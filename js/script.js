@@ -101,3 +101,7 @@ function animate(){
 
 init();
 animate();
+// PAGE LOADER
+window.addEventListener("load", () => {
+    document.body.classList.add("loaded");
+});
