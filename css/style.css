@@ -95,6 +95,14 @@ nav a {
     color:white;
 }
 
+h1, h2, h3 {
+    letter-spacing: -1px;
+}
+
+.hero h1 {
+    line-height: 1.1;
+}
+
 /* SERVICES */
 .section {
     padding:120px 8%;
