@@ -1,64 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>PracticeGrid Solutions | Medical Billing Experts</title>
-    <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PracticeGrid Solutions | Revenue Cycle Experts</title>
+
+<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script defer src="js/script.js"></script>
+
 </head>
 <body>
 
-<header>
+<!-- HEADER -->
+<header class="glass">
     <div class="logo">
         <img src="images/logo.png" alt="PracticeGrid Solutions">
     </div>
     <nav>
         <ul>
-            <li><a href="index.html">Home</a></li>
+            <li><a href="#">Home</a></li>
             <li><a href="services.html">Services</a></li>
             <li><a href="why-us.html">Why Us</a></li>
             <li><a href="blog.html">Blog</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="contact.html" class="nav-btn">Get Started</a></li>
         </ul>
     </nav>
 </header>
 
+<!-- HERO -->
 <section class="hero">
-    <div class="hero-text">
-        <h1>Precision-Driven Medical Billing Solutions</h1>
-        <p>Maximize revenue. Reduce denials. Accelerate reimbursements with PracticeGrid Solutions.</p>
-        <a href="contact.html" class="btn">Get Free Consultation</a>
+    <div class="hero-content">
+        <h1>Maximize Revenue.<br>Minimize Denials.</h1>
+        <p>Elite medical billing & RCM solutions built for modern healthcare practices.</p>
+        <div class="hero-buttons">
+            <a href="contact.html" class="btn-primary">Free Consultation</a>
+            <a href="services.html" class="btn-outline">Explore Services</a>
+        </div>
     </div>
 </section>
 
+<!-- SERVICES -->
 <section class="section">
-    <h2>Our Core Services</h2>
+    <h2>Premium Revenue Cycle Services</h2>
     <div class="services-grid">
-        <div class="service-card">
-            <h3>Patient Scheduling</h3>
-            <p>Optimized scheduling workflows to improve efficiency and reduce no-shows.</p>
+
+        <div class="service-card reveal">
+            <div class="icon">
+                <!-- Animated SVG -->
+                <svg viewBox="0 0 24 24">
+                    <path d="M3 12h18M12 3v18"/>
+                </svg>
+            </div>
+            <h3>Billing & Coding</h3>
+            <p>Accurate CPT & ICD-10 coding with 99% clean claim rate.</p>
         </div>
-        <div class="service-card">
-            <h3>Benefits & Eligibility</h3>
-            <p>Accurate insurance verification to prevent claim rejections.</p>
+
+        <div class="service-card reveal">
+            <div class="icon">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="9"/>
+                </svg>
+            </div>
+            <h3>Denial Management</h3>
+            <p>Smart denial tracking & rapid resubmissions.</p>
         </div>
-        <div class="service-card">
-            <h3>Authorization</h3>
-            <p>Streamlined prior authorization management.</p>
+
+        <div class="service-card reveal">
+            <div class="icon">
+                <svg viewBox="0 0 24 24">
+                    <rect x="4" y="4" width="16" height="16"/>
+                </svg>
+            </div>
+            <h3>Accounts Receivable</h3>
+            <p>Persistent follow-ups to reduce aging AR.</p>
         </div>
-        <div class="service-card">
-            <h3>Revenue Cycle Management</h3>
-            <p>End-to-end billing, AR, denial management, and payment posting.</p>
+
+        <div class="service-card reveal">
+            <div class="icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </div>
+            <h3>Practice Analytics</h3>
+            <p>Data-driven performance reporting dashboards.</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- EHR SLIDER -->
+<section class="ehr-section">
+    <h2>We Work With Leading EHR Platforms</h2>
+    <div class="slider">
+        <div class="slide-track">
+            <img src="images/ehr1.png">
+            <img src="images/ehr2.png">
+            <img src="images/ehr3.png">
+            <img src="images/ehr4.png">
+            <img src="images/ehr5.png">
+
+            <!-- Duplicate for smooth loop -->
+            <img src="images/ehr1.png">
+            <img src="images/ehr2.png">
+            <img src="images/ehr3.png">
+            <img src="images/ehr4.png">
+            <img src="images/ehr5.png">
         </div>
     </div>
 </section>
 
+<!-- CTA -->
 <section class="cta">
-    <h2>Ready to Optimize Your Revenue?</h2>
-    <p>Partner with PracticeGrid Solutions today.</p>
-    <a href="contact.html" class="btn">Contact Us</a>
+    <h2>Ready to Increase Your Collections?</h2>
+    <a href="contact.html" class="btn-primary">Start Today</a>
 </section>
 
 <footer>
-    <p>© 2026 PracticeGrid Solutions | contact@practicegridsolutions.com | +1 (727) 674-1458</p>
+    <p>© 2026 PracticeGrid Solutions</p>
 </footer>
 
 </body>
