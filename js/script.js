@@ -116,16 +116,3 @@ document.addEventListener("scroll", function() {
         el.style.transform = `translateY(${yPos}px)`;
     });
 });
-
-// SLIDE UP REVEAL
-const slideElements = document.querySelectorAll(".slide-up");
-
-const slideObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if(entry.isIntersecting){
-            entry.target.classList.add("active");
-        }
-    });
-});
-
-slideElements.forEach(el => slideObserver.observe(el));
