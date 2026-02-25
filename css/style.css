@@ -1,20 +1,40 @@
 :root {
-  -bg-primary: #0f172a;
-  -bg-secondary: #111827;
+
+  /* Layout */
+  -container-width: 1200px;
+  -section-padding: 120px;
+  -card-radius: 20px;
+
+  /* Colors */
+  -bg-primary: #0b1120;
+  -bg-secondary: #0f172a;
+  -bg-elevated: rgba(255,255,255,0.04);
+
   -text-primary: #ffffff;
-  -card-bg: rgba(255,255,255,0.05);
+  -text-secondary: #94a3b8;
+
   -accent: #6366f1;
-  -accent-dark: #4f46e5;
-  -shadow-soft: 0 10px 30px rgba(0,0,0,0.2);
-  -shadow-hover: 0 15px 40px rgba(0,0,0,0.3);
+  -accent-2: #8b5cf6;
+  -gradient-primary: linear-gradient(135deg, #6366f1, #8b5cf6);
+
+  /* Shadows */
+  -shadow-soft: 0 10px 40px rgba(0,0,0,0.25);
+  -shadow-hover: 0 20px 60px rgba(0,0,0,0.35);
+
+  /* Typography */
+  -font-main: 'Inter', sans-serif;
 }
+
 body.light-mode {
   -bg-primary: #ffffff;
   -bg-secondary: #f8fafc;
+  -bg-elevated: #ffffff;
+
   -text-primary: #111827;
-  -card-bg: #ffffff;
-  -shadow-soft: 0 10px 25px rgba(0,0,0,0.08);
-  -shadow-hover: 0 15px 40px rgba(0,0,0,0.12);
+  -text-secondary: #475569;
+
+  -shadow-soft: 0 10px 30px rgba(0,0,0,0.08);
+  -shadow-hover: 0 20px 60px rgba(0,0,0,0.12);
 }
 
 * {
