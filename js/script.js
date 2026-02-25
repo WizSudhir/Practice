@@ -1,113 +1,156 @@
-const reveals = document.querySelectorAll(".reveal");
-
-window.addEventListener("scroll", () => {
-    reveals.forEach(el => {
-        const windowHeight = window.innerHeight;
-        const elementTop = el.getBoundingClientRect().top;
-        const elementVisible = 100;
-
-        if (elementTop < windowHeight - elementVisible) {
-            el.classList.add("active");
-        }
-    });
-});
-
-// COUNTER ANIMATION
-const counters = document.querySelectorAll(".counter");
-
-const startCounter = () => {
-    counters.forEach(counter => {
-        const updateCount = () => {
-            const target = +counter.getAttribute("data-target");
-            const count = +counter.innerText;
-
-            const increment = target / 100;
-
-            if(count < target){
-                counter.innerText = Math.ceil(count + increment);
-                setTimeout(updateCount, 20);
-            } else {
-                counter.innerText = target;
-            }
-        };
-
-        updateCount();
-    });
-};
+/* ===============================
+   GLOBAL SCROLL HANDLER (Optimized)
+================================== */
 
 let counterStarted = false;
 
-window.addEventListener("scroll", () => {
+window.addEventListener("scroll", handleScroll);
+
+function handleScroll() {
+    revealOnScroll();
+    startCounterOnView();
+    parallaxEffect();
+}
+
+/* ===============================
+   REVEAL ANIMATION
+================================== */
+
+const reveals = document.querySelectorAll(".reveal");
+
+function revealOnScroll() {
+    const windowHeight = window.innerHeight;
+
+    reveals.forEach(el => {
+        const elementTop = el.getBoundingClientRect().top;
+
+        if (elementTop < windowHeight - 100) {
+            el.classList.add("active");
+        }
+    });
+}
+
+/* ===============================
+   COUNTER ANIMATION (Improved)
+================================== */
+
+const counters = document.querySelectorAll(".counter");
+
+function startCounterOnView() {
     const statsSection = document.querySelector(".stats");
+    if (!statsSection) return;
+
     const sectionTop = statsSection.getBoundingClientRect().top;
 
-    if(sectionTop < window.innerHeight && !counterStarted){
-        startCounter();
+    if (sectionTop < window.innerHeight && !counterStarted) {
+        counters.forEach(counter => animateCounter(counter));
         counterStarted = true;
     }
-});
-// PARTICLE BACKGROUND
+}
+
+function animateCounter(counter) {
+    const target = +counter.getAttribute("data-target");
+    const duration = 1500;
+    const startTime = performance.now();
+
+    function update(currentTime) {
+        const progress = Math.min((currentTime - startTime) / duration, 1);
+        counter.innerText = Math.floor(progress * target);
+
+        if (progress < 1) {
+            requestAnimationFrame(update);
+        } else {
+            counter.innerText = target;
+        }
+    }
+
+    requestAnimationFrame(update);
+}
+
+/* ===============================
+   PARTICLE BACKGROUND
+================================== */
+
 const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+if (canvas) {
+    const ctx = canvas.getContext("2d");
+    let particlesArray = [];
 
-let particlesArray = [];
-
-class Particle {
-    constructor(){
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 3 + 1;
-        this.speedX = Math.random() * 1 - 0.5;
-        this.speedY = Math.random() * 1 - 0.5;
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
     }
 
-    update(){
-        this.x += this.speedX;
-        this.y += this.speedY;
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
 
-        if(this.x < 0 || this.x > canvas.width){
-            this.speedX *= -1;
+    class Particle {
+        constructor() {
+            this.reset();
         }
-        if(this.y < 0 || this.y > canvas.height){
-            this.speedY *= -1;
+
+        reset() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 2 + 1;
+            this.speedX = Math.random() * 0.6 - 0.3;
+            this.speedY = Math.random() * 0.6 - 0.3;
+        }
+
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+
+            if (this.x < 0 || this.x > canvas.width ||
+                this.y < 0 || this.y > canvas.height) {
+                this.reset();
+            }
+        }
+
+        draw() {
+            ctx.fillStyle = "rgba(255,255,255,0.4)";
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
         }
     }
 
-    draw(){
-        ctx.fillStyle = "rgba(255,255,255,0.5)";
-        ctx.beginPath();
-        ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
-        ctx.fill();
+    function initParticles() {
+        particlesArray = [];
+        for (let i = 0; i < 80; i++) {
+            particlesArray.push(new Particle());
+        }
     }
-}
 
-function init(){
-    for(let i=0;i<80;i++){
-        particlesArray.push(new Particle());
+    function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        particlesArray.forEach(p => {
+            p.update();
+            p.draw();
+        });
+
+        requestAnimationFrame(animateParticles);
     }
+
+    initParticles();
+    animateParticles();
 }
 
-function animate(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    particlesArray.forEach(p=>{
-        p.update();
-        p.draw();
-    });
-    requestAnimationFrame(animate);
-}
+/* ===============================
+   PAGE LOADER
+================================== */
 
-init();
-animate();
-// PAGE LOADER
 window.addEventListener("load", () => {
     document.body.classList.add("loaded");
 });
 
-// PARALLAX EFFECT
-document.addEventListener("scroll", function() {
+/* ===============================
+   PARALLAX EFFECT
+================================== */
+
+function parallaxEffect() {
     const parallaxElements = document.querySelectorAll(".parallax");
 
     parallaxElements.forEach(el => {
@@ -115,20 +158,20 @@ document.addEventListener("scroll", function() {
         const yPos = -(window.scrollY / speed);
         el.style.transform = `translateY(${yPos}px)`;
     });
-});
+}
 
-// CONTACT STRIP REVEAL
+/* ===============================
+   CONTACT STRIP REVEAL (IntersectionObserver)
+================================== */
+
 const revealElements = document.querySelectorAll(".reveal-up");
+
 const revealObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-        if(entry.isIntersecting){
+        if (entry.isIntersecting) {
             entry.target.classList.add("active");
         }
     });
-});
-revealElements.forEach(el => revealObserver.observe(el));
+}, { threshold: 0.2 });
 
-window.addEventListener("scroll", function() {
-  const header = document.querySelector("header");
-  header.classList.toggle("scrolled", window.scrollY > 50);
-});
+revealElements.forEach(el => revealObserver.observe(el));
