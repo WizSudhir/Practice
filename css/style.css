@@ -391,3 +391,86 @@ body.loaded #loader {
     font-size:36px;
     margin-bottom:20px;
 }
+/* PREMIUM CONTACT CTA */
+.contact-cta {
+    position: relative;
+    padding: 140px 20px;
+    background: radial-gradient(circle at top,#1e1b4b,#0f172a 70%);
+    overflow: hidden;
+    text-align: center;
+}
+
+/* Animated Grid Background */
+.cta-grid {
+    position:absolute;
+    inset:0;
+    background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: gridMove 20s linear infinite;
+    opacity:0.3;
+}
+
+@keyframes gridMove {
+    from { transform: translateY(0); }
+    to { transform: translateY(50px); }
+}
+
+/* Wave Gradient Overlay */
+.cta-wave {
+    position:absolute;
+    bottom:0;
+    width:200%;
+    height:200px;
+    background: radial-gradient(circle,#6a5acd33 20%, transparent 70%);
+    animation: waveMove 8s ease-in-out infinite alternate;
+}
+
+@keyframes waveMove {
+    from { transform: translateX(0); }
+    to { transform: translateX(-200px); }
+}
+
+/* HIPAA Badge */
+.hipaa-badge {
+    margin: 30px auto 60px;
+    display:inline-flex;
+    align-items:center;
+    gap:15px;
+    padding:15px 30px;
+    background: rgba(255,255,255,0.05);
+    border-radius:50px;
+    backdrop-filter:blur(20px);
+    position:relative;
+}
+
+.hipaa-badge svg {
+    width:28px;
+    height:28px;
+    stroke:#22c55e;
+    stroke-width:2;
+    fill:none;
+    animation:pulseBadge 2s infinite;
+}
+
+@keyframes pulseBadge {
+    0%,100% { transform:scale(1); }
+    50% { transform:scale(1.15); }
+}
+
+/* Slide-up animation */
+.slide-up {
+    opacity:0;
+    transform:translateY(40px);
+    transition: all 0.8s ease;
+}
+
+.slide-up.active {
+    opacity:1;
+    transform:translateY(0);
+}
+
+.delay-1 { transition-delay:0.2s; }
+.delay-2 { transition-delay:0.4s; }
+.delay-3 { transition-delay:0.6s; }
+.delay-4 { transition-delay:0.8s; }
