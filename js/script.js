@@ -11,3 +11,38 @@ window.addEventListener("scroll", () => {
         }
     });
 });
+
+// COUNTER ANIMATION
+const counters = document.querySelectorAll(".counter");
+
+const startCounter = () => {
+    counters.forEach(counter => {
+        const updateCount = () => {
+            const target = +counter.getAttribute("data-target");
+            const count = +counter.innerText;
+
+            const increment = target / 100;
+
+            if(count < target){
+                counter.innerText = Math.ceil(count + increment);
+                setTimeout(updateCount, 20);
+            } else {
+                counter.innerText = target;
+            }
+        };
+
+        updateCount();
+    });
+};
+
+let counterStarted = false;
+
+window.addEventListener("scroll", () => {
+    const statsSection = document.querySelector(".stats");
+    const sectionTop = statsSection.getBoundingClientRect().top;
+
+    if(sectionTop < window.innerHeight && !counterStarted){
+        startCounter();
+        counterStarted = true;
+    }
+});
