@@ -240,8 +240,8 @@ h1, h2, h3 {
 }
 
 .slide-track img {
-    width:200px;
-    margin:0 30px;
+    width:100px;
+    margin:0 15px;
 }
 
 @keyframes scroll {
