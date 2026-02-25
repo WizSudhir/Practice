@@ -634,3 +634,34 @@ header.scrolled {
     background:linear-gradient(#6a5acd,#a855f7);
     border-radius:10px;
 }
+
+/* PAGE HERO */
+.page-hero {
+  padding: 140px 0 100px;
+  position: relative;
+  text-align: center;
+  background: var(--bg-primary);
+}
+
+.page-hero h1 {
+  font-size: 48px;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.page-hero p {
+  font-size: 18px;
+  max-width: 700px;
+  margin: auto;
+  opacity: 0.8;
+}
+
+.hero-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: radial-gradient(circle at 20% 20%, rgba(80,120,255,0.2), transparent 60%);
+  z-index: -1;
+}
