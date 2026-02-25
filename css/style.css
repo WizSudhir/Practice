@@ -614,3 +614,16 @@ header.scrolled {
   box-shadow: 0 10px 30px rgba(0,0,0,0.2);
   z-index: 999;
 }
+
+::-webkit-scrollbar {
+    width:8px;
+}
+
+::-webkit-scrollbar-track {
+    background:#0f0f1b;
+}
+
+::-webkit-scrollbar-thumb {
+    background:linear-gradient(#6a5acd,#a855f7);
+    border-radius:10px;
+}
