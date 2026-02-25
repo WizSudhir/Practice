@@ -119,7 +119,6 @@ document.addEventListener("scroll", function() {
 
 // CONTACT STRIP REVEAL
 const revealElements = document.querySelectorAll(".reveal-up");
-
 const revealObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if(entry.isIntersecting){
@@ -127,5 +126,4 @@ const revealObserver = new IntersectionObserver(entries => {
         }
     });
 });
-
 revealElements.forEach(el => revealObserver.observe(el));
