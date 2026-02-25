@@ -116,3 +116,12 @@ document.addEventListener("scroll", function() {
         el.style.transform = `translateY(${yPos}px)`;
     });
 });
+
+// ACCORDION
+const serviceCards = document.querySelectorAll(".service-card");
+
+serviceCards.forEach(card => {
+    card.addEventListener("click", () => {
+        card.classList.toggle("active");
+    });
+});
