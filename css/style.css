@@ -85,6 +85,12 @@ nav a {
     text-decoration:none;
     font-weight:600;
     margin-right:15px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
 }
 
 .btn-outline {
@@ -101,6 +107,23 @@ h1, h2, h3 {
 
 .hero h1 {
     line-height: 1.1;
+}
+
+@media(max-width:992px){
+    .hero-container{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .hero-right img{
+        width:320px;
+        margin-top:40px;
+    }
+
+    .stats{
+        justify-content:center;
+        flex-wrap:wrap;
+    }
 }
 
 /* SERVICES */
@@ -196,8 +219,9 @@ h1, h2, h3 {
 
 .slide-track {
     display:flex;
-    width:calc(250px * 10);
+    gap:60px;
     animation:scroll 25s linear infinite;
+    width:max-content;
 }
 
 .slide-track img {
