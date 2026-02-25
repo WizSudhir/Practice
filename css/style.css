@@ -229,7 +229,7 @@ h1, h2, h3 {
 .slider {
     overflow:hidden;
     position:relative;
-    margin-top:50px;
+    margin-top:25px;
 }
 
 .slide-track {
