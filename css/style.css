@@ -391,33 +391,3 @@ body.loaded #loader {
     font-size:36px;
     margin-bottom:20px;
 }
-
-/* ACCORDION */
-.accordion-header {
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-top:20px;
-    font-size:18px;
-}
-
-.accordion-icon {
-    font-size:22px;
-    transition:0.3s ease;
-}
-
-.accordion-content {
-    max-height:0;
-    overflow:hidden;
-    transition:max-height 0.4s ease;
-    margin-top:10px;
-    opacity:0.8;
-}
-
-.service-card.active .accordion-content {
-    max-height:200px;
-}
-
-.service-card.active .accordion-icon {
-    transform:rotate(45deg);
-}
