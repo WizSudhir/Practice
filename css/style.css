@@ -10,7 +10,14 @@ body {
     color:white;
     scroll-behavior:smooth;
 }
-
+body::before {
+    content:"";
+    position:fixed;
+    inset:0;
+    background:url('https://www.transparenttextures.com/patterns/noise.png');
+    opacity:0.02;
+    pointer-events:none;
+}
 /* GLASS NAV */
 .glass {
     display:flex;
