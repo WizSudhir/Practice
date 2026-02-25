@@ -561,3 +561,16 @@ header.scrolled {
   backdrop-filter: blur(20px);
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
+
+.floating-cta {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: linear-gradient(45deg,#0066ff,#00c6ff);
+  color: #fff;
+  padding: 14px 22px;
+  border-radius: 50px;
+  font-weight: 600;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  z-index: 999;
+}
