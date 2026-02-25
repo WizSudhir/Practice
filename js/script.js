@@ -127,3 +127,8 @@ const revealObserver = new IntersectionObserver(entries => {
     });
 });
 revealElements.forEach(el => revealObserver.observe(el));
+
+window.addEventListener("scroll", function() {
+  const header = document.querySelector("header");
+  header.classList.toggle("scrolled", window.scrollY > 50);
+});
