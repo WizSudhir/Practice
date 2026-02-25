@@ -116,3 +116,16 @@ document.addEventListener("scroll", function() {
         el.style.transform = `translateY(${yPos}px)`;
     });
 });
+
+// CONTACT STRIP REVEAL
+const revealElements = document.querySelectorAll(".reveal-up");
+
+const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            entry.target.classList.add("active");
+        }
+    });
+});
+
+revealElements.forEach(el => revealObserver.observe(el));
