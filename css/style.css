@@ -37,6 +37,24 @@ body.light-mode {
   -shadow-hover: 0 20px 60px rgba(0,0,0,0.12);
 }
 
+body {
+  font-family: var(--font-main);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  margin: 0;
+  transition: background 0.3s ease;
+}
+
+.container {
+  max-width: var(--container-width);
+  margin: auto;
+  padding: 0 24px;
+}
+
+.section-lg {
+  padding: var(--section-padding) 0;
+}
+
 * {
     margin:0;
     padding:0;
@@ -93,6 +111,41 @@ nav a {
     background:linear-gradient(45deg,#6a5acd,#a855f7);
     padding:10px 20px;
     border-radius:30px;
+}
+
+.page-hero {
+  padding: 180px 0 140px;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-primary);
+  text-align: center;
+}
+
+.page-hero::before {
+  content: "";
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(99,102,241,0.3), transparent 70%);
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0;
+}
+
+.page-hero h1 {
+  font-size: 56px;
+  font-weight: 800;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.page-hero p {
+  max-width: 700px;
+  margin: 20px auto 0;
+  font-size: 20px;
+  color: var(--text-secondary);
 }
 
 /* HERO */
