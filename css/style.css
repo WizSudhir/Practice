@@ -288,35 +288,3 @@ body.loaded #loader {
     opacity:0;
     visibility:hidden;
 }
-.hero-left h1 {
-    font-size:64px;
-    font-weight:800;
-    line-height:1.1;
-    background:linear-gradient(45deg,#ffffff,#c084fc);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-}
-
-.hero-left p {
-    font-size:20px;
-    margin:20px 0;
-    opacity:0.85;
-    max-width:500px;
-}
-
-.hero-buttons {
-    margin-top:20px;
-}
-
-.hero-buttons a:hover {
-    transform:scale(1.05);
-    transition:0.3s;
-}
-body {
-    opacity:0;
-    transition:opacity 0.6s ease-in;
-}
-
-body.loaded {
-    opacity:1;
-}
