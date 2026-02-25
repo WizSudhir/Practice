@@ -45,7 +45,6 @@ body {
   scroll-behavior: smooth;
   transition: background 0.3s ease;
 }
-
 .container {
   max-width: var(--container-width);
   margin: auto;
@@ -537,7 +536,7 @@ body.loaded #loader {
 /* CONTACT STRIP PREMIUM */
 .contact-strip {
     position: relative;
-    padding: 40px 8px;
+    padding: 50px 10px;
     background: linear-gradient(135deg,#0f172a,#1e1b4b);
     overflow: hidden;
 }
