@@ -116,3 +116,34 @@ document.addEventListener("scroll", function() {
         el.style.transform = `translateY(${yPos}px)`;
     });
 });
+
+// REVENUE GRAPH
+const ctxChart = document.getElementById('revenueChart');
+
+if(ctxChart){
+    new Chart(ctxChart, {
+        type: 'line',
+        data: {
+            labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul'],
+            datasets: [{
+                label: 'Revenue Growth',
+                data: [50, 65, 80, 95, 120, 150, 180],
+                borderColor: '#a855f7',
+                backgroundColor: 'rgba(168,85,247,0.2)',
+                tension: 0.4,
+                fill: true
+            }]
+        },
+        options: {
+            responsive:true,
+            plugins:{
+                legend:{ labels:{ color:'white' } }
+            },
+            scales:{
+                x:{ ticks:{ color:'white' } },
+                y:{ ticks:{ color:'white' } }
+            }
+        }
+    });
+}
+
