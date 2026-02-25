@@ -351,3 +351,16 @@ body.loaded #loader {
     font-size:36px;
     margin-bottom:20px;
 }
+
+/* DASHBOARD */
+.dashboard-section {
+    padding:120px 8%;
+    background:#0f0f1b;
+    text-align:center;
+}
+
+#revenueChart {
+    max-width:900px;
+    margin:60px auto 0 auto;
+}
+
