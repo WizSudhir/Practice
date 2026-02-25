@@ -548,3 +548,20 @@ body.loaded #loader {
         display:none;
     }
 }
+
+/* Make CTA Section Content Narrow */
+.cta-section .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.cta-section h2 {
+    max-width: 750px;
+    margin: 0 auto 25px auto;
+}
+
+.cta-section p {
+    max-width: 650px;
+    margin: 0 auto 35px auto;
+}
