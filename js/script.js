@@ -175,18 +175,3 @@ const revealObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.2 });
 
 revealElements.forEach(el => revealObserver.observe(el));
-
-/* ===============================
-   Dark/Light Toggle
-================================== */
-const toggle = document.getElementById("themeToggle");
-
-toggle.addEventListener("click", () => {
-  document.body.classList.toggle("light-mode");
-
-  if(document.body.classList.contains("light-mode")){
-    toggle.innerText = "☀️";
-  } else {
-    toggle.innerText = "🌙";
-  }
-});
