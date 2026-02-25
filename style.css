@@ -37,14 +37,6 @@ body.light-mode {
   --shadow-hover: 0 20px 60px rgba(0,0,0,0.12);
 }
 
-body {
-  font-family: var(--font-main);
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  margin: 0;
-  transition: background 0.3s ease;
-}
-
 .container {
   max-width: var(--container-width);
   margin: auto;
