@@ -1,128 +1,33 @@
-/* =========================================================
-   PRACTICEGRID SOLUTIONS
-   ENTERPRISE JS ARCHITECTURE
-========================================================= */
+document.addEventListener("DOMContentLoaded",()=>{
 
-document.addEventListener("DOMContentLoaded", () => {
+const toggle=document.querySelector(".nav-toggle");
+const menu=document.querySelector(".nav-menu");
+toggle?.addEventListener("click",()=>menu.classList.toggle("active"));
 
-  /* =====================================================
-     1. NAVBAR SCROLL EFFECT
-  ===================================================== */
+const counters=document.querySelectorAll(".stat-number");
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+let el=entry.target;
+let target=+el.dataset.target;
+let count=0;
+let step=target/100;
+let interval=setInterval(()=>{
+count+=step;
+if(count>=target){el.textContent=target;clearInterval(interval);}
+else{el.textContent=Math.floor(count);}
+},20);
+observer.unobserve(el);
+}
+});
+});
+counters.forEach(c=>observer.observe(c));
 
-  const navbar = document.querySelector(".navbar");
-
-  const handleNavbarScroll = () => {
-    if (window.scrollY > 20) {
-      navbar?.classList.add("scrolled");
-    } else {
-      navbar?.classList.remove("scrolled");
-    }
-  };
-
-  window.addEventListener("scroll", handleNavbarScroll);
-
-
-
-  /* =====================================================
-     2. SCROLL REVEAL (Intersection Observer)
-  ===================================================== */
-
-  const revealElements = document.querySelectorAll(".reveal-up");
-
-  const revealObserver = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("active");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.15 }
-  );
-
-  revealElements.forEach(el => revealObserver.observe(el));
-
-
-
-  /* =====================================================
-     3. STATS COUNTER ANIMATION
-  ===================================================== */
-
-  const counters = document.querySelectorAll(".stat-number");
-
-  const counterObserver = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-
-          const counter = entry.target;
-          const target = +counter.dataset.target;
-          const duration = 2000;
-          const startTime = performance.now();
-
-          const updateCounter = (currentTime) => {
-            const progress = Math.min((currentTime - startTime) / duration, 1);
-            const value = Math.floor(progress * target);
-            counter.textContent = value.toLocaleString();
-
-            if (progress < 1) {
-              requestAnimationFrame(updateCounter);
-            }
-          };
-
-          requestAnimationFrame(updateCounter);
-          observer.unobserve(counter);
-        }
-      });
-    },
-    { threshold: 0.5 }
-  );
-
-  counters.forEach(counter => counterObserver.observe(counter));
-
-
-
-  /* =====================================================
-     4. MOBILE NAV TOGGLE (Optional but Recommended)
-  ===================================================== */
-
-  const navToggle = document.querySelector(".nav-toggle");
-  const navMenu = document.querySelector(".nav-menu");
-
-  if (navToggle && navMenu) {
-    navToggle.addEventListener("click", () => {
-      navMenu.classList.toggle("active");
-    });
-  }
-
-
-
-  /* =====================================================
-     5. SMOOTH ANCHOR SCROLL
-  ===================================================== */
-
-  const anchorLinks = document.querySelectorAll('a[href^="#"]');
-
-  anchorLinks.forEach(anchor => {
-    anchor.addEventListener("click", function (e) {
-      const targetID = this.getAttribute("href");
-
-      if (targetID.length > 1) {
-        e.preventDefault();
-        const targetElement = document.querySelector(targetID);
-
-        targetElement?.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-
-        // Close mobile nav if open
-        navMenu?.classList.remove("active");
-      }
-    });
-  });
-
-
+document.getElementById("contactForm")?.addEventListener("submit",e=>{
+if(document.getElementById("captcha").value!=7){
+e.preventDefault();
+alert("Captcha incorrect");
+}
+});
 
 });
