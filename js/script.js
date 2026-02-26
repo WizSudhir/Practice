@@ -175,3 +175,36 @@ const revealObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.2 });
 
 revealElements.forEach(el => revealObserver.observe(el));
+
+// COUNTER ANIMATION
+const counters = document.querySelectorAll('.counter');
+
+const counterObserver = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+
+    const counter = entry.target;
+    const target = +counter.getAttribute('data-target');
+    const duration = 1500;
+    const stepTime = Math.abs(Math.floor(duration / target));
+    let current = 0;
+
+    const updateCounter = () => {
+      current++;
+      counter.textContent = current;
+
+      if (current < target) {
+        setTimeout(updateCounter, stepTime);
+      } else {
+        counter.textContent = target;
+      }
+    };
+
+    updateCounter();
+    observer.unobserve(counter);
+  });
+}, { threshold: 0.6 });
+
+counters.forEach(counter => {
+  counterObserver.observe(counter);
+});
