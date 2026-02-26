@@ -1,210 +1,128 @@
-/* ===============================
-   GLOBAL SCROLL HANDLER (Optimized)
-================================== */
+/* =========================================================
+   PRACTICEGRID SOLUTIONS
+   ENTERPRISE JS ARCHITECTURE
+========================================================= */
 
-let counterStarted = false;
+document.addEventListener("DOMContentLoaded", () => {
 
-window.addEventListener("scroll", handleScroll);
+  /* =====================================================
+     1. NAVBAR SCROLL EFFECT
+  ===================================================== */
 
-function handleScroll() {
-    revealOnScroll();
-    startCounterOnView();
-    parallaxEffect();
-}
+  const navbar = document.querySelector(".navbar");
 
-/* ===============================
-   REVEAL ANIMATION
-================================== */
-
-const reveals = document.querySelectorAll(".reveal");
-
-function revealOnScroll() {
-    const windowHeight = window.innerHeight;
-
-    reveals.forEach(el => {
-        const elementTop = el.getBoundingClientRect().top;
-
-        if (elementTop < windowHeight - 100) {
-            el.classList.add("active");
-        }
-    });
-}
-
-/* ===============================
-   COUNTER ANIMATION (Improved)
-================================== */
-
-const counters = document.querySelectorAll(".counter");
-
-function startCounterOnView() {
-    const statsSection = document.querySelector(".stats");
-    if (!statsSection) return;
-
-    const sectionTop = statsSection.getBoundingClientRect().top;
-
-    if (sectionTop < window.innerHeight && !counterStarted) {
-        counters.forEach(counter => animateCounter(counter));
-        counterStarted = true;
+  const handleNavbarScroll = () => {
+    if (window.scrollY > 20) {
+      navbar?.classList.add("scrolled");
+    } else {
+      navbar?.classList.remove("scrolled");
     }
-}
+  };
 
-function animateCounter(counter) {
-    const target = +counter.getAttribute("data-target");
-    const duration = 1500;
-    const startTime = performance.now();
+  window.addEventListener("scroll", handleNavbarScroll);
 
-    function update(currentTime) {
-        const progress = Math.min((currentTime - startTime) / duration, 1);
-        counter.innerText = Math.floor(progress * target);
 
-        if (progress < 1) {
-            requestAnimationFrame(update);
-        } else {
-            counter.innerText = target;
+
+  /* =====================================================
+     2. SCROLL REVEAL (Intersection Observer)
+  ===================================================== */
+
+  const revealElements = document.querySelectorAll(".reveal-up");
+
+  const revealObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+          observer.unobserve(entry.target);
         }
-    }
+      });
+    },
+    { threshold: 0.15 }
+  );
 
-    requestAnimationFrame(update);
-}
+  revealElements.forEach(el => revealObserver.observe(el));
 
-/* ===============================
-   PARTICLE BACKGROUND
-================================== */
 
-const canvas = document.getElementById("particles");
 
-if (canvas) {
-    const ctx = canvas.getContext("2d");
-    let particlesArray = [];
+  /* =====================================================
+     3. STATS COUNTER ANIMATION
+  ===================================================== */
 
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
+  const counters = document.querySelectorAll(".stat-number");
 
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
+  const counterObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
 
-    class Particle {
-        constructor() {
-            this.reset();
-        }
+          const counter = entry.target;
+          const target = +counter.dataset.target;
+          const duration = 2000;
+          const startTime = performance.now();
 
-        reset() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 2 + 1;
-            this.speedX = Math.random() * 0.6 - 0.3;
-            this.speedY = Math.random() * 0.6 - 0.3;
-        }
+          const updateCounter = (currentTime) => {
+            const progress = Math.min((currentTime - startTime) / duration, 1);
+            const value = Math.floor(progress * target);
+            counter.textContent = value.toLocaleString();
 
-        update() {
-            this.x += this.speedX;
-            this.y += this.speedY;
-
-            if (this.x < 0 || this.x > canvas.width ||
-                this.y < 0 || this.y > canvas.height) {
-                this.reset();
+            if (progress < 1) {
+              requestAnimationFrame(updateCounter);
             }
+          };
+
+          requestAnimationFrame(updateCounter);
+          observer.unobserve(counter);
         }
+      });
+    },
+    { threshold: 0.5 }
+  );
 
-        draw() {
-            ctx.fillStyle = "rgba(255,255,255,0.4)";
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
-        }
-    }
+  counters.forEach(counter => counterObserver.observe(counter));
 
-    function initParticles() {
-        particlesArray = [];
-        for (let i = 0; i < 80; i++) {
-            particlesArray.push(new Particle());
-        }
-    }
 
-    function animateParticles() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        particlesArray.forEach(p => {
-            p.update();
-            p.draw();
+  /* =====================================================
+     4. MOBILE NAV TOGGLE (Optional but Recommended)
+  ===================================================== */
+
+  const navToggle = document.querySelector(".nav-toggle");
+  const navMenu = document.querySelector(".nav-menu");
+
+  if (navToggle && navMenu) {
+    navToggle.addEventListener("click", () => {
+      navMenu.classList.toggle("active");
+    });
+  }
+
+
+
+  /* =====================================================
+     5. SMOOTH ANCHOR SCROLL
+  ===================================================== */
+
+  const anchorLinks = document.querySelectorAll('a[href^="#"]');
+
+  anchorLinks.forEach(anchor => {
+    anchor.addEventListener("click", function (e) {
+      const targetID = this.getAttribute("href");
+
+      if (targetID.length > 1) {
+        e.preventDefault();
+        const targetElement = document.querySelector(targetID);
+
+        targetElement?.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
         });
 
-        requestAnimationFrame(animateParticles);
-    }
-
-    initParticles();
-    animateParticles();
-}
-
-/* ===============================
-   PAGE LOADER
-================================== */
-
-window.addEventListener("load", () => {
-    document.body.classList.add("loaded");
-});
-
-/* ===============================
-   PARALLAX EFFECT
-================================== */
-
-function parallaxEffect() {
-    const parallaxElements = document.querySelectorAll(".parallax");
-
-    parallaxElements.forEach(el => {
-        const speed = el.getAttribute("data-speed");
-        const yPos = -(window.scrollY / speed);
-        el.style.transform = `translateY(${yPos}px)`;
-    });
-}
-
-/* ===============================
-   CONTACT STRIP REVEAL (IntersectionObserver)
-================================== */
-
-const revealElements = document.querySelectorAll(".reveal-up");
-
-const revealObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add("active");
-        }
-    });
-}, { threshold: 0.2 });
-
-revealElements.forEach(el => revealObserver.observe(el));
-
-// COUNTER ANIMATION
-const counters = document.querySelectorAll('.counter');
-
-const counterObserver = new IntersectionObserver((entries, observer) => {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) return;
-
-    const counter = entry.target;
-    const target = +counter.getAttribute('data-target');
-    const duration = 1500;
-    const stepTime = Math.abs(Math.floor(duration / target));
-    let current = 0;
-
-    const updateCounter = () => {
-      current++;
-      counter.textContent = current;
-
-      if (current < target) {
-        setTimeout(updateCounter, stepTime);
-      } else {
-        counter.textContent = target;
+        // Close mobile nav if open
+        navMenu?.classList.remove("active");
       }
-    };
-
-    updateCounter();
-    observer.unobserve(counter);
+    });
   });
-}, { threshold: 0.6 });
 
-counters.forEach(counter => {
-  counterObserver.observe(counter);
+
+
 });
