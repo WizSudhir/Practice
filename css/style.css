@@ -37,12 +37,17 @@
   --shadow-sm: 0 10px 20px rgba(0,0,0,.2);
   --shadow-md: 0 20px 40px rgba(0,0,0,.3);
   --shadow-lg: 0 30px 70px rgba(0,0,0,.4);
+
+  --font-main: 'Inter', sans-serif;
+  --container-width: 1200px;
+  --section-padding: 120px;
+  --gradient-primary: linear-gradient(90deg,#00c6ff,#0072ff);
 }
 
 body.light-mode {
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8fafc;
-  --bg-elevated: #ffffff;
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f8fafc;
+  --color-bg-elevated: #ffffff;
 
   --text-primary: #111827;
   --text-secondary: #475569;
@@ -88,7 +93,7 @@ body::before {
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:20px 8%;
+    padding:20px 5%;
     position:fixed;
     width:100%;
     backdrop-filter:blur(15px);
@@ -126,6 +131,12 @@ nav a {
   padding: 160px 0 120px;
   text-align: center;
   overflow: hidden;
+}
+
+@media(max-width:768px){
+  .page-hero {
+    padding: 120px 0 80px;
+  }
 }
 
 .hero-bg {
@@ -171,6 +182,16 @@ nav a {
   z-index: 0;
 }
 
+@media(max-width:768px){
+  .page-hero h1 {
+    font-size: 36px;
+  }
+
+  .page-hero p {
+    font-size: 16px;
+  }
+}
+
 .page-hero h1 {
   font-size: 56px;
   font-weight: 800;
@@ -188,7 +209,7 @@ nav a {
 
 /* HERO */
 .hero {
-    height:100vh;
+    min-height:100vh;
     display:flex;
     align-items:center;
     padding:0 8%;
@@ -268,11 +289,6 @@ h1, h2, h3 {
   padding: var(--section-padding) 0;
 }
 
-.container {
-  max-width: var(--container-width);
-  margin: auto;
-  padding: 0 24px;
-}
 .services-grid {
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -800,4 +816,31 @@ header.scrolled {
 
 .cta-premium .container {
   max-width: 800px;
+}
+
+/* Mobile System */
+@media(max-width:768px){
+
+  h1 { font-size: 36px; }
+  h2 { font-size: 28px; }
+  h3 { font-size: 20px; }
+
+  .hero {
+    min-height: auto;
+    padding: 120px 24px 60px;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .glass {
+    padding: 15px 20px;
+  }
+
+  .stats {
+    flex-direction: column;
+    gap: 20px;
+  }
+
 }
