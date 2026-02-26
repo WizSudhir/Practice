@@ -776,3 +776,14 @@ header.scrolled {
     background:linear-gradient(#6a5acd,#a855f7);
     border-radius:10px;
 }
+
+/* CTA Premium */
+.cta-premium {
+  padding: 120px 0;
+  text-align: center;
+  background: linear-gradient(135deg,#0f172a,#0b1120);
+}
+
+.cta-premium .container {
+  max-width: 800px;
+}
