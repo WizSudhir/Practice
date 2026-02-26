@@ -49,11 +49,11 @@ body.light-mode {
   --color-bg-secondary: #f8fafc;
   --color-bg-elevated: #ffffff;
 
-  --text-primary: #111827;
-  --text-secondary: #475569;
+  --color-text-primary: #111827;
+  --color-text-secondary: #475569;
 
-  --shadow-soft: 0 10px 30px rgba(0,0,0,0.08);
-  --shadow-hover: 0 20px 60px rgba(0,0,0,0.12);
+  --shadow-sm: 0 10px 30px rgba(0,0,0,0.08);
+  --shadow-md: 0 20px 60px rgba(0,0,0,0.12);
 }
 
 body {
