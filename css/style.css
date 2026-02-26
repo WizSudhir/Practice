@@ -54,8 +54,8 @@ body.light-mode {
 body {
   margin: 0;
   font-family: var(--font-main);
-  background: var(--bg-primary);
-  color: var(--text-primary);
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
   scroll-behavior: smooth;
   transition: background 0.3s ease;
 }
@@ -481,7 +481,7 @@ footer {
 /* STATS STRIP FOR SERVICES */
 .stats-strip {
   padding: 60px 0;
-  background: var(--bg-secondary);
+  background: var(--color-bg-secondary);
 }
 
 .stats-grid {
