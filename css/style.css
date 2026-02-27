@@ -489,7 +489,27 @@ footer {
   text-align:center;
   background: var(--bg-tertiary);
 }
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
 
+.footer-contact {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-contact a {
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+.footer-hipaa img {
+  height: 50px;
+  filter: drop-shadow(0 0 10px rgba(139,92,246,0.8));
+}
 /* ===============================
    15. LOADER
 ================================= */
