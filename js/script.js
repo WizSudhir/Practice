@@ -74,7 +74,15 @@ const counterObserver = new IntersectionObserver(entries => {
 counters.forEach(counter => {
     counterObserver.observe(counter);
 });
-
+// Run immediately if already visible (Hero section case)
+counters.forEach(counter => {
+    const rect = counter.getBoundingClientRect();
+    if (rect.top < window.innerHeight) {
+        animateCounter(counter);
+        counterObserver.unobserve(counter);
+    }
+});
+   
 function animateCounter(counter) {
     const target = +counter.getAttribute("data-target");
     const duration = 1500;
