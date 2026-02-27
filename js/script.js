@@ -56,16 +56,18 @@ function revealOnScroll() {
 
 const counters = document.querySelectorAll(".counter");
 
-function startCounterOnView() {
-    const statsSection = document.querySelector(".stats");
-    if (!statsSection) return;
+const counterObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            counters.forEach(counter => animateCounter(counter));
+            counterObserver.disconnect();
+        }
+    });
+}, { threshold: 0.5 });
 
-    const sectionTop = statsSection.getBoundingClientRect().top;
-
-    if (sectionTop < window.innerHeight && !counterStarted) {
-        counters.forEach(counter => animateCounter(counter));
-        counterStarted = true;
-    }
+const statsSection = document.querySelector(".stats");
+if (statsSection) {
+    counterObserver.observe(statsSection);
 }
 
 function animateCounter(counter) {
