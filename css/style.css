@@ -331,25 +331,41 @@ header.scrolled {
 /* ===============================
    10. HIPAA SECTION
 ================================= */
-.hipaa-section {
-  padding:60px 0;
-  background: var(--bg-secondary);
-}
-
-.hipaa-container {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:60px;
+.hipaa-badge {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .badge-ring {
-  border:4px solid var(--accent-2);
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  border: 4px solid var(--accent-2);
+  animation: glowRing 3s infinite ease-in-out;
 }
 
 .badge-core {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   background: var(--gradient-primary);
-  box-shadow:0 0 30px rgba(139,92,246,0.6);
+  color: #fff;
+  box-shadow: 0 0 40px rgba(139,92,246,0.6);
+}
+
+@keyframes glowRing {
+  0% { box-shadow: 0 0 10px rgba(139,92,246,0.4); }
+  50% { box-shadow: 0 0 40px rgba(139,92,246,0.9); }
+  100% { box-shadow: 0 0 10px rgba(139,92,246,0.4); }
 }
 
 /* ===============================
