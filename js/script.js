@@ -98,8 +98,9 @@ if (canvas) {
     let particlesArray = [];
 
     function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        const heroSection = document.querySelector(".hero");
+        canvas.width = heroSection.offsetWidth;
+        canvas.height = heroSection.offsetHeight;
     }
 
     resizeCanvas();
@@ -129,7 +130,7 @@ if (canvas) {
         }
 
         draw() {
-            ctx.fillStyle = "rgba(255,255,255,0.7)";
+            ctx.fillStyle = "rgba(255,255,255,0.4)";
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
             ctx.fill();
