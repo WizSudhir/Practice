@@ -800,3 +800,38 @@ footer {
   margin: 0;
   color: var(--text-secondary);
 }
+/* =========================================================
+   SERVICES HERO IMAGE LAYOUT
+========================================================= */
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 60px;
+}
+
+.hero-image img {
+  width: 100%;
+  max-width: 520px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  transition: 0.4s ease;
+}
+
+.hero-image img:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Mobile */
+@media (max-width: 992px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero-image {
+    margin-top: 40px;
+  }
+}
