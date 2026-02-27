@@ -35,6 +35,7 @@ handleScroll();
    
 function handleScroll() {
     revealOnScroll();
+    startCounterOnView();
     parallaxEffect();
 }
 
