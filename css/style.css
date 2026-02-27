@@ -231,6 +231,7 @@ header.scrolled {
   background-size:400% 400%;
   animation:gradient 12s ease infinite;
   padding-top: 95px;
+  z-index: 1;
 }
 
 @keyframes gradient {
@@ -245,7 +246,7 @@ header.scrolled {
   align-items:center;
   width:100%;
   position: relative;
-  z-index: 2;
+  z-index: 3;
 }
 
 .hero-left { max-width:600px; }
