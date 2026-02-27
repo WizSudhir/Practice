@@ -246,7 +246,7 @@ header.scrolled {
   align-items:center;
   width:100%;
   position: relative;
-  z-index: 10;
+  z-index: 2;
 }
 
 .hero-left { max-width:600px; }
@@ -264,10 +264,6 @@ header.scrolled {
 }
 
 /* DROPLETS in HERO */
-.hero {
-  position: relative;
-  overflow: hidden;
-}
 
 .hero-blob {
   position: absolute;
