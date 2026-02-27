@@ -230,6 +230,31 @@ header.scrolled {
   50% { transform:translateY(-15px); }
 }
 
+/* DROPLETS in HERO */
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-blob {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(99,102,241,0.4), transparent);
+  filter: blur(120px);
+  z-index: 0;
+}
+
+.blob-1 {
+  top: -100px;
+  left: -100px;
+}
+
+.blob-2 {
+  bottom: -100px;
+  right: -100px;
+}
+
 /* ===============================
    9. SERVICES
 ================================= */
