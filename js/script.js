@@ -59,16 +59,15 @@ const counters = document.querySelectorAll(".counter");
 const counterObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            counters.forEach(counter => animateCounter(counter));
-            counterObserver.disconnect();
+            animateCounter(entry.target);
+            counterObserver.unobserve(entry.target);
         }
     });
-}, { threshold: 0.5 });
+}, { threshold: 0.6 });
 
-const statsSection = document.querySelector(".stats");
-if (statsSection) {
-    counterObserver.observe(statsSection);
-}
+counters.forEach(counter => {
+    counterObserver.observe(counter);
+});
 
 function animateCounter(counter) {
     const target = +counter.getAttribute("data-target");
@@ -100,10 +99,11 @@ if (canvas) {
     let particlesArray = [];
 
     function resizeCanvas() {
-        const heroSection = document.querySelector(".hero");
-        canvas.width = heroSection.offsetWidth;
-        canvas.height = heroSection.offsetHeight;
-    }
+    const heroSection = document.querySelector(".hero");
+
+    canvas.width = heroSection.clientWidth;
+    canvas.height = heroSection.clientHeight;
+}
 
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
