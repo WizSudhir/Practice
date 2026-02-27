@@ -79,8 +79,21 @@ const runCounters = () => {
     });
 };
 
-// Start counters as soon as page loads
-window.addEventListener('load', runCounters);
+// Suggestion to view particles in hero by chatgpt
+const heroSection = document.querySelector(".hero");
+
+if (heroSection) {
+    const counterObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                runCounters();
+                counterObserver.disconnect(); // run only once
+            }
+        });
+    }, { threshold: 0.5 });
+
+    counterObserver.observe(heroSection);
+}
    
 /* ===============================
    PARTICLE BACKGROUND (Stable Version)
