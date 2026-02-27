@@ -164,6 +164,8 @@ window.addEventListener("load", () => {
         animateParticles();
     }, 300);
 });
+   
+}
 /* ===============================
    PAGE LOADER
 ================================== */
@@ -201,3 +203,4 @@ const revealObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.2 });
 
 revealElements.forEach(el => revealObserver.observe(el));
+});
