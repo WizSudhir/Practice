@@ -315,9 +315,40 @@ header.scrolled {
    11. EHR SLIDER
 ================================= */
 .ehr-section {
-  padding:50px 0;
-  background: var(--bg-tertiary);
-  text-align:center;
+  padding: 100px 0;
+  overflow: hidden;
+  background: var(--bg-secondary);
+  text-align: center;
+}
+
+.slider {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  margin-top: 40px;
+}
+
+.slide-track {
+  display: flex;
+  width: calc(250px * 20);
+  animation: scroll 40s linear infinite;
+}
+
+.slide-track img {
+  width: 200px;
+  margin: 0 25px;
+  opacity: 0.8;
+  transition: 0.3s ease;
+}
+
+.slide-track img:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 /* ===============================
