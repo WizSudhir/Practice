@@ -28,8 +28,6 @@ if (header) {
    GLOBAL SCROLL HANDLER (Optimized)
 ================================== */
 
-let counterStarted = false;
-
 window.addEventListener("scroll", handleScroll);
 handleScroll();
    
