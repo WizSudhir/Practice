@@ -1,6 +1,6 @@
 /* =========================================================
-   PRACTICEGRID SOLUTIONS — PREMIUM SAAS CSS ARCHITECTURE
-   Version: Production Optimized
+   PRACTICEGRID SOLUTIONS — ENTERPRISE SAAS CSS SYSTEM
+   Version: Production Optimized ($25K Architecture)
 ========================================================= */
 
 /* ===============================
@@ -9,75 +9,77 @@
 :root {
 
   /* Layout */
-  --container: 1200px;
-  --section-space: 120px;
+  --container-width: 1200px;
+  --section-padding: 120px;
+  --section-padding-sm: 80px;
   --radius-lg: 20px;
   --radius-pill: 50px;
 
-  /* Colors - Dark (Default) */
-  --bg-primary: #0f0f1b;
-  --bg-secondary: #121226;
-  --bg-surface: rgba(255,255,255,0.04);
+  /* Brand Colors (Logo Theme) */
+  --accent: #6366f1;
+  --accent-2: #8b5cf6;
+  --accent-3: #3b82f6;
+
+  --gradient-primary: linear-gradient(135deg, var(--accent), var(--accent-2));
+  --gradient-hero: linear-gradient(-45deg,#5a3eb1,#8c3fc6,#3b82f6,#9333ea);
+
+  /* Dark Mode (Default) */
+  --bg-primary: #0b1120;
+  --bg-secondary: #0f172a;
+  --bg-tertiary: #111827;
+  --bg-elevated: rgba(255,255,255,0.04);
 
   --text-primary: #ffffff;
   --text-secondary: #94a3b8;
 
-  --accent: #8b5cf6;
-  --accent-strong: #6a5acd;
-  --accent-gradient: linear-gradient(135deg,#6a5acd,#a855f7);
-
   /* Effects */
-  --shadow-sm: 0 8px 25px rgba(0,0,0,0.2);
-  --shadow-lg: 0 20px 50px rgba(0,0,0,0.35);
+  --shadow-soft: 0 10px 40px rgba(0,0,0,0.25);
+  --shadow-hover: 0 20px 60px rgba(0,0,0,0.35);
+  --border-glow: linear-gradient(45deg,var(--accent),var(--accent-2),var(--accent-3));
 
   /* Typography */
   --font-main: 'Inter', sans-serif;
-
-  /* Motion */
-  --transition-fast: 0.25s ease;
-  --transition-smooth: 0.45s cubic-bezier(.4,0,.2,1);
 }
 
 /* ===============================
-   LIGHT MODE
+   2. LIGHT MODE
 ================================= */
 body.light-mode {
+
   --bg-primary: #ffffff;
   --bg-secondary: #f8fafc;
-  --bg-surface: #ffffff;
+  --bg-tertiary: #e2e8f0;
+  --bg-elevated: #ffffff;
 
   --text-primary: #111827;
   --text-secondary: #475569;
 
-  --shadow-sm: 0 8px 20px rgba(0,0,0,0.08);
-  --shadow-lg: 0 20px 40px rgba(0,0,0,0.12);
+  --shadow-soft: 0 10px 30px rgba(0,0,0,0.08);
+  --shadow-hover: 0 20px 60px rgba(0,0,0,0.12);
 }
 
 /* ===============================
-   2. GLOBAL RESET
+   3. GLOBAL RESET
 ================================= */
 *,
 *::before,
 *::after {
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-  scroll-behavior:smooth;
+  scroll-behavior: smooth;
 }
 
 body {
   font-family: var(--font-main);
   background: var(--bg-primary);
   color: var(--text-primary);
-  transition: background var(--transition-smooth),
-              color var(--transition-fast);
-  overflow-x:hidden;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* Subtle texture */
 body::before {
   content:"";
   position:fixed;
@@ -85,230 +87,316 @@ body::before {
   background:url('https://www.transparenttextures.com/patterns/noise.png');
   opacity:0.02;
   pointer-events:none;
-  z-index:-1;
+  z-index:0;
 }
 
 /* ===============================
-   3. LAYOUT SYSTEM
+   4. LAYOUT SYSTEM
 ================================= */
 .container {
-  width:100%;
-  max-width:var(--container);
-  margin:auto;
-  padding:0 24px;
+  max-width: var(--container-width);
+  margin: auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 2;
 }
 
 .section {
-  padding: var(--section-space) 0;
+  padding: var(--section-padding) 0;
 }
 
-.text-center { text-align:center; }
+@media(max-width:992px){
+  .section {
+    padding: var(--section-padding-sm) 0;
+  }
+}
 
 /* ===============================
-   4. TYPOGRAPHY
+   5. TYPOGRAPHY
 ================================= */
 h1,h2,h3 {
-  letter-spacing:-1px;
-  font-weight:800;
+  letter-spacing: -1px;
 }
 
-h1 { font-size: clamp(36px,5vw,60px); }
-h2 { font-size: clamp(28px,4vw,42px); }
-p  { color: var(--text-secondary); line-height:1.7; }
+h1 { font-size: 60px; font-weight: 800; }
+h2 { font-size: 42px; font-weight: 700; }
+h3 { font-size: 22px; font-weight: 600; }
+
+p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
 
 /* ===============================
-   5. NAVIGATION (GLASS)
+   6. NAVIGATION
 ================================= */
-header {
-  position:fixed;
-  top:0;
-  width:100%;
-  z-index:1000;
-  backdrop-filter: blur(12px);
-  background: rgba(255,255,255,0.04);
-  transition: var(--transition-smooth);
+.navbar {
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  backdrop-filter: blur(15px);
+  background: rgba(255,255,255,0.05);
 }
 
-header.scrolled {
-  box-shadow: var(--shadow-sm);
-}
-
-.nav-inner {
+.navbar-inner {
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:18px 8%;
+  padding:20px 0;
 }
 
-nav ul {
-  list-style:none;
+.logo img { height:55px; }
+
+.nav-menu ul {
   display:flex;
+  list-style:none;
   gap:30px;
 }
 
-nav a {
+.nav-menu a {
   text-decoration:none;
-  color:var(--text-primary);
+  color: var(--text-primary);
   font-weight:500;
-  transition: var(--transition-fast);
 }
 
-nav a:hover {
-  color:var(--accent);
+header.scrolled {
+  box-shadow: var(--shadow-soft);
 }
 
 /* ===============================
-   6. BUTTONS
+   7. BUTTONS
 ================================= */
-.btn {
-  display:inline-block;
-  padding:14px 28px;
-  border-radius:var(--radius-pill);
-  font-weight:600;
-  text-decoration:none;
-  transition: var(--transition-smooth);
-}
-
 .btn-primary {
-  background: var(--accent-gradient);
-  color:#fff;
-  box-shadow: var(--shadow-sm);
+  background: #fff;
+  color: var(--accent);
+  padding:14px 28px;
+  border-radius: var(--radius-pill);
+  text-decoration:none;
+  font-weight:600;
+  transition:0.3s ease;
 }
 
 .btn-primary:hover {
-  transform:translateY(-4px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
 }
 
 .btn-outline {
-  border:2px solid var(--accent);
-  color:var(--accent);
-}
-
-.btn-outline:hover {
-  background:var(--accent);
+  border:2px solid #fff;
+  padding:14px 28px;
+  border-radius: var(--radius-pill);
+  text-decoration:none;
   color:#fff;
 }
 
 /* ===============================
-   7. HERO SECTION
+   8. HERO SECTION
 ================================= */
 .hero {
-  min-height:100vh;
+  position:relative;
+  height:100vh;
   display:flex;
   align-items:center;
-  justify-content:center;
-  background:linear-gradient(-45deg,#5a3eb1,#8c3fc6,#3b82f6,#9333ea);
-  background-size:300% 300%;
-  animation: heroGradient 14s ease infinite;
-  text-align:center;
+  overflow:hidden;
+  background: var(--gradient-hero);
+  background-size:400% 400%;
+  animation:gradient 12s ease infinite;
 }
 
-@keyframes heroGradient {
+@keyframes gradient {
   0%{background-position:0% 50%}
   50%{background-position:100% 50%}
   100%{background-position:0% 50%}
 }
 
+.hero-container {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  width:100%;
+}
+
+.hero-left { max-width:600px; }
+.hero h1 { line-height:1.1; }
+.hero p { margin:20px 0; }
+
+.hero-right img {
+  width:500px;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,100% { transform:translateY(0); }
+  50% { transform:translateY(-15px); }
+}
+
 /* ===============================
-   8. SERVICE CARDS
+   9. SERVICES
 ================================= */
 .services-grid {
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:30px;
   margin-top:60px;
 }
 
-.card {
-  background: var(--bg-surface);
+.service-card {
+  background: var(--bg-elevated);
   padding:35px;
-  border-radius:var(--radius-lg);
-  transition: var(--transition-smooth);
+  border-radius: var(--radius-lg);
+  transition:0.4s ease;
+  backdrop-filter: blur(20px);
   position:relative;
   overflow:hidden;
 }
 
-.card:hover {
-  transform:translateY(-8px);
-  box-shadow: var(--shadow-lg);
-}
-
-/* GPU optimized hover glow */
-.card::before {
+.service-card::before {
   content:"";
   position:absolute;
   inset:0;
-  border-radius:inherit;
-  background: var(--accent-gradient);
+  border-radius: var(--radius-lg);
+  padding:2px;
+  background: var(--border-glow);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
   opacity:0;
-  transition: var(--transition-fast);
-  z-index:-1;
-  filter: blur(40px);
+  transition:0.4s;
 }
 
-.card:hover::before {
-  opacity:0.15;
+.service-card:hover::before { opacity:1; }
+
+.service-card:hover {
+  transform:translateY(-10px) scale(1.02);
+  box-shadow: var(--shadow-hover);
 }
 
-/* ===============================
-   9. EHR LOGO SLIDER
-================================= */
-.slider {
-  overflow:hidden;
+.icon svg {
+  width:50px;
+  height:50px;
+  stroke: var(--accent-2);
+  stroke-width:2;
+  fill:none;
+  animation: rotate 6s linear infinite;
 }
 
-.slide-track {
-  display:flex;
-  gap:60px;
-  animation: scrollX 30s linear infinite;
-  will-change:transform;
-}
-
-@keyframes scrollX {
-  from{transform:translateX(0);}
-  to{transform:translateX(-50%);}
+@keyframes rotate {
+  from{transform:rotate(0deg);}
+  to{transform:rotate(360deg);}
 }
 
 /* ===============================
-   10. CTA SECTION
+   10. HIPAA SECTION
 ================================= */
-.cta {
-  padding:80px 5%;
-  text-align:center;
-  background: var(--accent-gradient);
-  color:#fff;
-}
-
-/* ===============================
-   11. FOOTER
-================================= */
-footer {
-  padding:40px;
-  text-align:center;
+.hipaa-section {
+  padding:60px 0;
   background: var(--bg-secondary);
 }
 
+.hipaa-container {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:60px;
+}
+
+.badge-ring {
+  border:4px solid var(--accent-2);
+}
+
+.badge-core {
+  background: var(--gradient-primary);
+  box-shadow:0 0 30px rgba(139,92,246,0.6);
+}
+
 /* ===============================
-   12. SCROLL REVEAL
+   11. EHR SLIDER
 ================================= */
-.reveal {
-  opacity:0;
-  transform:translateY(40px);
-  transition: var(--transition-smooth);
-}
-
-.reveal.active {
-  opacity:1;
-  transform:translateY(0);
+.ehr-section {
+  padding:50px 0;
+  background: var(--bg-tertiary);
+  text-align:center;
 }
 
 /* ===============================
-   13. SCROLLBAR (PREMIUM)
+   12. CTA
+================================= */
+.cta {
+  padding:60px 0;
+  background: var(--gradient-primary);
+  text-align:center;
+}
+
+/* ===============================
+   13. CONTACT STRIP
+================================= */
+.contact-strip {
+  padding:60px 0;
+  background: linear-gradient(135deg,var(--bg-secondary),#1e1b4b);
+}
+
+.contact-item {
+  color: var(--text-primary);
+}
+
+.contact-circle svg {
+  stroke: var(--accent-2);
+}
+
+/* ===============================
+   14. FOOTER
+================================= */
+footer {
+  padding:40px 0;
+  text-align:center;
+  background: var(--bg-tertiary);
+}
+
+/* ===============================
+   15. LOADER
+================================= */
+#loader {
+  background: var(--bg-primary);
+}
+
+.spinner {
+  border-top:4px solid var(--accent-2);
+}
+
+/* ===============================
+   16. SCROLLBAR
 ================================= */
 ::-webkit-scrollbar { width:8px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
 ::-webkit-scrollbar-thumb {
-  background: var(--accent-gradient);
+  background: var(--gradient-primary);
   border-radius:10px;
 }
 
+/* ===============================
+   17. RESPONSIVE
+================================= */
+@media(max-width:992px){
+
+  .hero-container {
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .hero-right img {
+    width:320px;
+    margin-top:40px;
+  }
+
+  .stats {
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+
+  .hipaa-container {
+    flex-direction:column;
+    text-align:center;
+  }
+}
