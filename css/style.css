@@ -1,9 +1,7 @@
 /* =========================================================
    PRACTICEGRID SOLUTIONS
    ENTERPRISE SAAS DESIGN SYSTEM
-   Fully Mobile Optimized
 ========================================================= */
-
 
 /* =========================================================
    1. DESIGN TOKENS
@@ -11,7 +9,7 @@
 
 :root {
 
-  /* ===== COLORS ===== */
+  /* ===== COLOR SYSTEM ===== */
   --color-bg-primary: #0b1120;
   --color-bg-secondary: #0f172a;
   --color-bg-elevated: rgba(255,255,255,0.04);
@@ -22,21 +20,21 @@
   --color-accent: #00c6ff;
   --color-accent-strong: #0072ff;
 
-  /* ===== GRADIENTS ===== */
+  /* ===== GRADIENT SYSTEM ===== */
   --gradient-primary: linear-gradient(90deg, var(--color-accent), var(--color-accent-strong));
   --gradient-hero: linear-gradient(-45deg,#5a3eb1,#8c3fc6,#3b82f6,#9333ea);
   --gradient-surface: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
 
-  /* ===== FLUID TYPOGRAPHY ===== */
-  --text-xs: clamp(12px, 1vw, 13px);
-  --text-sm: clamp(14px, 1.2vw, 15px);
-  --text-md: clamp(16px, 1.5vw, 17px);
-  --text-lg: clamp(18px, 2vw, 20px);
-  --text-xl: clamp(24px, 3vw, 32px);
-  --text-2xl: clamp(32px, 4vw, 44px);
-  --text-3xl: clamp(36px, 5vw, 56px);
+  /* ===== TYPOGRAPHY SCALE ===== */
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-md: 16px;
+  --text-lg: 20px;
+  --text-xl: 28px;
+  --text-2xl: 40px;
+  --text-3xl: 56px;
 
-  /* ===== SPACING ===== */
+  /* ===== SPACING SCALE ===== */
   --space-xs: 8px;
   --space-sm: 16px;
   --space-md: 24px;
@@ -44,27 +42,27 @@
   --space-xl: 80px;
   --space-2xl: 120px;
 
-  /* ===== RADIUS ===== */
+  /* ===== RADIUS SYSTEM ===== */
   --radius-sm: 12px;
   --radius-md: 20px;
   --radius-lg: 32px;
   --radius-pill: 999px;
 
-  /* ===== SHADOWS ===== */
+  /* ===== ELEVATION SYSTEM ===== */
   --shadow-sm: 0 10px 20px rgba(0,0,0,.2);
   --shadow-md: 0 20px 40px rgba(0,0,0,.3);
   --shadow-lg: 0 30px 70px rgba(0,0,0,.4);
 
   /* ===== LAYOUT ===== */
   --container-width: 1200px;
-  --section-padding: clamp(80px, 8vw, 120px);
+  --section-padding: var(--space-2xl);
 
   --font-main: 'Inter', sans-serif;
 }
 
 
 /* =========================================================
-   2. BASE
+   2. BASE LAYER
 ========================================================= */
 
 *,
@@ -83,17 +81,11 @@ body {
   scroll-behavior: smooth;
 }
 
-h1 { font-size: var(--text-3xl); }
-h2 { font-size: var(--text-2xl); }
-h3 { font-size: var(--text-xl); }
-
-p {
-  font-size: var(--text-md);
-  color: var(--color-text-secondary);
+h1,h2,h3 {
+  letter-spacing: -1px;
 }
 
 .container {
-  width:100%;
   max-width: var(--container-width);
   margin: 0 auto;
   padding: 0 var(--space-md);
@@ -105,8 +97,23 @@ p {
 
 
 /* =========================================================
-   3. NAVBAR
+   3. UTILITIES (Architecture Layer)
 ========================================================= */
+
+.u-text-center { text-align:center; }
+.u-flex { display:flex; }
+.u-grid { display:grid; }
+.u-gap-lg { gap: var(--space-lg); }
+.u-mt-lg { margin-top: var(--space-lg); }
+.u-mt-xl { margin-top: var(--space-xl); }
+
+
+/* =========================================================
+   4. COMPONENTS
+========================================================= */
+
+
+/* ---------- NAVBAR ---------- */
 
 .navbar {
   position: fixed;
@@ -118,7 +125,6 @@ p {
   backdrop-filter: blur(20px);
   background: rgba(255,255,255,0.05);
   z-index:1000;
-  transition: all .3s ease;
 }
 
 .navbar.scrolled {
@@ -126,18 +132,16 @@ p {
 }
 
 
-/* =========================================================
-   4. HERO
-========================================================= */
+/* ---------- HERO ---------- */
 
 .hero {
-  min-height: 100svh; /* mobile safe viewport */
+  min-height:100vh;
   display:flex;
   align-items:center;
   background: var(--gradient-hero);
   background-size:400% 400%;
   animation: gradientMove 12s ease infinite;
-  padding: var(--space-xl) var(--space-lg);
+  padding: 0 var(--space-lg);
 }
 
 @keyframes gradientMove {
@@ -146,18 +150,19 @@ p {
   100%{background-position:0% 50%}
 }
 
-.hero-content {
-  max-width: 650px;
+.hero h1 {
+  font-size: var(--text-3xl);
+  line-height:1.1;
 }
 
 .hero p {
+  font-size: var(--text-lg);
   margin-top: var(--space-md);
+  color: var(--color-text-secondary);
 }
 
 
-/* =========================================================
-   5. BUTTON SYSTEM
-========================================================= */
+/* ---------- BUTTON SYSTEM ---------- */
 
 .btn {
   display:inline-block;
@@ -167,7 +172,6 @@ p {
   font-weight:600;
   text-decoration:none;
   transition: all .3s ease;
-  text-align:center;
 }
 
 .btn-primary {
@@ -191,9 +195,7 @@ p {
 }
 
 
-/* =========================================================
-   6. CARD SYSTEM
-========================================================= */
+/* ---------- CARD SYSTEM ---------- */
 
 .card {
   background: var(--gradient-surface);
@@ -209,9 +211,7 @@ p {
 }
 
 
-/* =========================================================
-   7. SERVICES GRID
-========================================================= */
+/* ---------- SERVICES GRID ---------- */
 
 .services-grid {
   display:grid;
@@ -220,9 +220,7 @@ p {
 }
 
 
-/* =========================================================
-   8. STATS STRIP
-========================================================= */
+/* ---------- STATS STRIP ---------- */
 
 .stats-strip {
   background: var(--color-bg-secondary);
@@ -245,9 +243,7 @@ p {
 }
 
 
-/* =========================================================
-   9. CTA
-========================================================= */
+/* ---------- CTA ---------- */
 
 .cta {
   padding: var(--space-2xl) 0;
@@ -261,7 +257,7 @@ p {
 
 
 /* =========================================================
-   10. SCROLL REVEAL
+   5. ANIMATION UTILITIES
 ========================================================= */
 
 .reveal-up {
@@ -277,51 +273,16 @@ p {
 
 
 /* =========================================================
-   11. MOBILE OPTIMIZATION
+   6. RESPONSIVE SYSTEM
 ========================================================= */
 
-@media (max-width: 992px){
+@media(max-width:768px){
+
+  h1 { font-size: var(--text-xl); }
+  h2 { font-size: var(--text-lg); }
 
   .hero {
     padding: var(--space-xl) var(--space-md);
-  }
-
-}
-
-@media (max-width: 768px){
-
-  .navbar {
-    padding: var(--space-sm);
-    flex-direction: column;
-    gap: var(--space-sm);
-  }
-
-  .hero {
-    text-align:center;
-  }
-
-  .hero-content {
-    margin:auto;
-  }
-
-  .btn {
-    width:100%;
-  }
-
-  .services-grid {
-    grid-template-columns:1fr;
-  }
-
-  .stats-grid {
-    gap: var(--space-md);
-  }
-
-}
-
-@media (max-width: 480px){
-
-  .section {
-    padding: var(--space-xl) 0;
   }
 
 }
