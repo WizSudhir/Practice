@@ -85,11 +85,23 @@ function startCounters() {
 }
 
 // Wait until loader is removed
-window.addEventListener("load", () => {
-    setTimeout(() => {
+function checkCounters() {
+    if (counterStarted) return;
+
+    const trigger = document.querySelector(".hero");
+    if (!trigger) return;
+
+    const top = trigger.getBoundingClientRect().top;
+    const windowHeight = window.innerHeight;
+
+    if (top < windowHeight - 100) {
+        counterStarted = true;
         startCounters();
-    }, 300); // small delay after loader disappears
-});
+    }
+}
+
+window.addEventListener("scroll", checkCounters);
+window.addEventListener("load", checkCounters);
 /* ===============================
    PARTICLE BACKGROUND
 ================================== */
