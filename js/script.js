@@ -35,7 +35,6 @@ handleScroll();
    
 function handleScroll() {
     revealOnScroll();
-    startCounterOnView();
     parallaxEffect();
 }
 
@@ -70,7 +69,7 @@ const counterObserver = new IntersectionObserver(entries => {
             counterObserver.unobserve(entry.target);
         }
     });
-}, { threshold: 0.6 });
+}, { threshold: 0.3 });
 
 counters.forEach(counter => {
     counterObserver.observe(counter);
