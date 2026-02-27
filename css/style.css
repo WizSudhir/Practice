@@ -428,27 +428,22 @@ header.scrolled {
 
 .slide-track {
   display: flex;
-  width: calc(250px * 20);
-  animation: scroll 40s linear infinite;
+  gap: 60px;
+  animation: scroll 35s linear infinite;
 }
 
 .slide-track img {
-  width: 200px;
-  margin: 0 25px;
-  opacity: 0.8;
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.85;
   transition: 0.3s ease;
-}
-
-.slide-track img:hover {
-  opacity: 1;
-  transform: scale(1.05);
 }
 
 @keyframes scroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-
 /* ===============================
    12. CTA
 ================================= */
@@ -473,6 +468,10 @@ header.scrolled {
 
 .contact-item {
   color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  text-decoration: none;
 }
 
 .contact-circle svg {
@@ -483,13 +482,17 @@ header.scrolled {
   align-items: center;
   justify-content: space-between;
   gap: 40px;
+  flex-wrap: wrap;
 }
 
-.contact-item {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  text-decoration: none;
+.contact-item h4 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.contact-item span {
+  font-size: 14px;
+  color: var(--text-secondary);
 }
 
 .contact-circle {
@@ -518,6 +521,12 @@ header.scrolled {
   animation: pulse 2s infinite;
 }
 
+.divider-line {
+  width: 1px;
+  height: 80px;
+  background: rgba(255,255,255,0.1);
+}
+
 @keyframes pulse {
   0% { transform: scale(1); opacity: 0.7; }
   100% { transform: scale(1.5); opacity: 0; }
@@ -526,7 +535,7 @@ header.scrolled {
    14. FOOTER
 ================================= */
 footer {
-  padding:40px 0;
+  padding: 100px 0 40px;
   text-align:center;
   background: var(--bg-tertiary);
 }
@@ -550,6 +559,46 @@ footer {
 .footer-hipaa img {
   height: 50px;
   filter: drop-shadow(0 0 10px rgba(139,92,246,0.8));
+}
+.footer {
+  background: var(--bg-tertiary);
+  padding: 100px 0 40px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 60px;
+}
+
+.footer-brand img {
+  height: 55px;
+  margin-bottom: 20px;
+}
+
+.footer-links,
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: var(--text-secondary);
+  transition: 0.3s;
+}
+
+.footer-links a:hover {
+  color: var(--accent-2);
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 60px;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  color: var(--text-secondary);
 }
 /* ===============================
    15. LOADER
