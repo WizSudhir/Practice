@@ -294,7 +294,7 @@ header.scrolled {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
 }
 /* ===============================
    9. SERVICES
@@ -662,11 +662,6 @@ body:not(.loading) #loader {
   display: flex;
   justify-content: center;
   align-items: center;
-   animation: autoHide 5s forwards;
-}
-@keyframes autoHide {
-  0% { opacity: 1; visibility: visible; }
-  100% { opacity: 0; visibility: hidden; }
 }
 /* ===============================
    16. SCROLLBAR
