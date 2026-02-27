@@ -835,3 +835,16 @@ footer {
     margin-top: 40px;
   }
 }
+
+/* =========================================================
+   Icons for contact strip in footer
+========================================================= */
+.footer-contact a {
+  text-decoration: none;
+  color: var(--text-secondary);
+  transition: 0.3s ease;
+}
+
+.footer-contact a:hover {
+  color: var(--accent-2);
+}
