@@ -173,7 +173,7 @@ if (canvas) {
 ================================== */
 
 window.addEventListener("load", () => {
-    document.body.classList.add("loaded");
+    document.body.classList.remove("loading");
 });
 
 /* ===============================
