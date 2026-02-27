@@ -416,7 +416,12 @@ header.scrolled {
   background: var(--gradient-primary);
   text-align:center;
 }
-
+.cta .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
 /* ===============================
    13. CONTACT STRIP
 ================================= */
