@@ -487,9 +487,17 @@ header.scrolled {
   align-items: center;
   justify-content: space-between;
   gap: 40px;
-  flex-wrap: wrap;
-  position: relative;
-  z-index: 2;
+  flex-wrap: nowrap;
+}
+@media (max-width: 992px) {
+  .contact-strip-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .divider-line {
+    display: none;
+  }
 }
 
 .contact-item h4 {
