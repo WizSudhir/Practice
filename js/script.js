@@ -1,202 +1,168 @@
-/* =========================================================
-   PRACTICEGRID SOLUTIONS
-   ENTERPRISE JS ARCHITECTURE
-========================================================= */
-
-document.addEventListener("DOMContentLoaded", () => {
+// ======================================================
+// PRACTICEGRID SOLUTIONS - GLOBAL JS ARCHITECTURE
+// Production Optimized
+// ======================================================
 
 
-/* ===============================
-   Header Scroll Window
-================================== */
-const header = document.querySelector(".navbar");
+// ===============================
+// 1. HEADER SCROLL EFFECT
+// ===============================
+const navbar = document.querySelector(".navbar");
 
-if (header) {
-    if (window.scrollY > 50) {
-        header.classList.add("scrolled");
-    }
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 60) {
+    navbar?.classList.add("scrolled");
+  } else {
+    navbar?.classList.remove("scrolled");
+  }
+});
 
-    window.addEventListener("scroll", () => {
-        if (window.scrollY > 50) {
-            header.classList.add("scrolled");
-        } else {
-            header.classList.remove("scrolled");
-        }
-    });
-}
-/* ===============================
-   GLOBAL SCROLL HANDLER (Optimized)
-================================== */
 
-window.addEventListener("scroll", handleScroll);
-handleScroll();
-   
-function handleScroll() {
-    revealOnScroll();
-    parallaxEffect();
-}
-
-/* ===============================
-   REVEAL ANIMATION
-================================== */
-
+// ===============================
+// 2. REVEAL ANIMATION
+// ===============================
 const reveals = document.querySelectorAll(".reveal");
 
-function revealOnScroll() {
-    const windowHeight = window.innerHeight;
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("active");
+    }
+  });
+}, { threshold: 0.15 });
 
-    reveals.forEach(el => {
-        const elementTop = el.getBoundingClientRect().top;
+reveals.forEach(el => revealObserver.observe(el));
 
-        if (elementTop < windowHeight - 100) {
-            el.classList.add("active");
-        }
-    });
-}
 
-/* ===============================
-   COUNTER ANIMATION (Fixed)
-================================== */
+// ===============================
+// 3. COUNTER ANIMATION
+// ===============================
 const counters = document.querySelectorAll(".counter");
 
-const runCounters = () => {
-    counters.forEach(counter => {
-        const target = +counter.getAttribute("data-target");
-        const duration = 2000; // 2 seconds
-        const step = target / (duration / 16); // 60fps
-        
-        let current = 0;
-        const update = () => {
-            current += step;
-            if (current < target) {
-                counter.innerText = Math.floor(current);
-                requestAnimationFrame(update);
-            } else {
-                counter.innerText = target;
-            }
-        };
-        update();
-    });
-};
+function runCounters() {
+  counters.forEach(counter => {
+    const target = +counter.getAttribute("data-target");
+    const duration = 1500;
+    const startTime = performance.now();
 
-// Suggestion to view particles in hero by chatgpt
-const heroSection = document.querySelector(".hero");
+    function updateCounter(currentTime) {
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+      counter.innerText = Math.floor(progress * target);
 
-if (heroSection) {
-    const counterObserver = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                runCounters();
-                counterObserver.disconnect(); // run only once
-            }
-        });
-    }, { threshold: 0.5 });
+      if (progress < 1) {
+        requestAnimationFrame(updateCounter);
+      } else {
+        counter.innerText = target;
+      }
+    }
 
-    counterObserver.observe(heroSection);
+    requestAnimationFrame(updateCounter);
+  });
 }
-   
-/* ===============================
-   PARTICLE BACKGROUND (Stable Version)
-================================== */
 
+if (counters.length > 0) {
+  const counterObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      runCounters();
+      counterObserver.disconnect();
+    }
+  }, { threshold: 0.5 });
+
+  counterObserver.observe(document.querySelector(".stats"));
+}
+
+
+// ===============================
+// 4. PARTICLE BACKGROUND
+// ===============================
 const canvas = document.getElementById("particles");
 
 if (canvas) {
-    const ctx = canvas.getContext("2d");
-    const heroSection = document.querySelector(".hero");
-    let particlesArray = [];
+  const ctx = canvas.getContext("2d");
 
-    function resizeCanvas() {
-        canvas.width = heroSection.clientWidth;
-        canvas.height = heroSection.clientHeight;
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let particlesArray = [];
+
+  class Particle {
+    constructor() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.size = Math.random() * 2 + 1;
+      this.speedX = Math.random() * 0.5 - 0.25;
+      this.speedY = Math.random() * 0.5 - 0.25;
     }
 
-    class Particle {
-        constructor() {
-            this.reset();
-        }
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
 
-        reset() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 2 + 1;
-            this.speedX = Math.random() * 0.3 - 0.15;
-            this.speedY = Math.random() * 0.3 - 0.15;
-        }
-
-        update() {
-            this.x += this.speedX;
-            this.y += this.speedY;
-
-            if (this.x < 0 || this.x > canvas.width ||
-                this.y < 0 || this.y > canvas.height) {
-                this.reset();
-            }
-        }
-
-        draw() {
-            ctx.fillStyle = "rgba(255,255,255,0.6)";
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
-        }
+      if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+      if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
     }
 
-    function initParticles() {
-        particlesArray = [];
-        for (let i = 0; i < 80; i++) {
-            particlesArray.push(new Particle());
-        }
+    draw() {
+      ctx.fillStyle = "rgba(255,255,255,0.5)";
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
     }
+  }
 
-    function animateParticles() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        particlesArray.forEach(p => {
-            p.update();
-            p.draw();
-        });
-
-        requestAnimationFrame(animateParticles);
+  function initParticles() {
+    particlesArray = [];
+    for (let i = 0; i < 80; i++) {
+      particlesArray.push(new Particle());
     }
+  }
 
-    // Initialize immediately after DOM ready
-    resizeCanvas();
+  function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particlesArray.forEach(p => {
+      p.update();
+      p.draw();
+    });
+    requestAnimationFrame(animateParticles);
+  }
+
+  initParticles();
+  animateParticles();
+
+  window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
     initParticles();
-    animateParticles();
-
-    window.addEventListener("resize", () => {
-        resizeCanvas();
-        initParticles();
-    });
-}
-/* ===============================
-   PARALLAX EFFECT
-================================== */
-
-function parallaxEffect() {
-    const parallaxElements = document.querySelectorAll(".parallax");
-
-    parallaxElements.forEach(el => {
-        const speed = el.getAttribute("data-speed");
-        const yPos = -(window.scrollY / speed);
-        el.style.transform = `translateY(${yPos}px)`;
-    });
+  });
 }
 
-/* ===============================
-   CONTACT STRIP REVEAL (IntersectionObserver)
-================================== */
 
-const revealElements = document.querySelectorAll(".reveal-up");
+// ===============================
+// 5. PARALLAX EFFECT
+// ===============================
+const parallaxElements = document.querySelectorAll(".parallax");
 
-const revealObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add("active");
-        }
-    });
-}, { threshold: 0.2 });
+window.addEventListener("scroll", () => {
+  const scrollY = window.scrollY;
 
-revealElements.forEach(el => revealObserver.observe(el));
+  parallaxElements.forEach(el => {
+    const speed = el.getAttribute("data-speed") || 0.3;
+    el.style.transform = `translateY(${scrollY * speed}px)`;
+  });
 });
+
+
+// ===============================
+// 6. CONTACT STRIP REVEAL
+// ===============================
+const contactStrip = document.querySelector(".contact-strip");
+
+if (contactStrip) {
+  const contactObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      contactStrip.classList.add("visible");
+    }
+  }, { threshold: 0.3 });
+
+  contactObserver.observe(contactStrip);
+}
