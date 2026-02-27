@@ -704,26 +704,27 @@ footer {
 .delay-2 { transition-delay: 0.4s; }
 
 /* =========================================================
-   SERVICES PAGE (Vertical Layout Version)
-   Only used on services.html
-   Safe – does NOT affect homepage
+   SERVICES PAGE – LEFT ICON LAYOUT
+   Safe – Does NOT affect homepage
 ========================================================= */
 
 .services-vertical {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 80px auto 0;
   display: flex;
   flex-direction: column;
-  gap: 80px;
+  gap: 60px;
 }
 
 .service-vertical-card {
+  display: flex;
+  align-items: center; /* Vertical centering */
+  gap: 40px;
   background: var(--bg-elevated);
-  padding: 50px;
+  padding: 45px;
   border-radius: var(--radius-lg);
   backdrop-filter: blur(20px);
   box-shadow: var(--shadow-soft);
-  text-align: center;
   position: relative;
   transition: 0.4s ease;
 }
@@ -749,25 +750,25 @@ footer {
 }
 
 .service-vertical-card:hover {
-  transform: translateY(-12px);
+  transform: translateY(-10px);
   box-shadow: var(--shadow-hover);
 }
 
 .service-vertical-icon {
-  width: 100px;
+  min-width: 100px;
   height: 100px;
-  margin: 0 auto 30px;
   border-radius: 50%;
   background: var(--bg-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+  transition: 0.4s ease;
 }
 
 .service-vertical-icon svg {
-  width: 50px;
-  height: 50px;
+  width: 48px;
+  height: 48px;
   stroke: var(--accent-2);
   stroke-width: 2;
   fill: none;
@@ -777,4 +778,13 @@ footer {
 .service-vertical-card:hover .service-vertical-icon svg {
   stroke: var(--accent);
   transform: scale(1.1);
+}
+
+.service-vertical-content h3 {
+  margin-bottom: 15px;
+}
+
+.service-vertical-content p {
+  margin: 0;
+  color: var(--text-secondary);
 }
