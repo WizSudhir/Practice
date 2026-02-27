@@ -291,7 +291,7 @@ header.scrolled {
   pointer-events: none;
   z-index: 2;
 }
-stats {
+.stats {
   display: flex;
   gap: 40px;
   margin-top: 40px;
