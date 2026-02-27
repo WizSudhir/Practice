@@ -60,14 +60,6 @@ function revealOnScroll() {
    COUNTER ANIMATION (Improved)
 ================================== */
 const counters = document.querySelectorAll(".counter");
-let counterStarted = false;
-
-function startCounters() {
-    if (counterStarted) return;
-
-    counters.forEach(counter => animateCounter(counter));
-    counterStarted = true;
-}
 
 function animateCounter(counter) {
     const target = +counter.getAttribute("data-target");
@@ -88,17 +80,19 @@ function animateCounter(counter) {
     requestAnimationFrame(update);
 }
 
-// Start counters when page loads (since hero is visible)
-window.addEventListener("load", startCounters);
+function startCounters() {
+    counters.forEach(counter => animateCounter(counter));
+}
 
+// Wait until loader is removed
+window.addEventListener("load", () => {
+    setTimeout(() => {
+        startCounters();
+    }, 300); // small delay after loader disappears
+});
 /* ===============================
    PARTICLE BACKGROUND
 ================================== */
-
-/* ===============================
-   PARTICLE BACKGROUND (Fixed)
-================================== */
-
 const canvas = document.getElementById("particles");
 
 if (canvas) {
@@ -162,12 +156,14 @@ if (canvas) {
         requestAnimationFrame(animateParticles);
     }
 
-    // Initialize immediately (no load event dependency)
-    resizeCanvas();
-    initParticles();
-    animateParticles();
-}
-
+    // Initialize AFTER full page + loader completes
+window.addEventListener("load", () => {
+    setTimeout(() => {
+        resizeCanvas();
+        initParticles();
+        animateParticles();
+    }, 300);
+});
 /* ===============================
    PAGE LOADER
 ================================== */
