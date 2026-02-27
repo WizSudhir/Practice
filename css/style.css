@@ -779,8 +779,8 @@ footer {
   opacity: 0.8;
 }
 .service-vertical-icon svg {
-  width: 48px;
-  height: 48px;
+  width: 70px;
+  height: 70px;
   stroke: var(--accent-2);
   stroke-width: 2;
   fill: none;
