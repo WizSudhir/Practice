@@ -639,25 +639,30 @@ footer {
 /* ===============================
    15. LOADER
 ================================= */
-#loader {
-  background: var(--bg-primary);
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* loader visible while loading */
+body.loading #loader {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
-body.loaded #loader {
+/* hide loader once class removed */
+body:not(.loading) #loader {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.6s ease;
+  transition: opacity 0.6s ease, visibility 0s linear 0.6s;
 }
 
-.spinner {
-  border-top:4px solid var(--accent-2);
+/* ensures loader covers everything */
+#loader {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-primary);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* ===============================
