@@ -57,67 +57,62 @@ function revealOnScroll() {
 }
 
 /* ===============================
-   COUNTER ANIMATION (Improved)
+   COUNTER ANIMATION (Stable)
 ================================== */
+
 const counters = document.querySelectorAll(".counter");
+let counterStarted = false;
 
 function animateCounter(counter) {
     const target = +counter.getAttribute("data-target");
-    const duration = 1800;
-    const startTime = performance.now();
+    let count = 0;
+    const speed = target / 60;
 
-    function update(currentTime) {
-        const progress = Math.min((currentTime - startTime) / duration, 1);
-        counter.innerText = Math.floor(progress * target);
+    const update = () => {
+        count += speed;
 
-        if (progress < 1) {
+        if (count < target) {
+            counter.innerText = Math.floor(count);
             requestAnimationFrame(update);
         } else {
             counter.innerText = target;
         }
-    }
+    };
 
-    requestAnimationFrame(update);
+    update();
 }
 
-function startCounters() {
-    counters.forEach(counter => animateCounter(counter));
-}
-
-// Wait until loader is removed
-function checkCounters() {
+function startCountersIfVisible() {
     if (counterStarted) return;
 
-    const trigger = document.querySelector(".hero");
-    if (!trigger) return;
+    const hero = document.querySelector(".hero");
+    const rect = hero.getBoundingClientRect();
 
-    const top = trigger.getBoundingClientRect().top;
-    const windowHeight = window.innerHeight;
-
-    if (top < windowHeight - 100) {
+    if (rect.top < window.innerHeight) {
         counterStarted = true;
-        startCounters();
+        counters.forEach(c => animateCounter(c));
     }
 }
 
-window.addEventListener("scroll", checkCounters);
-window.addEventListener("load", checkCounters);
+// Run immediately + on scroll
+startCountersIfVisible();
+window.addEventListener("scroll", startCountersIfVisible);
+   
 /* ===============================
-   PARTICLE BACKGROUND
+   PARTICLE BACKGROUND (Stable Version)
 ================================== */
+
 const canvas = document.getElementById("particles");
 
 if (canvas) {
     const ctx = canvas.getContext("2d");
-    let particlesArray = [];
     const heroSection = document.querySelector(".hero");
+    let particlesArray = [];
 
     function resizeCanvas() {
-        canvas.width = heroSection.offsetWidth;
-        canvas.height = heroSection.offsetHeight;
+        canvas.width = heroSection.clientWidth;
+        canvas.height = heroSection.clientHeight;
     }
-
-    window.addEventListener("resize", resizeCanvas);
 
     class Particle {
         constructor() {
@@ -128,8 +123,8 @@ if (canvas) {
             this.x = Math.random() * canvas.width;
             this.y = Math.random() * canvas.height;
             this.size = Math.random() * 2 + 1;
-            this.speedX = Math.random() * 0.5 - 0.25;
-            this.speedY = Math.random() * 0.5 - 0.25;
+            this.speedX = Math.random() * 0.3 - 0.15;
+            this.speedY = Math.random() * 0.3 - 0.15;
         }
 
         update() {
@@ -143,7 +138,7 @@ if (canvas) {
         }
 
         draw() {
-            ctx.fillStyle = "rgba(255,255,255,0.5)";
+            ctx.fillStyle = "rgba(255,255,255,0.6)";
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
             ctx.fill();
@@ -152,7 +147,7 @@ if (canvas) {
 
     function initParticles() {
         particlesArray = [];
-        for (let i = 0; i < 90; i++) {
+        for (let i = 0; i < 80; i++) {
             particlesArray.push(new Particle());
         }
     }
@@ -168,15 +163,15 @@ if (canvas) {
         requestAnimationFrame(animateParticles);
     }
 
-    // Initialize AFTER full page + loader completes
-window.addEventListener("load", () => {
-    setTimeout(() => {
+    // Initialize immediately after DOM ready
+    resizeCanvas();
+    initParticles();
+    animateParticles();
+
+    window.addEventListener("resize", () => {
         resizeCanvas();
         initParticles();
-        animateParticles();
-    }, 300);
-});
-   
+    });
 }
 /* ===============================
    PARALLAX EFFECT
