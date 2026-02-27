@@ -106,20 +106,22 @@ function animateCounter(counter) {
    PARTICLE BACKGROUND
 ================================== */
 
+/* ===============================
+   PARTICLE BACKGROUND (Fixed)
+================================== */
+
 const canvas = document.getElementById("particles");
 
 if (canvas) {
     const ctx = canvas.getContext("2d");
     let particlesArray = [];
-
-    function resizeCanvas() {
     const heroSection = document.querySelector(".hero");
 
-    canvas.width = heroSection.clientWidth;
-    canvas.height = heroSection.clientHeight;
-}
+    function resizeCanvas() {
+        canvas.width = heroSection.offsetWidth;
+        canvas.height = heroSection.offsetHeight;
+    }
 
-    window.addEventListener("load", resizeCanvas);
     window.addEventListener("resize", resizeCanvas);
 
     class Particle {
@@ -131,8 +133,8 @@ if (canvas) {
             this.x = Math.random() * canvas.width;
             this.y = Math.random() * canvas.height;
             this.size = Math.random() * 2 + 1;
-            this.speedX = Math.random() * 0.6 - 0.3;
-            this.speedY = Math.random() * 0.6 - 0.3;
+            this.speedX = Math.random() * 0.5 - 0.25;
+            this.speedY = Math.random() * 0.5 - 0.25;
         }
 
         update() {
@@ -146,7 +148,7 @@ if (canvas) {
         }
 
         draw() {
-            ctx.fillStyle = "rgba(255,255,255,0.4)";
+            ctx.fillStyle = "rgba(255,255,255,0.5)";
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
             ctx.fill();
@@ -155,7 +157,7 @@ if (canvas) {
 
     function initParticles() {
         particlesArray = [];
-        for (let i = 0; i < 80; i++) {
+        for (let i = 0; i < 90; i++) {
             particlesArray.push(new Particle());
         }
     }
@@ -171,11 +173,10 @@ if (canvas) {
         requestAnimationFrame(animateParticles);
     }
 
-    window.addEventListener("load", () => {
+    // Initialize immediately (no load event dependency)
     resizeCanvas();
     initParticles();
     animateParticles();
-});
 }
 
 /* ===============================
