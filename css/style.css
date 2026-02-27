@@ -1,70 +1,61 @@
 /* =========================================================
-   PRACTICEGRID SOLUTIONS
-   ENTERPRISE SAAS DESIGN SYSTEM
+   PRACTICEGRID SOLUTIONS — PREMIUM SAAS CSS ARCHITECTURE
+   Version: Production Optimized
 ========================================================= */
 
-/* =========================================================
+/* ===============================
    1. DESIGN TOKENS
-========================================================= */
-
+================================= */
 :root {
 
-  /* ===== COLOR SYSTEM ===== */
-  --color-bg-primary: #0b1120;
-  --color-bg-secondary: #0f172a;
-  --color-bg-elevated: rgba(255,255,255,0.04);
+  /* Layout */
+  --container: 1200px;
+  --section-space: 120px;
+  --radius-lg: 20px;
+  --radius-pill: 50px;
 
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #94a3b8;
+  /* Colors - Dark (Default) */
+  --bg-primary: #0f0f1b;
+  --bg-secondary: #121226;
+  --bg-surface: rgba(255,255,255,0.04);
 
-  --color-accent: #00c6ff;
-  --color-accent-strong: #0072ff;
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8;
 
-  /* ===== GRADIENT SYSTEM ===== */
-  --gradient-primary: linear-gradient(90deg, var(--color-accent), var(--color-accent-strong));
-  --gradient-hero: linear-gradient(-45deg,#5a3eb1,#8c3fc6,#3b82f6,#9333ea);
-  --gradient-surface: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  --accent: #8b5cf6;
+  --accent-strong: #6a5acd;
+  --accent-gradient: linear-gradient(135deg,#6a5acd,#a855f7);
 
-  /* ===== TYPOGRAPHY SCALE ===== */
-  --text-xs: 12px;
-  --text-sm: 14px;
-  --text-md: 16px;
-  --text-lg: 20px;
-  --text-xl: 28px;
-  --text-2xl: 40px;
-  --text-3xl: 56px;
+  /* Effects */
+  --shadow-sm: 0 8px 25px rgba(0,0,0,0.2);
+  --shadow-lg: 0 20px 50px rgba(0,0,0,0.35);
 
-  /* ===== SPACING SCALE ===== */
-  --space-xs: 8px;
-  --space-sm: 16px;
-  --space-md: 24px;
-  --space-lg: 40px;
-  --space-xl: 80px;
-  --space-2xl: 120px;
-
-  /* ===== RADIUS SYSTEM ===== */
-  --radius-sm: 12px;
-  --radius-md: 20px;
-  --radius-lg: 32px;
-  --radius-pill: 999px;
-
-  /* ===== ELEVATION SYSTEM ===== */
-  --shadow-sm: 0 10px 20px rgba(0,0,0,.2);
-  --shadow-md: 0 20px 40px rgba(0,0,0,.3);
-  --shadow-lg: 0 30px 70px rgba(0,0,0,.4);
-
-  /* ===== LAYOUT ===== */
-  --container-width: 1200px;
-  --section-padding: var(--space-2xl);
-
+  /* Typography */
   --font-main: 'Inter', sans-serif;
+
+  /* Motion */
+  --transition-fast: 0.25s ease;
+  --transition-smooth: 0.45s cubic-bezier(.4,0,.2,1);
 }
 
+/* ===============================
+   LIGHT MODE
+================================= */
+body.light-mode {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-surface: #ffffff;
 
-/* =========================================================
-   2. BASE LAYER
-========================================================= */
+  --text-primary: #111827;
+  --text-secondary: #475569;
 
+  --shadow-sm: 0 8px 20px rgba(0,0,0,0.08);
+  --shadow-lg: 0 20px 40px rgba(0,0,0,0.12);
+}
+
+/* ===============================
+   2. GLOBAL RESET
+================================= */
 *,
 *::before,
 *::after {
@@ -73,216 +64,258 @@
   box-sizing:border-box;
 }
 
+html {
+  scroll-behavior:smooth;
+}
+
 body {
   font-family: var(--font-main);
-  background: var(--color-bg-primary);
-  color: var(--color-text-primary);
-  line-height: 1.6;
-  scroll-behavior: smooth;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background var(--transition-smooth),
+              color var(--transition-fast);
+  overflow-x:hidden;
 }
 
-h1,h2,h3 {
-  letter-spacing: -1px;
+/* Subtle texture */
+body::before {
+  content:"";
+  position:fixed;
+  inset:0;
+  background:url('https://www.transparenttextures.com/patterns/noise.png');
+  opacity:0.02;
+  pointer-events:none;
+  z-index:-1;
 }
 
+/* ===============================
+   3. LAYOUT SYSTEM
+================================= */
 .container {
-  max-width: var(--container-width);
-  margin: 0 auto;
-  padding: 0 var(--space-md);
+  width:100%;
+  max-width:var(--container);
+  margin:auto;
+  padding:0 24px;
 }
 
 .section {
-  padding: var(--section-padding) 0;
+  padding: var(--section-space) 0;
 }
 
+.text-center { text-align:center; }
 
-/* =========================================================
-   3. UTILITIES (Architecture Layer)
-========================================================= */
+/* ===============================
+   4. TYPOGRAPHY
+================================= */
+h1,h2,h3 {
+  letter-spacing:-1px;
+  font-weight:800;
+}
 
-.u-text-center { text-align:center; }
-.u-flex { display:flex; }
-.u-grid { display:grid; }
-.u-gap-lg { gap: var(--space-lg); }
-.u-mt-lg { margin-top: var(--space-lg); }
-.u-mt-xl { margin-top: var(--space-xl); }
+h1 { font-size: clamp(36px,5vw,60px); }
+h2 { font-size: clamp(28px,4vw,42px); }
+p  { color: var(--text-secondary); line-height:1.7; }
 
-
-/* =========================================================
-   4. COMPONENTS
-========================================================= */
-
-
-/* ---------- NAVBAR ---------- */
-
-.navbar {
-  position: fixed;
+/* ===============================
+   5. NAVIGATION (GLASS)
+================================= */
+header {
+  position:fixed;
+  top:0;
   width:100%;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding: var(--space-sm) var(--space-lg);
-  backdrop-filter: blur(20px);
-  background: rgba(255,255,255,0.05);
   z-index:1000;
+  backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.04);
+  transition: var(--transition-smooth);
 }
 
-.navbar.scrolled {
+header.scrolled {
   box-shadow: var(--shadow-sm);
 }
 
+.nav-inner {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 8%;
+}
 
-/* ---------- HERO ---------- */
+nav ul {
+  list-style:none;
+  display:flex;
+  gap:30px;
+}
 
+nav a {
+  text-decoration:none;
+  color:var(--text-primary);
+  font-weight:500;
+  transition: var(--transition-fast);
+}
+
+nav a:hover {
+  color:var(--accent);
+}
+
+/* ===============================
+   6. BUTTONS
+================================= */
+.btn {
+  display:inline-block;
+  padding:14px 28px;
+  border-radius:var(--radius-pill);
+  font-weight:600;
+  text-decoration:none;
+  transition: var(--transition-smooth);
+}
+
+.btn-primary {
+  background: var(--accent-gradient);
+  color:#fff;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+  transform:translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-outline {
+  border:2px solid var(--accent);
+  color:var(--accent);
+}
+
+.btn-outline:hover {
+  background:var(--accent);
+  color:#fff;
+}
+
+/* ===============================
+   7. HERO SECTION
+================================= */
 .hero {
   min-height:100vh;
   display:flex;
   align-items:center;
-  background: var(--gradient-hero);
-  background-size:400% 400%;
-  animation: gradientMove 12s ease infinite;
-  padding: 0 var(--space-lg);
+  justify-content:center;
+  background:linear-gradient(-45deg,#5a3eb1,#8c3fc6,#3b82f6,#9333ea);
+  background-size:300% 300%;
+  animation: heroGradient 14s ease infinite;
+  text-align:center;
 }
 
-@keyframes gradientMove {
+@keyframes heroGradient {
   0%{background-position:0% 50%}
   50%{background-position:100% 50%}
   100%{background-position:0% 50%}
 }
 
-.hero h1 {
-  font-size: var(--text-3xl);
-  line-height:1.1;
+/* ===============================
+   8. SERVICE CARDS
+================================= */
+.services-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:30px;
+  margin-top:60px;
 }
-
-.hero p {
-  font-size: var(--text-lg);
-  margin-top: var(--space-md);
-  color: var(--color-text-secondary);
-}
-
-
-/* ---------- BUTTON SYSTEM ---------- */
-
-.btn {
-  display:inline-block;
-  padding: var(--space-sm) var(--space-lg);
-  border-radius: var(--radius-pill);
-  font-size: var(--text-md);
-  font-weight:600;
-  text-decoration:none;
-  transition: all .3s ease;
-}
-
-.btn-primary {
-  background: var(--gradient-primary);
-  color:#fff;
-}
-
-.btn-primary:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
-}
-
-.btn-outline {
-  border:2px solid var(--color-accent);
-  color: var(--color-accent);
-}
-
-.btn-outline:hover {
-  background: var(--color-accent);
-  color:#fff;
-}
-
-
-/* ---------- CARD SYSTEM ---------- */
 
 .card {
-  background: var(--gradient-surface);
-  padding: var(--space-lg);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-  transition: all .4s ease;
+  background: var(--bg-surface);
+  padding:35px;
+  border-radius:var(--radius-lg);
+  transition: var(--transition-smooth);
+  position:relative;
+  overflow:hidden;
 }
 
 .card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-md);
+  transform:translateY(-8px);
+  box-shadow: var(--shadow-lg);
 }
 
-
-/* ---------- SERVICES GRID ---------- */
-
-.services-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap: var(--space-lg);
+/* GPU optimized hover glow */
+.card::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  background: var(--accent-gradient);
+  opacity:0;
+  transition: var(--transition-fast);
+  z-index:-1;
+  filter: blur(40px);
 }
 
-
-/* ---------- STATS STRIP ---------- */
-
-.stats-strip {
-  background: var(--color-bg-secondary);
-  padding: var(--space-xl) 0;
+.card:hover::before {
+  opacity:0.15;
 }
 
-.stats-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap: var(--space-lg);
-  text-align:center;
+/* ===============================
+   9. EHR LOGO SLIDER
+================================= */
+.slider {
+  overflow:hidden;
 }
 
-.stat-number {
-  font-size: var(--text-2xl);
-  font-weight:800;
-  background: var(--gradient-primary);
-  -webkit-background-clip:text;
-  color:transparent;
+.slide-track {
+  display:flex;
+  gap:60px;
+  animation: scrollX 30s linear infinite;
+  will-change:transform;
 }
 
+@keyframes scrollX {
+  from{transform:translateX(0);}
+  to{transform:translateX(-50%);}
+}
 
-/* ---------- CTA ---------- */
-
+/* ===============================
+   10. CTA SECTION
+================================= */
 .cta {
-  padding: var(--space-2xl) 0;
-  background: var(--color-bg-secondary);
+  padding:80px 5%;
   text-align:center;
+  background: var(--accent-gradient);
+  color:#fff;
 }
 
-.cta .container {
-  max-width:800px;
+/* ===============================
+   11. FOOTER
+================================= */
+footer {
+  padding:40px;
+  text-align:center;
+  background: var(--bg-secondary);
 }
 
-
-/* =========================================================
-   5. ANIMATION UTILITIES
-========================================================= */
-
-.reveal-up {
+/* ===============================
+   12. SCROLL REVEAL
+================================= */
+.reveal {
   opacity:0;
   transform:translateY(40px);
-  transition: all .8s ease;
+  transition: var(--transition-smooth);
 }
 
-.reveal-up.active {
+.reveal.active {
   opacity:1;
   transform:translateY(0);
 }
 
+/* ===============================
+   13. SCROLLBAR (PREMIUM)
+================================= */
+::-webkit-scrollbar { width:8px; }
+::-webkit-scrollbar-thumb {
+  background: var(--accent-gradient);
+  border-radius:10px;
+}
 
-/* =========================================================
-   6. RESPONSIVE SYSTEM
-========================================================= */
-
-@media(max-width:768px){
-
-  h1 { font-size: var(--text-xl); }
-  h2 { font-size: var(--text-lg); }
-
-  .hero {
-    padding: var(--space-xl) var(--space-md);
-  }
-
+/* ===============================
+   14. RESPONSIVE
+================================= */
+@media(max-width:992px){
+  .nav-inner { flex-direction:column; gap:15px; }
+  .hero { padding:120px 20px; }
 }
