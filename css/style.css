@@ -635,34 +635,7 @@ footer {
   border-top: 1px solid rgba(255,255,255,0.08);
   color: var(--text-secondary);
 }
-/* ===============================
-   15. LOADER
-================================= */
-/* loader visible while loading */
-body.loading #loader {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-}
 
-/* hide loader once class removed */
-body:not(.loading) #loader {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity 0.6s ease, visibility 0s linear 0.6s;
-}
-
-/* ensures loader covers everything */
-#loader {
-  position: fixed;
-  inset: 0;
-  background: var(--bg-primary);
-  z-index: 9999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 /* ===============================
    16. SCROLLBAR
 ================================= */
