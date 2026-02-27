@@ -112,7 +112,7 @@ if (canvas) {
     canvas.height = heroSection.clientHeight;
 }
 
-    resizeCanvas();
+    window.addEventListener("load", resizeCanvas);
     window.addEventListener("resize", resizeCanvas);
 
     class Particle {
