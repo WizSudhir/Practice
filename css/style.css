@@ -312,10 +312,3 @@ footer {
   border-radius:10px;
 }
 
-/* ===============================
-   14. RESPONSIVE
-================================= */
-@media(max-width:992px){
-  .nav-inner { flex-direction:column; gap:15px; }
-  .hero { padding:120px 20px; }
-}
