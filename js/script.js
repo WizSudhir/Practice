@@ -5,6 +5,18 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
+
+/* ===============================
+   Header Scroll Window
+================================== */
+   const header = document.querySelector(".navbar");
+
+if (window.scrollY > 50) {
+    header.classList.add("scrolled");
+} else {
+    header.classList.remove("scrolled");
+}
+
 /* ===============================
    GLOBAL SCROLL HANDLER (Optimized)
 ================================== */
