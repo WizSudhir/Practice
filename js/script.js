@@ -24,7 +24,8 @@ if (window.scrollY > 50) {
 let counterStarted = false;
 
 window.addEventListener("scroll", handleScroll);
-
+handleScroll();
+   
 function handleScroll() {
     revealOnScroll();
     startCounterOnView();
