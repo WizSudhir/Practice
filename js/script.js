@@ -9,21 +9,21 @@ document.addEventListener("DOMContentLoaded", () => {
 /* ===============================
    Header Scroll Window
 ================================== */
-   const header = document.querySelector(".navbar");
+const header = document.querySelector(".navbar");
 
-if (window.scrollY > 50) {
-    header.classList.add("scrolled");
-} else {
-    header.classList.remove("scrolled");
-}
-window.addEventListener("scroll", () => {
+if (header) {
     if (window.scrollY > 50) {
         header.classList.add("scrolled");
-    } else {
-        header.classList.remove("scrolled");
     }
-});
-   
+
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+            header.classList.add("scrolled");
+        } else {
+            header.classList.remove("scrolled");
+        }
+    });
+}
 /* ===============================
    GLOBAL SCROLL HANDLER (Optimized)
 ================================== */
