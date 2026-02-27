@@ -302,6 +302,33 @@ stats {
   gap: 40px;
   margin-top: 40px;
 }
+/* --- ADD THIS BELOW HERO BLOB STYLES --- */
+
+.stats {
+  display: flex;          /* This puts the numbers in a row */
+  gap: 40px;              /* Spacing between the three stats */
+  margin-top: 40px;       /* Space between the buttons and the numbers */
+}
+
+.stat h2 {
+  font-size: 48px;        /* Makes the 35%, 99%, etc. big and bold */
+  color: #ffffff;         /* Ensures numbers are bright white */
+  margin-bottom: 5px;
+  font-weight: 800;
+}
+
+.stat p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8); /* Slightly faded white for the labels */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Ensure the container sits on top of the particles */
+.hero-container {
+  position: relative;
+  z-index: 10;
+}
 /* ===============================
    9. SERVICES
 ================================= */
