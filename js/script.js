@@ -55,48 +55,32 @@ function revealOnScroll() {
 }
 
 /* ===============================
-   COUNTER ANIMATION (Stable)
+   COUNTER ANIMATION (Fixed)
 ================================== */
-
 const counters = document.querySelectorAll(".counter");
-let counterStarted = false;
 
-function animateCounter(counter) {
-    const target = +counter.getAttribute("data-target");
-    let count = 0;
-    const speed = target / 60;
+const runCounters = () => {
+    counters.forEach(counter => {
+        const target = +counter.getAttribute("data-target");
+        const duration = 2000; // 2 seconds
+        const step = target / (duration / 16); // 60fps
+        
+        let current = 0;
+        const update = () => {
+            current += step;
+            if (current < target) {
+                counter.innerText = Math.floor(current);
+                requestAnimationFrame(update);
+            } else {
+                counter.innerText = target;
+            }
+        };
+        update();
+    });
+};
 
-    const update = () => {
-        count += speed;
-
-        if (count < target) {
-            counter.innerText = Math.floor(count);
-            requestAnimationFrame(update);
-        } else {
-            counter.innerText = target;
-        }
-    };
-
-    update();
-}
-
-function startCountersIfVisible() {
-    if (counterStarted) return;
-
-    const hero = document.querySelector(".hero");
-    const rect = hero.getBoundingClientRect();
-
-    if (rect.top < window.innerHeight) {
-        counterStarted = true;
-        counters.forEach(c => animateCounter(c));
-    }
-}
-
-// Run once immediately to catch the Hero section
-setTimeout(() => {
-    counters.forEach(c => animateCounter(c));
-    counterStarted = true;
-}, 500); // Small delay to let the page settle
+// Start counters as soon as page loads
+window.addEventListener('load', runCounters);
    
 /* ===============================
    PARTICLE BACKGROUND (Stable Version)
