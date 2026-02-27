@@ -59,33 +59,19 @@ function revealOnScroll() {
 /* ===============================
    COUNTER ANIMATION (Improved)
 ================================== */
-
 const counters = document.querySelectorAll(".counter");
+let counterStarted = false;
 
-const counterObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            animateCounter(entry.target);
-            counterObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.1, rootMargin: "0px 0px -100px 0px" });
+function startCounters() {
+    if (counterStarted) return;
 
-counters.forEach(counter => {
-    counterObserver.observe(counter);
-});
-// Run immediately if already visible (Hero section case)
-counters.forEach(counter => {
-    const rect = counter.getBoundingClientRect();
-    if (rect.top < window.innerHeight) {
-        animateCounter(counter);
-        counterObserver.unobserve(counter);
-    }
-});
-   
+    counters.forEach(counter => animateCounter(counter));
+    counterStarted = true;
+}
+
 function animateCounter(counter) {
     const target = +counter.getAttribute("data-target");
-    const duration = 1500;
+    const duration = 1800;
     const startTime = performance.now();
 
     function update(currentTime) {
@@ -101,6 +87,9 @@ function animateCounter(counter) {
 
     requestAnimationFrame(update);
 }
+
+// Start counters when page loads (since hero is visible)
+window.addEventListener("load", startCounters);
 
 /* ===============================
    PARTICLE BACKGROUND
