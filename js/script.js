@@ -69,7 +69,7 @@ const counterObserver = new IntersectionObserver(entries => {
             counterObserver.unobserve(entry.target);
         }
     });
-}, { threshold: 0.3 });
+}, { threshold: 0.1, rootMargin: "0px 0px -100px 0px" });
 
 counters.forEach(counter => {
     counterObserver.observe(counter);
@@ -163,8 +163,11 @@ if (canvas) {
         requestAnimationFrame(animateParticles);
     }
 
+    window.addEventListener("load", () => {
+    resizeCanvas();
     initParticles();
     animateParticles();
+});
 }
 
 /* ===============================
