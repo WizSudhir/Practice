@@ -663,8 +663,12 @@ body:not(.loading) #loader {
   display: flex;
   justify-content: center;
   align-items: center;
+   animation: autoHide 5s forwards;
 }
-
+@keyframes autoHide {
+  0% { opacity: 1; visibility: visible; }
+  100% { opacity: 0; visibility: hidden; }
+}
 /* ===============================
    16. SCROLLBAR
 ================================= */
