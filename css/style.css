@@ -848,3 +848,8 @@ footer {
 .footer-contact a:hover {
   color: var(--accent-2);
 }
+.footer-contact svg {
+  stroke: var(--accent-2);
+  width: 18px;
+  height: 18px;
+}
