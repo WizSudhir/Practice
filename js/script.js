@@ -5,124 +5,180 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* =====================================================
-     1. NAVBAR SCROLL EFFECT
-  ===================================================== */
+/* ===============================
+   GLOBAL SCROLL HANDLER (Optimized)
+================================== */
 
-  const navbar = document.querySelector(".navbar");
+let counterStarted = false;
 
-  const handleNavbarScroll = () => {
-    if (window.scrollY > 20) {
-      navbar?.classList.add("scrolled");
-    } else {
-      navbar?.classList.remove("scrolled");
-    }
-  };
+window.addEventListener("scroll", handleScroll);
 
-  window.addEventListener("scroll", handleNavbarScroll);
+function handleScroll() {
+    revealOnScroll();
+    startCounterOnView();
+    parallaxEffect();
+}
 
+/* ===============================
+   REVEAL ANIMATION
+================================== */
 
+const reveals = document.querySelectorAll(".reveal");
 
-  /* =====================================================
-     2. SCROLL REVEAL (Intersection Observer)
-  ===================================================== */
+function revealOnScroll() {
+    const windowHeight = window.innerHeight;
 
-  const revealElements = document.querySelectorAll(".reveal-up");
+    reveals.forEach(el => {
+        const elementTop = el.getBoundingClientRect().top;
 
-  const revealObserver = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("active");
-          observer.unobserve(entry.target);
+        if (elementTop < windowHeight - 100) {
+            el.classList.add("active");
         }
-      });
-    },
-    { threshold: 0.15 }
-  );
-
-  revealElements.forEach(el => revealObserver.observe(el));
-
-
-
-  /* =====================================================
-     3. STATS COUNTER ANIMATION
-  ===================================================== */
-
-  const counters = document.querySelectorAll(".stat-number");
-
-  const counterObserver = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-
-          const counter = entry.target;
-          const target = +counter.dataset.target;
-          const duration = 2000;
-          const startTime = performance.now();
-
-          const updateCounter = (currentTime) => {
-            const progress = Math.min((currentTime - startTime) / duration, 1);
-            const value = Math.floor(progress * target);
-            counter.textContent = value.toLocaleString();
-
-            if (progress < 1) {
-              requestAnimationFrame(updateCounter);
-            }
-          };
-
-          requestAnimationFrame(updateCounter);
-          observer.unobserve(counter);
-        }
-      });
-    },
-    { threshold: 0.5 }
-  );
-
-  counters.forEach(counter => counterObserver.observe(counter));
-
-
-
-  /* =====================================================
-     4. MOBILE NAV TOGGLE (Optional but Recommended)
-  ===================================================== */
-
-  const navToggle = document.querySelector(".nav-toggle");
-  const navMenu = document.querySelector(".nav-menu");
-
-  if (navToggle && navMenu) {
-    navToggle.addEventListener("click", () => {
-      navMenu.classList.toggle("active");
     });
-  }
+}
 
+/* ===============================
+   COUNTER ANIMATION (Improved)
+================================== */
 
+const counters = document.querySelectorAll(".counter");
 
-  /* =====================================================
-     5. SMOOTH ANCHOR SCROLL
-  ===================================================== */
+function startCounterOnView() {
+    const statsSection = document.querySelector(".stats");
+    if (!statsSection) return;
 
-  const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    const sectionTop = statsSection.getBoundingClientRect().top;
 
-  anchorLinks.forEach(anchor => {
-    anchor.addEventListener("click", function (e) {
-      const targetID = this.getAttribute("href");
+    if (sectionTop < window.innerHeight && !counterStarted) {
+        counters.forEach(counter => animateCounter(counter));
+        counterStarted = true;
+    }
+}
 
-      if (targetID.length > 1) {
-        e.preventDefault();
-        const targetElement = document.querySelector(targetID);
+function animateCounter(counter) {
+    const target = +counter.getAttribute("data-target");
+    const duration = 1500;
+    const startTime = performance.now();
 
-        targetElement?.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
+    function update(currentTime) {
+        const progress = Math.min((currentTime - startTime) / duration, 1);
+        counter.innerText = Math.floor(progress * target);
+
+        if (progress < 1) {
+            requestAnimationFrame(update);
+        } else {
+            counter.innerText = target;
+        }
+    }
+
+    requestAnimationFrame(update);
+}
+
+/* ===============================
+   PARTICLE BACKGROUND
+================================== */
+
+const canvas = document.getElementById("particles");
+
+if (canvas) {
+    const ctx = canvas.getContext("2d");
+    let particlesArray = [];
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    class Particle {
+        constructor() {
+            this.reset();
+        }
+
+        reset() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 2 + 1;
+            this.speedX = Math.random() * 0.6 - 0.3;
+            this.speedY = Math.random() * 0.6 - 0.3;
+        }
+
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+
+            if (this.x < 0 || this.x > canvas.width ||
+                this.y < 0 || this.y > canvas.height) {
+                this.reset();
+            }
+        }
+
+        draw() {
+            ctx.fillStyle = "rgba(255,255,255,0.4)";
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    function initParticles() {
+        particlesArray = [];
+        for (let i = 0; i < 80; i++) {
+            particlesArray.push(new Particle());
+        }
+    }
+
+    function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        particlesArray.forEach(p => {
+            p.update();
+            p.draw();
         });
 
-        // Close mobile nav if open
-        navMenu?.classList.remove("active");
-      }
-    });
-  });
+        requestAnimationFrame(animateParticles);
+    }
 
+    initParticles();
+    animateParticles();
+}
 
+/* ===============================
+   PAGE LOADER
+================================== */
 
+window.addEventListener("load", () => {
+    document.body.classList.add("loaded");
 });
+
+/* ===============================
+   PARALLAX EFFECT
+================================== */
+
+function parallaxEffect() {
+    const parallaxElements = document.querySelectorAll(".parallax");
+
+    parallaxElements.forEach(el => {
+        const speed = el.getAttribute("data-speed");
+        const yPos = -(window.scrollY / speed);
+        el.style.transform = `translateY(${yPos}px)`;
+    });
+}
+
+/* ===============================
+   CONTACT STRIP REVEAL (IntersectionObserver)
+================================== */
+
+const revealElements = document.querySelectorAll(".reveal-up");
+
+const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+        }
+    });
+}, { threshold: 0.2 });
+
+revealElements.forEach(el => revealObserver.observe(el));
