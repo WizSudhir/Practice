@@ -92,9 +92,11 @@ function startCountersIfVisible() {
     }
 }
 
-// Run immediately + on scroll
-startCountersIfVisible();
-window.addEventListener("scroll", startCountersIfVisible);
+// Run once immediately to catch the Hero section
+setTimeout(() => {
+    counters.forEach(c => animateCounter(c));
+    counterStarted = true;
+}, 500); // Small delay to let the page settle
    
 /* ===============================
    PARTICLE BACKGROUND (Stable Version)
