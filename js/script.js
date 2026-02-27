@@ -203,13 +203,3 @@ const revealObserver = new IntersectionObserver(entries => {
 
 revealElements.forEach(el => revealObserver.observe(el));
 });
-
-// Force remove loader safely
-window.addEventListener("load", () => {
-    document.body.classList.remove("loading");
-});
-
-// Fallback safety (in case load fails)
-setTimeout(() => {
-    document.body.classList.remove("loading");
-}, 3000);
