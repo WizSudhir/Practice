@@ -204,6 +204,7 @@ header.scrolled {
   background: var(--gradient-hero);
   background-size:400% 400%;
   animation:gradient 12s ease infinite;
+   margin-top: 95px;
 }
 
 @keyframes gradient {
