@@ -13,6 +13,23 @@
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script defer src="js/script.js"></script>
 </head>
+
+<script>
+  function validateRecaptcha() {
+    // 1. Check if the user has ticked the box
+    var response = grecaptcha.getResponse();
+    
+    if (response.length === 0) {
+      // 2. If response is empty, they didn't click it
+      alert("Please verify that you are not a robot.");
+      return false; // This stops the form from submitting
+    }
+    
+    // 3. If response exists, allow the form to send
+    return true;
+  }
+</script>
+  
 <body>
 <a href="contact.html" class="floating-cta">Free Audit</a>
 <header class="navbar">
