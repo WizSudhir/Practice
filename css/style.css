@@ -739,19 +739,30 @@ footer {
 ================================= */
 @media(max-width:992px){
 
+   .hero {
+    /* FIX 1: Change height from 100vh to auto */
+    /* This allows the box to grow as long as the content needs it to be */
+    height: auto; 
+    padding-bottom: 60px; /* Adds space at the bottom so it doesn't look cramped */
+    display: block; /* Helps content flow naturally downwards */
+  }
   .hero-container {
     flex-direction:column;
     text-align:center;
+     padding-top: 40px; /* Gives the text some breathing room from the logo */
   }
 
   .hero-right img {
-    width:320px;
+    width:90%; /* Scale to fit the screen width */
+     max-width: 300px; /* Prevents it from getting too huge */
+     height: auto;
     margin-top:40px;
   }
 
   .stats {
     justify-content:center;
     flex-wrap:wrap;
+     gap: 20px; /* Tightens gap for small screens */
   }
 
   .hipaa-container {
