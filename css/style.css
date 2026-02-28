@@ -870,14 +870,23 @@ footer {
   letter-spacing: 0.5px;
   text-align: center;
 }
-.footer-contact a {
-  display: flex;           /* Put icon and text in a row */
-  align-items: center;     /* Vertically center them */
-  gap: 10px;               /* Space between icon and text */
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.footer-contact a span {
-  display: inline-block;   /* Ensure text stays inline */
-  font-size: 14px;         /* Match other contact items */
+.footer-contact-item {
+  display: flex;           /* horizontal row */
+  align-items: center;     /* vertically center icon & text */
+  gap: 10px;               /* space between icon and text */
   color: var(--text-secondary);
+  text-decoration: none;
+}
+
+.footer-contact-item svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--accent-2);
+  flex-shrink: 0;          /* prevent shrinking */
 }
