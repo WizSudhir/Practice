@@ -870,3 +870,14 @@ footer {
   letter-spacing: 0.5px;
   text-align: center;
 }
+.footer-contact a {
+  display: flex;           /* Put icon and text in a row */
+  align-items: center;     /* Vertically center them */
+  gap: 10px;               /* Space between icon and text */
+}
+
+.footer-contact a span {
+  display: inline-block;   /* Ensure text stays inline */
+  font-size: 14px;         /* Match other contact items */
+  color: var(--text-secondary);
+}
