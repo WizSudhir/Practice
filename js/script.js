@@ -73,37 +73,44 @@ if (counters.length > 0) {
 
 
 // ===============================
-// 4. PARTICLE BACKGROUND
+// 4. PARTICLE BACKGROUND (Optimized for mobile)
 // ===============================
 const canvas = document.getElementById("particles");
-
 if (canvas) {
   const ctx = canvas.getContext("2d");
-
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
   let particlesArray = [];
+  
+  // Adjusted for mobile performance
+  const isMobile = window.innerWidth < 768;
+  const particleCount = isMobile ? 30 : 80; 
+
+  function setCanvasSize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  setCanvasSize();
 
   class Particle {
     constructor() {
+      this.init();
+    }
+    init() {
       this.x = Math.random() * canvas.width;
       this.y = Math.random() * canvas.height;
       this.size = Math.random() * 2 + 1;
-      this.speedX = Math.random() * 0.5 - 0.25;
-      this.speedY = Math.random() * 0.5 - 0.25;
+      this.speedX = Math.random() * 0.4 - 0.2;
+      this.speedY = Math.random() * 0.4 - 0.2;
     }
-
     update() {
       this.x += this.speedX;
       this.y += this.speedY;
-
-      if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-      if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+      if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+        this.init(); // Reset particle if it leaves screen
+      }
     }
-
     draw() {
-      ctx.fillStyle = "rgba(255,255,255,0.5)";
+      // Increased opacity from 0.5 to 0.8 so they are visible on mobile
+      ctx.fillStyle = "rgba(255, 255, 255, 0.8)"; 
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
       ctx.fill();
@@ -112,17 +119,17 @@ if (canvas) {
 
   function initParticles() {
     particlesArray = [];
-    for (let i = 0; i < 80; i++) {
+    for (let i = 0; i < particleCount; i++) {
       particlesArray.push(new Particle());
     }
   }
 
   function animateParticles() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particlesArray.forEach(p => {
-      p.update();
-      p.draw();
-    });
+    for (let i = 0; i < particlesArray.length; i++) {
+      particlesArray[i].update();
+      particlesArray[i].draw();
+    }
     requestAnimationFrame(animateParticles);
   }
 
@@ -130,28 +137,23 @@ if (canvas) {
   animateParticles();
 
   window.addEventListener("resize", () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    setCanvasSize();
     initParticles();
   });
 }
-
-
 // ===============================
-// 5. PARALLAX EFFECT
+// 5. PARALLAX EFFECT (Disabled on Mobile for Speed)
 // ===============================
 const parallaxElements = document.querySelectorAll(".parallax");
-
 window.addEventListener("scroll", () => {
+  if (window.innerWidth < 992) return; // Stop the script if on mobile
+  
   const scrollY = window.scrollY;
-
   parallaxElements.forEach(el => {
     const speed = el.getAttribute("data-speed") || 0.3;
-    el.style.transform = `translateY(${scrollY * speed}px)`;
+    el.style.transform = `translateY(${scrollY * (speed * 0.1)}px)`;
   });
 });
-
-
 // ===============================
 // 6. CONTACT STRIP REVEAL
 // ===============================
