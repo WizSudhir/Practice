@@ -760,6 +760,9 @@ footer {
     margin-top: 40px;
     position: relative;
     z-index: 5;
+     will-change: transform;
+     transform: translateZ(0); 
+     backface-visibility: hidden;
   }
    .hero-left {
     max-width: 100%;
