@@ -740,29 +740,43 @@ footer {
 @media(max-width:992px){
 
    .hero {
-    /* FIX 1: Change height from 100vh to auto */
-    /* This allows the box to grow as long as the content needs it to be */
-    height: auto; 
-    padding-bottom: 60px; /* Adds space at the bottom so it doesn't look cramped */
-    display: block; /* Helps content flow naturally downwards */
+    height: auto !important; /* Forces the box to grow with the content */
+    min-height: 100vh;
+    padding-top: 120px; /* Prevents the fixed navbar from covering the title */
+    padding-bottom: 60px;
+    display: flex;
+    align-items: center;
   }
   .hero-container {
-    flex-direction:column;
-    text-align:center;
-     padding-top: 40px; /* Gives the text some breathing room from the logo */
+    flex-direction: column;
+    text-align: center;
+    padding: 0 20px;
   }
 
   .hero-right img {
-    width:90%; /* Scale to fit the screen width */
-     max-width: 300px; /* Prevents it from getting too huge */
-     height: auto;
-    margin-top:40px;
+    width: 80% !important; 
+    max-width: 280px; 
+    height: auto;
+    margin-top: 40px;
+    position: relative;
+    z-index: 5;
+  }
+   .hero-left {
+    max-width: 100%;
+    transform: none !important; /* Disables parallax which causes 'pop out' on mobile */
   }
 
+  .hero-right {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    transform: none !important; /* Keeps the image exactly where it belongs */
+  }
   .stats {
     justify-content:center;
     flex-wrap:wrap;
-     gap: 20px; /* Tightens gap for small screens */
+     margin-top: 30px;
+     gap: 15px; /* Tightens gap for small screens */
   }
 
   .hipaa-container {
