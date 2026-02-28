@@ -166,3 +166,26 @@ if (contactStrip) {
 
   contactObserver.observe(contactStrip);
 }
+// ===============================
+// 7. Mobile navigation bar
+// ===============================
+// MOBILE MENU TOGGLE LOGIC
+const navToggle = document.querySelector('.nav-toggle');
+const navMenu = document.querySelector('.nav-menu');
+
+if (navToggle && navMenu) {
+  navToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    
+    // Optional: Animate the hamburger spans to an 'X'
+    const spans = navToggle.querySelectorAll('span');
+    spans.forEach(span => span.classList.toggle('open'));
+  });
+}
+
+// Close menu when a link is clicked
+document.querySelectorAll('.nav-menu a').forEach(link => {
+  link.addEventListener('click', () => {
+    navMenu.classList.remove('active');
+  });
+});
