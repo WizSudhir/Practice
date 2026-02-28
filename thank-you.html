@@ -1,60 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Thank You | PracticeGrid Solutions</title>
-<meta name="description" content="Thank you for contacting PracticeGrid Solutions. We will get back to you shortly.">
-<meta name="keywords" content="Thank You, Contact, PracticeGrid Solutions, Revenue Cycle Management">
-<meta name="author" content="PracticeGrid Solutions">
-
 <link rel="icon" type="image/png" href="images/favicon.png">
 <link rel="stylesheet" href="css/style.css">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 <script defer src="js/script.js"></script>
+<style>
+    /* Specific overrides for the Thank You page to ensure centering */
+    .hero-thank-you {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: left;
+    }
+    .back-home {
+        margin-top: 30px;
+        display: inline-block;
+    }
+    @media (max-width: 992px) {
+        .hero-thank-you .hero-container {
+            text-align: center;
+        }
+    }
+</style>
 </head>
-
 <body>
 
-<!-- HERO -->
-<section class="hero">
+<section class="hero hero-thank-you">
   <canvas id="particles"></canvas>
+  
   <div class="hero-blob blob-1"></div>
   <div class="hero-blob blob-2"></div>
-
+  
   <div class="container hero-container">
     <div class="hero-left parallax" data-speed="2">
-      <h1>Thank You for Reaching Out!</h1>
-      <p>We sincerely appreciate your time and response. Our team of revenue cycle experts will review your submission and contact you shortly to provide the personalized solutions you need.</p>
-
+      <div class="logo" style="margin-bottom: 40px;">
+        <img src="images/logo.png" alt="PracticeGrid Solutions Logo" style="height: 60px;">
+      </div>
+      <h1>Thank you for your <br><span style="color: var(--accent-2);">time and response.</span></h1>
+      <p style="font-size: 20px; max-width: 500px;">
+        Your message has been successfully received. We appreciate your interest in <strong>PracticeGrid Solutions</strong>. Our billing experts are reviewing your details and will be contacting you shortly to discuss your practice goals.
+      </p>
+      
       <div class="hero-buttons">
-        <a href="index.html" class="btn-primary">Return Home</a>
-        <a href="services.html" class="btn-outline">Explore Our Services</a>
+        <a href="index.html" class="btn-primary">Return to Home</a>
+        <a href="services.html" class="btn-outline">Our Services</a>
       </div>
-
-      <!-- Optional Stats (comment out if not needed) -->
-      <!--
-      <div class="stats">
-        <div class="stat">
-          <h2><span class="counter" data-target="35">0</span>%</h2>
-          <p>Revenue Boosted</p>
-        </div>
-        <div class="stat">
-          <h2><span class="counter" data-target="99">0</span>%</h2>
-          <p>Claim Accuracy</p>
-        </div>
-        <div class="stat">
-          <h2><span class="counter" data-target="45">0</span>+</h2>
-          <p>Practices Served</p>
-        </div>
-      </div>
-      -->
     </div>
 
     <div class="hero-right parallax" data-speed="4">
-      <img src="images/thank-you-hd.png" alt="Thank You Illustration">
+      <img src="https://illustrations.popsy.co/white/thank-you.svg" alt="Thank You Illustration" style="filter: drop-shadow(0 0 30px rgba(139,92,246,0.3)); max-width: 450px;">
     </div>
   </div>
 </section>
