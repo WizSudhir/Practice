@@ -71,18 +71,17 @@ if (counters.length > 0) {
   counterObserver.observe(document.querySelector(".stats"));
 }
 
-
 // ===============================
-// 4. PARTICLE BACKGROUND (Optimized for mobile)
+// 4. OPTIMIZED PARTICLE SYSTEM
 // ===============================
 const canvas = document.getElementById("particles");
 if (canvas) {
   const ctx = canvas.getContext("2d");
   let particlesArray = [];
   
-  // Adjusted for mobile performance
+  // High-performance check: If screen is small, we show fewer, slower dots.
   const isMobile = window.innerWidth < 768;
-  const particleCount = isMobile ? 30 : 80; 
+  const particleCount = isMobile ? 15 : 60; 
 
   function setCanvasSize() {
     canvas.width = window.innerWidth;
@@ -97,20 +96,20 @@ if (canvas) {
     init() {
       this.x = Math.random() * canvas.width;
       this.y = Math.random() * canvas.height;
-      this.size = Math.random() * 2 + 1;
-      this.speedX = Math.random() * 0.4 - 0.2;
-      this.speedY = Math.random() * 0.4 - 0.2;
+      this.size = Math.random() * 1.5 + 1;
+      // Much slower speeds = smoother look on mobile
+      this.speedX = Math.random() * 0.2 - 0.1;
+      this.speedY = Math.random() * 0.2 - 0.1;
     }
     update() {
       this.x += this.speedX;
       this.y += this.speedY;
       if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
-        this.init(); // Reset particle if it leaves screen
+        this.init();
       }
     }
     draw() {
-      // Increased opacity from 0.5 to 0.8 so they are visible on mobile
-      ctx.fillStyle = "rgba(255, 255, 255, 0.8)"; 
+      ctx.fillStyle = "rgba(255, 255, 255, 0.6)"; 
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
       ctx.fill();
@@ -141,13 +140,13 @@ if (canvas) {
     initParticles();
   });
 }
+
 // ===============================
-// 5. PARALLAX EFFECT (Disabled on Mobile for Speed)
+// 5. PARALLAX (Disabled for Mobile Speed)
 // ===============================
 const parallaxElements = document.querySelectorAll(".parallax");
 window.addEventListener("scroll", () => {
-  if (window.innerWidth < 992) return; // Stop the script if on mobile
-  
+  if (window.innerWidth < 992) return; // This stops the heavy "jumping" effect on phones
   const scrollY = window.scrollY;
   parallaxElements.forEach(el => {
     const speed = el.getAttribute("data-speed") || 0.3;
