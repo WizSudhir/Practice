@@ -96,7 +96,7 @@ if (canvas) {
     init() {
       this.x = Math.random() * canvas.width;
       this.y = Math.random() * canvas.height;
-      this.size = Math.random() * 1.5 + 1;
+      this.size = Math.random() * 3 + 2;
       // Much slower speeds = smoother look on mobile
       this.speedX = Math.random() * 0.2 - 0.1;
       this.speedY = Math.random() * 0.2 - 0.1;
