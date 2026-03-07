@@ -190,3 +190,54 @@ document.querySelectorAll('.nav-menu a').forEach(link => {
     navMenu.classList.remove('active');
   });
 });
+
+
+<!-- ===============================
+// 8. BLOG FILTER + SEARCH JS
+================================= -->
+
+<script>
+
+const searchInput = document.getElementById("blogSearch")
+const cards = document.querySelectorAll(".blog-card")
+
+searchInput.addEventListener("keyup",function(){
+
+const value = this.value.toLowerCase()
+
+cards.forEach(card=>{
+const text = card.innerText.toLowerCase()
+
+card.style.display = text.includes(value) ? "block" : "none"
+
+})
+
+})
+
+const filterBtns = document.querySelectorAll(".filter-btn")
+
+filterBtns.forEach(btn=>{
+
+btn.addEventListener("click",()=>{
+
+const filter = btn.dataset.filter
+
+cards.forEach(card=>{
+
+if(filter==="all" || card.dataset.category===filter){
+
+card.style.display="block"
+
+}else{
+
+card.style.display="none"
+
+}
+
+})
+
+})
+
+})
+
+</script>
