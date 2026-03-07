@@ -240,4 +240,4 @@ card.style.display="none"
 
 })
 
-</script>
+<script>
