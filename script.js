@@ -195,49 +195,51 @@ document.querySelectorAll('.nav-menu a').forEach(link => {
 <!-- ===============================
 // 8. BLOG FILTER + SEARCH JS
 ================================= -->
+// Serch
+function searchBlogs() {
 
-<script>
+let input = document.getElementById("blogSearch").value.toLowerCase();
+let cards = document.querySelectorAll(".blog-card");
 
-const searchInput = document.getElementById("blogSearch")
-const cards = document.querySelectorAll(".blog-card")
+cards.forEach(card => {
 
-searchInput.addEventListener("keyup",function(){
+let title = card.querySelector("h3").innerText.toLowerCase();
 
-const value = this.value.toLowerCase()
+if(title.includes(input)){
+card.style.display = "block";
+}
+else{
+card.style.display = "none";
+}
 
-cards.forEach(card=>{
-const text = card.innerText.toLowerCase()
-
-card.style.display = text.includes(value) ? "block" : "none"
-
-})
-
-})
-
-const filterBtns = document.querySelectorAll(".filter-btn")
-
-filterBtns.forEach(btn=>{
-
-btn.addEventListener("click",()=>{
-
-const filter = btn.dataset.filter
-
-cards.forEach(card=>{
-
-if(filter==="all" || card.dataset.category===filter){
-
-card.style.display="block"
-
-}else{
-
-card.style.display="none"
+});
 
 }
 
-})
+// Filter
+const filterButtons = document.querySelectorAll(".filter-btn");
+const blogCards = document.querySelectorAll(".blog-card");
 
-})
+filterButtons.forEach(button => {
 
-})
+button.addEventListener("click", () => {
 
-<script>
+let filter = button.getAttribute("data-filter");
+
+blogCards.forEach(card => {
+
+if(filter === "all"){
+card.style.display = "block";
+}
+else if(card.dataset.category === filter){
+card.style.display = "block";
+}
+else{
+card.style.display = "none";
+}
+
+});
+
+});
+
+});
