@@ -191,12 +191,11 @@ document.querySelectorAll('.nav-menu a').forEach(link => {
   });
 });
 
+// ===============================
+// 8. BLOG SEARCH
+// ===============================
 
-// ===============================
-// 8. BLOG FILTER + SEARCH JS
-// ===============================
-// Search
-function searchBlogs() {
+function searchBlogs(){
 
 let input = document.getElementById("blogSearch").value.toLowerCase();
 let cards = document.querySelectorAll(".blog-card");
@@ -205,47 +204,43 @@ cards.forEach(card => {
 
 let title = card.querySelector("h3").innerText.toLowerCase();
 
-if(title.includes(input)){
-card.style.display = "block";
-}
-else{
-card.style.display = "none";
-}
+card.style.display = title.includes(input) ? "block" : "none";
 
 });
 
 }
 
-// Filter
-const filterButtons = document.querySelectorAll(".filter-btn");
-const blogCards = document.querySelectorAll(".blog-card");
-
-filterButtons.forEach(button => {
-
-button.addEventListener("click", () => {
-
-let filter = button.getAttribute("data-filter");
-
-blogCards.forEach(card => {
-
-if(filter === "all"){
-card.style.display = "block";
-}
-else if(card.dataset.category === filter){
-card.style.display = "block";
-}
-else{
-card.style.display = "none";
-}
-
-});
-
-});
-
-});
 
 // ===============================
-// LOAD BLOG POSTS
+// 9. BLOG FILTER
+// ===============================
+
+document.addEventListener("click", function(e){
+
+if(e.target.classList.contains("filter-btn")){
+
+let filter = e.target.getAttribute("data-filter");
+let cards = document.querySelectorAll(".blog-card");
+
+cards.forEach(card=>{
+
+if(filter==="all"){
+card.style.display="block";
+}
+else if(card.dataset.category===filter){
+card.style.display="block";
+}
+else{
+card.style.display="none";
+}
+
+});
+
+}
+
+});
+// ===============================
+// 10. LOAD BLOG POSTS AUTOMATICALLY
 // ===============================
 
 const blogGrid = document.getElementById("blogGrid");
