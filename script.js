@@ -243,3 +243,46 @@ card.style.display = "none";
 });
 
 });
+
+<!-- ===============================
+// 9. FETCH BLOG POSTS AUTOMATICALLY
+================================= -->
+fetch("posts.json")
+.then(res => res.json())
+.then(posts => {
+
+let grid = document.getElementById("blogGrid");
+
+grid.innerHTML="";
+
+posts.forEach(post => {
+
+grid.innerHTML += `
+
+<div class="blog-card reveal" data-category="${post.category}">
+
+<img src="${post.image}">
+
+<div class="blog-content">
+
+<div class="blog-meta">
+<span>${post.category}</span>
+<span>${post.date} • ${post.readTime}</span>
+</div>
+
+<h3>${post.title}</h3>
+
+<p>${post.description}</p>
+
+<a href="${post.url}" class="blog-read">
+Read Article →
+</a>
+
+</div>
+</div>
+
+`;
+
+});
+
+});
