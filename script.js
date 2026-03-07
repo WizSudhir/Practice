@@ -192,10 +192,10 @@ document.querySelectorAll('.nav-menu a').forEach(link => {
 });
 
 
-<!-- ===============================
+// ===============================
 // 8. BLOG FILTER + SEARCH JS
-================================= -->
-// Serch
+// ===============================
+// Search
 function searchBlogs() {
 
 let input = document.getElementById("blogSearch").value.toLowerCase();
@@ -244,24 +244,26 @@ card.style.display = "none";
 
 });
 
-<!-- ===============================
-// 9. FETCH BLOG POSTS AUTOMATICALLY
-================================= -->
+// ===============================
+// LOAD BLOG POSTS
+// ===============================
+
+const blogGrid = document.getElementById("blogGrid");
+
+if (blogGrid) {
+
 fetch("posts.json")
-.then(res => res.json())
+.then(response => response.json())
 .then(posts => {
 
-let grid = document.getElementById("blogGrid");
-
-grid.innerHTML="";
+blogGrid.innerHTML = "";
 
 posts.forEach(post => {
 
-grid.innerHTML += `
-
+const card = `
 <div class="blog-card reveal" data-category="${post.category}">
 
-<img src="${post.image}">
+<img src="${post.image}" alt="${post.title}">
 
 <div class="blog-content">
 
@@ -280,9 +282,11 @@ Read Article →
 
 </div>
 </div>
-
 `;
 
+blogGrid.innerHTML += card;
+
 });
 
 });
+}
