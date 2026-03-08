@@ -368,7 +368,14 @@ header.scrolled {
   z-index: 2;
 }
 
-.hero-left { max-width:600px; }
+.hero-left{
+max-width:600px;
+padding:40px;
+border-radius:20px;
+background:rgba(255,255,255,0.03);
+backdrop-filter:blur(12px);
+border:1px solid rgba(255,255,255,0.08);
+}
 .hero h1 { line-height:1.1; }
 .hero p { margin:20px 0; }
 
