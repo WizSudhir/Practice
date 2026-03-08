@@ -299,7 +299,7 @@ box-shadow:0 20px 50px rgba(99,102,241,0.5);
   min-height:100vh;
   display:flex;
   align-items:center;
-  overflow:hidden;
+  overflow:visible;
   background: var(--gradient-hero);
   background-size:400% 400%;
   animation:gradient 12s ease infinite;
@@ -330,7 +330,7 @@ justify-content:center;
 align-items:flex-start;
 position:relative;
 text-align:center;
-padding-top:60px;
+padding-top:20px;
 }
 .hero-left{
 max-width:600px;
@@ -505,7 +505,7 @@ transform:translateY(-10px);
 display:flex;
 flex-direction:column;
 align-items:center;   /* centers all steps */
-justify-content:center;
+justify-content:flex-start;
 gap:16px;
 position:relative;
 width:100%;
