@@ -607,7 +607,7 @@ header.scrolled {
   gap: 30px;
 }
 /* =========================================================
-  14. ENTERPRISE CTA (REFERENCE STYLE PANEL)
+   14 .ENTERPRISE CTA PANEL (USES GLOBAL DESIGN TOKENS)
 ========================================================= */
 
 .cta-enterprise{
@@ -621,30 +621,28 @@ overflow:hidden;
 .cta-enterprise .cta-bg{
 position:absolute;
 inset:0;
+
 background:url("images/cta-healthcare.jpg") center/cover no-repeat;
+
 z-index:0;
 }
 
 /* GRADIENT SHAPE */
 
-.cta-shape{
+.cta-enterprise .cta-shape{
 
 position:absolute;
 
-top:40px;             /* starts slightly below top */
+top:50px;          /* slightly below top */
 left:0;
 
-width:66%;            /* 2/3 width */
-height:340px;
+width:66%;         /* 2/3 width */
+height:330px;
 
-background:linear-gradient(
-135deg,
-#1e3a8a,
-#10b981
-);
+background: var(--gradient-primary);
 
-border-top-right-radius:180px;
-border-bottom-right-radius:180px;
+border-top-right-radius:160px;
+border-bottom-right-radius:160px;
 
 display:flex;
 align-items:center;
@@ -654,7 +652,7 @@ padding-right:80px;
 
 z-index:2;
 
-box-shadow:var(--shadow-soft);
+box-shadow: var(--shadow-soft);
 }
 
 /* CONTENT */
@@ -664,7 +662,7 @@ max-width:520px;
 }
 
 .cta-content h2{
-font-size:38px;
+font-size:40px;
 line-height:1.2;
 margin-bottom:20px;
 }
@@ -680,17 +678,21 @@ color:rgba(255,255,255,0.9);
 
 .cta-enterprise{
 height:auto;
-padding:60px 0;
+padding:80px 0;
 }
 
-.cta-shape{
+.cta-enterprise .cta-shape{
 position:relative;
 top:0;
 width:100%;
 height:auto;
+
 border-radius:20px;
+
 padding:40px;
+
 margin:0 20px;
+
 text-align:center;
 }
 
