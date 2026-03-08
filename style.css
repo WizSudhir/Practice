@@ -303,8 +303,8 @@ box-shadow:0 20px 50px rgba(99,102,241,0.5);
   background: var(--gradient-hero);
   background-size:400% 400%;
   animation:gradient 12s ease infinite;
-  padding-top: 95px;
-  padding-bottom:40px;
+  padding-top: 120px;
+  padding-bottom:80px;
 }
 @keyframes gradient {
   0%{background-position:0% 50%}
@@ -314,7 +314,7 @@ box-shadow:0 20px 50px rgba(99,102,241,0.5);
 .hero-container {
   display:flex;
   justify-content:space-between;
-  align-items:center;
+  align-items:flex-start;
   width:100%;
   position: relative;
   z-index: 2;
@@ -327,9 +327,10 @@ flex:0.9;
 flex:1.1;
 display:flex;
 justify-content:center;
-align-items:center;
+align-items:flex-start;
 position:relative;
-text-align:center
+text-align:center;
+padding-top:60px;
 }
 .hero-left{
 max-width:600px;
@@ -440,13 +441,6 @@ z-index:2;
 position:relative;
 animation:float 6s ease-in-out infinite;
 }
-.hero-right{
-position:relative;
-display:flex;
-justify-content:center;
-align-items:center;
-padding-top:40px;
-}
 /* Dashboard card */
 .hero-dashboard{
 position:absolute;
@@ -512,10 +506,10 @@ display:flex;
 flex-direction:column;
 align-items:center;   /* centers all steps */
 justify-content:center;
-gap:14px;
+gap:16px;
 position:relative;
 width:100%;
-max-width:420px;
+max-width:520px;
 margin:auto;
 }
 /* individual steps */
@@ -534,6 +528,7 @@ align-items:center;
 justify-content:center;
 text-align:center;
 animation:stepFloat 5s ease-in-out infinite;
+line-height:1.35;
 }
 /* arrows */
 .flow-arrow{
@@ -542,10 +537,10 @@ opacity:.7;
 margin:4px 0;
 }
 .flow-step.left{
-transform:translateX(-18px);
+transform:translateX(-12px);
 }
 .flow-step.right{
-transform:translateX(18px);
+transform:translateX(12px);
 }
 /* final revenue step */
 .flow-step.revenue{
