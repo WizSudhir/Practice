@@ -461,6 +461,18 @@ font-size:13px;
 letter-spacing:.5px;
 margin-bottom:20px;
 }
+.gradient-text{
+background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd,#fff);
+background-size:300%;
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:gradientText 6s linear infinite;
+}
+
+@keyframes gradientText{
+0%{background-position:0%}
+100%{background-position:300%}
+}
 /* ===============================
    10. SERVICES
 ================================= */
