@@ -444,6 +444,7 @@ position:relative;
 display:flex;
 justify-content:center;
 align-items:center;
+padding-top:20px;
 }
 /* Dashboard card */
 .hero-dashboard{
@@ -513,30 +514,37 @@ justify-content:center;
 gap:14px;
 position:relative;
 width:100%;
-max-width:300px;
+max-width:380px;
 margin:auto;
 }
 /* individual steps */
 .flow-step{
 background:rgba(255,255,255,0.08);
 backdrop-filter:blur(10px);
-padding:16px 26px;
+padding:16px 20px;
 border-radius:12px;
 font-size:14px;
 border:1px solid rgba(255,255,255,0.2);
 box-shadow:0 15px 40px rgba(0,0,0,0.3);
-width:220px;
+width:260px;          /* makes all cards same width */
+min-height:60px;      /* keeps height consistent */
+display:flex;
+align-items:center;
+justify-content:center;
 text-align:center;
 animation:stepFloat 5s ease-in-out infinite;
 }
 /* arrows */
 .flow-arrow{
-display:flex;
-justify-content:center;
-align-items:center;
-width:100%;
-font-size:22px;
+font-size:20px;
 opacity:.7;
+line-height:1;
+}
+.flow-step.left{
+transform:translateX(-30px);
+}
+.flow-step.right{
+transform:translateX(30px);
 }
 /* final revenue step */
 .flow-step.revenue{
@@ -549,11 +557,6 @@ font-weight:600;
 0%,100%{transform:translateY(0)}
 50%{transform:translateY(-6px)}
 }
-.flow-step:nth-of-type(1){ transform:translateX(-20px); }
-.flow-step:nth-of-type(3){ transform:translateX(20px); }
-.flow-step:nth-of-type(5){ transform:translateX(-20px); }
-.flow-step:nth-of-type(7){ transform:translateX(20px); }
-.flow-step:nth-of-type(9){ transform:translateX(0); }
 .revenue-flow::before{
 content:"";
 position:absolute;
