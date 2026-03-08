@@ -606,8 +606,85 @@ header.scrolled {
   align-items: center;
   gap: 30px;
 }
+/* =========================================================
+  13. MODERN CURVED CTA (SAFE EXTENSION)
+   Does NOT affect existing CTA styles
+========================================================= */
+
+.cta-modern{
+padding:0;
+background:none;
+overflow:hidden;
+}
+
+.cta-modern-wrapper{
+display:grid;
+grid-template-columns:60% 40%;
+min-height:420px;
+}
+
+/* LEFT PANEL */
+
+.cta-modern-left{
+background:linear-gradient(135deg,#1e3a8a,#10b981);
+display:flex;
+align-items:center;
+position:relative;
+border-top-right-radius:120px;
+border-bottom-right-radius:120px;
+}
+
+.cta-modern-left h2{
+font-size:42px;
+line-height:1.2;
+margin-bottom:20px;
+}
+
+.cta-modern-left p{
+max-width:500px;
+margin-bottom:30px;
+color:rgba(255,255,255,0.9);
+}
+
+/* RIGHT IMAGE */
+
+.cta-modern-right{
+position:relative;
+overflow:hidden;
+}
+
+.cta-modern-right img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+/* MOBILE */
+
+@media(max-width:992px){
+
+.cta-modern-wrapper{
+grid-template-columns:1fr;
+}
+
+.cta-modern-left{
+border-radius:0;
+padding:60px 0;
+text-align:center;
+}
+
+.cta-modern-left p{
+margin-left:auto;
+margin-right:auto;
+}
+
+.cta-modern-right{
+height:260px;
+}
+
+}
 /* ===============================
-   13. CONTACT STRIP
+   14. CONTACT STRIP
 ================================= */
 .contact-strip {
   padding:60px 0;
@@ -718,7 +795,7 @@ header.scrolled {
 }
 
 /* ===============================
-   14. FOOTER
+   15. FOOTER
 ================================= */
 footer {
   padding: 100px 0 40px;
@@ -872,7 +949,7 @@ footer {
 }
 
 /* =========================================================
-   SERVICES PAGE – LEFT ICON LAYOUT
+   18. SERVICES PAGE – LEFT ICON LAYOUT
    Safe – Does NOT affect homepage
 ========================================================= */
 
@@ -969,7 +1046,7 @@ footer {
   color: var(--text-secondary);
 }
 /* =========================================================
-   SERVICES HERO IMAGE LAYOUT
+   19. SERVICES HERO IMAGE LAYOUT
 ========================================================= */
 
 .hero-grid {
@@ -1005,7 +1082,7 @@ footer {
 }
 
 /* =========================================================
-   Icons for contact strip in footer
+   20. Icons for contact strip in footer
 ========================================================= */
 .footer-contact a {
   text-decoration: none;
@@ -1057,7 +1134,7 @@ footer {
 }
 
 /* ===============================
-BLOG PAGE
+21. BLOG PAGE
 ================================= */
 
 .blog-grid{
