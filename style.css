@@ -380,11 +380,6 @@ border:1px solid rgba(255,255,255,0.08);
 .hero h1 { line-height:1.1; }
 .hero p { margin:20px 0; }
 
-.hero-right img {
-  width:500px;
-  animation: float 6s ease-in-out infinite;
-}
-
 @keyframes float {
   0%,100% { transform:translateY(0); }
   50% { transform:translateY(-15px); }
@@ -486,7 +481,85 @@ transform:translateX(-50%);
 filter:blur(120px);
 z-index:0;
 }
+.hero-right img {
+  width:100%;
+  max-width:460px;
+  height:auto;
+  animation: float 6s ease-in-out infinite;
+}
+.hero-right{
+position:relative;
+display:flex;
+justify-content:center;
+align-items:center;
+}
 
+/* Dashboard card */
+
+.hero-dashboard{
+
+position:absolute;
+
+bottom:20px;
+right:-60px;
+
+width:220px;
+
+background:rgba(15,23,42,0.7);
+backdrop-filter:blur(16px);
+
+border:1px solid rgba(255,255,255,0.12);
+border-radius:16px;
+
+padding:18px;
+
+box-shadow:0 25px 60px rgba(0,0,0,0.4);
+
+animation:dashboardFloat 6s ease-in-out infinite;
+}
+.hero-dashboard{
+position:relative;
+right:auto;
+bottom:auto;
+margin-top:20px;
+}
+
+/* title */
+
+.hero-dashboard h4{
+font-size:14px;
+margin-bottom:10px;
+color:#fff;
+}
+
+/* metric rows */
+
+.metric{
+display:flex;
+justify-content:space-between;
+font-size:13px;
+padding:6px 0;
+color:#cbd5f5;
+}
+
+.metric strong{
+color:#22c55e;
+font-weight:700;
+}
+
+/* floating motion */
+
+@keyframes dashboardFloat{
+
+0%,100%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-10px);
+}
+
+}
 /* ===============================
    10. SERVICES
 ================================= */
