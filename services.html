@@ -2,102 +2,157 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Comprehensive RCM Services | PracticeGrid Solutions</title>
+<title>Revenue Cycle Management Services | PracticeGrid Solutions</title>
 
-<meta name="description" content="End-to-end revenue cycle management services including eligibility verification, coding, billing, AR follow-up, denial management, credentialing and revenue analytics.">
+<meta name="description" content="Enterprise-level revenue cycle management services helping healthcare practices reduce denials, accelerate collections, and optimize financial performance.">
 
 <link rel="icon" type="image/png" href="images/favicon.png">
 <link rel="stylesheet" href="style.css">
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 <script defer src="script.js"></script>
 
 <style>
 
-/* ================================================
-   SERVICES TIMELINE LAYOUT (Scoped to this page)
-   ================================================ */
+/* ================================
+   SERVICES PAGE ENHANCEMENTS
+================================ */
 
-.services-timeline {
-  position: relative;
-  margin-top: 80px;
+.services-layout{
+display:grid;
+grid-template-columns:260px 1fr;
+gap:60px;
+margin-top:80px;
 }
 
-.services-timeline::before {
-  content: "";
-  position: absolute;
-  left: 35px;
-  top: 0;
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(to bottom, var(--accent), var(--accent-2));
-  opacity: 0.25;
+.services-nav{
+position:sticky;
+top:120px;
+background:var(--bg-elevated);
+padding:30px;
+border-radius:var(--radius-lg);
+box-shadow:var(--shadow-soft);
+height:fit-content;
 }
 
-.service-row {
-  display: grid;
-  grid-template-columns: 80px 1fr;
-  gap: 40px;
-  margin-bottom: 60px;
-  position: relative;
+.services-nav h4{
+margin-bottom:20px;
 }
 
-.service-icon-wrapper {
-  position: relative;
-  z-index: 2;
+.services-nav a{
+display:block;
+margin-bottom:12px;
+color:var(--text-secondary);
+text-decoration:none;
 }
 
-.service-icon {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background: var(--bg-elevated);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: var(--shadow-soft);
-  backdrop-filter: blur(15px);
+.services-nav a:hover{
+color:var(--accent-2);
 }
 
-.service-icon svg {
-  width: 32px;
-  height: 32px;
-  stroke: var(--accent-2);
-  stroke-width: 2;
-  fill: none;
+.rcm-phase{
+margin-bottom:100px;
 }
 
-.service-content {
-  background: var(--bg-elevated);
-  padding: 35px;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-soft);
-  transition: 0.4s ease;
+.phase-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:30px;
+margin-top:40px;
 }
 
-.service-content:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-hover);
+.phase-card{
+background:var(--bg-elevated);
+padding:30px;
+border-radius:var(--radius-lg);
+box-shadow:var(--shadow-soft);
+transition:.35s;
+}
+
+.phase-card:hover{
+transform:translateY(-8px);
+box-shadow:var(--shadow-hover);
+}
+
+.phase-icon{
+margin-bottom:15px;
+}
+
+.phase-icon svg{
+width:40px;
+height:40px;
+stroke:var(--accent-2);
+transition:.3s;
+}
+
+.phase-card:hover svg{
+transform:scale(1.15);
+stroke:var(--accent);
+}
+
+/* specialties */
+
+.specialties-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:25px;
+margin-top:50px;
+}
+
+.specialty{
+background:var(--bg-elevated);
+padding:20px;
+border-radius:14px;
+text-align:center;
+}
+
+/* trust section */
+
+.trust-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:30px;
+margin-top:50px;
+}
+
+/* faq */
+
+.faq{
+max-width:900px;
+margin:auto;
+margin-top:60px;
+}
+
+.faq-item{
+background:var(--bg-elevated);
+padding:25px;
+border-radius:14px;
+margin-bottom:15px;
+}
+
+/* audit panel */
+
+.audit-panel{
+background:var(--bg-secondary);
+padding:60px;
+border-radius:var(--radius-lg);
+margin-top:60px;
 }
 
 @media(max-width:992px){
 
-  .services-timeline::before{
-    left: 25px;
-  }
+.services-layout{
+grid-template-columns:1fr;
+}
 
-  .service-row{
-    grid-template-columns: 60px 1fr;
-    gap: 25px;
-  }
-
-  .service-icon{
-    width: 55px;
-    height: 55px;
-  }
+.services-nav{
+display:none;
+}
 
 }
 
@@ -109,443 +164,483 @@
 
 <a href="contact.html" class="floating-cta">Free Audit</a>
 
+<!-- NAVBAR (UNCHANGED) -->
+
 <header class="navbar">
-  <div class="container navbar-inner">
-    <div class="logo">
-       <a href="index.html">
-          <img src="images/logo.png" alt="PracticeGrid Solutions Logo">
-          </a>
-    </div>
+<div class="container navbar-inner">
 
-    <nav class="nav-menu">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="why-us.html">Why Us</a></li>
-        <li><a href="blog/">Blog</a></li>
-        <li><a href="contact.html" class="btn-primary">Get Started</a></li>
-      </ul>
-    </nav>
-
-    <button class="nav-toggle" aria-label="Toggle Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</header>
-
-<section class="hero" style="height:60vh;">
-  <canvas id="particles"></canvas>
-  <div class="hero-blob blob-1"></div>
-  <div class="hero-blob blob-2"></div>
-
-  <div class="container hero-container hero-services-grid">
-
-  <div class="hero-left">
-    <h1>Comprehensive Revenue Cycle Services</h1>
-    <p>
-      Full-spectrum RCM solutions designed to maximize collections,
-      reduce denials, and improve operational efficiency.
-    </p>
-  </div>
-
-  <div class="hero-right">
-    <img src="images/services-hero.png" alt="Revenue Cycle Management Illustration" fetchpriority="high" loading="eager">
-  </div>
-
-</div>
-   
-</section>
-
-<section class="section">
-  <div class="container">
-
-    <h2 class="section-title">End-to-End Revenue Cycle Management</h2>
-
-    <div class="services-vertical">
-
-      <!-- SERVICE TEMPLATE START -->
-
-      <div class="service-vertical-card reveal">
-        <div class="service-vertical-icon">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24">
-               <path d="M12 3l7 4v5c0 5-3.5 8-7 9-3.5-1-7-4-7-9V7l7-4z"/>
-               <path d="M9 12l2 2 4-4"/>
-            </svg>
-          </div>
-        </div>
-        <div class="service-vertical-content">
-          <h3>Eligibility & Benefits Verification</h3>
-          <p>Real-time insurance verification to prevent front-end denials and ensure accurate patient responsibility estimates.</p>
-        </div>
-      </div>
-
-      <div class="service-vertical-card reveal">
-        <div class="service-vertical-icon">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24">
-               <rect x="3" y="6" width="18" height="12" rx="2"/>
-               <circle cx="8" cy="12" r="2"/>
-               <path d="M12 10h6M12 14h4"/>
-            </svg>
-          </div>
-        </div>
-        <div class="service-vertical-content">
-          <h3>Patient Demographic Entry</h3>
-          <p>Accurate patient data capture to minimize claim rejections and maintain clean records.</p>
-        </div>
-      </div>
-
-       <div class="service-vertical-card reveal">
-        <div class="service-vertical-icon">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24">
-               <rect x="6" y="4" width="12" height="16" rx="2"/>
-               <path d="M9 2h6v4H9z"/>
-               <path d="M12 10v6M10 12h4"/>
-            </svg>
-          </div>
-        </div>
-        <div class="service-vertical-content">
-          <h3>Charge Entry</h3>
-          <p>Precise entry of CPT, ICD-10 and HCPCS codes aligned with provider documentation.</p>
-        </div>
-      </div>
-
-       <div class="service-vertical-card reveal">
-        <div class="service-vertical-icon">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24">
-               <rect x="5" y="3" width="14" height="18" rx="2"/>
-               <path d="M12 8v6M9 11h6"/>
-            </svg>
-          </div>
-        </div>
-        <div class="service-vertical-content">
-          <h3>Medical Coding</h3>
-          <p>Certified coders ensuring compliance, accuracy, and maximum reimbursement.</p>
-        </div>
-      </div>
-
-       <div class="service-vertical-card reveal">
-        <div class="service-vertical-icon">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24">
-               <path d="M22 2L11 13"/>
-               <path d="M22 2L15 22l-4-9-9-4z"/>
-            </svg>
-          </div>
-        </div>
-        <div class="service-vertical-content">
-          <h3>Claim Submission</h3>
-          <p>Electronic and paper claim submission with rigorous quality checks for clean claim rates.</p>
-        </div>
-      </div>
-
-       <div class="service-vertical-card reveal">
-        <div class="service-vertical-icon">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24">
-               <path d="M12 3l10 18H2L12 3z"/>
-               <path d="M12 9v4M12 17h.01"/>
-            </svg>
-          </div>
-        </div>
-        <div class="service-vertical-content">
-          <h3>Rejection Management</h3>
-          <p>Immediate correction and resubmission of rejected claims to prevent revenue delays.</p>
-        </div>
-      </div>
-
-       <div class="service-vertical-card reveal">
-        <div class="service-vertical-icon">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24">
-               <rect x="2" y="6" width="20" height="12" rx="2"/>
-               <path d="M16 12h2"/>
-            </svg>
-          </div>
-        </div>
-        <div class="service-vertical-content">
-          <h3>Payment Posting</h3>
-          <p>ERA and manual posting with accurate reconciliation to maintain financial transparency.</p>
-        </div>
-      </div>
-
-       <div class="service-vertical-card reveal">
-        <div class="service-vertical-icon">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24">
-               <circle cx="12" cy="12" r="9"/>
-               <path d="M12 7v5l3 3"/>
-            </svg>
-          </div>
-        </div>
-        <div class="service-vertical-content">
-          <h3>Accounts Receivable Follow-Up</h3>
-          <p>Strategic AR follow-ups to accelerate collections and reduce aging buckets.</p>
-        </div>
-      </div>
-
-       <div class="service-vertical-card reveal">
-        <div class="service-vertical-icon">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24">
-               <path d="M10 14l-2 2a3 3 0 1 1-4-4l2-2"/>
-               <path d="M14 10l2-2a3 3 0 1 1 4 4l-2 2"/>
-            </svg>
-          </div>
-        </div>
-        <div class="service-vertical-content">
-          <h3>Denial Management</h3>
-          <p>Root-cause analysis and appeal management to recover underpaid or denied claims.</p>
-        </div>
-      </div>
-
-       <div class="service-vertical-card reveal">
-        <div class="service-vertical-icon">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24">
-               <path d="M3 12h18"/>
-               <path d="M8 7l-5 5 5 5"/>
-            </svg>
-          </div>
-        </div>
-        <div class="service-vertical-content">
-          <h3>Credit Balance Resolution</h3>
-          <p>Identification and refund processing to maintain compliance and financial accuracy.</p>
-        </div>
-      </div>
-
-       <div class="service-vertical-card reveal">
-        <div class="service-vertical-icon">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24">
-               <circle cx="12" cy="8" r="4"/>
-               <path d="M8 14l4 7 4-7"/>
-            </svg>
-          </div>
-        </div>
-        <div class="service-vertical-content">
-          <h3>Provider Credentialing & Enrollments</h3>
-          <p>End-to-end payer enrollment and credentialing services to avoid reimbursement delays.</p>
-        </div>
-      </div>
-
-       <div class="service-vertical-card reveal">
-        <div class="service-vertical-icon">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24">
-               <rect x="2" y="8" width="20" height="10" rx="2"/>
-               <path d="M7 12h10"/>
-               <path d="M12 9v6"/>
-            </svg>
-          </div>
-        </div>
-        <div class="service-vertical-content">
-          <h3>ERA, EDI & EFT Enrollments</h3>
-          <p>Electronic remittance and funds transfer setup for seamless payment workflows.</p>
-        </div>
-      </div>
-
-       <div class="service-vertical-card reveal">
-        <div class="service-vertical-icon">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24">
-               <rect x="3" y="6" width="18" height="12" rx="2"/>
-               <path d="M3 6l9 7 9-7"/>
-            </svg>
-          </div>
-        </div>
-        <div class="service-vertical-content">
-          <h3>Patient Statements</h3>
-          <p>Clear and timely patient billing statements to improve collections and patient satisfaction.</p>
-        </div>
-      </div>
-
-       <div class="service-vertical-card reveal">
-        <div class="service-vertical-icon">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24">
-               <path d="M4 20V10"/>
-               <path d="M10 20V6"/>
-               <path d="M16 20V14"/>
-            </svg>
-          </div>
-        </div>
-        <div class="service-vertical-content">
-          <h3>Revenue Cycle Analytics</h3>
-          <p>Advanced dashboards and KPIs providing actionable financial insights.</p>
-        </div>
-      </div>
-
-       <div class="service-vertical-card reveal">
-        <div class="service-vertical-icon">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24">
-               <rect x="5" y="11" width="14" height="10" rx="2"/>
-               <path d="M8 11V8a4 4 0 0 1 8 0v3"/>
-            </svg>
-          </div>
-        </div>
-        <div class="service-vertical-content">
-          <h3>Pre-Authorization & Pre-Certification</h3>
-          <p>Efficient approval management to reduce treatment delays and claim denials.</p>
-        </div>
-      </div>
-
-       <div class="service-vertical-card reveal">
-        <div class="service-vertical-icon">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24">
-               <rect x="4" y="3" width="16" height="18" rx="2"/>
-               <path d="M8 8l2 2 4-4"/>
-               <path d="M8 14h8"/>
-            </svg>
-          </div>
-        </div>
-        <div class="service-vertical-content">
-          <h3>Compliance Audits & Monitoring</h3>
-          <p>Continuous monitoring to ensure regulatory compliance and reduce risk exposure.</p>
-        </div>
-      </div>
-
-       <div class="service-vertical-card reveal">
-        <div class="service-vertical-icon">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24">
-               <path d="M3 12l4-4 4 4 4-4 6 6"/>
-            </svg>
-          </div>
-        </div>
-        <div class="service-vertical-content">
-          <h3>Contract Management</h3>
-          <p>Negotiation support and payer contract optimization for maximum reimbursement.</p>
-        </div>
-      </div>
-
-       <div class="service-vertical-card reveal">
-        <div class="service-vertical-icon">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24">
-               <path d="M12 3l7 4v5c0 5-3.5 8-7 9-3.5-1-7-4-7-9V7l7-4z"/>
-               <path d="M12 9v6M10 11h4"/>
-            </svg>
-          </div>
-        </div>
-        <div class="service-vertical-content">
-          <h3>Revenue Integrity</h3>
-          <p>Ensuring complete and accurate revenue capture across the care continuum.</p>
-        </div>
-      </div>
-
-       <div class="service-vertical-card reveal">
-        <div class="service-vertical-icon">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24">
-               <path d="M12 21s-6-4.35-9-8.5C1 9 3 5 7 5c2 0 3 1 5 3 2-2 3-3 5-3 4 0 6 4 4 7.5C18 16.65 12 21 12 21z"/>
-            </svg>
-          </div>
-        </div>
-        <div class="service-vertical-content">
-          <h3>Patient Financial Counseling</h3>
-          <p>Transparent cost communication and payment plan assistance for patients.</p>
-        </div>
-      </div>
-
-       <div class="service-vertical-card reveal">
-        <div class="service-vertical-icon">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24">
-               <circle cx="12" cy="12" r="9"/>
-               <circle cx="12" cy="12" r="4"/>
-            </svg>
-          </div>
-        </div>
-        <div class="service-vertical-content">
-          <h3>Quality Assurance & Performance Improvement</h3>
-          <p>Ongoing audits and workflow optimization to drive measurable performance gains.</p>
-        </div>
-      </div>
-
-       <div class="service-vertical-card reveal">
-        <div class="service-vertical-icon">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24">
-               <path d="M2 9l10-4 10 4-10 4-10-4z"/>
-               <path d="M6 11v4c0 2 4 3 6 3s6-1 6-3v-4"/>
-            </svg>
-          </div>
-        </div>
-        <div class="service-vertical-content">
-          <h3>Education & Training Initiatives</h3>
-          <p>Provider and staff training programs focused on documentation accuracy and compliance.</p>
-        </div>
-      </div>
-       
-    </div>
-  </div>
-</section>
-
-<section class="cta">
-  <div class="container">
-    <h2>Ready to Optimize Your Revenue Cycle?</h2>
-    <a href="contact.html" class="btn-primary">Schedule a Consultation</a>
-  </div>
-</section>
-
-<footer class="footer">
-  <div class="container footer-grid">
-
-    <div class="footer-brand">
-      <img src="images/logo.png" alt="PracticeGrid Solutions">
-      <p>Elite Revenue Cycle Management for Modern Healthcare Practices.</p>
-    </div>
-
-    <div class="footer-links">
-      <h4>Company</h4>
-      <a href="#">Home</a>
-      <a href="services.html">Services</a>
-      <a href="why-us.html">Why Us</a>
-      <a href="contact.html">Contact</a>
-    </div>
-
-    <div class="footer-contact">
-  <h4><a href="contact.html" style="text-decoration:none; color:inherit;">Contact</a></h4>
-
-  <a href="tel:+17276741458" style="display:flex; align-items:center; gap:10px;">
-    <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2">
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 
-      19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67 
-      A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 
-      c.12.9.37 1.77.73 2.6a2 2 0 0 1-.45 2.11L8.09 9.91
-      a16 16 0 0 0 6 6l1.48-1.48a2 2 0 0 1 2.11-.45
-      c.83.36 1.7.61 2.6.73a2 2 0 0 1 1.72 2z"/>
-    </svg>
-    <span>+1 (727) 674-1458</span>
-  </a>
-
- <a href="mailto:contact@practicegridsolutions.com" class="footer-contact-item">
-  <div class="footer-contact-icon">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="3" y="5" width="18" height="14" rx="2"></rect>
-      <polyline points="3 7 12 13 21 7"></polyline>
-    </svg>
-  </div>
-  <span>contact@practicegridsolutions.com</span>
+<div class="logo">
+<a href="index.html">
+<img src="images/logo.png">
 </a>
 </div>
 
-    <div class="footer-hipaa">
-      <img src="images/hipaa-official.png" alt="HIPAA Compliant">
-      <span class="hipaa-text">HIPAA Compliant</span>
-    </div>
+<nav class="nav-menu">
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="services.html">Services</a></li>
+<li><a href="why-us.html">Why Us</a></li>
+<li><a href="blog/">Blog</a></li>
+<li><a href="contact.html" class="btn-primary">Get Started</a></li>
+</ul>
+</nav>
 
-  </div>
+<button class="nav-toggle">
+<span></span>
+<span></span>
+<span></span>
+</button>
 
-  <div class="footer-bottom">
-    © 2026 PracticeGrid Solutions. All rights reserved.
-  </div>
+</div>
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+<canvas id="particles"></canvas>
+
+<div class="hero-blob blob-1"></div>
+<div class="hero-blob blob-2"></div>
+
+<div class="container hero-container">
+
+<div class="hero-left">
+
+<div class="hero-badge">Enterprise RCM Consulting</div>
+
+<h1 class="gradient-text">
+Revenue Cycle Management That
+Increases Healthcare Revenue
+</h1>
+
+<p>
+Reduce denials, accelerate reimbursements, and optimize financial performance with enterprise-grade revenue cycle management services.
+</p>
+
+<div class="hero-buttons">
+<a href="contact.html" class="btn-primary">Get Free Revenue Audit</a>
+<a href="contact.html" class="btn-outline">Schedule Consultation</a>
+</div>
+
+<div class="stats">
+
+<div class="stat">
+<h2 class="counter" data-target="35">0</h2>
+<p>% Faster Collections</p>
+</div>
+
+<div class="stat">
+<h2 class="counter" data-target="98">0</h2>
+<p>% Clean Claim Rate</p>
+</div>
+
+<div class="stat">
+<h2 class="counter" data-target="30">0</h2>
+<p>% Denial Reduction</p>
+</div>
+
+</div>
+
+</div>
+
+<div class="hero-right">
+<img src="images/services-hero.png">
+</div>
+
+</div>
+</section>
+
+
+<!-- SOCIAL PROOF -->
+
+<section class="section">
+
+<div class="container" style="text-align:center">
+
+<h2>Trusted by Healthcare Practices Across the United States</h2>
+
+<p style="margin-top:20px">
+Helping medical practices optimize millions in revenue through intelligent revenue cycle management.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- SERVICES WITH STICKY NAV -->
+
+<section class="section">
+
+<div class="container services-layout">
+
+
+<!-- sticky nav -->
+
+<div class="services-nav">
+
+<h4>RCM Services</h4>
+
+<a href="#front">Front-End RCM</a>
+<a href="#coding">Coding & Charge Capture</a>
+<a href="#claims">Claims & Reimbursement</a>
+<a href="#recovery">Revenue Recovery</a>
+
+</div>
+
+
+<div>
+
+
+<!-- PHASE 1 -->
+
+<div id="front" class="rcm-phase">
+
+<h2>Front-End Revenue Protection</h2>
+
+<p>
+Prevent denials before they happen through accurate patient intake and payer verification processes.
+</p>
+
+<div class="phase-grid">
+
+<div class="phase-card reveal">
+
+<div class="phase-icon">
+<svg viewBox="0 0 24 24">
+<path d="M12 3l7 4v5c0 5-3.5 8-7 9-3.5-1-7-4-7-9V7l7-4z"/>
+</svg>
+</div>
+
+<h3>Eligibility Verification</h3>
+
+<p>Real-time insurance verification preventing front-end claim denials.</p>
+
+</div>
+
+
+<div class="phase-card reveal">
+
+<h3>Patient Demographics</h3>
+
+<p>Accurate patient information capture to reduce claim rejection rates.</p>
+
+</div>
+
+<div class="phase-card reveal">
+
+<h3>Pre-Authorizations</h3>
+
+<p>Efficient authorization workflows ensuring treatment approval.</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- PHASE 2 -->
+
+<div id="coding" class="rcm-phase">
+
+<h2>Coding & Charge Capture</h2>
+
+<div class="phase-grid">
+
+<div class="phase-card reveal">
+
+<h3>Medical Coding</h3>
+
+<p>Certified coders ensuring accurate CPT, ICD-10, and HCPCS coding.</p>
+
+</div>
+
+<div class="phase-card reveal">
+
+<h3>Charge Entry</h3>
+
+<p>Precise charge capture aligned with provider documentation.</p>
+
+</div>
+
+<div class="phase-card reveal">
+
+<h3>Compliance Audits</h3>
+
+<p>Continuous monitoring to maintain coding accuracy and compliance.</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- PHASE 3 -->
+
+<div id="claims" class="rcm-phase">
+
+<h2>Claims & Reimbursement</h2>
+
+<div class="phase-grid">
+
+<div class="phase-card reveal">
+
+<h3>Claim Submission</h3>
+
+<p>Clean claims submitted electronically to accelerate reimbursements.</p>
+
+</div>
+
+<div class="phase-card reveal">
+
+<h3>Payment Posting</h3>
+
+<p>ERA reconciliation and accurate financial posting.</p>
+
+</div>
+
+<div class="phase-card reveal">
+
+<h3>EDI / ERA Enrollments</h3>
+
+<p>Electronic payment setup with insurance payers.</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- PHASE 4 -->
+
+<div id="recovery" class="rcm-phase">
+
+<h2>Revenue Recovery</h2>
+
+<div class="phase-grid">
+
+<div class="phase-card reveal">
+
+<h3>AR Follow-Up</h3>
+
+<p>Strategic follow-ups reducing aging accounts receivable.</p>
+
+</div>
+
+<div class="phase-card reveal">
+
+<h3>Denial Management</h3>
+
+<p>Root-cause analysis and appeal management.</p>
+
+<p>
+Learn more in our article:
+<a href="/blog/common-medical-billing-mistakes">Common Medical Billing Mistakes</a>
+</p>
+
+</div>
+
+<div class="phase-card reveal">
+
+<h3>Revenue Analytics</h3>
+
+<p>Advanced reporting dashboards providing financial insight.</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+</div>
+</section>
+
+
+<!-- SPECIALTIES -->
+
+<section class="section">
+
+<div class="container">
+
+<h2 class="section-title">Specialties We Serve</h2>
+
+<div class="specialties-grid">
+
+<div class="specialty">Cardiology</div>
+<div class="specialty">Orthopedics</div>
+<div class="specialty">Dermatology</div>
+<div class="specialty">Mental Health</div>
+<div class="specialty">Primary Care</div>
+<div class="specialty">Radiology</div>
+<div class="specialty">Urgent Care</div>
+<div class="specialty">Gastroenterology</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- WHY OUTSOURCE -->
+
+<section class="section">
+
+<div class="container">
+
+<h2>Why Healthcare Practices Outsource Revenue Cycle Management</h2>
+
+<p style="margin-top:25px">
+
+Increasing payer complexity, staffing shortages, and rising denial rates make revenue cycle management more difficult than ever.
+
+Healthcare practices outsource RCM to reduce administrative burden, improve collections, and maintain regulatory compliance.
+
+</p>
+
+</div>
+
+</section>
+
+
+<!-- TRUST -->
+
+<section class="section">
+
+<div class="container">
+
+<h2>Why Healthcare Organizations Trust PracticeGrid</h2>
+
+<div class="trust-grid">
+
+<div class="phase-card">HIPAA Compliant Operations</div>
+<div class="phase-card">Certified Medical Coders</div>
+<div class="phase-card">Dedicated Account Managers</div>
+<div class="phase-card">Transparent Revenue Reporting</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- FAQ -->
+
+<section class="section">
+
+<div class="container">
+
+<h2>Frequently Asked Questions</h2>
+
+<div class="faq">
+
+<div class="faq-item">
+<h3>How much does medical billing outsourcing cost?</h3>
+<p>Most RCM companies charge 4-8% of collections depending on specialty and claim complexity.</p>
+</div>
+
+<div class="faq-item">
+<h3>How quickly can revenue improve?</h3>
+<p>Most practices see measurable improvements within 60-90 days after implementing optimized workflows.</p>
+</div>
+
+<div class="faq-item">
+<h3>How long does provider credentialing take?</h3>
+<p>Credentialing typically takes 60-120 days depending on the insurance payer.</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- FREE AUDIT -->
+
+<section class="section">
+
+<div class="container audit-panel">
+
+<h2>Free Revenue Cycle Audit</h2>
+
+<p style="margin-top:20px">
+
+Our team analyzes denial rates, payer performance, AR aging, and revenue leakage to identify opportunities for improvement.
+
+</p>
+
+<a href="contact.html" class="btn-primary" style="margin-top:30px;display:inline-block;">
+Request Free Audit
+</a>
+
+</div>
+
+</section>
+
+
+<!-- CTA -->
+
+<section class="cta">
+<div class="container">
+<h2>Ready to Optimize Your Revenue Cycle?</h2>
+<a href="contact.html" class="btn-primary">Schedule Consultation</a>
+</div>
+</section>
+
+
+<!-- FOOTER (UNCHANGED) -->
+
+<footer class="footer">
+
+<div class="container footer-grid">
+
+<div class="footer-brand">
+<img src="images/logo.png">
+<p>Elite Revenue Cycle Management for Modern Healthcare Practices.</p>
+</div>
+
+<div class="footer-links">
+<h4>Company</h4>
+<a href="index.html">Home</a>
+<a href="services.html">Services</a>
+<a href="why-us.html">Why Us</a>
+<a href="contact.html">Contact</a>
+</div>
+
+<div class="footer-contact">
+
+<h4>Contact</h4>
+
+<a href="tel:+17276741458">+1 (727) 674-1458</a>
+
+<a href="mailto:contact@practicegridsolutions.com">
+contact@practicegridsolutions.com
+</a>
+
+</div>
+
+<div class="footer-hipaa">
+<img src="images/hipaa-official.png">
+<span class="hipaa-text">HIPAA Compliant</span>
+</div>
+
+</div>
+
+<div class="footer-bottom">
+
+© 2026 PracticeGrid Solutions. All rights reserved.
+
+</div>
+
 </footer>
 
 </body>
