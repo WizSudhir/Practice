@@ -128,7 +128,7 @@ p {
 }
 
 /* ===============================
-   FLOATING CTA
+   6. FLOATING CTA
 ================================= */
 .floating-cta {
   position: fixed;
@@ -213,7 +213,7 @@ p {
 }
 
 /* ===============================
-   6. NAVIGATION
+   7. NAVIGATION
 ================================= */
 .navbar {
   position: fixed;
@@ -313,7 +313,7 @@ header.scrolled {
   }
 }
 /* ===============================
-   7. BUTTONS
+   8. BUTTONS
 ================================= */
 .btn-primary {
   background: #fff;
@@ -339,7 +339,7 @@ header.scrolled {
 }
 
 /* ===============================
-   8. HERO SECTION
+   9. HERO SECTION
 ================================= */
 .hero {
   position:relative;
@@ -445,7 +445,7 @@ header.scrolled {
   z-index: 10;
 }
 /* ===============================
-   9. SERVICES
+   10. SERVICES
 ================================= */
 .services-grid {
   display:grid;
@@ -507,7 +507,7 @@ header.scrolled {
 }
 
 /* ===============================
-   10. HIPAA SECTION
+   11. HIPAA SECTION
 ================================= */
 .hipaa-badge {
   position: relative;
@@ -558,7 +558,7 @@ header.scrolled {
   filter: drop-shadow(0 0 25px rgba(139,92,246,0.8));
 }
 /* ===============================
-   11. EHR SLIDER
+   12. EHR SLIDER
 ================================= */
 .ehr-section {
   padding: 100px 0;
@@ -593,7 +593,7 @@ header.scrolled {
   100% { transform: translateX(-50%); }
 }
 /* ===============================
-   12. CTA
+   13. CTA
 ================================= */
 .cta {
   padding:60px 0;
@@ -607,12 +607,12 @@ header.scrolled {
   gap: 30px;
 }
 /* =========================================================
-   13. ENTERPRISE CTA – IMAGE BACKGROUND + 2/3 GRADIENT PANEL
+  14. ENTERPRISE CTA (REFERENCE STYLE PANEL)
 ========================================================= */
 
 .cta-enterprise{
 position:relative;
-padding:120px 0;
+height:420px;
 overflow:hidden;
 }
 
@@ -621,47 +621,50 @@ overflow:hidden;
 .cta-enterprise .cta-bg{
 position:absolute;
 inset:0;
-
 background:url("images/cta-healthcare.jpg") center/cover no-repeat;
-
 z-index:0;
 }
 
-/* GRADIENT PANEL (2/3 WIDTH) */
+/* GRADIENT SHAPE */
 
-.cta-enterprise .cta-gradient{
+.cta-shape{
 
 position:absolute;
-top:0;
+
+top:40px;             /* starts slightly below top */
 left:0;
-height:100%;
-width:66%;
+
+width:66%;            /* 2/3 width */
+height:340px;
 
 background:linear-gradient(
 135deg,
-rgba(99,102,241,0.95),
-rgba(59,130,246,0.9)
+#1e3a8a,
+#10b981
 );
 
-border-top-right-radius:160px;
-border-bottom-right-radius:160px;
+border-top-right-radius:180px;
+border-bottom-right-radius:180px;
 
-z-index:1;
+display:flex;
+align-items:center;
+
+padding-left:120px;
+padding-right:80px;
+
+z-index:2;
+
+box-shadow:var(--shadow-soft);
 }
 
 /* CONTENT */
-
-.cta-enterprise .container{
-position:relative;
-z-index:2;
-}
 
 .cta-content{
 max-width:520px;
 }
 
 .cta-content h2{
-font-size:40px;
+font-size:38px;
 line-height:1.2;
 margin-bottom:20px;
 }
@@ -676,22 +679,24 @@ color:rgba(255,255,255,0.9);
 @media(max-width:992px){
 
 .cta-enterprise{
-padding:80px 0;
+height:auto;
+padding:60px 0;
 }
 
-.cta-enterprise .cta-gradient{
+.cta-shape{
+position:relative;
+top:0;
 width:100%;
-border-radius:0;
-}
-
-.cta-content{
+height:auto;
+border-radius:20px;
+padding:40px;
+margin:0 20px;
 text-align:center;
-margin:auto;
 }
 
 }
 /* ===============================
-   14. CONTACT STRIP
+   15. CONTACT STRIP
 ================================= */
 .contact-strip {
   padding:60px 0;
@@ -802,7 +807,7 @@ margin:auto;
 }
 
 /* ===============================
-   15. FOOTER
+   16. FOOTER
 ================================= */
 footer {
   padding: 100px 0 40px;
@@ -872,7 +877,7 @@ footer {
 }
 
 /* ===============================
-   16. SCROLLBAR
+   17. SCROLLBAR
 ================================= */
 ::-webkit-scrollbar { width:8px; }
 ::-webkit-scrollbar-track { background: var(--bg-primary); }
@@ -882,7 +887,7 @@ footer {
 }
 
 /* ===============================
-   17. RESPONSIVE
+   18. RESPONSIVE
 ================================= */
 @media(max-width:992px){
 
@@ -956,8 +961,7 @@ footer {
 }
 
 /* =========================================================
-   18. SERVICES PAGE – LEFT ICON LAYOUT
-   Safe – Does NOT affect homepage
+   19. SERVICES PAGE – LEFT ICON LAYOUT
 ========================================================= */
 
 .services-vertical {
@@ -1053,7 +1057,7 @@ footer {
   color: var(--text-secondary);
 }
 /* =========================================================
-   19. SERVICES HERO IMAGE LAYOUT
+   20. SERVICES HERO IMAGE LAYOUT
 ========================================================= */
 
 .hero-grid {
@@ -1089,7 +1093,7 @@ footer {
 }
 
 /* =========================================================
-   20. Icons for contact strip in footer
+   21. Icons for contact strip in footer
 ========================================================= */
 .footer-contact a {
   text-decoration: none;
@@ -1141,7 +1145,7 @@ footer {
 }
 
 /* ===============================
-21. BLOG PAGE
+22. BLOG PAGE
 ================================= */
 
 .blog-grid{
