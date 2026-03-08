@@ -504,6 +504,55 @@ transform:translateY(0);
 transform:translateY(-10px);
 }
 }
+.revenue-flow{
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:14px;
+}
+/* individual steps */
+.flow-step{
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(10px);
+padding:14px 22px;
+border-radius:12px;
+font-size:14px;
+border:1px solid rgba(255,255,255,0.2);
+box-shadow:0 15px 40px rgba(0,0,0,0.3);
+animation:stepFloat 5s ease-in-out infinite;
+}
+/* arrows */
+.flow-arrow{
+font-size:20px;
+opacity:0.7;
+}
+/* final revenue step */
+.flow-step.revenue{
+background:var(--gradient-primary);
+color:#fff;
+font-weight:600;
+}
+/* floating animation */
+@keyframes stepFloat{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-6px)}
+}
+.flow-step:nth-child(1){ margin-left:-30px }
+.flow-step:nth-child(3){ margin-left:30px }
+.flow-step:nth-child(5){ margin-left:-30px }
+.flow-step:nth-child(7){ margin-left:30px }
+.flow-step:nth-child(9){ margin-left:0 }
+.revenue-flow::before{
+content:"";
+position:absolute;
+width:420px;
+height:420px;
+background:radial-gradient(circle,
+rgba(139,92,246,0.3),
+transparent 70%);
+filter:blur(80px);
+z-index:-1;
+}
 /* ===============================
    10. SERVICES
 ================================= */
