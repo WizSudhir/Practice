@@ -530,7 +530,6 @@ z-index:0;
   transform:translateY(-10px) scale(1.02);
   box-shadow: var(--shadow-hover);
 }
-
 .icon svg {
   width:50px;
   height:50px;
@@ -557,11 +556,6 @@ flex-direction:column;
 gap:12px;
 align-items:center;
 }
-.service-desc{
-font-size:14px;
-color:var(--text-secondary);
-max-width:260px;
-}
 /* READ MORE BUTTON */
 .service-btn{
 margin-top:10px;
@@ -577,6 +571,24 @@ transition:.3s;
 .service-btn:hover{
 transform:translateY(-3px);
 background:var(--accent);
+}
+/* EXPANDABLE SERVICE DESCRIPTION */
+.service-expand{
+max-height:0;
+overflow:hidden;
+transition:0.4s ease;
+opacity:0;
+}
+/* When active */
+.service-card.active .service-expand{
+max-height:200px;
+opacity:1;
+margin-top:10px;
+}
+/* Button style */
+.toggle-btn{
+cursor:pointer;
+border:none;
 }
 /* ===============================
    11. HIPAA SECTION
