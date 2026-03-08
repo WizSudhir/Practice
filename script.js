@@ -248,7 +248,12 @@ const blogGrid = document.getElementById("blogGrid");
 if (blogGrid) {
 
 fetch("posts/posts.json")
-.then(response => response.json())
+.then(response => {
+if(!response.ok){
+throw new Error("JSON not found");
+}
+return response.json();
+})
 .then(posts => {
 
 blogGrid.innerHTML = "";
