@@ -240,7 +240,28 @@ card.style.display="none";
 
 });
 // ===============================
-// 10. LOAD BLOG POSTS AUTOMATICALLY
+// 10. SERVICE CARD EXPAND
+// ===============================
+document.querySelectorAll(".toggle-btn").forEach(button => {
+
+button.addEventListener("click", function(){
+
+const card = this.closest(".service-card");
+
+card.classList.toggle("active");
+
+if(card.classList.contains("active")){
+this.innerText = "Read Less ↑";
+}
+else{
+this.innerText = "Read More →";
+}
+
+});
+
+});
+// ===============================
+// 11. LOAD BLOG POSTS AUTOMATICALLY
 // ===============================
 
 const blogGrid = document.getElementById("blogGrid");
