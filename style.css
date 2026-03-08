@@ -296,7 +296,7 @@ box-shadow:0 20px 50px rgba(99,102,241,0.5);
 ================================= */
 .hero {
   position:relative;
-  height:100vh;
+  min-height:100vh;
   display:flex;
   align-items:center;
   overflow:hidden;
@@ -304,6 +304,7 @@ box-shadow:0 20px 50px rgba(99,102,241,0.5);
   background-size:400% 400%;
   animation:gradient 12s ease infinite;
   padding-top: 95px;
+  padding-bottom:40px;
 }
 @keyframes gradient {
   0%{background-position:0% 50%}
@@ -320,10 +321,10 @@ box-shadow:0 20px 50px rgba(99,102,241,0.5);
   gap:60px;
 }
 .hero-left{
-flex:1;
+flex:0.9;
 }
 .hero-right{
-flex:1;
+flex:1.1;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -444,7 +445,7 @@ position:relative;
 display:flex;
 justify-content:center;
 align-items:center;
-padding-top:20px;
+padding-top:40px;
 }
 /* Dashboard card */
 .hero-dashboard{
@@ -514,7 +515,7 @@ justify-content:center;
 gap:14px;
 position:relative;
 width:100%;
-max-width:380px;
+max-width:420px;
 margin:auto;
 }
 /* individual steps */
@@ -526,7 +527,7 @@ border-radius:12px;
 font-size:14px;
 border:1px solid rgba(255,255,255,0.2);
 box-shadow:0 15px 40px rgba(0,0,0,0.3);
-width:260px;          /* makes all cards same width */
+width:300px;          /* makes all cards same width */
 min-height:60px;      /* keeps height consistent */
 display:flex;
 align-items:center;
@@ -538,13 +539,13 @@ animation:stepFloat 5s ease-in-out infinite;
 .flow-arrow{
 font-size:20px;
 opacity:.7;
-line-height:1;
+margin:4px 0;
 }
 .flow-step.left{
-transform:translateX(-30px);
+transform:translateX(-18px);
 }
 .flow-step.right{
-transform:translateX(30px);
+transform:translateX(18px);
 }
 /* final revenue step */
 .flow-step.revenue{
