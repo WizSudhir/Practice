@@ -607,8 +607,7 @@ header.scrolled {
   gap: 30px;
 }
 /* =========================================================
-   13. ENTERPRISE CTA (IMAGE BACKGROUND VERSION)
-   Safe with existing architecture
+   13. ENTERPRISE CTA – IMAGE BACKGROUND + 2/3 GRADIENT PANEL
 ========================================================= */
 
 .cta-enterprise{
@@ -623,58 +622,52 @@ overflow:hidden;
 position:absolute;
 inset:0;
 
-background:
-linear-gradient(
-to right,
-rgba(15,23,42,0.95) 0%,
-rgba(15,23,42,0.85) 40%,
-rgba(15,23,42,0.3) 70%,
-rgba(15,23,42,0.1) 100%
-),
-url("images/cta-healthcare.jpg");
+background:url("images/cta-healthcare.jpg") center/cover no-repeat;
 
-background-size:cover;
-background-position:center;
 z-index:0;
 }
 
-/* CONTENT ABOVE IMAGE */
+/* GRADIENT PANEL (2/3 WIDTH) */
+
+.cta-enterprise .cta-gradient{
+
+position:absolute;
+top:0;
+left:0;
+height:100%;
+width:66%;
+
+background:linear-gradient(
+135deg,
+rgba(99,102,241,0.95),
+rgba(59,130,246,0.9)
+);
+
+border-top-right-radius:160px;
+border-bottom-right-radius:160px;
+
+z-index:1;
+}
+
+/* CONTENT */
 
 .cta-enterprise .container{
 position:relative;
 z-index:2;
 }
 
-/* GRADIENT SHAPE PANEL */
-
-.cta-panel{
-
-max-width:620px;
-
-background: linear-gradient(
-135deg,
-rgba(99,102,241,0.95),
-rgba(59,130,246,0.9)
-);
-
-padding:60px;
-
-border-radius:0 120px 120px 0;
-
-box-shadow: var(--shadow-soft);
+.cta-content{
+max-width:520px;
 }
 
-/* TEXT */
-
-.cta-panel h2{
+.cta-content h2{
 font-size:40px;
-margin-bottom:20px;
 line-height:1.2;
+margin-bottom:20px;
 }
 
-.cta-panel p{
+.cta-content p{
 margin-bottom:30px;
-max-width:500px;
 color:rgba(255,255,255,0.9);
 }
 
@@ -682,13 +675,18 @@ color:rgba(255,255,255,0.9);
 
 @media(max-width:992px){
 
-.cta-panel{
-border-radius:20px;
-padding:40px;
-}
-
 .cta-enterprise{
 padding:80px 0;
+}
+
+.cta-enterprise .cta-gradient{
+width:100%;
+border-radius:0;
+}
+
+.cta-content{
+text-align:center;
+margin:auto;
 }
 
 }
