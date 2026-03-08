@@ -1062,139 +1062,7 @@ footer {
 }
 
 /* =========================================================
-   19. SERVICES PAGE – LEFT ICON LAYOUT
-========================================================= */
-
-.services-vertical {
-  max-width: 1000px;
-  margin: 80px auto 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.service-vertical-card {
-  display: flex;
-  align-items: center; /* Vertical centering */
-  gap: 40px;
-  background: var(--bg-elevated);
-  padding: 45px;
-  border-radius: var(--radius-lg);
-  backdrop-filter: blur(20px);
-  box-shadow: var(--shadow-soft);
-  position: relative;
-  transition: 0.4s ease;
-}
-
-.service-vertical-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: var(--radius-lg);
-  padding: 2px;
-  background: var(--border-glow);
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0;
-  transition: 0.4s;
-}
-
-.service-vertical-card:hover::before {
-  opacity: 1;
-}
-
-.service-vertical-card:hover {
-  transform: translateY(-10px);
-  box-shadow: var(--shadow-hover);
-}
-
-.service-vertical-icon {
-  min-width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  background: var(--bg-secondary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  transition: 0.4s ease;
-   box-shadow:
-    0 0 25px rgba(139, 92, 246, 0.6),
-    0 0 60px rgba(6, 182, 212, 0.4);
-}
-.service-vertical-icon::before {
-  content: "";
-  position: absolute;
-  inset: -3px;
-  border-radius: 50%;
-  background: var(--border-glow);
-  z-index: -1;
-  filter: blur(8px);
-  opacity: 0.8;
-}
-.service-vertical-icon svg {
-  width: 90px;
-  height: 90px;
-  stroke: var(--accent-2);
-  stroke-width: 2;
-  fill: none;
-  transition: 0.4s ease;
-}
-
-.service-vertical-card:hover .service-vertical-icon svg {
-  stroke: var(--accent);
-  transform: scale(1.1);
-}
-
-.service-vertical-content h3 {
-  margin-bottom: 15px;
-}
-
-.service-vertical-content p {
-  margin: 0;
-  color: var(--text-secondary);
-}
-/* =========================================================
-   20. SERVICES HERO IMAGE LAYOUT
-========================================================= */
-
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: 60px;
-}
-
-.hero-image img {
-  width: 100%;
-  max-width: 520px;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-soft);
-  transition: 0.4s ease;
-}
-
-.hero-image img:hover {
-  transform: translateY(-10px);
-  box-shadow: var(--shadow-hover);
-}
-
-/* Mobile */
-@media (max-width: 992px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-
-  .hero-image {
-    margin-top: 40px;
-  }
-}
-
-/* =========================================================
-   21. Icons for contact strip in footer
+   19. Icons for contact strip in footer
 ========================================================= */
 .footer-contact a {
   text-decoration: none;
@@ -1246,7 +1114,7 @@ footer {
 }
 
 /* ===============================
-22. BLOG PAGE
+20. BLOG PAGE
 ================================= */
 
 .blog-grid{
@@ -1324,4 +1192,139 @@ background:var(--gradient-primary);
 color:#fff;
 }
 
+/* ================================
+   SERVICES PAGE ENHANCEMENTS
+================================ */
+.services-layout{
+display:grid;
+grid-template-columns:260px 1fr;
+gap:60px;
+margin-top:80px;
+}
+
+.services-nav{
+position:sticky;
+top:120px;
+background:var(--bg-elevated);
+padding:30px;
+border-radius:var(--radius-lg);
+box-shadow:var(--shadow-soft);
+height:fit-content;
+}
+
+.services-nav h4{
+margin-bottom:20px;
+}
+
+.services-nav a{
+display:block;
+margin-bottom:12px;
+color:var(--text-secondary);
+text-decoration:none;
+}
+
+.services-nav a:hover{
+color:var(--accent-2);
+}
+
+.rcm-phase{
+margin-bottom:100px;
+}
+
+.phase-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:30px;
+margin-top:40px;
+}
+
+.phase-card{
+background:var(--bg-elevated);
+padding:30px;
+border-radius:var(--radius-lg);
+box-shadow:var(--shadow-soft);
+transition:.35s;
+}
+
+.phase-card:hover{
+transform:translateY(-8px);
+box-shadow:var(--shadow-hover);
+}
+
+.phase-icon{
+margin-bottom:15px;
+}
+
+.phase-icon svg{
+width:40px;
+height:40px;
+stroke:var(--accent-2);
+transition:.3s;
+}
+
+.phase-card:hover svg{
+transform:scale(1.15);
+stroke:var(--accent);
+}
+
+/* specialties */
+
+.specialties-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:25px;
+margin-top:50px;
+}
+
+.specialty{
+background:var(--bg-elevated);
+padding:20px;
+border-radius:14px;
+text-align:center;
+}
+
+/* trust section */
+
+.trust-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:30px;
+margin-top:50px;
+}
+
+/* faq */
+
+.faq{
+max-width:900px;
+margin:auto;
+margin-top:60px;
+}
+
+.faq-item{
+background:var(--bg-elevated);
+padding:25px;
+border-radius:14px;
+margin-bottom:15px;
+}
+
+/* audit panel */
+
+.audit-panel{
+background:var(--bg-secondary);
+padding:60px;
+border-radius:var(--radius-lg);
+margin-top:60px;
+}
+
+@media(max-width:992px){
+
+.services-layout{
+grid-template-columns:1fr;
+}
+
+.services-nav{
+display:none;
+}
+
+}
 
