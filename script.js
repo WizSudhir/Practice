@@ -8,7 +8,6 @@
 // 1. HEADER SCROLL EFFECT
 // ===============================
 const navbar = document.querySelector(".navbar");
-
 window.addEventListener("scroll", () => {
   if (window.scrollY > 60) {
     navbar?.classList.add("scrolled");
@@ -17,12 +16,10 @@ window.addEventListener("scroll", () => {
   }
 });
 
-
 // ===============================
 // 2. REVEAL ANIMATION
 // ===============================
 const reveals = document.querySelectorAll(".reveal");
-
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -30,36 +27,29 @@ const revealObserver = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 0.15 });
-
 reveals.forEach(el => revealObserver.observe(el));
-
 
 // ===============================
 // 3. COUNTER ANIMATION
 // ===============================
 const counters = document.querySelectorAll(".counter");
-
 function runCounters() {
   counters.forEach(counter => {
     const target = +counter.getAttribute("data-target");
     const duration = 1500;
     const startTime = performance.now();
-
     function updateCounter(currentTime) {
       const progress = Math.min((currentTime - startTime) / duration, 1);
       counter.innerText = Math.floor(progress * target);
-
       if (progress < 1) {
         requestAnimationFrame(updateCounter);
       } else {
         counter.innerText = target;
       }
     }
-
     requestAnimationFrame(updateCounter);
   });
 }
-
 if (counters.length > 0) {
   const counterObserver = new IntersectionObserver((entries) => {
     if (entries[0].isIntersecting) {
@@ -67,7 +57,6 @@ if (counters.length > 0) {
       counterObserver.disconnect();
     }
   }, { threshold: 0.5 });
-
   counterObserver.observe(document.querySelector(".stats"));
 }
 
@@ -78,17 +67,14 @@ const canvas = document.getElementById("particles");
 if (canvas) {
   const ctx = canvas.getContext("2d");
   let particlesArray = [];
-  
   // High-performance check: If screen is small, we show fewer, slower dots.
   const isMobile = window.innerWidth < 768;
   const particleCount = isMobile ? 15 : 60; 
-
   function setCanvasSize() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
   }
   setCanvasSize();
-
   class Particle {
     constructor() {
       this.init();
@@ -115,14 +101,12 @@ if (canvas) {
       ctx.fill();
     }
   }
-
   function initParticles() {
     particlesArray = [];
     for (let i = 0; i < particleCount; i++) {
       particlesArray.push(new Particle());
     }
   }
-
   function animateParticles() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     for (let i = 0; i < particlesArray.length; i++) {
@@ -131,7 +115,6 @@ if (canvas) {
     }
     requestAnimationFrame(animateParticles);
   }
-
   initParticles();
   animateParticles();
 
@@ -140,7 +123,6 @@ if (canvas) {
     initParticles();
   });
 }
-
 // ===============================
 // 5. PARALLAX (Disabled for Mobile Speed)
 // ===============================
@@ -157,14 +139,12 @@ window.addEventListener("scroll", () => {
 // 6. CONTACT STRIP REVEAL
 // ===============================
 const contactStrip = document.querySelector(".contact-strip");
-
 if (contactStrip) {
   const contactObserver = new IntersectionObserver((entries) => {
     if (entries[0].isIntersecting) {
       contactStrip.classList.add("visible");
     }
   }, { threshold: 0.3 });
-
   contactObserver.observe(contactStrip);
 }
 // ===============================
@@ -173,17 +153,14 @@ if (contactStrip) {
 // MOBILE MENU TOGGLE LOGIC
 const navToggle = document.querySelector('.nav-toggle');
 const navMenu = document.querySelector('.nav-menu');
-
 if (navToggle && navMenu) {
   navToggle.addEventListener('click', () => {
     navMenu.classList.toggle('active');
-    
     // Optional: Animate the hamburger spans to an 'X'
     const spans = navToggle.querySelectorAll('span');
     spans.forEach(span => span.classList.toggle('open'));
   });
 }
-
 // Close menu when a link is clicked
 document.querySelectorAll('.nav-menu a').forEach(link => {
   link.addEventListener('click', () => {
@@ -194,36 +171,23 @@ document.querySelectorAll('.nav-menu a').forEach(link => {
 // ===============================
 // 8. BLOG SEARCH
 // ===============================
-
 function searchBlogs(){
-
 let input = document.getElementById("blogSearch").value.toLowerCase();
 let cards = document.querySelectorAll(".blog-card");
-
 cards.forEach(card => {
-
 let title = card.querySelector("h3").innerText.toLowerCase();
-
 card.style.display = title.includes(input) ? "block" : "none";
-
 });
-
 }
-
 
 // ===============================
 // 9. BLOG FILTER
 // ===============================
-
 document.addEventListener("click", function(e){
-
 if(e.target.classList.contains("filter-btn")){
-
 let filter = e.target.getAttribute("data-filter");
 let cards = document.querySelectorAll(".blog-card");
-
 cards.forEach(card=>{
-
 if(filter==="all"){
 card.style.display="block";
 }
@@ -233,41 +197,30 @@ card.style.display="block";
 else{
 card.style.display="none";
 }
-
 });
-
 }
-
 });
 // ===============================
 // 10. SERVICE CARD EXPAND
 // ===============================
 document.querySelectorAll(".toggle-btn").forEach(button => {
-
 button.addEventListener("click", function(){
-
 const card = this.closest(".service-card");
-
-card.classList.toggle("active");
-
-if(card.classList.contains("active")){
+card.classList.toggle("expanded");
+if(card.classList.contains("expanded")){
 this.innerText = "Read Less ↑";
 }
 else{
 this.innerText = "Read More →";
 }
-
+});
 });
 
-});
 // ===============================
 // 11. LOAD BLOG POSTS AUTOMATICALLY
 // ===============================
-
 const blogGrid = document.getElementById("blogGrid");
-
 if (blogGrid) {
-
 fetch("posts/posts.json")
 .then(response => {
 if(!response.ok){
@@ -276,41 +229,27 @@ throw new Error("JSON not found");
 return response.json();
 })
 .then(posts => {
-
 blogGrid.innerHTML = "";
-
 posts.forEach(post => {
-
 const card = `
 <div class="blog-card reveal" data-category="${post.category}">
-
 <img src="${post.image}" alt="${post.title}">
-
 <div class="blog-content">
-
 <div class="blog-meta">
 <span>${post.category}</span>
 <span>${post.date} • ${post.readTime}</span>
 </div>
-
 <h3>${post.title}</h3>
-
 <p>${post.description}</p>
-
 <a href="${post.url}" class="blog-read">
 Read Article →
 </a>
-
 </div>
 </div>
 `;
-
 blogGrid.innerHTML += card;
-
 });
-
 // re-enable reveal animation
 document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
-
 });
 }
