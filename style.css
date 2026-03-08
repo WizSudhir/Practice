@@ -495,6 +495,7 @@ z-index:0;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:30px;
   margin-top:60px;
+  align-items:stretch;
 }
 .service-card {
   background: var(--bg-elevated);
@@ -509,6 +510,7 @@ z-index:0;
   align-items: center;
   text-align: center;
   gap: 20px;
+  height:100%;
 }
 .service-card::before {
   content:"";
@@ -524,6 +526,7 @@ z-index:0;
   mask-composite: exclude;
   opacity:0;
   transition:0.4s;
+  pointer-events:none;
 }
 .service-card:hover::before { opacity:1; }
 .service-card:hover {
@@ -538,48 +541,42 @@ z-index:0;
   fill:none;
   animation: rotate 6s linear infinite;
 }
-
 @keyframes rotate {
   from{transform:rotate(0deg);}
   to{transform:rotate(360deg);}
 }
 .service-card img{
 width:100%;
-height:240px;
+height:220px;
 object-fit:cover;
 border-radius:16px;
 transition:0.4s ease;
+display:block;
 }
 .service-card:hover img{
 transform:scale(1.05);
 }
 .service-content{
-padding-top:10px;
 display:flex;
 flex-direction:column;
+justify-content:flex-start;
 align-items:center;
 width:100%;
-height:100%;
+flex:1;
 }
 .service-content h3{
 margin-bottom:12px;
 }
-/* push button to bottom */
 .service-btn{
 margin-top:auto;
-cursor:pointer;
-border:none;
-}
-/* READ MORE BUTTON */
-.service-btn{
-margin-top:10px;
 display:inline-block;
 background:#111;
 color:#fff;
 padding:12px 24px;
 border-radius:40px;
-text-decoration:none;
 font-weight:600;
+border:none;
+cursor:pointer;
 transition:.3s;
 }
 .service-btn:hover{
@@ -599,7 +596,7 @@ line-height:1.6;
 }
 /* When active */
 .service-card.expanded .service-expand{
-max-height:500px;
+max-height:300px;
 opacity:1;
 margin-top:12px;
 }
