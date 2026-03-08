@@ -247,7 +247,7 @@ const blogGrid = document.getElementById("blogGrid");
 
 if (blogGrid) {
 
-fetch("posts.json")
+fetch("posts/posts.json")
 .then(response => response.json())
 .then(posts => {
 
