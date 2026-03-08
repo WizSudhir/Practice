@@ -539,6 +539,26 @@ animation-delay:2s;
 0%,100%{transform:translateY(0)}
 50%{transform:translateY(-12px)}
 }
+.hero-ring{
+position:absolute;
+width:420px;
+height:420px;
+border-radius:50%;
+
+background: radial-gradient(circle,
+rgba(139,92,246,0.4),
+transparent 70%);
+
+filter:blur(40px);
+z-index:1;
+
+animation:ringPulse 6s ease-in-out infinite;
+}
+
+@keyframes ringPulse{
+0%,100%{transform:scale(1)}
+50%{transform:scale(1.1)}
+}
 /* ===============================
    10. SERVICES
 ================================= */
