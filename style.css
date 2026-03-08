@@ -580,7 +580,7 @@ transition:0.4s ease;
 opacity:0;
 }
 /* When active */
-.service-card.active .service-expand{
+.service-card.expanded .service-expand{
 max-height:200px;
 opacity:1;
 margin-top:10px;
