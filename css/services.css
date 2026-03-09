@@ -113,8 +113,148 @@ background:var(--gradient-primary);
 -webkit-text-fill-color:transparent;
 }
 
+/* =========================================================
+   4. RCM MATURITY GAUGE
+========================================================= */
+.rcm-score-section{
+text-align:center;
+}
+
+.section-sub{
+max-width:700px;
+margin:auto;
+margin-top:20px;
+color:var(--text-secondary);
+}
+
+.rcm-score-layout{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:80px;
+
+margin-top:60px;
+
+align-items:center;
+
+}
 
 
+/* QUESTIONS */
+
+.rcm-questions{
+
+background:var(--bg-elevated);
+
+padding:40px;
+
+border-radius:var(--radius-lg);
+
+box-shadow:var(--shadow-soft);
+
+text-align:left;
+
+}
+
+.question{
+
+margin-bottom:25px;
+
+}
+
+.question h4{
+
+margin-bottom:10px;
+
+}
+
+.question select{
+
+width:100%;
+
+padding:12px;
+
+border-radius:8px;
+
+border:none;
+
+background:var(--bg-secondary);
+
+color:var(--text-primary);
+
+}
+
+
+/* GAUGE */
+
+.rcm-gauge-box{
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+}
+
+.gauge{
+
+position:relative;
+
+width:240px;
+
+}
+
+.gauge svg{
+
+width:100%;
+
+}
+
+.score-number{
+
+position:absolute;
+
+top:65px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+font-size:36px;
+
+font-weight:700;
+
+}
+
+.score-result{
+
+margin-top:20px;
+
+max-width:300px;
+
+}
+
+.score-result p{
+
+margin-bottom:20px;
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:992px){
+
+.rcm-score-layout{
+
+grid-template-columns:1fr;
+
+}
+
+}
 /* =========================================================
    3. RCM TRANSFORMATION
 ========================================================= */
@@ -149,47 +289,6 @@ border-left:4px solid #ef4444;
 .transform-card.after{
 border-left:4px solid #22c55e;
 }
-
-
-
-/* =========================================================
-   4. RCM MATURITY ASSESSMENT
-========================================================= */
-
-.assessment-box{
-margin-top:60px;
-padding:50px;
-background:var(--bg-elevated);
-border-radius:var(--radius-lg);
-box-shadow:var(--shadow-soft);
-max-width:800px;
-margin-left:auto;
-margin-right:auto;
-}
-
-.assessment-question{
-margin-bottom:40px;
-}
-
-.assessment-question h3{
-margin-bottom:15px;
-}
-
-.assessment-question label{
-display:block;
-margin-bottom:10px;
-cursor:pointer;
-color:var(--text-secondary);
-}
-
-.assessment-result{
-margin-top:40px;
-padding:30px;
-background:var(--bg-secondary);
-border-radius:12px;
-}
-
-
 
 /* =========================================================
    5. SERVICES LAYOUT (STICKY NAV)
