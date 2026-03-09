@@ -7,36 +7,29 @@
    1. DESIGN TOKENS
 ================================= */
 :root {
-
   /* Layout */
   --container-width: 1200px;
   --section-padding: 120px;
   --section-padding-sm: 80px;
   --radius-lg: 20px;
   --radius-pill: 50px;
-
   /* Brand Colors (Logo Theme) */
   --accent: #6366f1;
   --accent-2: #8b5cf6;
   --accent-3: #3b82f6;
-
   --gradient-primary: linear-gradient(135deg, var(--accent), var(--accent-2));
   --gradient-hero: linear-gradient(-45deg,#5a3eb1,#8c3fc6,#3b82f6,#9333ea);
-
   /* Dark Mode (Default) */
   --bg-primary: #0b1120;
   --bg-secondary: #0f172a;
   --bg-tertiary: #111827;
   --bg-elevated: rgba(255,255,255,0.04);
-
   --text-primary: #ffffff;
   --text-secondary: #94a3b8;
-
   /* Effects */
   --shadow-soft: 0 10px 40px rgba(0,0,0,0.25);
   --shadow-hover: 0 20px 60px rgba(0,0,0,0.35);
   --border-glow: linear-gradient(45deg,var(--accent),var(--accent-2),var(--accent-3));
-
   /* Typography */
   --font-main: 'Inter', sans-serif;
 }
@@ -45,15 +38,12 @@
    2. LIGHT MODE
 ================================= */
 body.light-mode {
-
   --bg-primary: #ffffff;
   --bg-secondary: #f8fafc;
   --bg-tertiary: #e2e8f0;
   --bg-elevated: #ffffff;
-
   --text-primary: #111827;
   --text-secondary: #475569;
-
   --shadow-soft: 0 10px 30px rgba(0,0,0,0.08);
   --shadow-hover: 0 20px 60px rgba(0,0,0,0.12);
 }
@@ -68,18 +58,15 @@ body.light-mode {
   padding: 0;
   box-sizing: border-box;
 }
-
 html {
   scroll-behavior: smooth;
 }
-
 body {
   font-family: var(--font-main);
   background: var(--bg-primary);
   color: var(--text-primary);
   transition: background 0.3s ease, color 0.3s ease;
 }
-
 body::before {
   content:"";
   position:fixed;
@@ -100,11 +87,9 @@ body::before {
   position: relative;
   z-index: 2;
 }
-
 .section {
   padding: var(--section-padding) 0;
 }
-
 @media(max-width:992px){
   .section {
     padding: var(--section-padding-sm) 0;
@@ -117,11 +102,9 @@ body::before {
 h1,h2,h3 {
   letter-spacing: -1px;
 }
-
 h1 { font-size: 60px; font-weight: 800; }
 h2 { font-size: 42px; font-weight: 700; }
 h3 { font-size: 22px; font-weight: 600; }
-
 p {
   color: var(--text-secondary);
   line-height: 1.7;
@@ -141,72 +124,42 @@ p {
   font-weight: 600;
   text-decoration: none;
   z-index: 2000;
-
   /* Glow */
   box-shadow:
     0 0 10px rgba(139,92,246,0.6),
     0 0 25px rgba(99,102,241,0.5),
     0 0 50px rgba(59,130,246,0.4);
-
   /* Animation */
   animation: floatingCTA 4s ease-in-out infinite;
 }
 @keyframes floatingCTA {
-
-  0% {
-    transform: translateY(0px) rotate(0deg);
-  }
-
-  25% {
-    transform: translateY(-8px) rotate(-1deg);
-  }
-
-  50% {
-    transform: translateY(-14px) rotate(1deg);
-  }
-
-  75% {
-    transform: translateY(-8px) rotate(-1deg);
-  }
-
-  100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-
+  0% { transform: translateY(0px) rotate(0deg);}
+  25% { transform: translateY(-8px) rotate(-1deg);}
+  50% { transform: translateY(-14px) rotate(1deg);}
+  75% { transform: translateY(-8px) rotate(-1deg);}
+  100% { transform: translateY(0px) rotate(0deg);}
 }
 .floating-cta:hover {
-
   transform: translateY(-6px) scale(1.05);
-
   box-shadow:
     0 0 20px rgba(139,92,246,0.9),
     0 0 60px rgba(59,130,246,0.8);
-
 }
 .floating-cta::before {
-
   content:"";
   position:absolute;
   inset:-6px;
   border-radius:inherit;
-
   background: var(--gradient-primary);
-
   filter: blur(15px);
   opacity:0.6;
-
   z-index:-1;
-
   animation: ctaGlow 3s ease-in-out infinite;
 }
 @keyframes ctaGlow {
-
   0% { opacity:0.4; transform:scale(1); }
-
   50% { opacity:0.8; transform:scale(1.08); }
-
   100% { opacity:0.4; transform:scale(1); }
-
 }
 .floating-cta{
   will-change: transform;
@@ -225,28 +178,23 @@ p {
   background: rgba(15, 23, 42, 0.7);
   transition: 0.3s ease;
 }
-
 .navbar-inner {
   display:flex;
   justify-content:space-between;
   align-items:center;
   padding:20px 0;
 }
-
 .logo img { height:55px; }
-
 .nav-menu ul {
   display:flex;
   list-style:none;
   gap:30px;
 }
-
 .nav-menu a {
   text-decoration:none;
   color: var(--text-primary);
   font-weight:500;
 }
-
 header.scrolled {
   box-shadow: var(--shadow-soft);
 }
@@ -267,7 +215,6 @@ header.scrolled {
     cursor: pointer;
     z-index: 1001;
   }
-
   .nav-toggle span {
     width: 100%;
     height: 3px;
@@ -275,7 +222,6 @@ header.scrolled {
     border-radius: 10px;
     transition: 0.3s;
   }
-
   .nav-menu {
     position: fixed;
     top: 0;
@@ -290,22 +236,18 @@ header.scrolled {
     transition: 0.4s ease-in-out;
     box-shadow: -10px 0 30px rgba(0,0,0,0.5);
   }
-
   .nav-menu.active {
     right: 0; /* Slides the menu into view */
   }
-
   .nav-menu ul {
     flex-direction: column;
     gap: 40px;
     text-align: center;
   }
-
   .nav-menu ul li a {
     font-size: 20px;
   }
 }
-
 /* Hide toggle on desktop */
 @media (min-width: 993px) {
   .nav-toggle {
@@ -325,12 +267,10 @@ font-weight:600;
 box-shadow:0 10px 30px rgba(99,102,241,0.4);
 transition:.3s;
 }
-
 .btn-primary:hover{
 transform:translateY(-3px);
 box-shadow:0 20px 50px rgba(99,102,241,0.5);
 }
-
 .btn-outline {
   border:2px solid #fff;
   padding:14px 28px;
@@ -353,13 +293,11 @@ box-shadow:0 20px 50px rgba(99,102,241,0.5);
   animation:gradient 12s ease infinite;
   padding-top: 95px;
 }
-
 @keyframes gradient {
   0%{background-position:0% 50%}
   50%{background-position:100% 50%}
   100%{background-position:0% 50%}
 }
-
 .hero-container {
   display:flex;
   justify-content:space-between;
@@ -368,7 +306,6 @@ box-shadow:0 20px 50px rgba(99,102,241,0.5);
   position: relative;
   z-index: 2;
 }
-
 .hero-left{
 max-width:600px;
 padding:40px;
@@ -379,19 +316,15 @@ border:1px solid rgba(255,255,255,0.08);
 }
 .hero h1 { line-height:1.1; }
 .hero p { margin:20px 0; }
-
 .hero-right img {
   width:500px;
   animation: float 6s ease-in-out infinite;
 }
-
 @keyframes float {
   0%,100% { transform:translateY(0); }
   50% { transform:translateY(-15px); }
 }
-
 /* DROPLETS in HERO */
-
 .hero-blob {
   position: absolute;
   width: 400px;
@@ -400,17 +333,14 @@ border:1px solid rgba(255,255,255,0.08);
   filter: blur(120px);
   z-index: 0;
 }
-
 .blob-1 {
   top: -100px;
   left: -100px;
 }
-
 .blob-2 {
   bottom: -100px;
   right: -100px;
 }
-
 #particles {
   position: absolute;
   inset: 0;
@@ -426,21 +356,18 @@ border:1px solid rgba(255,255,255,0.08);
   gap: 40px;              /* Spacing between the three stats */
   margin-top: 40px;       /* Space between the buttons and the numbers */
 }
-
 .stat h2 {
   font-size: 48px;        /* Makes the 35%, 99%, etc. big and bold */
   color: #ffffff;         /* Ensures numbers are bright white */
   margin-bottom: 5px;
   font-weight: 800;
 }
-
 .stat p {
   font-size: 14px;
   color: rgba(255, 255, 255, 0.8); /* Slightly faded white for the labels */
   text-transform: uppercase;
   letter-spacing: 1px;
 }
-
 /* Ensure the container sits on top of the particles */
 .hero-container {
   position: relative;
@@ -463,12 +390,10 @@ background-size:300%;
 -webkit-text-fill-color:transparent;
 animation:gradientText 6s linear infinite;
 }
-
 @keyframes gradientText{
 0%{background-position:0%}
 100%{background-position:300%}
 }
-
 .hero-light{
 position:absolute;
 top:-200px;
@@ -598,7 +523,6 @@ border:none;
   align-items: center;
   justify-content: center;
 }
-
 .badge-ring {
   position: absolute;
   width: 220px;
@@ -607,7 +531,6 @@ border:none;
   border: 4px solid var(--accent-2);
   animation: glowRing 3s infinite ease-in-out;
 }
-
 .badge-core {
   width: 160px;
   height: 160px;
@@ -620,20 +543,17 @@ border:none;
   color: #fff;
   box-shadow: 0 0 40px rgba(139,92,246,0.6);
 }
-
 @keyframes glowRing {
   0% { box-shadow: 0 0 10px rgba(139,92,246,0.4); }
   50% { box-shadow: 0 0 40px rgba(139,92,246,0.9); }
   100% { box-shadow: 0 0 10px rgba(139,92,246,0.4); }
 }
-
 .hipaa-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 80px;
 }
-
 .badge-core img {
   width: 110px;
   filter: drop-shadow(0 0 25px rgba(139,92,246,0.8));
@@ -647,20 +567,17 @@ border:none;
   background: var(--bg-secondary);
   text-align: center;
 }
-
 .slider {
   overflow: hidden;
   position: relative;
   width: 100%;
   margin-top: 40px;
 }
-
 .slide-track {
   display: flex;
   gap: 60px;
   animation: scroll 35s linear infinite;
 }
-
 .slide-track img {
   height: 60px;
   width: auto;
@@ -668,7 +585,6 @@ border:none;
   opacity: 0.85;
   transition: 0.3s ease;
 }
-
 @keyframes scroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -690,93 +606,64 @@ border:none;
 /* =========================================================
    14 .ENTERPRISE CTA PANEL (USES GLOBAL DESIGN TOKENS)
 ========================================================= */
-
 .cta-enterprise{
 position:relative;
 height:420px;
 overflow:hidden;
 }
-
 /* BACKGROUND IMAGE */
-
 .cta-enterprise .cta-bg{
 position:absolute;
 inset:0;
-
 background:url("images/cta-healthcare.jpg") center/cover no-repeat;
-
 z-index:0;
 }
-
 /* GRADIENT SHAPE */
-
 .cta-enterprise .cta-shape{
-
 position:absolute;
-
 top:50px;          /* slightly below top */
 left:0;
-
 width:66%;         /* 2/3 width */
 height:330px;
-
 background: var(--gradient-primary);
-
 border-top-right-radius:160px;
 border-bottom-right-radius:160px;
-
 display:flex;
 align-items:center;
-
 padding-left:120px;
 padding-right:80px;
-
 z-index:2;
-
 box-shadow: var(--shadow-soft);
 }
-
 /* CONTENT */
-
 .cta-content{
 max-width:520px;
 }
-
 .cta-content h2{
 font-size:40px;
 line-height:1.2;
 margin-bottom:20px;
 }
-
 .cta-content p{
 margin-bottom:30px;
 color:rgba(255,255,255,0.9);
 }
-
 /* MOBILE */
-
 @media(max-width:992px){
-
 .cta-enterprise{
 height:auto;
 padding:80px 0;
 }
-
 .cta-enterprise .cta-shape{
 position:relative;
 top:0;
 width:100%;
 height:auto;
-
 border-radius:20px;
-
 padding:40px;
-
 margin:0 20px;
-
 text-align:center;
 }
-
 }
 /* ===============================
    15. CONTACT STRIP
@@ -787,7 +674,6 @@ text-align:center;
   position: relative;
   overflow: hidden;
 }
-
 .contact-item {
   color: var(--text-primary);
   display: flex;
@@ -795,7 +681,6 @@ text-align:center;
   gap: 20px;
   text-decoration: none;
 }
-
 .contact-circle svg {
   stroke: var(--accent-2);
    stroke-width: 2;
@@ -813,12 +698,10 @@ text-align:center;
     flex-direction: column;
     text-align: center;
   }
-
   .divider-line {
     display: none;
   }
 }
-
 .contact-item h4 {
   font-size: 18px;
   font-weight: 600;
@@ -826,12 +709,10 @@ text-align:center;
    overflow: hidden;
    text-overflow: ellipsis;
 }
-
 .contact-item span {
   font-size: 14px;
   color: var(--text-secondary);
 }
-
 .contact-circle {
   width: 70px;
   height: 70px;
@@ -842,13 +723,11 @@ text-align:center;
   justify-content: center;
   position: relative;
 }
-
 .contact-circle svg {
   width: 28px;
   height: 28px;
   stroke-width: 2;
 }
-
 .pulse-ring {
   position: absolute;
   width: 100%;
@@ -857,18 +736,15 @@ text-align:center;
   border: 2px solid var(--accent-2);
   animation: pulse 2s infinite;
 }
-
 .divider-line {
   width: 1px;
   height: 80px;
   background: rgba(255,255,255,0.1);
 }
-
 @keyframes pulse {
   0% { transform: scale(1); opacity: 0.7; }
   100% { transform: scale(1.5); opacity: 0; }
 }
-
 .wave-lines {
   position: absolute;
   inset: 0;
@@ -883,7 +759,6 @@ text-align:center;
   pointer-events: none;
   z-index: 0;
 }
-
 @keyframes waveMove {
   from { background-position: 0 0; }
   to { background-position: 1000px 0; }
@@ -903,17 +778,14 @@ footer {
   align-items: center;
   gap: 30px;
 }
-
 .footer-contact {
   display: flex;
   gap: 20px;
 }
-
 .footer-contact a {
   color: var(--text-secondary);
   text-decoration: none;
 }
-
 .footer-hipaa img {
   height: 50px;
   filter: drop-shadow(0 0 10px rgba(139,92,246,0.8));
@@ -922,35 +794,29 @@ footer {
   background: var(--bg-tertiary);
   padding: 100px 0 40px;
 }
-
 .footer-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
   gap: 60px;
 }
-
 .footer-brand img {
   height: 55px;
   margin-bottom: 20px;
 }
-
 .footer-links,
 .footer-contact {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
-
 .footer-links a {
   text-decoration: none;
   color: var(--text-secondary);
   transition: 0.3s;
 }
-
 .footer-links a:hover {
   color: var(--accent-2);
 }
-
 .footer-bottom {
   text-align: center;
   margin-top: 60px;
@@ -958,7 +824,6 @@ footer {
   border-top: 1px solid rgba(255,255,255,0.08);
   color: var(--text-secondary);
 }
-
 /* ===============================
    17. SCROLLBAR
 ================================= */
@@ -968,12 +833,10 @@ footer {
   background: var(--gradient-primary);
   border-radius:10px;
 }
-
 /* ===============================
    18. RESPONSIVE
 ================================= */
 @media(max-width:992px){
-
    .hero {
     height: auto !important; /* Forces the box to grow with the content */
     min-height: 100vh;
@@ -987,7 +850,6 @@ footer {
     text-align: center;
     padding: 0 20px;
   }
-
   .hero-right img {
     width: 80% !important; 
     max-width: 280px; 
@@ -1016,14 +878,11 @@ footer {
      margin-top: 30px;
      gap: 15px; /* Tightens gap for small screens */
   }
-
   .hipaa-container {
     flex-direction:column;
     text-align:center;
   }
 }
-
-
 .delay-1 { transition-delay: 0.2s; }
 .delay-2 { transition-delay: 0.4s; }
 
@@ -1035,7 +894,6 @@ footer {
     align-items: center;    /* Centers them horizontally */
     gap: 15px;              /* Adds space between the two buttons */
   }
-
   .hero-buttons .btn-primary, 
   .hero-buttons .btn-outline {
     width: 100%;            /* Optional: makes buttons uniform width on mobile */
@@ -1051,7 +909,6 @@ footer {
   color: var(--text-secondary);
   transition: 0.3s ease;
 }
-
 .footer-contact a:hover {
   color: var(--accent-2);
 }
@@ -1061,12 +918,10 @@ footer {
   align-items: center;
   gap: 8px; /* space between image and text */
 }
-
 .footer-hipaa img {
   height: 50px;
   filter: drop-shadow(0 0 10px rgba(139,92,246,0.8));
 }
-
 .footer-hipaa .hipaa-text {
   font-size: 14px;
   font-weight: 600;
@@ -1079,7 +934,6 @@ footer {
   flex-direction: column;
   gap: 12px;
 }
-
 .footer-contact-item {
   display: flex;           /* horizontal row */
   align-items: center;     /* vertically center icon & text */
@@ -1087,7 +941,6 @@ footer {
   color: var(--text-secondary);
   text-decoration: none;
 }
-
 .footer-contact-item svg {
   width: 20px;
   height: 20px;
@@ -1098,14 +951,12 @@ footer {
 /* ===============================
 20. BLOG PAGE
 ================================= */
-
 .blog-grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
 gap:40px;
 margin-top:60px;
 }
-
 .blog-card{
 background:var(--bg-elevated);
 border-radius:var(--radius-lg);
@@ -1113,22 +964,18 @@ overflow:hidden;
 box-shadow:var(--shadow-soft);
 transition:.35s;
 }
-
 .blog-card:hover{
 transform:translateY(-10px);
 box-shadow:var(--shadow-hover);
 }
-
 .blog-card img{
 width:100%;
 height:220px;
 object-fit:cover;
 }
-
 .blog-content{
 padding:25px;
 }
-
 .blog-meta{
 display:flex;
 justify-content:space-between;
@@ -1136,31 +983,26 @@ font-size:13px;
 color:var(--text-secondary);
 margin-bottom:10px;
 }
-
 .blog-content h3{
 font-size:20px;
 margin-bottom:10px;
 }
-
 .blog-content a{
 text-decoration:none;
 color:var(--text-primary);
 }
-
 .blog-read{
 display:inline-block;
 margin-top:10px;
 color:var(--accent-2);
 font-weight:600;
 }
-
 .blog-pagination{
 display:flex;
 justify-content:center;
 gap:15px;
 margin-top:60px;
 }
-
 .blog-pagination a{
 padding:10px 16px;
 border-radius:8px;
@@ -1168,7 +1010,6 @@ background:var(--bg-secondary);
 text-decoration:none;
 color:var(--text-primary);
 }
-
 .blog-pagination a.active{
 background:var(--gradient-primary);
 color:#fff;
