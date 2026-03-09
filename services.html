@@ -119,13 +119,15 @@ Reduce denials, accelerate reimbursements, and optimize financial performance wi
 
 <div class="calc-grid">
 
-<input type="number" placeholder="Monthly Claims">
+<input id="claims" type="number" placeholder="Monthly Claims">
 
-<input type="number" placeholder="Average Reimbursement">
+<input id="reimbursement" type="number" placeholder="Average Reimbursement">
 
-<input type="number" placeholder="Denial Rate (%)">
+<input id="denial" type="number" placeholder="Denial Rate (%)">
 
-<button class="btn-primary">Calculate Revenue Loss</button>
+<button onclick="calculateRevenue()" class="btn-primary">
+Calculate Revenue Loss
+</button>
 
 </div>
 
@@ -133,9 +135,11 @@ Reduce denials, accelerate reimbursements, and optimize financial performance wi
 
 Estimated Annual Revenue Loss
 
-<h3>$148,000</h3>
+<h3 id="roiResult">$0</h3>
 
-<a href="contact.html" class="btn-primary">Get Free Revenue Audit</a>
+<a href="contact.html" class="btn-primary">
+Get Free Revenue Audit
+</a>
 
 </div>
 
