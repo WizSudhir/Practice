@@ -7,173 +7,109 @@
 /* =========================================================
    1. HERO (DIFFERENT FROM HOME)
 ========================================================= */
-.unicorn-hero{
-position:relative;
+.nextgen-hero{
 padding:150px 0;
 background:#050816;
 color:white;
+position:relative;
 overflow:hidden;
 }
 
-/* ambient lighting */
-
-.hero-light{
+.hero-glow{
 position:absolute;
 width:900px;
 height:900px;
-background:radial-gradient(circle,#3b82f6,transparent 60%);
+background:radial-gradient(circle,#2563eb,transparent 70%);
 opacity:.15;
 top:-300px;
-left:-200px;
-}
-
-.hero-light-2{
-position:absolute;
-width:800px;
-height:800px;
-background:radial-gradient(circle,#9333ea,transparent 60%);
-opacity:.12;
-bottom:-300px;
 right:-200px;
 }
 
-/* layout */
-
-.unicorn-grid{
+.hero-grid{
 display:grid;
 grid-template-columns:1.1fr 1fr;
-gap:90px;
+gap:80px;
 align-items:center;
 }
 
-/* copy */
-
-.hero-pill{
-background:rgba(255,255,255,.08);
-padding:8px 14px;
-border-radius:20px;
-display:inline-block;
-font-size:13px;
-margin-bottom:20px;
-}
-
-.hero-title{
+.hero-headline{
 font-size:64px;
 font-weight:800;
 line-height:1.1;
-margin-bottom:25px;
+margin-bottom:20px;
 }
 
-.hero-description{
+.hero-sub{
 font-size:18px;
 opacity:.85;
 max-width:520px;
 margin-bottom:30px;
 }
 
-.hero-actions{
+.hero-buttons{
 display:flex;
-gap:18px;
+gap:16px;
 margin-bottom:40px;
 }
 
-.hero-metrics{
-display:flex;
-gap:40px;
+.live-revenue span{
+font-size:13px;
+opacity:.7;
 }
 
-.metric span{
-font-size:30px;
-font-weight:700;
-display:block;
+#revenueCounter{
+font-size:40px;
+font-weight:800;
+margin-top:6px;
 }
 
-/* dashboard */
+/* pipeline */
 
-.hero-product{
-position:relative;
-}
-
-.glass-dashboard{
+.hero-engine{
 background:rgba(255,255,255,.04);
-backdrop-filter:blur(16px);
 border:1px solid rgba(255,255,255,.08);
-border-radius:18px;
-padding:28px;
-width:420px;
-}
-
-.dashboard-header{
-font-size:14px;
-opacity:.8;
-margin-bottom:18px;
+border-radius:16px;
+padding:30px;
 }
 
 .pipeline{
 display:flex;
-justify-content:space-between;
-font-size:12px;
-margin-bottom:20px;
+flex-direction:column;
+gap:12px;
+margin-bottom:30px;
 }
 
-.pipe-step{
-background:rgba(255,255,255,.06);
-padding:5px 8px;
-border-radius:6px;
-}
-
-.dashboard-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:14px;
-margin-bottom:20px;
-}
-
-.stat-card{
+.node{
 background:rgba(255,255,255,.05);
-padding:14px;
-border-radius:8px;
-}
-
-.stat-card span{
-font-size:22px;
-font-weight:700;
-display:block;
-margin-top:6px;
-}
-
-.revenue-chart{
-display:flex;
-align-items:flex-end;
-gap:6px;
-height:80px;
-}
-
-.chart-bar{
-width:10px;
-background:#3b82f6;
-border-radius:4px;
-height:60%;
-}
-
-.chart-bar:nth-child(2){height:75%}
-.chart-bar:nth-child(3){height:95%}
-.chart-bar:nth-child(4){height:70%}
-.chart-bar:nth-child(5){height:100%}
-
-/* floating feature cards */
-
-.floating-card{
-position:absolute;
-background:rgba(255,255,255,.06);
 padding:10px 14px;
-border-radius:10px;
-font-size:12px;
+border-radius:8px;
+font-size:13px;
 }
 
-.card-a{top:-20px;right:-20px}
-.card-b{bottom:-20px;left:-20px}
-.card-c{top:50%;right:-50px}
+.node.ai{
+background:rgba(59,130,246,.2);
+}
+
+/* chart */
+
+.growth-chart{
+height:120px;
+background:linear-gradient(
+to top,
+rgba(59,130,246,.2),
+transparent
+);
+border-radius:8px;
+position:relative;
+}
+
+.line{
+position:absolute;
+width:100%;
+height:3px;
+background:#3b82f6;
+top:60%;
+}
 /* =========================================================
    2. REVENUE CALCULATOR
 ========================================================= */
