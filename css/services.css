@@ -95,7 +95,7 @@ background-position:500px 500px;
 }
 .pg-stage{
 max-width:900px;
-margin:200px auto;
+margin:100px auto;
 padding:60px 40px;
 background:rgba(15,23,42,0.4);
 backdrop-filter:blur(12px);
@@ -120,7 +120,7 @@ background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
 text-shadow:0 10px 30px rgba(0,0,0,0.6);
 }
 .gradient-title{
-background:var(--gradient-primary);
+background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
