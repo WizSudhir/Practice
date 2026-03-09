@@ -276,8 +276,30 @@ width:26px;
 fill:white;
 }
 
+/* =========================================================
+   7. Service Comparison Matrix
+========================================================= */
+.comparison{
 
+width:100%;
+border-collapse:collapse;
+margin-top:60px;
 
+}
+
+.comparison th,
+.comparison td{
+
+padding:16px;
+border:1px solid rgba(255,255,255,0.1);
+
+}
+
+.comparison th{
+
+background:var(--bg-secondary);
+
+}
 /* =========================================================
    7. SPECIALTIES GRID
 ========================================================= */
