@@ -253,3 +253,35 @@ blogGrid.innerHTML += card;
 document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
 });
 }
+
+// ===============================
+// 12. Activated Service Navigation (Services Page)
+// ===============================
+const sections = document.querySelectorAll(".rcm-phase");
+const navLinks = document.querySelectorAll(".services-nav a");
+
+window.addEventListener("scroll", () => {
+
+let current = "";
+
+sections.forEach(section => {
+
+const sectionTop = section.offsetTop - 200;
+const sectionHeight = section.clientHeight;
+
+if(pageYOffset >= sectionTop){
+current = section.getAttribute("id");
+}
+
+});
+
+navLinks.forEach(link => {
+link.classList.remove("active");
+
+if(link.getAttribute("href") === "#" + current){
+link.classList.add("active");
+}
+
+});
+
+});
