@@ -142,3 +142,55 @@ stage.style.transform = "translateY(0)";
 });
 
 });
+
+// ===============================
+// 13. Hero Stages Effect (Services Page)
+// ===============================
+const stages = document.querySelectorAll(".pg-stage");
+
+window.addEventListener("scroll", () => {
+
+let scrollPosition = window.scrollY + window.innerHeight * 0.6;
+
+stages.forEach(stage => {
+
+let stageTop = stage.offsetTop;
+
+if(scrollPosition > stageTop){
+
+stage.style.opacity = "1";
+stage.style.transform = "translateY(0)";
+
+}
+
+});
+
+});
+
+// ===============================
+// 13. Hero Metrices count number (Services Page)
+// ===============================
+function animateMetric(id,target,suffix=""){
+
+let el=document.getElementById(id);
+let value=0;
+
+let interval=setInterval(()=>{
+
+value+=Math.ceil(target/30);
+
+if(value>=target){
+value=target;
+clearInterval(interval);
+}
+
+el.innerText=value+suffix;
+
+},40);
+
+}
+
+animateMetric("metric1",98,"%");
+animateMetric("metric2",28);
+animateMetric("metric3",30,"%");
+animateMetric("metric4",35,"%");
