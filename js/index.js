@@ -374,3 +374,26 @@ clearInterval(interval);
 }
 
 },40);
+
+// ===============================
+// 13. Hero (Services Page)
+// ===============================
+const stages = document.querySelectorAll(".pg-stage");
+
+window.addEventListener("scroll", () => {
+
+const scroll = window.scrollY;
+const height = window.innerHeight;
+
+stages.forEach((stage,index)=>{
+
+if(scroll >= height * index){
+stage.style.opacity = "1";
+}
+else{
+stage.style.opacity = "0.2";
+}
+
+});
+
+});
