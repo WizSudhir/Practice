@@ -7,7 +7,6 @@
 /* =========================================================
    1. HERO (DIFFERENT FROM HOME)
 ========================================================= */
-
 .hero{
 min-height:90vh;
 display:flex;
@@ -17,14 +16,12 @@ radial-gradient(circle at 20% 30%, rgba(99,102,241,0.25), transparent 40%),
 radial-gradient(circle at 80% 70%, rgba(139,92,246,0.25), transparent 40%),
 var(--bg-primary);
 }
-
 .hero-container{
 display:grid;
 grid-template-columns:1.1fr 1fr;
 gap:80px;
 align-items:center;
 }
-
 .hero-left{
 background:linear-gradient(
 180deg,
@@ -64,8 +61,6 @@ background:var(--gradient-primary);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
-
-
 
 /* =========================================================
    2. REVENUE CALCULATOR
@@ -231,8 +226,10 @@ transition:.3s;
 .services-nav a:hover{
 color:var(--accent);
 }
-
-
+.services-nav a.active{
+color:var(--accent);
+font-weight:600;
+}
 
 /* =========================================================
    6. RCM PHASES
