@@ -9,7 +9,7 @@
 ========================================================= */
 
 .pg-hero{
-min-height:100vh;
+min-height:200vh; /* makes scrolling hero */
 display:flex;
 flex-direction:column;
 justify-content:center;
@@ -17,15 +17,42 @@ align-items:center;
 text-align:center;
 padding-top:140px;
 padding-bottom:120px;
-background: radial-gradient(circle at top,#1e1b4b,transparent 70%);
 position:relative;
 overflow:hidden;
+/* HERO IMAGE */
+background:
+linear-gradient(rgba(5,10,25,0.75), rgba(5,10,25,0.85)),
+url("../images/rcm-hero.webp");
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+background-attachment:fixed;
 }
-
+.pg-hero::before{
+content:"";
+position:absolute;
+width:800px;
+height:800px;
+background:radial-gradient(circle,#6366f1 0%,transparent 70%);
+top:-200px;
+left:-200px;
+opacity:0.25;
+filter:blur(120px);
+animation:heroGlow 12s infinite alternate;
+}
+@keyframes heroGlow{
+0%{transform:translate(0,0);}
+100%{transform:translate(200px,100px);}
+}
 .pg-stage{
 max-width:900px;
 margin:auto;
-padding:60px 20px;
+padding:60px 40px;
+background:rgba(15,23,42,0.4);
+backdrop-filter:blur(12px);
+border-radius:var(--radius-lg);
+border:1px solid rgba(255,255,255,0.08);
+transition:opacity .6s ease, transform .6s ease;
 }
 
 .pg-title{
