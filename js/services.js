@@ -120,22 +120,31 @@ clearInterval(interval);
 },40);
 
 // ===============================
-// 13. Hero (Services Page)
+// 13. Hero Stages Effect (Services Page)
 // ===============================
 const stages = document.querySelectorAll(".pg-stage");
 
 window.addEventListener("scroll", () => {
 
-const scroll = window.scrollY;
-const height = window.innerHeight;
+let scroll = window.scrollY;
+let windowHeight = window.innerHeight;
 
 stages.forEach((stage,index)=>{
 
-if(scroll >= height * index){
+let triggerPoint = windowHeight * index;
+
+if(scroll >= triggerPoint){
+
 stage.style.opacity = "1";
+stage.style.transform = "translateY(0)";
+
 }
+
 else{
-stage.style.opacity = "0.2";
+
+stage.style.opacity = "0";
+stage.style.transform = "translateY(40px)";
+
 }
 
 });
