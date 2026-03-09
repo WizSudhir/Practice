@@ -126,24 +126,16 @@ const stages = document.querySelectorAll(".pg-stage");
 
 window.addEventListener("scroll", () => {
 
-let scroll = window.scrollY;
-let windowHeight = window.innerHeight;
+let scrollPosition = window.scrollY + window.innerHeight * 0.6;
 
-stages.forEach((stage,index)=>{
+stages.forEach(stage => {
 
-let triggerPoint = windowHeight * index;
+let stageTop = stage.offsetTop;
 
-if(scroll >= triggerPoint){
+if(scrollPosition > stageTop){
 
 stage.style.opacity = "1";
 stage.style.transform = "translateY(0)";
-
-}
-
-else{
-
-stage.style.opacity = "0";
-stage.style.transform = "translateY(40px)";
 
 }
 
