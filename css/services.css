@@ -28,6 +28,13 @@ background-position:center;
 background-repeat:no-repeat;
 background-attachment:fixed;
 }
+.pg-hero{
+animation:heroZoom 20s ease-in-out infinite alternate;
+}
+@keyframes heroZoom{
+0%{background-size:100%;}
+100%{background-size:110%;}
+}
 .pg-hero::before{
 content:"";
 position:absolute;
@@ -53,6 +60,8 @@ backdrop-filter:blur(12px);
 border-radius:var(--radius-lg);
 border:1px solid rgba(255,255,255,0.08);
 transition:opacity .6s ease, transform .6s ease;
+opacity:0;
+transform:translateY(40px);
 }
 
 .pg-title{
