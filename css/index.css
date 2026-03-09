@@ -199,7 +199,6 @@ header.scrolled {
   box-shadow: var(--shadow-soft);
 }
 .navbar .btn-primary {
-  background: var(--gradient-primary);
   color: #fff;
 }
 /* MOBILE MENU FIX */
