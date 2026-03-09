@@ -105,7 +105,11 @@ transition:opacity .6s ease, transform .6s ease;
 opacity:0;
 transform:translateY(40px);
 }
-
+/* show first hero stage immediately */
+.stage-intro{
+opacity:1;
+transform:translateY(0);
+}
 .pg-title{
 font-size:56px;
 line-height:1.1;
@@ -167,15 +171,17 @@ color:#fff;
 background:#22c55e;
 color:#fff;
 }
-
-
+.node:hover{
+box-shadow:0 0 15px rgba(99,102,241,0.5);
+transform:translateY(-2px);
+}
 /* =========================================================
 3. DASHBOARD METRICS
 ========================================================= */
 
 .dashboard{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+grid-template-columns:repeat(4,1fr);
 gap:30px;
 margin-top:40px;
 }
@@ -582,6 +588,13 @@ grid-template-columns:1fr;
 .services-nav{
 flex-direction:row;
 overflow:auto;
+}
+
+}
+@media(max-width:900px){
+
+.dashboard{
+grid-template-columns:1fr 1fr;
 }
 
 }
