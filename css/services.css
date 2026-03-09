@@ -7,130 +7,114 @@
 /* =========================================================
    1. HERO (DIFFERENT FROM HOME)
 ========================================================= */
-
-.enterprise-hero{
-position:relative;
+.rcm-hero{
 padding:140px 0 120px;
-background:#070b18;
+background:#050816;
 color:white;
+position:relative;
 overflow:hidden;
 }
 
-.hero-gradient{
+.hero-bg{
 position:absolute;
 width:900px;
 height:900px;
-background:radial-gradient(circle,#3b82f6 0%,transparent 60%);
+background:radial-gradient(circle,#2563eb,transparent 70%);
 opacity:.15;
-top:-300px;
-left:-200px;
+top:-200px;
+right:-200px;
 }
 
-.hero-grid{
+.hero-layout{
 display:grid;
-grid-template-columns:1.1fr 1fr;
-gap:80px;
+grid-template-columns:1fr 1fr;
+gap:90px;
 align-items:center;
 }
 
 .hero-tag{
-display:inline-block;
+background:rgba(255,255,255,.08);
 padding:8px 14px;
-background:rgba(255,255,255,0.08);
-border-radius:30px;
+border-radius:20px;
 font-size:13px;
-margin-bottom:25px;
+display:inline-block;
+margin-bottom:20px;
 }
 
-.enterprise-hero h1{
+.rcm-hero h1{
 font-size:56px;
 font-weight:800;
 line-height:1.15;
 margin-bottom:25px;
 }
 
-.enterprise-hero p{
+.rcm-hero p{
 font-size:18px;
 opacity:.85;
-max-width:540px;
 margin-bottom:30px;
 }
 
-.hero-cta{
+.hero-actions{
 display:flex;
 gap:18px;
 margin-bottom:40px;
 }
 
-.hero-trust span{
-font-size:13px;
-opacity:.7;
-}
-
-.trust-metrics{
+.hero-stats{
 display:flex;
 gap:40px;
-margin-top:10px;
 }
 
-.trust-metrics strong{
-font-size:28px;
+.hero-stats strong{
+font-size:30px;
 display:block;
 }
 
-.trust-metrics p{
+.hero-stats span{
 font-size:13px;
 opacity:.7;
 }
 
-/* DASHBOARD */
+/* PLATFORM */
 
-.hero-visual{
-display:flex;
-justify-content:center;
-}
-
-.dashboard{
-position:relative;
-width:420px;
-height:320px;
-background:rgba(255,255,255,0.03);
+.hero-platform{
+background:rgba(255,255,255,.03);
+border:1px solid rgba(255,255,255,.08);
 border-radius:16px;
-border:1px solid rgba(255,255,255,0.08);
 padding:30px;
 }
 
-.dashboard-card{
-background:rgba(255,255,255,0.06);
-border-radius:10px;
-padding:14px 18px;
-position:absolute;
+.pipeline{
+display:flex;
+justify-content:space-between;
+margin-bottom:30px;
+font-size:13px;
+opacity:.8;
 }
 
-.card-1{top:20px;left:20px;}
-.card-2{top:20px;right:20px;}
-.card-3{bottom:20px;left:20px;}
+.stage{
+background:rgba(255,255,255,.05);
+padding:6px 10px;
+border-radius:8px;
+}
 
-.metric{
+.platform-dashboard{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:16px;
+}
+
+.metric-card{
+background:rgba(255,255,255,.05);
+padding:18px;
+border-radius:10px;
+}
+
+.metric-card span{
 font-size:26px;
 font-weight:700;
+display:block;
 margin-top:6px;
-}
-
-.dashboard-chart{
-position:absolute;
-bottom:20px;
-right:20px;
-display:flex;
-gap:6px;
-align-items:flex-end;
-height:120px;
-}
-
-.bar{
-width:10px;
-background:#3b82f6;
-border-radius:4px;
 }
 /* =========================================================
    2. REVENUE CALCULATOR
