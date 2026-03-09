@@ -87,6 +87,12 @@ font-weight:700;
 display:block;
 margin-top:10px;
 }
+.pg-hero-inner{
+display:grid;
+grid-template-columns:1.1fr 1fr;
+gap:60px;
+align-items:center;
+}
 /* =========================================================
    2. REVENUE CALCULATOR
 ========================================================= */
