@@ -144,7 +144,151 @@ Get Free Revenue Audit
 </div>
 
 </section>
+<!-- RCM Maturity Score Gauge section. -->
+<section class="section rcm-score-section">
 
+<div class="container">
+
+<h2 class="section-title">Revenue Cycle Maturity Assessment</h2>
+
+<p class="section-sub">
+Answer a few quick questions to evaluate the health of your revenue cycle.
+</p>
+
+
+<div class="rcm-score-layout">
+
+
+<!-- QUESTIONS -->
+
+<div class="rcm-questions">
+
+<div class="question">
+
+<h4>What is your Average Claim Denial Rate</h4>
+
+<select id="q1">
+
+<option value="3">0–5%</option>
+<option value="2">5–10%</option>
+<option value="1">10–20%</option>
+<option value="0">20%+</option>
+
+</select>
+
+</div>
+
+
+<div class="question">
+
+<h4>How often do you track payer performance?</h4>
+
+<select id="q2">
+
+<option value="3">Real-time analytics</option>
+<option value="2">Monthly reports</option>
+<option value="1">Limited tracking</option>
+<option value="0">No tracking</option>
+
+</select>
+
+</div>
+
+
+<div class="question">
+
+<h4>How structured is your denial management?</h4>
+
+<select id="q3">
+
+<option value="3">Fully optimized workflow</option>
+<option value="2">Partial workflow</option>
+<option value="1">Manual / reactive</option>
+<option value="0">No structured process</option>
+
+</select>
+
+</div>
+
+
+<button onclick="calculateRCMScore()" class="btn-primary">
+
+Calculate My RCM Score
+
+</button>
+
+</div>
+
+
+
+<!-- GAUGE RESULT -->
+
+<div class="rcm-gauge-box">
+
+<div class="gauge">
+
+<svg viewBox="0 0 200 120">
+
+<path d="M20 100 A80 80 0 0 1 180 100"
+stroke="rgba(255,255,255,0.1)"
+stroke-width="16"
+fill="none"/>
+
+<path id="gaugeFill"
+d="M20 100 A80 80 0 0 1 180 100"
+stroke="url(#gaugeGradient)"
+stroke-width="16"
+stroke-dasharray="251"
+stroke-dashoffset="251"
+fill="none"/>
+
+<defs>
+
+<linearGradient id="gaugeGradient">
+
+<stop offset="0%" stop-color="#ef4444"/>
+<stop offset="50%" stop-color="#f59e0b"/>
+<stop offset="100%" stop-color="#22c55e"/>
+
+</linearGradient>
+
+</defs>
+
+</svg>
+
+<div class="score-number" id="scoreValue">
+
+0
+
+</div>
+
+</div>
+
+
+<div class="score-result">
+
+<p id="scoreLabel">
+
+Your RCM maturity score will appear here.
+
+</p>
+
+<a href="contact.html" class="btn-primary">
+
+Get Free Revenue Audit
+
+</a>
+
+</div>
+
+</div>
+
+
+</div>
+</div>
+
+</section>
+  
 <!-- The “Before vs After RCM Transformation -->
 <section class="section rcm-transformation">
 <div class="container">
