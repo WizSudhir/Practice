@@ -551,3 +551,9 @@ justify-content:center;
 }
 
 }
+.snapshot-card{
+background:linear-gradient(180deg,#0f172a,#020617);
+border:1px solid rgba(255,255,255,0.08);
+padding:40px;
+border-radius:16px;
+}
