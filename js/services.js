@@ -195,7 +195,11 @@ el.innerText=value+suffix;
 
 }
 
+window.addEventListener("load",()=>{
+
 animateMetric("metric1",98,"%");
 animateMetric("metric2",28);
 animateMetric("metric3",30,"%");
 animateMetric("metric4",35,"%");
+
+});
