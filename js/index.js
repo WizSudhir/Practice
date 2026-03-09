@@ -353,3 +353,24 @@ document.getElementById("gaugeFill")
 .style.strokeDashoffset = offset;
 
 }
+// ===============================
+// 13. Hero (Services Page)
+// ===============================
+
+const counter = document.getElementById("revenueCounter");
+
+let value = 0;
+
+const target = 2450000;
+
+const interval = setInterval(() => {
+
+value += 25000;
+
+counter.innerText = "$" + value.toLocaleString();
+
+if(value >= target){
+clearInterval(interval);
+}
+
+},40);
