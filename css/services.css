@@ -7,50 +7,67 @@
 /* =========================================================
    1. HERO (DIFFERENT FROM HOME)
 ========================================================= */
-.rcm-hero{
-padding:140px 0 120px;
+.unicorn-hero{
+position:relative;
+padding:150px 0;
 background:#050816;
 color:white;
-position:relative;
 overflow:hidden;
 }
 
-.hero-bg{
+/* ambient lighting */
+
+.hero-light{
 position:absolute;
 width:900px;
 height:900px;
-background:radial-gradient(circle,#2563eb,transparent 70%);
+background:radial-gradient(circle,#3b82f6,transparent 60%);
 opacity:.15;
-top:-200px;
+top:-300px;
+left:-200px;
+}
+
+.hero-light-2{
+position:absolute;
+width:800px;
+height:800px;
+background:radial-gradient(circle,#9333ea,transparent 60%);
+opacity:.12;
+bottom:-300px;
 right:-200px;
 }
 
-.hero-layout{
+/* layout */
+
+.unicorn-grid{
 display:grid;
-grid-template-columns:1fr 1fr;
+grid-template-columns:1.1fr 1fr;
 gap:90px;
 align-items:center;
 }
 
-.hero-tag{
+/* copy */
+
+.hero-pill{
 background:rgba(255,255,255,.08);
 padding:8px 14px;
 border-radius:20px;
-font-size:13px;
 display:inline-block;
+font-size:13px;
 margin-bottom:20px;
 }
 
-.rcm-hero h1{
-font-size:56px;
+.hero-title{
+font-size:64px;
 font-weight:800;
-line-height:1.15;
+line-height:1.1;
 margin-bottom:25px;
 }
 
-.rcm-hero p{
+.hero-description{
 font-size:18px;
 opacity:.85;
+max-width:520px;
 margin-bottom:30px;
 }
 
@@ -60,62 +77,103 @@ gap:18px;
 margin-bottom:40px;
 }
 
-.hero-stats{
+.hero-metrics{
 display:flex;
 gap:40px;
 }
 
-.hero-stats strong{
+.metric span{
 font-size:30px;
+font-weight:700;
 display:block;
 }
 
-.hero-stats span{
-font-size:13px;
-opacity:.7;
+/* dashboard */
+
+.hero-product{
+position:relative;
 }
 
-/* PLATFORM */
-
-.hero-platform{
-background:rgba(255,255,255,.03);
+.glass-dashboard{
+background:rgba(255,255,255,.04);
+backdrop-filter:blur(16px);
 border:1px solid rgba(255,255,255,.08);
-border-radius:16px;
-padding:30px;
+border-radius:18px;
+padding:28px;
+width:420px;
+}
+
+.dashboard-header{
+font-size:14px;
+opacity:.8;
+margin-bottom:18px;
 }
 
 .pipeline{
 display:flex;
 justify-content:space-between;
-margin-bottom:30px;
-font-size:13px;
-opacity:.8;
+font-size:12px;
+margin-bottom:20px;
 }
 
-.stage{
+.pipe-step{
+background:rgba(255,255,255,.06);
+padding:5px 8px;
+border-radius:6px;
+}
+
+.dashboard-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:14px;
+margin-bottom:20px;
+}
+
+.stat-card{
 background:rgba(255,255,255,.05);
-padding:6px 10px;
+padding:14px;
 border-radius:8px;
 }
 
-.platform-dashboard{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:16px;
-}
-
-.metric-card{
-background:rgba(255,255,255,.05);
-padding:18px;
-border-radius:10px;
-}
-
-.metric-card span{
-font-size:26px;
+.stat-card span{
+font-size:22px;
 font-weight:700;
 display:block;
 margin-top:6px;
 }
+
+.revenue-chart{
+display:flex;
+align-items:flex-end;
+gap:6px;
+height:80px;
+}
+
+.chart-bar{
+width:10px;
+background:#3b82f6;
+border-radius:4px;
+height:60%;
+}
+
+.chart-bar:nth-child(2){height:75%}
+.chart-bar:nth-child(3){height:95%}
+.chart-bar:nth-child(4){height:70%}
+.chart-bar:nth-child(5){height:100%}
+
+/* floating feature cards */
+
+.floating-card{
+position:absolute;
+background:rgba(255,255,255,.06);
+padding:10px 14px;
+border-radius:10px;
+font-size:12px;
+}
+
+.card-a{top:-20px;right:-20px}
+.card-b{bottom:-20px;left:-20px}
+.card-c{top:50%;right:-50px}
 /* =========================================================
    2. REVENUE CALCULATOR
 ========================================================= */
