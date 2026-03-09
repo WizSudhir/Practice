@@ -71,6 +71,7 @@ margin-bottom:25px;
 background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
+text-shadow:0 10px 30px rgba(0,0,0,0.6);
 }
 
 .pg-sub{
