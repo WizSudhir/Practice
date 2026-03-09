@@ -10,7 +10,7 @@
 
 .pg-hero{
 
-min-height:200vh;
+min-height:350vh;
 
 display:flex;
 flex-direction:column;
@@ -150,7 +150,14 @@ background:var(--bg-elevated);
 border:1px solid rgba(255,255,255,0.08);
 font-size:14px;
 }
-
+.node{
+animation:pulseNode 3s infinite ease-in-out;
+}
+@keyframes pulseNode{
+0%{transform:scale(1)}
+50%{transform:scale(1.05)}
+100%{transform:scale(1)}
+}
 .node.ai{
 background:var(--gradient-primary);
 color:#fff;
