@@ -143,7 +143,12 @@ background:var(--gradient-primary);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
-
+.calc-layout{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:60px;
+align-items:center;
+}
 /* =========================================================
    4. RCM MATURITY GAUGE
 ========================================================= */
