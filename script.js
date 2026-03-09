@@ -285,3 +285,21 @@ link.classList.add("active");
 });
 
 });
+// ===============================
+// 12. Interactive ROI Calculator (Services Page)
+// ===============================
+function calculateRevenue(){
+
+let claims = document.getElementById("claims").value;
+let reimbursement = document.getElementById("reimbursement").value;
+let denial = document.getElementById("denial").value;
+
+let monthlyRevenue = claims * reimbursement;
+let lostRevenue = monthlyRevenue * (denial / 100);
+
+let yearlyLoss = lostRevenue * 12;
+
+document.getElementById("roiResult").innerText =
+"$" + yearlyLoss.toLocaleString();
+
+}
