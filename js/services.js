@@ -98,27 +98,45 @@ document.getElementById("gaugeFill")
 
 }
 // ===============================
-// 13. Hero (Services Page)
+// 13. Hero Revenue Counter
 // ===============================
 
-const counter = document.getElementById("revenueCounter");
+let counterStarted=false;
 
-let value = 0;
+function startRevenueCounter(){
 
-const target = 2450000;
+if(counterStarted) return;
 
-const interval = setInterval(() => {
+counterStarted=true;
 
-value += 25000;
+let counter=document.getElementById("revenueCounter");
 
-counter.innerText = "$" + value.toLocaleString();
+let value=0;
 
-if(value >= target){
+let target=2450000;
+
+let interval=setInterval(()=>{
+
+value+=25000;
+
+counter.innerText="$"+value.toLocaleString();
+
+if(value>=target){
 clearInterval(interval);
+
+/* restart after pause */
+
+setTimeout(()=>{
+counterStarted=false;
+counter.innerText="$0";
+startRevenueCounter();
+},4000);
+
 }
 
 },40);
 
+}
 // ===============================
 // 13. Hero Stages Effect (Services Page)
 // ===============================
