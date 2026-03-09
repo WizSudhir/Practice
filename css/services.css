@@ -38,33 +38,58 @@ background-attachment:fixed;
 
 }
 .pg-hero::before{
-
 content:"";
 position:absolute;
-
-width:900px;
-height:900px;
+width:1200px;
+height:1200px;
 
 background:radial-gradient(circle,#3b82f6 0%,transparent 70%);
 
-top:-300px;
+top:-400px;
 left:-200px;
 
-opacity:0.25;
-filter:blur(140px);
+opacity:.35;
+filter:blur(160px);
 
-animation:heroGlow 14s infinite alternate;
-
+animation:heroGlow 12s infinite alternate ease-in-out;
 }
 
 @keyframes heroGlow{
 
 0%{
-transform:translate(0,0);
+transform:translate(0,0) scale(1);
 }
 
 100%{
-transform:translate(200px,120px);
+transform:translate(250px,180px) scale(1.2);
+}
+
+}
+.pg-hero::after{
+
+content:"";
+position:absolute;
+inset:0;
+
+background-image:
+radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
+
+background-size:40px 40px;
+
+opacity:.2;
+
+animation:gridMove 60s linear infinite;
+
+}
+
+@keyframes gridMove{
+
+0%{
+background-position:0 0;
+}
+
+100%{
+background-position:500px 500px;
 }
 
 }
