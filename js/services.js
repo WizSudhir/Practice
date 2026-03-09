@@ -137,30 +137,17 @@ startRevenueCounter();
 },40);
 
 }
-// ===============================
-// 13. Hero Stages Effect (Services Page)
-// ===============================
-const stages = document.querySelectorAll(".pg-stage");
-
 window.addEventListener("scroll", () => {
 
-let scrollPosition = window.scrollY + window.innerHeight * 0.6;
+let cta = document.querySelector(".stage-cta");
 
-stages.forEach(stage => {
+if(window.scrollY + window.innerHeight > cta.offsetTop){
 
-let stageTop = stage.offsetTop;
-
-if(scrollPosition > stageTop){
-
-stage.style.opacity = "1";
-stage.style.transform = "translateY(0)";
+startRevenueCounter();
 
 }
 
 });
-
-});
-
 // ===============================
 // 13. Hero Stages Effect (Services Page)
 // ===============================
