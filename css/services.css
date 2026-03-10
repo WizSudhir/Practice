@@ -11,84 +11,35 @@
 position:sticky;
 top:0;
 height:100vh;
+width:100%;
 display:flex;
 align-items:center;
 justify-content:center;
-z-index:5;
-max-width:1100px;
-margin:auto;
 }
 .pg-hero{
 height:400vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
 position:relative;
-overflow:hidden;
-/* HERO IMAGE */
-background:
-linear-gradient(rgba(5,10,25,0.75), rgba(5,10,25,0.85)),
-url("../images/rcm-hero.webp");
-background-size:cover;
-background-position:center 30%;
-background-repeat:no-repeat;
-background-attachment:fixed;
-}
-.pg-hero::before{
-content:"";
-position:absolute;
-width:1200px;
-height:1200px;
-background:radial-gradient(circle,#3b82f6 0%,transparent 70%);
-top:-400px;
-left:-200px;
-opacity:.35;
-filter:blur(160px);
-animation:heroGlow 12s infinite alternate ease-in-out;
-pointer-events:none;
-}
-@keyframes heroGlow{
-0%{transform:translate(0,0) scale(1);}
-100%{transform:translate(250px,180px) scale(1.2);}
-}
-.pg-hero::after{
-content:"";
-position:absolute;
-inset:0;
-background-image:
-radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
-background-size:40px 40px;
-opacity:.2;
-animation:gridMove 60s linear infinite;
-pointer-events:none;
-}
-@keyframes gridMove{
-0%{background-position:0 0;}
-100%{background-position:500px 500px;}
+background:#050a19;
 }
 .pg-stage{
-width:900px;
-padding:60px 40px;
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100vh;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+padding:60px;
 background:linear-gradient(
 180deg,
-rgba(30,41,59,0.85),
-rgba(15,23,42,0.85)
+rgba(30,41,59,0.9),
+rgba(15,23,42,0.9)
 );
-filter:blur(10px);
-border-radius:var(--radius-lg);
-border:1px solid rgba(148,163,184,0.25);
-box-shadow:
-0 30px 80px rgba(0,0,0,0.65),
-0 0 0 1px rgba(255,255,255,0.04) inset;
-transition:all .7s ease;
 opacity:0;
-transform:translate(-50%,-50%) scale(.95);
-position:absolute;
-top:50%;
-left:50%;
-z-index:2;
+transform:scale(.95);
+transition:opacity .6s ease, transform .6s ease;
 }
 .pg-stage:hover{
 transform:translate(-50%,-52%) scale(1.02);
@@ -116,6 +67,9 @@ transition:.4s;
 opacity:1;
 transform:translateY(0);
 }
+.stage-pipeline .pipeline{
+max-width:900px;
+}
 .pg-title{
 font-size:56px;
 line-height:1.1;
@@ -129,6 +83,9 @@ text-shadow:0 10px 30px rgba(0,0,0,0.6);
 background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
+}
+.stage-dashboard .dashboard{
+max-width:900px;
 }
 .pg-sub{
 max-width:700px;
