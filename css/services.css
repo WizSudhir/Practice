@@ -1062,12 +1062,11 @@ color:var(--text-secondary);
 }
 
 .rcm-circle{
-
 position:relative;
-width:820px;
+width:900px;
 height:520px;
 margin:90px auto;
-
+transform:scaleX(1.4);
 }
 
 .rcm-core{
@@ -1108,14 +1107,15 @@ opacity:.9;
 /* NODES */
 
 .rcm-node{
-
 position:absolute;
+
+top:50%;
+left:50%;
 
 width:120px;
 height:120px;
 
 background:var(--bg-elevated);
-
 border-radius:18px;
 
 display:flex;
@@ -1124,13 +1124,14 @@ align-items:center;
 justify-content:center;
 
 gap:8px;
-
 text-align:center;
 
 border:1px solid rgba(255,255,255,0.08);
-
 transition:.35s;
 
+/* ellipse orbit control */
+transform-origin:0 -220px;
+scale: 0.72 1;
 }
 
 /* ICON */
@@ -1157,17 +1158,18 @@ box-shadow:
 
 }
 
-/* ELLIPTICAL POSITIONING */
-.rcm-node:nth-child(2){ top:-10px; left:350px;}           /* Scheduling */
-.rcm-node:nth-child(3){ top:60px; left:600px;}            /* Insurance */
-.rcm-node:nth-child(4){ top:200px; left:700px;}           /* Authorization */
-.rcm-node:nth-child(5){ top:350px; left:600px;}           /* Scribing */
-.rcm-node:nth-child(6){ bottom:-10px; left:350px;}        /* Coding */
-.rcm-node:nth-child(7){ top:350px; left:100px;}           /* Claim Submit */
-.rcm-node:nth-child(8){ top:200px; left:0px;}             /* Payment Posting */
-.rcm-node:nth-child(9){ top:60px; left:100px;}            /* AR Followup */
-.rcm-node:nth-child(10){ top:150px; left:350px;}          /* Denial Mgmt */
-.rcm-node:nth-child(11){ bottom:150px; left:350px;}       /* Analytics */
+/* TRUE ELLIPSE DISTRIBUTION */
+
+.rcm-node:nth-child(2){ transform: rotate(0deg) translateY(-220px) rotate(0deg);}
+.rcm-node:nth-child(3){ transform: rotate(36deg) translateY(-220px) rotate(-36deg);}
+.rcm-node:nth-child(4){ transform: rotate(72deg) translateY(-220px) rotate(-72deg);}
+.rcm-node:nth-child(5){ transform: rotate(108deg) translateY(-220px) rotate(-108deg);}
+.rcm-node:nth-child(6){ transform: rotate(144deg) translateY(-220px) rotate(-144deg);}
+.rcm-node:nth-child(7){ transform: rotate(180deg) translateY(-220px) rotate(-180deg);}
+.rcm-node:nth-child(8){ transform: rotate(216deg) translateY(-220px) rotate(-216deg);}
+.rcm-node:nth-child(9){ transform: rotate(252deg) translateY(-220px) rotate(-252deg);}
+.rcm-node:nth-child(10){ transform: rotate(288deg) translateY(-220px) rotate(-288deg);}
+.rcm-node:nth-child(11){ transform: rotate(324deg) translateY(-220px) rotate(-324deg);}
 
 /* RESPONSIVE */
 
