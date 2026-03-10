@@ -43,25 +43,22 @@ function updateHeroStages(){
 
 if(!hero) return;
 
-let rect = hero.getBoundingClientRect();
+const scrollY = window.scrollY;
+const heroTop = hero.offsetTop;
+const heroHeight = hero.offsetHeight - window.innerHeight;
 
-let progress = -rect.top / (hero.offsetHeight - window.innerHeight);
+let progress = (scrollY - heroTop) / heroHeight;
 
 progress = Math.max(0, Math.min(1, progress));
 
-let stageIndex = Math.min(
-Math.floor(progress * stages.length),
-stages.length - 1
-);
+let stageIndex = Math.floor(progress * stages.length);
 
-stages.forEach((stage,i)=>{
-
-stage.classList.remove("active");
-
-if(i === stageIndex){
-stage.classList.add("active");
+if(stageIndex >= stages.length){
+stageIndex = stages.length - 1;
 }
 
+stages.forEach((stage,i)=>{
+stage.classList.toggle("active", i === stageIndex);
 });
 
 }
@@ -263,4 +260,7 @@ lucide.createIcons();
 // ===============================
 // Update Hero Stages
 // ===============================
-window.addEventListener("load", updateHeroStages);
+window.addEventListener("load", () => {
+updateHeroStages();
+stages[0].classList.add("active");
+});
