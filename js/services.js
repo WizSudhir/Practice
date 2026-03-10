@@ -233,3 +233,40 @@ lucide.createIcons();
 window.addEventListener("load", () => {
 updateHeroStages();
 });
+// ===============================
+// Add Hover Interaction (RCM Timeline)
+// ===============================
+const nodes = document.querySelectorAll(".rcm-node");
+const title = document.getElementById("rcmTitle");
+const desc = document.getElementById("rcmDesc");
+const kpi = document.getElementById("rcmKpi");
+
+nodes.forEach(node => {
+
+node.addEventListener("mouseenter", ()=>{
+
+title.innerText = node.innerText;
+
+desc.innerText = node.dataset.desc;
+
+kpi.innerText = node.dataset.kpi;
+
+});
+
+});
+// ===============================
+// Generate Claim Particles (RCM Timeline)
+// ===============================
+const container = document.querySelector(".claim-particles");
+
+for(let i=0;i<15;i++){
+
+let dot = document.createElement("span");
+
+dot.style.top = Math.random()*100 + "%";
+
+dot.style.animationDelay = Math.random()*6 + "s";
+
+container.appendChild(dot);
+
+}
