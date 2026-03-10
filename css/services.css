@@ -1134,7 +1134,6 @@ opacity:.9;
 .rcm-node{
 
 position:absolute;
-
 top:50%;
 left:50%;
 
@@ -1150,16 +1149,12 @@ align-items:center;
 justify-content:center;
 
 gap:6px;
-
 text-align:center;
 
 border:1px solid rgba(255,255,255,0.08);
 
-transform-origin:center 205px;
-transform:scaleX(1.5);
-.rcm-node > *{
-transform:scaleX(0.67);
-}
+transform-origin:center 210px;
+
 }
 
 /* ICON */
@@ -1188,46 +1183,44 @@ box-shadow:
 
 /* ===== PERFECT 10 POINT ELLIPSE ===== */
 
-/* PERFECT ELLIPSE ROTATION */
-
 .rcm-node:nth-child(2){
-transform:rotate(0deg) translateY(-205px) rotate(0deg);
+transform:rotate(0deg) translateY(-210px) rotate(0deg);
 }
 
 .rcm-node:nth-child(3){
-transform:rotate(36deg) translateY(-205px) rotate(-36deg);
+transform:rotate(36deg) translateY(-210px) rotate(-36deg);
 }
 
 .rcm-node:nth-child(4){
-transform:rotate(72deg) translateY(-205px) rotate(-72deg);
+transform:rotate(72deg) translateY(-210px) rotate(-72deg);
 }
 
 .rcm-node:nth-child(5){
-transform:rotate(108deg) translateY(-205px) rotate(-108deg);
+transform:rotate(108deg) translateY(-210px) rotate(-108deg);
 }
 
 .rcm-node:nth-child(6){
-transform:rotate(144deg) translateY(-205px) rotate(-144deg);
+transform:rotate(144deg) translateY(-210px) rotate(-144deg);
 }
 
 .rcm-node:nth-child(7){
-transform:rotate(180deg) translateY(-205px) rotate(-180deg);
+transform:rotate(180deg) translateY(-210px) rotate(-180deg);
 }
 
 .rcm-node:nth-child(8){
-transform:rotate(216deg) translateY(-205px) rotate(-216deg);
+transform:rotate(216deg) translateY(-210px) rotate(-216deg);
 }
 
 .rcm-node:nth-child(9){
-transform:rotate(252deg) translateY(-205px) rotate(-252deg);
+transform:rotate(252deg) translateY(-210px) rotate(-252deg);
 }
 
 .rcm-node:nth-child(10){
-transform:rotate(288deg) translateY(-205px) rotate(-288deg);
+transform:rotate(288deg) translateY(-210px) rotate(-288deg);
 }
 
 .rcm-node:nth-child(11){
-transform:rotate(324deg) translateY(-205px) rotate(-324deg);
+transform:rotate(324deg) translateY(-210px) rotate(-324deg);
 }
 
 .rcm-circle::before{
@@ -1236,7 +1229,7 @@ content:"";
 
 position:absolute;
 
-width:820px;
+width:420px;
 height:420px;
 
 border-radius:50%;
@@ -1246,7 +1239,7 @@ border:1px dashed rgba(99,102,241,0.25);
 top:50%;
 left:50%;
 
-transform:translate(-50%,-50%) scaleX(1.5);
+transform:translate(-50%,-50%) scaleX(2);
 
 pointer-events:none;
 
