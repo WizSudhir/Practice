@@ -260,5 +260,4 @@ lucide.createIcons();
 // ===============================
 window.addEventListener("load", () => {
 updateHeroStages();
-stages[0].classList.add("active");
 });
