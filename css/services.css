@@ -58,8 +58,11 @@ transition:opacity .6s ease, transform .6s ease;
 text-align:center;
 z-index:1;
 padding:140px 60px 60px;
-backdrop-filter: blur(10px);
+backdrop-filter:none;
 pointer-events:none;
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
 }
 .pg-stage:hover{
 transform:scale(1.02);
@@ -168,7 +171,7 @@ HERO STAGE BACKGROUNDS
 
 .stage-intro{
 background:
-linear-gradient(rgba(5,10,25,.75), rgba(5,10,25,.9)),
+linear-gradient(rgba(5,10,25,.45), rgba(5,10,25,.65))
 url("../images/hero-intro.jpg");
 background-size:cover;
 background-position:center;
@@ -176,7 +179,7 @@ background-position:center;
 
 .stage-pipeline{
 background:
-linear-gradient(rgba(5,10,25,.75), rgba(5,10,25,.9)),
+linear-gradient(rgba(5,10,25,.45), rgba(5,10,25,.65))
 url("../images/hero-intro.jpg");
 background-size:cover;
 background-position:center;
@@ -184,7 +187,7 @@ background-position:center;
 
 .stage-dashboard{
 background:
-linear-gradient(rgba(5,10,25,.75), rgba(5,10,25,.9)),
+linear-gradient(rgba(5,10,25,.45), rgba(5,10,25,.65))
 url("../images/hero-intro.jpg");
 background-size:cover;
 background-position:center;
@@ -192,7 +195,7 @@ background-position:center;
 
 .stage-revenue{
 background:
-linear-gradient(rgba(5,10,25,.75), rgba(5,10,25,.9)),
+linear-gradient(rgba(5,10,25,.45), rgba(5,10,25,.65))
 url("../images/hero-intro.jpg");
 background-size:cover;
 background-position:center;
