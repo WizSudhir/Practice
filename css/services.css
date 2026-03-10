@@ -1074,7 +1074,7 @@ position:absolute;
 top:50%;
 left:50%;
 
-transform:translate(-50%,-50%) scaleX(0.59);
+transform:translate(-50%,-50%);
 
 width:200px;
 height:200px;
@@ -1156,7 +1156,6 @@ text-align:center;
 border:1px solid rgba(255,255,255,0.08);
 
 transform-origin:center 260px;
-scale:0.6 1;
 
 }
 
@@ -1244,17 +1243,10 @@ border:1px dashed rgba(99,102,241,0.25);
 top:50%;
 left:50%;
 
-transform:translate(-50%,-50%);
+transform:translate(-50%,-50%) scaleX(1.4);
 
 pointer-events:none;
-transform:scaleX(1.4);
 
-}
-.rcm-node{
-width:90px;
-height:90px;
-font-size:12px;
-scale:0.72 1;
 }
 
 .rcm-core{
