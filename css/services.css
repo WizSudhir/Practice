@@ -9,7 +9,7 @@
 ========================================================= */
 
 .pg-hero{
-min-height:220vh;
+min-height:160vh;
 display:flex;
 flex-direction:column;
 justify-content:center;
@@ -159,9 +159,15 @@ margin-top:40px;
 background:var(--bg-elevated);
 padding:30px;
 border-radius:var(--radius-lg);
-text-align:center;
 border:1px solid rgba(255,255,255,0.05);
 transition:.35s;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+height:150px;
+}
+.metric h3{
+font-size:16px;
 }
 
 .metric:hover{
@@ -170,7 +176,8 @@ box-shadow:var(--shadow-hover);
 }
 
 .metric span{
-font-size:40px;
+margin-top:auto;
+font-size:42px;
 font-weight:800;
 background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
 -webkit-background-clip:text;
