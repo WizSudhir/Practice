@@ -236,7 +236,10 @@ updateHeroStages();
 /* ===============================
 RCM Circular SYSTEM ANIMATION
 =============================== */
+
 const rcmNodes = document.querySelectorAll(".rcm-node");
+
+if(rcmNodes.length){
 
 let rcmIndex = 0;
 
@@ -255,4 +258,5 @@ rcmIndex = 0;
 }
 
 setInterval(animateRCM,1200);
+
 }
