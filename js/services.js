@@ -54,15 +54,28 @@ progress = Math.max(0, Math.min(1, progress));
 const stageIndex = Math.floor(progress * stages.length);
 
 stages.forEach((stage, index)=>{
+
 stage.classList.remove("active");
 
 if(index === stageIndex){
 stage.classList.add("active");
+
+
+// TRIGGER ANIMATIONS WHEN STAGE APPEARS
+
+if(stage.classList.contains("stage-dashboard")){
+startMetrics();
 }
-});
+
+if(stage.classList.contains("stage-cta")){
+startRevenueCounter();
+}
 
 }
-// ===============================
+
+});
+
+}===============================
 // ONE Scroll Listener (better)
 // ===============================
 
@@ -169,23 +182,6 @@ counter.innerText="$"+value.toLocaleString();
 
 }
 
-const revenueSection = document.querySelector(".stage-cta");
-
-if(revenueSection){
-
-const revenueObserver = new IntersectionObserver((entries)=>{
-
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-startRevenueCounter();
-}
-});
-
-},{threshold:0.6});
-
-revenueObserver.observe(revenueSection);
-
-}
 
 
 // ===============================
@@ -229,25 +225,6 @@ animateMetric("metric3",30,"%");
 animateMetric("metric4",35,"%");
 
 }
-
-const metricsSection=document.querySelector(".stage-dashboard");
-
-if(metricsSection){
-
-const metricsObserver=new IntersectionObserver((entries)=>{
-
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-startMetrics();
-}
-});
-
-},{threshold:0.6});
-
-metricsObserver.observe(metricsSection);
-
-}
-
 
 // ===============================
 // Lucide Icons
