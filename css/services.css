@@ -9,7 +9,7 @@
 ========================================================= */
 
 .pg-hero{
-min-height:160vh;
+height:400vh;
 display:flex;
 flex-direction:column;
 justify-content:center;
