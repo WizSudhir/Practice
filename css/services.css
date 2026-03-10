@@ -11,91 +11,57 @@
 .pg-hero{
 
 min-height:220vh;
-
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-
 text-align:center;
-
 padding-top:80px;
-padding-bottom:120px;
-
+padding-bottom:80px;
 position:relative;
 overflow:hidden;
-
 /* HERO IMAGE */
-
 background:
 linear-gradient(rgba(5,10,25,0.75), rgba(5,10,25,0.85)),
 url("../images/rcm-hero.webp");
-
 background-size:cover;
 background-position:center 30%;
 background-repeat:no-repeat;
 background-attachment:fixed;
-
 }
 .pg-hero::before{
 content:"";
 position:absolute;
 width:1200px;
 height:1200px;
-
 background:radial-gradient(circle,#3b82f6 0%,transparent 70%);
-
 top:-400px;
 left:-200px;
-
 opacity:.35;
 filter:blur(160px);
-
 animation:heroGlow 12s infinite alternate ease-in-out;
 }
-
 @keyframes heroGlow{
-
-0%{
-transform:translate(0,0) scale(1);
-}
-
-100%{
-transform:translate(250px,180px) scale(1.2);
-}
-
+0%{transform:translate(0,0) scale(1);}
+100%{transform:translate(250px,180px) scale(1.2);}
 }
 .pg-hero::after{
-
 content:"";
 position:absolute;
 inset:0;
-
 background-image:
 radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
-
 background-size:40px 40px;
-
 opacity:.2;
-
 animation:gridMove 60s linear infinite;
-
 }
-
 @keyframes gridMove{
-
-0%{
-background-position:0 0;
-}
-
-100%{
-background-position:500px 500px;
-}
-
+0%{background-position:0 0;}
+100%{background-position:500px 500px;}
 }
 .pg-stage{
 max-width:900px;
-margin:100px auto;
+margin:50px auto;
 padding:60px 40px;
 background:rgba(15,23,42,0.4);
 backdrop-filter:blur(12px);
