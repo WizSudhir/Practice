@@ -42,6 +42,7 @@ transform:scale(.95);
 transition:opacity .6s ease, transform .6s ease;
 text-align:center;
 z-index:1;
+padding:140px 60px 60px;
 }
 .pg-stage:hover{
 transform:scale(1.02);
