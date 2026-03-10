@@ -775,19 +775,45 @@ font-size:16px;
 /* =========================================================
 9. RCM TIMELINE
 ========================================================= */
-
+.rcm-timeline .section-title{
+text-align:center;
+margin-bottom:20px;
+}
 .timeline{
+position:relative;
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:40px;
-margin-top:60px;
+margin-top:70px;
+}
+.timeline::before{
+content:"";
+position:absolute;
+top:50%;
+left:0;
+right:0;
+height:2px;
+background:linear-gradient(
+90deg,
+transparent,
+rgba(99,102,241,.4),
+transparent
+);
+z-index:0;
 }
 
 .timeline-step{
 background:var(--bg-elevated);
-padding:25px;
+padding:30px;
 border-radius:var(--radius-lg);
-position:relative;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+gap:12px;
+min-height:180px;
+transition:.35s;
 }
 
 .timeline-step span{
@@ -802,7 +828,40 @@ color:#fff;
 font-weight:700;
 margin-bottom:12px;
 }
+.step-icon{
+width:48px;
+height:48px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:12px;
+background:var(--gradient-primary);
+margin-bottom:10px;
+}
 
+.step-icon svg{
+width:24px;
+height:24px;
+color:white;
+}
+.timeline-step h4{
+font-size:16px;
+font-weight:700;
+margin-top:6px;
+}
+
+.timeline-step p{
+font-size:14px;
+color:var(--text-secondary);
+max-width:220px;
+}
+.timeline-step:hover{
+transform:translateY(-8px);
+box-shadow:
+0 15px 40px rgba(0,0,0,0.6),
+0 0 30px rgba(99,102,241,0.25);
+border:1px solid rgba(99,102,241,0.35);
+}
 
 /* =========================================================
 10. SERVICES LAYOUT + STICKY NAV
