@@ -1062,11 +1062,10 @@ color:var(--text-secondary);
 }
 
 .rcm-circle{
-width:1200px;
+width:1400px;
 height:520px;
 margin:120px auto;
 position:relative;
-transform:scaleX(1.7);
 }
 .rcm-core{
 
@@ -1156,7 +1155,7 @@ text-align:center;
 
 border:1px solid rgba(255,255,255,0.08);
 
-transform-origin:center;
+transform-origin:center 260px;
 scale:0.6 1;
 
 }
@@ -1190,50 +1189,45 @@ box-shadow:
 /* PERFECT ELLIPSE ROTATION */
 
 .rcm-node:nth-child(2){
-transform:rotate(0deg) translateY(-240px) rotate(0deg);
+transform:rotate(0deg) translateY(-260px) rotate(0deg);
 }
 
 .rcm-node:nth-child(3){
-transform:rotate(36deg) translateY(-240px) rotate(-36deg);
+transform:rotate(36deg) translateY(-260px) rotate(-36deg);
 }
 
 .rcm-node:nth-child(4){
-transform:rotate(72deg) translateY(-240px) rotate(-72deg);
+transform:rotate(72deg) translateY(-260px) rotate(-72deg);
 }
 
 .rcm-node:nth-child(5){
-transform:rotate(108deg) translateY(-240px) rotate(-108deg);
+transform:rotate(108deg) translateY(-260px) rotate(-108deg);
 }
 
 .rcm-node:nth-child(6){
-transform:rotate(144deg) translateY(-240px) rotate(-144deg);
+transform:rotate(144deg) translateY(-260px) rotate(-144deg);
 }
 
 .rcm-node:nth-child(7){
-transform:rotate(180deg) translateY(-240px) rotate(-180deg);
+transform:rotate(180deg) translateY(-260px) rotate(-180deg);
 }
 
 .rcm-node:nth-child(8){
-transform:rotate(216deg) translateY(-240px) rotate(-216deg);
+transform:rotate(216deg) translateY(-260px) rotate(-216deg);
 }
 
 .rcm-node:nth-child(9){
-transform:rotate(252deg) translateY(-240px) rotate(-252deg);
+transform:rotate(252deg) translateY(-260px) rotate(-252deg);
 }
 
 .rcm-node:nth-child(10){
-transform:rotate(288deg) translateY(-240px) rotate(-288deg);
+transform:rotate(288deg) translateY(-260px) rotate(-288deg);
 }
 
 .rcm-node:nth-child(11){
-transform:rotate(324deg) translateY(-240px) rotate(-324deg);
+transform:rotate(324deg) translateY(-260px) rotate(-324deg);
 }
 
-/* RESPONSIVE */
-
-.rcm-circle{
-width:420px;
-height:420px;
 .rcm-circle::before{
 
 content:"";
