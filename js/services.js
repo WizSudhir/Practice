@@ -1,25 +1,26 @@
 // ===============================
-// 12. Activated Service Navigation (Services Page)
+// Services Navigation Highlight
 // ===============================
+
 const sections = document.querySelectorAll(".rcm-phase");
 const navLinks = document.querySelectorAll(".services-nav a");
 
-window.addEventListener("scroll", () => {
+function updateNav(){
 
 let current = "";
 
 sections.forEach(section => {
 
 const sectionTop = section.offsetTop - 200;
-const sectionHeight = section.clientHeight;
 
-if(pageYOffset >= sectionTop){
+if(window.pageYOffset >= sectionTop){
 current = section.getAttribute("id");
 }
 
 });
 
 navLinks.forEach(link => {
+
 link.classList.remove("active");
 
 if(link.getAttribute("href") === "#" + current){
@@ -28,19 +29,61 @@ link.classList.add("active");
 
 });
 
+}
+
+
+// ===============================
+// Hero Scroll Story
+// ===============================
+
+const hero = document.querySelector(".pg-hero");
+const stages = document.querySelectorAll(".pg-stage");
+
+function updateHeroStages(){
+
+if(!hero) return;
+
+let rect = hero.getBoundingClientRect();
+
+let progress = -rect.top / (hero.offsetHeight - window.innerHeight);
+
+progress = Math.max(0, Math.min(1, progress));
+
+let stageIndex = Math.floor(progress * (stages.length - 1));
+
+stages.forEach((stage,i)=>{
+
+stage.style.opacity = (i === stageIndex) ? "1" : "0";
+
 });
+
+}
+
+
 // ===============================
-// 12. Interactive ROI Calculator (Services Page)
+// ONE Scroll Listener (better)
 // ===============================
+
+window.addEventListener("scroll", () => {
+
+updateNav();
+updateHeroStages();
+
+});
+
+
+// ===============================
+// ROI Calculator
+// ===============================
+
 function calculateRevenue(){
 
-let claims = document.getElementById("claims").value;
-let reimbursement = document.getElementById("reimbursement").value;
-let denial = document.getElementById("denial").value;
+let claims = document.getElementById("claims").value || 0;
+let reimbursement = document.getElementById("reimbursement").value || 0;
+let denial = document.getElementById("denial").value || 0;
 
 let monthlyRevenue = claims * reimbursement;
 let lostRevenue = monthlyRevenue * (denial / 100);
-
 let yearlyLoss = lostRevenue * 12;
 
 document.getElementById("roiResult").innerText =
@@ -48,9 +91,11 @@ document.getElementById("roiResult").innerText =
 
 }
 
+
 // ===============================
-// 13. RCM Maturity Score Gauge (Services Page)
+// RCM Score Gauge
 // ===============================
+
 function calculateRCMScore(){
 
 let q1 = parseInt(document.getElementById("q1").value);
@@ -63,45 +108,42 @@ let score = Math.round((total / 9) * 100);
 
 document.getElementById("scoreValue").innerText = score;
 
-
-let label = "";
+let label="";
 
 if(score >= 80){
-
-label = "Excellent Revenue Cycle Performance";
-
+label="Excellent Revenue Cycle Performance";
 }
-
 else if(score >= 50){
-
-label = "Moderate Optimization Opportunity";
-
+label="Moderate Optimization Opportunity";
 }
-
 else{
-
-label = "High Revenue Leakage Risk";
-
+label="High Revenue Leakage Risk";
 }
 
 document.getElementById("scoreLabel").innerText = label;
 
-
 /* animate gauge */
 
 let circumference = 251;
-
 let offset = circumference - (score / 100) * circumference;
 
 document.getElementById("gaugeFill")
 .style.strokeDashoffset = offset;
 
 }
+
+
 // ===============================
-// 13. Hero Revenue Counter
+// Hero Revenue Counter
 // ===============================
 
+let revenueStarted = false;
+
 function startRevenueCounter(){
+
+if(revenueStarted) return;
+
+revenueStarted = true;
 
 let counter=document.getElementById("revenueCounter");
 
@@ -125,48 +167,31 @@ counter.innerText="$"+value.toLocaleString();
 
 }
 
+const revenueSection = document.querySelector(".stage-cta");
+
+if(revenueSection){
+
 const revenueObserver = new IntersectionObserver((entries)=>{
 
 entries.forEach(entry=>{
-
 if(entry.isIntersecting){
-
 startRevenueCounter();
-
 }
-
 });
 
 },{threshold:0.6});
 
-revenueObserver.observe(document.querySelector(".stage-cta"));
+revenueObserver.observe(revenueSection);
+
+}
+
+
 // ===============================
-// Hero Stages Effect (Services Page)
+// Dashboard Metrics Animation
 // ===============================
 
-const hero = document.querySelector(".pg-hero");
-const stages = document.querySelectorAll(".pg-stage");
+let metricsStarted=false;
 
-window.addEventListener("scroll", ()=>{
-
-let rect = hero.getBoundingClientRect();
-
-let progress = -rect.top / (hero.offsetHeight - window.innerHeight);
-
-progress = Math.max(0, Math.min(1, progress));
-
-let stageIndex = Math.floor(progress * stages.length);
-
-stages.forEach((stage,i)=>{
-
-stage.style.opacity = (i === stageIndex) ? "1" : "0";
-
-});
-
-});
-// ===============================
-// 13. Hero Metrices count number (Services Page)
-// ===============================
 function animateMetric(id,target,suffix=""){
 
 let el=document.getElementById(id);
@@ -180,11 +205,8 @@ let interval=setInterval(()=>{
 value+=step;
 
 if(value>=target){
-
 value=target;
-
 clearInterval(interval);
-
 }
 
 el.innerText=Math.floor(value)+suffix;
@@ -195,6 +217,10 @@ el.innerText=Math.floor(value)+suffix;
 
 function startMetrics(){
 
+if(metricsStarted) return;
+
+metricsStarted=true;
+
 animateMetric("metric1",98,"%");
 animateMetric("metric2",28);
 animateMetric("metric3",30,"%");
@@ -202,23 +228,27 @@ animateMetric("metric4",35,"%");
 
 }
 
-const metricsObserver = new IntersectionObserver((entries)=>{
+const metricsSection=document.querySelector(".stage-dashboard");
+
+if(metricsSection){
+
+const metricsObserver=new IntersectionObserver((entries)=>{
 
 entries.forEach(entry=>{
-
 if(entry.isIntersecting){
-
 startMetrics();
-
 }
-
 });
 
 },{threshold:0.6});
 
-metricsObserver.observe(document.querySelector(".stage-dashboard"));
+metricsObserver.observe(metricsSection);
+
+}
+
 
 // ===============================
-// LUCID icons activate
+// Lucide Icons
 // ===============================
+
 lucide.createIcons();
