@@ -173,7 +173,7 @@ HERO STAGE BACKGROUNDS
 .stage-dashboard,
 .stage-revenue{
 background:
-linear-gradient(rgba(5,10,25,.45), rgba(5,10,25,.65))
+linear-gradient(rgba(5,10,25,.45), rgba(5,10,25,.65)),
 url("../images/hero-intro.jpg");
 background-size:cover;
 background-position:center;
