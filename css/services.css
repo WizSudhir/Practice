@@ -21,6 +21,23 @@ height:400vh;
 position:relative;
 background:#050a19;
 }
+.pg-hero::before{
+content:"";
+position:absolute;
+width:800px;
+height:800px;
+background:radial-gradient(circle,#6366f1 0%,transparent 70%);
+top:-200px;
+left:-200px;
+opacity:.35;
+filter:blur(140px);
+animation:heroGlow 14s infinite alternate ease-in-out;
+pointer-events:none;
+}
+@keyframes heroGlow{
+0%{transform:translate(0,0)}
+100%{transform:translate(200px,150px)}
+}
 .pg-stage{
 position:absolute;
 top:0;
@@ -43,6 +60,9 @@ transition:opacity .6s ease, transform .6s ease;
 text-align:center;
 z-index:1;
 padding:140px 60px 60px;
+backdrop-filter: blur(10px);
+border:1px solid rgba(255,255,255,0.08);
+box-shadow:0 20px 60px rgba(0,0,0,0.6);
 }
 .pg-stage:hover{
 transform:scale(1.02);
