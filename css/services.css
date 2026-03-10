@@ -541,10 +541,28 @@ pointer-events:none;
 font-size:44px;
 text-align:center;
 margin-bottom:20px;
-
 background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
+}
+.snapshot-title::after{
+content:"";
+display:block;
+width:120px;
+height:3px;
+margin:18px auto 0;
+background:linear-gradient(
+90deg,
+transparent,
+#6366f1,
+#3b82f6,
+transparent
+);
+animation:lineMove 4s linear infinite;
+}
+@keyframes lineMove{
+0%{background-position:0%}
+100%{background-position:200%}
 }
 .snapshot-section .container{
 max-width:1200px;
