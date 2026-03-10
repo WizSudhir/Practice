@@ -263,4 +263,4 @@ lucide.createIcons();
 // ===============================
 // Update Hero Stages
 // ===============================
-updateHeroStages();
+window.addEventListener("load", updateHeroStages);
