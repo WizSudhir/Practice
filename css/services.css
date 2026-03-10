@@ -112,6 +112,15 @@ transform:translateY(0);
 opacity:1;
 transform:translateY(0);
 }
+.stage-pipeline .node{
+opacity:0;
+transform:translateY(20px);
+transition:.4s;
+}
+.stage-pipeline.active .node{
+opacity:1;
+transform:translateY(0);
+}
 .pg-title{
 font-size:56px;
 line-height:1.1;
