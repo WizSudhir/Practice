@@ -53,7 +53,11 @@ let stageIndex = Math.floor(progress * (stages.length - 1));
 
 stages.forEach((stage,i)=>{
 
-stage.style.opacity = (i === stageIndex) ? "1" : "0";
+stage.classList.remove("active");
+
+if(i === stageIndex){
+stage.classList.add("active");
+}
 
 });
 
