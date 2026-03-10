@@ -3,7 +3,6 @@
    Uses global tokens from index.css
 ========================================================= */
 
-
 /* =========================================================
 1. HERO SECTION
 ========================================================= */
@@ -118,17 +117,13 @@ margin:auto;
 font-size:18px;
 margin-bottom:40px;
 }
-
 .pg-buttons{
 display:flex;
 gap:20px;
 justify-content:center;
 flex-wrap:wrap;
 }
-/* =========================================================
-2. PIPELINE VISUAL
-========================================================= */
-
+/* PIPELINE VISUAL */
 .pipeline{
 display:flex;
 gap:20px;
@@ -136,7 +131,6 @@ flex-wrap:wrap;
 justify-content:center;
 margin-top:40px;
 }
-
 .node{
 padding:12px 20px;
 border-radius:40px;
@@ -156,7 +150,6 @@ animation:pulseNode 3s infinite ease-in-out;
 background:var(--gradient-primary);
 color:#fff;
 }
-
 .node.success{
 background:#22c55e;
 color:#fff;
@@ -165,9 +158,7 @@ color:#fff;
 box-shadow:0 0 15px rgba(99,102,241,0.5);
 transform:translateY(-2px);
 }
-/* ========================================
-HERO STAGE BACKGROUNDS
-======================================== */
+/* HERO STAGE BACKGROUNDS */
 .stage-intro,
 .stage-pipeline,
 .stage-dashboard,
@@ -183,10 +174,7 @@ animation:heroZoom 18s ease-in-out infinite alternate;
 0%{background-size:100%}
 100%{background-size:110%}
 }
-/* =========================================================
-3. DASHBOARD METRICS
-========================================================= */
-
+/* DASHBOARD METRICS */
 .dashboard{
 display:grid;
 grid-template-columns:repeat(4,1fr);
@@ -194,7 +182,6 @@ gap:30px;
 margin-top:40px;
 align-items:center;
 }
-
 .metric{
 background:var(--bg-elevated);
 padding:28px;
@@ -214,7 +201,6 @@ font-size:14px;
 color:var(--text-secondary);
 margin-bottom:8px;
 }
-
 .metric:hover{
 transform:translateY(-6px);
 box-shadow:
@@ -222,7 +208,6 @@ box-shadow:
 0 0 25px rgba(99,102,241,0.3);
 border:1px solid rgba(99,102,241,0.4);
 }
-
 .metric span{
 margin-top:auto;
 font-size:36px;
@@ -238,7 +223,6 @@ justify-content:center;
 align-items:center;
 margin-bottom:8px;
 }
-
 .metric-icon svg{
 width:28px;
 height:28px;
@@ -248,20 +232,15 @@ stroke-width:2;
 transform:scale(1.15);
 transition:transform .3s ease;
 }
-/* =========================================================
-4. REVENUE COUNTER
-========================================================= */
-
+/* REVENUE COUNTER */
 .revenue-live{
 margin:40px 0;
 }
-
 .revenue-live span{
 display:block;
 color:var(--text-secondary);
 margin-bottom:10px;
 }
-
 .revenue-live h3{
 font-size:48px;
 font-weight:800;
@@ -270,9 +249,8 @@ background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
 -webkit-text-fill-color:transparent;
 }
 
-
 /* =========================================================
-5. CALCULATOR SECTION
+2. CALCULATOR SECTION
 ========================================================= */
 
 .calc-layout{
