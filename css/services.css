@@ -1162,36 +1162,33 @@ box-shadow:
 
 }
 
-/* ===== TRUE ELLIPTICAL POSITIONS ===== */
+/* ===== PERFECT 10 POINT ELLIPSE ===== */
 
 .rcm-node:nth-child(2){ top:-10px; left:395px;}      /* Scheduling */
 
-.rcm-node:nth-child(3){ top:60px; left:640px;}       /* Insurance */
+.rcm-node:nth-child(3){ top:40px; left:600px;}       /* Insurance */
 
-.rcm-node:nth-child(4){ top:210px; left:760px;}      /* Authorization */
+.rcm-node:nth-child(4){ top:160px; left:760px;}      /* Authorization */
 
-.rcm-node:nth-child(5){ top:370px; left:640px;}      /* Scribing */
+.rcm-node:nth-child(5){ top:330px; left:720px;}      /* Scribing */
 
-.rcm-node:nth-child(6){ top:440px; left:395px;}      /* Coding */
+.rcm-node:nth-child(6){ top:440px; left:500px;}      /* Coding */
 
-.rcm-node:nth-child(7){ top:370px; left:150px;}      /* Claim Submission */
+.rcm-node:nth-child(7){ top:440px; left:280px;}      /* Claim Submit */
 
-.rcm-node:nth-child(8){ top:210px; left:30px;}       /* Payment Posting */
+.rcm-node:nth-child(8){ top:330px; left:80px;}       /* Payment Posting */
 
-.rcm-node:nth-child(9){ top:60px; left:150px;}       /* AR Followup */
+.rcm-node:nth-child(9){ top:160px; left:40px;}       /* AR Followup */
 
-.rcm-node:nth-child(10){ top:150px; left:395px;}     /* Denial */
+.rcm-node:nth-child(10){ top:40px; left:200px;}      /* Denial */
 
-.rcm-node:nth-child(11){ top:300px; left:395px;}     /* Analytics */
+.rcm-node:nth-child(11){ top:0px; left:250px;}     /* Analytics */
 
 /* RESPONSIVE */
-
-@media(max-width:900px){
 
 .rcm-circle{
 width:420px;
 height:420px;
-}
 .rcm-circle::before{
 
 content:"";
