@@ -160,23 +160,32 @@ margin-top:40px;
 }
 
 .metric{
-background:var(--bg-elevated);
+
+background:rgba(15,23,42,0.65);
+backdrop-filter:blur(12px);
 padding:30px;
 border-radius:var(--radius-lg);
-border:1px solid rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.12);
+box-shadow:
+0 10px 30px rgba(0,0,0,0.4),
+inset 0 1px 0 rgba(255,255,255,0.05);
 transition:.35s;
 display:flex;
 flex-direction:column;
 justify-content:space-between;
 height:150px;
+position:relative;
+overflow:hidden;
 }
 .metric h3{
 font-size:16px;
 }
 
 .metric:hover{
-transform:translateY(-8px);
-box-shadow:var(--shadow-hover);
+transform:translateY(-10px);
+box-shadow:
+0 20px 50px rgba(59,130,246,0.35);
+border:1px solid rgba(147,197,253,0.5);
 }
 
 .metric span{
@@ -187,7 +196,16 @@ background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
-
+.metric::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+right:0;
+height:3px;
+background:linear-gradient(90deg,#6366f1,#3b82f6,#22c55e);
+opacity:.8;
+}
 
 /* =========================================================
 4. REVENUE COUNTER
