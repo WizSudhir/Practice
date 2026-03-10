@@ -96,7 +96,7 @@ max-width:900px;
 position:relative;
 background:
 linear-gradient(rgba(5,10,25,0.75), rgba(5,10,25,0.9)),
-url("../images/rcm-hero.jpg");
+url("images/rcm-hero.jpg");
 background-size:cover;
 background-position:center;
 background-repeat:no-repeat;
