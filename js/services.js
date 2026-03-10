@@ -233,3 +233,24 @@ lucide.createIcons();
 window.addEventListener("load", () => {
 updateHeroStages();
 });
+// ===============================
+// RCM Timeline Circular Layout
+// ===============================
+const steps = document.querySelectorAll(".rcm-step");
+let current = 0;
+
+function animateRCM(){
+
+steps.forEach(s => s.classList.remove("active"));
+
+steps[current].classList.add("active");
+
+current++;
+
+if(current >= steps.length){
+current = 0;
+}
+
+}
+
+setInterval(animateRCM, 1200);
