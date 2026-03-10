@@ -194,7 +194,18 @@ el.innerText=value+suffix;
 
 }
 
-let metricsStarted = false;
+function startMetrics(){
+
+animateMetric("metric1",98,"%");
+animateMetric("metric2",28);
+animateMetric("metric3",30,"%");
+animateMetric("metric4",35,"%");
+
+}
+
+/* repeat animation */
+
+let metricsRunning = false;
 
 window.addEventListener("scroll", () => {
 
@@ -204,14 +215,17 @@ if(!dashboard) return;
 
 let rect = dashboard.getBoundingClientRect();
 
-if(!metricsStarted && rect.top < window.innerHeight){
+if(rect.top < window.innerHeight && !metricsRunning){
 
-metricsStarted = true;
+metricsRunning = true;
 
-animateMetric("metric1",98,"%");
-animateMetric("metric2",28);
-animateMetric("metric3",30,"%");
-animateMetric("metric4",35,"%");
+startMetrics();
+
+/* restart after delay */
+
+setTimeout(()=>{
+metricsRunning=false;
+},4000);
 
 }
 
