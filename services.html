@@ -178,11 +178,20 @@ Request Free Revenue Audit
 
 <div class="calc-grid">
 
-<input id="claims" type="number" placeholder="Monthly Claims">
+<div class="calc-field">
+<label for="claims">Monthly Claims</label>
+<input id="claims" type="number">
+</div>
 
-<input id="reimbursement" type="number" placeholder="Average Reimbursement">
+<div class="calc-field">
+<label for="reimbursement">Average Reimbursement ($)</label>
+<input id="reimbursement" type="number">
+</div>
 
-<input id="denial" type="number" placeholder="Denial Rate (%)">
+<div class="calc-field">
+<label for="denial">Denial Rate (%)</label>
+<input id="denial" type="number">
+</div>
 
 <button onclick="calculateRevenue()" class="btn-primary">
 Calculate Revenue Loss
