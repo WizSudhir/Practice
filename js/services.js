@@ -256,5 +256,3 @@ rcmIndex = 0;
 
 setInterval(animateRCM,1200);
 }
-
-setInterval(animateRCM, 1200);
