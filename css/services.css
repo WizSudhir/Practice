@@ -1104,19 +1104,14 @@ border-radius:50%;
 border:1px dashed rgba(99,102,241,.35);
 animation:spinSlowReverse 22s linear infinite;
 }
-
 @keyframes spinSlow{
-
-0%{transform:rotate(0deg)}
-100%{transform:rotate(360deg)}
-
+0%{transform:translate(-50%,-50%) rotate(0deg)}
+100%{transform:translate(-50%,-50%) rotate(360deg)}
 }
 
 @keyframes spinSlowReverse{
-
-0%{transform:rotate(360deg)}
-100%{transform:rotate(0deg)}
-
+0%{transform:translate(-50%,-50%) rotate(360deg)}
+100%{transform:translate(-50%,-50%) rotate(0deg)}
 }
 /* RCM ENGINE (CENTER) */
 
@@ -1280,14 +1275,14 @@ animation:dataFlow 4s linear infinite;
 100%{stroke-dashoffset:40}
 }
 .rcm-circle .orbit{
-
 position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
 width:420px;
 height:420px;
 border-radius:50%;
-
 animation:orbit 12s linear infinite;
-
 }
 
 .orbit::before{
@@ -1302,8 +1297,8 @@ background:#6366f1;
 border-radius:50%;
 
 position:absolute;
-top:-5px;
-left:50%;
+top:-6px;
+left:calc(50% - 5px);
 
 box-shadow:0 0 15px #6366f1;
 
