@@ -1179,7 +1179,7 @@ box-shadow:
 .rcm-node:nth-child(8){grid-column:2;grid-row:4;}  /* Payment Posting */
 .rcm-node:nth-child(9){grid-column:1;grid-row:4;} /* AR Followup */
 
-.rcm-node:nth-child(10){grid-column:2;grid-row:3;} /* Denial */
+.rcm-node:nth-child(10){grid-column:1;grid-row:3;} /* Denial */
 .rcm-node:nth-child(11){grid-column:1;grid-row:2;} /* Analytics */
 
 /* ENGINE PULSE */
