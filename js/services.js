@@ -153,13 +153,7 @@ document.getElementById("gaugeFill")
 // Hero Revenue Counter
 // ===============================
 
-let revenueStarted = false;
-
 function startRevenueCounter(){
-
-if(revenueStarted) return;
-
-revenueStarted = true;
 
 let counter=document.getElementById("revenueCounter");
 
@@ -182,14 +176,13 @@ counter.innerText="$"+value.toLocaleString();
 },30);
 
 }
-
-
+function resetRevenue(){
+document.getElementById("revenueCounter").innerText="$0";
+}
 
 // ===============================
 // Dashboard Metrics Animation
 // ===============================
-
-let metricsStarted=false;
 
 function animateMetric(id,target,suffix=""){
 
@@ -215,18 +208,17 @@ el.innerText=Math.floor(value)+suffix;
 }
 
 function startMetrics(){
-
-if(metricsStarted) return;
-
-metricsStarted=true;
-
 animateMetric("metric1",98,"%");
 animateMetric("metric2",28);
 animateMetric("metric3",30,"%");
 animateMetric("metric4",35,"%");
-
 }
-
+function resetMetrics(){
+document.getElementById("metric1").innerText="0";
+document.getElementById("metric2").innerText="0";
+document.getElementById("metric3").innerText="0";
+document.getElementById("metric4").innerText="0";
+}
 // ===============================
 // Lucide Icons
 // ===============================
