@@ -205,8 +205,11 @@ window.addEventListener("scroll", () => {
 
 let dashboard = document.querySelector(".stage-dashboard");
 
-if(!metricsStarted &&
-window.scrollY + window.innerHeight > dashboard.offsetTop + 100){
+if(!dashboard) return;
+
+let rect = dashboard.getBoundingClientRect();
+
+if(!metricsStarted && rect.top < window.innerHeight){
 
 metricsStarted = true;
 
