@@ -59,6 +59,7 @@ text-align:center;
 z-index:1;
 padding:140px 60px 60px;
 backdrop-filter: blur(10px);
+pointer-events:none;
 }
 .pg-stage:hover{
 transform:scale(1.02);
@@ -73,6 +74,7 @@ opacity:1;
 transform:translateY(0) scale(1);
 filter:blur(0);
 z-index:2;
+pointer-events:auto;
 }
 .pg-stage > *{
 max-width:900px;
