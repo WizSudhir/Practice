@@ -1142,3 +1142,33 @@ background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
+.claim-particles{
+position:absolute;
+inset:0;
+pointer-events:none;
+overflow:hidden;
+}
+
+.claim-particles span{
+position:absolute;
+width:8px;
+height:8px;
+background:#6366f1;
+border-radius:50%;
+opacity:.8;
+animation:claimFlow 6s linear infinite;
+}
+
+@keyframes claimFlow{
+0%{
+transform:translateX(-50px);
+opacity:0;
+}
+30%{
+opacity:1;
+}
+100%{
+transform:translateX(110vw);
+opacity:0;
+}
+}
