@@ -351,20 +351,49 @@ display:inline-block;
 ========================================================= */
 
 .rcm-score-section{
-background:var(--bg-secondary);
+position:relative;
+background:
+radial-gradient(circle at 20% 30%, rgba(99,102,241,0.18), transparent 40%),
+radial-gradient(circle at 80% 70%, rgba(59,130,246,0.18), transparent 40%),
+#050a19;
+overflow:hidden;
 }
-
+.rcm-score-section::before{
+content:"";
+position:absolute;
+width:700px;
+height:700px;
+background:radial-gradient(circle,#6366f1 0%,transparent 70%);
+top:-200px;
+right:-200px;
+opacity:.35;
+filter:blur(120px);
+animation:rcmGlow 16s infinite alternate ease-in-out;
+pointer-events:none;
+}
+@keyframes rcmGlow{
+0%{transform:translate(0,0)}
+100%{transform:translate(-120px,80px)}
+}
+.rcm-score-section::after{
+content:"";
+position:absolute;
+inset:0;
+background-image:
+linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+background-size:60px 60px;
+pointer-events:none;
+}
 .rcm-score-layout{
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:60px;
 margin-top:60px;
 }
-
 .question{
 margin-bottom:25px;
 }
-
 .question select{
 width:100%;
 padding:14px;
@@ -373,17 +402,14 @@ background:var(--bg-primary);
 border:1px solid rgba(255,255,255,0.08);
 color:var(--text-primary);
 }
-
 .rcm-gauge-box{
 text-align:center;
 }
-
 .gauge{
 width:260px;
 margin:auto;
 position:relative;
 }
-
 .score-number{
 position:absolute;
 bottom:20px;
@@ -392,7 +418,13 @@ transform:translateX(-50%);
 font-size:38px;
 font-weight:800;
 }
-
+.rcm-questions{
+background:rgba(10,15,35,0.6);
+padding:40px;
+border-radius:var(--radius-lg);
+backdrop-filter:blur(12px);
+border:1px solid rgba(255,255,255,0.05);
+}
 
 /* =========================================================
 7. SNAPSHOT CARDS
