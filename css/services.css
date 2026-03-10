@@ -172,7 +172,7 @@ box-shadow:var(--shadow-hover);
 .metric span{
 font-size:40px;
 font-weight:800;
-background:var(--gradient-primary);
+background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
@@ -195,7 +195,7 @@ margin-bottom:10px;
 .revenue-live h3{
 font-size:48px;
 font-weight:800;
-background:var(--gradient-primary);
+background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
