@@ -144,21 +144,22 @@ revenueObserver.observe(document.querySelector(".stage-cta"));
 // Hero Stages Effect (Services Page)
 // ===============================
 
+const hero = document.querySelector(".pg-hero");
 const stages = document.querySelectorAll(".pg-stage");
 
-window.addEventListener("scroll", () => {
+window.addEventListener("scroll", ()=>{
 
-let trigger = window.scrollY + window.innerHeight * 0.8;
+let rect = hero.getBoundingClientRect();
 
-stages.forEach(stage => {
+let progress = -rect.top / (hero.offsetHeight - window.innerHeight);
 
-let stageTop = stage.offsetTop;
+progress = Math.max(0, Math.min(1, progress));
 
-if(trigger > stageTop && !stage.classList.contains("visible")){
+let stageIndex = Math.floor(progress * stages.length);
 
-stage.classList.add("visible");
+stages.forEach((stage,i)=>{
 
-}
+stage.style.opacity = (i === stageIndex) ? "1" : "0";
 
 });
 
