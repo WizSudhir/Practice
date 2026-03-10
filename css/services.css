@@ -56,7 +56,7 @@ opacity:0;
 transform:translateY(40px) scale(.96);
 transition:opacity .6s ease, transform .6s ease;
 text-align:center;
-z-index:1;
+z-index:0;
 padding:140px 60px 60px;
 backdrop-filter:none;
 pointer-events:none;
@@ -76,7 +76,7 @@ border:1px solid rgba(99,102,241,0.4);
 opacity:1;
 transform:translateY(0) scale(1);
 filter:blur(0);
-z-index:2;
+z-index:5;
 pointer-events:auto;
 }
 .pg-stage > *{
