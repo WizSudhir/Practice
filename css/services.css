@@ -23,7 +23,6 @@ background:
 radial-gradient(circle at 20% 20%, rgba(99,102,241,0.15), transparent 40%),
 radial-gradient(circle at 80% 70%, rgba(59,130,246,0.15), transparent 40%),
 #050a19;
-overflow:hidden;
 }
 .pg-hero::before{
 content:"";
