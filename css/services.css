@@ -1080,37 +1080,29 @@ position:relative;
 
 }
 .rcm-circle::before{
-
 content:"";
-
 position:absolute;
-
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
 width:480px;
 height:480px;
-
 border-radius:50%;
-
 border:1px dashed rgba(99,102,241,.25);
-
 animation:spinSlow 30s linear infinite;
-
 }
 
 .rcm-circle::after{
-
 content:"";
-
 position:absolute;
-
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
 width:340px;
 height:340px;
-
 border-radius:50%;
-
 border:1px dashed rgba(99,102,241,.35);
-
 animation:spinSlowReverse 22s linear infinite;
-
 }
 
 @keyframes spinSlow{
@@ -1190,9 +1182,17 @@ text-align:center;
 border:1px solid rgba(255,255,255,0.08);
 
 transition:all .3s ease;
-
+animation:nodeGlow 8s infinite;
 }
-
+@keyframes nodeGlow{
+0%{box-shadow:none}
+50%{
+box-shadow:
+0 0 12px rgba(99,102,241,.7),
+0 0 20px rgba(99,102,241,.4);
+}
+100%{box-shadow:none}
+}
 .rcm-node svg{
 width:26px;
 height:26px;
