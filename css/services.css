@@ -40,9 +40,11 @@ rgba(15,23,42,0.9)
 opacity:0;
 transform:scale(.95);
 transition:opacity .6s ease, transform .6s ease;
+text-align:center;
+z-index:1;
 }
 .pg-stage:hover{
-transform:translate(-50%,-52%) scale(1.02);
+transform:scale(1.02);
 box-shadow:
 0 35px 90px rgba(0,0,0,0.7),
 0 0 40px rgba(99,102,241,0.35),
@@ -51,12 +53,13 @@ border:1px solid rgba(99,102,241,0.4);
 }
 .pg-stage.active{
 opacity:1;
-transform:translate(-50%,-50%) scale(1);
+transform:scale(1);
 filter:blur(0);
+z-index:2;
 }
-.pg-stage.visible{
-opacity:1;
-transform:translateY(0);
+.pg-stage > *{
+max-width:900px;
+width:100%;
 }
 .stage-pipeline .node{
 opacity:0;
