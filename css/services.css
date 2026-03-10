@@ -92,15 +92,6 @@ transform:translateY(0);
 .stage-pipeline .pipeline{
 max-width:900px;
 }
-.stage-intro{
-position:relative;
-background:
-linear-gradient(rgba(5,10,25,0.75), rgba(5,10,25,0.9)),
-url("images/rcm-hero.jpg");
-background-size:cover;
-background-position:center;
-background-repeat:no-repeat;
-}
 .pg-title{
 font-size:56px;
 line-height:1.1;
@@ -170,6 +161,41 @@ color:#fff;
 .node:hover{
 box-shadow:0 0 15px rgba(99,102,241,0.5);
 transform:translateY(-2px);
+}
+/* ========================================
+HERO STAGE BACKGROUNDS
+======================================== */
+
+.stage-intro{
+background:
+linear-gradient(rgba(5,10,25,.75), rgba(5,10,25,.9)),
+url("../images/hero-intro.jpg");
+background-size:cover;
+background-position:center;
+}
+
+.stage-pipeline{
+background:
+linear-gradient(rgba(5,10,25,.75), rgba(5,10,25,.9)),
+url("../images/hero-pipeline.jpg");
+background-size:cover;
+background-position:center;
+}
+
+.stage-dashboard{
+background:
+linear-gradient(rgba(5,10,25,.75), rgba(5,10,25,.9)),
+url("../images/hero-dashboard.jpg");
+background-size:cover;
+background-position:center;
+}
+
+.stage-revenue{
+background:
+linear-gradient(rgba(5,10,25,.75), rgba(5,10,25,.9)),
+url("../images/hero-revenue.jpg");
+background-size:cover;
+background-position:center;
 }
 /* =========================================================
 3. DASHBOARD METRICS
