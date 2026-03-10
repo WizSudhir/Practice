@@ -205,16 +205,21 @@ background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
 -webkit-text-fill-color:transparent;
 }
 .metric-icon{
-font-size:36px;
-margin-bottom:14px;
 display:flex;
 justify-content:center;
 align-items:center;
-background:none;
-width:auto;
-height:auto;
+margin-bottom:14px;
 }
 
+.metric-icon svg{
+width:36px;
+height:36px;
+stroke-width:2;
+}
+.metric:hover svg{
+transform:scale(1.15);
+transition:transform .3s ease;
+}
 /* =========================================================
 4. REVENUE COUNTER
 ========================================================= */
