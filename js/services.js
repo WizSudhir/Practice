@@ -49,7 +49,10 @@ let progress = -rect.top / (hero.offsetHeight - window.innerHeight);
 
 progress = Math.max(0, Math.min(1, progress));
 
-let stageIndex = Math.floor(progress * (stages.length - 1));
+let stageIndex = Math.min(
+Math.floor(progress * stages.length),
+stages.length - 1
+);
 
 stages.forEach((stage,i)=>{
 
