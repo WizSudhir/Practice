@@ -43,27 +43,25 @@ function updateHeroStages(){
 
 if(!hero) return;
 
-const scrollY = window.scrollY;
 const heroTop = hero.offsetTop;
-const heroHeight = hero.offsetHeight - window.innerHeight;
+const heroHeight = hero.offsetHeight;
+const scrollPosition = window.scrollY + window.innerHeight/2;
 
-let progress = (scrollY - heroTop) / heroHeight;
+let progress = (scrollPosition - heroTop) / heroHeight;
 
 progress = Math.max(0, Math.min(1, progress));
 
-let stageIndex = Math.floor(progress * stages.length);
+const stageIndex = Math.floor(progress * stages.length);
 
-if(stageIndex >= stages.length){
-stageIndex = stages.length - 1;
+stages.forEach((stage, index)=>{
+stage.classList.remove("active");
+
+if(index === stageIndex){
+stage.classList.add("active");
 }
-
-stages.forEach((stage,i)=>{
-stage.classList.toggle("active", i === stageIndex);
 });
 
 }
-
-
 // ===============================
 // ONE Scroll Listener (better)
 // ===============================
