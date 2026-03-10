@@ -101,53 +101,45 @@ document.getElementById("gaugeFill")
 // 13. Hero Revenue Counter
 // ===============================
 
-let counterStarted=false;
-
 function startRevenueCounter(){
-
-if(counterStarted) return;
-
-counterStarted=true;
 
 let counter=document.getElementById("revenueCounter");
 
 let value=0;
-
 let target=2450000;
+
+counter.innerText="$0";
 
 let interval=setInterval(()=>{
 
 value+=25000;
 
+if(value>=target){
+value=target;
+clearInterval(interval);
+}
+
 counter.innerText="$"+value.toLocaleString();
 
-if(value>=target){
-clearInterval(interval);
-
-/* restart after pause */
-
-setTimeout(()=>{
-counterStarted=false;
-counter.innerText="$0";
-startRevenueCounter();
-},4000);
+},30);
 
 }
 
-},40);
+const revenueObserver = new IntersectionObserver((entries)=>{
 
-}
-window.addEventListener("scroll", () => {
+entries.forEach(entry=>{
 
-let cta = document.querySelector(".stage-cta");
-
-if(window.scrollY + window.innerHeight > cta.offsetTop){
+if(entry.isIntersecting){
 
 startRevenueCounter();
 
 }
 
 });
+
+},{threshold:0.6});
+
+revenueObserver.observe(document.querySelector(".stage-cta"));
 // ===============================
 // Hero Stages Effect (Services Page)
 // ===============================
@@ -177,20 +169,26 @@ stage.classList.add("visible");
 function animateMetric(id,target,suffix=""){
 
 let el=document.getElementById(id);
+
 let value=0;
+
+let step=target/40;
 
 let interval=setInterval(()=>{
 
-value+=Math.ceil(target/30);
+value+=step;
 
 if(value>=target){
+
 value=target;
+
 clearInterval(interval);
+
 }
 
-el.innerText=value+suffix;
+el.innerText=Math.floor(value)+suffix;
 
-},40);
+},30);
 
 }
 
@@ -203,33 +201,22 @@ animateMetric("metric4",35,"%");
 
 }
 
-/* repeat animation */
+const metricsObserver = new IntersectionObserver((entries)=>{
 
-let metricsRunning = false;
+entries.forEach(entry=>{
 
-window.addEventListener("scroll", () => {
-
-let dashboard = document.querySelector(".stage-dashboard");
-
-if(!dashboard) return;
-
-let rect = dashboard.getBoundingClientRect();
-
-if(rect.top < window.innerHeight && !metricsRunning){
-
-metricsRunning = true;
+if(entry.isIntersecting){
 
 startMetrics();
-
-/* restart after delay */
-
-setTimeout(()=>{
-metricsRunning=false;
-},4000);
 
 }
 
 });
+
+},{threshold:0.6});
+
+metricsObserver.observe(document.querySelector(".stage-dashboard"));
+
 // ===============================
 // LUCID icons activate
 // ===============================
