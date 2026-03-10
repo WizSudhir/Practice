@@ -39,6 +39,7 @@ left:-200px;
 opacity:.35;
 filter:blur(160px);
 animation:heroGlow 12s infinite alternate ease-in-out;
+pointer-events:none;
 }
 @keyframes heroGlow{
 0%{transform:translate(0,0) scale(1);}
@@ -53,6 +54,7 @@ radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
 background-size:40px 40px;
 opacity:.2;
 animation:gridMove 60s linear infinite;
+pointer-events:none;
 }
 @keyframes gridMove{
 0%{background-position:0 0;}
@@ -69,6 +71,8 @@ border:1px solid rgba(255,255,255,0.08);
 transition:opacity .6s ease, transform .6s ease;
 opacity:0;
 transform:translateY(40px);
+position:relative;
+z-index:2;
 }
 /* show first hero stage immediately */
 .stage-intro{
