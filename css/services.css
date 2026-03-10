@@ -1167,17 +1167,17 @@ box-shadow:
 
 /* GRID POSITIONS */
 
-.rcm-node:nth-child(2){grid-column:1;grid-row:1;}
-.rcm-node:nth-child(3){grid-column:2;grid-row:1;}
-.rcm-node:nth-child(4){grid-column:3;grid-row:1;}
+.rcm-node:nth-child(2){grid-column:1;grid-row:1;} /* Scheduling */
+.rcm-node:nth-child(3){grid-column:2;grid-row:1;} /* Verification */
+.rcm-node:nth-child(4){grid-column:3;grid-row:1;} /* Authorization */
 
-.rcm-node:nth-child(5){grid-column:3;grid-row:2;}
-.rcm-node:nth-child(6){grid-column:3;grid-row:3;}
+.rcm-node:nth-child(5){grid-column:3;grid-row:2;} /* Scribing */
+.rcm-node:nth-child(6){grid-column:3;grid-row:3;} /* Coding */
 
-.rcm-node:nth-child(7){grid-column:2;grid-row:4;}
+.rcm-node:nth-child(7){grid-column:3;grid-row:4;} /* Claim Submission */
 
-.rcm-node:nth-child(8){grid-column:1;grid-row:4;}
-.rcm-node:nth-child(9){grid-column:1;grid-row:3;}
+.rcm-node:nth-child(8){grid-column:2;grid-row:4;}  /* Payment Posting */
+.rcm-node:nth-child(9){grid-column:1;grid-row:4;} /* AR Followup */
 
 .rcm-node:nth-child(10){grid-column:2;grid-row:3;} /* Denial */
 .rcm-node:nth-child(11){grid-column:1;grid-row:2;} /* Analytics */
