@@ -64,24 +64,30 @@ pointer-events:none;
 max-width:900px;
 margin:80px auto;
 padding:60px 40px;
-background:rgba(15,23,42,0.55);
-backdrop-filter:blur(16px);
+background:linear-gradient(
+180deg,
+rgba(30,41,59,0.85),
+rgba(15,23,42,0.85)
+);
+backdrop-filter:blur(18px);
 border-radius:var(--radius-lg);
-border:1px solid rgba(255,255,255,0.12);
+border:1px solid rgba(148,163,184,0.25);
 box-shadow:
-0 20px 50px rgba(0,0,0,0.6),
-inset 0 1px 0 rgba(255,255,255,0.05);
-transition:opacity .6s ease, transform .6s ease;
+0 30px 80px rgba(0,0,0,0.65),
+0 0 0 1px rgba(255,255,255,0.04) inset;
+transition:all .45s ease;
 opacity:0;
 transform:translateY(40px);
 position:relative;
 z-index:2;
 }
 .pg-stage:hover{
-transform:translateY(-4px);
+transform:translateY(-6px);
 box-shadow:
-0 30px 80px rgba(0,0,0,0.7),
-0 0 40px rgba(99,102,241,0.15);
+0 35px 90px rgba(0,0,0,0.7),
+0 0 40px rgba(99,102,241,0.35),
+0 0 80px rgba(99,102,241,0.15);
+border:1px solid rgba(99,102,241,0.4);
 }
 /* show first hero stage immediately */
 .stage-intro{
@@ -170,20 +176,22 @@ display:grid;
 grid-template-columns:repeat(4,1fr);
 gap:30px;
 margin-top:40px;
+align-items:center;
 }
 
 .metric{
 background:var(--bg-elevated);
-padding:30px;
+padding:28px;
 border-radius:var(--radius-lg);
-border:1px solid rgba(255,255,255,0.05);
-transition:.35s;
+border:1px solid rgba(255,255,255,0.08);
 display:flex;
 flex-direction:column;
-justify-content:space-between;
-height:150px;
 align-items:center;
+justify-content:center;
 text-align:center;
+gap:8px;
+min-height:160px;
+transition:.35s;
 }
 .metric h3{
 font-size:14px;
@@ -192,28 +200,32 @@ margin-bottom:8px;
 }
 
 .metric:hover{
-transform:translateY(-8px);
-box-shadow:var(--shadow-hover);
+transform:translateY(-6px);
+box-shadow:
+0 10px 30px rgba(0,0,0,0.6),
+0 0 25px rgba(99,102,241,0.3);
+border:1px solid rgba(99,102,241,0.4);
 }
 
 .metric span{
 margin-top:auto;
-font-size:42px;
+font-size:36px;
 font-weight:800;
 background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
+line-height:1;
 }
 .metric-icon{
 display:flex;
 justify-content:center;
 align-items:center;
-margin-bottom:14px;
+margin-bottom:8px;
 }
 
 .metric-icon svg{
-width:36px;
-height:36px;
+width:28px;
+height:28px;
 stroke-width:2;
 }
 .metric:hover svg{
