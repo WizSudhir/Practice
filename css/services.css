@@ -1045,3 +1045,71 @@ grid-template-columns:1fr 1fr;
 }
 
 }
+/* =========================================================
+ RCM Timeline circular layout
+========================================================= */
+.rcm-system{
+text-align:center;
+padding:120px 0;
+}
+
+.rcm-circle{
+position:relative;
+width:600px;
+height:600px;
+margin:80px auto;
+border-radius:50%;
+}
+
+.rcm-center{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:180px;
+height:180px;
+border-radius:50%;
+background:linear-gradient(135deg,#6366f1,#3b82f6);
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+color:white;
+font-weight:700;
+box-shadow:0 0 40px rgba(99,102,241,.6);
+}
+
+.rcm-step{
+position:absolute;
+width:120px;
+height:120px;
+background:var(--bg-elevated);
+border-radius:16px;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:10px;
+border:1px solid rgba(255,255,255,0.05);
+transition:.4s;
+}
+
+/* Position around circle */
+
+.step1{ top:-20px; left:240px;}
+.step2{ top:80px; left:420px;}
+.step3{ top:240px; left:500px;}
+.step4{ top:420px; left:420px;}
+.step5{ bottom:-20px; left:240px;}
+.step6{ top:420px; left:40px;}
+.step7{ top:240px; left:-20px;}
+.step8{ top:80px; left:40px;}
+.step9{ top:160px; left:240px;}
+.step10{ bottom:160px; left:240px;}
+
+.rcm-step.active{
+background:var(--gradient-primary);
+color:white;
+box-shadow:0 0 25px rgba(99,102,241,.8);
+transform:scale(1.1);
+}
