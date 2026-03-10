@@ -17,23 +17,13 @@ align-items:center;
 justify-content:center;
 }
 .pg-hero{
-height:450vh;
+height:400vh;
 position:relative;
-overflow:hidden;
 background:
-radial-gradient(circle at 20% 30%, rgba(99,102,241,0.15), transparent 40%),
+radial-gradient(circle at 20% 20%, rgba(99,102,241,0.15), transparent 40%),
 radial-gradient(circle at 80% 70%, rgba(59,130,246,0.15), transparent 40%),
 #050a19;
-}
-.pg-hero::after{
-content:"";
-position:absolute;
-inset:0;
-background-image:
-radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
-background-size:40px 40px;
-opacity:.25;
-pointer-events:none;
+overflow:hidden;
 }
 .pg-hero::before{
 content:"";
@@ -131,15 +121,6 @@ gap:20px;
 justify-content:center;
 flex-wrap:wrap;
 }
-.pg-panel{
-background:rgba(15,23,42,0.6);
-backdrop-filter:blur(12px);
-border-radius:20px;
-border:1px solid rgba(255,255,255,0.08);
-padding:50px;
-box-shadow:0 30px 80px rgba(0,0,0,0.6);
-}
-
 /* =========================================================
 2. PIPELINE VISUAL
 ========================================================= */
