@@ -155,23 +155,27 @@ const stages = document.querySelectorAll(".pg-stage");
 
 window.addEventListener("scroll", () => {
 
-let scrollPosition = window.scrollY + window.innerHeight * 0.6;
+let trigger = window.scrollY + window.innerHeight * 0.75;
 
 stages.forEach(stage => {
 
 let stageTop = stage.offsetTop;
 
-if(scrollPosition > stageTop){
+if(trigger > stageTop){
 
 stage.style.opacity = "1";
 stage.style.transform = "translateY(0)";
+
+}else{
+
+stage.style.opacity = "0";
+stage.style.transform = "translateY(40px)";
 
 }
 
 });
 
 });
-
 // ===============================
 // 13. Hero Metrices count number (Services Page)
 // ===============================
@@ -195,11 +199,22 @@ el.innerText=value+suffix;
 
 }
 
-window.addEventListener("load",()=>{
+let metricsStarted = false;
+
+window.addEventListener("scroll", () => {
+
+let dashboard = document.querySelector(".stage-dashboard");
+
+if(!metricsStarted &&
+window.scrollY + window.innerHeight > dashboard.offsetTop + 100){
+
+metricsStarted = true;
 
 animateMetric("metric1",98,"%");
 animateMetric("metric2",28);
 animateMetric("metric3",30,"%");
 animateMetric("metric4",35,"%");
+
+}
 
 });
