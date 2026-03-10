@@ -256,3 +256,8 @@ metricsObserver.observe(metricsSection);
 // ===============================
 
 lucide.createIcons();
+
+// ===============================
+// Update Hero Stages
+// ===============================
+updateHeroStages();
