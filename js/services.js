@@ -216,3 +216,7 @@ animateMetric("metric4",35,"%");
 }
 
 });
+// ===============================
+// LUCID icons activate
+// ===============================
+lucide.createIcons();
