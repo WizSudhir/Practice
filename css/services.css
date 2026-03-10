@@ -589,12 +589,32 @@ background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
+.transform-sub{
+text-align:center;
+color:var(--text-secondary);
+max-width:700px;
+margin:auto;
+margin-bottom:60px;
+font-size:18px;
+}
 .transform-grid{
 display:grid;
 grid-template-columns:1fr 120px 1fr;
 gap:40px;
 margin-top:70px;
 align-items:center;
+}
+.transform-grid::before{
+content:"";
+position:absolute;
+left:50%;
+top:50%;
+transform:translate(-50%,-50%);
+width:180px;
+height:180px;
+background:radial-gradient(circle, rgba(99,102,241,0.4), transparent 70%);
+filter:blur(40px);
+pointer-events:none;
 }
 .transform-card{
 padding:45px;
@@ -609,7 +629,7 @@ animation:floatTransform 6s ease-in-out infinite;
 }
 @keyframes floatTransform{
 0%{transform:translateY(0)}
-50%{transform:translateY(-6px)}
+50%{transform:translateY(-4px)}
 100%{transform:translateY(0)}
 }
 .transform-card:hover{
@@ -621,9 +641,11 @@ border:1px solid rgba(99,102,241,0.35);
 }
 .transform-before{
 border-left:4px solid #ef4444;
+background:rgba(40,10,15,0.6);
 }
 .transform-after{
 border-left:4px solid #22c55e;
+background:rgba(10,40,20,0.6);
 }
 .transform-card ul{
 margin-top:20px;
@@ -634,8 +656,8 @@ padding:0;
 .transform-card li{
 display:flex;
 align-items:center;
-gap:10px;
-margin-bottom:10px;
+gap:12px;
+margin-bottom:14px;
 font-size:15px;
 }
 .transform-before li::before{
@@ -647,6 +669,20 @@ font-weight:bold;
 content:"✓";
 color:#22c55e;
 font-weight:bold;
+}
+.transform-before li::before,
+.transform-after li::before{
+font-size:18px;
+}
+.transform-card h3{
+font-size:20px;
+margin-bottom:10px;
+}
+.transform-before h3{
+color:#ef4444;
+}
+.transform-after h3{
+color:#22c55e;
 }
 .transform-section{
 position:relative;
@@ -688,11 +724,30 @@ pointer-events:none;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:48px;
+font-size:60px;
 color:#6366f1;
-opacity:.8;
+opacity:.9;
+text-shadow:
+0 0 10px rgba(99,102,241,0.6),
+0 0 30px rgba(99,102,241,0.4);
+animation:arrowPulse 2.5s infinite ease-in-out;
 }
-
+@keyframes arrowPulse{
+0%{transform:translateX(0)}
+50%{transform:translateX(8px)}
+100%{transform:translateX(0)}
+}
+.transform-card .icon{
+font-size:28px;
+margin-bottom:12px;
+}
+@media(max-width:992px){
+.transform-arrow{
+transform:rotate(90deg);
+font-size:50px;
+margin:10px 0;
+}
+}
 /* =========================================================
 9. RCM TIMELINE
 ========================================================= */
