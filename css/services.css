@@ -7,7 +7,14 @@
 /* =========================================================
 1. HERO SECTION
 ========================================================= */
-
+.pg-sticky{
+position:sticky;
+top:0;
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+}
 .pg-hero{
 height:400vh;
 display:flex;
@@ -61,7 +68,7 @@ pointer-events:none;
 100%{background-position:500px 500px;}
 }
 .pg-stage{
-max-width:900px;
+width:900px;
 margin:80px auto;
 padding:60px 40px;
 background:linear-gradient(
@@ -75,10 +82,12 @@ border:1px solid rgba(148,163,184,0.25);
 box-shadow:
 0 30px 80px rgba(0,0,0,0.65),
 0 0 0 1px rgba(255,255,255,0.04) inset;
-transition:all .45s ease;
+transition:all .6s ease;
 opacity:0;
-transform:translateY(40px);
-position:relative;
+transform:translate(-50%,-50%);
+position:absolute;
+top:50%;
+left:50%;
 z-index:2;
 }
 .pg-stage:hover{
