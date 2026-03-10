@@ -177,7 +177,7 @@ background-position:center;
 .stage-pipeline{
 background:
 linear-gradient(rgba(5,10,25,.75), rgba(5,10,25,.9)),
-url("../images/hero-pipeline.jpg");
+url("../images/hero-intro.jpg");
 background-size:cover;
 background-position:center;
 }
@@ -185,7 +185,7 @@ background-position:center;
 .stage-dashboard{
 background:
 linear-gradient(rgba(5,10,25,.75), rgba(5,10,25,.9)),
-url("../images/hero-dashboard.jpg");
+url("../images/hero-intro.jpg");
 background-size:cover;
 background-position:center;
 }
@@ -193,7 +193,7 @@ background-position:center;
 .stage-revenue{
 background:
 linear-gradient(rgba(5,10,25,.75), rgba(5,10,25,.9)),
-url("../images/hero-revenue.jpg");
+url("../images/hero-intro.jpg");
 background-size:cover;
 background-position:center;
 }
