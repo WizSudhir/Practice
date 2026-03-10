@@ -1079,7 +1079,53 @@ justify-items:center;
 position:relative;
 
 }
+.rcm-circle::before{
 
+content:"";
+
+position:absolute;
+
+width:480px;
+height:480px;
+
+border-radius:50%;
+
+border:1px dashed rgba(99,102,241,.25);
+
+animation:spinSlow 30s linear infinite;
+
+}
+
+.rcm-circle::after{
+
+content:"";
+
+position:absolute;
+
+width:340px;
+height:340px;
+
+border-radius:50%;
+
+border:1px dashed rgba(99,102,241,.35);
+
+animation:spinSlowReverse 22s linear infinite;
+
+}
+
+@keyframes spinSlow{
+
+0%{transform:rotate(0deg)}
+100%{transform:rotate(360deg)}
+
+}
+
+@keyframes spinSlowReverse{
+
+0%{transform:rotate(360deg)}
+100%{transform:rotate(0deg)}
+
+}
 /* RCM ENGINE (CENTER) */
 
 .rcm-core{
@@ -1204,4 +1250,16 @@ box-shadow:
 0 0 120px rgba(99,102,241,0.3);
 }
 
+}
+.engine-icon{
+width:42px;
+height:42px;
+margin-bottom:8px;
+stroke:white;
+stroke-width:2.2;
+animation:engineSpin 6s linear infinite;
+}
+@keyframes engineSpin{
+0%{transform:rotate(0deg)}
+100%{transform:rotate(360deg)}
 }
