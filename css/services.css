@@ -1278,7 +1278,6 @@ animation:dataFlow 4s linear infinite;
 position:absolute;
 top:50%;
 left:50%;
-transform:translate(-50%,-50%);
 width:420px;
 height:420px;
 border-radius:50%;
@@ -1286,27 +1285,18 @@ animation:orbit 12s linear infinite;
 }
 
 .orbit::before{
-
 content:"";
-
 width:10px;
 height:10px;
-
 background:#6366f1;
-
 border-radius:50%;
-
 position:absolute;
 top:-6px;
 left:calc(50% - 5px);
-
 box-shadow:0 0 15px #6366f1;
-
 }
 
 @keyframes orbit{
-
-0%{transform:rotate(0deg)}
-100%{transform:rotate(360deg)}
-
+0%{transform:translate(-50%,-50%) rotate(0deg)}
+100%{transform:translate(-50%,-50%) rotate(360deg)}
 }
