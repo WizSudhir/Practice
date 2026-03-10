@@ -168,37 +168,20 @@ transform:translateY(-2px);
 /* ========================================
 HERO STAGE BACKGROUNDS
 ======================================== */
-
-.stage-intro{
-background:
-linear-gradient(rgba(5,10,25,.45), rgba(5,10,25,.65))
-url("../images/hero-intro.jpg");
-background-size:cover;
-background-position:center;
-}
-
-.stage-pipeline{
-background:
-linear-gradient(rgba(5,10,25,.45), rgba(5,10,25,.65))
-url("../images/hero-intro.jpg");
-background-size:cover;
-background-position:center;
-}
-
-.stage-dashboard{
-background:
-linear-gradient(rgba(5,10,25,.45), rgba(5,10,25,.65))
-url("../images/hero-intro.jpg");
-background-size:cover;
-background-position:center;
-}
-
+.stage-intro,
+.stage-pipeline,
+.stage-dashboard,
 .stage-revenue{
 background:
 linear-gradient(rgba(5,10,25,.45), rgba(5,10,25,.65))
 url("../images/hero-intro.jpg");
 background-size:cover;
 background-position:center;
+animation:heroZoom 18s ease-in-out infinite alternate;
+}
+@keyframes heroZoom{
+0%{background-size:100%}
+100%{background-size:110%}
 }
 /* =========================================================
 3. DASHBOARD METRICS
