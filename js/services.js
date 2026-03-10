@@ -62,13 +62,15 @@ stage.classList.add("active");
 
 
 // TRIGGER ANIMATIONS WHEN STAGE APPEARS
-
 if(stage.classList.contains("stage-dashboard")){
 startMetrics();
+}else{
+resetMetrics();
 }
-
 if(stage.classList.contains("stage-cta")){
 startRevenueCounter();
+}else{
+resetRevenue();
 }
 
 }
@@ -187,7 +189,7 @@ document.getElementById("revenueCounter").innerText="$0";
 function animateMetric(id,target,suffix=""){
 
 let el=document.getElementById(id);
-
+el.innerText="0";
 let value=0;
 
 let step=target/40;
