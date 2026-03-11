@@ -230,35 +230,32 @@ setInterval(animateRCM,1200);
 /* =====================================
 STICKY NAV ACTIVE HIGHLIGHT
 ===================================== */
-
 const sections = document.querySelectorAll(".rcm-phase");
 const navLinks = document.querySelectorAll(".services-nav a");
 
-window.addEventListener("scroll", () => {
+function updateNav(){
 
 let current = "";
 
-sections.forEach(section => {
+sections.forEach(section=>{
 
-const sectionTop = section.offsetTop - 200;
+const rect = section.getBoundingClientRect();
 
-if(scrollY >= sectionTop){
-current = section.getAttribute("id");
+if(rect.top <= 150 && rect.bottom >= 150){
+current = section.id;
 }
 
 });
 
-navLinks.forEach(link => {
-
+navLinks.forEach(link=>{
 link.classList.remove("active");
 
 if(link.getAttribute("href") === "#" + current){
 link.classList.add("active");
 }
-
 });
 
-});
+}
 /* =====================================
 PHASE PROGRESS BAR
 ===================================== */
