@@ -74,7 +74,10 @@ particles.push(particle)
 
 
 // LEAK PARTICLES
-
+const leakMaterial = new THREE.MeshBasicMaterial({
+color:0xef4444
+})
+let leaks = []
 const leakPositions = [-1.5, 0, 1.5]
 
 for(let i=0;i<30;i++){
