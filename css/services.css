@@ -1057,6 +1057,11 @@ background:linear-gradient(
 rgba(20,25,55,.45),
 rgba(10,15,35,.25)
 );
+padding:60px 60px 80px 60px;
+border-radius:20px;
+margin-bottom:100px;
+border:1px solid rgba(255,255,255,.04);
+}
 .rcm-phase::before{
 content:"";
 position:absolute;
@@ -1067,11 +1072,6 @@ height:14px;
 border-radius:50%;
 background:#6366f1;
 box-shadow:0 0 12px #6366f1;
-}
-padding:60px 60px 80px 60px;
-border-radius:20px;
-margin-bottom:100px;
-border:1px solid rgba(255,255,255,.04);
 }
 .rcm-phase::after{
 left:117px;
