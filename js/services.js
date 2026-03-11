@@ -259,3 +259,27 @@ link.classList.add("active");
 });
 
 });
+/* =====================================
+PHASE PROGRESS BAR
+===================================== */
+/* =====================================
+SCROLL PROGRESS BAR
+===================================== */
+
+const progressBar = document.querySelector(".phase-progress");
+
+window.addEventListener("scroll", () => {
+
+const section = document.querySelector(".rcm-services");
+
+const rect = section.getBoundingClientRect();
+
+const height = section.offsetHeight;
+
+const scrolled = window.scrollY - section.offsetTop;
+
+const progress = (scrolled / height) * 100;
+
+progressBar.style.height = progress + "%";
+
+});
