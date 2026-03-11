@@ -79,9 +79,13 @@ margin-bottom:12px;
 
 .pipeline{
 position:relative;
-height:6px;
-background:rgba(255,255,255,0.2);
-border-radius:10px;
+height:16px;
+background:linear-gradient(90deg,#0f172a,#1e293b);
+border-radius:20px;
+box-shadow:
+0 0 0 2px rgba(255,255,255,0.04) inset,
+0 0 25px rgba(59,130,246,0.15);
+overflow:hidden;
 }
 
 /* FLOWING LINE */
@@ -161,7 +165,21 @@ flex-direction:column;
 gap:12px;
 text-align:center;
 }
+.revenue-particle{
+position:absolute;
+width:8px;
+height:8px;
+border-radius:50%;
+background:#22c55e;
+box-shadow:0 0 10px #22c55e;
+animation:flowParticle 3s linear infinite;
+}
 
+@keyframes flowParticle{
+0%{left:-5%;opacity:0}
+10%{opacity:1}
+90%{opacity:1}
+100%{left:105%;opacity:0}
 }
 /* =========================================================
 3. RCM MATURITY SCORE GAUGE
