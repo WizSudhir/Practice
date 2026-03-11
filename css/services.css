@@ -954,15 +954,22 @@ box-shadow:0 0 15px #6366f1;
 }
 
 /* =========================================================
-7. SERVICES LAYOUT + STICKY NAV
+7. RCM SERVICES LAYOUT + STICKY NAV
 ========================================================= */
-
+.rcm-services{
+position:relative;
+padding:120px 0;
+background:
+radial-gradient(circle at 10% 20%, rgba(99,102,241,.15), transparent 40%),
+radial-gradient(circle at 90% 80%, rgba(59,130,246,.15), transparent 40%),
+#050a19;
+}
 .services-layout{
 display:grid;
-grid-template-columns:240px 1fr;
-gap:80px;
+grid-template-columns:260px 1fr;
+gap:90px;
+align-items:start;
 }
-
 .services-nav{
 position:sticky;
 top:140px;
@@ -974,52 +981,202 @@ background:rgba(20,25,55,.55);
 border-radius:20px;
 border:1px solid rgba(255,255,255,.05);
 backdrop-filter:blur(10px);
-
-position:relative;   /* ADD THIS */
-overflow:hidden;     /* ADD THIS */
 }
-
+.services-nav h4{
+margin-bottom:10px;
+font-size:14px;
+letter-spacing:.08em;
+text-transform:uppercase;
+color:var(--text-secondary);
+}
 .services-nav a{
 text-decoration:none;
 color:var(--text-secondary);
-padding:8px 0;
+font-size:15px;
+padding:10px 0;
+display:flex;
+align-items:center;
+gap:10px;
 transition:.3s;
+position:relative;
 }
-
+.services-nav a::before{
+content:"";
+width:8px;
+height:8px;
+border-radius:50%;
+background:#6366f1;
+opacity:.3;
+}
 .services-nav a:hover{
-color:var(--accent-2);
+color:white;
+transform:translateX(4px);
 }
-
-
-/* =========================================================
-11. RCM PHASE CARDS
-========================================================= */
+.services-nav a.active{
+color:white;
+font-weight:600;
+}
+.services-nav a.active::before{
+opacity:1;
+box-shadow:0 0 10px #6366f1;
+}
 
 .rcm-phase{
-margin-bottom:120px;
+background:rgba(20,25,55,.35);
+padding:60px 60px 80px 60px;
+border-radius:20px;
+margin-bottom:100px;
+border:1px solid rgba(255,255,255,.04);
 }
-
+.rcm-phase::before{
+content:"";
+position:absolute;
+left:0;
+top:0;
+bottom:-120px;
+width:2px;
+background:linear-gradient(
+to bottom,
+rgba(99,102,241,.6),
+rgba(59,130,246,.4),
+transparent
+);
+}
+.phase-header{
+margin-bottom:60px;
+}
+.phase-header h2{
+font-size:32px;
+margin-bottom:12px;
+background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+.phase-header p{
+max-width:650px;
+color:var(--text-secondary);
+}
 .phase-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-gap:30px;
-margin-top:40px;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:32px;
 }
-
-.phase-card{
-background:var(--bg-elevated);
-padding:30px;
-border-radius:var(--radius-lg);
-border:1px solid rgba(255,255,255,0.05);
+.service-card{
+background:rgba(20,25,55,.6);
+border:1px solid rgba(255,255,255,.06);
+border-radius:20px;
+padding:35px;
+display:flex;
+flex-direction:column;
+gap:14px;
+transition:.35s;
+backdrop-filter:blur(10px);
+position:relative;
+overflow:hidden;
+}
+.service-card::before{
+content:"";
+position:absolute;
+inset:0;
+background:radial-gradient(circle at top left,
+rgba(99,102,241,.25),
+transparent 60%);
+opacity:.25;
 transition:.3s;
 }
-
-.phase-card:hover{
-transform:translateY(-8px);
-box-shadow:var(--shadow-hover);
+.service-card:hover::before{
+opacity:.5;
 }
-
-
+.service-card:hover{
+transform:translateY(-8px);
+border:1px solid rgba(99,102,241,.45);
+box-shadow:
+0 20px 50px rgba(0,0,0,.6),
+0 0 40px rgba(99,102,241,.25);
+}
+.service-icon{
+width:48px;
+height:48px;
+border-radius:12px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(135deg,#6366f1,#3b82f6);
+box-shadow:
+0 0 20px rgba(99,102,241,.5);
+}
+.service-icon svg{
+width:22px;
+height:22px;
+stroke:white;
+transition:all .4s ease;
+}
+.service-card:hover svg{
+transform:scale(1.25) rotate(6deg);
+}
+.service-card:hover .service-icon{
+transform:scale(1.1);
+}
+.rcm-phase::after{
+content:"";
+position:absolute;
+left:-6px;
+top:20px;
+width:12px;
+height:12px;
+border-radius:50%;
+background:#6366f1;
+box-shadow:0 0 15px #6366f1;
+}
+.service-card h3{
+font-size:18px;
+margin-top:6px;
+}
+.service-card p{
+font-size:14px;
+line-height:1.6;
+color:var(--text-secondary);
+}
+.reveal{
+opacity:0;
+transform:translateY(20px);
+transition:all .6s ease;
+}
+.reveal.active{
+opacity:1;
+transform:translateY(0);
+}
+.phase-number{
+font-size:28px;
+font-weight:800;
+color:#6366f1;
+margin-right:12px;
+opacity:.85;
+}
+.rcm-phase::before{
+content:"";
+position:absolute;
+left:0;
+top:0;
+bottom:-120px;
+width:2px;
+background:linear-gradient(to bottom,#6366f1,#3b82f6,transparent);
+background-size:200% 200%;
+animation:flowLine 4s linear infinite;
+}
+@keyframes flowLine{
+0%{background-position:0% 0%}
+100%{background-position:0% 100%}
+}
+.phase-progress{
+position:absolute;
+left:0;
+top:0;
+width:3px;
+height:0%;
+background:linear-gradient(#6366f1,#3b82f6);
+transition:height .2s;
+}
 /* =========================================================
 12. BENCHMARK TABLE
 ========================================================= */
@@ -1139,332 +1296,4 @@ grid-template-columns:1fr 1fr;
 }
 
 }
-/* =========================================================
-RCM SERVICES — ENTERPRISE VISUAL SECTION
-========================================================= */
 
-.rcm-services{
-position:relative;
-padding:120px 0;
-background:
-radial-gradient(circle at 10% 20%, rgba(99,102,241,.15), transparent 40%),
-radial-gradient(circle at 90% 80%, rgba(59,130,246,.15), transparent 40%),
-#050a19;
-}
-
-
-/* =================================
-LAYOUT
-================================= */
-.services-layout{
-display:grid;
-grid-template-columns:260px 1fr;
-gap:90px;
-align-items:start;
-}
-
-/* =================================
-STICKY NAVIGATION
-================================= */
-
-.services-nav{
-position:sticky;
-top:140px;
-display:flex;
-flex-direction:column;
-gap:16px;
-padding:30px;
-background:rgba(20,25,55,.55);
-border-radius:20px;
-border:1px solid rgba(255,255,255,.05);
-backdrop-filter:blur(10px);
-}
-
-.services-nav h4{
-margin-bottom:10px;
-font-size:14px;
-letter-spacing:.08em;
-text-transform:uppercase;
-color:var(--text-secondary);
-}
-
-.services-nav a{
-text-decoration:none;
-color:var(--text-secondary);
-font-size:15px;
-padding:10px 0;
-display:flex;
-align-items:center;
-gap:10px;
-transition:.3s;
-position:relative;
-}
-
-.services-nav a::before{
-content:"";
-width:8px;
-height:8px;
-border-radius:50%;
-background:#6366f1;
-opacity:.3;
-}
-
-.services-nav a:hover{
-color:white;
-transform:translateX(4px);
-}
-
-.services-nav a.active{
-color:white;
-font-weight:600;
-}
-
-.services-nav a.active::before{
-opacity:1;
-box-shadow:0 0 10px #6366f1;
-}
-
-
-/* =================================
-PHASE SECTIONS
-================================= */
-
-.rcm-phase{
-margin-bottom:140px;
-position:relative;
-padding-left:40px;
-}
-
-
-/* vertical pipeline line */
-
-.rcm-phase::before{
-content:"";
-position:absolute;
-left:0;
-top:0;
-bottom:-120px;
-width:2px;
-background:linear-gradient(
-to bottom,
-rgba(99,102,241,.6),
-rgba(59,130,246,.4),
-transparent
-);
-}
-
-
-/* =================================
-PHASE HEADER
-================================= */
-
-.phase-header{
-margin-bottom:40px;
-}
-
-.phase-header h2{
-font-size:32px;
-margin-bottom:12px;
-background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
-
-.phase-header p{
-max-width:650px;
-color:var(--text-secondary);
-}
-
-
-/* =================================
-SERVICE GRID
-================================= */
-
-.phase-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:32px;
-}
-
-
-/* =================================
-SERVICE CARD
-================================= */
-
-.service-card{
-background:rgba(20,25,55,.6);
-border:1px solid rgba(255,255,255,.06);
-border-radius:20px;
-padding:35px;
-display:flex;
-flex-direction:column;
-gap:14px;
-transition:.35s;
-backdrop-filter:blur(10px);
-position:relative;
-overflow:hidden;
-}
-
-
-/* glow background */
-
-.service-card::before{
-content:"";
-position:absolute;
-inset:0;
-background:radial-gradient(circle at top left,
-rgba(99,102,241,.25),
-transparent 60%);
-opacity:.25;
-transition:.3s;
-}
-
-.service-card:hover::before{
-opacity:.5;
-}
-
-
-/* hover animation */
-
-.service-card:hover{
-transform:translateY(-8px);
-border:1px solid rgba(99,102,241,.45);
-box-shadow:
-0 20px 50px rgba(0,0,0,.6),
-0 0 40px rgba(99,102,241,.25);
-}
-
-
-/* =================================
-SERVICE ICON
-================================= */
-
-.service-icon{
-width:48px;
-height:48px;
-border-radius:12px;
-display:flex;
-align-items:center;
-justify-content:center;
-background:linear-gradient(135deg,#6366f1,#3b82f6);
-box-shadow:
-0 0 20px rgba(99,102,241,.5);
-}
-
-.service-icon svg{
-width:22px;
-height:22px;
-stroke:white;
-transition:all .4s ease;
-}
-.service-card:hover svg{
-
-transform:scale(1.25) rotate(6deg);
-
-}
-.service-card:hover .service-icon{
-transform:scale(1.1);
-}
-/* =====================================
-PHASE FLOW CONNECTOR
-===================================== */
-
-.rcm-phase::after{
-
-content:"";
-
-position:absolute;
-
-left:-6px;
-
-top:20px;
-
-width:12px;
-
-height:12px;
-
-border-radius:50%;
-
-background:#6366f1;
-
-box-shadow:0 0 15px #6366f1;
-
-}
-/* =================================
-CARD TEXT
-================================= */
-
-.service-card h3{
-font-size:18px;
-margin-top:6px;
-}
-
-.service-card p{
-font-size:14px;
-line-height:1.6;
-color:var(--text-secondary);
-}
-
-
-/* =================================
-REVEAL ANIMATION
-================================= */
-
-.reveal{
-opacity:0;
-transform:translateY(20px);
-transition:all .6s ease;
-}
-
-.reveal.active{
-opacity:1;
-transform:translateY(0);
-}
-.phase-number{
-font-size:28px;
-font-weight:800;
-color:#6366f1;
-margin-right:12px;
-opacity:.85;
-}
-/* Revenue flow animation */
-
-.rcm-phase::before{
-content:"";
-position:absolute;
-left:0;
-top:0;
-bottom:-120px;
-width:2px;
-background:linear-gradient(
-to bottom,
-#6366f1,
-#3b82f6,
-transparent
-);
-
-background-size:200% 200%;
-animation:flowLine 4s linear infinite;
-}
-
-@keyframes flowLine{
-0%{background-position:0% 0%}
-100%{background-position:0% 100%}
-}
-.phase-progress{
-
-position:absolute;
-
-left:0;
-
-top:0;
-
-width:3px;
-
-height:0%;
-
-background:linear-gradient(#6366f1,#3b82f6);
-
-transition:height .2s;
-
-}
