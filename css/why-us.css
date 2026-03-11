@@ -110,7 +110,8 @@ overflow:hidden;
 .flow-line{
 position:absolute;
 height:100%;
-width:100%;
+width:40%;
+opacity:.6;
 background:linear-gradient(90deg,#22c55e,#3b82f6);
 border-radius:10px;
 animation:flow 2s linear infinite;
@@ -184,6 +185,7 @@ flex-direction:column;
 gap:12px;
 text-align:center;
 }
+}
 .revenue-particle{
 position:absolute;
 width:8px;
@@ -204,6 +206,9 @@ animation:flowParticle 3s linear infinite;
 position:absolute;
 width:6px;
 height:6px;
+top:20px;
+left:50%;
+transform:translateX(-50%);
 background:#ef4444;
 border-radius:50%;
 animation:leakFall 1.5s linear infinite;
