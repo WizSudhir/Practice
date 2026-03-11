@@ -79,8 +79,13 @@ opacity:.7;
 
 .hero-right{
 position:relative;
+animation:float 6s ease-in-out infinite;
 }
-
+@keyframes float{
+0%{transform:translateY(0)}
+50%{transform:translateY(-8px)}
+100%{transform:translateY(0)}
+}
 .pipeline-stages{
 display:flex;
 justify-content:space-between;
