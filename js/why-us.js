@@ -53,12 +53,22 @@ if(window.scrollY > 150 && !fixed){
 
 fixed = true
 
-pipeline.classList.add("fixed")
-
+// stop leak animations
 leaks.forEach(leak=>{
-leak.style.opacity = "0"
+leak.style.opacity="0"
 })
 
+// increase revenue tokens
+document.querySelectorAll(".revenue-token")
+.forEach(token=>{
+token.innerText = "$" + (Math.floor(Math.random()*400)+200)
+})
+
+// activate revenue stage
+document.querySelector(".revenue-stage")
+.style.boxShadow="0 0 30px rgba(34,197,94,1)"
+
+// show engine activation
 fixBanner.classList.add("active")
 
 }
