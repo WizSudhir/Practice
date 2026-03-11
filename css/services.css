@@ -957,6 +957,7 @@ box-shadow:0 0 15px #6366f1;
 7. RCM SERVICES LAYOUT + STICKY NAV
 ========================================================= */
 .rcm-services{
+min-height:200vh;
 position:relative;
 padding:120px 0;
 background:
@@ -972,7 +973,8 @@ align-items:start;
 }
 .services-nav{
 position:sticky;
-top:140px;
+top:120px;
+height:fit-content;
 display:flex;
 gap:16px;
 gap:12px;
