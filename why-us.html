@@ -132,35 +132,51 @@ Free Revenue Audit
 
 </div>
 
-<div class="pipeline">
+<div class="workflow">
 
-<div class="flow-line"></div>
+<div class="stage">
+<span class="stage-node">Patient Visit</span>
+</div>
 
-<!-- Revenue flow particles -->
-<div class="revenue-particle" style="animation-delay:0s"></div>
-<div class="revenue-particle" style="animation-delay:0.8s"></div>
-<div class="revenue-particle" style="animation-delay:1.6s"></div>
-<div class="revenue-particle" style="animation-delay:2.4s"></div>
-
-<!-- Leak points -->
+<div class="stage">
+<span class="stage-node">Coding</span>
 
 <div class="leak leak1">
-Denials
-<div class="leak-drop"></div>
-<div class="leak-drop" style="animation-delay:.3s"></div>
+⚠ Coding Error
+<div class="loss">-$120</div>
 </div>
+
+</div>
+
+<div class="stage">
+<span class="stage-node">Claim</span>
 
 <div class="leak leak2">
-Underpayments
-<div class="leak-drop"></div>
-<div class="leak-drop" style="animation-delay:.3s"></div>
+⚠ Denial
+<div class="loss">-$85</div>
 </div>
 
-<div class="leak leak3">
-Coding Errors
-<div class="leak-drop"></div>
-<div class="leak-drop" style="animation-delay:.3s"></div>
 </div>
+
+<div class="stage">
+<span class="stage-node">Payer</span>
+
+<div class="leak leak3">
+⚠ Underpayment
+<div class="loss">-$210</div>
+</div>
+
+</div>
+
+<div class="stage">
+<span class="stage-node revenue-stage">Revenue</span>
+</div>
+
+<!-- moving revenue tokens -->
+
+<div class="revenue-token" style="animation-delay:0s">$120</div>
+<div class="revenue-token" style="animation-delay:1s">$240</div>
+<div class="revenue-token" style="animation-delay:2s">$320</div>
 
 </div>
 
