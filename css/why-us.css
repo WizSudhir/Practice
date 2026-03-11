@@ -48,9 +48,9 @@ border-radius:12px;
 font-size:12px;
 transform:translateX(-50%);
 }
-.l1{ left:25%; }
+.l1{ left:30%; }
 .l2{ left:50%; }
-.l3{ left:75%; }
+.l3{ left:70%; }
 .fix-indicator{
 position:absolute;
 bottom:30px;
