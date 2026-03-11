@@ -3,56 +3,81 @@
 ========================================================= */
 .hero-leakage{
 
-padding:180px 20px;
+padding:180px 20px 160px;
 position:relative;
 overflow:hidden;
 
 }
 
-.hero-text{
+.hero-content{
 
-max-width:720px;
+max-width:800px;
 margin:auto;
 text-align:center;
-margin-bottom:80px;
+margin-bottom:120px;
 
 }
 
-.hero-text h1{
+.hero-content h1{
 
-font-size:48px;
+font-size:52px;
 font-weight:800;
+line-height:1.1;
 
 }
 
-.hero-text p{
+.hero-content p{
 
 margin-top:20px;
 opacity:.8;
+max-width:650px;
+margin-left:auto;
+margin-right:auto;
 
 }
 
-.pipeline{
+.hero-cta{
 
-max-width:1000px;
+margin-top:30px;
+display:flex;
+gap:16px;
+justify-content:center;
+
+}
+
+.pipeline-container{
+
+max-width:1200px;
 margin:auto;
 position:relative;
 
 }
 
-.flow-bar{
-
-height:16px;
-background:linear-gradient(90deg,#22c55e,#3b82f6);
-
-border-radius:20px;
-margin-bottom:80px;
+.pipeline-track{
 
 display:flex;
-align-items:center;
-justify-content:center;
+justify-content:space-between;
+margin-bottom:30px;
 
-font-size:12px;
+font-size:13px;
+opacity:.7;
+
+}
+
+.pipeline-label{
+
+background:rgba(255,255,255,0.05);
+padding:8px 14px;
+border-radius:20px;
+
+}
+
+#revenueFlow{
+
+width:100%;
+height:200px;
+
+border-radius:12px;
 
 }
 
@@ -60,31 +85,76 @@ font-size:12px;
 
 position:absolute;
 
-background:rgba(255,255,255,0.05);
+background:rgba(255,70,70,0.08);
 
-padding:16px;
+border:1px solid rgba(255,70,70,0.3);
 
 border-radius:14px;
 
-border:1px solid rgba(255,255,255,0.1);
-
-}
-
-.leak1{top:10px; left:20%;}
-.leak2{top:10px; left:45%;}
-.leak3{top:10px; left:70%;}
-
-.recovered{
+padding:12px 18px;
 
 text-align:center;
-margin-top:80px;
+
+backdrop-filter:blur(8px);
 
 }
 
-.recovery-amount{
+.leak span{
 
-font-size:36px;
-color:#22c55e;
+font-weight:700;
+color:#ef4444;
+
+}
+
+.leak1{
+
+top:40px;
+left:25%;
+
+}
+
+.leak2{
+
+top:40px;
+left:50%;
+
+}
+
+.leak3{
+
+top:40px;
+left:75%;
+
+}
+
+.fix-banner{
+
+position:absolute;
+bottom:-60px;
+left:50%;
+transform:translateX(-50%);
+
+background:rgba(0,200,120,0.1);
+
+border:1px solid rgba(0,200,120,0.3);
+
+padding:16px 28px;
+
+border-radius:30px;
+
+display:flex;
+gap:12px;
+align-items:center;
+
+opacity:0;
+transition:all .8s ease;
+
+}
+
+.fix-banner.active{
+
+opacity:1;
+bottom:-20px;
 
 }
 /* =========================================================
