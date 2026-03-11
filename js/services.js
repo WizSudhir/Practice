@@ -260,9 +260,6 @@ link.classList.add("active");
 
 });
 /* =====================================
-PHASE PROGRESS BAR
-===================================== */
-/* =====================================
 SCROLL PROGRESS BAR
 ===================================== */
 
@@ -283,3 +280,28 @@ const progress = (scrolled / height) * 100;
 progressBar.style.height = progress + "%";
 
 });
+/* =====================================
+SCROLL REVEAL ANIMATION
+===================================== */
+
+const revealElements = document.querySelectorAll(".reveal");
+
+function revealOnScroll(){
+
+const trigger = window.innerHeight * 0.85;
+
+revealElements.forEach(el => {
+
+const top = el.getBoundingClientRect().top;
+
+if(top < trigger){
+el.classList.add("active");
+}
+
+});
+
+}
+
+window.addEventListener("scroll", revealOnScroll);
+
+revealOnScroll();
