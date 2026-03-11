@@ -39,19 +39,119 @@ document.getElementById("gaugeFill")
 }
 
 // ===============================
-// Scroll Animation
+// • Flowing revenue particles
+// ===============================
+const canvas = document.getElementById("revenueFlow");
+const ctx = canvas.getContext("2d");
+
+canvas.width = canvas.offsetWidth;
+canvas.height = 200;
+
+let particles = [];
+
+class Particle{
+
+constructor(){
+
+this.x = Math.random()*canvas.width;
+this.y = Math.random()*canvas.height;
+
+this.speed = 1 + Math.random()*2;
+
+this.radius = 3;
+
+}
+
+update(){
+
+this.x += this.speed;
+
+if(this.x > canvas.width){
+
+this.x = 0;
+
+}
+
+}
+
+draw(){
+
+ctx.beginPath();
+ctx.arc(this.x,this.y,this.radius,0,Math.PI*2);
+
+ctx.fillStyle = "#22c55e";
+
+ctx.fill();
+
+}
+
+}
+
+for(let i=0;i<80;i++){
+
+particles.push(new Particle());
+
+}
+
+function animate(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+particles.forEach(p=>{
+
+p.update();
+p.draw();
+
+});
+
+requestAnimationFrame(animate);
+
+}
+
+animate();
+// ===============================
+// Leak Effect
 // ===============================
 const leaks = document.querySelectorAll(".leak");
 
+let leaking = true;
+
+function leakAnimation(){
+
+if(!leaking) return;
+
+leaks.forEach(leak=>{
+
+const drop = document.createElement("div");
+
+drop.className = "money-drop";
+
+leak.appendChild(drop);
+
+setTimeout(()=>{
+
+drop.remove();
+
+},2000);
+
+});
+
+}
+
+setInterval(leakAnimation,500);
+// ===============================
+// PracticeGrid Fixing the Leaks
+// ===============================
 window.addEventListener("scroll",()=>{
 
 const scroll = window.scrollY;
 
-leaks.forEach((leak,i)=>{
+if(scroll > 200){
 
-leak.style.transform =
-`translateY(${scroll*0.2}px)`;
+leaking = false;
 
-});
+document.querySelector(".fix-banner").classList.add("active");
+
+}
 
 });
