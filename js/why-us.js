@@ -38,3 +38,22 @@ document.getElementById("gaugeFill")
 
 }
 
+// ===============================
+// Scroll Animation System
+// ===============================
+const cards = document.querySelectorAll(".card");
+
+window.addEventListener("scroll", () => {
+
+const scroll = window.scrollY;
+
+cards.forEach((card,i)=>{
+
+const speed = (i+1)*0.05;
+
+card.style.transform =
+`translateY(${scroll*speed}px)`;
+
+});
+
+});
