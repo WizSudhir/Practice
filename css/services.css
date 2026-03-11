@@ -1350,9 +1350,38 @@ box-shadow:
 width:22px;
 height:22px;
 stroke:white;
+transition:all .35s ease;
 }
+.service-card:hover svg{
 
+transform:scale(1.25) rotate(6deg);
 
+}
+/* =====================================
+PHASE FLOW CONNECTOR
+===================================== */
+
+.rcm-phase::after{
+
+content:"";
+
+position:absolute;
+
+left:-6px;
+
+top:20px;
+
+width:12px;
+
+height:12px;
+
+border-radius:50%;
+
+background:#6366f1;
+
+box-shadow:0 0 15px #6366f1;
+
+}
 /* =================================
 CARD TEXT
 ================================= */
@@ -1388,4 +1417,45 @@ font-size:14px;
 color:#6366f1;
 font-weight:700;
 margin-right:10px;
+}
+/* Revenue flow animation */
+
+.rcm-phase::before{
+content:"";
+position:absolute;
+left:0;
+top:0;
+bottom:-120px;
+width:2px;
+background:linear-gradient(
+to bottom,
+#6366f1,
+#3b82f6,
+transparent
+);
+
+background-size:200% 200%;
+animation:flowLine 4s linear infinite;
+}
+
+@keyframes flowLine{
+0%{background-position:0% 0%}
+100%{background-position:0% 100%}
+}
+.phase-progress{
+
+position:absolute;
+
+left:0;
+
+top:0;
+
+width:3px;
+
+height:0%;
+
+background:linear-gradient(#6366f1,#3b82f6);
+
+transition:height .2s;
+
 }
