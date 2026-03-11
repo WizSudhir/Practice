@@ -1,26 +1,29 @@
 /* =========================================================
 1. HERO
 ========================================================= */
-.hero-leakage{
+.hero-3d{
 
-padding:180px 20px 160px;
 position:relative;
+padding:180px 20px 140px;
 overflow:hidden;
 
 }
 
 .hero-content{
 
-max-width:800px;
-margin:auto;
 text-align:center;
-margin-bottom:120px;
+max-width:750px;
+margin:auto;
+margin-bottom:60px;
+
+z-index:2;
+position:relative;
 
 }
 
 .hero-content h1{
 
-font-size:52px;
+font-size:54px;
 font-weight:800;
 line-height:1.1;
 
@@ -28,170 +31,76 @@ line-height:1.1;
 
 .hero-content p{
 
-margin-top:20px;
+margin-top:18px;
 opacity:.8;
-max-width:650px;
-margin-left:auto;
-margin-right:auto;
 
 }
 
-.hero-cta{
+.hero-buttons{
 
-margin-top:30px;
+margin-top:28px;
 display:flex;
 gap:16px;
 justify-content:center;
 
 }
 
-.pipeline-container{
-
-max-width:1200px;
-margin:auto;
-position:relative;
-
-}
-
-.pipeline-track{
-
-display:flex;
-justify-content:space-between;
-margin-bottom:30px;
-
-font-size:13px;
-opacity:.7;
-
-}
-
-.pipeline-label{
-
-background:rgba(255,255,255,0.05);
-padding:8px 14px;
-border-radius:20px;
-
-}
-
-#revenueFlow{
+#pipeline3d{
 
 width:100%;
-height:200px;
-
-border-radius:12px;
+height:420px;
 
 }
 
-.leak{
+.gradient{
+
+background:linear-gradient(90deg,#3b82f6,#22c55e);
+-webkit-background-clip:text;
+color:transparent;
+
+}
+
+.leak-label{
 
 position:absolute;
-
-background:rgba(255,70,70,0.08);
-
+background:rgba(255,70,70,0.1);
 border:1px solid rgba(255,70,70,0.3);
 
-border-radius:14px;
+padding:8px 14px;
+border-radius:12px;
 
-padding:12px 18px;
-
-text-align:center;
-
-backdrop-filter:blur(8px);
+font-size:12px;
 
 }
 
-.leak span{
+.l1{top:320px; left:28%;}
+.l2{top:320px; left:50%;}
+.l3{top:320px; left:72%;}
 
-font-weight:700;
-color:#ef4444;
-
-}
-
-.leak1{
-
-top:40px;
-left:25%;
-
-}
-
-.leak2{
-
-top:40px;
-left:50%;
-
-}
-
-.leak3{
-
-top:40px;
-left:75%;
-
-}
-
-.fix-banner{
+.fix-indicator{
 
 position:absolute;
-bottom:-60px;
+
+bottom:30px;
 left:50%;
 transform:translateX(-50%);
 
-background:rgba(0,200,120,0.1);
+background:rgba(34,197,94,0.15);
 
-border:1px solid rgba(0,200,120,0.3);
+border:1px solid rgba(34,197,94,0.35);
 
-padding:16px 28px;
+padding:14px 22px;
 
-border-radius:30px;
-
-display:flex;
-gap:12px;
-align-items:center;
+border-radius:20px;
 
 opacity:0;
 transition:all .8s ease;
 
 }
 
-.fix-banner.active{
+.fix-indicator.active{
 
 opacity:1;
-bottom:-20px;
-
-}
-.money-drop{
-
-position:absolute;
-
-width:6px;
-height:6px;
-
-background:#ef4444;
-
-border-radius:50%;
-
-bottom:-10px;
-left:50%;
-
-animation:drop 2s linear forwards;
-
-}
-
-@keyframes drop{
-
-0%{
-
-transform:translateY(0);
-
-opacity:1;
-
-}
-
-100%{
-
-transform:translateY(120px);
-
-opacity:0;
-
-}
 
 }
 /* =========================================================
