@@ -39,20 +39,18 @@ document.getElementById("gaugeFill")
 }
 
 // ===============================
-// Scroll Parallax Motion
+// Scroll Animation
 // ===============================
-const panels = document.querySelectorAll(".panel");
+const leaks = document.querySelectorAll(".leak");
 
 window.addEventListener("scroll",()=>{
 
 const scroll = window.scrollY;
 
-panels.forEach((panel,i)=>{
+leaks.forEach((leak,i)=>{
 
-const speed = (i+1)*0.08;
-
-panel.style.transform =
-`translateY(${scroll*speed}px)`;
+leak.style.transform =
+`translateY(${scroll*0.2}px)`;
 
 });
 
