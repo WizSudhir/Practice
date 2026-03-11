@@ -1,79 +1,90 @@
 /* =========================================================
 1. HERO
 ========================================================= */
-.hero-dashboard{
+.hero-leakage{
 
+padding:180px 20px;
 position:relative;
-padding:180px 20px 160px;
 overflow:hidden;
 
 }
 
-.hero-content{
+.hero-text{
 
-max-width:700px;
+max-width:720px;
 margin:auto;
 text-align:center;
+margin-bottom:80px;
 
 }
 
-.hero-content h1{
+.hero-text h1{
 
 font-size:48px;
 font-weight:800;
-margin-bottom:20px;
 
 }
 
-.hero-content p{
+.hero-text p{
 
+margin-top:20px;
 opacity:.8;
-line-height:1.6;
-margin-bottom:30px;
 
 }
 
-.floating-panels{
+.pipeline{
 
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
+max-width:1000px;
+margin:auto;
+position:relative;
 
 }
 
-.panel{
+.flow-bar{
+
+height:16px;
+background:linear-gradient(90deg,#22c55e,#3b82f6);
+
+border-radius:20px;
+margin-bottom:80px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-size:12px;
+
+}
+
+.leak{
 
 position:absolute;
+
 background:rgba(255,255,255,0.05);
 
-border:1px solid rgba(255,255,255,0.08);
+padding:16px;
 
-border-radius:18px;
+border-radius:14px;
 
-padding:20px;
-
-backdrop-filter:blur(10px);
-
-box-shadow:0 20px 60px rgba(0,0,0,0.4);
-
-width:220px;
-
-transition:transform .4s ease;
+border:1px solid rgba(255,255,255,0.1);
 
 }
 
-.p1{top:80px; left:10%;}
-.p2{top:220px; left:5%;}
-.p3{top:120px; right:10%;}
-.p4{top:260px; right:12%;}
-.p5{bottom:120px; left:50%; transform:translateX(-50%);}
+.leak1{top:10px; left:20%;}
+.leak2{top:10px; left:45%;}
+.leak3{top:10px; left:70%;}
 
-.big{
+.recovered{
+
+text-align:center;
+margin-top:80px;
+
+}
+
+.recovery-amount{
 
 font-size:36px;
-font-weight:700;
+color:#22c55e;
 
 }
 /* =========================================================
