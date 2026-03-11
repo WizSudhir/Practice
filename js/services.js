@@ -260,22 +260,24 @@ link.classList.add("active");
 
 });
 /* =====================================
-SCROLL PROGRESS BAR
+PHASE PROGRESS BAR
 ===================================== */
 
 const progressBar = document.querySelector(".phase-progress");
+const servicesSection = document.querySelector(".rcm-services");
 
 window.addEventListener("scroll", () => {
 
-const section = document.querySelector(".rcm-services");
+if(!progressBar || !servicesSection) return;
 
-const rect = section.getBoundingClientRect();
+const sectionTop = servicesSection.offsetTop;
+const sectionHeight = servicesSection.offsetHeight;
 
-const height = section.offsetHeight;
+const scroll = window.scrollY - sectionTop;
 
-const scrolled = window.scrollY - section.offsetTop;
+let progress = (scroll / sectionHeight) * 100;
 
-const progress = (scrolled / height) * 100;
+progress = Math.max(0, Math.min(progress,100));
 
 progressBar.style.height = progress + "%";
 
