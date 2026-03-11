@@ -157,6 +157,43 @@ opacity:1;
 bottom:-20px;
 
 }
+.money-drop{
+
+position:absolute;
+
+width:6px;
+height:6px;
+
+background:#ef4444;
+
+border-radius:50%;
+
+bottom:-10px;
+left:50%;
+
+animation:drop 2s linear forwards;
+
+}
+
+@keyframes drop{
+
+0%{
+
+transform:translateY(0);
+
+opacity:1;
+
+}
+
+100%{
+
+transform:translateY(120px);
+
+opacity:0;
+
+}
+
+}
 /* =========================================================
 3. RCM MATURITY SCORE GAUGE
 ========================================================= */
