@@ -1176,7 +1176,8 @@ font-size:28px;
 font-weight:800;
 color:#6366f1;
 margin-right:12px;
-opacity:.85;
+opacity:1;
+text-shadow:0 0 8px rgba(99,102,241,.6);
 }
 .phase-progress{
 position:absolute;
