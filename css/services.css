@@ -965,10 +965,18 @@ gap:80px;
 
 .services-nav{
 position:sticky;
-top:120px;
+top:140px;
 display:flex;
 flex-direction:column;
-gap:12px;
+gap:16px;
+padding:30px;
+background:rgba(20,25,55,.55);
+border-radius:20px;
+border:1px solid rgba(255,255,255,.05);
+backdrop-filter:blur(10px);
+
+position:relative;   /* ADD THIS */
+overflow:hidden;     /* ADD THIS */
 }
 
 .services-nav a{
@@ -1149,13 +1157,12 @@ overflow:hidden;
 /* =================================
 LAYOUT
 ================================= */
-
 .services-layout{
 display:grid;
+grid-template-columns:260px 1fr;
 gap:90px;
 align-items:start;
 }
-
 
 /* =================================
 STICKY NAVIGATION
