@@ -260,3 +260,35 @@ rcmIndex = 0;
 setInterval(animateRCM,1200);
 
 }
+/* =====================================
+STICKY NAV ACTIVE HIGHLIGHT
+===================================== */
+
+const sections = document.querySelectorAll(".rcm-phase");
+const navLinks = document.querySelectorAll(".services-nav a");
+
+window.addEventListener("scroll", () => {
+
+let current = "";
+
+sections.forEach(section => {
+
+const sectionTop = section.offsetTop - 200;
+
+if(scrollY >= sectionTop){
+current = section.getAttribute("id");
+}
+
+});
+
+navLinks.forEach(link => {
+
+link.classList.remove("active");
+
+if(link.getAttribute("href") === "#" + current){
+link.classList.add("active");
+}
+
+});
+
+});
