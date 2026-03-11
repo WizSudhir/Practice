@@ -1152,7 +1152,6 @@ LAYOUT
 
 .services-layout{
 display:grid;
-grid-template-columns:260px 1fr;
 gap:90px;
 align-items:start;
 }
