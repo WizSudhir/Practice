@@ -1020,7 +1020,10 @@ font-weight:600;
 opacity:1;
 box-shadow:0 0 10px #6366f1;
 }
-
+.services-nav svg{
+width:16px;
+height:16px;
+}
 .rcm-phase{
 background:linear-gradient(
 180deg,
