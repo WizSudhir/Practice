@@ -14,7 +14,7 @@ camera.position.z = 8
 const renderer = new THREE.WebGLRenderer({alpha:true})
 
 renderer.setSize(container.clientWidth,container.clientHeight)
-
+renderer.setPixelRatio(window.devicePixelRatio)
 container.appendChild(renderer.domElement)
 
 
@@ -30,18 +30,19 @@ scene.add(light)
 // PIPE MATERIAL
 
 const pipeMaterial = new THREE.MeshStandardMaterial({
-color:0x1e293b,
-metalness:.6,
+color:0x0f172a,
+metalness:.9,
 roughness:.2
 })
 
 
 // PIPE GEOMETRY
 
-const pipeGeometry = new THREE.CylinderGeometry(.3,.3,6,32)
+const pipeGeometry = new THREE.CylinderGeometry(.6,.6,7,32)
 
 const pipe = new THREE.Mesh(pipeGeometry,pipeMaterial)
 
+pipe.rotation.y = 0.2
 pipe.rotation.z = Math.PI/2
 
 scene.add(pipe)
@@ -62,7 +63,8 @@ for(let i=0;i<120;i++){
 const particle = new THREE.Mesh(particleGeometry,particleMaterial)
 
 particle.position.x = Math.random()*6-3
-particle.position.y = Math.random()*0.2
+particle.position.y = 0
+particle.position.z = (Math.random()-0.5)*0.3
 
 scene.add(particle)
 
@@ -73,25 +75,23 @@ particles.push(particle)
 
 // LEAK PARTICLES
 
-let leaks = []
-
-const leakMaterial = new THREE.MeshBasicMaterial({
-color:0xef4444
-})
+const leakPositions = [-1.5, 0, 1.5]
 
 for(let i=0;i<30;i++){
 
-const drop = new THREE.Mesh(particleGeometry,leakMaterial)
+const pos = leakPositions[i % 3]
 
-drop.position.x = Math.random()*4-2
-drop.position.y = -1
+const drop = new THREE.Mesh(particleGeometry, leakMaterial)
+
+drop.position.x = pos
+drop.position.y = -0.5
+drop.position.z = 0
 
 scene.add(drop)
 
 leaks.push(drop)
 
 }
-
 
 // ANIMATION
 
@@ -144,10 +144,22 @@ if(window.scrollY > 150){
 
 leaking = false
 
+pipe.material.color.set(0x22c55e)
+
 document
 .querySelector(".fix-indicator")
 .classList.add("active")
 
 }
+
+})
+
+// Resize Handler
+window.addEventListener("resize", ()=>{
+
+camera.aspect = container.clientWidth/container.clientHeight
+camera.updateProjectionMatrix()
+
+renderer.setSize(container.clientWidth, container.clientHeight)
 
 })
