@@ -1165,21 +1165,6 @@ color:#6366f1;
 margin-right:12px;
 opacity:.85;
 }
-.rcm-phase::before{
-content:"";
-position:absolute;
-left:0;
-top:0;
-bottom:-120px;
-width:2px;
-background:linear-gradient(to bottom,#6366f1,#3b82f6,transparent);
-background-size:200% 200%;
-animation:flowLine 4s linear infinite;
-}
-@keyframes flowLine{
-0%{background-position:0% 0%}
-100%{background-position:0% 100%}
-}
 .phase-progress{
 position:absolute;
 left:0;
