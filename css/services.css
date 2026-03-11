@@ -1191,6 +1191,14 @@ margin:auto;
 margin-bottom:60px;
 color:var(--text-secondary);
 }
+.phase-label{
+display:inline-block;
+font-size:12px;
+letter-spacing:.08em;
+text-transform:uppercase;
+color:#93c5fd;
+margin-bottom:10px;
+}
 /* =========================================================
 12. BENCHMARK TABLE
 ========================================================= */
