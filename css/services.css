@@ -1034,12 +1034,12 @@ position:absolute;
 left:0;
 top:0;
 bottom:-120px;
-width:2px;
+width:4px;
 background:linear-gradient(
 to bottom,
-rgba(99,102,241,.6),
-rgba(59,130,246,.4),
-transparent
+#6366f1,
+#8b5cf6,
+#3b82f6
 );
 }
 .phase-header{
