@@ -60,22 +60,21 @@ NAVBAR
 <!-- =========================================
 1 HERO
 ========================================= -->
-<section class="hero-leakage">
+<section class="hero-3d">
 
 <div class="hero-content">
 
 <h1>
 How Much Revenue Is
-<span class="gradient-text">Leaking From Your Practice?</span>
+<span class="gradient">Leaking From Your Practice?</span>
 </h1>
 
 <p>
-Most healthcare organizations lose 10–20% of revenue due to denials,
-underpayments, and inefficient billing workflows. PracticeGrid identifies
-and recovers hidden revenue across your entire revenue cycle.
+PracticeGrid Solutions identifies and recovers hidden revenue
+lost through denials, coding errors, and inefficient billing workflows.
 </p>
 
-<div class="hero-cta">
+<div class="hero-buttons">
 
 <a href="contact.html" class="btn-primary">
 Calculate Revenue Leakage
@@ -89,65 +88,21 @@ Get Free Revenue Audit
 
 </div>
 
+<div id="pipeline3d"></div>
 
-<div class="pipeline-container">
+<div class="leak-label l1">Denials $180k</div>
+<div class="leak-label l2">Underpayments $140k</div>
+<div class="leak-label l3">Coding Errors $100k</div>
 
-<div class="pipeline-track">
-
-<div class="pipeline-label start">
-Patient Visit
-</div>
-
-<div class="pipeline-label">
-Coding
-</div>
-
-<div class="pipeline-label">
-Claim Submission
-</div>
-
-<div class="pipeline-label">
-Payer
-</div>
-
-<div class="pipeline-label end">
-Revenue Collected
-</div>
-
-</div>
-
-<canvas id="revenueFlow"></canvas>
-
-
-<div class="leak leak1">
-<h4>Denials</h4>
-<span>$180k</span>
-</div>
-
-<div class="leak leak2">
-<h4>Underpayments</h4>
-<span>$140k</span>
-</div>
-
-<div class="leak leak3">
-<h4>Coding Errors</h4>
-<span>$100k</span>
-</div>
-
-
-<div class="fix-banner">
-
-<img src="images/logo.png">
-
-<span>
-PracticeGrid Revenue Recovery Engine
-</span>
-
-</div>
-
+<div class="fix-indicator">
+PracticeGrid Revenue Recovery Engine Activated
 </div>
 
 </section>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script src="js/revenue-pipeline.js"></script>
+
 <!-- =========================================
 2 WHO WE WORK WITH
 ========================================= -->
