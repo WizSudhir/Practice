@@ -1,101 +1,81 @@
 /* =========================================================
 1. HERO
 ========================================================= */
-.hero-collage{
-padding:160px 20px 120px;
+.hero-dashboard{
+
 position:relative;
+padding:180px 20px 160px;
 overflow:hidden;
+
 }
 
-.hero-title{
+.hero-content{
+
+max-width:700px;
+margin:auto;
 text-align:center;
-max-width:800px;
-margin:auto;
-margin-bottom:80px;
+
 }
 
-.hero-title h1{
-font-size:44px;
+.hero-content h1{
+
+font-size:48px;
 font-weight:800;
-line-height:1.2;
+margin-bottom:20px;
+
 }
 
-.collage-grid{
-max-width:1200px;
-margin:auto;
-display:grid;
-grid-template-columns:repeat(3,1fr);
-grid-template-rows:260px 260px 200px;
-gap:24px;
-}
+.hero-content p{
 
-.card{
-background:rgba(255,255,255,0.03);
-border-radius:20px;
-padding:28px;
-backdrop-filter:blur(8px);
-border:1px solid rgba(255,255,255,0.08);
-box-shadow:0 20px 50px rgba(0,0,0,0.25);
-transition:transform .4s ease;
-}
-
-.card h2{
-font-size:28px;
-margin-bottom:14px;
-}
-
-.card h3{
-font-size:20px;
-margin-bottom:12px;
-}
-
-.card p{
 opacity:.8;
 line-height:1.6;
+margin-bottom:30px;
+
 }
 
-.card-1{
-grid-column:1 / span 3;
+.floating-panels{
+
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+
 }
 
-.card-2{
-grid-column:1;
-grid-row:2;
+.panel{
+
+position:absolute;
+background:rgba(255,255,255,0.05);
+
+border:1px solid rgba(255,255,255,0.08);
+
+border-radius:18px;
+
+padding:20px;
+
+backdrop-filter:blur(10px);
+
+box-shadow:0 20px 60px rgba(0,0,0,0.4);
+
+width:220px;
+
+transition:transform .4s ease;
+
 }
 
-.card-3{
-grid-column:2;
-grid-row:2;
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:14px;
-}
+.p1{top:80px; left:10%;}
+.p2{top:220px; left:5%;}
+.p3{top:120px; right:10%;}
+.p4{top:260px; right:12%;}
+.p5{bottom:120px; left:50%; transform:translateX(-50%);}
 
-.card-4{
-grid-column:3;
-grid-row:2;
-}
+.big{
 
-.card-5{
-grid-column:1 / span 3;
-grid-row:3;
-text-align:center;
-}
+font-size:36px;
+font-weight:700;
 
-.metric h2{
-font-size:32px;
-color:#7dd3fc;
 }
-
-.metric span{
-font-size:13px;
-opacity:.7;
-}
-
-.flow li{
-margin-bottom:6px;
-}
-
 /* =========================================================
 3. RCM MATURITY SCORE GAUGE
 ========================================================= */
