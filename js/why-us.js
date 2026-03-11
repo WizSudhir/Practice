@@ -45,7 +45,13 @@ const leaks = document.querySelectorAll(".leak")
 const fixBanner = document.querySelector(".fix-banner")
 
 let fixed = false
+const pipeline = document.querySelector(".pipeline")
 
+leaks.forEach(leak=>{
+leak.style.opacity="0"
+})
+
+pipeline.classList.add("fixed")
 window.addEventListener("scroll",()=>{
 
 if(window.scrollY > 150 && !fixed){
