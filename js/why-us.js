@@ -39,5 +39,25 @@ document.getElementById("gaugeFill")
 }
 
 // ===============================
-// RCM Score Gauge
+// Leak → Fix Animation
 // ===============================
+const leaks = document.querySelectorAll(".leak")
+const fixBanner = document.querySelector(".fix-banner")
+
+let fixed = false
+
+window.addEventListener("scroll",()=>{
+
+if(window.scrollY > 150 && !fixed){
+
+fixed = true
+
+leaks.forEach(leak=>{
+leak.style.opacity = "0"
+})
+
+fixBanner.classList.add("active")
+
+}
+
+})
