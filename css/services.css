@@ -319,7 +319,7 @@ display:inline-block;
 }
 
 /* =========================================================
-5. THE “BEFORRE V/S AFTER RCM TRANSFORMATION
+3. THE “BEFORRE V/S AFTER RCM TRANSFORMATION
 ========================================================= */
 
 .transform-title{
@@ -515,7 +515,7 @@ font-size:16px;
 }
 
 /* ======================================
-6. RCM PROCESS TIMELINE
+4. RCM PROCESS TIMELINE
 ====================================== */
 
 .rcm-system{
@@ -722,7 +722,7 @@ box-shadow:0 0 15px #6366f1;
 }
 
 /* =========================================================
-7. RCM SERVICES LAYOUT + STICKY NAV
+5. RCM SERVICES LAYOUT + STICKY NAV
 ========================================================= */
 .rcm-services{
 min-height:200vh;
@@ -984,7 +984,7 @@ color:var(--text-secondary);
 }
 
 /* =========================================================
-10. SPECIALTIES GRID
+6. SPECIALTIES GRID
 ========================================================= */
 .specialties-section{
 position:relative;
@@ -1077,7 +1077,7 @@ pointer-events:none;
 100%{transform:translate(120px,60px)}
 }
 /* =========================================================
-12. CTA
+7. CTA
 ========================================================= */
 .cta{
 position:relative;
@@ -1149,7 +1149,7 @@ grid-template-columns:1fr;
 }
 }
 /* =========================================================
-16. RESPONSIVE
+8. RESPONSIVE
 ========================================================= */
 
 @media(max-width:992px){
