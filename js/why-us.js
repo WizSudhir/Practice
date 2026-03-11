@@ -53,6 +53,8 @@ if(window.scrollY > 150 && !fixed){
 
 fixed = true
 
+pipeline.classList.add("fixed")
+
 leaks.forEach(leak=>{
 leak.style.opacity = "0"
 })
