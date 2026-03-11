@@ -1204,6 +1204,17 @@ text-transform:uppercase;
 color:#93c5fd;
 margin-bottom:10px;
 }
+.pipeline-title{
+margin-bottom:20px;
+}
+.pipeline-title h3{
+font-size:18px;
+margin-bottom:6px;
+}
+.pipeline-title p{
+font-size:13px;
+color:var(--text-secondary);
+}
 /* =========================================================
 12. BENCHMARK TABLE
 ========================================================= */
