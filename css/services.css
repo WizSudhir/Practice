@@ -1215,27 +1215,11 @@ font-size:13px;
 color:var(--text-secondary);
 }
 /* =========================================================
-12. BENCHMARK TABLE
+8. INDUSTRY BENCHMARKS
 ========================================================= */
-
-.benchmark-table{
-width:100%;
-margin-top:60px;
-border-collapse:collapse;
-}
-
-.benchmark-table th,
-.benchmark-table td{
-padding:16px;
-text-align:left;
-border-bottom:1px solid rgba(255,255,255,0.08);
-}
-
-.benchmark-table th{
-background:var(--bg-secondary);
-}
-
-
+/* =========================================================
+9. CHECKLIST
+========================================================= */
 /* =========================================================
 13. SPECIALTIES GRID
 ========================================================= */
@@ -1260,25 +1244,6 @@ transition:.3s;
 background:var(--gradient-primary);
 color:#fff;
 }
-
-
-/* =========================================================
-14. CHECKLIST
-========================================================= */
-
-.checklist{
-margin-top:50px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-gap:20px;
-}
-
-.check-item{
-background:var(--bg-elevated);
-padding:20px;
-border-radius:var(--radius-lg);
-}
-
 
 /* =========================================================
 15. AUDIT PANEL
