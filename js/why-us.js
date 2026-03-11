@@ -39,19 +39,19 @@ document.getElementById("gaugeFill")
 }
 
 // ===============================
-// Scroll Animation System
+// Scroll Parallax Motion
 // ===============================
-const cards = document.querySelectorAll(".card");
+const panels = document.querySelectorAll(".panel");
 
-window.addEventListener("scroll", () => {
+window.addEventListener("scroll",()=>{
 
 const scroll = window.scrollY;
 
-cards.forEach((card,i)=>{
+panels.forEach((panel,i)=>{
 
-const speed = (i+1)*0.05;
+const speed = (i+1)*0.08;
 
-card.style.transform =
+panel.style.transform =
 `translateY(${scroll*speed}px)`;
 
 });
