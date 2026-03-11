@@ -1150,7 +1150,6 @@ background:
 radial-gradient(circle at 10% 20%, rgba(99,102,241,.15), transparent 40%),
 radial-gradient(circle at 90% 80%, rgba(59,130,246,.15), transparent 40%),
 #050a19;
-overflow:hidden;
 }
 
 
@@ -1422,10 +1421,11 @@ opacity:1;
 transform:translateY(0);
 }
 .phase-number{
-font-size:14px;
+font-size:28px;
+font-weight:800;
 color:#6366f1;
-font-weight:700;
-margin-right:10px;
+margin-right:12px;
+opacity:.85;
 }
 /* Revenue flow animation */
 
