@@ -577,6 +577,9 @@ linear-gradient(#000 0 0);
 opacity:.35;
 pointer-events:none;
 }
+.org-card:hover .org-image img{
+transform:scale(1.05);
+}
 /* IMAGE */
 
 .org-image{
@@ -589,6 +592,7 @@ overflow:hidden;
 width:100%;
 height:100%;
 object-fit:cover;
+transition:transform .5s ease;
 }
 .org-image::after{
 content:"";
