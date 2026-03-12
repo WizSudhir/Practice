@@ -668,14 +668,33 @@ color:white;
 /* ======================================
 SPECIALTY CARDS
 ====================================== */
+.serve-specialties::before{
+content:"";
+position:absolute;
+top:-60px;
+left:50%;
+transform:translateX(-50%);
+width:300px;
+height:1px;
 
+background:linear-gradient(
+90deg,
+transparent,
+#6366f1,
+transparent
+);
+
+opacity:.6;
+}
 .serve-specialties{
-padding:120px 0;
-background:#f8fafc;
+padding:140px 0;
+background:
+radial-gradient(circle at 30% 20%, rgba(99,102,241,.18), transparent 40%),
+radial-gradient(circle at 70% 80%, rgba(59,130,246,.15), transparent 40%),
+#050a19;
 position:relative;
 overflow:hidden;
 }
-
 
 /* SECTION HEADER */
 
@@ -683,6 +702,8 @@ overflow:hidden;
 max-width:720px;
 margin:0 auto 70px;
 text-align:center;
+color:#cbd5f5;
+opacity:.9;
 }
 
 .serve-specialties h2{
@@ -712,22 +733,44 @@ gap:28px;
 
 .specialty-card{
 position:relative;
-background:#fff;
-border-radius:18px;
+
+background:rgba(20,25,55,.55);
+
+border:1px solid rgba(255,255,255,.12);
+
+border-radius:20px;
+
 overflow:hidden;
-box-shadow:0 8px 30px rgba(0,0,0,0.06);
-transition:all .35s cubic-bezier(.4,0,.2,1);
+
+backdrop-filter:blur(16px);
+
+transition:.35s ease;
+
 text-decoration:none;
+
+color:white;
+
 display:flex;
 flex-direction:column;
+
+box-shadow:
+0 25px 60px rgba(0,0,0,.5),
+0 0 30px rgba(99,102,241,.08);
 }
 
 
 /* HOVER EFFECT */
 
 .specialty-card:hover{
-transform:translateY(-8px);
-box-shadow:0 20px 50px rgba(0,0,0,0.12);
+
+transform:translateY(-10px);
+
+border:1px solid rgba(99,102,241,.55);
+
+box-shadow:
+0 35px 90px rgba(0,0,0,.8),
+0 0 60px rgba(99,102,241,.35);
+
 }
 
 
@@ -759,19 +802,22 @@ top:140px;
 left:24px;
 width:48px;
 height:48px;
-background:#fff;
-border-radius:12px;
+background:linear-gradient(135deg,#6366f1,#3b82f6);
+border-radius:14px;
 display:flex;
 align-items:center;
 justify-content:center;
-box-shadow:0 8px 18px rgba(0,0,0,0.12);
+box-shadow:
+0 10px 25px rgba(0,0,0,.6),
+0 0 20px rgba(99,102,241,.4);
+border:1px solid rgba(255,255,255,.15);
 }
 
 .specialty-icon svg{
 width:22px;
 height:22px;
 stroke-width:2;
-color:#2563eb;
+color:white;
 }
 
 
@@ -785,12 +831,13 @@ padding:34px 26px 28px;
 font-size:20px;
 font-weight:700;
 margin-bottom:10px;
-color:#111827;
+color:white;
 }
 
 .specialty-content p{
 font-size:15px;
-color:#6b7280;
+color:#cbd5f5;
+opacity:.9;
 line-height:1.6;
 }
 
