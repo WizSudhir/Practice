@@ -106,3 +106,35 @@ container.appendChild(p);
 for(let i=0;i<25;i++){
 createParticle();
 }
+
+//////////////* DATA FLOW LINES *///////////
+
+const svg = document.querySelector(".data-lines");
+
+const center = {x:210,y:210};
+
+const nodes = [
+{x:210,y:0},
+{x:420,y:210},
+{x:210,y:420},
+{x:0,y:210},
+{x:320,y:70},
+{x:90,y:330}
+];
+
+nodes.forEach(n=>{
+
+const line=document.createElementNS(
+"http://www.w3.org/2000/svg",
+"line"
+);
+
+line.setAttribute("x1",n.x);
+line.setAttribute("y1",n.y);
+
+line.setAttribute("x2",center.x);
+line.setAttribute("y2",center.y);
+
+svg.appendChild(line);
+
+});
