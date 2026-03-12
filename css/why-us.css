@@ -116,13 +116,15 @@ position:absolute;
 left:40px;
 right:40px;
 top:60%;
-height:4px;
+height:8px;
 background:linear-gradient(
 90deg,
-#334155,
+#1e293b,
 #475569,
-#334155
+#1e293b
 );
+box-shadow:
+0 0 10px rgba(59,130,246,.4);
 border-radius:4px;
 }
 .stage{
@@ -167,9 +169,6 @@ white-space:nowrap;
 box-shadow:
 0 10px 25px rgba(0,0,0,.35);
 }
-.leak1{left:25%;}
-.leak2{left:50%;}
-.leak3{left:75%;}
 .loss{
 margin-top:6px;
 color:#ef4444;
@@ -183,7 +182,7 @@ animation:lossDrop 2s linear infinite;
 }
 .revenue-token{
 position:absolute;
-top:60%;
+top:calc(60% - 8px);
 transform:translateY(-50%);
 background:#22c55e;
 color:white;
