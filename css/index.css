@@ -18,7 +18,9 @@
   --accent-2: #8b5cf6;
   --accent-3: #3b82f6;
   --gradient-primary: linear-gradient(135deg, var(--accent), var(--accent-2));
-  --gradient-hero: linear-gradient(-45deg,#0f172a,#1e1b4b,#1e3a8a,#312e81);
+  --gradient-hero: radial-gradient(circle at 20% 30%, rgba(99,102,241,.25), transparent 40%),
+                   radial-gradient(circle at 80% 70%, rgba(59,130,246,.25), transparent 40%),
+                   #050a19;
   /* Dark Mode (Default) */
   --bg-primary: #0b1120;
   --bg-secondary: #0f172a;
