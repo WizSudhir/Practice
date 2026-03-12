@@ -83,8 +83,11 @@ p.style.animationDelay = Math.random()*6 + "s";
 
 p.style.top="50%";
 p.style.left="50%";
-p.style.transform = `rotate(${Math.random()*360}deg)`;
 p.style.zIndex = Math.floor(Math.random()*5);
+const startAngle = Math.random()*360;
+
+p.style.transform =
+`rotate(${startAngle}deg) translateX(${orbit}px) rotate(-${startAngle}deg)`;
 /* random color */
 
 const colors = ["#6366f1","#3b82f6","#22c55e","#a78bfa"];
@@ -221,13 +224,19 @@ function animate(){
 
 requestAnimationFrame(animate);
 
+/* universe rotation */
+
 particles.rotation.y += 0.0008;
 particles.rotation.x += 0.0003;
+
+/* cursor gravity */
+
+particles.rotation.y += mouseX*0.0005;
+particles.rotation.x += mouseY*0.0005;
 
 renderer.render(scene,camera);
 
 }
-
 animate();
 
 window.addEventListener("resize",()=>{
