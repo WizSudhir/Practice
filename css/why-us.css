@@ -73,11 +73,14 @@ opacity:.85;
 max-width:520px;
 }
 .hero-cta{
-margin-top:30px;
+margin-top:34px;
 display:flex;
 align-items:center;
-gap:18px;
-flex-wrap:wrap;
+gap:16px;
+}
+.btn-secondary{
+background:transparent;
+border:1px solid rgba(255,255,255,.15);
 }
 .hero-cta a{
 min-width:220px;
@@ -168,6 +171,7 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 min-height:460px;
+padding-right:20px;
 }
 .hero-right{
 padding:40px;
@@ -179,6 +183,19 @@ animation:float 6s ease-in-out infinite;
 0%{transform:translateY(0)}
 50%{transform:translateY(-8px)}
 100%{transform:translateY(0)}
+}
+.hero-right::before{
+content:"";
+position:absolute;
+width:500px;
+height:500px;
+background:radial-gradient(circle,
+rgba(99,102,241,.25),
+transparent 70%);
+top:-100px;
+right:-100px;
+filter:blur(80px);
+pointer-events:none;
 }
 .pipeline-stages{
 display:flex;
