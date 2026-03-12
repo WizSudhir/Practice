@@ -163,6 +163,7 @@ transform:translateY(-2px);
 .stage-pipeline,
 .stage-cta{
 background:
+linear-gradient(rgba(5,10,25,.15), rgba(5,10,25,.25)),
 url("../images/hero-intro.jpg");
 background-size:cover;
 background-position:center;
