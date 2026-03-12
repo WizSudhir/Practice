@@ -83,6 +83,7 @@ p.style.animationDelay = Math.random()*6 + "s";
 
 p.style.top="50%";
 p.style.left="50%";
+p.style.transform = `rotate(${Math.random()*360}deg)`;
 /* random color */
 
 const colors = ["#6366f1","#3b82f6","#22c55e","#a78bfa"];
@@ -104,5 +105,4 @@ container.appendChild(p);
 
 for(let i=0;i<25;i++){
 createParticle();
-p.style.transform = `rotate(${Math.random()*360}deg)`;
 }
