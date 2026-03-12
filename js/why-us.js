@@ -135,10 +135,7 @@ fixBanner.classList.add("active")
 
 }
 
-}
-
 })
-
 }
 
 
