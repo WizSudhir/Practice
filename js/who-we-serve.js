@@ -84,6 +84,7 @@ p.style.animationDelay = Math.random()*6 + "s";
 p.style.top="50%";
 p.style.left="50%";
 p.style.transform = `rotate(${Math.random()*360}deg)`;
+p.style.zIndex = Math.floor(Math.random()*5);
 /* random color */
 
 const colors = ["#6366f1","#3b82f6","#22c55e","#a78bfa"];
