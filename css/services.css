@@ -161,8 +161,7 @@ transform:translateY(-2px);
 /* HERO STAGE BACKGROUNDS */
 .stage-intro,
 .stage-pipeline,
-.stage-dashboard,
-.stage-revenue{
+.stage-cta{
 background:
 linear-gradient(rgba(5,10,25,.45), rgba(5,10,25,.65)),
 url("../images/hero-intro.jpg");
