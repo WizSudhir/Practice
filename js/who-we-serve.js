@@ -232,6 +232,13 @@ ecoLines[index].classList.add("active");
 }
 if(ecoFlows[index]){
 ecoFlows[index].classList.add("active");
+/* glow platform when data arrives */
+setTimeout(()=>{
+ecoCore.classList.add("data-glow");
+setTimeout(()=>{
+ecoCore.classList.remove("data-glow");
+},500);
+},400);
 }
 }, index*700);
 ecoTimers.push(timer);
