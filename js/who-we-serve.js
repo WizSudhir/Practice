@@ -267,10 +267,10 @@ const containerRect = document
 .getBoundingClientRect();
 
 /* node center */
-const startX =
+const nodeCenterX =
 nodeRect.left + nodeRect.width/2 - containerRect.left;
 
-const startY =
+const nodeCenterY =
 nodeRect.top + nodeRect.height/2 - containerRect.top;
 
 /* core center */
@@ -281,11 +281,19 @@ const coreY =
 coreRect.top + coreRect.height/2 - containerRect.top;
 
 /* direction vector */
-const dx = coreX - startX;
-const dy = coreY - startY;
+const dx = coreX - nodeCenterX;
+const dy = coreY - nodeCenterY;
 
-/* distance */
-const distance = Math.sqrt(dx*dx + dy*dy);
+/* normalize direction */
+const dist = Math.sqrt(dx*dx + dy*dy);
+const dirX = dx / dist;
+const dirY = dy / dist;
+
+/* start at node edge */
+const nodeRadius = nodeRect.width / 2;
+
+const startX = nodeCenterX + dirX * nodeRadius;
+const startY = nodeCenterY + dirY * nodeRadius;
 
 /* stop at platform edge */
 const stopDistance = distance - coreRect.width/2;
