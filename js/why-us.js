@@ -48,12 +48,11 @@ window.calculateRCMScore = calculateRCMScore;
 const leaks = document.querySelectorAll(".leak")
 const fixBanner = document.querySelector(".fix-banner")
 const workflow = document.querySelector(".workflow")
+const heroSection = document.querySelector(".hero-enterprise")
 
 let fixed = false
 
-if(workflow){
-
-const heroSection = document.querySelector(".hero-enterprise")
+if(workflow && heroSection){
 
 const observer = new IntersectionObserver(entries => {
 
@@ -74,6 +73,7 @@ resetEngine()
 },{ threshold:0.4 })
 
 observer.observe(heroSection)
+
 function resetEngine(){
 
 fixed = false
@@ -89,11 +89,6 @@ fixBanner.classList.remove("active")
 
 }
 
-function stopEngine(){
-
-fixed = false
-
-}
 function startEngine(){
 
 if(fixed) return
@@ -120,9 +115,9 @@ recovered += 850
 recoveredMetric.innerText = "$" + recovered
 
 leakageMetric.innerText =
-"$" + Math.max(0,84900 - recovered)
+"$" + Math.max(0,8490 - recovered)
 
-if(recovered >= 84900){
+if(recovered >= 8490){
 clearInterval(interval)
 }
 
@@ -135,10 +130,7 @@ fixBanner.classList.add("active")
 
 }
 
-})
 }
-
-
 // ===============================
 // Aurora Background Interaction
 // ===============================
