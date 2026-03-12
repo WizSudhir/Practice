@@ -99,11 +99,24 @@ align-items:center;
 /* LEFT SIDE */
 
 .hero-left h1{
-font-size:56px;
+font-size:clamp(38px, 3.8vw, 46px);
 font-weight:800;
-line-height:1.1;
+line-height:1.15;
+letter-spacing:-0.02em;
+max-width:620px;
 }
-
+.hero-left h1 .gradient{
+background:linear-gradient(
+90deg,
+#ffffff 0%,
+#d8ccff 40%,
+#9fd4ff 100%
+);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+display:block;
+margin-top:6px;
+}
 .hero-sub{
 margin-top:20px;
 opacity:.8;
