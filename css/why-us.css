@@ -116,7 +116,11 @@ box-shadow:
 padding:30px;
 
 position:relative;
+transform:rotateX(8deg) rotateY(-10deg);
 
+transform-style:preserve-3d;
+
+transition:transform .5s ease;
 }
 .dashboard-header{
 
@@ -141,7 +145,17 @@ letter-spacing:.4px;
 opacity:.8;
 
 }
+.dashboard-perspective{
 
+perspective:1600px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+}
 .system-status{
 
 display:flex;
@@ -396,6 +410,29 @@ right:-200px;
 opacity:.25;
 filter:blur(120px);
 pointer-events:none;
+}
+.hero-enterprise::after{
+
+content:"";
+
+position:absolute;
+
+width:600px;
+
+height:600px;
+
+background:radial-gradient(circle,#22c55e 0%,transparent 70%);
+
+top:40%;
+
+right:15%;
+
+opacity:.15;
+
+filter:blur(120px);
+
+pointer-events:none;
+
 }
 /* =========================================================
 3. RCM MATURITY SCORE GAUGE
