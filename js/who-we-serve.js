@@ -227,7 +227,11 @@ function activateEcosystem(){
 ecoNodes.forEach((node,index)=>{
 const timer = setTimeout(()=>{
 node.classList.add("active");
+// create continuous stream
+const interval = setInterval(()=>{
 createDataFlow(node);
+}, 800 + Math.random()*800);
+ecoTimers.push(interval);
 }, index*700);
 ecoTimers.push(timer);
 });
