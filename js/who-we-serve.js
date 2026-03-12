@@ -1,3 +1,5 @@
+// Intersection Animation
+
 const cards = document.querySelectorAll('.org-card, .specialty-card');
 
 const observer = new IntersectionObserver(entries => {
@@ -16,9 +18,11 @@ cards.forEach(card=>{
 observer.observe(card);
 });
 
-//* Filter JS *//
+
+// FILTER SYSTEM
+
 const filterBtns = document.querySelectorAll(".filter-btn");
-const cards = document.querySelectorAll(".specialty-card");
+const specialtyCards = document.querySelectorAll(".specialty-card");
 
 filterBtns.forEach(btn=>{
 
@@ -29,7 +33,7 @@ btn.classList.add("active");
 
 const filter = btn.dataset.filter;
 
-cards.forEach(card=>{
+specialtyCards.forEach(card=>{
 
 if(filter==="all" || card.dataset.category===filter){
 card.style.display="block";
