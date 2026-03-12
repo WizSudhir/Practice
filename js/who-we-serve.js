@@ -284,10 +284,12 @@ coreRect.top + coreRect.height/2 - containerRect.top;
 const dx = coreX - nodeCenterX;
 const dy = coreY - nodeCenterY;
 
+/* full distance */
+const distance = Math.sqrt(dx*dx + dy*dy);
+
 /* normalize direction */
-const dist = Math.sqrt(dx*dx + dy*dy);
-const dirX = dx / dist;
-const dirY = dy / dist;
+const dirX = dx / distance;
+const dirY = dy / distance;
 
 /* start at node edge */
 const nodeRadius = nodeRect.width / 2;
@@ -296,7 +298,7 @@ const startX = nodeCenterX + dirX * nodeRadius;
 const startY = nodeCenterY + dirY * nodeRadius;
 
 /* stop at platform edge */
-const stopDistance = distance - coreRect.width/2;
+const stopDistance = distance - (coreRect.width / 2);
 
 flow.style.left = startX + "px";
 flow.style.top = startY + "px";
@@ -305,13 +307,13 @@ flow.style.top = startY + "px";
 flow.animate([
 { transform:"translate(0,0)", opacity:1 },
 {
-transform:`translate(${dx*(stopDistance/distance)}px,
-${dy*(stopDistance/distance)}px)`,
+transform:`translate(${dirX * stopDistance}px,
+${dirY * stopDistance}px)`
 opacity:1
 },
 {
-transform:`translate(${dx*(stopDistance/distance)}px,
-${dy*(stopDistance/distance)}px)`,
+transform:`translate(${dirX * stopDistance}px,
+${dirY * stopDistance}px)`
 opacity:0
 }
 ],
