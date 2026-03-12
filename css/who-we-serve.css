@@ -311,8 +311,11 @@ color:#cbd5f5;
 }
 .eco-core.data-glow{
 box-shadow:
-0 0 100px rgba(99,102,241,.9),
-0 0 200px rgba(99,102,241,.5);
+0 0 40px rgba(255,255,255,0.9),
+0 0 80px rgba(99,102,241,1),
+0 0 140px rgba(99,102,241,0.8),
+0 0 220px rgba(59,130,246,0.6);
+transform:translate(-50%,-50%) scale(1.05);
 }
 /* ECOSYSTEM NODES */
 
@@ -398,13 +401,14 @@ transition:stroke .5s;
 /* DATA FLOW PARTICLES */
 .eco-flow{
 position:absolute;
-width:8px;
-height:8px;
+width:10px;
+height:10px;
 border-radius:50%;
-background:#6366f1;
+background:linear-gradient(135deg,#60a5fa,#6366f1);
 box-shadow:
-0 0 6px #6366f1,
-0 0 12px #6366f1;
+0 0 10px #6366f1,
+0 0 20px #6366f1,
+0 0 30px rgba(99,102,241,.8);
 pointer-events:none;
 }
 .eco-flow.active{
