@@ -145,7 +145,68 @@ z-index:10;
 100%{transform:scale(1)}
 
 }
+.engine-icon{
 
+width:36px;
+height:36px;
+
+margin-bottom:6px;
+
+stroke:white;
+
+animation:engineSpin 6s linear infinite;
+
+}
+
+/* rotating icon */
+
+@keyframes engineSpin{
+
+0%{transform:rotate(0deg)}
+
+100%{transform:rotate(360deg)}
+
+}
+
+/* engine glow */
+
+.orbit-core{
+
+flex-direction:column;
+
+background:linear-gradient(135deg,#6366f1,#3b82f6);
+
+box-shadow:
+
+0 0 60px rgba(99,102,241,.7),
+0 0 120px rgba(99,102,241,.4),
+0 0 200px rgba(99,102,241,.2);
+
+animation:enginePulse 4s infinite ease-in-out;
+
+}
+
+@keyframes enginePulse{
+
+0%{
+transform:scale(1);
+}
+
+50%{
+transform:scale(1.08);
+}
+
+100%{
+transform:scale(1);
+}
+
+}
+
+.orbit-core h4{
+font-size:13px;
+font-weight:600;
+margin-top:4px;
+}
 /* ORBITS */
 
 .orbit{
