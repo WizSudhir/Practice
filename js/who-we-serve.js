@@ -141,7 +141,7 @@ opacity:.8
 });
 const particles = new THREE.Points(geometry,material);
 scene.add(particles);
-const engine = document.querySelector(".orbit-core");
+const engine = document.querySelector(".orbit-core") || {getBoundingClientRect:()=>({left:0,top:0,width:0,height:0})};
 // MOUSE GRAVITY TRACKING ///
 let mouseX = 0;
 let mouseY = 0;
@@ -193,13 +193,13 @@ const ecoNodes = document.querySelectorAll(".eco-node");
 const ecoLines = document.querySelectorAll(".eco-lines line");
 const ecoFlows = document.querySelectorAll(".eco-flow");
 const ecoCore = document.querySelector(".eco-core");
+let ecoTimers = [];
 ecoFlows.forEach(flow=>{
 flow.style.animationDelay = Math.random()*4 + "s";
 });
 const ecoObserver = new IntersectionObserver((entries)=>{
 entries.forEach(entry=>{
 if(entry.isIntersecting){
-let ecoTimers = [];
 activateEcosystem();
 }else{
 resetEcosystem();
@@ -220,7 +220,9 @@ flow.classList.remove("active");
 });
 ecoCore.classList.remove("active");
 }
+if(ecoSection){
 ecoObserver.observe(ecoSection);
+}
 function activateEcosystem(){
 ecoNodes.forEach((node,index)=>{
 const timer = setTimeout(()=>{
