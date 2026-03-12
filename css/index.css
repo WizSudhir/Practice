@@ -639,7 +639,7 @@ overflow:hidden;
 .cta-enterprise .cta-bg{
 position:absolute;
 inset:0;
-background:url("images/cta-healthcare.jpg") center/cover no-repeat;
+background:url("../images/cta-healthcare.jpg") center/cover no-repeat;
 z-index:0;
 }
 /* GRADIENT SHAPE */
