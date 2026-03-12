@@ -460,6 +460,29 @@ transform:rotate(360deg);
 }
 
 }
+
+.serve-organizations{
+position:relative;
+}
+
+.serve-organizations::before{
+content:"";
+position:absolute;
+top:-60px;
+left:50%;
+transform:translateX(-50%);
+width:300px;
+height:1px;
+
+background:linear-gradient(
+90deg,
+transparent,
+#6366f1,
+transparent
+);
+
+opacity:.6;
+}
 /* ======================================
 ORG CARDS
 ====================================== */
