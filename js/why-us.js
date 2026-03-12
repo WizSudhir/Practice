@@ -48,20 +48,26 @@ let fixed = false
 const workflow = document.querySelector(".workflow")
 
 window.addEventListener("scroll",()=>{
-
+workflow.style.boxShadow =
+"0 0 40px rgba(34,197,94,.4), 0 20px 80px rgba(0,0,0,.45)";
 if(window.scrollY > 150 && !fixed){
 
 fixed = true
 
 // stop leak animations
 leaks.forEach(leak=>{
+leak.style.transition="opacity .8s ease"
 leak.style.opacity="0"
 })
 
 // increase revenue tokens
 document.querySelectorAll(".revenue-token")
 .forEach(token=>{
-token.innerText = "$" + (Math.floor(Math.random()*400)+200)
+let base = 200
+document.querySelectorAll(".revenue-token")
+.forEach((token,i)=>{
+token.innerText="$"+(base + i*120)
+})
 })
 
 // activate revenue stage
