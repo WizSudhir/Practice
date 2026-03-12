@@ -185,3 +185,30 @@ universeContainer.clientHeight
 
 // 7. LUCIDE ICONS //
 lucide.createIcons();
+
+// 8. ECOSYSTEM SCROLL ANIMATION //
+const ecoSection = document.querySelector(".ecosystem-section");
+const ecoNodes = document.querySelectorAll(".eco-node");
+const ecoLines = document.querySelectorAll(".eco-lines line");
+const ecoFlows = document.querySelectorAll(".eco-flow");
+const ecoObserver = new IntersectionObserver((entries)=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+activateEcosystem();
+}
+});
+},{threshold:.4});
+ecoObserver.observe(ecoSection);
+function activateEcosystem(){
+ecoNodes.forEach((node,index)=>{
+setTimeout(()=>{
+node.classList.add("active");
+if(ecoLines[index]){
+ecoLines[index].classList.add("active");
+}
+if(ecoFlows[index]){
+ecoFlows[index].classList.add("active");
+}
+}, index*700);
+});
+}
