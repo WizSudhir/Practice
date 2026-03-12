@@ -239,6 +239,57 @@ box-shadow:
 .orbit3 span:nth-child(3){right:-10px}
 .orbit3 span:nth-child(4){bottom:-10px}
 
+/* data flow particles */
+
+.particle-system{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+}
+
+.data-particle{
+
+position:absolute;
+
+width:6px;
+height:6px;
+
+border-radius:50%;
+
+background:#6366f1;
+
+box-shadow:
+0 0 6px #6366f1,
+0 0 12px #6366f1,
+0 0 18px rgba(99,102,241,.7);
+
+opacity:.9;
+
+animation:particleMove linear infinite;
+}
+
+/* particle path animation */
+
+@keyframes particleMove{
+
+0%{
+transform:rotate(0deg) translateX(160px) rotate(0deg);
+opacity:0;
+}
+
+10%{opacity:1;}
+
+90%{opacity:1;}
+
+100%{
+transform:rotate(360deg) translateX(160px) rotate(-360deg);
+opacity:0;
+}
+
+}
 /* ======================================
 ECOSYSTEM NETWORK
 ====================================== */
