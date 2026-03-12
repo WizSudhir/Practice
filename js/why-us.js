@@ -61,11 +61,11 @@ entries.forEach(entry => {
 
 if(entry.isIntersecting){
 
-resetEngine()
+startEngine()
 
 }else{
 
-stopEngine()
+resetEngine()
 
 }
 
@@ -82,7 +82,7 @@ leaks.forEach(leak=>{
 leak.style.opacity = "1"
 })
 
-document.querySelector(".metric-box .metric-value").innerText="$415"
+document.querySelector(".metric-box .metric-value").innerText="$8,490"
 document.querySelector(".metric-box.recovered .metric-value").innerText="$0"
 
 fixBanner.classList.remove("active")
@@ -91,9 +91,14 @@ fixBanner.classList.remove("active")
 
 function stopEngine(){
 
-// optional pause logic if needed
+fixed = false
 
 }
+function startEngine(){
+
+if(fixed) return
+
+fixed = true
 
 let recovered = 0
 
@@ -103,16 +108,21 @@ document.querySelector(".metric-box.recovered .metric-value")
 const leakageMetric =
 document.querySelector(".metric-box .metric-value")
 
+leaks.forEach(leak=>{
+leak.style.transition="opacity .8s ease"
+leak.style.opacity="0"
+})
+
 const interval = setInterval(()=>{
 
-recovered += 85
+recovered += 850
 
 recoveredMetric.innerText = "$" + recovered
 
 leakageMetric.innerText =
-"$" + Math.max(0,415 - recovered)
+"$" + Math.max(0,84900 - recovered)
 
-if(recovered >= 415){
+if(recovered >= 84900){
 clearInterval(interval)
 }
 
@@ -122,6 +132,8 @@ document.querySelector(".revenue-stage")
 .style.boxShadow="0 0 30px rgba(34,197,94,1)"
 
 fixBanner.classList.add("active")
+
+}
 
 }
 
