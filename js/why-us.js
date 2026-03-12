@@ -53,19 +53,47 @@ let fixed = false
 
 if(workflow){
 
-window.addEventListener("scroll",()=>{
+const heroSection = document.querySelector(".hero-enterprise")
 
-workflow.style.boxShadow =
-"0 0 40px rgba(34,197,94,.4), 0 20px 80px rgba(0,0,0,.45)"
+const observer = new IntersectionObserver(entries => {
 
-if(window.scrollY > 150 && !fixed){
+entries.forEach(entry => {
 
-fixed = true
+if(entry.isIntersecting){
+
+resetEngine()
+
+}else{
+
+stopEngine()
+
+}
+
+})
+
+},{ threshold:0.4 })
+
+observer.observe(heroSection)
+function resetEngine(){
+
+fixed = false
 
 leaks.forEach(leak=>{
-leak.style.transition="opacity .8s ease"
-leak.style.opacity="0"
+leak.style.opacity = "1"
 })
+
+document.querySelector(".metric-box .metric-value").innerText="$415"
+document.querySelector(".metric-box.recovered .metric-value").innerText="$0"
+
+fixBanner.classList.remove("active")
+
+}
+
+function stopEngine(){
+
+// optional pause logic if needed
+
+}
 
 let recovered = 0
 
