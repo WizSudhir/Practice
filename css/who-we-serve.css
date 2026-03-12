@@ -4,6 +4,9 @@
 padding:120px 0;
 background:linear-gradient(180deg,#f7f9fc,#ffffff);
 }
+.serve-organizations{
+padding:120px 0;
+}
 
 .hero-grid{
 display:grid;
@@ -11,15 +14,20 @@ grid-template-columns:1.2fr 1fr;
 gap:80px;
 align-items:center;
 }
-
+.serve-organizations{
+padding:120px 0;
+}
 .hero-content h1{
-font-size:44px;
+font-size:58px;
+font-weight:800;
+letter-spacing:-1px;
 line-height:1.2;
 margin-bottom:24px;
 }
 
 .hero-content p{
-font-size:18px;
+font-size:20px;
+line-height:1.6;
 color:#6b7280;
 margin-bottom:30px;
 }
@@ -83,16 +91,17 @@ gap:30px;
 }
 
 .org-card{
-padding:35px;
-background:#fff;
-border-radius:16px;
-border:1px solid #f0f0f0;
-transition:all .3s;
+padding:40px;
+border-radius:18px;
+background:linear-gradient(180deg,#ffffff,#fbfbff);
+border:1px solid rgba(0,0,0,0.04);
+box-shadow:0 8px 30px rgba(0,0,0,0.05);
+transition:all .35s ease;
 }
 
 .org-card:hover{
-transform:translateY(-5px);
-box-shadow:0 10px 30px rgba(0,0,0,0.06);
+transform:translateY(-8px);
+box-shadow:0 20px 60px rgba(0,0,0,0.08);
 }
 
 .org-card h3{
@@ -104,7 +113,26 @@ font-size:20px;
 color:#6b7280;
 }
 
+.visual-circle{
+width:420px;
+height:420px;
+border-radius:50%;
+background:radial-gradient(circle,#eef2ff,#ffffff);
+display:flex;
+flex-wrap:wrap;
+align-content:center;
+justify-content:center;
+gap:14px;
+box-shadow:0 20px 60px rgba(0,0,0,0.08);
+}
 
+.visual-circle span{
+background:white;
+padding:10px 16px;
+border-radius:20px;
+font-size:14px;
+box-shadow:0 4px 15px rgba(0,0,0,0.08);
+}
 /* SPECIALTIES */
 
 .serve-specialties{
@@ -115,7 +143,7 @@ background:#fafbff;
 .specialty-grid{
 display:grid;
 grid-template-columns:repeat(4,1fr);
-gap:18px;
+gap:26px;
 }
 
 .specialty-card{
