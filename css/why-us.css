@@ -378,7 +378,27 @@ padding:16px;
 text-align:center;
 
 }
+.metric-box:first-child{
 
+animation:dangerPulse 2s infinite;
+
+}
+
+@keyframes dangerPulse{
+
+0%{
+box-shadow:0 0 0 rgba(239,68,68,0);
+}
+
+50%{
+box-shadow:0 0 30px rgba(239,68,68,.5);
+}
+
+100%{
+box-shadow:0 0 0 rgba(239,68,68,0);
+}
+
+}
 .metric-label{
 
 display:block;
@@ -473,6 +493,23 @@ opacity:0;
 }
 
 }
+.danger{
+
+color:#fca5a5;
+
+animation:dangerBlink 1.2s infinite;
+
+}
+
+@keyframes dangerBlink{
+
+0%{opacity:1;}
+
+50%{opacity:.4;}
+
+100%{opacity:1;}
+
+}
 .revenue-token{
 position:absolute;
 top:calc(60% - 8px);
@@ -489,7 +526,7 @@ box-shadow:
 animation:revenueFlow 6s linear infinite;
 }
 @keyframes revenueFlow{
-0%{left:-5%;opacity:0;}
+0%{left:40px;opacity:0;}
 10%{opacity:1;}
 90%{opacity:1;}
 100%{left:105%;opacity:0;}
@@ -520,17 +557,6 @@ box-shadow:
 .revenue-stage{
 background:#16a34a;
 box-shadow:0 0 20px rgba(34,197,94,.6);
-}
-
-/* TRUST STRIP */
-
-.hero-trust{
-margin-top:80px;
-display:flex;
-justify-content:center;
-gap:40px;
-font-size:14px;
-opacity:.7;
 }
 
 /* MOBILE */
