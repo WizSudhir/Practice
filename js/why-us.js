@@ -81,21 +81,21 @@ fixed = false
 leaks.forEach(leak=>{
 leak.style.opacity = "1"
 })
-
+workflow.style.borderColor = ""
+workflow.classList.remove("pipeline-fixed")
 document.querySelector(".metric-box .metric-value").innerText="$8,490"
 document.querySelector(".metric-box.recovered .metric-value").innerText="$0"
 
 fixBanner.classList.remove("active")
 
 }
-document.querySelector(".workflow").style.borderColor="#22c55e"
-workflow.classList.add("pipeline-fixed")
 function startEngine(){
 
 if(fixed) return
 
 fixed = true
-
+document.querySelector(".workflow").style.borderColor="#22c55e"
+workflow.classList.add("pipeline-fixed")
 let recovered = 0
 
 const recoveredMetric =
