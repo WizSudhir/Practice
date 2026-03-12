@@ -135,8 +135,8 @@ filter:drop-shadow(0 0 6px rgba(255,255,255,.6));
 
 position:absolute;
 
-width:160px;
-height:160px;
+width:180px;
+height:180px;
 
 border-radius:50%;
 
@@ -166,14 +166,25 @@ content:"";
 
 position:absolute;
 
-width:220px;
-height:220px;
+width:240px;
+height:240px;
 
 border-radius:50%;
 
-border:1px dashed rgba(99,102,241,.35);
+background:
+conic-gradient(
+#6366f1,
+#3b82f6,
+#22c55e,
+#6366f1
+);
+
+mask:
+radial-gradient(circle, transparent 58%, black 60%);
 
 animation:engineOrbit 18s linear infinite;
+
+opacity:.7;
 
 }
 
