@@ -342,6 +342,7 @@ border-radius:20px;
 background:rgba(255,255,255,0.03);
 backdrop-filter:blur(12px);
 border:1px solid rgba(255,255,255,0.08);
+box-shadow:0 30px 80px rgba(0,0,0,0.4);
 }
 .hero h1 { line-height:1.1; }
 .hero p { margin:20px 0; }
@@ -429,7 +430,7 @@ top:-200px;
 left:50%;
 width:900px;
 height:900px;
-background:radial-gradient(circle,rgba(139,92,246,0.25),transparent 60%);
+background:radial-gradient(circle,rgba(139,92,246,0.12),transparent 60%);
 transform:translateX(-50%);
 filter:blur(120px);
 z-index:0;
@@ -988,7 +989,14 @@ footer {
   stroke: var(--accent-2);
   flex-shrink: 0;          /* prevent shrinking */
 }
-
+.footer-contact-icon{
+display:flex;
+align-items:center;
+justify-content:center;
+width:26px;
+height:26px;
+color:var(--accent-2);
+}
 /* ===============================
 20. BLOG PAGE
 ================================= */
