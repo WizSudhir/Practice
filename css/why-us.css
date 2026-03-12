@@ -187,6 +187,13 @@ font-size:12px;
 opacity:.6;
 margin-bottom:12px;
 }
+.pipeline-fixed::before{
+background:linear-gradient(
+90deg,
+#22c55e,
+#16a34a
+);
+}
 /* DASHBOARD SHELL */
 
 .workflow-dashboard{
