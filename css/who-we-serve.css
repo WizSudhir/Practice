@@ -1,5 +1,43 @@
 /* HERO */
+.specialty-cloud{
+position:relative;
+width:420px;
+height:420px;
+border-radius:50%;
+background:radial-gradient(circle,#eef2ff,#ffffff);
+display:flex;
+align-items:center;
+justify-content:center;
+flex-wrap:wrap;
+gap:14px;
+padding:60px;
+box-shadow:0 30px 80px rgba(0,0,0,0.08);
+animation:floatCloud 8s ease-in-out infinite;
+}
 
+.specialty-cloud span{
+background:white;
+padding:10px 16px;
+border-radius:20px;
+font-size:14px;
+font-weight:600;
+box-shadow:0 5px 20px rgba(0,0,0,0.08);
+transition:all .25s ease;
+cursor:pointer;
+}
+
+.specialty-cloud span:hover{
+transform:scale(1.15);
+background:#eef2ff;
+}
+
+@keyframes floatCloud{
+
+0%{transform:translateY(0px)}
+50%{transform:translateY(-10px)}
+100%{transform:translateY(0px)}
+
+}
 .serve-hero{
 padding:120px 0;
 background:linear-gradient(180deg,#f7f9fc,#ffffff);
@@ -90,8 +128,43 @@ margin-bottom:16px;
 .section-header p{
 color:#6b7280;
 }
+/* Scrolling Healthcare Ecosystem Diagram */
+.ecosystem-section{
+padding:140px 0;
+background:#fafbff;
+text-align:center;
+}
 
+.ecosystem-title{
+font-size:40px;
+margin-bottom:80px;
+}
 
+.ecosystem-diagram{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:40px;
+max-width:900px;
+margin:auto;
+}
+
+.eco-node{
+background:white;
+padding:30px;
+border-radius:16px;
+box-shadow:0 10px 30px rgba(0,0,0,0.06);
+font-weight:600;
+transition:all .3s ease;
+}
+
+.eco-node.highlight{
+background:#eef2ff;
+transform:scale(1.1);
+}
+
+.eco-node:hover{
+transform:translateY(-6px);
+}
 /* ORGANIZATION GRID */
 
 .org-grid{
