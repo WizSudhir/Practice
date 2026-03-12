@@ -94,3 +94,29 @@ fixBanner.classList.add("active")
 }
 
 })
+// ===============================
+// SaaS Hero Parallax System
+// ===============================
+
+const dashboard =
+document.querySelector(".workflow-dashboard")
+
+const hero =
+document.querySelector(".hero-enterprise")
+
+hero.addEventListener("mousemove",(e)=>{
+
+const x = (window.innerWidth/2 - e.clientX)/40
+const y = (window.innerHeight/2 - e.clientY)/40
+
+dashboard.style.transform =
+`rotateX(${8+y}deg) rotateY(${-10+x}deg)`
+
+})
+
+hero.addEventListener("mouseleave",()=>{
+
+dashboard.style.transform =
+"rotateX(8deg) rotateY(-10deg)"
+
+})
