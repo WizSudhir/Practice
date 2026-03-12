@@ -4,6 +4,16 @@
 padding:120px 0;
 background:linear-gradient(180deg,#f7f9fc,#ffffff);
 }
+.serve-hero::before{
+content:"";
+position:absolute;
+width:600px;
+height:600px;
+background:radial-gradient(circle,#eef2ff,transparent);
+top:-200px;
+right:-100px;
+z-index:0;
+}
 .serve-organizations{
 padding:120px 0;
 }
