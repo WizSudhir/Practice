@@ -207,7 +207,10 @@ resetEcosystem();
 });
 },{threshold:0.25});
 function resetEcosystem(){
-ecoTimers.forEach(timer=>clearTimeout(timer));
+ecoTimers.forEach(timer=>{
+clearTimeout(timer);
+clearInterval(timer);
+});
 ecoTimers=[];
 ecoNodes.forEach(node=>{
 node.classList.remove("active");
@@ -230,7 +233,7 @@ node.classList.add("active");
 // create continuous stream
 const interval = setInterval(()=>{
 createDataFlow(node);
-}, 800 + Math.random()*800);
+}, 400 + Math.random()*600);
 ecoTimers.push(interval);
 }, index*700);
 ecoTimers.push(timer);
@@ -315,17 +318,12 @@ if(Math.random() > 0.6){
 core.classList.add("data-glow");
 setTimeout(()=>{
 core.classList.remove("data-glow");
-},500);
+},600);
 }
-setTimeout(()=>{
-core.classList.remove("data-glow");
-},400);
-
 },900);
-
 /* remove particle */
 setTimeout(()=>{
 flow.remove();
-},1300);
+},2000);
 
 }
