@@ -913,3 +913,220 @@ height:28px;
 flex-shrink:0;
 color:var(--accent-2);
 }
+/* ===============================
+   19. RESPONSIVE SYSTEM
+================================= */
+
+/* LARGE TABLETS / SMALL LAPTOPS (Below 1200px) */
+@media (max-width:1200px){
+.hero-right img{
+width:420px;
+}
+.cta-enterprise .cta-shape{
+width:75%;
+padding-left:80px;
+padding-right:60px;
+}
+}
+/* TABLET (Below 992px) */
+@media (max-width:992px){
+/* ---------- GLOBAL ---------- */
+.section{
+padding:80px 0;
+}
+h1{
+font-size:46px;
+}
+h2{
+font-size:34px;
+}
+/* ---------- HERO ---------- */
+.hero{
+height:auto;
+padding-top:120px;
+padding-bottom:80px;
+}
+.hero-container{
+flex-direction:column;
+text-align:center;
+gap:50px;
+}
+.hero-left{
+max-width:100%;
+padding:35px;
+}
+.hero-buttons{
+justify-content:center;
+flex-wrap:wrap;
+}
+.hero-right img{
+width:380px;
+max-width:100%;
+}
+.stats{
+justify-content:center;
+flex-wrap:wrap;
+gap:30px;
+}
+/* ---------- SERVICES ---------- */
+.services-grid{
+grid-template-columns:repeat(2,1fr);
+gap:24px;
+}
+/* ---------- HIPAA ---------- */
+.hipaa-container{
+flex-direction:column;
+text-align:center;
+gap:50px;
+}
+.hipaa-badge{
+margin:auto;
+}
+/* ---------- CTA ENTERPRISE ---------- */
+.cta-enterprise{
+height:auto;
+padding:80px 0;
+}
+.cta-enterprise .cta-bg{
+display:none;
+}
+.cta-enterprise .cta-shape{
+position:relative;
+width:100%;
+height:auto;
+border-radius:40px;
+padding:60px 40px;
+justify-content:center;
+text-align:center;
+}
+/* ---------- CONTACT STRIP ---------- */
+.contact-strip-inner{
+flex-direction:column;
+gap:30px;
+}
+.divider-line{
+display:none;
+}
+.contact-item{
+justify-content:center;
+}
+/* ---------- FOOTER ---------- */
+.footer-grid{
+grid-template-columns:repeat(2,1fr);
+gap:40px;
+text-align:center;
+}
+.footer-brand,
+.footer-links,
+.footer-contact,
+.footer-hipaa{
+align-items:center;
+}
+}
+
+/* MOBILE (Below 768px) */
+@media (max-width:768px){
+/* ---------- GLOBAL ---------- */
+.container{
+padding:0 20px;
+}
+h1{
+font-size:36px;
+}
+h2{
+font-size:28px;
+}
+p{
+font-size:15px;
+}
+/* ---------- HERO ---------- */
+.hero-left{
+padding:28px;
+}
+.hero-buttons{
+flex-direction:column;
+gap:14px;
+}
+.hero-right img{
+width:320px;
+}
+.stats{
+flex-direction:column;
+gap:18px;
+}
+/* ---------- SERVICES ---------- */
+.services-grid{
+grid-template-columns:1fr;
+gap:24px;
+}
+.service-card img{
+height:200px;
+}
+/* ---------- HIPAA ---------- */
+.badge-ring{
+width:180px;
+height:180px;
+}
+.badge-core{
+width:130px;
+height:130px;
+}
+.badge-core img{
+width:85px;
+}
+/* ---------- EHR SLIDER ---------- */
+.slide-track{
+gap:30px;
+}
+.slide-track img{
+height:36px;
+}
+/* ---------- CTA ---------- */
+.cta-content h2{
+font-size:30px;
+}
+/* ---------- CONTACT STRIP ---------- */
+.contact-circle{
+width:60px;
+height:60px;
+}
+.contact-circle svg{
+width:24px;
+height:24px;
+}
+.contact-item h4{
+font-size:16px;
+}
+/* ---------- FLOATING CTA ---------- */
+.floating-cta{
+padding:12px 20px;
+font-size:14px;
+bottom:20px;
+right:20px;
+}
+}
+/* SMALL PHONES (Below 480px) */
+@media (max-width:480px){
+h1{
+font-size:30px;
+}
+h2{
+font-size:24px;
+}
+.hero{
+padding-top:110px;
+}
+.hero-right img{
+width:260px;
+}
+.service-card img{
+height:180px;
+}
+.cta-content h2{
+font-size:24px;
+}
+.footer-grid{
+grid-template-columns:1fr;
+gap:30px;
+}
+}
