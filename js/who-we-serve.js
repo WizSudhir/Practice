@@ -86,8 +86,7 @@ p.style.left="50%";
 p.style.zIndex = Math.floor(Math.random()*5);
 const startAngle = Math.random()*360;
 
-p.style.transform =
-`rotate(${startAngle}deg) translateX(${orbit}px) rotate(-${startAngle}deg)`;
+p.style.transform = `rotate(${startAngle}deg)`;
 /* random color */
 
 const colors = ["#6366f1","#3b82f6","#22c55e","#a78bfa"];
@@ -178,7 +177,10 @@ const renderer = new THREE.WebGLRenderer({
 alpha:true
 });
 
-renderer.setSize(window.innerWidth,window.innerHeight);
+renderer.setSize(
+universeContainer.clientWidth,
+universeContainer.clientHeight
+);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
 
 universeContainer.appendChild(renderer.domElement);
@@ -216,6 +218,7 @@ opacity:.8
 const particles = new THREE.Points(geometry,material);
 
 scene.add(particles);
+const engine = document.querySelector(".orbit-core");
 // MOUSE GRAVITY TRACKING ///
 let mouseX = 0;
 let mouseY = 0;
@@ -239,13 +242,12 @@ const dy = e.clientY - engineY;
 engineDistance = Math.sqrt(dx*dx + dy*dy);
 
 });
-const engine = document.querySelector(".orbit-core");
 /* animation */
 
 function animate(){
 
 requestAnimationFrame(animate);
-
+if(!universeContainer.offsetParent) return;
 /* universe rotation */
 
 particles.rotation.y += 0.0008;
@@ -261,6 +263,7 @@ let glowStrength = Math.max(0, 1 - engineDistance/400);
 
 material.opacity = 0.6 + glowStrength*0.8;
 material.size = 0.03 + glowStrength*0.05;
+material.color.setHSL(0.65,1,0.5 + glowStrength*0.3);
 renderer.render(scene,camera);
 
 }
