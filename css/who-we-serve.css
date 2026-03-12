@@ -92,18 +92,16 @@ backdrop-filter:blur(10px);
 ========================================== */
 
 .orbit-system{
-
 position:relative;
-
 width:420px;
 height:420px;
-
 margin:auto;
-
 display:flex;
 align-items:center;
 justify-content:center;
-
+perspective:1000px;
+transform-style:preserve-3d;
+transition:transform .2s ease;
 }
 
 /* CENTER ENGINE */
@@ -223,18 +221,21 @@ justify-content:center;
 width:220px;
 height:220px;
 animation:orbitRotate 16s linear infinite;
+transform:translateZ(20px);
 }
 
 .orbit2{
 width:320px;
 height:320px;
 animation:orbitRotate 24s linear infinite reverse;
+transform:translateZ(0px);
 }
 
 .orbit3{
 width:420px;
 height:420px;
 animation:orbitRotate 36s linear infinite;
+transform:translateZ(-30px);
 }
 
 /* orbit animation */
@@ -322,7 +323,7 @@ box-shadow:
 0 0 18px rgba(99,102,241,.7);
 
 opacity:.9;
-
+transform-style:preserve-3d;
 animation:particleMove linear infinite;
 }
 
