@@ -115,7 +115,19 @@ margin-top:28px;
 display:flex;
 gap:16px;
 }
+.cta-secondary{
+display:flex;
+align-items:center;
+font-size:14px;
+font-weight:600;
+color:#93c5fd;
+text-decoration:none;
+transition:opacity .2s ease;
+}
 
+.cta-secondary:hover{
+opacity:.8;
+}
 /* IMPACT CARDS */
 
 .impact-cards{
