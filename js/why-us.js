@@ -90,7 +90,17 @@ engineCycle = setInterval(()=>{
 resetEngine()
 
 setTimeout(()=>{
+startScanning()
+
+setTimeout(()=>{
+
+detectLeaks()
+
+setTimeout(()=>{
 runEngine()
+},2000)
+
+},2000)
 },2000)
 
 },12000)
@@ -121,6 +131,42 @@ document.querySelector(".metric-box.recovered .metric-value").innerText="$0"
 fixBanner.classList.remove("active")
 document.querySelector(".revenue-stage")
 .style.boxShadow="0 0 20px rgba(34,197,94,.6)"
+
+}
+function detectLeaks(){
+
+const statusText =
+document.querySelector(".status-text")
+
+const statusBox =
+document.querySelector(".system-status")
+
+statusText.innerText = "Leakage detected"
+
+statusBox.classList.remove("scanning")
+
+// show leaks
+leaks.forEach(leak=>{
+leak.style.opacity="1"
+})
+
+}
+function startScanning(){
+
+const statusText =
+document.querySelector(".status-text")
+
+const statusBox =
+document.querySelector(".system-status")
+
+statusText.innerText = "System scanning..."
+
+statusBox.classList.add("scanning")
+
+// hide leaks during scanning
+leaks.forEach(leak=>{
+leak.style.opacity="0"
+})
 
 }
 function runEngine(){
@@ -214,5 +260,8 @@ dashboard.style.transform =
 })
 
 }
+const statusText =
+document.querySelector(".status-text")
 
+statusText.innerText="System scanning..."
 }) // increase revenue tokenslfklsejlkdsjlkjdslkjslkjsldkjdslkjflksdlkdsfjlksjdlfjlskdjflksjlfksdjlksdjlkdsjlkdsjflkjsdlkfjsdlkdfjlksjdlkflksf
