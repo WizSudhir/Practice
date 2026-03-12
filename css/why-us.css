@@ -168,7 +168,27 @@ opacity:.7;
 }
 
 /* RIGHT SIDE PIPELINE */
+.pipeline-status{
+font-size:13px;
+font-weight:600;
+margin-bottom:14px;
+letter-spacing:.3px;
+color:#93c5fd;
+display:flex;
+align-items:center;
+gap:8px;
+opacity:.9;
+}
 
+.pipeline-status::before{
+content:"●";
+color:#3b82f6;
+animation:scanPulse 1.5s infinite;
+}
+
+.pipeline-text{
+transition:opacity .4s ease;
+}
 .hero-right{
 padding:40px;
 min-height:460px;
