@@ -179,7 +179,7 @@ alpha:true
 });
 
 renderer.setSize(window.innerWidth,window.innerHeight);
-renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
 
 universeContainer.appendChild(renderer.domElement);
 
@@ -216,7 +216,17 @@ opacity:.8
 const particles = new THREE.Points(geometry,material);
 
 scene.add(particles);
+// MOUSE GRAVITY TRACKING ///
 
+let mouseX = 0;
+let mouseY = 0;
+
+document.addEventListener("mousemove",(e)=>{
+
+mouseX = (e.clientX/window.innerWidth - 0.5)*2;
+mouseY = (e.clientY/window.innerHeight - 0.5)*2;
+
+});
 
 /* animation */
 
