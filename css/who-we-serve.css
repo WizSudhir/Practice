@@ -321,12 +321,15 @@ position:absolute;
 top:50%;
 left:50%;
 transform-origin:0 0;
+width:160px;
+height:110px;
 display:flex;
 flex-direction:column;
 align-items:center;
+justify-content:center;
 text-align:center;
 gap:6px;
-padding:14px 16px;
+padding:12px;
 background:rgba(20,25,55,.65);
 border:1px solid rgba(255,255,255,.08);
 border-radius:16px;
@@ -341,11 +344,12 @@ box-shadow:
 0 0 50px rgba(99,102,241,.4);
 }
 .eco-node i{
-width:22px;
-height:22px;
+width:24px;
+height:24px;
 color:#a5b4fc;
 display:block;
 margin:auto;
+margin-bottom:6px;
 }
 .eco-node:hover{
 border:1px solid rgba(99,102,241,.5);
@@ -365,6 +369,12 @@ left:50%;
 transform:translate(-50%, -50%);
 width:0;
 height:0;
+}
+.eco-node span,
+.eco-node p,
+.eco-node h4{
+max-width:120px;
+line-height:1.3;
 }
 /* ECOSYSTEM CONNECTION LINES */
 
