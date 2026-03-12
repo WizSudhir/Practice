@@ -1,6 +1,86 @@
 /* =========================================================
 1. HERO
 ========================================================= */
+.hero-aurora{
+
+position:absolute;
+
+width:900px;
+height:900px;
+
+top:-200px;
+left:-200px;
+
+background:radial-gradient(circle,
+rgba(59,130,246,.35) 0%,
+rgba(59,130,246,.15) 30%,
+transparent 70%);
+
+filter:blur(120px);
+
+animation:auroraMove 18s infinite alternate ease-in-out;
+
+pointer-events:none;
+
+z-index:0;
+
+}
+
+.hero-aurora-2{
+
+top:200px;
+left:auto;
+right:-200px;
+
+background:radial-gradient(circle,
+rgba(34,197,94,.35) 0%,
+rgba(34,197,94,.15) 30%,
+transparent 70%);
+
+animation:auroraMoveTwo 22s infinite alternate ease-in-out;
+
+}
+@keyframes auroraMove{
+
+0%{
+transform:translate(0,0) scale(1);
+}
+
+100%{
+transform:translate(120px,80px) scale(1.15);
+}
+
+}
+
+@keyframes auroraMoveTwo{
+
+0%{
+transform:translate(0,0) scale(1);
+}
+
+100%{
+transform:translate(-120px,-60px) scale(1.2);
+}
+
+}
+.hero-grid-overlay{
+
+position:absolute;
+
+inset:0;
+
+background-image:
+
+linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+
+background-size:60px 60px;
+
+pointer-events:none;
+
+z-index:0;
+
+}
 .hero-enterprise{
 padding:180px 20px 140px;
 position:relative;
