@@ -191,13 +191,30 @@ const ecoSection = document.querySelector(".ecosystem-section");
 const ecoNodes = document.querySelectorAll(".eco-node");
 const ecoLines = document.querySelectorAll(".eco-lines line");
 const ecoFlows = document.querySelectorAll(".eco-flow");
+ecoFlows.forEach(flow=>{
+flow.style.animationDelay = Math.random()*4 + "s";
+});
 const ecoObserver = new IntersectionObserver((entries)=>{
 entries.forEach(entry=>{
 if(entry.isIntersecting){
 activateEcosystem();
+}else{
+resetEcosystem();
 }
 });
 },{threshold:.4});
+function resetEcosystem(){
+ecoNodes.forEach(node=>{
+node.classList.remove("active");
+});
+ecoLines.forEach(line=>{
+line.classList.remove("active");
+});
+ecoFlows.forEach(flow=>{
+flow.classList.remove("active");
+});
+ecoCore.classList.remove("active");
+}
 ecoObserver.observe(ecoSection);
 function activateEcosystem(){
 ecoNodes.forEach((node,index)=>{
@@ -211,8 +228,8 @@ ecoFlows[index].classList.add("active");
 }
 }, index*700);
 });
-}
-const ecoCore = document.querySelector(".eco-core");
 setTimeout(()=>{
 ecoCore.classList.add("active");
 }, ecoNodes.length*700);
+}
+const ecoCore = document.querySelector(".eco-core");
