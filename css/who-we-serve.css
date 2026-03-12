@@ -263,10 +263,9 @@ ECOSYSTEM NETWORK
 .ecosystem-network{
 position:relative;
 max-width:700px;
-height:500px;
+height:600px;
 margin:auto;
 }
-
 /* CORE PLATFORM */
 
 .eco-core{
@@ -319,8 +318,8 @@ box-shadow:
 
 .eco-node{
 position:absolute;
-top:0;
-left:0;
+top:50%;
+left:50%;
 transform-origin:0 0;
 display:flex;
 flex-direction:column;
