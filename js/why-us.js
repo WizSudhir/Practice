@@ -53,7 +53,12 @@ const heroSection = document.querySelector(".hero-enterprise")
 let fixed = false
 let engineCycle = null
 let startDelay = null
+const statusText =
+document.querySelector(".status-text")
 
+if(statusText){
+statusText.innerText="System scanning..."
+}
 if(workflow && heroSection){
 
 const observer = new IntersectionObserver(entries => {
@@ -83,8 +88,17 @@ if(engineCycle) return
 // Wait 3 seconds so visitor understands the pipeline
 startDelay = setTimeout(()=>{
 
-runEngine()
+startScanning()
 
+setTimeout(()=>{
+
+detectLeaks()
+
+setTimeout(()=>{
+runEngine()
+},2000)
+
+},2000)
 engineCycle = setInterval(()=>{
 
 resetEngine()
@@ -121,7 +135,7 @@ function resetEngine(){
 fixed = false
 
 leaks.forEach(leak=>{
-leak.style.opacity = "1"
+leak.style.opacity = "0"
 })
 workflow.style.borderColor = ""
 workflow.classList.remove("pipeline-fixed")
@@ -131,6 +145,14 @@ document.querySelector(".metric-box.recovered .metric-value").innerText="$0"
 fixBanner.classList.remove("active")
 document.querySelector(".revenue-stage")
 .style.boxShadow="0 0 20px rgba(34,197,94,.6)"
+const statusText =
+document.querySelector(".status-text")
+
+const statusBox =
+document.querySelector(".system-status")
+
+statusText.innerText="System scanning..."
+statusBox.classList.add("scanning")
 
 }
 function detectLeaks(){
@@ -260,8 +282,4 @@ dashboard.style.transform =
 })
 
 }
-const statusText =
-document.querySelector(".status-text")
-
-statusText.innerText="System scanning..."
 }) // increase revenue tokenslfklsejlkdsjlkjdslkjslkjsldkjdslkjflksdlkdsfjlksjdlfjlskdjflksjlfksdjlksdjlkdsjlkdsjflkjsdlkfjsdlkdfjlksjdlkflksf
