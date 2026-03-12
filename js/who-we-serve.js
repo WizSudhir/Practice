@@ -227,23 +227,90 @@ function activateEcosystem(){
 ecoNodes.forEach((node,index)=>{
 const timer = setTimeout(()=>{
 node.classList.add("active");
-if(ecoLines[index]){
-ecoLines[index].classList.add("active");
-}
-if(ecoFlows[index]){
-ecoFlows[index].classList.add("active");
-/* glow platform when data arrives */
-setTimeout(()=>{
-ecoCore.classList.add("data-glow");
-setTimeout(()=>{
-ecoCore.classList.remove("data-glow");
-},500);
-},400);
-}
+createDataFlow(node);
 }, index*700);
 ecoTimers.push(timer);
 });
 setTimeout(()=>{
 ecoCore.classList.add("active");
 }, ecoNodes.length*700);
+}
+
+// 9. PARTICLES TRAVEL FUNCTION //
+function createDataFlow(node){
+
+const flow = document.createElement("div");
+flow.className = "eco-flow";
+
+document.querySelector(".ecosystem-network").appendChild(flow);
+
+const core = document.querySelector(".eco-core");
+
+const nodeRect = node.getBoundingClientRect();
+const coreRect = core.getBoundingClientRect();
+const containerRect = document
+.querySelector(".ecosystem-network")
+.getBoundingClientRect();
+
+/* node center */
+const startX =
+nodeRect.left + nodeRect.width/2 - containerRect.left;
+
+const startY =
+nodeRect.top + nodeRect.height/2 - containerRect.top;
+
+/* core center */
+const coreX =
+coreRect.left + coreRect.width/2 - containerRect.left;
+
+const coreY =
+coreRect.top + coreRect.height/2 - containerRect.top;
+
+/* direction vector */
+const dx = coreX - startX;
+const dy = coreY - startY;
+
+/* distance */
+const distance = Math.sqrt(dx*dx + dy*dy);
+
+/* stop at platform edge */
+const stopDistance = distance - coreRect.width/2;
+
+flow.style.left = startX + "px";
+flow.style.top = startY + "px";
+
+/* animation */
+flow.animate([
+{ transform:"translate(0,0)", opacity:1 },
+{
+transform:`translate(${dx*(stopDistance/distance)}px,
+${dy*(stopDistance/distance)}px)`,
+opacity:1
+},
+{
+transform:`translate(${dx*(stopDistance/distance)}px,
+${dy*(stopDistance/distance)}px)`,
+opacity:0
+}
+],
+{
+duration:1200,
+easing:"ease-out"
+});
+
+/* glow platform */
+setTimeout(()=>{
+core.classList.add("data-glow");
+
+setTimeout(()=>{
+core.classList.remove("data-glow");
+},400);
+
+},900);
+
+/* remove particle */
+setTimeout(()=>{
+flow.remove();
+},1300);
+
 }
