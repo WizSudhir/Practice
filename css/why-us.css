@@ -327,7 +327,8 @@ position:absolute;
 left:40px;
 right:40px;
 top:60%;
-height:10px;
+height:16px;
+border-radius:10px;
 background:linear-gradient(
 90deg,
 #1e293b 0%,
@@ -339,7 +340,6 @@ background:linear-gradient(
 background-size:200% 100%;
 box-shadow:
 0 0 10px rgba(59,130,246,.4);
-border-radius:4px;
 animation:pipelineMove 4s linear infinite;
 }
 @keyframes pipelineMove{
@@ -443,21 +443,32 @@ height:2px;
 background:rgba(255,255,255,.08);
 }
 .stage-node{
+width:90px;
+height:90px;
+display:flex;
+align-items:center;
+justify-content:center;
+position:relative;
+top:-18px;
+padding:10px 16px;
 background:#0f172a;
-border:1px solid rgba(255,255,255,.1);
-padding:14px 20px;
-border-radius:14px;
-font-size:14px;
-font-weight:600;
+border:2px solid rgba(255,255,255,.12);
+border-radius:50%;
+font-size:12px;
+font-weight:700;
+text-align:center;
 box-shadow:
 0 10px 25px rgba(0,0,0,.35),
 0 0 20px rgba(59,130,246,.15);
 }
 .leak{
 position:absolute;
-top:-70px;
+top:80px;
 left:50%;
 transform:translateX(-50%);
+display:flex;
+flex-direction:column;
+align-items:center;
 background:rgba(239,68,68,.15);
 border:1px solid rgba(239,68,68,.35);
 padding:10px 14px;
@@ -473,22 +484,17 @@ margin-top:6px;
 color:#ef4444;
 font-weight:800;
 font-size:13px;
-animation:lossDrop 2s ease-in infinite;
+animation:leakFlow 2s ease-in infinite;
 }
-@keyframes lossDrop{
+@keyframes leakFlow{
 
 0%{
-transform:translateY(0);
-opacity:1;
-}
-
-60%{
-transform:translateY(40px);
+transform:translate(-50%,0);
 opacity:1;
 }
 
 100%{
-transform:translateY(80px);
+transform:translate(-50%,80px);
 opacity:0;
 }
 
