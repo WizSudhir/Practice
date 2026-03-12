@@ -88,7 +88,8 @@ document.querySelector(".metric-box.recovered .metric-value").innerText="$0"
 fixBanner.classList.remove("active")
 
 }
-
+document.querySelector(".workflow").style.borderColor="#22c55e"
+workflow.classList.add("pipeline-fixed")
 function startEngine(){
 
 if(fixed) return
