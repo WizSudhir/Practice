@@ -62,8 +62,9 @@ function createParticle(){
 const particle = document.createElement("div");
 particle.classList.add("data-particle");
 
-/* random orbit size */
-
+/* random orbit size & colors */
+const colors=["#6366f1","#3b82f6","#22c55e","#a78bfa"];
+particle.style.background=colors[Math.floor(Math.random()*colors.length)];
 const orbit = Math.random()*120 + 120;
 
 /* random speed */
