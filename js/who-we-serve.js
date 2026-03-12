@@ -183,7 +183,6 @@ universeContainer.appendChild(renderer.domElement);
 
 /* create particles */
 
-const particleCount = 200;
 const particleCount = window.innerWidth < 768 ? 120 : 220;
 const geometry = new THREE.BufferGeometry();
 
@@ -237,6 +236,9 @@ camera.aspect = window.innerWidth/window.innerHeight;
 
 camera.updateProjectionMatrix();
 
-renderer.setSize(window.innerWidth,window.innerHeight);
+renderer.setSize(
+universeContainer.clientWidth,
+universeContainer.clientHeight
+);
 
 });
