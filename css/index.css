@@ -210,49 +210,37 @@ header.scrolled {
 }
 /* MOBILE MENU FIX */
 @media (max-width: 992px) {
-  .nav-toggle {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 21px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    z-index: 1001;
-  }
-  .nav-toggle span {
-    width: 100%;
-    height: 3px;
-    background-color: var(--text-primary);
-    border-radius: 10px;
-    transition: 0.3s;
-  }
-  .nav-menu {
-    position: fixed;
-    top: 0;
-    right: -100%; /* Hides the menu off-screen to the right */
-    width: 80%;
-    height: 100vh;
-    background: var(--bg-secondary);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: 0.4s ease-in-out;
-    box-shadow: -10px 0 30px rgba(0,0,0,0.5);
-  }
-  .nav-menu.active {
-    right: 0; /* Slides the menu into view */
-  }
-  .nav-menu ul {
-    flex-direction: column;
-    gap: 40px;
-    text-align: center;
-  }
-  .nav-menu ul li a {
-    font-size: 20px;
-  }
+
+.nav-menu{
+position:fixed;
+top:0;
+right:-100%;
+width:80%;
+height:100vh;
+background:var(--bg-secondary);
+
+display:flex;
+flex-direction:column;
+align-items:flex-start; /* FIX */
+justify-content:flex-start; /* FIX */
+
+padding-top:120px;
+padding-left:40px;
+
+transition:0.4s ease-in-out;
+box-shadow:-10px 0 30px rgba(0,0,0,0.5);
+}
+
+.nav-menu.active{
+right:0;
+}
+
+.nav-menu ul{
+flex-direction:column;
+gap:30px;
+align-items:flex-start; /* FIX */
+}
+
 }
 /* Hide toggle on desktop */
 @media (min-width: 993px) {
@@ -985,10 +973,14 @@ margin:auto;
 /* ---------- CTA ENTERPRISE ---------- */
 .cta-enterprise{
 height:auto;
-padding:80px 0;
+padding:100px 0;
+background:
+linear-gradient(rgba(10,10,30,0.7), rgba(10,10,30,0.7)),
+url("../images/cta-healthcare.jpg") center/cover no-repeat;
 }
 .cta-enterprise .cta-bg{
-display:none;
+display:block;
+opacity:0.25;
 }
 .cta-enterprise .cta-shape{
 position:relative;
@@ -1027,6 +1019,9 @@ align-items:center;
 /* MOBILE (Below 768px) */
 @media (max-width:768px){
 /* ---------- GLOBAL ---------- */
+.nav-toggle{
+justify-self:end;
+}
 .container{
 padding:0 20px;
 }
@@ -1107,6 +1102,9 @@ right:20px;
 }
 /* SMALL PHONES (Below 480px) */
 @media (max-width:480px){
+.nav-toggle{
+justify-self:end;
+}
 h1{
 font-size:30px;
 }
