@@ -1062,24 +1062,27 @@ padding:50px 40px;
 .pg-hero{
 height:auto;
 padding-top:120px;
+height:300vh;
 }
 .pg-sticky{
-position:relative;
-height:auto;
+position:sticky;
+top:0;
+height:100vh;
 }
 .pg-stage{
 position:relative;
 height:auto;
-padding:80px 24px;
+padding:120px 24px 60px;
 opacity:1 !important;
 transform:none !important;
 pointer-events:auto;
 }
 .pg-title{
-font-size:34px;
+font-size:32px;
+line-height:1.2;
 }
 .pg-sub{
-font-size:16px;
+font-size:15px;
 }
 .pg-buttons{
 flex-direction:column;
@@ -1094,10 +1097,12 @@ margin:auto;
 .pipeline{
 flex-direction:column;
 align-items:center;
-gap:12px;
+gap:10px;
+justify-content:center;
 }
 .node{
-font-size:13px;
+font-size:12px;
+padding:8px 14px;
 }
 /* REVENUE COUNTER */
 .revenue-live h3{
