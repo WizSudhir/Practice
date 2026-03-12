@@ -217,17 +217,29 @@ const particles = new THREE.Points(geometry,material);
 
 scene.add(particles);
 // MOUSE GRAVITY TRACKING ///
-
 let mouseX = 0;
 let mouseY = 0;
+let engineDistance = 999;
 
 document.addEventListener("mousemove",(e)=>{
 
 mouseX = (e.clientX/window.innerWidth - 0.5)*2;
 mouseY = (e.clientY/window.innerHeight - 0.5)*2;
 
-});
+/* distance from engine */
 
+const rect = engine.getBoundingClientRect();
+
+const engineX = rect.left + rect.width/2;
+const engineY = rect.top + rect.height/2;
+
+const dx = e.clientX - engineX;
+const dy = e.clientY - engineY;
+
+engineDistance = Math.sqrt(dx*dx + dy*dy);
+
+});
+const engine = document.querySelector(".orbit-core");
 /* animation */
 
 function animate(){
@@ -243,7 +255,12 @@ particles.rotation.x += 0.0003;
 
 particles.rotation.y += mouseX*0.0005;
 particles.rotation.x += mouseY*0.0005;
+/* engine gravity glow */
 
+let glowStrength = Math.max(0, 1 - engineDistance/400);
+
+material.opacity = 0.6 + glowStrength*0.8;
+material.size = 0.03 + glowStrength*0.05;
 renderer.render(scene,camera);
 
 }
