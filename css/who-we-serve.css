@@ -529,3 +529,155 @@ font-size:38px;
 }
 
 }
+
+/* ==========================================
+3D HEALTHCARE UNIVERSE
+========================================== */
+
+.orbit-system{
+
+position:relative;
+
+width:420px;
+height:420px;
+
+margin:auto;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+}
+
+/* CENTER ENGINE */
+
+.orbit-core{
+
+position:absolute;
+
+width:140px;
+height:140px;
+
+border-radius:50%;
+
+background:linear-gradient(135deg,#6366f1,#3b82f6);
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-weight:700;
+font-size:16px;
+
+box-shadow:
+0 0 60px rgba(99,102,241,.8),
+0 0 120px rgba(99,102,241,.35);
+
+animation:corePulse 4s infinite ease-in-out;
+
+z-index:10;
+
+}
+
+@keyframes corePulse{
+
+0%{transform:scale(1)}
+
+50%{transform:scale(1.08)}
+
+100%{transform:scale(1)}
+
+}
+
+/* ORBITS */
+
+.orbit{
+
+position:absolute;
+
+border-radius:50%;
+
+border:1px dashed rgba(99,102,241,.35);
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+}
+
+/* orbit sizes */
+
+.orbit1{
+width:220px;
+height:220px;
+animation:orbitRotate 16s linear infinite;
+}
+
+.orbit2{
+width:320px;
+height:320px;
+animation:orbitRotate 24s linear infinite reverse;
+}
+
+.orbit3{
+width:420px;
+height:420px;
+animation:orbitRotate 36s linear infinite;
+}
+
+/* orbit animation */
+
+@keyframes orbitRotate{
+
+0%{transform:rotate(0deg)}
+
+100%{transform:rotate(360deg)}
+
+}
+
+/* specialty nodes */
+
+.orbit span{
+
+position:absolute;
+
+background:rgba(20,25,55,.65);
+
+border:1px solid rgba(255,255,255,.08);
+
+padding:8px 14px;
+
+border-radius:20px;
+
+font-size:13px;
+
+backdrop-filter:blur(10px);
+
+transition:.35s;
+
+}
+
+.orbit span:hover{
+
+transform:scale(1.15);
+
+border:1px solid rgba(99,102,241,.5);
+
+box-shadow:
+0 0 20px rgba(99,102,241,.6);
+
+}
+
+/* position nodes */
+
+.orbit1 span:nth-child(1){top:-10px}
+.orbit1 span:nth-child(2){bottom:-10px}
+
+.orbit2 span:nth-child(1){top:-10px}
+.orbit2 span:nth-child(2){left:-10px}
+.orbit2 span:nth-child(3){right:-10px}
+
+.orbit3 span:nth-child(1){top:-10px}
+.orbit3 span:nth-child(2){left:-10px}
+.orbit3 span:nth-child(3){right:-10px}
+.orbit3 span:nth-child(4){bottom:-10px}
