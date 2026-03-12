@@ -327,16 +327,31 @@ position:absolute;
 left:40px;
 right:40px;
 top:60%;
-height:8px;
+height:10px;
 background:linear-gradient(
 90deg,
-#1e293b,
-#475569,
-#1e293b
+#1e293b 0%,
+#334155 30%,
+#64748b 50%,
+#334155 70%,
+#1e293b 100%
 );
+background-size:200% 100%;
 box-shadow:
 0 0 10px rgba(59,130,246,.4);
 border-radius:4px;
+animation:pipelineMove 4s linear infinite;
+}
+@keyframes pipelineMove{
+
+0%{
+background-position:0% 0;
+}
+
+100%{
+background-position:200% 0;
+}
+
 }
 .dashboard-metrics{
 
@@ -438,11 +453,25 @@ margin-top:6px;
 color:#ef4444;
 font-weight:800;
 font-size:13px;
-animation:lossDrop 2s linear infinite;
+animation:lossDrop 2s ease-in infinite;
 }
 @keyframes lossDrop{
-0%{transform:translateY(0);opacity:1;}
-100%{transform:translateY(60px);opacity:0;}
+
+0%{
+transform:translateY(0);
+opacity:1;
+}
+
+60%{
+transform:translateY(40px);
+opacity:1;
+}
+
+100%{
+transform:translateY(80px);
+opacity:0;
+}
+
 }
 .revenue-token{
 position:absolute;
