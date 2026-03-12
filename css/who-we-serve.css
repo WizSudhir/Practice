@@ -339,10 +339,9 @@ box-shadow .6s ease;
 }
 .eco-node.active{
 opacity:1;
-filter:brightness(1.1);
 box-shadow:
-0 0 25px rgba(99,102,241,.7),
-0 0 40px rgba(99,102,241,.4);
+0 0 25px rgba(99,102,241,.8),
+0 0 50px rgba(99,102,241,.4);
 }
 .eco-node i{
 width:22px;
@@ -388,12 +387,6 @@ stroke-dasharray:300;
 stroke-dashoffset:300;
 opacity:.6;
 transition:stroke .5s;
-}
-.eco-lines line.active{
-animation:drawLine .8s ease forwards;
-}
-@keyframes drawLine{
-to{stroke-dashoffset:0;}
 }
 /* DATA FLOW PARTICLES */
 
