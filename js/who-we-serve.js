@@ -182,3 +182,6 @@ universeContainer.clientWidth,
 universeContainer.clientHeight
 );
 });
+
+// 7. LUCIDE ICONS //
+lucide.createIcons();
