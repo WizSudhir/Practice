@@ -229,9 +229,9 @@ recovered += 850
 recoveredMetric.innerText = "$" + recovered
 
 leakageMetric.innerText =
-"$" + Math.max(0,8490 - recovered)
+"$" + Math.max(0,8500 - recovered)
 
-if(recovered >= 8490){
+if(recovered >= 8500){
 clearInterval(interval)
 }
 
