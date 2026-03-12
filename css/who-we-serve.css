@@ -464,86 +464,91 @@ transform:rotate(360deg);
 ORG CARDS
 ====================================== */
 
-.serve-organizations{
-
-background:#050a19;
-}
-
-.section-header{
-
-text-align:center;
-max-width:720px;
-margin:auto;
-margin-bottom:80px;
-}
-
-.section-header h2{
-
-font-size:40px;
-
-background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-
-margin-bottom:20px;
-}
-
-.section-header p{
-color:#cbd5f5;
-}
-
-/* GRID */
-
 .org-grid{
-
 display:grid;
-
-grid-template-columns:repeat(3,1fr);
-
-gap:30px;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:32px;
+margin-top:60px;
 }
 
-/* GLASS CARD */
+
+/* CARD */
 
 .org-card{
-
-background:rgba(20,25,55,.65);
-
-border:1px solid rgba(255,255,255,.08);
-
-border-radius:20px;
-
-padding:40px;
-
-backdrop-filter:blur(10px);
-
-transition:.35s;
-
-opacity:0;
-transform:translateY(20px);
+display:block;
+background:white;
+border-radius:18px;
+overflow:hidden;
+box-shadow:0 10px 30px rgba(0,0,0,0.06);
+transition:all .3s ease;
+text-decoration:none;
+color:inherit;
 }
 
 .org-card:hover{
-
-transform:translateY(-10px);
-
-border:1px solid rgba(99,102,241,.45);
-
-box-shadow:
-
-0 20px 50px rgba(0,0,0,.6),
-0 0 40px rgba(99,102,241,.25);
+transform:translateY(-8px);
+box-shadow:0 20px 50px rgba(0,0,0,0.12);
 }
 
-.org-card h3{
-margin-bottom:10px;
+
+/* IMAGE */
+
+.org-image{
+position:relative;
+height:180px;
+overflow:hidden;
 }
 
-.org-card p{
-color:#cbd5f5;
+.org-image img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+
+/* ICON */
+
+.org-icon{
+position:absolute;
+bottom:-22px;
+left:24px;
+width:44px;
+height:44px;
+background:white;
+border-radius:12px;
+display:flex;
+align-items:center;
+justify-content:center;
+box-shadow:0 6px 20px rgba(0,0,0,0.15);
+}
+
+
+/* CONTENT */
+
+.org-content{
+padding:40px 26px 28px;
+}
+
+.org-content h3{
+margin-bottom:12px;
+font-size:20px;
+}
+
+.org-content p{
+font-size:15px;
+line-height:1.6;
+color:#6b7280;
+margin-bottom:16px;
+}
+
+
+/* LINK */
+
+.org-link{
+font-weight:600;
+color:#2563eb;
 font-size:14px;
 }
-
 /* ======================================
 SPECIALTY CARDS
 ====================================== */
