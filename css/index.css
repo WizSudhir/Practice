@@ -18,7 +18,7 @@
   --accent-2: #8b5cf6;
   --accent-3: #3b82f6;
   --gradient-primary: linear-gradient(135deg, var(--accent), var(--accent-2));
-  --gradient-hero: linear-gradient(-45deg,#5a3eb1,#8c3fc6,#3b82f6,#9333ea);
+  --gradient-hero: linear-gradient(-45deg,#0f172a,#1e1b4b,#1e3a8a,#312e81);
   /* Dark Mode (Default) */
   --bg-primary: #0b1120;
   --bg-secondary: #0f172a;
@@ -179,10 +179,15 @@ p {
   transition: 0.3s ease;
 }
 .navbar-inner {
-  display:flex;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
   justify-content:space-between;
   align-items:center;
   padding:20px 0;
+}
+.nav-menu{
+display:flex;
+justify-content:center;
 }
 .logo img { height:55px; }
 .nav-menu ul {
@@ -433,6 +438,13 @@ z-index:0;
 /* ===============================
    10. SERVICES
 ================================= */
+.section-title{
+text-align:center;
+margin-bottom:40px;
+background:linear-gradient(90deg,#6366f1,#8b5cf6,#3b82f6);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
 .services-grid {
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -916,7 +928,8 @@ footer {
     display: flex;
     flex-direction: column; /* Stacks buttons vertically */
     align-items: center;    /* Centers them horizontally */
-    gap: 15px;              /* Adds space between the two buttons */
+    gap: 16px;              /* Adds space between the two buttons */
+    margin-top:25px;
   }
   .hero-buttons .btn-primary, 
   .hero-buttons .btn-outline {
