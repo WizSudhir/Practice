@@ -58,20 +58,17 @@ align-items:center;
 .hero-left h1{
 font-size:clamp(38px, 3.8vw, 46px);
 font-weight:800;
-line-height:1.15;
+line-height:1.1;
 letter-spacing:-0.02em;
 max-width:620px;
 }
 .hero-left h1 .gradient{
-background:linear-gradient(
-90deg,
-#ffffff 0%,
-#d8ccff 40%,
-#9fd4ff 100%
-);
+background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 display:block;
+font-weight:800;
+max-width:620px;
 margin-top:6px;
 }
 .hero-sub{
