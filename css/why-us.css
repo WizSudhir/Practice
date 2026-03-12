@@ -236,6 +236,37 @@ justify-content:center;
 align-items:center;
 
 }
+.app-chrome{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:10px 14px;
+margin:-30px -30px 20px -30px;
+background:rgba(255,255,255,.04);
+border-bottom:1px solid rgba(255,255,255,.06);
+border-radius:22px 22px 0 0;
+}
+
+.app-controls{
+display:flex;
+gap:8px;
+}
+
+.app-controls span{
+width:10px;
+height:10px;
+border-radius:50%;
+background:#ef4444;
+}
+
+.app-controls span:nth-child(2){background:#f59e0b}
+.app-controls span:nth-child(3){background:#22c55e}
+
+.app-title{
+font-size:12px;
+opacity:.6;
+letter-spacing:.4px;
+}
 .system-status{
 
 display:flex;
