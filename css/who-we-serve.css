@@ -396,19 +396,16 @@ opacity:.6;
 transition:stroke .5s;
 }
 /* DATA FLOW PARTICLES */
-
 .eco-flow{
 position:absolute;
-width:6px;
-height:6px;
+width:8px;
+height:8px;
 border-radius:50%;
 background:#6366f1;
 box-shadow:
 0 0 6px #6366f1,
 0 0 12px #6366f1;
-animation:ecoMove 6s linear infinite;
-opacity:0;
-transition:opacity .6s ease;
+pointer-events:none;
 }
 .eco-flow.active{
 opacity:1;
