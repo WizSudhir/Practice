@@ -612,7 +612,12 @@ border:none;
 .slide-track {
   display: flex;
   gap: 60px;
-  animation: scroll 35s linear infinite;
+  animation: scroll 60s linear infinite;
+  width:max-content;
+}
+@keyframes scroll{
+0%{transform:translateX(0)}
+100%{transform:translateX(-50%)}
 }
 .slide-track img {
   height: 60px;
@@ -620,10 +625,6 @@ border:none;
   object-fit: contain;
   opacity: 0.85;
   transition: 0.3s ease;
-}
-@keyframes scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
 }
 /* ===============================
    13. CTA
@@ -661,7 +662,7 @@ top:50px;          /* slightly below top */
 left:0;
 width:66%;         /* 2/3 width */
 height:330px;
-background: var(--gradient-primary);
+background: linear-gradient(135deg,#1e1b4b,#312e81,#4f46e5);
 border-top-right-radius:160px;
 border-bottom-right-radius:160px;
 display:flex;
@@ -679,6 +680,9 @@ max-width:520px;
 font-size:40px;
 line-height:1.2;
 margin-bottom:20px;
+background:linear-gradient(90deg,#6366f1,#8b5cf6,#3b82f6);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 .cta-content p{
 margin-bottom:30px;
