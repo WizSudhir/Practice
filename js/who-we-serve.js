@@ -245,7 +245,14 @@ function createDataFlow(node){
 
 const flow = document.createElement("div");
 flow.className = "eco-flow";
-
+const colors = ["#6366f1","#60a5fa","#a78bfa"];
+const color = colors[Math.floor(Math.random()*colors.length)];
+flow.style.background = color;
+flow.style.boxShadow = `
+0 0 10px ${color},
+0 0 20px ${color},
+0 0 30px ${color}
+`;
 document.querySelector(".ecosystem-network").appendChild(flow);
 
 const core = document.querySelector(".eco-core");
@@ -298,14 +305,18 @@ opacity:0
 }
 ],
 {
-duration:1200,
+duration:900 + Math.random()*700,
 easing:"ease-out"
 });
 
 /* glow platform */
 setTimeout(()=>{
+if(Math.random() > 0.6){
 core.classList.add("data-glow");
-
+setTimeout(()=>{
+core.classList.remove("data-glow");
+},500);
+}
 setTimeout(()=>{
 core.classList.remove("data-glow");
 },400);
