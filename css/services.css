@@ -16,7 +16,7 @@ align-items:center;
 justify-content:center;
 }
 .pg-hero{
-height:350vh;
+height:280vh;
 position:relative;
 background:
 radial-gradient(circle at 20% 20%, rgba(99,102,241,0.15), transparent 40%),
@@ -163,7 +163,6 @@ transform:translateY(-2px);
 .stage-pipeline,
 .stage-cta{
 background:
-linear-gradient(rgba(5,10,25,.45), rgba(5,10,25,.65)),
 url("../images/hero-intro.jpg");
 background-size:cover;
 background-position:center;
