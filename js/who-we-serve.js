@@ -83,7 +83,19 @@ p.style.animationDelay = Math.random()*6 + "s";
 
 p.style.top="50%";
 p.style.left="50%";
+/* random color */
 
+const colors = ["#6366f1","#3b82f6","#22c55e","#a78bfa"];
+
+const color = colors[Math.floor(Math.random()*colors.length)];
+
+p.style.background = color;
+
+p.style.boxShadow = `
+0 0 6px ${color},
+0 0 12px ${color},
+0 0 18px ${color}
+`;
 container.appendChild(p);
 
 }
@@ -93,6 +105,3 @@ container.appendChild(p);
 for(let i=0;i<25;i++){
 createParticle();
 }
-/* random colors */
-const colors=["#6366f1","#3b82f6","#22c55e","#a78bfa"];
-particle.style.background=colors[Math.floor(Math.random()*colors.length)];
