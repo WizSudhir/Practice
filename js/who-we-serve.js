@@ -212,3 +212,7 @@ ecoFlows[index].classList.add("active");
 }, index*700);
 });
 }
+const ecoCore = document.querySelector(".eco-core");
+setTimeout(()=>{
+ecoCore.classList.add("active");
+}, ecoNodes.length*700);
