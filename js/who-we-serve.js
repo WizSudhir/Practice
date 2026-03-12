@@ -104,4 +104,5 @@ container.appendChild(p);
 
 for(let i=0;i<25;i++){
 createParticle();
+p.style.transform = `rotate(${Math.random()*360}deg)`;
 }
