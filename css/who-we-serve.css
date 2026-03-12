@@ -476,18 +476,19 @@ margin-top:60px;
 
 .org-card{
 display:block;
-background:white;
+background:var(--card-bg);
 border-radius:18px;
 overflow:hidden;
-box-shadow:0 10px 30px rgba(0,0,0,0.06);
+border:1px solid var(--border-color);
+box-shadow:var(--shadow-md);
 transition:all .3s ease;
 text-decoration:none;
-color:inherit;
+color:var(--text-primary);
 }
-
 .org-card:hover{
 transform:translateY(-8px);
-box-shadow:0 20px 50px rgba(0,0,0,0.12);
+border-color:var(--primary);
+box-shadow:0 20px 60px rgba(0,0,0,0.18);
 }
 
 
@@ -512,17 +513,22 @@ object-fit:cover;
 position:absolute;
 bottom:-22px;
 left:24px;
-width:44px;
-height:44px;
-background:white;
+width:46px;
+height:46px;
+background:var(--surface);
 border-radius:12px;
 display:flex;
 align-items:center;
 justify-content:center;
-box-shadow:0 6px 20px rgba(0,0,0,0.15);
+border:1px solid var(--border-color);
+box-shadow:var(--shadow-sm);
 }
-
-
+.org-icon svg{
+width:22px;
+height:22px;
+color:var(--primary);
+stroke-width:2;
+}
 /* CONTENT */
 
 .org-content{
@@ -543,11 +549,11 @@ margin-bottom:16px;
 
 
 /* LINK */
-
 .org-link{
 font-weight:600;
-color:#2563eb;
+color:var(--primary);
 font-size:14px;
+letter-spacing:.2px;
 }
 /* ======================================
 SPECIALTY CARDS
