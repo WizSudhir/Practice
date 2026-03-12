@@ -79,7 +79,7 @@ opacity:.7;
 
 .hero-right{
 padding:40px;
-min-height:360px;
+min-height:460px;
 position:relative;
 animation:float 6s ease-in-out infinite;
 }
