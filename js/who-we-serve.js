@@ -51,3 +51,45 @@ card.style.display="none";
 });
 
 });
+/* =========================================
+ORBIT DATA PARTICLES
+========================================= */
+
+const particleContainer = document.querySelector(".particle-system");
+
+function createParticle(){
+
+const particle = document.createElement("div");
+particle.classList.add("data-particle");
+
+/* random orbit size */
+
+const orbit = Math.random()*120 + 120;
+
+/* random speed */
+
+const speed = Math.random()*10 + 8;
+
+particle.style.animationDuration = speed + "s";
+
+/* random delay */
+
+particle.style.animationDelay = Math.random()*5 + "s";
+
+/* random position */
+
+particle.style.top = "50%";
+particle.style.left = "50%";
+
+particle.style.transform =
+`rotate(${Math.random()*360}deg) translateX(${orbit}px)`;
+
+particleContainer.appendChild(particle);
+
+}
+
+/* create many particles */
+
+for(let i=0;i<20;i++){
+createParticle();
+}
