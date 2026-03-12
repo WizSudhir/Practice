@@ -352,12 +352,12 @@ border:1px solid rgba(99,102,241,.5);
 box-shadow:
 0 0 20px rgba(99,102,241,.6);
 }
-.node1{ transform: rotate(0deg) translateX(240px) rotate(0deg); }
-.node2{ transform: rotate(60deg) translateX(240px) rotate(-60deg); }
-.node3{ transform: rotate(120deg) translateX(240px) rotate(-120deg); }
-.node4{ transform: rotate(180deg) translateX(240px) rotate(-180deg); }
-.node5{ transform: rotate(240deg) translateX(240px) rotate(-240deg); }
-.node6{ transform: rotate(300deg) translateX(240px) rotate(-300deg); }
+.node1{ transform: rotate(0deg) translateX(240px) rotate(0deg) translate(-50%, -50%); }
+.node2{ transform: rotate(60deg) translateX(240px) rotate(-60deg) translate(-50%, -50%); }
+.node3{ transform: rotate(120deg) translateX(240px) rotate(-120deg) translate(-50%, -50%); }
+.node4{ transform: rotate(180deg) translateX(240px) rotate(-180deg) translate(-50%, -50%); }
+.node5{ transform: rotate(240deg) translateX(240px) rotate(-240deg) translate(-50%, -50%); }
+.node6{ transform: rotate(300deg) translateX(240px) rotate(-300deg) translate(-50%, -50%); }
 .eco-node-ring{
 position:absolute;
 top:50%;
