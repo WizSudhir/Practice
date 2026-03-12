@@ -322,30 +322,30 @@ color:#cbd5f5;
 /* ECOSYSTEM NODES */
 
 .eco-node{
-
 position:absolute;
-
 display:flex;
 flex-direction:column;
 align-items:center;
 gap:6px;
-
 padding:14px 16px;
-
 background:rgba(20,25,55,.65);
-
 border:1px solid rgba(255,255,255,.08);
-
 border-radius:16px;
-
 backdrop-filter:blur(10px);
-
 font-size:13px;
-
-transition:.35s;
-
+opacity:.35;
+transform:scale(.95);
+transition:
+opacity .6s ease,
+transform .6s ease,
+box-shadow .6s ease;
 }
-
+.eco-node.active{
+opacity:1;
+transform:scale(1);
+box-shadow:
+0 0 20px rgba(99,102,241,.6);
+}
 .eco-node i{
 width:22px;
 height:22px;
@@ -384,40 +384,35 @@ pointer-events:none;
 }
 
 .eco-lines line{
-
 stroke:#6366f1;
-
 stroke-width:1.5;
-
 stroke-dasharray:6 6;
-
 animation:dataFlow 6s linear infinite;
-
-opacity:.6;
-
+opacity:.15;
+transition:opacity .6s ease, stroke .6s ease;
 }
-
+.eco-lines line.active{
+opacity:.9;
+stroke:#6366f1;
+}
 /* DATA FLOW PARTICLES */
 
 .eco-flow{
-
 position:absolute;
-
 width:6px;
 height:6px;
-
 border-radius:50%;
-
 background:#6366f1;
-
 box-shadow:
 0 0 6px #6366f1,
 0 0 12px #6366f1;
-
 animation:ecoMove 6s linear infinite;
-
+opacity:0;
+transition:opacity .6s ease;
 }
-
+.eco-flow.active{
+opacity:1;
+}
 /* positions */
 
 .flow1{top:120px;left:350px}
