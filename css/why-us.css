@@ -199,7 +199,7 @@ position:relative;
 transform:rotateX(8deg) rotateY(-10deg);
 
 transform-style:preserve-3d;
-
+backdrop-filter: blur(12px);
 transition:transform .5s ease;
 }
 .dashboard-header{
