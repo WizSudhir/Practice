@@ -98,7 +98,17 @@ border:1px solid rgba(0,0,0,0.04);
 box-shadow:0 8px 30px rgba(0,0,0,0.05);
 transition:all .35s ease;
 }
+.org-card,
+.specialty-card{
+opacity:0;
+transform:translateY(20px);
+transition:all .6s ease;
+}
 
+.show{
+opacity:1;
+transform:translateY(0);
+}
 .org-card:hover{
 transform:translateY(-8px);
 box-shadow:0 20px 60px rgba(0,0,0,0.08);
