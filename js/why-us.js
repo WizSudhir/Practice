@@ -51,6 +51,8 @@ const workflow = document.querySelector(".workflow")
 const heroSection = document.querySelector(".hero-enterprise")
 
 let fixed = false
+let engineCycle = null
+let startDelay = null
 
 if(workflow && heroSection){
 
@@ -60,10 +62,11 @@ entries.forEach(entry => {
 
 if(entry.isIntersecting){
 
-startEngine()
+startCycle()
 
 }else{
 
+stopCycle()
 resetEngine()
 
 }
@@ -73,7 +76,36 @@ resetEngine()
 },{ threshold:0.4 })
 
 observer.observe(heroSection)
+function startCycle(){
 
+if(engineCycle) return
+
+// Wait 3 seconds so visitor understands the pipeline
+startDelay = setTimeout(()=>{
+
+runEngine()
+
+engineCycle = setInterval(()=>{
+
+resetEngine()
+
+setTimeout(()=>{
+runEngine()
+},2000)
+
+},12000)
+
+},3000)
+
+}
+function stopCycle(){
+
+clearTimeout(startDelay)
+clearInterval(engineCycle)
+
+engineCycle = null
+
+}
 function resetEngine(){
 
 fixed = false
@@ -87,9 +119,11 @@ document.querySelector(".metric-box .metric-value").innerText="$8,490"
 document.querySelector(".metric-box.recovered .metric-value").innerText="$0"
 
 fixBanner.classList.remove("active")
+document.querySelector(".revenue-stage")
+.style.boxShadow="0 0 20px rgba(34,197,94,.6)"
 
 }
-function startEngine(){
+function runEngine(){
 
 if(fixed) return
 
