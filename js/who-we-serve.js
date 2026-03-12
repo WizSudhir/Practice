@@ -55,42 +55,44 @@ card.style.display="none";
 ORBIT DATA PARTICLES
 ========================================= */
 
-const particleContainer = document.querySelector(".particle-system");
+const container = document.querySelector(".particle-system");
+
+const orbitRadii = [110,160,210]; // orbit1 orbit2 orbit3
 
 function createParticle(){
 
-const particle = document.createElement("div");
-particle.classList.add("data-particle");
+const p = document.createElement("div");
+p.classList.add("data-particle");
 
-/* random orbit size & colors */
-const colors=["#6366f1","#3b82f6","#22c55e","#a78bfa"];
-particle.style.background=colors[Math.floor(Math.random()*colors.length)];
-const orbit = Math.random()*120 + 120;
+/* choose random orbit */
+
+const orbit = orbitRadii[Math.floor(Math.random()*orbitRadii.length)];
+
+p.style.setProperty("--orbit-radius", orbit + "px");
 
 /* random speed */
 
-const speed = Math.random()*10 + 8;
-
-particle.style.animationDuration = speed + "s";
+const speed = Math.random()*12 + 10;
+p.style.animationDuration = speed + "s";
 
 /* random delay */
 
-particle.style.animationDelay = Math.random()*5 + "s";
+p.style.animationDelay = Math.random()*6 + "s";
 
-/* random position */
+/* start position */
 
-particle.style.top = "50%";
-particle.style.left = "50%";
+p.style.top="50%";
+p.style.left="50%";
 
-particle.style.transform =
-`rotate(${Math.random()*360}deg) translateX(${orbit}px)`;
-
-particleContainer.appendChild(particle);
+container.appendChild(p);
 
 }
 
-/* create many particles */
+/* create many */
 
-for(let i=0;i<20;i++){
+for(let i=0;i<25;i++){
 createParticle();
 }
+/* random colors */
+const colors=["#6366f1","#3b82f6","#22c55e","#a78bfa"];
+particle.style.background=colors[Math.floor(Math.random()*colors.length)];
