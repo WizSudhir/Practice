@@ -307,13 +307,11 @@ flow.style.top = startY + "px";
 flow.animate([
 { transform:"translate(0,0)", opacity:1 },
 {
-transform:`translate(${dirX * stopDistance}px,
-${dirY * stopDistance}px)`
+transform:`translate(${dirX * stopDistance}px, ${dirY * stopDistance}px)`,
 opacity:1
 },
 {
-transform:`translate(${dirX * stopDistance}px,
-${dirY * stopDistance}px)`
+transform:`translate(${dirX * stopDistance}px, ${dirY * stopDistance}px)`,
 opacity:0
 }
 ],
@@ -321,7 +319,6 @@ opacity:0
 duration:900 + Math.random()*700,
 easing:"ease-out"
 });
-
 /* glow platform */
 setTimeout(()=>{
 if(Math.random() > 0.6){
