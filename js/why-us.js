@@ -45,7 +45,7 @@ const leaks = document.querySelectorAll(".leak")
 const fixBanner = document.querySelector(".fix-banner")
 
 let fixed = false
-const pipeline = document.querySelector(".pipeline")
+const workflow = document.querySelector(".workflow")
 
 window.addEventListener("scroll",()=>{
 
