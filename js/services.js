@@ -21,11 +21,6 @@ if(index === stageIndex){
 stage.classList.add("active");
 
 // TRIGGER ANIMATIONS WHEN STAGE APPEARS
-if(stage.classList.contains("stage-dashboard")){
-startMetrics();
-}else{
-resetMetrics();
-}
 if(stage.classList.contains("stage-cta")){
 startRevenueCounter();
 }else{
