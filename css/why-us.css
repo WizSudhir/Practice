@@ -353,6 +353,44 @@ background-position:200% 0;
 }
 
 }
+.workflow::after{
+
+content:"";
+
+position:absolute;
+
+left:40px;
+right:40px;
+top:60%;
+
+height:6px;
+
+background:
+
+repeating-linear-gradient(
+90deg,
+transparent 0px,
+transparent 30px,
+#22c55e 30px,
+#22c55e 40px
+);
+
+animation:flow 2s linear infinite;
+
+opacity:.5;
+
+}
+@keyframes flow{
+
+0%{
+background-position:0 0;
+}
+
+100%{
+background-position:80px 0;
+}
+
+}
 .dashboard-metrics{
 
 display:flex;
