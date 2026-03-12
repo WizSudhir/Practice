@@ -25,7 +25,22 @@ label="Moderate Optimization Opportunity";
 else{
 label="High Revenue Leakage Risk";
 }
+/* ======================================
+AURORA BACKGROUND INTERACTION
+====================================== */
 
+const auroras = document.querySelectorAll(".hero-aurora")
+
+document.addEventListener("mousemove",(e)=>{
+
+  const x = (window.innerWidth/2 - e.clientX)/80
+  const y = (window.innerHeight/2 - e.clientY)/80
+
+  auroras.forEach(a=>{
+    a.style.transform = `translate(${x}px, ${y}px)`
+  })
+
+})
 document.getElementById("scoreLabel").innerText = label;
 
 /* animate gauge */
