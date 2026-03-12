@@ -61,14 +61,28 @@ leak.style.opacity="0"
 })
 
 // increase revenue tokens
-document.querySelectorAll(".revenue-token")
-.forEach(token=>{
-let base = 200
-document.querySelectorAll(".revenue-token")
-.forEach((token,i)=>{
-token.innerText="$"+(base + i*120)
-})
-})
+let recovered = 0
+
+const recoveredMetric =
+document.querySelector(".metric-box.recovered .metric-value")
+
+const leakageMetric =
+document.querySelector(".metric-box .metric-value")
+
+const interval = setInterval(()=>{
+
+recovered += 85
+
+recoveredMetric.innerText = "$" + recovered
+
+leakageMetric.innerText =
+"$" + Math.max(0,415 - recovered)
+
+if(recovered >= 415){
+clearInterval(interval)
+}
+
+},400)
 
 // activate revenue stage
 document.querySelector(".revenue-stage")
