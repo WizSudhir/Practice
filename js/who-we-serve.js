@@ -96,13 +96,14 @@ svg.appendChild(line);
 // 5. 3D PARALLAX HERO EFFECT //
 
 const orbitSystem = document.querySelector(".orbit-system");
+if(orbitSystem){
 document.addEventListener("mousemove",(e)=>{
 const x = (window.innerWidth/2 - e.clientX)/40;
 const y = (window.innerHeight/2 - e.clientY)/40;
 orbitSystem.style.transform =
 `rotateY(${x}deg) rotateX(${y}deg)`;
 });
-
+}
 // 6. WEBGL HERO PARTICLE UNIVERSE //
 
 const universeContainer = document.getElementById("hero-universe");
@@ -191,19 +192,23 @@ const ecoSection = document.querySelector(".ecosystem-section");
 const ecoNodes = document.querySelectorAll(".eco-node");
 const ecoLines = document.querySelectorAll(".eco-lines line");
 const ecoFlows = document.querySelectorAll(".eco-flow");
+const ecoCore = document.querySelector(".eco-core");
 ecoFlows.forEach(flow=>{
 flow.style.animationDelay = Math.random()*4 + "s";
 });
 const ecoObserver = new IntersectionObserver((entries)=>{
 entries.forEach(entry=>{
 if(entry.isIntersecting){
+let ecoTimers = [];
 activateEcosystem();
 }else{
 resetEcosystem();
 }
 });
-},{threshold:.4});
+},{threshold:0.25});
 function resetEcosystem(){
+ecoTimers.forEach(timer=>clearTimeout(timer));
+ecoTimers=[];
 ecoNodes.forEach(node=>{
 node.classList.remove("active");
 });
@@ -218,7 +223,7 @@ ecoCore.classList.remove("active");
 ecoObserver.observe(ecoSection);
 function activateEcosystem(){
 ecoNodes.forEach((node,index)=>{
-setTimeout(()=>{
+const timer = setTimeout(()=>{
 node.classList.add("active");
 if(ecoLines[index]){
 ecoLines[index].classList.add("active");
@@ -227,9 +232,9 @@ if(ecoFlows[index]){
 ecoFlows[index].classList.add("active");
 }
 }, index*700);
+ecoTimers.push(timer);
 });
 setTimeout(()=>{
 ecoCore.classList.add("active");
 }, ecoNodes.length*700);
 }
-const ecoCore = document.querySelector(".eco-core");
