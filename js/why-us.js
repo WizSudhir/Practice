@@ -55,6 +55,8 @@ let engineCycle = null
 let startDelay = null
 const statusText =
 document.querySelector(".status-text")
+const pipelineText =
+document.querySelector(".pipeline-text")
 
 if(statusText){
 statusText.innerText="System scanning..."
@@ -131,7 +133,9 @@ engineCycle = null
 
 }
 function resetEngine(){
-
+if(pipelineText){
+pipelineText.innerText="Analyzing Revenue Cycle"
+}
 fixed = false
 
 leaks.forEach(leak=>{
@@ -164,7 +168,9 @@ const statusBox =
 document.querySelector(".system-status")
 
 statusText.innerText = "Leakage detected"
-
+if(pipelineText){
+pipelineText.innerText="Revenue Leakage Detected"
+}
 statusBox.classList.remove("scanning")
 
 // show leaks
@@ -174,7 +180,9 @@ leak.style.opacity="1"
 
 }
 function startScanning(){
-
+if(pipelineText){
+pipelineText.innerText="Analyzing Revenue Cycle"
+}
 const statusText =
 document.querySelector(".status-text")
 
@@ -196,6 +204,9 @@ function runEngine(){
 if(fixed) return
 
 fixed = true
+if(pipelineText){
+pipelineText.innerText="Revenue Recovery Activated"
+}
 document.querySelector(".workflow").style.borderColor="#22c55e"
 workflow.classList.add("pipeline-fixed")
 let recovered = 0
