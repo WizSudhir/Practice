@@ -138,3 +138,18 @@ line.setAttribute("y2",center.y);
 svg.appendChild(line);
 
 });
+//////////////////////////////
+// 3D PARALLAX HERO EFFECT
+//////////////////////////////
+
+const orbitSystem = document.querySelector(".orbit-system");
+
+document.addEventListener("mousemove",(e)=>{
+
+const x = (window.innerWidth/2 - e.clientX)/40;
+const y = (window.innerHeight/2 - e.clientY)/40;
+
+orbitSystem.style.transform =
+`rotateY(${x}deg) rotateX(${y}deg)`;
+
+});
