@@ -556,6 +556,7 @@ background:
 radial-gradient(circle at 30% 20%, rgba(99,102,241,.15), transparent 40%),
 radial-gradient(circle at 80% 70%, rgba(59,130,246,.15), transparent 40%),
 #050a19;
+overflow:hidden;
 }
 /* ================= AI SYSTEMS ================= */
 .ai-system *{
@@ -565,7 +566,8 @@ backface-visibility:hidden;
 position:relative;
 max-width:1100px;
 margin:0 auto;
-height:760px;
+min-height:820px;
+padding:80px 0;
 transform:translateZ(0);
 will-change:transform;
 }
@@ -609,7 +611,7 @@ z-index:-1;
 position:absolute;
 top:50%;
 left:50%;
-transform:translate(-50%,-50%) translateZ(0);
+transform:translate(-50%,-50%);
 will-change:transform;
 width:360px;
 padding:50px;
@@ -742,14 +744,14 @@ left:50%;
 transform:translate(var(--tx),var(--ty));
 }
 .module-workflow{
-top:78%;
+top:72%;
 left:28%;
 --tx:-50%;
 --ty:-50%;
 transform:translate(var(--tx),var(--ty));
 }
 .module-recovery{
-top:78%;
+top:72%;
 right:28%;
 --tx:50%;
 --ty:-50%;
