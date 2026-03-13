@@ -567,8 +567,8 @@ margin-top:10px;
 .ai-core::before{
 content:"";
 position:absolute;
-width:420px;
-height:420px;
+width:520px;
+height:520px;
 border-radius:50%;
 background:radial-gradient(
 circle,
@@ -578,7 +578,7 @@ transparent 70%
 top:50%;
 left:50%;
 transform:translate(-50%,-50%);
-filter:blur(40px);
+filter:blur(60px);
 z-index:-1;
 }
 .ai-core{
@@ -646,6 +646,14 @@ color:#22c55e;
 font-size:11px;
 opacity:.7;
 }
+.ai-network{
+position:absolute;
+inset:0;
+display:flex;
+align-items:center;
+justify-content:center;
+pointer-events:none;
+}
 /* ================= MODULES ================= */
 .ai-module{
 position:absolute;
@@ -656,6 +664,7 @@ background:rgba(20,25,55,.85);
 border:1px solid rgba(255,255,255,.08);
 text-align:center;
 transition:.35s;
+pointer-events:auto;
 }
 .ai-module.active{
 box-shadow:
