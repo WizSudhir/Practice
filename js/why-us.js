@@ -299,7 +299,7 @@ currentIndex++
 if(currentIndex >= modules.length){
 currentIndex = 0
 }
-},3000)
+},3500)
 }
 // USER INTERACTION
 modules.forEach((module)=>{
@@ -394,7 +394,7 @@ claimPacket.innerText="Payment Posted"
 },14000)
 }
 // repeat loop
-setInterval(runClaimDemo,17000)
+setInterval(runClaimDemo,18000)
 runClaimDemo()
   
 }) // increase revenue tokenslfklsejlkdsjlkjdslkjslkjsldkjdslkjflksdlkdsfjlksjdlfjlskdjflksjlfksdjlksdjlkdsjlkdsjflkjsdlkfjsdlkdfjlksjdlkflksf
