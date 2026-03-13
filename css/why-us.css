@@ -1028,7 +1028,16 @@ transition:all .9s cubic-bezier(.4,0,.2,1);
 pointer-events:none;
 
 }
-
+.claim-packet::after{
+content:"";
+position:absolute;
+bottom:-6px;
+left:50%;
+transform:translateX(-50%);
+border-left:6px solid transparent;
+border-right:6px solid transparent;
+border-top:6px solid #3b82f6;
+}
 /* module highlights when claim arrives */
 
 .module-highlight{
