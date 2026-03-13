@@ -738,7 +738,43 @@ box-shadow:
 0 0 40px rgba(99,102,241,.35);
 
 }
+.ai-module.active::after{
 
+content:"";
+
+position:absolute;
+
+width:10px;
+height:10px;
+
+border-radius:50%;
+
+background:#22c55e;
+
+left:50%;
+top:50%;
+
+animation:sendData 1.5s linear forwards;
+
+}
+
+@keyframes sendData{
+
+0%{
+
+transform:translate(0,0);
+opacity:1;
+
+}
+
+100%{
+
+transform:translate(150px,150px);
+opacity:0;
+
+}
+
+}
 
 .ai-module h4{
 
