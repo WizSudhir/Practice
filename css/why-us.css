@@ -784,6 +784,162 @@ font-size:32px;
 
 }
 /* =========================================================
+PRACTICEGRID OUTCOMES
+========================================================= */
+
+.pg-outcomes{
+padding:140px 0;
+position:relative;
+background:
+radial-gradient(circle at 20% 30%, rgba(99,102,241,.18), transparent 40%),
+radial-gradient(circle at 80% 70%, rgba(59,130,246,.18), transparent 40%),
+#050a19;
+}
+
+/* GRID */
+
+.outcome-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:40px;
+margin-top:80px;
+}
+
+/* STORY CARD */
+
+.outcome-story{
+background:linear-gradient(
+180deg,
+rgba(20,25,55,.9),
+rgba(10,15,35,.95)
+);
+border-radius:24px;
+padding:40px;
+border:1px solid rgba(255,255,255,.08);
+transition:.4s;
+position:relative;
+}
+
+.outcome-story:hover{
+transform:translateY(-10px);
+box-shadow:
+0 40px 100px rgba(0,0,0,.6),
+0 0 60px rgba(99,102,241,.35);
+}
+
+/* HEADER */
+
+.outcome-header{
+display:flex;
+align-items:center;
+gap:14px;
+margin-bottom:20px;
+}
+
+.outcome-header svg{
+width:30px;
+height:30px;
+color:#93c5fd;
+}
+
+.outcome-header h3{
+font-size:22px;
+font-weight:700;
+}
+
+/* TEXT */
+
+.outcome-problem{
+opacity:.85;
+margin-bottom:16px;
+line-height:1.6;
+}
+
+.outcome-system{
+opacity:.8;
+margin-bottom:24px;
+line-height:1.6;
+}
+
+/* RESULTS */
+
+.outcome-result{
+display:flex;
+gap:30px;
+margin-top:10px;
+}
+
+.result-metric span{
+font-size:32px;
+font-weight:800;
+display:block;
+background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.result-metric p{
+font-size:13px;
+opacity:.75;
+}
+
+/* OUTCOMES BAR */
+
+.outcomes-bar{
+display:flex;
+justify-content:space-between;
+margin-top:100px;
+padding:40px;
+border-radius:24px;
+background:rgba(20,25,55,.6);
+border:1px solid rgba(255,255,255,.08);
+}
+
+.bar-metric{
+text-align:center;
+flex:1;
+}
+
+.bar-metric h4{
+font-size:42px;
+font-weight:900;
+background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.bar-metric p{
+font-size:14px;
+opacity:.8;
+}
+
+/* CTA */
+
+.outcomes-cta{
+text-align:center;
+margin-top:70px;
+}
+
+.outcomes-cta p{
+margin-bottom:20px;
+font-size:18px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+
+.outcome-grid{
+grid-template-columns:1fr;
+}
+
+.outcomes-bar{
+flex-direction:column;
+gap:30px;
+}
+
+}
+/* =========================================================
 3. RCM MATURITY SCORE GAUGE
 ========================================================= */
 
