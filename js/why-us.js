@@ -460,7 +460,7 @@ const rect = target.getBoundingClientRect()
 const parent = document.querySelector(".ai-system").getBoundingClientRect()
 
 const x = rect.left - parent.left + rect.width/2
-const y = rect.top - parent.top + rect.height/2
+const y = rect.top - parent.top - 40
 
 claimPacket.style.left = x + "px"
 claimPacket.style.top = y + "px"
