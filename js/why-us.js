@@ -311,14 +311,20 @@ const label1 = document.getElementById("metricLabel1")
 const label2 = document.getElementById("metricLabel2")
 const label3 = document.getElementById("metricLabel3")
 
-modules.forEach(module => {
+let currentIndex = 0
+let scanInterval
+let userHovering = false
 
-module.addEventListener("mouseenter", ()=>{
+// MODULE DATA LOGIC
 
-const type = module.dataset.node
+function activateModule(module){
+
+modules.forEach(m=>m.classList.remove("active"))
 
 module.classList.add("active")
 brain.classList.add("receiving")
+
+const type = module.dataset.node
 
 if(type === "intelligence"){
 
@@ -385,14 +391,53 @@ label3.innerText = "Revenue Growth Potential"
 
 }
 
+}
+
+// AUTO AI SCANNING
+function startAIScan(){
+
+scanInterval = setInterval(()=>{
+
+if(userHovering) return
+
+const module = modules[currentIndex]
+
+activateModule(module)
+
+currentIndex++
+
+if(currentIndex >= modules.length){
+
+currentIndex = 0
+
+}
+
+},3000)
+
+}
+
+
+// USER INTERACTION
+
+modules.forEach((module)=>{
+
+module.addEventListener("mouseenter",()=>{
+
+userHovering = true
+
+activateModule(module)
+
 })
 
-module.addEventListener("mouseleave", ()=>{
+module.addEventListener("mouseleave",()=>{
 
-module.classList.remove("active")
-brain.classList.remove("receiving")
+userHovering = false
+
+})
 
 })
 
-})
+
+// start AI scan
+startAIScan()
 }) // increase revenue tokenslfklsejlkdsjlkjdslkjslkjsldkjdslkjflksdlkdsfjlksjdlfjlskdjflksjlfksdjlksdjlkdsjlkdsjflkjsdlkfjsdlkdfjlksjdlkflksf
