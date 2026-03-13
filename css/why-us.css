@@ -571,7 +571,20 @@ background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
-
+.pg-advantage h2::after{
+content:"";
+display:block;
+width:120px;
+height:3px;
+margin:20px auto 0;
+background:linear-gradient(
+90deg,
+transparent,
+#6366f1,
+#3b82f6,
+transparent
+);
+}
 .pg-advantage .section-header p{
 font-size:18px;
 line-height:1.7;
@@ -583,14 +596,23 @@ opacity:.9;
 
 .advantage-grid{
 display:grid;
-grid-template-columns:1.2fr 1fr 1fr;
+grid-template-columns:repeat(2,1fr);
 gap:36px;
 align-items:stretch;
 }
-
+.adv-card::before{
+content:"";
+position:absolute;
+inset:0;
+background:
+radial-gradient(circle at top left,
+rgba(99,102,241,.12),
+transparent 40%);
+pointer-events:none;
+}
 .adv-card{
 position:relative;
-padding:44px;
+padding:52px;
 background:linear-gradient(
 180deg,
 rgba(25,30,70,.8),
@@ -615,17 +637,11 @@ box-shadow:
 0 0 60px rgba(99,102,241,.35);
 }
 
-/* PRIMARY CARD */
-
-.adv-primary{
-grid-row:span 2;
-}
-
 /* ICON */
 
 .adv-icon{
-width:64px;
-height:64px;
+width:72px;
+height:72px;
 border-radius:16px;
 display:flex;
 align-items:center;
@@ -638,16 +654,16 @@ box-shadow:
 }
 
 .adv-icon svg{
-width:30px;
-height:30px;
+width:36px;
+height:36px;
 color:white;
 }
 
 /* CARD TEXT */
 
 .adv-card h3{
-font-size:24px;
-font-weight:700;
+font-size:26px;
+font-weight:800;
 margin-bottom:12px;
 }
 
@@ -667,8 +683,9 @@ margin:0 0 20px;
 }
 
 .adv-points li{
-font-size:14px;
-margin-bottom:8px;
+font-size:15px;
+margin-bottom:10px;
+color:#e2e8ff;
 opacity:.9;
 }
 
@@ -687,8 +704,13 @@ font-size:13px;
 font-weight:700;
 padding:8px 16px;
 border-radius:999px;
-background:rgba(20,25,55,.7);
-border:1px solid rgba(255,255,255,.08);
+background:linear-gradient(
+90deg,
+rgba(99,102,241,.25),
+rgba(59,130,246,.25)
+);
+border:1px solid rgba(99,102,241,.4);
+box-shadow:0 0 20px rgba(99,102,241,.25);
 display:inline-block;
 }
 
@@ -697,7 +719,7 @@ display:inline-block;
 .adv-metrics{
 display:flex;
 justify-content:center;
-gap:60px;
+gap:40px;
 margin-top:80px;
 flex-wrap:wrap;
 }
