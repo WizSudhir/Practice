@@ -1049,6 +1049,57 @@ opacity:.9;
 
 }
 
+/* ================= LIVE CLAIM PACKET FLOW ================= */
+.claim-packet{
+
+position:absolute;
+
+top:50%;
+left:50%;
+
+transform:translate(-50%,-50%);
+
+background:#3b82f6;
+
+color:white;
+
+font-size:13px;
+
+font-weight:700;
+
+padding:10px 16px;
+
+border-radius:18px;
+
+box-shadow:
+
+0 0 25px rgba(59,130,246,.8),
+
+0 10px 25px rgba(0,0,0,.45);
+
+z-index:6;
+
+transition:all .9s cubic-bezier(.4,0,.2,1);
+
+pointer-events:none;
+
+}
+
+/* module highlights when claim arrives */
+
+.module-highlight{
+
+box-shadow:
+
+0 0 80px rgba(34,197,94,.9),
+
+0 0 160px rgba(59,130,246,.7),
+
+0 20px 80px rgba(0,0,0,.7);
+
+transform:scale(1.08);
+
+}
 
 /* RESPONSIVE */
 
