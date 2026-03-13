@@ -582,6 +582,23 @@ opacity:.6;
 margin-top:10px;
 
 }
+.ai-core::before{
+content:"";
+position:absolute;
+width:420px;
+height:420px;
+border-radius:50%;
+background:radial-gradient(
+circle,
+rgba(99,102,241,.25),
+transparent 70%
+);
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+filter:blur(40px);
+z-index:-1;
+}
 .ai-core{
 
 position:absolute;
@@ -735,7 +752,7 @@ transform:scale(1.05);
 
 .ai-module:hover{
 
-transform:translateY(-6px);
+transform:scale(1.05);
 
 box-shadow:
 
@@ -827,19 +844,13 @@ top:45%;
 }
 
 .module-workflow{
-
-bottom:0;
-
-left:25%;
-
+bottom:120px;
+left:28%;
 }
 
 .module-recovery{
-
-bottom:0;
-
-right:25%;
-
+bottom:120px;
+right:28%;
 }
 
 .module-performance{
