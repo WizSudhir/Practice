@@ -440,4 +440,68 @@ userHovering = false
 
 // start AI scan
 startAIScan()
+// ========================================
+// LIVE CLAIM FLOW DEMO (SaaS PRODUCT FEEL)
+// ========================================
+
+const claimPacket = document.getElementById("claimPacket")
+
+const modulePositions = {
+intelligence: document.querySelector(".module-intelligence"),
+denial: document.querySelector(".module-denial"),
+workflow: document.querySelector(".module-workflow"),
+recovery: document.querySelector(".module-recovery"),
+performance: document.querySelector(".module-performance")
+}
+
+function moveClaim(target){
+
+const rect = target.getBoundingClientRect()
+const parent = document.querySelector(".ai-system").getBoundingClientRect()
+
+const x = rect.left - parent.left + rect.width/2
+const y = rect.top - parent.top + rect.height/2
+
+claimPacket.style.left = x + "px"
+claimPacket.style.top = y + "px"
+
+modules.forEach(m => m.classList.remove("module-highlight"))
+
+target.classList.add("module-highlight")
+
+}
+
+function runClaimDemo(){
+
+setTimeout(()=>{
+moveClaim(modulePositions.intelligence)
+claimPacket.innerText="Claim Submitted"
+},1000)
+
+setTimeout(()=>{
+moveClaim(modulePositions.denial)
+claimPacket.innerText="Denial Risk Detected"
+},4000)
+
+setTimeout(()=>{
+moveClaim(modulePositions.workflow)
+claimPacket.innerText="Claim Routed"
+},7000)
+
+setTimeout(()=>{
+moveClaim(modulePositions.recovery)
+claimPacket.innerText="Appeal Submitted"
+},10000)
+
+setTimeout(()=>{
+moveClaim(modulePositions.performance)
+claimPacket.innerText="Payment Posted"
+},13000)
+
+}
+
+// repeat loop
+setInterval(runClaimDemo,15000)
+
+runClaimDemo()
 }) // increase revenue tokenslfklsejlkdsjlkjdslkjslkjsldkjdslkjflksdlkdsfjlksjdlfjlskdjflksjlfksdjlksdjlkdsjlkdsjflkjsdlkfjsdlkdfjlksjdlkflksf
