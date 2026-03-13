@@ -541,6 +541,190 @@ filter:blur(120px);
 pointer-events:none;
 }
 /* =========================================================
+PRACTICEGRID PLATFORM
+========================================================= */
+
+.pg-platform{
+padding:140px 0;
+position:relative;
+background:
+radial-gradient(circle at 20% 20%, rgba(99,102,241,.15), transparent 40%),
+radial-gradient(circle at 80% 80%, rgba(59,130,246,.15), transparent 40%),
+#050a19;
+overflow:hidden;
+}
+
+/* HEADER */
+
+.pg-platform .section-header{
+text-align:center;
+max-width:780px;
+margin:0 auto 90px;
+}
+
+.pg-platform h2{
+font-size:44px;
+font-weight:800;
+margin-bottom:20px;
+background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.pg-platform p{
+font-size:18px;
+color:#cbd5f5;
+line-height:1.7;
+}
+
+/* DIAGRAM */
+
+.platform-diagram{
+position:relative;
+max-width:1100px;
+margin:auto;
+}
+
+/* CORE */
+
+.platform-core{
+text-align:center;
+background:linear-gradient(
+180deg,
+rgba(25,30,70,.9),
+rgba(10,15,35,.95)
+);
+border-radius:26px;
+padding:50px;
+border:1px solid rgba(255,255,255,.08);
+box-shadow:
+0 40px 100px rgba(0,0,0,.6),
+0 0 80px rgba(99,102,241,.25);
+margin-bottom:80px;
+}
+
+.platform-core h3{
+font-size:28px;
+margin-bottom:14px;
+}
+
+/* MODULE GRID */
+
+.platform-modules{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:30px;
+}
+
+/* MODULE CARD */
+
+.platform-module{
+background:linear-gradient(
+180deg,
+rgba(20,25,55,.8),
+rgba(10,15,35,.95)
+);
+border-radius:20px;
+padding:30px;
+border:1px solid rgba(255,255,255,.08);
+transition:.35s;
+text-align:center;
+}
+
+.platform-module:hover{
+transform:translateY(-8px);
+border:1px solid rgba(99,102,241,.45);
+box-shadow:
+0 30px 80px rgba(0,0,0,.6),
+0 0 40px rgba(99,102,241,.35);
+}
+
+/* ICON */
+
+.module-icon{
+width:54px;
+height:54px;
+margin:0 auto 14px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:14px;
+background:linear-gradient(135deg,#6366f1,#3b82f6);
+}
+
+.module-icon svg{
+width:26px;
+height:26px;
+color:white;
+}
+
+.platform-module h4{
+font-size:18px;
+margin-bottom:8px;
+}
+
+.platform-module p{
+font-size:14px;
+opacity:.85;
+}
+
+/* OUTCOMES STRIP */
+
+.platform-outcomes{
+margin-top:90px;
+display:flex;
+justify-content:space-between;
+padding:40px;
+background:rgba(20,25,55,.6);
+border-radius:24px;
+border:1px solid rgba(255,255,255,.08);
+}
+
+.outcome{
+text-align:center;
+flex:1;
+}
+
+.outcome h3{
+font-size:40px;
+font-weight:900;
+background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.outcome p{
+font-size:14px;
+opacity:.8;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+
+.platform-modules{
+grid-template-columns:repeat(2,1fr);
+}
+
+.platform-outcomes{
+flex-direction:column;
+gap:30px;
+}
+
+}
+
+@media(max-width:600px){
+
+.platform-modules{
+grid-template-columns:1fr;
+}
+
+.pg-platform h2{
+font-size:32px;
+}
+
+}
+/* =========================================================
 PRACTICEGRID ADVANTAGE
 ========================================================= */
 
