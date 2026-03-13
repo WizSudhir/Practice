@@ -726,9 +726,9 @@ transition:.35s;
 .ai-module.active{
 
 box-shadow:
-0 0 40px rgba(99,102,241,.6),
-0 0 80px rgba(59,130,246,.5);
-
+0 0 60px rgba(99,102,241,.8),
+0 0 120px rgba(59,130,246,.6),
+0 20px 80px rgba(0,0,0,.7);
 transform:scale(1.05);
 
 }
