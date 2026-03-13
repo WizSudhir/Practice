@@ -556,10 +556,7 @@ radial-gradient(circle at 80% 70%, rgba(59,130,246,.15), transparent 40%),
 position:relative;
 max-width:1100px;
 margin:0 auto;
-height:720px;
-display:flex;
-align-items:center;
-justify-content:center;
+height:760px;
 }
 /* CORE AI */
 .ai-helper{
@@ -598,9 +595,10 @@ filter:blur(45px);
 z-index:-1;
 }
 .ai-core{
-position:relative;
-margin:auto;
-transform:none;
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
 width:360px;
 padding:50px;
 border-radius:28px;
@@ -673,6 +671,8 @@ pointer-events:none;
 position:absolute;
 width:200px;
 padding:25px;
+min-width:200px;
+max-width:220px;
 border-radius:18px;
 background:rgba(20,25,55,.85);
 border:1px solid rgba(255,255,255,.08);
@@ -726,23 +726,23 @@ left:50%;
 transform:translateX(-50%);
 }
 .module-denial{
-left:8%;
-top:45%;
+left:4%;
+top:50%;
 transform:translateY(-50%);
 }
 .module-workflow{
-top:65%;
+top:78%;
 left:28%;
-transform:translateY(-50%);
+transform:translate(-50%,-50%);
 }
 .module-recovery{
-top:65%;
+top:78%;
 right:28%;
-transform:translateY(-50%);
+transform:translate(50%,-50%);
 }
-.module-performance{
-right:8%;
-top:45%;
+.module-denial{
+left:4%;
+top:50%;
 transform:translateY(-50%);
 }
 /* ================= DATA LINES ================= */
