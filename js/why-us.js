@@ -314,7 +314,27 @@ const label3 = document.getElementById("metricLabel3")
 let currentIndex = 0
 let scanInterval
 let userHovering = false
+function animateMetric(element, value){
 
+let current = 0
+const duration = 600
+const steps = 30
+const increment = value / steps
+
+const interval = setInterval(()=>{
+
+current += increment
+
+if(current >= value){
+current = value
+clearInterval(interval)
+}
+
+element.innerText = Math.floor(current).toLocaleString()
+
+}, duration / steps)
+
+}
 // MODULE DATA LOGIC
 
 function activateModule(module){
@@ -322,58 +342,60 @@ function activateModule(module){
 modules.forEach(m=>m.classList.remove("active"))
 
 module.classList.add("active")
+document.getElementById("aiStatus").innerText =
+module.querySelector("h4").innerText + " processing..."
 brain.classList.add("receiving")
 
 const type = module.dataset.node
 
 if(type === "intelligence"){
 
-metric1.innerText = "3,842"
+animateMetric(metric1,3842)
 label1.innerText = "Claims Analyzed"
 
-metric2.innerText = "14"
+animateMetric(metric2,14)
 label2.innerText = "Payer Behavior Alerts"
 
-metric3.innerText = "$12,500"
+animateMetric(metric3,12500)
 label3.innerText = "Revenue Opportunities"
 
 }
 
 if(type === "denial"){
 
-metric1.innerText = "126"
+animateMetric(metric1,126)
 label1.innerText = "Coding Issues Detected"
 
-metric2.innerText = "41"
+animateMetric(metric2,41)
 label2.innerText = "Denial Risks Prevented"
 
-metric3.innerText = "$9,200"
+animateMetric(metric3,9200)
 label3.innerText = "Revenue Protected"
 
 }
 
 if(type === "workflow"){
 
-metric1.innerText = "214"
+animateMetric(metric1,214)
 label1.innerText = "Claims Routed"
 
-metric2.innerText = "36"
+animateMetric(metric2,36)
 label2.innerText = "Workflow Bottlenecks"
 
-metric3.innerText = "$7,850"
+animateMetric(metric3,7850)
 label3.innerText = "Processing Efficiency"
 
 }
 
 if(type === "recovery"){
 
-metric1.innerText = "87"
+animateMetric(metric1,87)
 label1.innerText = "Denied Claims Reopened"
 
-metric2.innerText = "53"
+animateMetric(metric2,53)
 label2.innerText = "Successful Appeals"
 
-metric3.innerText = "$18,450"
+animateMetric(metric3,18450)
 label3.innerText = "Recovered Revenue"
 
 }
@@ -447,13 +469,20 @@ startAIScan()
 const claimPacket = document.getElementById("claimPacket")
 
 const modulePositions = {
-intelligence: document.querySelector(".module-intelligence"),
-denial: document.querySelector(".module-denial"),
-workflow: document.querySelector(".module-workflow"),
-recovery: document.querySelector(".module-recovery"),
-performance: document.querySelector(".module-performance")
-}
 
+core: document.querySelector(".ai-core"),
+
+intelligence: document.querySelector(".module-intelligence"),
+
+denial: document.querySelector(".module-denial"),
+
+workflow: document.querySelector(".module-workflow"),
+
+recovery: document.querySelector(".module-recovery"),
+
+performance: document.querySelector(".module-performance")
+
+}
 function moveClaim(target){
 
 const rect = target.getBoundingClientRect()
@@ -479,29 +508,44 @@ claimPacket.innerText="Claim Submitted"
 },1000)
 
 setTimeout(()=>{
+moveClaim(modulePositions.core)
+claimPacket.innerText="AI Processing Claim"
+},2500)
+
+setTimeout(()=>{
 moveClaim(modulePositions.denial)
 claimPacket.innerText="Denial Risk Detected"
-},4000)
+},4500)
+
+setTimeout(()=>{
+moveClaim(modulePositions.core)
+claimPacket.innerText="AI Routing Claim"
+},6500)
 
 setTimeout(()=>{
 moveClaim(modulePositions.workflow)
 claimPacket.innerText="Claim Routed"
-},7000)
+},8500)
+
+setTimeout(()=>{
+moveClaim(modulePositions.core)
+claimPacket.innerText="AI Recovery Analysis"
+},10500)
 
 setTimeout(()=>{
 moveClaim(modulePositions.recovery)
 claimPacket.innerText="Appeal Submitted"
-},10000)
+},12000)
 
 setTimeout(()=>{
 moveClaim(modulePositions.performance)
 claimPacket.innerText="Payment Posted"
-},13000)
+},14000)
 
 }
 
 // repeat loop
-setInterval(runClaimDemo,15000)
+setInterval(runClaimDemo,17000)
 
 runClaimDemo()
 }) // increase revenue tokenslfklsejlkdsjlkjdslkjslkjsldkjdslkjflksdlkdsfjlksjdlfjlskdjflksjlfksdjlksdjlkdsjlkdsjflkjsdlkfjsdlkdfjlksjdlkflksf
