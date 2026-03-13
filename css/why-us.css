@@ -543,109 +543,223 @@ pointer-events:none;
 /* =========================================================
 PRACTICEGRID ADVANTAGE
 ========================================================= */
+
 .pg-advantage{
 position:relative;
 padding:140px 0;
 background:
-radial-gradient(circle at 20% 30%, rgba(99,102,241,.18), transparent 40%),
-radial-gradient(circle at 80% 70%, rgba(59,130,246,.18), transparent 40%),
+radial-gradient(circle at 20% 30%, rgba(99,102,241,.15), transparent 40%),
+radial-gradient(circle at 80% 70%, rgba(59,130,246,.15), transparent 40%),
 #050a19;
 overflow:hidden;
 }
-/* section header */
+
+/* HEADER */
+
 .pg-advantage .section-header{
 text-align:center;
 max-width:760px;
-margin:0 auto 80px;
+margin:0 auto 90px;
 }
-.pg-advantage .section-header h2{
+
+.pg-advantage h2{
 font-size:44px;
-font-weight:700;
-background:linear-gradient(90deg,#ffffff,#c4b5fd,#93c5fd);
+line-height:1.1;
+margin-bottom:20px;
+font-weight:800;
+background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
-margin-bottom:20px;
 }
+
 .pg-advantage .section-header p{
 font-size:18px;
 line-height:1.7;
 color:#cbd5f5;
 opacity:.9;
 }
-/* grid */
+
+/* GRID */
+
 .advantage-grid{
 display:grid;
-grid-template-columns:repeat(2,1fr);
+grid-template-columns:1.2fr 1fr 1fr;
 gap:36px;
+align-items:stretch;
 }
-/* cards */
+
 .adv-card{
 position:relative;
-padding:40px;
-background:rgba(20,25,55,.6);
+padding:44px;
+background:linear-gradient(
+180deg,
+rgba(25,30,70,.8),
+rgba(10,15,35,.95)
+);
+border-radius:22px;
 border:1px solid rgba(255,255,255,.08);
-border-radius:20px;
-backdrop-filter:blur(12px);
-transition:.35s;
+backdrop-filter:blur(14px);
 box-shadow:
-0 20px 50px rgba(0,0,0,.45),
-0 0 30px rgba(99,102,241,.08);
+0 20px 60px rgba(0,0,0,.45),
+0 0 40px rgba(99,102,241,.08);
+transition:.35s;
+display:flex;
+flex-direction:column;
 }
+
 .adv-card:hover{
 transform:translateY(-8px);
 border:1px solid rgba(99,102,241,.45);
 box-shadow:
-0 30px 80px rgba(0,0,0,.7),
+0 30px 80px rgba(0,0,0,.65),
 0 0 60px rgba(99,102,241,.35);
 }
-/* icon */
+
+/* PRIMARY CARD */
+
+.adv-primary{
+grid-row:span 2;
+}
+
+/* ICON */
+
 .adv-icon{
-width:52px;
-height:52px;
-border-radius:14px;
+width:64px;
+height:64px;
+border-radius:16px;
 display:flex;
 align-items:center;
 justify-content:center;
 background:linear-gradient(135deg,#6366f1,#3b82f6);
-margin-bottom:20px;
+margin-bottom:22px;
 box-shadow:
-0 10px 25px rgba(0,0,0,.6),
-0 0 20px rgba(99,102,241,.35);
+0 10px 25px rgba(0,0,0,.5),
+0 0 30px rgba(99,102,241,.4);
 }
+
 .adv-icon svg{
-width:26px;
-height:26px;
+width:30px;
+height:30px;
 color:white;
 }
-/* title */
+
+/* CARD TEXT */
+
 .adv-card h3{
-font-size:22px;
-margin-bottom:10px;
-font-weight:600;
+font-size:24px;
+font-weight:700;
+margin-bottom:12px;
 }
-/* description */
+
 .adv-card p{
 font-size:15px;
 line-height:1.7;
 color:#cbd5f5;
-opacity:.9;
-margin-bottom:18px;
+margin-bottom:20px;
 }
-/* highlight */
+
+/* BULLETS */
+
+.adv-points{
+list-style:none;
+padding:0;
+margin:0 0 20px;
+}
+
+.adv-points li{
+font-size:14px;
+margin-bottom:8px;
+opacity:.9;
+}
+
+.adv-points li::before{
+content:"✓";
+margin-right:10px;
+color:#22c55e;
+font-weight:700;
+}
+
+/* HIGHLIGHT */
+
 .adv-highlight{
+margin-top:auto;
 font-size:13px;
-font-weight:600;
-padding:6px 14px;
-border-radius:30px;
+font-weight:700;
+padding:8px 16px;
+border-radius:999px;
 background:rgba(20,25,55,.7);
 border:1px solid rgba(255,255,255,.08);
 display:inline-block;
 }
-/* responsive */
-@media(max-width:900px){
+
+/* METRICS */
+
+.adv-metrics{
+display:flex;
+justify-content:center;
+gap:60px;
+margin-top:80px;
+flex-wrap:wrap;
+}
+
+.adv-metric{
+text-align:center;
+}
+
+.adv-metric strong{
+font-size:36px;
+display:block;
+background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.adv-metric span{
+font-size:14px;
+opacity:.7;
+}
+
+/* CTA */
+
+.adv-cta{
+margin-top:70px;
+text-align:center;
+}
+
+.adv-cta p{
+margin-bottom:20px;
+font-size:17px;
+opacity:.9;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+
+.advantage-grid{
+grid-template-columns:1fr 1fr;
+}
+
+.adv-primary{
+grid-row:auto;
+}
+
+}
+
+@media(max-width:700px){
+
 .advantage-grid{
 grid-template-columns:1fr;
 }
+
+.adv-metrics{
+gap:30px;
+}
+
+.pg-advantage h2{
+font-size:32px;
+}
+
 }
 /* =========================================================
 3. RCM MATURITY SCORE GAUGE
