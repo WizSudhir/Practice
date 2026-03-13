@@ -565,7 +565,6 @@ position:relative;
 max-width:1100px;
 margin:0 auto;
 height:760px;
-contain:layout paint;
 }
 /* CORE AI */
 .ai-helper{
@@ -629,6 +628,8 @@ border-radius:30px;
 border:1px solid rgba(99,102,241,.4);
 opacity:.5;
 animation:corePulse 2s infinite;
+will-change:transform;
+transform-origin:center;
 }
 @keyframes corePulse{
 0%{transform:scale(.9);opacity:.6;}
@@ -687,7 +688,7 @@ border-radius:18px;
 background:rgba(20,25,55,.85);
 border:1px solid rgba(255,255,255,.08);
 text-align:center;
-transition:.35s;
+transition:transform .35s, box-shadow .35s;
 pointer-events:auto;
 z-index:10;
 }
@@ -733,22 +734,30 @@ opacity:.7;
 .module-intelligence{
 top:0;
 left:50%;
-transform:translateX(-50%);
+--tx:-50%;
+--ty:0;
+transform:translate(var(--tx),var(--ty));
 }
 .module-workflow{
 top:78%;
 left:28%;
-transform:translate(-50%,-50%);
+--tx:-50%;
+--ty:-50%;
+transform:translate(var(--tx),var(--ty));
 }
 .module-recovery{
 top:78%;
 right:28%;
-transform:translate(50%,-50%);
+--tx:50%;
+--ty:-50%;
+transform:translate(var(--tx),var(--ty));
 }
 .module-denial{
 left:4%;
 top:50%;
-transform:translateY(-50%);
+--tx:0;
+--ty:-50%;
+transform:translate(var(--tx),var(--ty));
 }
 /* ================= DATA LINES ================= */
 .data-line{
@@ -758,6 +767,7 @@ background:
 linear-gradient(90deg,transparent,#3b82f6,#22c55e,transparent);
 background-size:200% 100%;
 animation:dataMove 3s linear infinite;
+transform-origin:left center;
 opacity:.8;
 }
 .line1{
@@ -791,7 +801,8 @@ width:200px;
 position:absolute;
 top:50%;
 left:50%;
-transform:translate(-50%,-50%);
+margin-left:-80px;
+margin-top:-20px;
 background:#3b82f6;
 color:white;
 font-size:13px;
