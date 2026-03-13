@@ -545,7 +545,12 @@ pointer-events:none;
 2. REVENUE PLATFORM
 ===================================================== */
 .pg-ai-platform{
-padding:160px 0;
+padding:120px 0;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:900px;
+position:relative;
 background:
 radial-gradient(circle at 30% 20%, rgba(99,102,241,.15), transparent 40%),
 radial-gradient(circle at 80% 70%, rgba(59,130,246,.15), transparent 40%),
