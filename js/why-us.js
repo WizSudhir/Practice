@@ -243,6 +243,7 @@ element.innerText = Math.floor(current).toLocaleString()
 function activateModule(module){
 modules.forEach(m=>m.classList.remove("active"))
 module.classList.add("active")
+sendAIPulse(module, brain)
 document.getElementById("aiStatus").innerText =
 module.querySelector("h4").innerText + " processing..."
 brain.classList.add("receiving")
@@ -317,6 +318,27 @@ startAIScan()
 // LIVE CLAIM FLOW DEMO (SaaS PRODUCT FEEL)
 // ========================================
 const claimPacket = document.getElementById("claimPacket")
+function sendAIPulse(fromElement, toElement){
+const pulse = document.createElement("div")
+pulse.className = "ai-pulse"
+document.querySelector(".ai-system").appendChild(pulse)
+const from = fromElement.getBoundingClientRect()
+const to = toElement.getBoundingClientRect()
+const parent = document.querySelector(".ai-system").getBoundingClientRect()
+const startX = from.left - parent.left + from.width/2
+const startY = from.top - parent.top + from.height/2
+const endX = to.left - parent.left + to.width/2
+const endY = to.top - parent.top + to.height/2
+pulse.style.left = startX + "px"
+pulse.style.top = startY + "px"
+requestAnimationFrame(()=>{
+pulse.style.transform =
+`translate(${endX-startX}px, ${endY-startY}px)`
+})
+setTimeout(()=>{
+pulse.remove()
+},900)
+}
 const modulePositions = {
 core: document.querySelector(".ai-core"),
 intelligence: document.querySelector(".module-intelligence"),
@@ -334,7 +356,9 @@ claimPacket.style.left = x + "px"
 claimPacket.style.top = y + "px"
 modules.forEach(m => m.classList.remove("module-highlight"))
 target.classList.add("module-highlight")
+sendAIPulse(target, document.querySelector(".ai-core"))
 }
+
 function runClaimDemo(){
 setTimeout(()=>{
 moveClaim(modulePositions.intelligence)
