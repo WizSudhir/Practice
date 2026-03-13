@@ -575,7 +575,13 @@ height:650px;
 
 
 /* ================= CORE AI ================= */
+.ai-helper{
 
+font-size:12px;
+opacity:.6;
+margin-top:10px;
+
+}
 .ai-core{
 
 position:absolute;
@@ -775,7 +781,13 @@ opacity:0;
 }
 
 }
+.ai-module.active ~ .data-line{
 
+opacity:1;
+
+animation-duration:1s;
+
+}
 .ai-module h4{
 
 font-size:16px;
