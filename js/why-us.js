@@ -296,4 +296,103 @@ dashboard.style.transform =
 })
 
 }
+// ===============================
+// AI PLATFORM NODE INTERACTION
+// ===============================
+
+const modules = document.querySelectorAll(".ai-module")
+const brain = document.querySelector(".ai-core")
+
+const metric1 = document.getElementById("metric1")
+const metric2 = document.getElementById("metric2")
+const metric3 = document.getElementById("metric3")
+
+const label1 = document.getElementById("metricLabel1")
+const label2 = document.getElementById("metricLabel2")
+const label3 = document.getElementById("metricLabel3")
+
+modules.forEach(module => {
+
+module.addEventListener("mouseenter", ()=>{
+
+const type = module.dataset.node
+
+module.classList.add("active")
+brain.classList.add("receiving")
+
+if(type === "intelligence"){
+
+metric1.innerText = "3,842"
+label1.innerText = "Claims Analyzed"
+
+metric2.innerText = "14"
+label2.innerText = "Payer Behavior Alerts"
+
+metric3.innerText = "$12,500"
+label3.innerText = "Revenue Opportunities"
+
+}
+
+if(type === "denial"){
+
+metric1.innerText = "126"
+label1.innerText = "Coding Issues Detected"
+
+metric2.innerText = "41"
+label2.innerText = "Denial Risks Prevented"
+
+metric3.innerText = "$9,200"
+label3.innerText = "Revenue Protected"
+
+}
+
+if(type === "workflow"){
+
+metric1.innerText = "214"
+label1.innerText = "Claims Routed"
+
+metric2.innerText = "36"
+label2.innerText = "Workflow Bottlenecks"
+
+metric3.innerText = "$7,850"
+label3.innerText = "Processing Efficiency"
+
+}
+
+if(type === "recovery"){
+
+metric1.innerText = "87"
+label1.innerText = "Denied Claims Reopened"
+
+metric2.innerText = "53"
+label2.innerText = "Successful Appeals"
+
+metric3.innerText = "$18,450"
+label3.innerText = "Recovered Revenue"
+
+}
+
+if(type === "performance"){
+
+metric1.innerText = "98%"
+label1.innerText = "Clean Claim Rate"
+
+metric2.innerText = "30%"
+label2.innerText = "Faster Collections"
+
+metric3.innerText = "$250k+"
+label3.innerText = "Revenue Growth Potential"
+
+}
+
+})
+
+module.addEventListener("mouseleave", ()=>{
+
+module.classList.remove("active")
+brain.classList.remove("receiving")
+
+})
+
+})
 }) // increase revenue tokenslfklsejlkdsjlkjdslkjslkjsldkjdslkjflksdlkdsfjlksjdlfjlskdjflksjlfksdjlksdjlkdsjlkdsjflkjsdlkfjsdlkdfjlksjdlkflksf
