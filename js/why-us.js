@@ -356,7 +356,7 @@ label1.innerText = "Claims Analyzed"
 animateMetric(metric2,14)
 label2.innerText = "Payer Behavior Alerts"
 
-animateMetric(metric3,$12500)
+animateMetric(metric3,12500)
 label3.innerText = "Revenue Opportunities"
 
 }
@@ -369,7 +369,7 @@ label1.innerText = "Coding Issues Detected"
 animateMetric(metric2,41)
 label2.innerText = "Denial Risks Prevented"
 
-animateMetric(metric3,$9200)
+animateMetric(metric3,9200)
 label3.innerText = "Revenue Protected"
 
 }
@@ -382,7 +382,7 @@ label1.innerText = "Claims Routed"
 animateMetric(metric2,36)
 label2.innerText = "Workflow Bottlenecks"
 
-animateMetric(metric3,$7850)
+animateMetric(metric3,7850)
 label3.innerText = "Processing Efficiency"
 
 }
@@ -395,7 +395,7 @@ label1.innerText = "Denied Claims Reopened"
 animateMetric(metric2,53)
 label2.innerText = "Successful Appeals"
 
-animateMetric(metric3,$18450)
+animateMetric(metric3,18450)
 label3.innerText = "Recovered Revenue"
 
 }
