@@ -1,5 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-
+// ===============================
+// Lucide Icons
+// ===============================
+  lucide.createIcons();
 // ===============================
 // RCM Score Gauge
 // ===============================
