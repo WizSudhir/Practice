@@ -188,51 +188,112 @@ universeContainer.clientHeight
 lucide.createIcons();
 
 // 8. ECOSYSTEM SCROLL ANIMATION //
-const ecoSection = document.querySelector(".ecosystem-section");
-const ecoNodes = document.querySelectorAll(".eco-node");
-const ecoLines = document.querySelectorAll(".eco-lines line");
+const ecoContainer = document.querySelector(".ecosystem-network");
 const ecoCore = document.querySelector(".eco-core");
-let ecoTimers = [];
-const ecoObserver = new IntersectionObserver((entries)=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-activateEcosystem();
-}else{
-resetEcosystem();
-}
-});
-},{threshold:0.25});
-function resetEcosystem(){
-ecoTimers.forEach(timer=>{
-clearTimeout(timer);
-clearInterval(timer);
-});
-ecoTimers=[];
+const ecoNodes = document.querySelectorAll(".eco-node");
+const ecoSvg = document.querySelector(".eco-lines");
+
+/* RANDOM NODE POSITIONING */
+
 ecoNodes.forEach(node=>{
-node.classList.remove("active");
+const x = Math.random()*70 + 5;
+const y = Math.random()*70 + 5;
+
+node.style.left = x + "%";
+node.style.top = y + "%";
 });
-ecoLines.forEach(line=>{
-line.classList.remove("active");
+
+/* DRAW LINES */
+
+function drawLines(){
+
+ecoSvg.innerHTML = "";
+
+const coreRect = ecoCore.getBoundingClientRect();
+const containerRect = ecoContainer.getBoundingClientRect();
+
+const coreX = coreRect.left + coreRect.width/2 - containerRect.left;
+const coreY = coreRect.top + coreRect.height/2 - containerRect.top;
+
+ecoNodes.forEach(node=>{
+
+const rect = node.getBoundingClientRect();
+
+const nodeX = rect.left + rect.width/2 - containerRect.left;
+const nodeY = rect.top + rect.height/2 - containerRect.top;
+
+const line = document.createElementNS(
+"http://www.w3.org/2000/svg","line"
+);
+
+line.setAttribute("x1",nodeX);
+line.setAttribute("y1",nodeY);
+line.setAttribute("x2",coreX);
+line.setAttribute("y2",coreY);
+
+line.setAttribute("stroke","#6366f1");
+line.setAttribute("stroke-width","1.4");
+line.setAttribute("stroke-dasharray","2 6");
+
+ecoSvg.appendChild(line);
+
 });
-ecoCore.classList.remove("active");
-}
-if(ecoSection){
-ecoObserver.observe(ecoSection);
-}
-function activateEcosystem(){
-ecoNodes.forEach((node,index)=>{
-const timer = setTimeout(()=>{
-node.classList.add("active");
-// create continuous stream
-const interval = setInterval(()=>{
-createDataFlow(node);
-}, 400 + Math.random()*600);
-ecoTimers.push(interval);
-}, index*700);
-ecoTimers.push(timer);
-});
-setTimeout(()=>{
-ecoCore.classList.add("active");
-}, ecoNodes.length*700);
+
 }
 
+setTimeout(drawLines,200);
+
+window.addEventListener("resize",drawLines);
+
+/* DATA FLOW ANIMATION */
+
+function createPulse(node){
+
+const pulse = document.createElement("div");
+pulse.className="eco-pulse";
+
+ecoContainer.appendChild(pulse);
+
+const nodeRect = node.getBoundingClientRect();
+const coreRect = ecoCore.getBoundingClientRect();
+const containerRect = ecoContainer.getBoundingClientRect();
+
+const startX = nodeRect.left + nodeRect.width/2 - containerRect.left;
+const startY = nodeRect.top + nodeRect.height/2 - containerRect.top;
+
+const endX = coreRect.left + coreRect.width/2 - containerRect.left;
+const endY = coreRect.top + coreRect.height/2 - containerRect.top;
+
+pulse.style.left=startX+"px";
+pulse.style.top=startY+"px";
+
+pulse.animate([
+{transform:"translate(0,0)",opacity:1},
+{
+transform:`translate(${endX-startX}px,${endY-startY}px)`,
+opacity:1
+},
+{
+transform:`translate(${endX-startX}px,${endY-startY}px)`,
+opacity:0
+}
+],{
+duration:900,
+easing:"ease-out"
+});
+
+setTimeout(()=>{
+ecoCore.classList.add("data-glow");
+setTimeout(()=>ecoCore.classList.remove("data-glow"),500);
+},700);
+
+setTimeout(()=>pulse.remove(),1000);
+
+}
+
+/* RANDOM FEED */
+
+setInterval(()=>{
+const node = ecoNodes[Math.floor(Math.random()*ecoNodes.length)];
+createPulse(node);
+},1200);
