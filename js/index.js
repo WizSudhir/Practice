@@ -220,25 +220,24 @@ this.innerText = "Read More →";
 Stripe-style flowing animation
 ===================================== */
 const ctaSection = document.querySelector(".cta-stripe")
-const canvas = document.getElementById("cta-rays")
-if(!canvas){
+const raysCanvas = document.getElementById("cta-rays")
+if(!raysCanvas){
   console.warn("CTA rays canvas not found");
 } else {
-const ctx = canvas.getContext("2d")
+const ctx = raysCanvas.getContext("2d")
 let w,h
 let particles=[]
 let originX
 let originY
 function resize(){
-w = canvas.width = canvas.offsetWidth
-h = canvas.height = canvas.offsetHeight
+w = raysCanvas.width = raysCanvas.offsetWidth
+h = raysCanvas.height = raysCanvas.offsetHeight
 originX = w/2
 originY = h
 }
 window.addEventListener("resize",resize)
 resize()
 const PARTICLE_COUNT = 280
-resize()
 class Particle{
 constructor(){
 this.angle = Math.random()*Math.PI
@@ -285,7 +284,7 @@ particles.push(new Particle())
 }
 let mouse={x:-1000,y:-1000}
 ctaSection.addEventListener("mousemove",e=>{
-const rect = canvas.getBoundingClientRect()
+const rect = raysCanvas.getBoundingClientRect()
 mouse.x = e.clientX - rect.left
 mouse.y = e.clientY - rect.top
 })
