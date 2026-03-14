@@ -251,32 +251,35 @@ const cp1y = nodeY + (coreY - nodeY) * 0.25;
 const cp2x = coreX - (direction * curve);
 const cp2y = coreY - (coreY - nodeY) * 0.25;
 
-/* cubic spline */
+/* ORTHOGONAL ROUTING */
 
-let pathData;
+const offset = 60;
 
-/* horizontal direct connection */
+/* determine direction */
 
-if(Math.abs(nodeY - coreY) < 30){
+const horizontalDir = nodeX < coreX ? 1 : -1;
 
-pathData = `M ${nodeX} ${nodeY} L ${coreEdgeX} ${coreEdgeY}`;
+/* first horizontal segment */
 
-}
+const elbowX = nodeX + horizontalDir * offset;
 
-/* otherwise use spline */
+/* vertical alignment */
 
-else{
+const elbowY = coreY;
 
-const midX = (nodeX + coreEdgeX) / 2;
+/* final horizontal */
 
-pathData = `
+const endX = coreX - horizontalDir * 80;
+const endY = coreY;
+
+/* segmented path */
+
+const pathData = `
 M ${nodeX} ${nodeY}
-C ${midX} ${nodeY},
-  ${midX} ${coreEdgeY},
-  ${coreEdgeX} ${coreEdgeY}
+L ${elbowX} ${nodeY}
+L ${elbowX} ${elbowY}
+L ${endX} ${endY}
 `;
-
-}
 
 line.setAttribute("d", pathData);
 
