@@ -849,6 +849,7 @@ grid-column:auto;
 grid-row:auto;
 }
 }
+
 /* =========================================================
 PRACTICEGRID REVENUE FLOW
 ========================================================= */
@@ -1000,6 +1001,12 @@ display:none;
 .flow-step{
 text-align:center;
 }
+}
+.flow-result{
+margin-top:70px;
+text-align:center;
+font-size:18px;
+color:#cbd5f5;
 }
 /* =========================================================
 PRACTICEGRID OUTCOMES
