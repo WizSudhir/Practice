@@ -217,17 +217,14 @@ Stripe-style flowing animation
 ===================================== */
 const ctaSection = document.querySelector(".cta-stripe")
 const canvas = document.getElementById("cta-rays")
+if(!canvas) return
 const ctx = canvas.getContext("2d")
 
 let w,h
 let particles=[]
 
-function resize(){
-w = canvas.width = window.innerWidth
-h = canvas.height = canvas.offsetHeight
-}
-
 window.addEventListener("resize",resize)
+resize()
 let originX
 let originY
 function resize(){
@@ -239,7 +236,7 @@ originY = h
 }
 
 const PARTICLE_COUNT = 280
-
+resize()
 class Particle{
 
 constructor(){
@@ -289,6 +286,7 @@ grad.addColorStop(.4,"#ff7ac8")
 grad.addColorStop(.8,"#a855f7")
 grad.addColorStop(1,"#6366f1")
 
+ctx.globalAlpha = 0.8
 ctx.strokeStyle = grad
 ctx.lineWidth = .7
 
@@ -308,7 +306,7 @@ for(let i=0;i<PARTICLE_COUNT;i++){
 particles.push(new Particle())
 }
 
-let mouse={x:0,y:0}
+let mouse={x:-1000,y:-1000}
 
 ctaSection.addEventListener("mousemove",e=>{
 const rect = canvas.getBoundingClientRect()
@@ -327,7 +325,8 @@ const dy = p.y - mouse.y
 const dist = Math.sqrt(dx*dx + dy*dy)
 
 if(dist < 120){
-p.radius += (160 - dist) * 0.05
+p.radius += (160 - dist) * 0.02
+p.radius = Math.min(p.radius, p.baseRadius + 80)
 }else{
 p.radius += (p.baseRadius - p.radius) * 0.02
 }
@@ -341,4 +340,4 @@ requestAnimationFrame(animate)
 
 }
 
-animate()
+requestAnimationFrame(animate)
