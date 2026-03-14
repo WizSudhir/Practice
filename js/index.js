@@ -216,10 +216,6 @@ this.innerText = "Read More →";
 }
 });
 });
-// re-enable reveal animation
-document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
-});
-}
 /* =====================================
 Stripe-style flowing animation
 ===================================== */
