@@ -358,7 +358,31 @@ box-shadow:
 0 20px 40px rgba(0,0,0,.6),
 0 0 40px rgba(99,102,241,.5);
 }
-
+.node-sdk{
+top:40px;
+left:80px;
+}
+.node-events{
+top:60px;
+right:80px;
+}
+.node-market{
+top:200px;
+left:40px;
+}
+.node-pipeline{
+top:200px;
+right:40px;
+}
+.node-orchestration{
+bottom:40px;
+left:50%;
+transform:translateX(-50%);
+}
+.node-management{
+bottom:160px;
+right:220px;
+}
 /* CONNECTION LINES */
 
 .eco-lines{
@@ -381,7 +405,7 @@ animation:dataFlow 6s linear infinite;
 @keyframes dataFlow{
 
 0%{stroke-dashoffset:0}
-100%{stroke-dashoffset:60}
+100%{stroke-dashoffset:-60}
 
 }
 /* ======================================
