@@ -748,11 +748,13 @@ opacity:.7;
 .module-intelligence{
 top:0;
 left:20%;
+transform:translateX(-50%);
 }
 /* TOP RIGHT */
 .module-performance{
 top:0;
 right:20%;
+transform:translateX(-50%);
 }
 /* LEFT OF CORE */
 .module-denial{
