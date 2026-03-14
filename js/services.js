@@ -215,15 +215,17 @@ revealOnScroll();
 /* =====================================
 Stripe-style flowing animation
 ===================================== */
-const svg = document.getElementById("ribbons")
+const svgBack = document.getElementById("ribbons-back")
+const svgFront = document.getElementById("ribbons-front")
 
 const width = 1600
 const height = 600
 
-const ribbons = []
+const ribbonsBack = []
+const ribbonsFront = []
 const ribbonCount = 40
 
-function createRibbon(i){
+function createRibbon(container,i){
 
 const path = document.createElementNS(
 "http://www.w3.org/2000/svg","path"
@@ -231,49 +233,64 @@ const path = document.createElementNS(
 
 path.setAttribute("class","ribbon-line")
 
-svg.appendChild(path)
+path.style.opacity = 0.3 + Math.random()*0.5
+path.style.strokeWidth = 1 + Math.random()*1.5
+
+container.appendChild(path)
 
 return {
 path:path,
-offset:i * 0.15
+offset:i * 0.2 + Math.random()
 }
 
 }
 
 for(let i=0;i<ribbonCount;i++){
-ribbons.push(createRibbon(i))
+ribbonsBack.push(createRibbon(svgBack,i))
+}
+
+for(let i=0;i<ribbonCount;i++){
+ribbonsFront.push(createRibbon(svgFront,i))
 }
 
 let time = 0
 
 function animate(){
 
-time += 0.006
+time += 0.004
+
+function animateLayer(ribbons){
 
 ribbons.forEach((ribbon,index)=>{
 
 const offset = ribbon.offset
 
+const base = height/2
+
+const amplitude = 50 + index*1.4
+
 const y1 =
-height/2 +
-Math.sin(time + offset)*80
+base +
+Math.sin(time*0.5 + offset) * amplitude
 
 const y2 =
-height/2 +
-Math.sin(time + offset + 1)*120
+base +
+Math.sin(time*0.8 + offset + index*0.05) * amplitude*1.2
 
 const y3 =
-height/2 +
-Math.sin(time + offset + 2)*80
+base +
+Math.sin(time*0.3 + offset + index*0.1) * amplitude*0.7
+
+const d = `
 
 const d = `
 
 M 0 ${y1}
 
 C
-${width*0.25} ${y2},
-${width*0.75} ${y3},
-${width} ${y1}
+${width*0.35} ${y2},
+${width*0.65} ${y3},
+${width} ${y3}
 
 `
 
@@ -286,3 +303,5 @@ requestAnimationFrame(animate)
 }
 
 animate()
+animateLayer(ribbonsBack)
+animateLayer(ribbonsFront)
