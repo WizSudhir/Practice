@@ -683,21 +683,12 @@ color:#22c55e;
 font-size:11px;
 opacity:.7;
 }
-.ai-network{
-position:absolute;
-inset:0;
-width:100%;
-height:100%;
-pointer-events:none;
-}
 /* ================= MODULES ================= */
 .ai-module{
 position:relative;
 width:200px;
 padding:18px;
 font-size:13px;
-min-width:200px;
-max-width:220px;
 border-radius:18px;
 background:rgba(20,25,55,.85);
 border:1px solid rgba(255,255,255,.08);
@@ -816,17 +807,18 @@ animation:nodePulse 1s ease;
 /* RESPONSIVE */
 @media(max-width:900px){
 .ai-system{
-height:auto;
-display:grid;
 grid-template-columns:1fr;
+grid-template-rows:auto;
 gap:30px;
+height:auto;
 }
 .ai-core{
-position:relative;
-margin:0 auto;
+grid-column:auto;
+grid-row:auto;
 }
-.data-line{
-display:none;
+.ai-module{
+grid-column:auto;
+grid-row:auto;
 }
 }
 /* =========================================================
