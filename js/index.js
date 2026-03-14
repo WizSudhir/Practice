@@ -261,7 +261,7 @@ draw(){
 raysCtx.beginPath()
 raysCtx.moveTo(originX,originY)
 raysCtx.lineTo(this.x,this.y)
-const grad = ctx.createLinearGradient(
+const grad = raysCtx.createLinearGradient(
 originX,originY,
 this.x,this.y
 )
@@ -270,19 +270,19 @@ grad.addColorStop(.2,"rgba(147,197,253,0.15)")
 grad.addColorStop(.5,"rgba(99,102,241,0.35)")
 grad.addColorStop(.8,"rgba(139,92,246,0.25)")
 grad.addColorStop(1,"rgba(255,255,255,0)")
-ctx.globalAlpha = 0.6
-ctx.strokeStyle = grad
-ctx.lineWidth = 1.1
-ctx.shadowColor = "rgba(99,102,241,0.4)"
-ctx.shadowBlur = 8
-ctx.stroke()
-ctx.shadowBlur = 0
-ctx.beginPath()
-ctx.arc(this.x,this.y,this.size,0,Math.PI*2)
-ctx.fillStyle="rgba(255,255,255,0.8)"
-ctx.shadowBlur=6
-ctx.fill()
-ctx.shadowBlur=0
+raysCtx.globalAlpha = 0.6
+raysCtx.strokeStyle = grad
+raysCtx.lineWidth = 1.1
+raysCtx.shadowColor = "rgba(99,102,241,0.4)"
+raysCtx.shadowBlur = 8
+raysCtx.stroke()
+raysCtx.shadowBlur = 0
+raysCtx.beginPath()
+raysCtx.arc(this.x,this.y,this.size,0,Math.PI*2)
+raysCtx.fillStyle="rgba(255,255,255,0.8)"
+raysCtx.shadowBlur=6
+raysCtx.fill()
+raysCtx.shadowBlur=0
 }
 }
 for(let i=0;i<PARTICLE_COUNT;i++){
@@ -298,7 +298,7 @@ mouse.x = e.clientX - rect.left
 mouse.y = e.clientY - rect.top
 })
 function animate(time){
-ctx.clearRect(0,0,w,h)
+raysCtx.clearRect(0,0,w,h)
 particles.forEach(p=>{
 const dx = p.x - mouse.x
 const dy = p.y - mouse.y
