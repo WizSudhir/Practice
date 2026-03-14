@@ -848,8 +848,9 @@ align-items:flex-start;
 }
 .footer-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+ grid-template-columns: 1.6fr 1fr 1fr 1fr;
   gap: 60px;
+   align-items:start;
 }
 .footer-brand img {
   height: 55px;
@@ -913,27 +914,33 @@ width:100%;
 .footer-contact a:hover {
   color: var(--accent-2);
 }
-.footer-hipaa {
-   padding:18px;
-   border-radius:16px;
-   background:rgba(255,255,255,0.04);
-   border:1px solid rgba(255,255,255,0.06);
-  box-shadow:0 10px 40px rgba(0,0,0,.4);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px; /* space between image and text */
+.footer-hipaa{
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:10px;
+text-align:center;
 }
-.footer-hipaa img {
-  height: 50px;
-  filter: drop-shadow(0 0 10px rgba(139,92,246,0.8));
+.footer-hipaa img{
+height:60px;
+filter:drop-shadow(0 0 20px rgba(139,92,246,.7));
 }
-.footer-hipaa .hipaa-text {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text-secondary);
-  letter-spacing: 0.5px;
-  text-align: center;
+.hipaa-label{
+display:flex;
+flex-direction:column;
+line-height:1;
+}
+.hipaa-title{
+font-size:22px;
+font-weight:800;
+letter-spacing:.04em;
+color:#ffffff;
+}
+.hipaa-sub{
+font-size:13px;
+color:var(--text-secondary);
+letter-spacing:.1em;
+text-transform:uppercase;
 }
 .footer-contact-item{
 display:flex;
