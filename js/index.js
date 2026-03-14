@@ -1,3 +1,4 @@
+document.addEventListener("DOMContentLoaded", () => {
 // ======================================================
 // PRACTICEGRID SOLUTIONS - GLOBAL JS ARCHITECTURE
 // Production Optimized
@@ -311,3 +312,4 @@ requestAnimationFrame(animate)
 }
 requestAnimationFrame(animate)
 }
+}) // DOM Close
