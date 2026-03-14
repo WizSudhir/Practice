@@ -784,7 +784,7 @@ width:120px;
 height:2px;
 top:70px;
 left:200px;
-transform:rotate(-35deg);
+transform:rotate(35deg);
 }
 /* TOP RIGHT */
 .line2{
@@ -792,7 +792,7 @@ width:120px;
 height:2px;
 top:70px;
 right:200px;
-transform:rotate(35deg);
+transform:rotate(-35deg);
 }
 /* LEFT */
 .line3{
