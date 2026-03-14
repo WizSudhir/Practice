@@ -241,7 +241,7 @@ const PARTICLE_COUNT = 280
 class Particle{
 constructor(){
 this.angle = Math.random()*Math.PI
-this.radius = Math.random()*500 + 80
+this.radius = Math.random()*400 + 80
 this.baseRadius = this.radius
 this.speed = 0.002 + Math.random()*0.003
 this.x = originX
