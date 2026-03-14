@@ -774,6 +774,17 @@ top:50%;
 left:40px;
 transform:translateY(-50%);
 }
+.ai-network{
+position:absolute;
+inset:0;
+pointer-events:none;
+}
+.ai-network line{
+stroke:#3b82f6;
+stroke-width:2;
+stroke-dasharray:6 6;
+opacity:.4;
+}
 /* ================= LIVE CLAIM PACKET FLOW ================= */
 .claim-packet{
 position:absolute;
