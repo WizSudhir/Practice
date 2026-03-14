@@ -158,6 +158,7 @@ if (navToggle && navMenu) {
   navToggle.addEventListener('click', () => {
    navMenu.classList.toggle('active');
    navToggle.classList.toggle('active');
+   document.body.classList.toggle("menu-open");
     // Optional: Animate the hamburger spans to an 'X'
     const spans = navToggle.querySelectorAll('span');
     spans.forEach(span => span.classList.toggle('open'));
@@ -167,9 +168,27 @@ if (navToggle && navMenu) {
 document.querySelectorAll('.nav-menu a').forEach(link => {
   link.addEventListener('click', () => {
     navMenu.classList.remove('active');
+    navToggle.classList.remove('active');
   });
 });
-
+// Close menu when clicking outside
+document.addEventListener("click",(e)=>{
+  if(
+    navMenu.classList.contains("active") &&
+    !navMenu.contains(e.target) &&
+    !navToggle.contains(e.target)
+  ){
+    navMenu.classList.remove("active")
+    navToggle.classList.remove("active")
+  }
+})
+// Close menu if screen becomes desktop size
+window.addEventListener("resize",()=>{
+  if(window.innerWidth > 992){
+    navMenu.classList.remove("active")
+    navToggle.classList.remove("active")
+  }
+})
 // ===============================
 // 10. SERVICE CARD EXPAND
 // ===============================
