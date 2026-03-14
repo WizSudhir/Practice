@@ -231,7 +231,7 @@ ecoSvg.appendChild(line);
 
 }
 
-setTimeout(drawLines,200);
+window.addEventListener("load",drawLines);
 
 window.addEventListener("resize",drawLines);
 /* LINE FEED ANIMATION */
