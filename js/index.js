@@ -280,7 +280,9 @@ ctx.fill()
 }
 }
 for(let i=0;i<PARTICLE_COUNT;i++){
-particles.push(new Particle())
+let p = new Particle()
+p.angle = (i / PARTICLE_COUNT) * Math.PI * 2
+particles.push(p)
 }
 let mouse={x:-1000,y:-1000}
 ctaSection.addEventListener("mousemove",e=>{
