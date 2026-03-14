@@ -132,11 +132,9 @@ box-shadow:
   padding:20px 0;
 }
 .nav-menu{
-position:fixed;
-top:0;
-right:-100%;
-width:80%;
-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
 }
 .logo img { height:55px; }
 .nav-menu ul {
@@ -201,6 +199,9 @@ transition:.3s ease;
 }
 .nav-toggle:hover{
 background:rgba(255,255,255,0.12);
+}
+.mobile-cta{
+display:none;
 }
 /* MOBILE MENU FIX */
 @media (max-width: 992px) {
