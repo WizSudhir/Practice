@@ -70,7 +70,7 @@ if (canvas) {
   let particlesArray = [];
   // High-performance check: If screen is small, we show fewer, slower dots.
   const isMobile = window.innerWidth < 768;
-  const particleCount = isMobile ? 15 : 60; 
+  const particleCount = isMobile ? 15 : 40; 
   function setCanvasSize() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -238,7 +238,7 @@ originY = h
 }
 window.addEventListener("resize",resize)
 resize()
-const PARTICLE_COUNT = 420
+const PARTICLE_COUNT = 250
 class Particle{
 constructor(){
 this.angle = Math.random()*Math.PI*2
@@ -293,7 +293,16 @@ particles.push(p)
 }
 let mouse={x:-1000,y:-1000}
 if(ctaSection){
-window.addEventListener("mousemove",e=>{
+let mouseMoveTimeout;
+window.addEventListener("mousemove",(e)=>{
+if(mouseMoveTimeout) return;
+mouseMoveTimeout = setTimeout(()=>{
+const rect = raysCanvas.getBoundingClientRect();
+mouse.x = e.clientX - rect.left;
+mouse.y = e.clientY - rect.top;
+mouseMoveTimeout = null;
+},30);
+});
 const rect = raysCanvas.getBoundingClientRect()
 mouse.x = e.clientX - rect.left
 mouse.y = e.clientY - rect.top
