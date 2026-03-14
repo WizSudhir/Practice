@@ -215,94 +215,119 @@ revealOnScroll();
 /* =====================================
 Stripe-style flowing animation
 ===================================== */
-const svgBack = document.getElementById("ribbons-back")
-const svgFront = document.getElementById("ribbons-front")
+const canvas = document.getElementById("cta-rays")
+const ctx = canvas.getContext("2d")
 
-const width = 1600
-const height = 600
+let w,h
+let particles=[]
 
-const ribbonsBack = []
-const ribbonsFront = []
-const ribbonCount = 70
+function resize(){
+w = canvas.width = window.innerWidth
+h = canvas.height = canvas.offsetHeight
+}
 
-function createRibbon(container,i){
+window.addEventListener("resize",resize)
+resize()
 
-const path = document.createElementNS(
-"http://www.w3.org/2000/svg","path"
+const originX = w/2
+const originY = h
+
+const PARTICLE_COUNT = 280
+
+class Particle{
+
+constructor(){
+
+this.angle = Math.random()*Math.PI
+this.radius = Math.random()*350 + 50
+
+this.speed = 0.002 + Math.random()*0.003
+
+this.x = originX
+this.y = originY
+
+this.size = Math.random()*2+1
+
+}
+
+update(time){
+
+this.angle += this.speed
+
+this.x =
+originX +
+Math.cos(this.angle)*this.radius
+
+this.y =
+originY -
+Math.sin(this.angle)*this.radius
+
+}
+
+draw(){
+
+ctx.beginPath()
+
+ctx.moveTo(originX,originY)
+
+ctx.lineTo(this.x,this.y)
+
+const grad = ctx.createLinearGradient(
+originX,originY,
+this.x,this.y
 )
 
-path.setAttribute("class","ribbon-line")
+grad.addColorStop(0,"#ffba27")
+grad.addColorStop(.4,"#ff7ac8")
+grad.addColorStop(.8,"#a855f7")
+grad.addColorStop(1,"#6366f1")
 
-path.style.opacity = 0.15 + (i / ribbonCount) * 0.7
-path.style.strokeWidth = 1 + Math.random()*1.5
+ctx.strokeStyle = grad
+ctx.lineWidth = .7
 
-container.appendChild(path)
+ctx.stroke()
 
-return {
-path:path,
-offset:i * 0.2 + Math.random()
+ctx.beginPath()
+ctx.arc(this.x,this.y,this.size,0,Math.PI*2)
+
+ctx.fillStyle="#4f7cff"
+ctx.fill()
+
 }
 
 }
 
-for(let i=0;i<ribbonCount;i++){
-ribbonsBack.push(createRibbon(svgBack,i))
+for(let i=0;i<PARTICLE_COUNT;i++){
+particles.push(new Particle())
 }
 
-for(let i=0;i<ribbonCount;i++){
-ribbonsFront.push(createRibbon(svgFront,i))
-}
+let mouse={x:0,y:0}
 
-let time = 0
-let drift = 0
-
-function animateLayer(ribbons){
-
-ribbons.forEach((ribbon,index)=>{
-
-const offset = ribbon.offset
-const base = height/2
-const amplitude = 50 + index*1.4
-const wind =
-Math.sin(time*0.15) * 60 +
-Math.sin(drift) * 40
-const turbulence = Math.sin(time*0.9 + index)*8
-  
-const centerPull =
-Math.sin(time*0.2) * 40
-const y1 =
-base +
-Math.sin(time*0.5 + offset) * amplitude
-
-const y2 =
-base +
-Math.sin(time*0.8 + offset + index*0.05) * amplitude*1.2
-
-const y3 =
-base +
-Math.sin(time*0.3 + offset + index*0.1) * amplitude*0.7
-
-const d = `
-M -200 ${y1}
-C
-${width*0.25 + wind} ${y2 + turbulence - centerPull},
-${width*0.75 + wind} ${y3 - turbulence + centerPull},
-${width + 200} ${y1}
-`
-
-ribbon.path.setAttribute("d",d)
-
+window.addEventListener("mousemove",e=>{
+mouse.x=e.clientX
+mouse.y=e.clientY
 })
 
+function animate(time){
+
+ctx.clearRect(0,0,w,h)
+
+particles.forEach(p=>{
+
+const dx = p.x - mouse.x
+const dy = p.y - mouse.y
+const dist = Math.sqrt(dx*dx + dy*dy)
+
+if(dist<120){
+p.radius += 3
+}else{
+p.radius *= .99
 }
 
-function animate(){
+p.update(time)
+p.draw()
 
-time += 0.004
-drift += 0.001
-  
-animateLayer(ribbonsBack)
-animateLayer(ribbonsFront)
+})
 
 requestAnimationFrame(animate)
 
