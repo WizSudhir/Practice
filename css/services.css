@@ -1231,14 +1231,14 @@ STRIPE STYLE CTA
 
 .cta-stripe{
 position:relative;
-padding:160px 0;
+padding:180px 0;
+background:#0a1433;
 overflow:hidden;
-background:linear-gradient(180deg,#0a1433,#070f24);
 }
 
-/* CANVAS */
+/* SVG */
 
-#waveCanvas{
+.ribbon-bg{
 position:absolute;
 top:0;
 left:0;
@@ -1247,12 +1247,12 @@ height:100%;
 z-index:1;
 }
 
-/* CONTENT */
+/* CTA CONTENT */
 
 .cta-content{
 position:relative;
 z-index:2;
-max-width:700px;
+max-width:720px;
 }
 
 .cta-content h2{
@@ -1261,13 +1261,7 @@ font-weight:800;
 line-height:1.2;
 margin-bottom:20px;
 
-background:linear-gradient(
-90deg,
-#ffffff,
-#c4b5fd,
-#93c5fd
-);
-
+background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
@@ -1282,32 +1276,26 @@ margin-bottom:30px;
 /* BUTTON */
 
 .btn-primary{
-display:inline-block;
 padding:14px 28px;
 border-radius:999px;
-background:linear-gradient(
-135deg,
-#6366f1,
-#3b82f6
-);
+background:linear-gradient(135deg,#6366f1,#3b82f6);
 color:white;
 text-decoration:none;
 font-weight:700;
 transition:.3s;
-box-shadow:0 10px 25px rgba(0,0,0,.4);
+box-shadow:0 10px 30px rgba(0,0,0,.4);
 }
 
 .btn-primary:hover{
 transform:translateY(-3px);
-box-shadow:0 15px 40px rgba(0,0,0,.5);
 }
 
-/* MOBILE */
+/* Ribbon lines */
 
-@media(max-width:768px){
-
-.cta-content h2{
-font-size:32px;
-}
-
+.ribbon-line{
+fill:none;
+stroke:url(#ribbonGradient);
+stroke-width:2;
+opacity:.7;
+filter:blur(.3px);
 }
