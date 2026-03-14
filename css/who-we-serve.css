@@ -271,7 +271,7 @@ overflow:hidden;
 }
 .ecosystem-section .container{
 position:relative;
-z-index:3;
+z-index:2;
 background:transparent;
 }
 .ecosystem-section::before{
@@ -282,11 +282,11 @@ position:absolute;
 inset:0;
 
 background-image:
-radial-gradient(rgba(99,102,241,0.35) 1px, transparent 1px);
+radial-gradient(rgba(99,102,241,0.55) 1px, transparent 1px);
 
 background-size:26px 26px;
 
-opacity:.35;
+opacity:.6;
 
 z-index:0;
 
@@ -335,7 +335,7 @@ text-align:center;
 gap:4px;
 position:absolute;
 left:50%;
-top:50%;
+top:45%;
 transform:translate(-50%,-50%);
 width:140px;
 height:140px;
@@ -463,7 +463,7 @@ left:0;
 width:100%;
 height:100%;
 pointer-events:none;
-z-index:4;
+z-index:5;
 }
 
 .eco-lines path{
@@ -477,7 +477,7 @@ stroke-linejoin:round;
 opacity:.55;
 fill:none;
 
-filter:drop-shadow(0 0 6px rgba(99,102,241,.3));
+filter:drop-shadow(0 0 8px rgba(99,102,241,.5));
 
 animation:dataFlow 6s linear infinite;
 }
