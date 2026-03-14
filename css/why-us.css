@@ -179,6 +179,7 @@ min-height:460px;
 position:relative;
 animation:float 6s ease-in-out infinite;
 will-change:transform;
+transform:translateZ(0);
 }
 @keyframes float{
 0%{transform:translateY(0)}
@@ -222,7 +223,6 @@ box-shadow:
 0 0 80px rgba(59,130,246,.15);
 padding:30px;
 position:relative;
-transform:rotateX(8deg) rotateY(-10deg);
 transform:scale(1.05) rotateX(8deg) rotateY(-10deg);
 transform-style:preserve-3d;
 backdrop-filter: blur(12px);
@@ -546,11 +546,7 @@ pointer-events:none;
 2. REVENUE PLATFORM
 ===================================================== */
 .pg-ai-platform{
-padding:120px 0;
-display:flex;
-justify-content:center;
-align-items:center;
-min-height:900px;
+padding:140px 0;
 position:relative;
 background:
 radial-gradient(circle at 30% 20%, rgba(99,102,241,.15), transparent 40%),
@@ -568,8 +564,6 @@ max-width:1100px;
 margin:0 auto;
 min-height:820px;
 padding:80px 0;
-transform:translateZ(0);
-will-change:transform;
 }
 /* CORE AI */
 .ai-helper{
