@@ -191,12 +191,8 @@ lucide.createIcons();
 const ecoSection = document.querySelector(".ecosystem-section");
 const ecoNodes = document.querySelectorAll(".eco-node");
 const ecoLines = document.querySelectorAll(".eco-lines line");
-const ecoFlows = document.querySelectorAll(".eco-flow");
 const ecoCore = document.querySelector(".eco-core");
 let ecoTimers = [];
-ecoFlows.forEach(flow=>{
-flow.style.animationDelay = Math.random()*4 + "s";
-});
 const ecoObserver = new IntersectionObserver((entries)=>{
 entries.forEach(entry=>{
 if(entry.isIntersecting){
@@ -217,9 +213,6 @@ node.classList.remove("active");
 });
 ecoLines.forEach(line=>{
 line.classList.remove("active");
-});
-ecoFlows.forEach(flow=>{
-flow.classList.remove("active");
 });
 ecoCore.classList.remove("active");
 }
@@ -243,94 +236,3 @@ ecoCore.classList.add("active");
 }, ecoNodes.length*700);
 }
 
-// 9. PARTICLES TRAVEL FUNCTION //
-function createDataFlow(node){
-
-const flow = document.createElement("div");
-flow.className = "eco-flow";
-const colors = ["#6366f1","#60a5fa","#a78bfa"];
-const color = colors[Math.floor(Math.random()*colors.length)];
-flow.style.background = color;
-flow.style.boxShadow = `
-0 0 10px ${color},
-0 0 20px ${color},
-0 0 30px ${color}
-`;
-document.querySelector(".ecosystem-network").appendChild(flow);
-
-const core = document.querySelector(".eco-core");
-
-const nodeRect = node.getBoundingClientRect();
-const coreRect = core.getBoundingClientRect();
-const containerRect = document
-.querySelector(".ecosystem-network")
-.getBoundingClientRect();
-
-/* node center */
-const nodeCenterX =
-nodeRect.left + nodeRect.width/2 - containerRect.left;
-
-const nodeCenterY =
-nodeRect.top + nodeRect.height/2 - containerRect.top;
-
-/* core center */
-const coreX =
-coreRect.left + coreRect.width/2 - containerRect.left;
-
-const coreY =
-coreRect.top + coreRect.height/2 - containerRect.top;
-
-/* direction vector */
-const dx = coreX - nodeCenterX;
-const dy = coreY - nodeCenterY;
-
-/* full distance */
-const distance = Math.sqrt(dx*dx + dy*dy);
-
-/* normalize direction */
-const dirX = dx / distance;
-const dirY = dy / distance;
-
-/* start at node edge */
-const nodeRadius = nodeRect.width / 2;
-
-const startX = nodeCenterX + dirX * nodeRadius;
-const startY = nodeCenterY + dirY * nodeRadius;
-
-/* stop at platform edge */
-const stopDistance = distance - (coreRect.width / 2);
-
-flow.style.left = startX + "px";
-flow.style.top = startY + "px";
-
-/* animation */
-flow.animate([
-{ transform:"translate(0,0)", opacity:1 },
-{
-transform:`translate(${dirX * stopDistance}px, ${dirY * stopDistance}px)`,
-opacity:1
-},
-{
-transform:`translate(${dirX * stopDistance}px, ${dirY * stopDistance}px)`,
-opacity:0
-}
-],
-{
-duration:900 + Math.random()*700,
-easing:"ease-out"
-});
-/* glow platform */
-setTimeout(()=>{
-if(Math.random() > 0.6){
-core.classList.add("data-glow");
-setTimeout(()=>{
-core.classList.remove("data-glow");
-},600);
-}
-},900);
-/* remove particle */
-setTimeout(()=>{
-flow.remove();
-},2000);
-
-}
