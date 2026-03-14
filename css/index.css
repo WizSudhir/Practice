@@ -645,6 +645,7 @@ z-index:2;
 }
 .cta-stripe{
 position:relative;
+isolation:isolate;
 padding:120px 0;
 overflow:hidden;
 min-height:380px;
@@ -660,6 +661,11 @@ linear-gradient(120deg,#050a19,#0f1b3d,#1b2559,#050a19);
 background-size:300% 300%;
 animation:ctaGradient 14s ease infinite;
 z-index:0;
+}
+@keyframes ctaGradient{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
 }
 /* SVG */
 .ribbon-bg{
