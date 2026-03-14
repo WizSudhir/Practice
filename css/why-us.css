@@ -767,6 +767,11 @@ stroke-width:2;
 stroke-dasharray:6 6;
 opacity:.4;
 transition:opacity .3s ease;
+animation:flowLine 6s linear infinite;
+}
+@keyframes flowLine{
+0%{stroke-dashoffset:0}
+100%{stroke-dashoffset:-40}
 }
 /* ================= LIVE CLAIM PACKET FLOW ================= */
 .claim-packet{
