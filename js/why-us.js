@@ -330,15 +330,33 @@ const pulse = document.createElement("div")
 pulse.className = "ai-pulse"
 const container = document.querySelector(".ai-system")
 container.appendChild(pulse)
-const startX = fromElement.offsetLeft + fromElement.offsetWidth/2
-const startY = fromElement.offsetTop + fromElement.offsetHeight/2
-const endX = toElement.offsetLeft + toElement.offsetWidth/2
-const endY = toElement.offsetTop + toElement.offsetHeight/2
+const fromRect = fromElement.getBoundingClientRect()
+const toRect = toElement.getBoundingClientRect()
+const containerRect = container.getBoundingClientRect()
+const fromX =
+fromRect.left + fromRect.width/2 - containerRect.left
+const fromY =
+fromRect.top + fromRect.height/2 - containerRect.top
+const toX =
+toRect.left + toRect.width/2 - containerRect.left
+const toY =
+toRect.top + toRect.height/2 - containerRect.top
+const dx = toX - fromX
+const dy = toY - fromY
+const distance = Math.sqrt(dx*dx + dy*dy)
+const nx = dx / distance
+const ny = dy / distance
+const moduleRadius = fromRect.width/2
+const coreRadius = toRect.width/2
+const startX = fromX + nx * moduleRadius
+const startY = fromY + ny * moduleRadius
+const endX = toX - nx * coreRadius
+const endY = toY - ny * coreRadius
 pulse.style.left = startX + "px"
 pulse.style.top = startY + "px"
 requestAnimationFrame(()=>{
 pulse.style.transform =
-`translate(${endX-startX}px, ${endY-startY}px)`
+`translate(${endX-startX}px,${endY-startY}px)`
 })
 setTimeout(()=>{
 pulse.remove()
