@@ -707,10 +707,8 @@ box-shadow:
 0 0 60px rgba(99,102,241,.8),
 0 0 120px rgba(59,130,246,.6),
 0 20px 80px rgba(0,0,0,.7);
-transform:scale(1.05);
 }
 .ai-module:hover{
-transform:scale(1.05);
 box-shadow:
 0 25px 80px rgba(0,0,0,.6),
 0 0 40px rgba(99,102,241,.35);
@@ -856,10 +854,6 @@ height:auto;
 display:grid;
 grid-template-columns:1fr;
 gap:30px;
-}
-.ai-module{
-position:relative;
-transform:none;
 }
 .ai-core{
 position:relative;
