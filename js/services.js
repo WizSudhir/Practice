@@ -255,19 +255,15 @@ ribbonsFront.push(createRibbon(svgFront,i))
 
 let time = 0
 
-function animate(){
-
-time += 0.004
-
 function animateLayer(ribbons){
 
 ribbons.forEach((ribbon,index)=>{
 
 const offset = ribbon.offset
-
 const base = height/2
-
 const amplitude = 50 + index*1.4
+const wind = Math.sin(time*0.15) * 60
+const turbulence = Math.sin(time*0.9 + index)*8
 
 const y1 =
 base +
@@ -282,26 +278,28 @@ base +
 Math.sin(time*0.3 + offset + index*0.1) * amplitude*0.7
 
 const d = `
-
-const d = `
-
 M 0 ${y1}
-
 C
-${width*0.35} ${y2},
-${width*0.65} ${y3},
+${width*0.35 + wind} ${y2 + turbulence},
+${width*0.65 + wind} ${y3 - turbulence},
 ${width} ${y3}
-
 `
 
 ribbon.path.setAttribute("d",d)
 
 })
 
+}
+
+function animate(){
+
+time += 0.004
+
+animateLayer(ribbonsBack)
+animateLayer(ribbonsFront)
+
 requestAnimationFrame(animate)
 
 }
 
 animate()
-animateLayer(ribbonsBack)
-animateLayer(ribbonsFront)
