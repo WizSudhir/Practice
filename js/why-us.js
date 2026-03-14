@@ -458,23 +458,23 @@ setInterval(runClaimDemo,18000)
 runClaimDemo()
 
 /* =========================================
-TIMELINE INTERACTION
+REVENUE FLOW INTERACTION
 ========================================= */
-
-const items = document.querySelectorAll(".timeline-item")
-
-items.forEach(item => {
-
-item.addEventListener("click", ()=>{
-
-items.forEach(i=>i.classList.remove("active"))
-
-item.classList.add("active")
-
+const steps = document.querySelectorAll(".flow-step")
+const observer = new IntersectionObserver((entries)=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.style.opacity = 1
+entry.target.style.transform = "translateY(0)"
+}
 })
-
+},{threshold:.3})
+steps.forEach(step=>{
+step.style.opacity=0
+step.style.transform="translateY(40px)"
+step.style.transition="all .6s ease"
+observer.observe(step)
 })
-
 
 
 })
