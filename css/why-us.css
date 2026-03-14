@@ -642,6 +642,22 @@ box-shadow:
 0 0 60px rgba(99,102,241,.8),
 0 0 120px rgba(59,130,246,.6);
 }
+.node.active::after{
+content:"";
+position:absolute;
+width:8px;
+height:8px;
+background:#22c55e;
+border-radius:50%;
+top:50%;
+left:50%;
+animation:pulseFlow 1s infinite;
+}
+
+@keyframes pulseFlow{
+0%{transform:scale(.5);opacity:1}
+100%{transform:scale(3);opacity:0}
+}
 /* =========================================================
 PRACTICEGRID ADVANTAGE
 ========================================================= */
