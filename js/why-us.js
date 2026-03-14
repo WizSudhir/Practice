@@ -457,5 +457,35 @@ claimPacket.innerText="Payment Posted"
 setInterval(runClaimDemo,18000)
 runClaimDemo()
 
-  
+/* =========================================
+REVENUE FLOW INTERACTION
+========================================= */
+
+lucide.createIcons()
+
+const steps = document.querySelectorAll(".flow-step")
+
+const observer = new IntersectionObserver((entries)=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.style.opacity = 1
+entry.target.style.transform = "translateY(0)"
+
+}
+
+})
+
+},{threshold:.3})
+
+steps.forEach(step=>{
+step.style.opacity=0
+step.style.transform="translateY(40px)"
+step.style.transition="all .6s ease"
+observer.observe(step)
+})
+
+
 })
