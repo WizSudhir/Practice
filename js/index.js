@@ -312,4 +312,4 @@ requestAnimationFrame(animate)
 }
 requestAnimationFrame(animate)
 }
-}) // DOM Close
+}); // DOM Close
