@@ -204,7 +204,9 @@ const containerRect = ecoContainer.getBoundingClientRect();
 
 const coreX = coreRect.left + coreRect.width/2 - containerRect.left;
 const coreY = coreRect.top + coreRect.height/2 - containerRect.top;
-
+const coreEdgeOffset = 70;
+const coreEdgeX = coreX + (nodeCenterX < coreX ? -coreEdgeOffset : coreEdgeOffset);
+const coreEdgeY = coreY;
 ecoNodes.forEach(node=>{
 
 const rect = node.getBoundingClientRect();
