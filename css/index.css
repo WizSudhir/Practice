@@ -117,6 +117,7 @@ z-index:1000;
 background:rgba(15,23,42,0.7);
 backdrop-filter:blur(15px);
 transition:.3s ease;
+will-change:transform;
 }
 .navbar-inner{
 display:flex;
@@ -142,6 +143,71 @@ text-decoration:none;
 color:var(--text-primary);
 font-weight:500;
 }
+.nav-toggle{
+display:none;
+flex-direction:column;
+gap:5px;
+cursor:pointer;
+background:none;
+border:none;
+}
+.nav-toggle span{
+width:22px;
+height:2px;
+background:white;
+display:block;
+transition:.3s;
+}
+.nav-overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.5);
+opacity:0;
+visibility:hidden;
+transition:.3s;
+}
+.nav-overlay.active{
+opacity:1;
+visibility:visible;
+}
+@media (max-width:992px){
+.nav-toggle{
+display:flex;
+}
+/* Hide menu by default */
+.nav-menu{
+position:fixed;
+top:0;
+right:-100%;
+width:80%;
+height:100vh;
+background:var(--bg-secondary);
+display:flex;
+flex-direction:column;
+padding-top:120px;
+padding-left:40px;
+transition:.4s ease;
+box-shadow:-10px 0 40px rgba(0,0,0,.4);
+}
+/* Active state */
+.nav-menu.active{right:0;}
+/* Menu items */
+.nav-menu ul{flex-direction:column;align-items:flex-start;gap:28px;}
+/* Links */
+.nav-menu a{font-size:18px;}
+/* CTA button */
+.nav-menu .btn-primary{margin-top:20px;padding:14px 28px;}
+}
+@media (max-width:768px){
+.nav-menu{width:85%;padding-left:30px;}
+.logo img{height:48px;}
+.navbar-inner{padding:16px 0;}
+}
+.nav-toggle.active span:nth-child(1){
+transform:translateY(7px) rotate(45deg);
+}
+.nav-toggle.active span:nth-child(2){opacity:0;}
+.nav-toggle.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
 /* ===============================
    8. BUTTONS
 ================================= */
