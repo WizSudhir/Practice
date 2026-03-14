@@ -281,7 +281,7 @@ ctx.fill()
 }
 for(let i=0;i<PARTICLE_COUNT;i++){
 let p = new Particle()
-p.angle = (i / PARTICLE_COUNT) * Math.PI * 2
+p.angle = (i / PARTICLE_COUNT) * Math.PI * 2 + (Math.random()*0.05)
 particles.push(p)
 }
 let mouse={x:-1000,y:-1000}
