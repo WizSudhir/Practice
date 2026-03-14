@@ -743,31 +743,26 @@ opacity:.7;
 .module-intelligence{
 top:0;
 left:50%;
-transform:translate(-50%,0);
 }
 /* LEFT */
 .module-denial{
 top:50%;
 left:0;
-transform:translate(0,-50%);
 }
 /* RIGHT */
 .module-performance{
 top:50%;
 right:0;
-transform:translate(0,-50%);
 }
 /* BOTTOM LEFT */
 .module-workflow{
 bottom:0;
 left:20%;
-transform:translate(-50%,0);
 }
 /* BOTTOM RIGHT */
 .module-recovery{
 bottom:0;
 right:20%;
-transform:translate(50%,0);
 }
 /* ================= DATA LINES ================= */
 .data-line{
