@@ -316,4 +316,9 @@ requestAnimationFrame(animate)
 }
 requestAnimationFrame(animate)
 }
-}); // DOM Close
+
+}   // closes if(ctaSection)
+
+}   // closes else (IMPORTANT)
+
+}); // DOMContentLoaded close
