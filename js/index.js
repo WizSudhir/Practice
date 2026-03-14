@@ -237,7 +237,7 @@ originY = h
 }
 window.addEventListener("resize",resize)
 resize()
-const PARTICLE_COUNT = 360
+const PARTICLE_COUNT = 420
 class Particle{
 constructor(){
 this.angle = Math.random()*Math.PI*2
