@@ -628,6 +628,21 @@ border:none;
 /* =========================================
 13. CTA
 ========================================= */
+.cta-stripe::before{
+content:"";
+position:absolute;
+inset:0;
+background:
+linear-gradient(
+120deg,
+rgba(255,255,255,0.04),
+rgba(255,255,255,0.01),
+rgba(255,255,255,0.05)
+);
+backdrop-filter:blur(8px);
+pointer-events:none;
+z-index:1;
+}
 .cta-stripe{
 position:relative;
 padding:120px 0;
