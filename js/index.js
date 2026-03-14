@@ -296,7 +296,7 @@ const dy = p.y - mouse.y
 const dist = Math.sqrt(dx*dx + dy*dy)
 if(dist < 120){
 p.radius += (160 - dist) * 0.02
-p.radius = Math.min(p.radius, p.baseRadius + 80)
+p.radius = Math.min(p.radius, p.baseRadius + 160)
 }else{
 p.radius += (p.baseRadius - p.radius) * 0.02
 }
