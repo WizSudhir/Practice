@@ -360,7 +360,7 @@ box-shadow:
 .node-pipeline{grid-column:3;grid-row:2}
 
 .node-orchestration{grid-column:2;grid-row:3}
-
+.node-management{grid-column:2;grid-row:2}
 /* CONNECTION LINES */
 
 .eco-lines{
