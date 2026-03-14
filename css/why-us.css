@@ -879,6 +879,20 @@ font-size:18px;
 line-height:1.7;
 }
 /* FLOW LAYOUT */
+.revenue-flow::before{
+content:"";
+position:absolute;
+top:80px;
+left:8%;
+width:84%;
+height:2px;
+background:linear-gradient(
+90deg,
+rgba(99,102,241,.5),
+rgba(59,130,246,.5)
+);
+z-index:0;
+}
 .revenue-flow{
 display:grid;
 grid-template-columns:repeat(4,1fr);
@@ -904,6 +918,8 @@ rgba(10,15,35,.9)
 border:1px solid rgba(255,255,255,.08);
 text-align:center;
 transition:.35s;
+position:relative;
+z-index:2;
 }
 .flow-step:hover{
 transform:translateY(-6px);
