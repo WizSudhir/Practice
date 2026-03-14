@@ -307,14 +307,25 @@ modules.forEach(module=>{
 const line = document.createElementNS(
 "http://www.w3.org/2000/svg","line")
 const mod = module.getBoundingClientRect()
-line.setAttribute("x1",
-mod.left + mod.width/2 - cont.left)
-line.setAttribute("y1",
-mod.top + mod.height/2 - cont.top)
-line.setAttribute("x2",
-core.left + core.width/2 - cont.left)
-line.setAttribute("y2",
-core.top + core.height/2 - cont.top)
+const fromX =
+mod.left + mod.width/2 - cont.left
+const fromY =
+mod.top + mod.height/2 - cont.top
+const toX =
+core.left + core.width/2 - cont.left
+const toY =
+core.top + core.height/2 - cont.top
+const dx = toX - fromX
+const dy = toY - fromY
+const dist = Math.sqrt(dx*dx + dy*dy)
+const nx = dx/dist
+const ny = dy/dist
+const moduleRadius = mod.width/2
+const coreRadius = core.width/2
+line.setAttribute("x1", fromX + nx*moduleRadius)
+line.setAttribute("y1", fromY + ny*moduleRadius)
+line.setAttribute("x2", toX - nx*coreRadius)
+line.setAttribute("y2", toY - ny*coreRadius)
 svg.appendChild(line)
 })
 }
