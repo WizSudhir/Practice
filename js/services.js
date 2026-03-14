@@ -217,14 +217,14 @@ Stripe-style flowing animation
 ===================================== */
 const ctaSection = document.querySelector(".cta-stripe")
 const canvas = document.getElementById("cta-rays")
-if(!canvas) return
+if(!canvas){
+  console.warn("CTA rays canvas not found");
+} else {
 const ctx = canvas.getContext("2d")
 
 let w,h
 let particles=[]
 
-window.addEventListener("resize",resize)
-resize()
 let originX
 let originY
 function resize(){
@@ -234,7 +234,8 @@ h = canvas.height = canvas.offsetHeight
 originX = w/2
 originY = h
 }
-
+window.addEventListener("resize",resize)
+resize()
 const PARTICLE_COUNT = 280
 resize()
 class Particle{
@@ -341,3 +342,4 @@ requestAnimationFrame(animate)
 }
 
 requestAnimationFrame(animate)
+}
