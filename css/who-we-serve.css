@@ -454,13 +454,17 @@ left:0;
 width:100%;
 height:100%;
 pointer-events:none;
+z-index:4;
 }
 
-.eco-lines line{
+.eco-lines path{
 stroke:#6366f1;
-stroke-dasharray:2 6;
-stroke-width:1.4;
-opacity:.6;
+stroke-dasharray:2 7;
+stroke-width:1.3;
+stroke-linecap:round;
+filter:drop-shadow(0 0 6px rgba(99,102,241,.3));
+opacity:.55;
+fill:none;
 animation:dataFlow 6s linear infinite;
 }
 
