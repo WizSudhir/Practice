@@ -181,12 +181,19 @@ fixBanner.classList.add("active")
 // ===============================
 
 const auroras = document.querySelectorAll(".hero-aurora")
+let ticking = false
 document.addEventListener("mousemove",(e)=>{
+if(!ticking){
+requestAnimationFrame(()=>{
 const x = (window.innerWidth/2 - e.clientX)/80
 const y = (window.innerHeight/2 - e.clientY)/80
 auroras.forEach(a=>{
 a.style.transform = `translate(${x}px, ${y}px)`
 })
+ticking = false
+})
+ticking = true
+}
 })
 
 // ===============================
