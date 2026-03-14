@@ -171,38 +171,6 @@ document.querySelectorAll('.nav-menu a').forEach(link => {
 });
 
 // ===============================
-// 8. BLOG SEARCH
-// ===============================
-function searchBlogs(){
-let input = document.getElementById("blogSearch").value.toLowerCase();
-let cards = document.querySelectorAll(".blog-card");
-cards.forEach(card => {
-let title = card.querySelector("h3").innerText.toLowerCase();
-card.style.display = title.includes(input) ? "block" : "none";
-});
-}
-
-// ===============================
-// 9. BLOG FILTER
-// ===============================
-document.addEventListener("click", function(e){
-if(e.target.classList.contains("filter-btn")){
-let filter = e.target.getAttribute("data-filter");
-let cards = document.querySelectorAll(".blog-card");
-cards.forEach(card=>{
-if(filter==="all"){
-card.style.display="block";
-}
-else if(card.dataset.category===filter){
-card.style.display="block";
-}
-else{
-card.style.display="none";
-}
-});
-}
-});
-// ===============================
 // 10. SERVICE CARD EXPAND
 // ===============================
 document.querySelectorAll(".toggle-btn").forEach(button => {
@@ -303,10 +271,6 @@ mouse.y = e.clientY - rect.top;
 mouseMoveTimeout = null;
 },30);
 });
-const rect = raysCanvas.getBoundingClientRect()
-mouse.x = e.clientX - rect.left
-mouse.y = e.clientY - rect.top
-})
 function animate(){
 raysCtx.clearRect(0,0,w,h)
 particles.forEach(p=>{
