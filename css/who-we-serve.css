@@ -420,30 +420,38 @@ box-shadow:
 0 20px 40px rgba(0,0,0,.6),
 0 0 40px rgba(99,102,241,.5);
 }
+/* LEFT SIDE */
+
 .node-sdk{
-top:40px;
-left:80px;
+top:80px;
+left:60px;
 }
-.node-events{
-top:60px;
-right:80px;
-}
+
 .node-market{
-top:200px;
+top:220px;
 left:40px;
 }
+
+.node-orchestration{
+top:360px;
+left:80px;
+}
+
+/* RIGHT SIDE */
+
+.node-events{
+top:80px;
+right:60px;
+}
+
 .node-pipeline{
-top:200px;
+top:220px;
 right:40px;
 }
-.node-orchestration{
-bottom:40px;
-left:50%;
-transform:translateX(-50%);
-}
+
 .node-management{
-bottom:100px;
-right:220px;
+top:360px;
+right:80px;
 }
 /* CONNECTION LINES */
 
