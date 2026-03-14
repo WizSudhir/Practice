@@ -766,6 +766,7 @@ stroke:#3b82f6;
 stroke-width:2;
 stroke-dasharray:6 6;
 opacity:.4;
+transition:opacity .3s ease;
 }
 /* ================= LIVE CLAIM PACKET FLOW ================= */
 .claim-packet{
