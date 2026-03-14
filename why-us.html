@@ -227,97 +227,40 @@ the entire revenue cycle.
 </div>
 
 
-<div class="ai-system">
+<div class="ai-diagram">
 
+<svg class="ai-links" viewBox="0 0 600 400">
 
-<!-- ================= CORE AI BRAIN ================= -->
+<line x1="300" y1="200" x2="300" y2="40"></line>
+<line x1="300" y1="200" x2="80" y2="200"></line>
+<line x1="300" y1="200" x2="520" y2="200"></line>
+<line x1="300" y1="200" x2="200" y2="360"></line>
+<line x1="300" y1="200" x2="400" y2="360"></line>
 
-<div class="ai-core">
+</svg>
 
+<div class="node core" data-node="core">
 <h3>PracticeGrid Revenue Brain</h3>
-
-<p class="ai-status" id="aiStatus">
-Scanning claim workflows...
-</p>
-
-<div class="ai-metrics">
-
-<div class="metric">
-<span id="metric1">2,438</span>
-<p id="metricLabel1">Claims Analyzed</p>
 </div>
 
-<div class="metric">
-<span id="metric2">28</span>
-<p id="metricLabel2">Denial Risks Detected</p>
+<div class="node intelligence" data-node="intelligence">
+Revenue Intelligence
 </div>
 
-<div class="metric">
-<span id="metric3">$8,450</span>
-<p id="metricLabel3">Revenue Recovered</p>
-</div>
-  
-</div>
-<p class="ai-helper">
-Hover modules to see how the AI system processes revenue data
-</p>
+<div class="node denial" data-node="denial">
+Denial Prevention
 </div>
 
-
-<!-- ================= MODULES ================= -->
-<div class="ai-network">
-  
-<div class="ai-module module-intelligence" data-node="intelligence">
-<div class="ai-module-inner">
-<h4>Revenue Intelligence</h4>
-<p>Analyzing payer behavior...</p>
-</div>
+<div class="node workflow" data-node="workflow">
+Workflow Optimization
 </div>
 
-
-<div class="ai-module module-denial" data-node="denial">
-<div class="ai-module-inner">
-<h4>Denial Prevention</h4>
-<p>Checking coding accuracy...</p>
-</div>
+<div class="node recovery" data-node="recovery">
+Revenue Recovery
 </div>
 
-
-<div class="ai-module module-workflow" data-node="workflow">
-<div class="ai-module-inner">
-<h4>Workflow Optimization</h4>
-<p>Routing claims to recovery queue...</p>
-</div>
-</div>
-
-
-<div class="ai-module module-recovery" data-node="recovery">
-<div class="ai-module-inner">
-<h4>Revenue Recovery</h4>
-<p>Resubmitting denied claims...</p>
-</div>
-</div>
-
-
-<div class="ai-module module-performance" data-node="performance">
-<div class="ai-module-inner">
-<h4>Financial Performance</h4>
-<p>Updating revenue dashboards...</p>
-</div>
-</div>
-
-
-<!-- ================= DATA FLOW ================= -->
-
-<div class="data-line line1"></div>
-<div class="data-line line2"></div>
-<div class="data-line line3"></div>
-<div class="data-line line4"></div>
-
-</div>
-<!-- ================= DATA TOKENS ================= -->
-<div class="claim-packet" id="claimPacket">
-Claim #A4821
+<div class="node performance" data-node="performance">
+Financial Performance
 </div>
 
 </div>
