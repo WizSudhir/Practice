@@ -225,10 +225,10 @@ const direction = nodeX < coreX ? -1 : 1;
 /* spline control points */
 
 const cp1x = nodeX + (direction * curve);
-const cp1y = nodeY;
+const cp1y = nodeY + (coreY - nodeY) * 0.25;
 
 const cp2x = coreX - (direction * curve);
-const cp2y = coreY;
+const cp2y = coreY - (coreY - nodeY) * 0.25;
 
 /* cubic spline */
 
