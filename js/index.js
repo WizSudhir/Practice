@@ -309,7 +309,7 @@ p.radius = Math.min(p.radius, p.baseRadius + 160)
 }else{
 p.radius += (p.baseRadius - p.radius) * 0.02
 }
-update(){
+update()
 p.draw()
 })
 requestAnimationFrame(animate)
