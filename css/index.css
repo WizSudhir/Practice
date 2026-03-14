@@ -125,7 +125,7 @@ box-shadow:
 0 0 20px rgba(139,92,246,.5);
 }
 .navbar-inner {
-  display:grid;
+ display:flex;
   grid-template-columns:auto 1fr auto;
   justify-content:space-between;
   align-items:center;
@@ -370,7 +370,7 @@ box-shadow:0 30px 80px rgba(0,0,0,0.4);
   width: 400px;
   height: 400px;
   background: radial-gradient(circle, rgba(99,102,241,0.4), transparent);
-  filter: blur(120px);
+  filter: blur(80px);
   z-index: 0;
 }
 .blob-1 {
@@ -389,6 +389,7 @@ box-shadow:0 30px 80px rgba(0,0,0,0.4);
   pointer-events: none;
   z-index: 5;
   opacity:.8;
+  will-change:transform;
 }
 /* --- ADD THIS BELOW HERO BLOB STYLES --- */
 .stats {
@@ -743,6 +744,7 @@ height:100%;
 z-index:2;
 pointer-events:none;
 opacity:.9;
+will-change:transform;
 }
 .cta-content{
 position:relative;
