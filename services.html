@@ -658,13 +658,25 @@ rates and improve long-term revenue performance.
 </div>
 </section>
 <!-- =========================================
-7. STRIPE STYLE CTA SECTION
+STRIPE STYLE CTA (BEZIER RIBBON VERSION)
 ========================================= -->
 
 <section class="cta-stripe">
 
-  <!-- Animated Background -->
-  <canvas id="waveCanvas"></canvas>
+  <!-- Ribbon SVG -->
+  <svg class="ribbon-bg" viewBox="0 0 1600 600" preserveAspectRatio="none">
+
+    <defs>
+      <linearGradient id="ribbonGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#ff7ac8"/>
+        <stop offset="50%" stop-color="#a855f7"/>
+        <stop offset="100%" stop-color="#6366f1"/>
+      </linearGradient>
+    </defs>
+
+    <g id="ribbons"></g>
+
+  </svg>
 
   <div class="container">
 
