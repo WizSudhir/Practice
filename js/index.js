@@ -266,13 +266,13 @@ originX,originY,
 this.x,this.y
 )
 grad.addColorStop(0,"rgba(255,255,255,0)")
-grad.addColorStop(.2,"rgba(147,197,253,0.15)")
-grad.addColorStop(.5,"rgba(99,102,241,0.35)")
-grad.addColorStop(.8,"rgba(139,92,246,0.25)")
+grad.addColorStop(.2,"rgba(147,197,253,0.35)")
+grad.addColorStop(.5,"rgba(99,102,241,0.65)")
+grad.addColorStop(.8,"rgba(139,92,246,0.45)")
 grad.addColorStop(1,"rgba(255,255,255,0)")
 raysCtx.globalAlpha = 0.6
 raysCtx.strokeStyle = grad
-raysCtx.lineWidth = 1.1
+raysCtx.lineWidth = 1.6
 raysCtx.shadowColor = "rgba(99,102,241,0.4)"
 raysCtx.shadowBlur = 8
 raysCtx.stroke()
@@ -309,7 +309,7 @@ p.radius = Math.min(p.radius, p.baseRadius + 160)
 }else{
 p.radius += (p.baseRadius - p.radius) * 0.02
 }
-update()
+p.update()
 p.draw()
 })
 requestAnimationFrame(animate)
