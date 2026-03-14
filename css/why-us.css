@@ -548,6 +548,11 @@ pointer-events:none;
 /* =====================================================
 2. REVENUE PLATFORM
 ===================================================== */
+.pg-ai-platform .section-header h2{
+background:var(--pg-gradient-title);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
 .pg-ai-platform{
 padding:100px 0;
 position:relative;
@@ -682,7 +687,7 @@ pointer-events:none;
 /* ================= MODULES ================= */
 .ai-module{
 position:absolute;
-width:180px;
+width:200px;
 padding:18px;
 font-size:13px;
 min-width:200px;
