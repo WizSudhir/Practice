@@ -1295,7 +1295,8 @@ transform:translateY(-3px);
 .ribbon-line{
 fill:none;
 stroke:url(#ribbonGradient);
-stroke-width:2;
-opacity:.8;
-filter:drop-shadow(0 0 8px rgba(168,85,247,.6));
+stroke-width:1.6;
+opacity:.45;
+mix-blend-mode:screen;
+filter:drop-shadow(0 0 6px rgba(168,85,247,.5));
 }
