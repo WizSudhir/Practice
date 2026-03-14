@@ -754,7 +754,7 @@ transform:translateX(-50%);
 .module-performance{
 top:0;
 right:20%;
-transform:translateX(-50%);
+transform:translateX(50%);
 }
 /* LEFT OF CORE */
 .module-denial{
