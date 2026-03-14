@@ -247,7 +247,15 @@ opacity:.7;
 /* ======================================
 ECOSYSTEM NETWORK — STRIPE STYLE
 ====================================== */
-
+.ecosystem-title{
+font-size:44px;
+text-align:center;
+margin-bottom:24px;
+background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+font-weight:700;
+}
 .ecosystem-network{
 position:relative;
 max-width:900px;
@@ -291,7 +299,28 @@ width:26px;
 height:26px;
 margin-bottom:8px;
 }
+.eco-pulse{
+position:absolute;
+width:8px;
+height:8px;
+border-radius:50%;
 
+background:#93c5fd;
+
+box-shadow:
+0 0 10px #6366f1,
+0 0 20px #6366f1,
+0 0 40px rgba(99,102,241,.8);
+
+pointer-events:none;
+}
+
+.eco-core.data-glow{
+box-shadow:
+0 0 60px rgba(99,102,241,.9),
+0 0 120px rgba(99,102,241,.6),
+0 0 200px rgba(59,130,246,.5);
+}
 /* NODES */
 
 .eco-node{
