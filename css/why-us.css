@@ -744,65 +744,75 @@ font-size:12px;
 opacity:.7;
 }
 /* MODULE POSITIONS */
-/* TOP */
+/* TOP LEFT */
 .module-intelligence{
 top:0;
-left:50%;
+left:20%;
 }
-/* LEFT */
+/* TOP RIGHT */
+.module-performance{
+top:0;
+right:20%;
+}
+/* LEFT OF CORE */
 .module-denial{
 top:50%;
 left:0;
 }
-/* RIGHT */
-.module-performance{
+/* RIGHT OF CORE */
+.module-workflow{
 top:50%;
 right:0;
 }
-/* BOTTOM LEFT */
-.module-workflow{
-bottom:0;
-left:20%;
-}
-/* BOTTOM RIGHT */
+/* BELOW CORE */
 .module-recovery{
 bottom:0;
-right:20%;
+left:50%;
+transform:translateX(-50%);
 }
 /* ================= DATA LINES ================= */
 .data-line{
 position:absolute;
-width:2px;
 background:linear-gradient(#3b82f6,#22c55e);
 opacity:.6;
 }
-/* TOP */
+/* TOP LEFT */
 .line1{
-height:120px;
+width:120px;
+height:2px;
 top:70px;
-left:50%;
-transform:translateX(-50%);
+left:200px;
+transform:rotate(-35deg);
+}
+/* TOP RIGHT */
+.line2{
+width:120px;
+height:2px;
+top:70px;
+right:200px;
+transform:rotate(35deg);
 }
 /* LEFT */
-.line2{
+.line3{
 width:120px;
 height:2px;
 top:50%;
 left:120px;
 }
 /* RIGHT */
-.line3{
+.line4{
 width:120px;
 height:2px;
 top:50%;
 right:120px;
 }
 /* BOTTOM */
-.line4{
+.line5{
 height:120px;
 bottom:70px;
 left:50%;
 transform:translateX(-50%);
+width:2px;
 }
 /* ================= LIVE CLAIM PACKET FLOW ================= */
 .claim-packet{
