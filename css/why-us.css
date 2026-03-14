@@ -880,14 +880,18 @@ line-height:1.7;
 }
 /* FLOW LAYOUT */
 .revenue-flow{
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:30px;
-flex-wrap:wrap;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:40px;
+align-items:stretch;
+position:relative;
 }
 /* STEP */
 .flow-step{
+height:100%;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
 flex:1;
 min-width:220px;
 padding:30px;
@@ -933,12 +937,18 @@ margin-bottom:14px;
 }
 /* STAT */
 .flow-stat{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+text-align:center;
 font-size:13px;
 font-weight:700;
-padding:6px 14px;
+padding:8px 16px;
 border-radius:999px;
 background:rgba(99,102,241,.2);
 border:1px solid rgba(99,102,241,.4);
+max-width:220px;
+margin:0 auto;
 }
 /* LINE */
 .flow-line{
