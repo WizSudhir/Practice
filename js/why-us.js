@@ -458,34 +458,23 @@ setInterval(runClaimDemo,18000)
 runClaimDemo()
 
 /* =========================================
-REVENUE FLOW INTERACTION
+TIMELINE INTERACTION
 ========================================= */
 
-lucide.createIcons()
+const items = document.querySelectorAll(".timeline-item")
 
-const steps = document.querySelectorAll(".flow-step")
+items.forEach(item => {
 
-const observer = new IntersectionObserver((entries)=>{
+item.addEventListener("click", ()=>{
 
-entries.forEach(entry=>{
+items.forEach(i=>i.classList.remove("active"))
 
-if(entry.isIntersecting){
-
-entry.target.style.opacity = 1
-entry.target.style.transform = "translateY(0)"
-
-}
+item.classList.add("active")
 
 })
 
-},{threshold:.3})
-
-steps.forEach(step=>{
-step.style.opacity=0
-step.style.transform="translateY(40px)"
-step.style.transition="all .6s ease"
-observer.observe(step)
 })
+
 
 
 })
