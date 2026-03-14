@@ -216,14 +216,28 @@ const line = document.createElementNS(
 "http://www.w3.org/2000/svg","path"
 );
 
-/* control point for curve */
-const curveOffset = (nodeX < coreX) ? -80 : 80;
+/* curve strength */
+const curve = 80;
 
-const midX = (nodeX + coreX) / 2;
-const midY = (nodeY + coreY) / 2 + curveOffset;
+/* direction detection */
+const direction = nodeX < coreX ? -1 : 1;
 
-/* quadratic curve */
-const pathData = `M ${nodeX} ${nodeY} Q ${midX} ${midY} ${coreX} ${coreY}`;
+/* spline control points */
+
+const cp1x = nodeX + (direction * curve);
+const cp1y = nodeY;
+
+const cp2x = coreX - (direction * curve);
+const cp2y = coreY;
+
+/* cubic spline */
+
+const pathData = `
+M ${nodeX} ${nodeY}
+C ${cp1x} ${cp1y},
+  ${cp2x} ${cp2y},
+  ${coreX} ${coreY}
+`;
 
 line.setAttribute("d", pathData);
 
