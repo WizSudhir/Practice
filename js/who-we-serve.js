@@ -213,13 +213,19 @@ const nodeX = rect.left + rect.width/2 - containerRect.left;
 const nodeY = rect.top + rect.height/2 - containerRect.top;
 
 const line = document.createElementNS(
-"http://www.w3.org/2000/svg","line"
+"http://www.w3.org/2000/svg","path"
 );
 
-line.setAttribute("x1",nodeX);
-line.setAttribute("y1",nodeY);
-line.setAttribute("x2",coreX);
-line.setAttribute("y2",coreY);
+/* control point for curve */
+const curveOffset = (nodeX < coreX) ? -80 : 80;
+
+const midX = (nodeX + coreX) / 2;
+const midY = (nodeY + coreY) / 2 + curveOffset;
+
+/* quadratic curve */
+const pathData = `M ${nodeX} ${nodeY} Q ${midX} ${midY} ${coreX} ${coreY}`;
+
+line.setAttribute("d", pathData);
 
 line.setAttribute("stroke","#6366f1");
 line.setAttribute("stroke-width","1.4");
