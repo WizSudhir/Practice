@@ -776,6 +776,7 @@ z-index:2;
    16. FOOTER
 ================================= */
 .footer-brand p{
+margin-top:10px;
 max-width:280px;
 line-height:1.7;
 color:var(--text-secondary);
@@ -838,9 +839,15 @@ transparent
   gap: 20px;
 align-items:flex-start;
 }
-.footer-contact a {
-  color: var(--text-secondary);
-  text-decoration: none;
+.footer-contact{
+display:flex;
+flex-direction:column;
+gap:14px;
+align-items:flex-start;
+}
+.footer-contact h4{
+margin-bottom:12px;
+font-size:18px;
 }
 .footer-hipaa img {
   height: 50px;
@@ -848,7 +855,7 @@ align-items:flex-start;
 }
 .footer-grid {
   display: grid;
- grid-template-columns: 1.6fr 1fr 1fr 1fr;
+ grid-template-columns: 1.5fr 1fr 1.1fr .8fr;
   gap: 60px;
    align-items:start;
 }
@@ -894,6 +901,23 @@ width:100%;
   color:var(--text-secondary);
   border-top: 1px solid rgba(255,255,255,0.08);
 }
+.footer-social{
+display:flex;
+gap:18px;
+margin-top:18px;
+align-items:center;
+}
+.footer-social img{
+width:32px;
+height:32px;
+object-fit:contain;
+transition:.25s ease;
+filter:none;
+}
+.footer-social img:hover{
+transform:translateY(-2px);
+opacity:.9;
+}
 /* ===============================
    17. SCROLLBAR
 ================================= */
@@ -938,7 +962,7 @@ color:#ffffff;
 }
 .hipaa-sub{
 font-size:13px;
-color:var(--text-secondary);
+color:var(--accent-2);
 letter-spacing:.1em;
 text-transform:uppercase;
 }
