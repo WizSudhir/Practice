@@ -223,7 +223,7 @@ const height = 600
 
 const ribbonsBack = []
 const ribbonsFront = []
-const ribbonCount = 40
+const ribbonCount = 70
 
 function createRibbon(container,i){
 
@@ -233,7 +233,7 @@ const path = document.createElementNS(
 
 path.setAttribute("class","ribbon-line")
 
-path.style.opacity = 0.3 + Math.random()*0.5
+path.style.opacity = 0.15 + (i / ribbonCount) * 0.7
 path.style.strokeWidth = 1 + Math.random()*1.5
 
 container.appendChild(path)
@@ -254,6 +254,7 @@ ribbonsFront.push(createRibbon(svgFront,i))
 }
 
 let time = 0
+let drift = 0
 
 function animateLayer(ribbons){
 
@@ -262,9 +263,13 @@ ribbons.forEach((ribbon,index)=>{
 const offset = ribbon.offset
 const base = height/2
 const amplitude = 50 + index*1.4
-const wind = Math.sin(time*0.15) * 60
+const wind =
+Math.sin(time*0.15) * 60 +
+Math.sin(drift) * 40
 const turbulence = Math.sin(time*0.9 + index)*8
-
+  
+const centerPull =
+Math.sin(time*0.2) * 40
 const y1 =
 base +
 Math.sin(time*0.5 + offset) * amplitude
@@ -278,11 +283,11 @@ base +
 Math.sin(time*0.3 + offset + index*0.1) * amplitude*0.7
 
 const d = `
-M 0 ${y1}
+M -200 ${y1}
 C
-${width*0.35 + wind} ${y2 + turbulence},
-${width*0.65 + wind} ${y3 - turbulence},
-${width} ${y3}
+${width*0.25 + wind} ${y2 + turbulence - centerPull},
+${width*0.75 + wind} ${y3 - turbulence + centerPull},
+${width + 200} ${y1}
 `
 
 ribbon.path.setAttribute("d",d)
@@ -294,7 +299,8 @@ ribbon.path.setAttribute("d",d)
 function animate(){
 
 time += 0.004
-
+drift += 0.001
+  
 animateLayer(ribbonsBack)
 animateLayer(ribbonsFront)
 
