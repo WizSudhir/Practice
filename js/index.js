@@ -224,7 +224,7 @@ const raysCanvas = document.getElementById("cta-rays")
 if(!raysCanvas){
   console.warn("CTA rays canvas not found");
 } else {
-const ctx = raysCanvas.getContext("2d")
+const raysCtx = raysCanvas.getContext("2d")
 let w,h
 let particles=[]
 let originX
@@ -258,13 +258,9 @@ originY -
 Math.sin(this.angle)*this.radius
 }
 draw(){
-ctx.beginPath()
-ctx.moveTo(originX,originY)
-ctx.lineTo(this.x,this.y)
-const grad = ctx.createLinearGradient(
-originX,originY,
-this.x,this.y
-)
+raysCtx.beginPath()
+raysCtx.moveTo(originX,originY)
+raysCtx.lineTo(this.x,this.y)
 const grad = ctx.createLinearGradient(
 originX,originY,
 this.x,this.y
@@ -295,6 +291,7 @@ p.angle = (i / PARTICLE_COUNT) * Math.PI * 2 + (Math.random()*0.05)
 particles.push(p)
 }
 let mouse={x:-1000,y:-1000}
+if(ctaSection){
 ctaSection.addEventListener("mousemove",e=>{
 const rect = raysCanvas.getBoundingClientRect()
 mouse.x = e.clientX - rect.left
