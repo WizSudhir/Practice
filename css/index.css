@@ -775,10 +775,52 @@ z-index:2;
 /* ===============================
    16. FOOTER
 ================================= */
-footer {
-  padding: 100px 0 40px;
+.footer::before{
+content:"";
+position:absolute;
+top:-200px;
+left:50%;
+transform:translateX(-50%);
+width:900px;
+height:900px;
+background:radial-gradient(
+circle,
+rgba(139,92,246,0.12),
+transparent 60%
+);
+filter:blur(120px);
+pointer-events:none;
+animation:footerGlow 14s ease infinite;
+}
+@keyframes footerGlow{
+0%{opacity:.4}
+50%{opacity:.7}
+100%{opacity:.4}
+}
+.footer {
+   position: relative;
+  padding: 110px 0 40px;
   text-align:center;
-  background: var(--bg-tertiary);
+  background:
+    radial-gradient(circle at 20% 30%, rgba(99,102,241,0.18), transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(59,130,246,0.15), transparent 50%),
+    linear-gradient(180deg,#0b1120,#070b16);
+   overflow: hidden;
+}
+.footer::after{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:1px;
+background:linear-gradient(
+90deg,
+transparent,
+rgba(139,92,246,.6),
+rgba(99,102,241,.6),
+transparent
+);
 }
 .footer-inner {
   display: flex;
