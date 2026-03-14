@@ -203,6 +203,9 @@ background:rgba(255,255,255,0.12);
 .mobile-cta{
 display:none;
 }
+.mobile-cta{
+display:none;
+}
 /* MOBILE MENU FIX */
 @media (max-width: 992px) {
 .nav-menu{
