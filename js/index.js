@@ -297,7 +297,7 @@ const rect = raysCanvas.getBoundingClientRect()
 mouse.x = e.clientX - rect.left
 mouse.y = e.clientY - rect.top
 })
-function animate(time){
+function animate(){
 raysCtx.clearRect(0,0,w,h)
 particles.forEach(p=>{
 const dx = p.x - mouse.x
