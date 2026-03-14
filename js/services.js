@@ -215,67 +215,74 @@ revealOnScroll();
 /* =====================================
 Stripe-style flowing animation
 ===================================== */
-const canvas = document.getElementById("waveCanvas");
-const ctx = canvas.getContext("2d");
+const svg = document.getElementById("ribbons")
 
-let width;
-let height;
+const width = 1600
+const height = 600
 
-function resize(){
-width = canvas.width = window.innerWidth;
-height = canvas.height = canvas.offsetHeight;
+const ribbons = []
+const ribbonCount = 45
+
+function createRibbon(i){
+
+const path = document.createElementNS(
+"http://www.w3.org/2000/svg","path"
+)
+
+path.setAttribute("class","ribbon-line")
+
+svg.appendChild(path)
+
+return {
+path:path,
+offset:i * 0.15
 }
-
-window.addEventListener("resize", resize);
-resize();
-
-let time = 0;
-
-function drawWave(yOffset, amplitude, frequency, color){
-
-ctx.beginPath();
-
-for(let x = 0; x < width; x++){
-
-let y =
-height/2 +
-Math.sin((x * frequency) + time + yOffset) * amplitude;
-
-ctx.lineTo(x,y);
 
 }
 
-ctx.strokeStyle = color;
-ctx.lineWidth = 1.5;
-ctx.stroke();
-
+for(let i=0;i<ribbonCount;i++){
+ribbons.push(createRibbon(i))
 }
+
+let time = 0
 
 function animate(){
 
-ctx.clearRect(0,0,width,height);
+time += 0.02
 
-for(let i=0;i<40;i++){
+ribbons.forEach((ribbon,index)=>{
 
-let gradient = ctx.createLinearGradient(0,0,width,0);
+const offset = ribbon.offset
 
-gradient.addColorStop(0,"#ff7ac8");
-gradient.addColorStop(.5,"#a855f7");
-gradient.addColorStop(1,"#6366f1");
+const y1 =
+height/2 +
+Math.sin(time + offset)*80
 
-drawWave(
-i*0.4,
-30 + i*1.5,
-0.01 + i*0.0004,
-gradient
-);
+const y2 =
+height/2 +
+Math.sin(time + offset + 1)*120
+
+const y3 =
+height/2 +
+Math.sin(time + offset + 2)*80
+
+const d = `
+
+M 0 ${y1}
+
+C
+${width*0.25} ${y2},
+${width*0.75} ${y3},
+${width} ${y1}
+
+`
+
+ribbon.path.setAttribute("d",d)
+
+})
+
+requestAnimationFrame(animate)
 
 }
 
-time += 0.02;
-
-requestAnimationFrame(animate);
-
-}
-
-animate();
+animate()
