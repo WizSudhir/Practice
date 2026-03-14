@@ -772,50 +772,6 @@ bottom:0;
 left:50%;
 transform:translateX(-50%);
 }
-/* ================= DATA LINES ================= */
-.data-line{
-position:absolute;
-background:linear-gradient(#3b82f6,#22c55e);
-opacity:.6;
-}
-/* TOP LEFT */
-.line1{
-width:120px;
-height:2px;
-top:70px;
-left:200px;
-transform:rotate(35deg);
-}
-/* TOP RIGHT */
-.line2{
-width:120px;
-height:2px;
-top:70px;
-right:200px;
-transform:rotate(-35deg);
-}
-/* LEFT */
-.line3{
-width:120px;
-height:2px;
-top:50%;
-left:120px;
-}
-/* RIGHT */
-.line4{
-width:120px;
-height:2px;
-top:50%;
-right:120px;
-}
-/* BOTTOM */
-.line5{
-height:120px;
-bottom:70px;
-left:50%;
-transform:translateX(-50%);
-width:2px;
-}
 /* ================= LIVE CLAIM PACKET FLOW ================= */
 .claim-packet{
 position:absolute;
