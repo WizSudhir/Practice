@@ -248,7 +248,7 @@ this.x = originX
 this.y = originY
 this.size = Math.random()*2+1
 }
-update(time){
+update(){
 this.angle += this.speed
 this.x =
 originX +
@@ -309,7 +309,7 @@ p.radius = Math.min(p.radius, p.baseRadius + 160)
 }else{
 p.radius += (p.baseRadius - p.radius) * 0.02
 }
-p.update(time)
+update(){
 p.draw()
 })
 requestAnimationFrame(animate)
