@@ -221,7 +221,7 @@ const width = 1600
 const height = 600
 
 const ribbons = []
-const ribbonCount = 45
+const ribbonCount = 10
 
 function createRibbon(i){
 
