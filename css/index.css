@@ -836,6 +836,7 @@ transparent
 .footer-contact {
   display: flex;
   gap: 20px;
+align-items:flex-start;
 }
 .footer-contact a {
   color: var(--text-secondary);
@@ -854,8 +855,7 @@ transparent
   height: 55px;
   margin-bottom: 20px;
 }
-.footer-links,
-.footer-contact {
+.footer-links {
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -935,23 +935,21 @@ width:100%;
   letter-spacing: 0.5px;
   text-align: center;
 }
-.footer-contact {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.footer-contact-item{
+display:flex;
+align-items:center;
+gap:12px;
+padding:12px 16px;
+border-radius:12px;
+background:rgba(255,255,255,0.03);
+border:1px solid rgba(255,255,255,0.06);
+transition:.3s ease;
+width:fit-content;
+max-width:100%;
 }
-.footer-contact-item {
-   padding:10px 14px;
-   border-radius:12px;
-   background:rgba(255,255,255,0.03);
-   border:1px solid rgba(255,255,255,0.06);
-  transition:.3s ease;
-  display: flex;           /* horizontal row */
-  align-items: center;     /* vertically center icon & text */
-  gap:12px;
-  line-height:1;     
-  color: var(--text-secondary);
-  text-decoration: none;
+.footer-contact-item span{
+white-space:nowrap;
+font-size:14px;
 }
 .footer-contact-item:hover{
 background:rgba(99,102,241,.1);
