@@ -108,162 +108,39 @@ p {
 /* ===============================
    7. NAVIGATION
 ================================= */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  backdrop-filter: blur(15px);
-  background: rgba(15, 23, 42, 0.7);
-  transition: 0.3s ease;
-}
-.navbar.scrolled .nav-cta{
-background:linear-gradient(135deg,#6366f1,#8b5cf6);
-box-shadow:
-0 10px 30px rgba(99,102,241,.6),
-0 0 20px rgba(139,92,246,.5);
-}
-.navbar-inner {
- display:flex;
-  grid-template-columns:auto 1fr auto;
-  justify-content:space-between;
-  align-items:center;
-  padding:20px 0;
-}
-.nav-menu{
-display:flex;
-justify-content:center;
-align-items:center;
-}
-.logo img { height:55px; }
-.nav-menu ul {
-  display:flex;
-   flex-direction:column;
-   gap:30px;
-align-items:flex-start;
-   margin-top:20px;
-  list-style:none;
-  gap:30px;
-}
-.nav-menu li{
-  display:flex;
-  align-items:center;
-}
-.nav-menu a {
-  text-decoration:none;
-  color: var(--text-primary);
-  font-weight:500;
-}
-header.scrolled {
-  box-shadow: var(--shadow-soft);
-}
-.navbar .btn-primary {
-  color: #fff;
-}
-.nav-cta{
-padding:12px 24px;
-font-size:14px;
-font-weight:600;
-box-shadow:
-0 6px 18px rgba(99,102,241,.45),
-0 0 12px rgba(6,182,212,.35);
-transition:all .3s ease;
-}
-.nav-cta:hover{
-transform:translateY(-2px);
-box-shadow:
-0 12px 30px rgba(99,102,241,.65),
-0 0 20px rgba(6,182,212,.45);
-}
-.nav-toggle{
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-width:40px;
-height:40px;
-border-radius:8px;
-background:rgba(255,255,255,0.05);
-border:1px solid rgba(255,255,255,0.1);
-cursor:pointer;
-transition:.3s;
-}
-.nav-toggle span{
-display:block;
-width:22px;
-height:2px;
-background:white;
-margin:4px 0;
-transition:.3s ease;
-}
-.nav-toggle:hover{
-background:rgba(255,255,255,0.12);
-}
-.mobile-cta{
-display:none;
-}
-.mobile-cta{
-display:none;
-}
-/* MOBILE MENU FIX */
-@media (max-width: 992px) {
-.nav-menu{
+.navbar{
 position:fixed;
 top:0;
-right:-100%;
-width:80%;
-height:100vh;
-background:var(--bg-secondary);
-display:flex;
-flex-direction:column;
-align-items:flex-start; /* FIX */
-justify-content:flex-start; /* FIX */
-padding-top:120px;
-padding-left:40px;
-transition:0.4s ease-in-out;
-box-shadow:-10px 0 30px rgba(0,0,0,0.5);
+left:0;
+width:100%;
+z-index:1000;
+background:rgba(15,23,42,0.7);
+backdrop-filter:blur(15px);
+transition:.3s ease;
 }
-.nav-menu.active{
-right:0;
+.navbar-inner{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 0;
+}
+.logo img{
+height:55px;
+}
+.nav-menu{
+display:flex;
+align-items:center;
 }
 .nav-menu ul{
-flex-direction:column;
+display:flex;
+align-items:center;
 gap:30px;
-align-items:flex-start; /* FIX */
+list-style:none;
 }
-.desktop-cta{
-display:none;
-}
-.mobile-cta{
-display:block;
-margin-top:30px;
-}
-.mobile-cta .btn-primary{
-width:200px;
-text-align:center;
-padding:14px 28px;
-border-radius:40px;
-font-size:15px;
-font-weight:700;
-box-shadow:
-0 10px 25px rgba(99,102,241,.5);
-}
-.nav-toggle.active span:nth-child(1){
-transform:translateY(6px) rotate(45deg);
-}
-.nav-toggle.active span:nth-child(2){
-opacity:0;
-}
-.nav-toggle.active span:nth-child(3){
-transform:translateY(-6px) rotate(-45deg);
-}
-}
-/* Hide toggle on desktop */
-@media (min-width: 993px) {
-  .nav-toggle {
-    display: none;
-  }
+.nav-menu a{
+text-decoration:none;
+color:var(--text-primary);
+font-weight:500;
 }
 /* ===============================
    8. BUTTONS
