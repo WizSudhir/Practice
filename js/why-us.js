@@ -330,9 +330,6 @@ const pulse = document.createElement("div")
 pulse.className = "ai-pulse"
 const container = document.querySelector(".ai-system")
 container.appendChild(pulse)
-const fromRect = fromElement.offsetParent === container
-? fromElement
-: fromElement.offsetParent
 const startX = fromElement.offsetLeft + fromElement.offsetWidth/2
 const startY = fromElement.offsetTop + fromElement.offsetHeight/2
 const endX = toElement.offsetLeft + toElement.offsetWidth/2
