@@ -234,56 +234,33 @@ ecoSvg.appendChild(line);
 setTimeout(drawLines,200);
 
 window.addEventListener("resize",drawLines);
+/* LINE FEED ANIMATION */
+function triggerDataFlow(nodeIndex){
 
-/* DATA FLOW ANIMATION */
+const line = ecoSvg.children[nodeIndex];
+if(!line) return;
 
-function createPulse(node){
+line.style.strokeDasharray="3 8";
+line.style.strokeDashoffset="80";
 
-const pulse = document.createElement("div");
-pulse.className="eco-pulse";
-
-ecoContainer.appendChild(pulse);
-
-const nodeRect = node.getBoundingClientRect();
-const coreRect = ecoCore.getBoundingClientRect();
-const containerRect = ecoContainer.getBoundingClientRect();
-
-const startX = nodeRect.left + nodeRect.width/2 - containerRect.left;
-const startY = nodeRect.top + nodeRect.height/2 - containerRect.top;
-
-const endX = coreRect.left + coreRect.width/2 - containerRect.left;
-const endY = coreRect.top + coreRect.height/2 - containerRect.top;
-
-pulse.style.left=startX+"px";
-pulse.style.top=startY+"px";
-
-pulse.animate([
-{transform:"translate(0,0)",opacity:1},
+line.animate(
+[
+{strokeDashoffset:80},
+{strokeDashoffset:0}
+],
 {
-transform:`translate(${endX-startX}px,${endY-startY}px)`,
-opacity:1
-},
-{
-transform:`translate(${endX-startX}px,${endY-startY}px)`,
-opacity:0
-}
-],{
 duration:900,
 easing:"ease-out"
-});
+}
+);
 
 setTimeout(()=>{
 ecoCore.classList.add("data-glow");
-setTimeout(()=>ecoCore.classList.remove("data-glow"),500);
+setTimeout(()=>ecoCore.classList.remove("data-glow"),400);
 },700);
 
-setTimeout(()=>pulse.remove(),1000);
-
 }
-
-/* RANDOM FEED */
-
 setInterval(()=>{
-const node = ecoNodes[Math.floor(Math.random()*ecoNodes.length)];
-createPulse(node);
-},1200);
+const index = Math.floor(Math.random()*ecoNodes.length);
+triggerDataFlow(index);
+},1800);
