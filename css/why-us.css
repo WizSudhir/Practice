@@ -567,10 +567,15 @@ overflow:hidden;
 backface-visibility:hidden;
 }
 .ai-system{
-position:relative;
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+grid-template-rows:1fr 1fr 1fr;
 max-width:900px;
 height:520px;
 margin:80px auto;
+position:relative;
+align-items:center;
+justify-items:center;
 }
 /* CORE AI */
 .ai-helper{
@@ -609,11 +614,12 @@ filter:blur(45px);
 z-index:-1;
 }
 .ai-core{
-position:absolute;
-top:50%;
-left:50%;
-margin-left:-130px;
-margin-top:-130px;
+grid-column:2;
+grid-row:2;
+width:260px;
+padding:30px;
+position:relative;
+margin:0;
 transform:none;
 width:260px;
 padding:30px;
@@ -686,7 +692,7 @@ pointer-events:none;
 }
 /* ================= MODULES ================= */
 .ai-module{
-position:absolute;
+position:relative;
 width:200px;
 padding:18px;
 font-size:13px;
@@ -743,34 +749,26 @@ margin-bottom:8px;
 font-size:12px;
 opacity:.7;
 }
-/* MODULE POSITIONS */
-/* TOP LEFT */
+/* GRID MODULE PLACEMENT */
 .module-intelligence{
-top:0;
-left:20%;
-transform:translateX(-50%);
+grid-column:1;
+grid-row:1;
 }
-/* TOP RIGHT */
 .module-performance{
-top:0;
-right:20%;
-transform:translateX(50%);
+grid-column:3;
+grid-row:1;
 }
-/* LEFT OF CORE */
 .module-denial{
-top:50%;
-left:0;
+grid-column:1;
+grid-row:2;
 }
-/* RIGHT OF CORE */
 .module-workflow{
-top:50%;
-right:0;
+grid-column:3;
+grid-row:2;
 }
-/* BELOW CORE */
 .module-recovery{
-bottom:0;
-left:50%;
-transform:translateX(-50%);
+grid-column:2;
+grid-row:3;
 }
 /* ================= LIVE CLAIM PACKET FLOW ================= */
 .claim-packet{
