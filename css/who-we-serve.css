@@ -245,243 +245,151 @@ opacity:.7;
 }
 
 /* ======================================
-ECOSYSTEM NETWORK
+ECOSYSTEM NETWORK — STRIPE STYLE
 ====================================== */
-.ecosystem-title{
-font-size:44px;
-text-align:center;
-margin-bottom:24px;
-background:linear-gradient(90deg,#ffffff,#c4b5fd,#93c5fd);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-font-weight:700;
-}
-.ecosystem-subtext{
-text-align:center;
-max-width:800px;
-margin:auto;
-margin-bottom:90px;
-color:#d6dcff;
-font-size:18px;
-line-height:1.7;
-opacity:.9;
-}
-.ecosystem-section{
-padding-top:160px;
-padding-bottom:160px;
-}
+
 .ecosystem-network{
 position:relative;
-max-width:700px;
-height:600px;
+max-width:900px;
+height:500px;
 margin:auto;
 }
-/* CORE PLATFORM */
+
+/* GRID */
+
+.eco-grid{
+position:absolute;
+inset:0;
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+grid-template-rows:1fr 1fr 1fr;
+align-items:center;
+justify-items:center;
+}
+
+/* CORE */
 
 .eco-core{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
+grid-column:2;
+grid-row:2;
+
 width:200px;
 height:200px;
-border-radius:50%;
+
+border-radius:22px;
+
 display:flex;
 flex-direction:column;
 align-items:center;
 justify-content:center;
+
 background:
-radial-gradient(circle at 30% 30%, #818cf8, transparent 60%),
 linear-gradient(145deg,#6366f1,#3b82f6);
+
 box-shadow:
-0 0 70px rgba(99,102,241,.7),
-0 0 140px rgba(99,102,241,.35);
-text-align:center;
+0 0 60px rgba(99,102,241,.6),
+0 0 120px rgba(99,102,241,.35);
+
 border:1px solid rgba(255,255,255,.15);
-}
-.eco-core.active{
-box-shadow:
-0 0 80px rgba(99,102,241,.9),
-0 0 160px rgba(99,102,241,.5);
-}
-.eco-core i{
-width:32px;
-height:32px;
-margin-bottom:8px;
+
+text-align:center;
 }
 
 .eco-core h3{
 margin:0;
-font-size:18px;
+font-size:20px;
 }
 
 .eco-core span{
-font-size:12px;
+font-size:13px;
 color:#cbd5f5;
 }
-.eco-core.data-glow{
-box-shadow:
-0 0 40px rgba(255,255,255,0.9),
-0 0 80px rgba(99,102,241,1),
-0 0 140px rgba(99,102,241,0.8),
-0 0 220px rgba(59,130,246,0.6);
-transform:translate(-50%,-50%) scale(1.05);
+
+.eco-core i{
+width:32px;
+height:32px;
+margin-bottom:10px;
 }
-/* ECOSYSTEM NODES */
+
+/* NODES */
 
 .eco-node{
-position:absolute;
-top:50%;
-left:50%;
-width:140px;
-height:140px;
+width:190px;
+height:70px;
+
 display:flex;
-flex-direction:column;
 align-items:center;
-justify-content:center;
-text-align:center;
-padding:16px;
-gap:6px;
-background:rgba(20,25,55,.65);
-border:1px solid rgba(255,255,255,.08);
-border-radius:50%;
-font-size:13px;
-opacity:.35;
-transition:opacity .6s ease, box-shadow .6s ease;
-}
-.eco-node.active{
-opacity:1;
+gap:10px;
+
+padding:14px 18px;
+
+background:
+linear-gradient(145deg,#6366f1,#3b82f6);
+
+border-radius:14px;
+
+font-size:14px;
+
 box-shadow:
-0 0 25px rgba(99,102,241,.8),
-0 0 50px rgba(99,102,241,.4);
+0 10px 30px rgba(0,0,0,.5),
+0 0 30px rgba(99,102,241,.2);
+
+border:1px solid rgba(255,255,255,.12);
+
+transition:.3s;
 }
+
 .eco-node i{
-width:26px;
-height:26px;
-color:#a5b4fc;
-display:block;
-margin:auto;
-margin-bottom:6px;
+width:22px;
+height:22px;
 }
+
 .eco-node:hover{
-border:1px solid rgba(99,102,241,.5);
+transform:translateY(-3px);
 box-shadow:
-0 0 20px rgba(99,102,241,.6);
+0 20px 40px rgba(0,0,0,.6),
+0 0 40px rgba(99,102,241,.5);
 }
-.node1{ transform: rotate(0deg) translateX(220px) rotate(0deg) translate(-50%, -50%); }
-.node2{ transform: rotate(60deg) translateX(220px) rotate(-60deg) translate(-50%, -50%); }
-.node3{ transform: rotate(120deg) translateX(220px) rotate(-120deg) translate(-50%, -50%); }
-.node4{ transform: rotate(180deg) translateX(220px) rotate(-180deg) translate(-50%, -50%); }
-.node5{ transform: rotate(240deg) translateX(220px) rotate(-240deg) translate(-50%, -50%); }
-.node6{ transform: rotate(300deg) translateX(220px) rotate(-300deg) translate(-50%, -50%); }
-.eco-node-ring{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%, -50%);
-width:0;
-height:0;
-}
-.eco-node span,
-.eco-node p,
-.eco-node h4{
-max-width:100px;
-font-size:13px;
-line-height:1.35;
-font-weight:500;
-}
-/* ECOSYSTEM CONNECTION LINES */
+
+/* POSITIONING */
+
+.node-sdk{grid-column:1;grid-row:1}
+.node-events{grid-column:3;grid-row:1}
+
+.node-market{grid-column:1;grid-row:2}
+.node-pipeline{grid-column:3;grid-row:2}
+
+.node-orchestration{grid-column:2;grid-row:3}
+
+/* CONNECTION LINES */
 
 .eco-lines{
 position:absolute;
-top:50%;
-left:50%;
+top:0;
+left:0;
 width:100%;
 height:100%;
 pointer-events:none;
-transform:translate(-50%,-50%);
 }
 
 .eco-lines line{
+
 stroke:#6366f1;
-stroke-width:1.5;
-stroke-dasharray:300;
-stroke-dashoffset:300;
-opacity:.6;
-transition:stroke .5s;
-}
-/* DATA FLOW PARTICLES */
-.eco-flow{
-position:absolute;
-width:10px;
-height:10px;
-border-radius:50%;
-background:linear-gradient(135deg,#60a5fa,#6366f1);
-box-shadow:
-0 0 10px #6366f1,
-0 0 20px #6366f1,
-0 0 30px rgba(99,102,241,.8);
-pointer-events:none;
-}
-.eco-flow.active{
-opacity:1;
-}
-/* positions */
+stroke-width:2;
 
-.flow1{top:120px;left:350px}
-.flow2{top:210px;left:150px}
-.flow3{top:210px;right:150px}
-.flow4{bottom:140px;left:260px}
-.flow5{bottom:140px;right:260px}
-
-/* animation */
-@keyframes ecoMove{
-0%{
-transform:translate(-240px,0);
-opacity:0;
-}
-40%{
-opacity:1;
-}
-100%{
-transform:translate(-100px,0);
-opacity:0;
-}
-
-}
-@keyframes nodeOrbit{
-
-0%{
-transform:rotate(0deg);
-}
-
-100%{
-transform:rotate(360deg);
-}
-
-}
-
-.serve-organizations{
-position:relative;
-}
-
-.serve-organizations::before{
-content:"";
-position:absolute;
-top:-60px;
-left:50%;
-transform:translateX(-50%);
-width:300px;
-height:1px;
-
-background:linear-gradient(
-90deg,
-transparent,
-#6366f1,
-transparent
-);
+stroke-dasharray:6 6;
 
 opacity:.6;
+
+animation:dataFlow 6s linear infinite;
+
+}
+
+@keyframes dataFlow{
+
+0%{stroke-dashoffset:0}
+100%{stroke-dashoffset:60}
+
 }
 /* ======================================
 ORG CARDS
