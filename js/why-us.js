@@ -298,14 +298,15 @@ label3.innerText = "Revenue Growth Potential"
 }
 // HOVER LINE SYSTEM
 const svg = document.querySelector(".ai-network")
-function drawLine(module){
+function drawNetwork(){
 svg.innerHTML = ""
+const container = document.querySelector(".ai-system")
+const cont = container.getBoundingClientRect()
+const core = brain.getBoundingClientRect()
+modules.forEach(module=>{
 const line = document.createElementNS(
 "http://www.w3.org/2000/svg","line")
-svg.appendChild(line)
 const mod = module.getBoundingClientRect()
-const core = brain.getBoundingClientRect()
-const cont = document.querySelector(".ai-system").getBoundingClientRect()
 line.setAttribute("x1",
 mod.left + mod.width/2 - cont.left)
 line.setAttribute("y1",
@@ -314,10 +315,11 @@ line.setAttribute("x2",
 core.left + core.width/2 - cont.left)
 line.setAttribute("y2",
 core.top + core.height/2 - cont.top)
+svg.appendChild(line)
+})
 }
-function removeLine(){
-svg.innerHTML = ""
-}
+window.addEventListener("load", drawNetwork)
+window.addEventListener("resize", drawNetwork)
 // AUTO AI SCANNING
 function startAIScan(){
 scanInterval = setInterval(()=>{
@@ -331,16 +333,19 @@ currentIndex = 0
 },3500)
 }
 // USER INTERACTION
-modules.forEach((module)=>{
+modules.forEach((module, index)=>{
 module.addEventListener("mouseenter",()=>{
 userHovering = true
 activateModule(module)
-drawLine(module)
+// hide the dashed connection
+svg.children[index].style.opacity = 0
 })
 module.addEventListener("mouseleave",()=>{
 userHovering = false
-removeLine()
+// restore dashed connection
+svg.children[index].style.opacity = .4
 })
+
 })
 // start AI scan
 startAIScan()
@@ -442,4 +447,4 @@ setInterval(runClaimDemo,18000)
 runClaimDemo()
 
   
-}) // increase revenue tokenslfklsejlkdsjlkjdslkjslkjsldkjdslkjflksdlkdsfjlksjdlfjlskdjflksjlfksdjlksdjlkdsjlkdsjflkjsdlkfjsdlkdfjlksjdlkflksf
+})
