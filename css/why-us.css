@@ -597,8 +597,12 @@ pointer-events:none;
 z-index:7;
 }
 .ai-core-inner{
-padding:28px;
+width:240px;
 text-align:center;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:12px;
 }
 .ai-core::before{
 content:"";
@@ -651,8 +655,9 @@ transform-origin:center;
 100%{transform:scale(1.2);opacity:0;}
 }
 .ai-core h3{
-font-size:26px;
-margin-bottom:10px;
+font-size:22px;
+line-height:1.2;
+max-width:200px;
 }
 .ai-status{
 font-size:14px;
@@ -670,7 +675,7 @@ animation:statusBlink 2s infinite;
 .ai-metrics{
 display:flex;
 justify-content:space-between;
-gap:20px;
+gap:12px;
 margin-top:10px;
 }
 .metric{
@@ -682,7 +687,8 @@ font-weight:800;
 color:#22c55e;
 }
 .metric p{
-font-size:11px;
+font-size:10px;
+line-height:1.2;
 opacity:.7;
 }
 /* ================= MODULES ================= */
@@ -746,30 +752,27 @@ opacity:.7;
 }
 /* GRID MODULE PLACEMENT */
 .module-intelligence{
-position:absolute;
-top:10%;
+top:40px;
 left:50%;
-transform:translate(-50%,0);
+transform:translateX(-50%);
 }
 .module-performance{
-position:absolute;
-top:35%;
-right:8%;
+top:50%;
+right:40px;
+transform:translateY(-50%);
 }
 .module-workflow{
-position:absolute;
-bottom:10%;
-right:22%;
+bottom:60px;
+right:160px;
 }
 .module-recovery{
-position:absolute;
-bottom:10%;
-left:22%;
+bottom:60px;
+left:160px;
 }
 .module-denial{
-position:absolute;
-top:35%;
-left:8%;
+top:50%;
+left:40px;
+transform:translateY(-50%);
 }
 /* ================= LIVE CLAIM PACKET FLOW ================= */
 .claim-packet{
