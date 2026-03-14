@@ -134,7 +134,7 @@ align-items:center;
 .nav-menu ul{
 display:flex;
 align-items:center;
-gap:30px;
+gap:32px;
 list-style:none;
 }
 .nav-menu a{
@@ -562,15 +562,6 @@ z-index:0;
 50%{background-position:100% 50%}
 100%{background-position:0% 50%}
 }
-/* SVG */
-.ribbon-bg{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-z-index:1;
-}
 /* CTA CONTENT */
 .cta-content{
 position:relative;
@@ -607,14 +598,6 @@ box-shadow:0 10px 30px rgba(0,0,0,.4);
 transform:translateY(-3px);
 }
 /* Ribbon lines */
-.ribbon-line{
-fill:none;
-stroke:url(#ribbonGradient);
-stroke-width:1.8;
-opacity:.5;
-mix-blend-mode:screen;
-filter:drop-shadow(0 0 6px rgba(168,85,247,.5));
-}
 #cta-rays{
 position:absolute;
 top:0;
@@ -854,11 +837,6 @@ color:var(--accent-2);
 .hero-right img{
 width:420px;
 }
-.cta-enterprise .cta-shape{
-width:75%;
-padding-left:80px;
-padding-right:60px;
-}
 }
 /* TABLET (Below 992px) */
 @media (max-width:992px){
@@ -913,27 +891,6 @@ gap:50px;
 }
 .hipaa-badge{
 margin:auto;
-}
-/* ---------- CTA ENTERPRISE ---------- */
-.cta-enterprise{
-height:auto;
-padding:100px 0;
-background:
-linear-gradient(rgba(10,10,30,0.7), rgba(10,10,30,0.7)),
-url("../images/cta-healthcare.jpg") center/cover no-repeat;
-}
-.cta-enterprise .cta-bg{
-display:block;
-opacity:0.25;
-}
-.cta-enterprise .cta-shape{
-position:relative;
-width:100%;
-height:auto;
-border-radius:40px;
-padding:60px 40px;
-justify-content:center;
-text-align:center;
 }
 /* ---------- CONTACT STRIP ---------- */
 .contact-strip-inner{
