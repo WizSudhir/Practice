@@ -448,6 +448,7 @@ right:220px;
 /* CONNECTION LINES */
 
 .eco-lines{
+overflow:visible;
 position:absolute;
 top:0;
 left:0;
@@ -459,7 +460,7 @@ z-index:4;
 
 .eco-lines path{
 stroke:#6366f1;
-stroke-dasharray:2 7;
+stroke-dasharray:3 8;
 stroke-width:1.3;
 stroke-linecap:round;
 filter:drop-shadow(0 0 6px rgba(99,102,241,.3));
