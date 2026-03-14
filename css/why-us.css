@@ -692,6 +692,13 @@ transition:transform .35s, box-shadow .35s;
 pointer-events:auto;
 z-index:10;
 }
+.ai-module-inner{
+transition:transform .35s;
+}
+.ai-module.active .ai-module-inner,
+.ai-module:hover .ai-module-inner{
+transform:scale(1.05);
+}
 .ai-module.active{
 box-shadow:
 0 0 60px rgba(99,102,241,.8),
@@ -700,7 +707,7 @@ box-shadow:
 transform:scale(1.05);
 }
 .ai-module:hover{
-transform:translate(var(--tx),var(--ty)) scale(1.05);
+transform:scale(1.05);
 box-shadow:
 0 25px 80px rgba(0,0,0,.6),
 0 0 40px rgba(99,102,241,.35);
