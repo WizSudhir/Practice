@@ -296,6 +296,28 @@ metric3.innerText = "$250k+"
 label3.innerText = "Revenue Growth Potential"
 }
 }
+// HOVER LINE SYSTEM
+const svg = document.querySelector(".ai-network")
+function drawLine(module){
+svg.innerHTML = ""
+const line = document.createElementNS(
+"http://www.w3.org/2000/svg","line")
+svg.appendChild(line)
+const mod = module.getBoundingClientRect()
+const core = brain.getBoundingClientRect()
+const cont = document.querySelector(".ai-system").getBoundingClientRect()
+line.setAttribute("x1",
+mod.left + mod.width/2 - cont.left)
+line.setAttribute("y1",
+mod.top + mod.height/2 - cont.top)
+line.setAttribute("x2",
+core.left + core.width/2 - cont.left)
+line.setAttribute("y2",
+core.top + core.height/2 - cont.top)
+}
+function removeLine(){
+svg.innerHTML = ""
+}
 // AUTO AI SCANNING
 function startAIScan(){
 scanInterval = setInterval(()=>{
@@ -313,9 +335,11 @@ modules.forEach((module)=>{
 module.addEventListener("mouseenter",()=>{
 userHovering = true
 activateModule(module)
+drawLine(module)
 })
 module.addEventListener("mouseleave",()=>{
 userHovering = false
+removeLine()
 })
 })
 // start AI scan
@@ -416,29 +440,6 @@ claimPacket.innerText="Payment Posted"
 // repeat loop
 setInterval(runClaimDemo,18000)
 runClaimDemo()
-// ========================================
-// DRAW LINES MODULE TO CORE
-// ========================================
-const svg = document.querySelector(".ai-network")
-modules.forEach(module=>{
-const line = document.createElementNS(
-"http://www.w3.org/2000/svg",
-"line"
-)
-svg.appendChild(line)
-const mod = module.getBoundingClientRect()
-const core = brain.getBoundingClientRect()
-const cont = document.querySelector(".ai-system")
-.getBoundingClientRect()
-line.setAttribute("x1",
-mod.left + mod.width/2 - cont.left)
-line.setAttribute("y1",
-mod.top + mod.height/2 - cont.top)
-line.setAttribute("x2",
-core.left + core.width/2 - cont.left)
-line.setAttribute("y2",
-core.top + core.height/2 - cont.top)
-})  
 
   
 }) // increase revenue tokenslfklsejlkdsjlkjdslkjslkjsldkjdslkjflksdlkdsfjlksjdlfjlskdjflksjlfksdjlksdjlkdsjlkdsjflkjsdlkfjsdlkdfjlksjdlkflksf
