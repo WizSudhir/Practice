@@ -237,7 +237,7 @@ originY = h
 }
 window.addEventListener("resize",resize)
 resize()
-const PARTICLE_COUNT = 280
+const PARTICLE_COUNT = 360
 class Particle{
 constructor(){
 this.angle = Math.random()*Math.PI*2
@@ -265,18 +265,28 @@ const grad = ctx.createLinearGradient(
 originX,originY,
 this.x,this.y
 )
-grad.addColorStop(0,"#ffba27")
-grad.addColorStop(.4,"#ff7ac8")
-grad.addColorStop(.8,"#a855f7")
-grad.addColorStop(1,"#6366f1")
-ctx.globalAlpha = 0.8
+const grad = ctx.createLinearGradient(
+originX,originY,
+this.x,this.y
+)
+grad.addColorStop(0,"rgba(255,255,255,0)")
+grad.addColorStop(.2,"rgba(147,197,253,0.15)")
+grad.addColorStop(.5,"rgba(99,102,241,0.35)")
+grad.addColorStop(.8,"rgba(139,92,246,0.25)")
+grad.addColorStop(1,"rgba(255,255,255,0)")
+ctx.globalAlpha = 0.6
 ctx.strokeStyle = grad
-ctx.lineWidth = .7
+ctx.lineWidth = 1.1
+ctx.shadowColor = "rgba(99,102,241,0.4)"
+ctx.shadowBlur = 8
 ctx.stroke()
+ctx.shadowBlur = 0
 ctx.beginPath()
 ctx.arc(this.x,this.y,this.size,0,Math.PI*2)
-ctx.fillStyle="#4f7cff"
+ctx.fillStyle="rgba(255,255,255,0.8)"
+ctx.shadowBlur=6
 ctx.fill()
+ctx.shadowBlur=0
 }
 }
 for(let i=0;i<PARTICLE_COUNT;i++){
