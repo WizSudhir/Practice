@@ -261,13 +261,69 @@ position:relative;
 max-width:900px;
 height:500px;
 margin:auto;
+z-index:2;
+}
+/* STRIPE STYLE DOT GRID */
+
+.ecosystem-section{
+position:relative;
+overflow:hidden;
 }
 
+.ecosystem-section::before{
+
+content:"";
+
+position:absolute;
+inset:0;
+
+background-image:
+radial-gradient(rgba(99,102,241,0.18) 1px, transparent 1px);
+
+background-size:22px 22px;
+
+opacity:.35;
+
+z-index:0;
+
+animation:gridMove 80s linear infinite;
+
+}
+.ecosystem-section::after{
+
+content:"";
+
+position:absolute;
+inset:0;
+
+background:
+radial-gradient(circle at center,
+transparent 40%,
+#050a19 95%
+);
+
+pointer-events:none;
+
+z-index:1;
+
+}
+@keyframes gridMove{
+
+0%{
+transform:translate(0,0);
+}
+
+100%{
+transform:translate(120px,120px);
+}
+
+}
 /* GRID */
 
 .eco-grid{
 position:absolute;
 inset:0;
+z-index:3;
 }
 /* CORE */
 .eco-core{
