@@ -292,7 +292,7 @@ particles.push(p)
 }
 let mouse={x:-1000,y:-1000}
 if(ctaSection){
-ctaSection.addEventListener("mousemove",e=>{
+window.addEventListener("mousemove",e=>{
 const rect = raysCanvas.getBoundingClientRect()
 mouse.x = e.clientX - rect.left
 mouse.y = e.clientY - rect.top
@@ -303,11 +303,11 @@ particles.forEach(p=>{
 const dx = p.x - mouse.x
 const dy = p.y - mouse.y
 const dist = Math.sqrt(dx*dx + dy*dy)
-if(dist < 120){
-p.radius += (160 - dist) * 0.02
-p.radius = Math.min(p.radius, p.baseRadius + 160)
+if(dist < 280){
+p.radius += (280 - dist) * 0.06
+p.radius = Math.min(p.radius, p.baseRadius + 260)
 }else{
-p.radius += (p.baseRadius - p.radius) * 0.02
+p.radius += (p.baseRadius - p.radius) * 0.05
 }
 p.update()
 p.draw()
