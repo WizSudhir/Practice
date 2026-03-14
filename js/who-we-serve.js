@@ -193,16 +193,6 @@ const ecoCore = document.querySelector(".eco-core");
 const ecoNodes = document.querySelectorAll(".eco-node");
 const ecoSvg = document.querySelector(".eco-lines");
 
-/* RANDOM NODE POSITIONING */
-
-ecoNodes.forEach(node=>{
-const x = Math.random()*70 + 5;
-const y = Math.random()*70 + 5;
-
-node.style.left = x + "%";
-node.style.top = y + "%";
-});
-
 /* DRAW LINES */
 
 function drawLines(){
