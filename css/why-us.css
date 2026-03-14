@@ -578,11 +578,6 @@ align-items:center;
 justify-items:center;
 }
 /* CORE AI */
-.ai-helper{
-font-size:12px;
-opacity:.6;
-margin-top:10px;
-}
 .ai-pulse{
 position:absolute;
 width:8px;
