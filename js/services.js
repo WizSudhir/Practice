@@ -221,7 +221,7 @@ const width = 1600
 const height = 600
 
 const ribbons = []
-const ribbonCount = 2
+const ribbonCount = 40
 
 function createRibbon(i){
 
@@ -248,7 +248,7 @@ let time = 0
 
 function animate(){
 
-time += 0.02
+time += 0.006
 
 ribbons.forEach((ribbon,index)=>{
 
