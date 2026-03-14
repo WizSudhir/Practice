@@ -697,7 +697,7 @@ box-shadow:
 0 0 60px rgba(99,102,241,.8),
 0 0 120px rgba(59,130,246,.6),
 0 20px 80px rgba(0,0,0,.7);
-transform:translate(var(--tx),var(--ty)) scale(1.05);
+transform:scale(1.05);
 }
 .ai-module:hover{
 transform:translate(var(--tx),var(--ty)) scale(1.05);
