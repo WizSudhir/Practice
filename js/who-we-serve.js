@@ -209,8 +209,29 @@ ecoNodes.forEach(node=>{
 
 const rect = node.getBoundingClientRect();
 
-const nodeX = rect.left + rect.width/2 - containerRect.left;
-const nodeY = rect.top + rect.height/2 - containerRect.top;
+const nodeCenterX = rect.left + rect.width/2 - containerRect.left;
+const nodeCenterY = rect.top + rect.height/2 - containerRect.top;
+
+/* determine connection side */
+
+let nodeX = nodeCenterX;
+let nodeY = nodeCenterY;
+
+if(nodeCenterX < coreX){
+nodeX = rect.right - containerRect.left;   // right edge
+}
+
+if(nodeCenterX > coreX){
+nodeX = rect.left - containerRect.left;    // left edge
+}
+
+if(nodeCenterY < coreY){
+nodeY = rect.bottom - containerRect.top;   // bottom edge
+}
+
+if(nodeCenterY > coreY){
+nodeY = rect.top - containerRect.top;      // top edge
+}
 
 const line = document.createElementNS(
 "http://www.w3.org/2000/svg","path"
@@ -232,12 +253,30 @@ const cp2y = coreY - (coreY - nodeY) * 0.25;
 
 /* cubic spline */
 
-const pathData = `
+let pathData;
+
+/* horizontal direct connection */
+
+if(Math.abs(nodeY - coreY) < 30){
+
+pathData = `M ${nodeX} ${nodeY} L ${coreEdgeX} ${coreEdgeY}`;
+
+}
+
+/* otherwise use spline */
+
+else{
+
+const midX = (nodeX + coreEdgeX) / 2;
+
+pathData = `
 M ${nodeX} ${nodeY}
-C ${cp1x} ${cp1y},
-  ${cp2x} ${cp2y},
-  ${coreX} ${coreY}
+C ${midX} ${nodeY},
+  ${midX} ${coreEdgeY},
+  ${coreEdgeX} ${coreEdgeY}
 `;
+
+}
 
 line.setAttribute("d", pathData);
 
