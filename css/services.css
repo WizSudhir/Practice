@@ -619,12 +619,6 @@ display:flex;
 gap:40px;
 justify-content:center;
 }
-/* HOVER */
-.rcm-card:hover{
-transform:translateY(-6px);
-border-color:var(--accent-2);
-box-shadow:0 8px 25px rgba(0,0,0,.35);
-}
 /* RESPONSIVE */
 @media (max-width:900px){
 .rcm-layout{
