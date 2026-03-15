@@ -301,6 +301,8 @@ node.addEventListener("mouseenter",()=>{
 const type = node.dataset.type
 const d = data[type]
 
+if(!d) return
+
 sendDataPulse(node)
 
 if(engineStatus && d.status){
@@ -328,6 +330,8 @@ engineStatus.innerText =
 /* DRAW NETWORK LINES */
 
 function drawLines(){
+
+if(!svg || !engine || inputs.length === 0) return
 
 svg.innerHTML=""
 
@@ -385,23 +389,25 @@ svg.appendChild(line)
 
 }
 }
-
+drawLines()
 window.addEventListener("load",drawLines)
 window.addEventListener("resize",drawLines)
 })
 function animateMetric(el,value){
 
-let current = 0
-let target = parseInt(value)
+let numeric = parseInt(
+value.toString().replace(/[^0-9]/g,'')
+)
 
-const step = target / 30
+let current = 0
+let step = numeric / 30
 
 const interval = setInterval(()=>{
 
 current += step
 
-if(current >= target){
-current = target
+if(current >= numeric){
+current = numeric
 clearInterval(interval)
 }
 
@@ -448,4 +454,3 @@ pulse.remove()
 },900)
 
 }
-}) // DOM Close
