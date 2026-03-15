@@ -525,7 +525,11 @@ position:relative;
 border:2px solid var(--rcm-border);
 border-radius:24px;
 padding:40px 28px 28px;
-background:var(--bg-elevated);
+background:
+linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+var(--bg-elevated);
+background-size:40px 40px;
 box-shadow:
 0 0 40px rgba(99,102,241,0.15),
 inset 0 0 20px rgba(99,102,241,0.08);
@@ -579,11 +583,16 @@ align-items:center;
 text-align:center;
 opacity:0;
 transform:translateY(20px);
-transition:all .6s ease;
+transition:all .35s ease;
 }
 .rcm-card.show{
 opacity:1;
 transform:translateY(0);
+}
+.rcm-card:hover{
+transform:translateY(-6px);
+border-color:var(--rcm-blue);
+box-shadow:0 15px 40px rgba(0,0,0,.45);
 }
 /* CENTERED TITLE */
 .rcm-card-title{
@@ -614,6 +623,12 @@ width:36px;
 height:36px;
 stroke:var(--rcm-blue);
 stroke-width:2;
+animation:rcmPulse 6s infinite;
+}
+@keyframes rcmPulse{
+0%{transform:scale(1); opacity:.8}
+50%{transform:scale(1.15); opacity:1}
+100%{transform:scale(1); opacity:.8}
 }
 /* TEXT */
 .rcm-item span{
