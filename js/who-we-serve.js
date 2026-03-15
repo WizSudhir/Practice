@@ -113,7 +113,7 @@ universeContainer.appendChild(renderer.domElement);
 /* create particles */
 const universeParticleCount = window.innerWidth < 768 ? 120 : 220;
 const geometry = new THREE.BufferGeometry();
-const positions = new Float32Array(particleCount*3);
+const positions = new Float32Array(universeParticleCount*3);
 for(let i=0;i<universeParticleCount;i++){
 positions[i*3] = (Math.random()-0.5)*20;
 positions[i*3+1] = (Math.random()-0.5)*12;
