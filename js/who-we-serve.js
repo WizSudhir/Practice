@@ -54,7 +54,8 @@ p.style.boxShadow = `
 container.appendChild(p);
 }
 /* create many */
-for(let i=0;i<25;i++){
+const particleCount = window.innerWidth < 768 ? 14 : 25;
+for(let i=0;i<particleCount;i++){
 createParticle();
 }
 
