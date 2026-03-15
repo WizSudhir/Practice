@@ -714,12 +714,19 @@ inset:0;
 pointer-events:none;
 z-index:1;
 }
-.network-lines line{
+.network-lines path{
 stroke:#6366f1;
-stroke-width:2.5;
-stroke-dasharray:8 6;
+stroke-width:1.6;
+stroke-dasharray:3 8;
 stroke-linecap:round;
-opacity:.9;
+fill:none;
+opacity:.65;
+filter:drop-shadow(0 0 6px rgba(99,102,241,.35));
+animation:dataFlow 6s linear infinite;
+}
+@keyframes dataFlow{
+0%{stroke-dashoffset:0}
+100%{stroke-dashoffset:-60}
 }
 .data-pulse{
 position:absolute;
