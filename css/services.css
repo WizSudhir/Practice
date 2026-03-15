@@ -618,6 +618,8 @@ color:#ffffff;
 display:flex;
 gap:16px;
 justify-content:center;
+align-items:center;
+flex-wrap:wrap;
 }
 /* RESPONSIVE */
 @media (max-width:900px){
