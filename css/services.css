@@ -1185,6 +1185,12 @@ padding:30px;
 .impact-number{
 font-size:36px;
 }
+.rcm-transformation{
+padding-top:40px;
+}
+.rcm-transformation .container{
+padding-top:0;
+}
 .transform-title{
 font-size:30px;
 }
