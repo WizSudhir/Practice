@@ -10,16 +10,14 @@ const heroHeight = hero.offsetHeight;
 const scrollPosition = window.scrollY + window.innerHeight/2;
 let progress = (scrollPosition - heroTop) / heroHeight;
 progress = Math.max(0, Math.min(1, progress));
-const stageIndex = Math.min(
-stages.length - 1,
-Math.floor(progress * stages.length)
-);
+const stageIndex = Math.round(progress * (stages.length - 1));
 stages.forEach((stage, index)=>{
 stage.classList.remove("active");
 if(index === stageIndex){
 stage.classList.add("active");
 // TRIGGER ANIMATIONS WHEN STAGE APPEARS
 if(stage.classList.contains("stage-cta")){
+let revenueAnimating = false;
 startRevenueCounter();
 }else{
 resetRevenue();
@@ -76,6 +74,8 @@ element.classList.remove("animate");
 // ===============================
 
 function startRevenueCounter(){
+if(revenueAnimating) return;
+revenueAnimating = true;
 const counter = document.getElementById("revenueCounter");
 const target = 2450000;
 const duration = 2000;
@@ -86,12 +86,11 @@ const value = Math.floor(progress * target);
 counter.innerText = "$" + value.toLocaleString();
 if(progress < 1){
 requestAnimationFrame(animate);
+}else{
+revenueAnimating = false;
 }
 }
 requestAnimationFrame(animate);
-}
-function resetRevenue(){
-document.getElementById("revenueCounter").innerText="$0";
 }
 
 // ===============================
