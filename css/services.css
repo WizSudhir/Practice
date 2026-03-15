@@ -511,210 +511,217 @@ font-size:16px;
 /* ======================================
 4. RCM PROCESS TIMELINE
 ====================================== */
+/* RCM ARCHITECTURE */
 
-.rcm-system{
-padding:120px 0;
+.rcm-architecture{
 text-align:center;
 }
+
 .rcm-sub{
 max-width:700px;
-margin:auto;
-margin-top:20px;
+margin:20px auto 70px;
 color:var(--text-secondary);
 }
-/* System Grid */
-.rcm-circle{
-max-width:1000px;
-margin:100px auto;
+
+/* SYSTEM GRID */
+
+.rcm-system{
+
 display:grid;
+
 grid-template-columns:repeat(3,1fr);
-grid-template-rows:repeat(4,150px);
+
+gap:60px;
+
 align-items:center;
+
 justify-items:center;
+
 position:relative;
-}
-.rcm-circle::before{
-content:"";
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-width:480px;
-height:480px;
-border-radius:50%;
-border:1px dashed rgba(99,102,241,.25);
-animation:spinSlow 30s linear infinite;
-}
-.rcm-circle::after{
-content:"";
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-width:340px;
-height:340px;
-border-radius:50%;
-border:1px dashed rgba(99,102,241,.35);
-animation:spinSlowReverse 22s linear infinite;
-}
-@keyframes spinSlow{
-0%{transform:translate(-50%,-50%) rotate(0deg)}
-100%{transform:translate(-50%,-50%) rotate(360deg)}
-}
-@keyframes spinSlowReverse{
-0%{transform:translate(-50%,-50%) rotate(360deg)}
-100%{transform:translate(-50%,-50%) rotate(0deg)}
-}
-/* RCM Engine (Center) */
-.rcm-core{
-grid-column:2;
-grid-row:2 / span 2;
-width:200px;
-height:200px;
-border-radius:50%;
-background:linear-gradient(135deg,#6366f1,#3b82f6);
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-color:white;
-box-shadow:
-0 0 60px rgba(99,102,241,0.6),
-0 0 120px rgba(99,102,241,0.35),
-0 0 200px rgba(99,102,241,0.15);
-animation:enginePulse 4s infinite ease-in-out;
-z-index:2;
-}
-.rcm-core h3{
-margin:0;
-font-size:20px;
-}
-.rcm-core span{
-font-size:13px;
-opacity:.9;
-}
-/* Process Nodes */
-.rcm-node{
-width:120px;
-height:120px;
-background:var(--bg-elevated);
-border-radius:18px;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-gap:6px;
-text-align:center;
-border:1px solid rgba(255,255,255,0.08);
-transition:all .3s ease;
-animation:nodeGlow 8s infinite;
-}
-@keyframes nodeGlow{
-0%{box-shadow:none}
-50%{
-box-shadow:
-0 0 12px rgba(99,102,241,.7),
-0 0 20px rgba(99,102,241,.4);
-}
-100%{box-shadow:none}
-}
-.rcm-node svg{
-width:26px;
-height:26px;
-stroke-width:2;
-}
-/* Node Glow Animation */
-.rcm-node.active{
-border:1px solid #6366f1;
-box-shadow:
-0 0 12px rgba(99,102,241,.7),
-0 0 20px rgba(99,102,241,.4);
-}
-/* Grid Positions */
-.rcm-node:nth-child(2){grid-column:1;grid-row:1;} /* Scheduling */
-.rcm-node:nth-child(3){grid-column:2;grid-row:1;} /* Verification */
-.rcm-node:nth-child(4){grid-column:3;grid-row:1;} /* Authorization */
-.rcm-node:nth-child(5){grid-column:3;grid-row:2;} /* Scribing */
-.rcm-node:nth-child(6){grid-column:3;grid-row:3;} /* Coding */
-.rcm-node:nth-child(7){grid-column:3;grid-row:4;} /* Claim Submission */
-.rcm-node:nth-child(8){grid-column:2;grid-row:4;}  /* Payment Posting */
-.rcm-node:nth-child(9){grid-column:1;grid-row:4;} /* AR Followup */
-.rcm-node:nth-child(10){grid-column:1;grid-row:3;} /* Denial */
-.rcm-node:nth-child(11){grid-column:1;grid-row:2;} /* Analytics */
-/* Engine Pulse */
-@keyframes enginePulse{
-0%{
-transform:scale(1);
-box-shadow:
-0 0 50px rgba(99,102,241,0.6),
-0 0 120px rgba(99,102,241,0.3);
-}
-50%{
-transform:scale(1.05);
-box-shadow:
-0 0 90px rgba(99,102,241,0.9),
-0 0 180px rgba(99,102,241,0.45);
-}
-100%{
-transform:scale(1);
-box-shadow:
-0 0 50px rgba(99,102,241,0.6),
-0 0 120px rgba(99,102,241,0.3);
-}
-}
-.engine-icon{
-width:42px;
-height:42px;
-margin-bottom:8px;
-stroke:white;
-stroke-width:2.2;
-animation:engineSpin 6s linear infinite;
-}
-@keyframes engineSpin{
-0%{transform:rotate(0deg)}
-100%{transform:rotate(360deg)}
-}
-.rcm-lines{
-position:absolute;
-width:100%;
-height:100%;
-pointer-events:none;
-}
-.rcm-lines line{
-stroke:rgba(99,102,241,.35);
-stroke-width:1.5;
-stroke-dasharray:6 6;
-animation:dataFlow 4s linear infinite;
-}
-@keyframes dataFlow{
-0%{stroke-dashoffset:0}
-100%{stroke-dashoffset:40}
-}
-.rcm-circle .orbit{
-position:absolute;
-top:50%;
-left:50%;
-width:420px;
-height:420px;
-border-radius:50%;
-animation:orbit 12s linear infinite;
-}
-.orbit::before{
-content:"";
-width:10px;
-height:10px;
-background:#6366f1;
-border-radius:50%;
-position:absolute;
-top:-6px;
-left:calc(50% - 5px);
-box-shadow:0 0 15px #6366f1;
-}
-@keyframes orbit{
-0%{transform:translate(-50%,-50%) rotate(0deg)}
-100%{transform:translate(-50%,-50%) rotate(360deg)}
+
 }
 
+/* MODULES */
+
+.rcm-module{
+
+background:var(--bg-elevated);
+
+padding:28px;
+
+border-radius:18px;
+
+width:240px;
+
+border:1px solid rgba(255,255,255,0.06);
+
+transition:.35s ease;
+
+text-align:left;
+
+}
+
+.rcm-module:hover{
+
+transform:translateY(-6px);
+
+border-color:var(--accent-2);
+
+box-shadow:0 20px 50px rgba(0,0,0,.35);
+
+}
+
+.rcm-module h3{
+
+font-size:18px;
+
+margin-bottom:12px;
+
+}
+
+/* SUB ITEMS */
+
+.rcm-module ul{
+
+list-style:none;
+
+padding:0;
+
+margin:0;
+
+}
+
+.rcm-module li{
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+margin:8px 0;
+
+font-size:14px;
+
+color:var(--text-secondary);
+
+}
+
+.rcm-module svg{
+
+width:18px;
+
+height:18px;
+
+stroke:var(--accent-2);
+
+}
+
+/* CENTER ENGINE */
+
+.rcm-engine{
+
+grid-column:2;
+
+grid-row:1 / span 2;
+
+width:180px;
+
+height:180px;
+
+border-radius:22px;
+
+background:linear-gradient(135deg,var(--accent),var(--accent-2));
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+justify-content:center;
+
+color:#fff;
+
+font-weight:700;
+
+position:relative;
+
+box-shadow:0 30px 80px rgba(0,0,0,.5);
+
+}
+
+.rcm-engine h3{
+
+font-size:22px;
+
+margin-bottom:4px;
+
+}
+
+.rcm-engine span{
+
+font-size:14px;
+
+opacity:.85;
+
+}
+
+/* GLOW */
+
+.engine-glow{
+
+position:absolute;
+
+inset:-40px;
+
+background:radial-gradient(circle,rgba(99,102,241,.4),transparent);
+
+filter:blur(70px);
+
+z-index:-1;
+
+}
+
+/* CONNECTION LINES */
+
+.rcm-system::before{
+
+content:"";
+
+position:absolute;
+
+width:60%;
+
+height:60%;
+
+border:1px dashed rgba(255,255,255,0.08);
+
+border-radius:50%;
+
+}
+
+/* RESPONSIVE */
+
+@media (max-width:900px){
+
+.rcm-system{
+
+grid-template-columns:1fr;
+
+gap:30px;
+
+}
+
+.rcm-engine{
+
+grid-column:auto;
+
+grid-row:auto;
+
+}
+
+}
 /* =========================================================
 5. RCM SERVICES LAYOUT + STICKY NAV
 ========================================================= */
