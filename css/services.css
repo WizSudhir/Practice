@@ -524,7 +524,7 @@ padding:120px 0;
 position:relative;
 border:2px solid var(--rcm-border);
 border-radius:24px;
-padding:90px 40px 40px;
+padding:60px 32px 32px;
 background:var(--bg-elevated);
 box-shadow:
 0 0 40px rgba(99,102,241,0.15),
@@ -550,8 +550,8 @@ letter-spacing:.05em;
 padding:20px;
 display:grid;
 grid-template-columns:repeat(4,1fr);
-grid-template-rows:220px 220px 180px;
-gap:40px;
+grid-template-rows:auto auto auto;
+gap:28px;
 grid-template-areas:
 "claim claim recovery recovery"
 "patient intelligence recovery recovery"
@@ -570,7 +570,7 @@ height:100%;
 position:relative;
 border:1.5px solid var(--rcm-border-soft);
 border-radius:18px;
-padding:35px 25px;
+padding:28px 20px;
 background:transparent;
 display:flex;
 flex-direction:column;
@@ -599,12 +599,12 @@ display:flex;
 flex-direction:column;
 align-items:center;
 gap:10px;
-margin:14px 0;
+margin:10px 0;
 }
 /* LARGE ICON */
 .rcm-item svg{
-width:44px;
-height:44px;
+width:42px;
+height:42px;
 stroke:var(--rcm-blue);
 stroke-width:2;
 }
@@ -616,7 +616,7 @@ color:#ffffff;
 /* ROW */
 .rcm-row{
 display:flex;
-gap:40px;
+gap:24px;
 justify-content:center;
 }
 /* RESPONSIVE */
