@@ -204,8 +204,10 @@ el.classList.add("active");
 }
 });
 }
+if(window.innerWidth > 768){
 window.addEventListener("scroll", revealOnScroll);
 revealOnScroll();
+}
 
 /* =====================================
 Stripe-style flowing animation
@@ -317,4 +319,6 @@ entry.target.classList.remove("show");
 },{
 threshold:0.35
 });
+if(window.innerWidth > 768){
 cards.forEach(card => observer.observe(card));
+}
