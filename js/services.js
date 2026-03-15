@@ -96,36 +96,6 @@ revenueAnimating = false;
 document.getElementById("revenueCounter").innerText = "$0";
 }
 // ===============================
-// Dashboard Metrics Animation
-// ===============================
-
-function animateMetric(id,target,suffix=""){
-let el=document.getElementById(id);
-el.innerText="0";
-let value=0;
-let step=target/40;
-let interval=setInterval(()=>{
-value+=step;
-if(value>=target){
-value=target;
-clearInterval(interval);
-}
-el.innerText=Math.floor(value)+suffix;
-},30);
-}
-function startMetrics(){
-animateMetric("metric1",98,"%");
-animateMetric("metric2",28);
-animateMetric("metric3",30,"%");
-animateMetric("metric4",35,"%");
-}
-function resetMetrics(){
-document.getElementById("metric1").innerText="0";
-document.getElementById("metric2").innerText="0";
-document.getElementById("metric3").innerText="0";
-document.getElementById("metric4").innerText="0";
-}
-// ===============================
 // Lucide Icons
 // ===============================
 lucide.createIcons();
@@ -137,24 +107,6 @@ lucide.createIcons();
 window.addEventListener("load", () => {
 updateHeroStages();
 });
-/* ===============================
-RCM Circular SYSTEM ANIMATION
-=============================== */
-
-const rcmNodes = document.querySelectorAll(".rcm-node");
-if(rcmNodes.length){
-let rcmIndex = 0;
-function animateRCM(){
-rcmNodes.forEach(node => node.classList.remove("active"));
-rcmNodes[rcmIndex].classList.add("active");
-rcmIndex++;
-if(rcmIndex >= rcmNodes.length){
-rcmIndex = 0;
-}
-}
-setInterval(animateRCM,1200);
-}
-
 /* =====================================
 STICKY NAV ACTIVE HIGHLIGHT
 ===================================== */
