@@ -234,7 +234,8 @@ const label3 = document.getElementById("label3")
 
 const engine = document.querySelector(".engine-circle")
 const svg = document.querySelector(".network-lines")
-
+/* ENGINE STATUS */
+const engineStatus = document.getElementById("engineStatus")  
 /* DATA */
 
 const data = {
@@ -245,7 +246,8 @@ l1:"Claims Analyzed",
 m2:14,
 l2:"Denial Risks",
 m3:"$12,500",
-l3:"Revenue Opportunity"
+l3:"Revenue Opportunity",
+status:"Analyzing claim submissions..."
 },
 
 eligibility:{
@@ -293,11 +295,16 @@ inputs.forEach(node=>{
 
 node.addEventListener("mouseenter",()=>{
 
+sendDataPulse(node)
+
+engineStatus.innerText = d.status
+
+
 const type = node.dataset.type
 const d = data[type]
 
-metric1.innerText = d.m1
-metric2.innerText = d.m2
+animateMetric(metric1,d.m1)
+animateMetric(metric2,d.m2)
 metric3.innerText = d.m3
 
 label1.innerText = d.l1
@@ -347,7 +354,81 @@ svg.appendChild(line)
 
 window.addEventListener("load",drawLines)
 window.addEventListener("resize",drawLines)
+const dashboard = document.querySelector(".dashboard-card")
+const dashRect = dashboard.getBoundingClientRect()
+
+const line = document.createElementNS(
+"http://www.w3.org/2000/svg","line")
+
+line.setAttribute(
+"x1", engineRect.right - cont.left)
+
+line.setAttribute(
+"y1", engineRect.top + engineRect.height/2 - cont.top)
+
+line.setAttribute(
+"x2", dashRect.left - cont.left)
+
+line.setAttribute(
+"y2", dashRect.top + dashRect.height/2 - cont.top)
+
+svg.appendChild(line)
+})
+function animateMetric(el,value){
+
+let current = 0
+let target = parseInt(value)
+
+const step = target / 30
+
+const interval = setInterval(()=>{
+
+current += step
+
+if(current >= target){
+current = target
+clearInterval(interval)
+}
+
+el.innerText = Math.floor(current)
+
+},20)
+
+}
+ // ======================================
+// PLATFORM DATA FLOW PULSE
+// ====================================== 
+function sendDataPulse(fromElement){
+
+const pulse = document.createElement("div")
+pulse.className = "data-pulse"
+
+const container = document.querySelector(".architecture-grid")
+container.appendChild(pulse)
+
+const from = fromElement.getBoundingClientRect()
+const to = engine.getBoundingClientRect()
+const cont = container.getBoundingClientRect()
+
+const startX = from.right - cont.left
+const startY = from.top + from.height/2 - cont.top
+
+const endX = to.left - cont.left + to.width/2
+const endY = to.top - cont.top + to.height/2
+
+pulse.style.left = startX + "px"
+pulse.style.top = startY + "px"
+
+requestAnimationFrame(()=>{
+
+pulse.style.transform =
+`translate(${endX-startX}px,${endY-startY}px)`
 
 })
-  
+
+setTimeout(()=>{
+pulse.remove()
+},900)
+
+}
 }) // DOM Close
