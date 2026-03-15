@@ -313,9 +313,9 @@ if(metric1) animateMetric(metric1,d.m1)
 if(metric2) animateMetric(metric2,d.m2)
 if(metric3) metric3.innerText = d.m3
 
-label1.innerText = d.l1
-label2.innerText = d.l2
-label3.innerText = d.l3
+if(label1) label1.innerText = d.l1
+if(label2) label2.innerText = d.l2
+if(label3) label3.innerText = d.l3
 
 })
 node.addEventListener("mouseleave",()=>{
@@ -375,11 +375,11 @@ svg.appendChild(path)
 /* ENGINE → DASHBOARD CONNECTION */
 /* ENGINE → DASHBOARD CONNECTION */
 
-const dashboard = document.querySelector(".dashboard-card")
+const dashboardCard = document.querySelector(".dashboard-card")
 
-if(dashboard){
+if(dashboardCard){
 
-const dashRect = dashboard.getBoundingClientRect()
+const dashRect = dashboardCard.getBoundingClientRect()
 
 const startX = engineRect.right - cont.left
 const startY = engineRect.top + engineRect.height/2 - cont.top
@@ -405,7 +405,7 @@ L ${endX} ${endY}
 path.setAttribute("d",pathData)
 
 svg.appendChild(path)
-
+}
 }
 window.addEventListener("load", drawLines)
 window.addEventListener("resize", drawLines)
