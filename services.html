@@ -132,7 +132,9 @@ Request Free Revenue Audit
 3. REVENUE LEAKAGE CALCULATOR
 ========================================= -->
 <div class="calc-layout">
-  <section class="rcm-calculator">
+
+<!-- LEFT SIDE -->
+<section class="rcm-calculator">
 
 <h2 class="section-title">Revenue Leakage Calculator</h2>
 
@@ -142,17 +144,17 @@ Request Free Revenue Audit
 
 <div class="calc-field">
 <label for="claims">Monthly Claims</label>
-<input id="claims" type="number">
+<input id="claims" type="number" placeholder="Ex: 1200">
 </div>
 
 <div class="calc-field">
 <label for="reimbursement">Average Reimbursement ($)</label>
-<input id="reimbursement" type="number">
+<input id="reimbursement" type="number" placeholder="Ex: 120">
 </div>
 
 <div class="calc-field">
 <label for="denial">Denial Rate (%)</label>
-<input id="denial" type="number">
+<input id="denial" type="number" placeholder="Ex: 12">
 </div>
 
 <button onclick="calculateRevenue()" class="btn-primary">
@@ -161,22 +163,44 @@ Calculate Revenue Loss
 
 </div>
 
-<div class="calc-result">
+</section>
 
-Estimated Annual Revenue Loss
 
-<h3 id="roiResult">$0</h3>
+<!-- RIGHT SIDE RESULT PANEL -->
+<div class="calc-impact">
 
-<a href="contact.html" class="btn-primary">
-Get Free Revenue Audit
+<div class="impact-box">
+
+<h3 class="impact-title">Estimated Revenue Impact</h3>
+
+<div class="impact-number" id="roiResult">$0</div>
+
+<div class="impact-breakdown">
+
+<div class="impact-row">
+<span>Monthly Impact</span>
+<strong id="monthlyLoss">$0</strong>
+</div>
+
+<div class="impact-row">
+<span>Daily Impact</span>
+<strong id="dailyLoss">$0</strong>
+</div>
+
+</div>
+
+<p class="impact-message">
+Enter your practice metrics to estimate potential revenue leakage.
+</p>
+
+<a href="contact.html" class="btn-primary impact-cta">
+Recover This Revenue
 </a>
 
 </div>
-</section>
 
-<div class="calc-right">
-<img src="images/revenue-leakage.png">
 </div>
+
 </div>
   
 <!-- =========================================
