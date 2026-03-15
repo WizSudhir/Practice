@@ -16,6 +16,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 <script defer src="js/services.js"></script>
+<script defer src="js/index.js"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
@@ -26,34 +27,35 @@
 <!-- =========================================
 1. NAVBAR
 ========================================= -->
-
 <header class="navbar">
-<div class="container navbar-inner">
+  <div class="container navbar-inner">
 
-<div class="logo">
-<a href="index.html">
-<img src="images/logo.png">
-</a>
-</div>
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/logo.png" alt="PracticeGrid Solutions Logo">
+      </a>
+    </div>
 
-<nav class="nav-menu">
-<ul>
-<li><a href="index.html">Home</a></li>
-<li><a href="services.html">Services</a></li>
-<li><a href="who-we-serve.html">Who We Serve</a></li>
-<li><a href="why-us.html">Why Us</a></li>
-<li><a href="blog/">Blog</a></li>
-<li><a href="contact.html" class="btn-primary">Get Started</a></li>
-</ul>
-</nav>
+      <nav class="nav-menu">
+        <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="who-we-serve.html">Who We Serve</a></li>
+        <li><a href="why-us.html">Why Us</a></li>
+        <li><a href="blog/">Blog</a></li>
+        <li><a href="contact.html" class="btn-primary">Connect With Us</a></li>
+        </ul>
+      </nav>
 
-<button class="nav-toggle">
-Menu
-</button>
+    <!-- MOBILE TOGGLE -->
+          <button class="nav-toggle" aria-label="Toggle Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+          </button>
 
-</div>
+  </div>
 </header>
-
 <!-- =========================================
 2. HERO
 ========================================= -->
@@ -734,25 +736,20 @@ rates and improve long-term revenue performance.
 </div>
 </section>
 <!-- =========================================
-STRIPE STYLE CTA (BEZIER RIBBON VERSION)
+7. CTA
 ========================================= -->
 <section class="cta-stripe">
-
 <canvas id="cta-rays"></canvas>
-
 <div class="container">
 <div class="cta-content">
-
 <h2>
 Take the First Step Towards<br>
 Smarter Healthcare Operations
 </h2>
-
 <p>
 Our team analyzes denial rates, payer performance, AR aging, and
 revenue leakage to identify opportunities for improvement.
 </p>
-
 <a href="contact.html" class="btn-primary">
 Schedule Consultation
 </a>
@@ -760,16 +757,26 @@ Schedule Consultation
 </div>
 </div>
 
-</section>
+</section> 
+
 <!-- =========================================
 8. FOOTER
 ========================================= -->
+
 <footer class="footer">
   <div class="container footer-grid">
 
     <div class="footer-brand">
       <img src="images/logo.png" alt="PracticeGrid Solutions">
       <p>Elite Revenue Cycle Management for Modern Healthcare Practices.</p>
+      <div class="footer-social">
+        <a href="https://wa.me/17276741458" target="_blank">
+          <img src="images/whatsapplogo.svg" alt="WhatsApp">
+        </a>
+        <a href="https://www.linkedin.com/company/practicegridsolutions" target="_blank">
+          <img src="images/linkedinlogo.svg" alt="LinkedIn">
+        </a>
+      </div>
     </div>
 
     <div class="footer-links">
@@ -824,7 +831,10 @@ Schedule Consultation
 
     <div class="footer-hipaa">
       <img src="images/hipaa-official.png" alt="HIPAA Compliant">
-      <span class="hipaa-text">HIPAA Compliant</span>
+      <div class="hipaa-label">
+      <span class="hipaa-title">HIPAA</span>
+      <span class="hipaa-sub">Compliant</span>
+      </div>
     </div>
 
   </div>
@@ -834,7 +844,18 @@ Schedule Consultation
   </div>
 </footer>
 
+
+<!-- SCHEMA -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalBusiness",
+  "name": "PracticeGrid Solutions",
+  "telephone": "+1-727-674-1458",
+  "email": "contact@practicegridsolutions.com",
+  "areaServed": "United States"
+}
+</script>
+
 </body>
 </html>
-
-
