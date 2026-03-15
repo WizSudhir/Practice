@@ -24,13 +24,19 @@ background:
 radial-gradient(circle at 20% 30%, rgba(99,102,241,.25), transparent 40%),
 radial-gradient(circle at 80% 70%, rgba(59,130,246,.25), transparent 40%),
 #050a19;
-overflow:hidden;
+overflow:visible;
 }
 .hero-grid{
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:80px;
 align-items:center;
+}
+.hero-visual{
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:420px;
 }
 .hero-content h1{
 font-size:56px;
@@ -245,7 +251,7 @@ opacity:.7;
 .ecosystem-network{
 position:relative;
 max-width:900px;
-height:560px;
+height:640px;
 margin:auto;
 z-index:2;
 }
@@ -333,8 +339,8 @@ box-shadow:
 /* NODES */
 .eco-node{
 position:absolute;
-width:180px;
-height:60px;
+width:160px;
+height:56px;
 display:flex;
 align-items:center;
 gap:10px;
@@ -712,7 +718,6 @@ transition:all .6s ease;
 RESPONSIVE SYSTEM
 ========================================================= */
 
-
 /* LARGE LAPTOPS ≤ 1400px */
 @media (max-width:1400px){
 .hero-content h1{
@@ -802,7 +807,7 @@ height:320px;
 }
 /* ECOSYSTEM */
 .ecosystem-network{
-height:480px;
+height:600px;
 }
 /* ORG GRID */
 .org-grid{
@@ -858,12 +863,12 @@ width:280px;
 height:280px;
 }
 .orbit span{
-font-size:11px;
-padding:6px 10px;
+font-size:10px;
+padding:5px 8px;
 }
 /* ECOSYSTEM */
 .ecosystem-network{
-height:420px;
+height:540px;
 }
 /* shrink nodes */
 .eco-node{
@@ -876,6 +881,12 @@ padding:10px 12px;
 width:18px;
 height:18px;
 }
+.node-sdk{top:60px;left:20px;}
+.node-market{top:200px;left:10px;}
+.node-orchestration{top:340px;left:30px;}
+.node-events{top:60px;right:20px;}
+.node-pipeline{top:200px;right:10px;}
+.node-management{top:340px;right:30px;}
 /* ORG GRID */
 .org-grid{
 grid-template-columns:1fr;
