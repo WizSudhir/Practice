@@ -316,14 +316,15 @@ label2.innerText = d.l2
 label3.innerText = d.l3
 
 })
-
-})
-}
 node.addEventListener("mouseleave",()=>{
 if(engineStatus){
-engineStatus.innerText = "Awaiting healthcare data input..."
+engineStatus.innerText =
+"Awaiting healthcare data input..."
 }
 })
+  
+})
+}
 /* DRAW NETWORK LINES */
 
 function drawLines(){
