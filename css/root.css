@@ -36,7 +36,14 @@
   /* Typography */
   --font-main: 'Inter', sans-serif;
 }
-
+.section-title{
+text-align:center;
+font-size:44px;
+margin-bottom:20px;
+background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
 /* ===============================
    2. LIGHT MODE
 ================================= */
