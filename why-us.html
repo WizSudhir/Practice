@@ -208,7 +208,8 @@ PracticeGrid Revenue Recovery Engine Activated
 <!-- =========================================
 PRACTICEGRID PLATFORM ARCHITECTURE
 ========================================= -->
-<section class="pg-ai-platform">
+
+<section class="pg-platform-architecture">
 
 <div class="container">
 
@@ -219,96 +220,104 @@ Inside the PracticeGrid Revenue Intelligence Platform
 </h2>
 
 <p>
-The PracticeGrid revenue system continuously monitors claim workflows,
-detects denial risks, and activates automated recovery operations across
-the entire revenue cycle.
+PracticeGrid connects with your practice systems, analyzes billing workflows,
+detects denial risks, and activates automated recovery processes that improve
+collections and financial performance.
 </p>
 
 </div>
 
 
-<div class="ai-system">
+<div class="platform-diagram">
 
+<!-- ===============================
+DATA SOURCES
+================================= -->
 
-<!-- ================= CORE AI BRAIN ================= -->
+<div class="platform-layer sources">
 
-<div class="ai-core">
-  
-<div class="ai-core-inner">
-<h3>PracticeGrid Revenue Brain</h3>
-  
-<p class="ai-status" id="aiStatus">
-Scanning claim workflows...
-</p>
+<div class="source-node">EHR / EMR</div>
+<div class="source-node">Claims Data</div>
+<div class="source-node">Payer Rules</div>
+<div class="source-node">Scheduling</div>
+<div class="source-node">Clinical Documentation</div>
 
-<div class="ai-metrics">
-
-<div class="metric">
-<span id="metric1">2,438</span>
-<p id="metricLabel1">Claims Analyzed</p>
-</div>
-
-<div class="metric">
-<span id="metric2">28</span>
-<p id="metricLabel2">Denial Risks Detected</p>
-</div>
-
-<div class="metric">
-<span id="metric3">$8,450</span>
-<p id="metricLabel3">Revenue Recovered</p>
-</div>
-  
-</div>
-  
-</div>
 </div>
 
 
-<!-- ================= MODULES ================= -->
-  
-<div class="ai-module module-intelligence" data-node="intelligence">
-<div class="ai-module-inner">
+<div class="flow-arrow arrow-down"></div>
+
+
+<!-- ===============================
+CORE PLATFORM
+================================= -->
+
+<div class="platform-core">
+
+<div class="core-inner">
+
+<h3>PracticeGrid Revenue Intelligence Engine</h3>
+
+<div class="core-modules">
+
+<div class="core-module">
 <h4>Revenue Intelligence</h4>
-<p>Analyzing payer behavior...</p>
-</div>
+<p>Detects payer behavior patterns</p>
 </div>
 
-
-<div class="ai-module module-denial" data-node="denial">
-<div class="ai-module-inner">
+<div class="core-module">
 <h4>Denial Prevention</h4>
-<p>Checking coding accuracy...</p>
-</div>
+<p>Validates claims before submission</p>
 </div>
 
-
-<div class="ai-module module-workflow" data-node="workflow">
-<div class="ai-module-inner">
+<div class="core-module">
 <h4>Workflow Optimization</h4>
-<p>Routing claims to recovery queue...</p>
+<p>Routes claims to recovery queues</p>
 </div>
+
+<div class="core-module">
+<h4>AR Recovery</h4>
+<p>Appeals denied claims efficiently</p>
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 
-<div class="ai-module module-recovery" data-node="recovery">
-<div class="ai-module-inner">
-<h4>Revenue Recovery</h4>
-<p>Resubmitting denied claims...</p>
-</div>
-</div>
+<div class="flow-arrow arrow-down"></div>
 
 
-<div class="ai-module module-performance" data-node="performance">
-<div class="ai-module-inner">
-<h4>Financial Performance</h4>
-<p>Updating revenue dashboards...</p>
-</div>
+<!-- ===============================
+OUTCOMES
+================================= -->
+
+<div class="platform-layer outcomes">
+
+<div class="outcome-node">
+<span class="outcome-value">98%</span>
+<p>Clean Claim Rate</p>
 </div>
 
-<svg class="ai-network"></svg>
-<!-- ================= DATA TOKENS ================= -->
-<div class="claim-packet" id="claimPacket">
-Claim #A4821
+<div class="outcome-node">
+<span class="outcome-value">35%</span>
+<p>Denial Reduction</p>
+</div>
+
+<div class="outcome-node">
+<span class="outcome-value">30%</span>
+<p>Faster Collections</p>
+</div>
+
+<div class="outcome-node">
+<span class="outcome-value">$250k+</span>
+<p>Revenue Recovered</p>
+</div>
+
+</div>
+
 </div>
 
 </div>
