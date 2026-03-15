@@ -582,12 +582,12 @@ justify-content:center;
 align-items:center;
 text-align:center;
 opacity:0;
-transform:translateY(20px);
+transform:translateY(30px) scale(.96);
 transition:opacity 1s ease,transform 1s ease;
 }
 .rcm-card.show{
 opacity:1;
-transform:translateY(0);
+transform:translateY(0) scale(1);
 }
 .claim.show{ transition-delay:.2s; }
 .patient.show{ transition-delay:.4s; }
