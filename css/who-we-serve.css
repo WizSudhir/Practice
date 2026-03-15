@@ -254,6 +254,7 @@ max-width:900px;
 height:640px;
 margin:auto;
 z-index:2;
+overflow:visible;
 }
 /* STRIPE STYLE DOT GRID */
 .ecosystem-section{
