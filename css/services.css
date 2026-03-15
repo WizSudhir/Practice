@@ -372,14 +372,6 @@ display:inline-block;
 3. THE “BEFORRE V/S AFTER RCM TRANSFORMATION
 ========================================================= */
 
-.transform-title{
-font-size:44px;
-text-align:center;
-margin-bottom:20px;
-background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
 .transform-grid{
 display:grid;
 grid-template-columns:1fr 120px 1fr;
@@ -534,10 +526,10 @@ width:48px;
 height:48px;
 stroke:#6366f1;
 }
-}
 .rcm-transformation .section-title{
 text-align:center;
 margin-bottom:20px;
+width:100%;
 }
 .transform-tagline{
 text-align:center;
@@ -1007,9 +999,6 @@ font-size:40px;
 .calc-layout{
 padding:35px;
 }
-.transform-title{
-font-size:36px;
-}
 .services-layout{
 grid-template-columns:1fr;
 gap:40px;
@@ -1112,9 +1101,6 @@ padding-top:40px;
 .rcm-transformation .container{
 padding-top:0;
 }
-.transform-title{
-font-size:30px;
-}
 .transform-sub{
 font-size:15px;
 }
@@ -1202,9 +1188,6 @@ font-size:26px;
 }
 .impact-number{
 font-size:30px;
-}
-.transform-title{
-font-size:26px;
 }
 .service-card h3{
 font-size:16px;
