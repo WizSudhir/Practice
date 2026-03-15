@@ -567,6 +567,8 @@ height:650px;
 display:flex;
 flex-direction:column;
 gap:20px;
+z-index:3;
+position:relative;
 }
 .input-node{
 width:180px;
@@ -594,6 +596,7 @@ position:relative;
 display:flex;
 justify-content:center;
 align-items:center;
+z-index:2;
 }
 .arch-engine::before{
 content:"";
@@ -709,12 +712,14 @@ color:#22c55e;
 position:absolute;
 inset:0;
 pointer-events:none;
+z-index:1;
 }
 .network-lines line{
 stroke:#6366f1;
-stroke-width:2;
+stroke-width:2.5;
 stroke-dasharray:8 6;
-opacity:.8;
+stroke-linecap:round;
+opacity:.9;
 }
 .data-pulse{
 position:absolute;
