@@ -309,9 +309,9 @@ if(engineStatus && d.status){
 engineStatus.innerText = d.status
 }
 
-animateMetric(metric1,d.m1)
-animateMetric(metric2,d.m2)
-metric3.innerText = d.m3
+if(metric1) animateMetric(metric1,d.m1)
+if(metric2) animateMetric(metric2,d.m2)
+if(metric3) metric3.innerText = d.m3
 
 label1.innerText = d.l1
 label2.innerText = d.l2
@@ -373,12 +373,7 @@ svg.appendChild(path)
 
 })
 /* ENGINE → DASHBOARD CONNECTION */
-
-const dashboard = document.querySelector(".dashboard-card")
-
-if(dashboard){
-
-const dashRect = dashboard.getBoundingClientRect()
+/* ENGINE → DASHBOARD CONNECTION */
 
 const dashboard = document.querySelector(".dashboard-card")
 
@@ -412,11 +407,9 @@ path.setAttribute("d",pathData)
 svg.appendChild(path)
 
 }
-}
-drawLines()
-window.addEventListener("load",drawLines)
-window.addEventListener("resize",drawLines)
-})
+window.addEventListener("load", drawLines)
+window.addEventListener("resize", drawLines)
+setTimeout(drawLines, 200)
 function animateMetric(el,value){
 
 let numeric = parseInt(
