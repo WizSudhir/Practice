@@ -643,31 +643,38 @@ align-items:center;
 .arch-engine::before{
 content:"";
 position:absolute;
-width:340px;
-height:340px;
+width:360px;
+height:360px;
 border-radius:50%;
-border:1px dashed rgba(99,102,241,.35);
-animation:ringSpin 40s linear infinite;
+
+background:
+radial-gradient(
+circle,
+rgba(99,102,241,.25) 0%,
+rgba(99,102,241,.12) 30%,
+transparent 70%
+);
+
+filter:blur(40px);
+pointer-events:none;
 }
 
 .arch-engine::after{
 content:"";
 position:absolute;
-width:420px;
-height:420px;
+width:480px;
+height:480px;
 border-radius:50%;
-border:1px dashed rgba(59,130,246,.2);
-animation:ringSpinReverse 60s linear infinite;
-}
 
-@keyframes ringSpin{
-0%{transform:rotate(0)}
-100%{transform:rotate(360deg)}
-}
+background:
+radial-gradient(
+circle,
+rgba(59,130,246,.18) 0%,
+transparent 70%
+);
 
-@keyframes ringSpinReverse{
-0%{transform:rotate(360deg)}
-100%{transform:rotate(0)}
+filter:blur(80px);
+pointer-events:none;
 }
 
 .engine-circle{
