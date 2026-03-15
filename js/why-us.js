@@ -388,23 +388,6 @@ svg.appendChild(line)
 
 window.addEventListener("load",drawLines)
 window.addEventListener("resize",drawLines)
-
-const line = document.createElementNS(
-"http://www.w3.org/2000/svg","line")
-
-line.setAttribute(
-"x1", engineRect.right - cont.left)
-
-line.setAttribute(
-"y1", engineRect.top + engineRect.height/2 - cont.top)
-
-line.setAttribute(
-"x2", dashRect.left - cont.left)
-
-line.setAttribute(
-"y2", dashRect.top + dashRect.height/2 - cont.top)
-
-svg.appendChild(line)
 })
 function animateMetric(el,value){
 
