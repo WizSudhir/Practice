@@ -66,6 +66,8 @@ element.classList.add("animate");
 setTimeout(()=>{
 element.classList.remove("animate");
 },400);
+}, duration/40);
+}
 // ===============================
 // Hero Revenue Counter
 // ===============================
