@@ -220,33 +220,133 @@ dashboard.style.transform =
 // ======================================
 // PLATFORM DATA FLOW ANIMATION
 // ======================================
-
 document.addEventListener("DOMContentLoaded",()=>{
 
-const sources = document.querySelectorAll(".source-node")
-const outcomes = document.querySelectorAll(".outcome-node")
+const inputs = document.querySelectorAll(".input-node")
 
-let index = 0
+const metric1 = document.getElementById("metric1")
+const metric2 = document.getElementById("metric2")
+const metric3 = document.getElementById("metric3")
 
-setInterval(()=>{
+const label1 = document.getElementById("label1")
+const label2 = document.getElementById("label2")
+const label3 = document.getElementById("label3")
 
-sources.forEach(s=>s.classList.remove("active"))
+const engine = document.querySelector(".engine-circle")
+const svg = document.querySelector(".network-lines")
 
-outcomes.forEach(o=>o.classList.remove("active"))
+/* DATA */
 
-sources[index].classList.add("active")
+const data = {
 
-if(outcomes[index % outcomes.length]){
-outcomes[index % outcomes.length].classList.add("active")
+claims:{
+m1:3842,
+l1:"Claims Analyzed",
+m2:14,
+l2:"Denial Risks",
+m3:"$12,500",
+l3:"Revenue Opportunity"
+},
+
+eligibility:{
+m1:1280,
+l1:"Eligibility Checks",
+m2:6,
+l2:"Coverage Errors",
+m3:"$3,800",
+l3:"Prevented Denials"
+},
+
+coding:{
+m1:126,
+l1:"Coding Issues",
+m2:41,
+l2:"Denial Risks",
+m3:"$9,200",
+l3:"Revenue Protected"
+},
+
+payer:{
+m1:48,
+l1:"Payer Alerts",
+m2:11,
+l2:"Policy Changes",
+m3:"$5,400",
+l3:"Billing Adjustments"
+},
+
+documentation:{
+m1:87,
+l1:"Docs Reviewed",
+m2:9,
+l2:"Missing Items",
+m3:"$6,700",
+l3:"Recovered Revenue"
 }
 
-index++
-
-if(index >= sources.length){
-index = 0
 }
 
-},2000)
+
+/* HOVER EVENTS */
+
+inputs.forEach(node=>{
+
+node.addEventListener("mouseenter",()=>{
+
+const type = node.dataset.type
+const d = data[type]
+
+metric1.innerText = d.m1
+metric2.innerText = d.m2
+metric3.innerText = d.m3
+
+label1.innerText = d.l1
+label2.innerText = d.l2
+label3.innerText = d.l3
+
+})
+
+})
+
+
+/* DRAW NETWORK LINES */
+
+function drawLines(){
+
+svg.innerHTML=""
+
+const container = document.querySelector(".architecture-grid")
+const cont = container.getBoundingClientRect()
+
+const engineRect = engine.getBoundingClientRect()
+
+inputs.forEach(input=>{
+
+const line = document.createElementNS(
+"http://www.w3.org/2000/svg","line")
+
+const rect = input.getBoundingClientRect()
+
+line.setAttribute(
+"x1", rect.right - cont.left)
+
+line.setAttribute(
+"y1", rect.top + rect.height/2 - cont.top)
+
+line.setAttribute(
+"x2", engineRect.left - cont.left)
+
+line.setAttribute(
+"y2", engineRect.top + engineRect.height/2 - cont.top)
+
+svg.appendChild(line)
+
+})
+
+}
+
+window.addEventListener("load",drawLines)
+window.addEventListener("resize",drawLines)
 
 })
   
