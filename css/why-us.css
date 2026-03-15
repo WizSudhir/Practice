@@ -548,364 +548,228 @@ pointer-events:none;
 /* =========================================================
 PRACTICEGRID PLATFORM ARCHITECTURE
 ========================================================= */
-
-.pg-platform-architecture{
+.pg-architecture{
 
 padding:120px 0;
-
-background:
-radial-gradient(circle at 20% 30%, rgba(99,102,241,.15), transparent 40%),
-radial-gradient(circle at 80% 70%, rgba(59,130,246,.15), transparent 40%),
-#050a19;
-
-text-align:center;
-
-overflow:hidden;
-
+background:#050a19;
 position:relative;
 
 }
 
 
-/* SECTION HEADER */
+.architecture-grid{
 
-.pg-platform-architecture .section-header{
+display:grid;
 
-max-width:760px;
+grid-template-columns:1fr 1.2fr 1fr;
 
-margin:0 auto 80px;
+align-items:center;
 
-}
-
-
-.pg-platform-architecture .section-title{
-
-font-size:42px;
-
-font-weight:800;
-
-background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
-
--webkit-background-clip:text;
-
--webkit-text-fill-color:transparent;
-
-}
-
-
-.pg-platform-architecture p{
-
-color:#cbd5f5;
-
-font-size:18px;
-
-line-height:1.7;
-
-}
-
-
-/* DIAGRAM */
-
-.platform-diagram{
-
-max-width:1100px;
+max-width:1200px;
 
 margin:auto;
+
+position:relative;
+
+height:650px;
+
+}
+
+
+/* INPUTS */
+
+.arch-inputs{
 
 display:flex;
 
 flex-direction:column;
-
-align-items:center;
-
-gap:60px;
-
-}
-
-
-/* =============================
-SOURCE LAYER
-============================= */
-
-.platform-layer.sources{
-
-display:flex;
-
-flex-wrap:wrap;
-
-justify-content:center;
-
-gap:24px;
-
-}
-
-
-.source-node{
-
-padding:16px 26px;
-
-background:rgba(20,25,55,.85);
-
-border-radius:14px;
-
-border:1px solid rgba(255,255,255,.08);
-
-font-size:14px;
-
-font-weight:600;
-
-box-shadow:0 10px 30px rgba(0,0,0,.4);
-
-transition:.3s;
-
-}
-
-
-.source-node:hover{
-
-transform:translateY(-4px);
-
-border-color:rgba(99,102,241,.4);
-
-}
-
-
-/* =============================
-ARROW
-============================= */
-
-.flow-arrow{
-
-width:2px;
-
-height:60px;
-
-background:linear-gradient(
-
-180deg,
-
-rgba(99,102,241,.6),
-
-rgba(59,130,246,.6)
-
-);
-
-position:relative;
-
-}
-
-
-.flow-arrow::after{
-
-content:"";
-
-position:absolute;
-
-bottom:-8px;
-
-left:50%;
-
-transform:translateX(-50%);
-
-border-left:8px solid transparent;
-
-border-right:8px solid transparent;
-
-border-top:10px solid #6366f1;
-
-}
-
-
-/* =============================
-CORE PLATFORM
-============================= */
-
-.platform-core{
-
-padding:40px;
-
-border-radius:24px;
-
-background:
-
-linear-gradient(
-
-180deg,
-
-rgba(20,25,55,.9),
-
-rgba(10,15,35,.95)
-
-);
-
-border:1px solid rgba(255,255,255,.08);
-
-box-shadow:
-
-0 40px 120px rgba(0,0,0,.6),
-
-0 0 60px rgba(99,102,241,.25);
-
-max-width:800px;
-
-}
-
-
-.platform-core h3{
-
-font-size:24px;
-
-margin-bottom:30px;
-
-font-weight:800;
-
-}
-
-
-.core-modules{
-
-display:grid;
-
-grid-template-columns:repeat(2,1fr);
 
 gap:20px;
 
 }
 
 
-.core-module{
+.input-node{
 
-padding:20px;
+padding:16px 20px;
 
-border-radius:14px;
+border-radius:12px;
 
-background:rgba(15,23,42,.6);
+background:rgba(20,25,55,.9);
 
 border:1px solid rgba(255,255,255,.08);
 
-font-size:13px;
+font-weight:600;
+
+cursor:pointer;
 
 transition:.3s;
 
 }
 
 
-.core-module:hover{
+.input-node:hover{
 
-transform:translateY(-4px);
+transform:translateX(6px);
 
-border-color:rgba(99,102,241,.4);
-
-}
-
-
-.core-module h4{
-
-font-size:15px;
-
-margin-bottom:6px;
+border-color:#6366f1;
 
 }
 
 
-/* =============================
-OUTCOMES
-============================= */
+/* ENGINE */
 
-.platform-layer.outcomes{
+.arch-engine{
+
+position:relative;
 
 display:flex;
 
-gap:40px;
+justify-content:center;
 
-flex-wrap:wrap;
+align-items:center;
+
+}
+
+
+.engine-circle{
+
+width:220px;
+
+height:220px;
+
+border-radius:50%;
+
+background:
+
+linear-gradient(180deg,rgba(20,25,55,.9),rgba(10,15,35,.95));
+
+border:1px solid rgba(255,255,255,.08);
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+text-align:center;
+
+font-weight:700;
+
+box-shadow:
+
+0 0 60px rgba(99,102,241,.4);
+
+}
+
+
+/* EMR RING */
+
+.emr-ring{
+
+position:absolute;
+
+width:360px;
+
+height:360px;
+
+}
+
+
+.emr{
+
+position:absolute;
+
+width:46px;
+
+height:46px;
+
+background:white;
+
+padding:6px;
+
+border-radius:10px;
+
+}
+
+
+.emr1{ top:0; left:50%; transform:translateX(-50%); }
+.emr2{ right:0; top:40%; }
+.emr3{ bottom:0; left:50%; transform:translateX(-50%); }
+.emr4{ left:0; top:40%; }
+.emr5{ top:20%; left:15%; }
+
+
+/* DASHBOARD */
+
+.arch-dashboard{
+
+display:flex;
 
 justify-content:center;
 
 }
 
 
-.outcome-node{
+.dashboard-card{
 
-padding:28px 34px;
+background:rgba(20,25,55,.9);
 
-border-radius:20px;
+padding:30px;
 
-background:
-
-linear-gradient(
-
-180deg,
-
-rgba(20,25,55,.9),
-
-rgba(10,15,35,.95)
-
-);
+border-radius:16px;
 
 border:1px solid rgba(255,255,255,.08);
 
-min-width:160px;
-
-box-shadow:
-
-0 20px 60px rgba(0,0,0,.5);
-
-transition:.3s;
+width:240px;
 
 }
 
 
-.outcome-node:hover{
+.dashboard-metric{
 
-transform:translateY(-6px);
+margin-top:20px;
 
-border-color:rgba(34,197,94,.4);
-
-}
-
-
-.outcome-value{
-
-font-size:32px;
-
-font-weight:900;
-
-display:block;
-
-margin-bottom:6px;
-
-background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
-
--webkit-background-clip:text;
-
--webkit-text-fill-color:transparent;
+text-align:center;
 
 }
 
 
-/* =============================
-RESPONSIVE
-============================= */
+.dashboard-metric span{
 
-@media(max-width:900px){
+font-size:28px;
 
-.core-modules{
+font-weight:800;
 
-grid-template-columns:1fr;
+color:#22c55e;
 
 }
 
-.platform-layer.outcomes{
 
-flex-direction:column;
+/* NETWORK LINES */
 
-align-items:center;
+.network-lines{
+
+position:absolute;
+
+inset:0;
+
+pointer-events:none;
 
 }
 
-}
 
+.network-lines line{
+
+stroke:#3b82f6;
+
+stroke-width:2;
+
+stroke-dasharray:6 6;
+
+opacity:.5;
+
+}
 /* =========================================================
 PRACTICEGRID REVENUE FLOW
 ========================================================= */
