@@ -874,12 +874,12 @@ display:none;
 }
 /* ECOSYSTEM */
 .ecosystem-network{
-height:480px;
+height:560px;
 }
 /* shrink nodes */
 .eco-core{
-width:110px;
-height:110px;
+width:90px;
+height:90px;
 }
 .eco-node{
 width:150px;
