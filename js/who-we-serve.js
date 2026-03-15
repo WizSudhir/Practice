@@ -15,7 +15,16 @@ revealCards.forEach(card=>observer.observe(card));
 // 2. ORBIT DATA PARTICLES //
 
 const container = document.querySelector(".particle-system");
-const orbitRadii = [110,160,210]; // orbit1 orbit2 orbit3
+let orbitRadii = [110,160,210];
+if(window.innerWidth <= 992){
+orbitRadii = [100,130,160];
+}
+if(window.innerWidth <= 768){
+orbitRadii = [90,115,140];
+}
+if(window.innerWidth <= 480){
+orbitRadii = [75,95,120];
+} // orbit1 orbit2 orbit3
 function createParticle(){
 const p = document.createElement("div");
 p.classList.add("data-particle");
