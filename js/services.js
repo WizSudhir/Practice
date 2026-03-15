@@ -10,7 +10,10 @@ const heroHeight = hero.offsetHeight;
 const scrollPosition = window.scrollY + window.innerHeight/2;
 let progress = (scrollPosition - heroTop) / heroHeight;
 progress = Math.max(0, Math.min(1, progress));
-const stageIndex = Math.floor(progress * stages.length);
+const stageIndex = Math.min(
+stages.length - 1,
+Math.floor(progress * stages.length)
+);
 stages.forEach((stage, index)=>{
 stage.classList.remove("active");
 if(index === stageIndex){
@@ -73,18 +76,19 @@ element.classList.remove("animate");
 // ===============================
 
 function startRevenueCounter(){
-let counter=document.getElementById("revenueCounter");
-let value=0;
-let target=2450000;
-counter.innerText="$0";
-let interval=setInterval(()=>{
-value+=25000;
-if(value>=target){
-value=target;
-clearInterval(interval);
+const counter = document.getElementById("revenueCounter");
+const target = 2450000;
+const duration = 2000;
+const startTime = performance.now();
+function animate(time){
+const progress = Math.min((time - startTime) / duration, 1);
+const value = Math.floor(progress * target);
+counter.innerText = "$" + value.toLocaleString();
+if(progress < 1){
+requestAnimationFrame(animate);
 }
-counter.innerText="$"+value.toLocaleString();
-},30);
+}
+requestAnimationFrame(animate);
 }
 function resetRevenue(){
 document.getElementById("revenueCounter").innerText="$0";
