@@ -1218,7 +1218,9 @@ grid-template-areas:
 }
 .rcm-card{
 padding:18px;
-transition:opacity .5s ease, transform .5s ease;
+opacity:1 !important;
+transform:none !important;
+transition:none !important;
 }
 .rcm-item svg{
 width:30px;
@@ -1250,6 +1252,11 @@ backdrop-filter:none;
 .stage-pipeline,
 .stage-cta{
 background:none;
+}
+.reveal{
+opacity:1 !important;
+transform:none !important;
+transition:none !important;
 }
 }
 /* SMALL MOBILE */
