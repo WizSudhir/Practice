@@ -255,7 +255,7 @@ background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
 /* CALCULATOR SECTION CONTAINER */
 .calc-section{
 position:relative;
-padding:120px 0;
+padding:80px 0;
 background:
 radial-gradient(circle at 25% 30%, rgba(99,102,241,.18), transparent 45%),
 radial-gradient(circle at 80% 70%, rgba(56,189,248,.15), transparent 45%),
@@ -281,7 +281,7 @@ pointer-events:none;
 }
 .calc-layout{
 position:relative;
-min-height:100vh;
+min-height:auto;
 display:grid;
 grid-template-columns:1fr 1fr;
 align-items:center;
@@ -451,7 +451,7 @@ font-size:18px;
 display:grid;
 grid-template-columns:1fr 120px 1fr;
 gap:40px;
-margin-top:70px;
+margin-top:40px;
 align-items:center;
 }
 .transform-grid::before{
@@ -545,7 +545,7 @@ color:#22c55e;
 }
 .transform-section{
 position:relative;
-padding:120px 0;
+padding:80px 0;
 background:
 radial-gradient(circle at 20% 30%, rgba(99,102,241,0.15), transparent 40%),
 radial-gradient(circle at 80% 70%, rgba(59,130,246,0.15), transparent 40%),
@@ -613,7 +613,8 @@ margin-bottom:20px;
 .transform-tagline{
 text-align:center;
 color:var(--text-secondary);
-margin-top:10px;
+margin-top:6px;
+margin-bottom:30px;
 font-size:16px;
 }
 
@@ -627,7 +628,7 @@ font-size:16px;
 --rcm-border-soft:rgba(56,189,248,0.15);
 }
 .rcm-infrastructure-section{
-padding:60px 0;
+padding:50px 0;
 }
 .rcm-infrastructure{
 position:relative;
@@ -776,7 +777,7 @@ grid-row:auto;
 .rcm-services{
 min-height:200vh;
 position:relative;
-padding:120px 0;
+padding:80px 0;
 background:
 radial-gradient(circle at 10% 20%, rgba(99,102,241,.15), transparent 40%),
 radial-gradient(circle at 90% 80%, rgba(59,130,246,.15), transparent 40%),
@@ -876,7 +877,7 @@ rgba(10,15,35,.25)
 );
 padding:60px 60px 80px 60px;
 border-radius:20px;
-margin-bottom:100px;
+margin-bottom:60px;
 border:1px solid rgba(255,255,255,.04);
 }
 .rcm-phase::before{
@@ -895,7 +896,7 @@ left:117px;
 top:30px;
 }
 .phase-header{
-margin-bottom:60px;
+margin-bottom:40px;
 }
 .phase-header h2{
 font-size:32px;
@@ -911,7 +912,7 @@ color:var(--text-secondary);
 .phase-grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:40px;
+gap:28px;
 }
 .service-card{
 background:rgba(20,25,55,.6);
