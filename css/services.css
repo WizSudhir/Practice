@@ -583,12 +583,18 @@ align-items:center;
 text-align:center;
 opacity:0;
 transform:translateY(20px);
-transition:all .35s ease;
+transition:opacity 1s ease,transform 1s ease;
 }
 .rcm-card.show{
 opacity:1;
 transform:translateY(0);
 }
+.claim.show{ transition-delay:.2s; }
+.patient.show{ transition-delay:.4s; }
+.documentation.show{ transition-delay:.6s; }
+.recovery.show{ transition-delay:.8s; }
+.intelligence.show{ transition-delay:1s; }
+.credentialing.show{ transition-delay:1.2s; }
 .rcm-card:hover{
 transform:translateY(-6px);
 border-color:var(--rcm-blue);
