@@ -511,12 +511,18 @@ font-size:16px;
 /* ======================================
 4. RCM INFRASTRUCTURE
 ====================================== */
+:root{
+--rcm-blue:#38bdf8;
+--rcm-blue-soft:#0ea5e9;
+--rcm-border:rgba(56,189,248,0.35);
+--rcm-border-soft:rgba(56,189,248,0.15);
+}
 .rcm-infrastructure-section{
 padding:120px 0;
 }
 .rcm-infrastructure{
 position:relative;
-border:2px solid #6366f1;
+border:2px solid var(--rcm-border);
 border-radius:24px;
 padding:90px 40px 40px;
 background:var(--bg-elevated);
@@ -530,7 +536,7 @@ position:absolute;
 top:-18px;
 left:50%;
 transform:translateX(-50%);
-background:linear-gradient(135deg,var(--accent),var(--accent-2));
+background:var(--rcm-blue);
 color:#fff;
 padding:8px 22px;
 border-radius:40px;
@@ -562,7 +568,7 @@ grid-template-areas:
 .rcm-card{
 height:100%;
 position:relative;
-border:2px solid rgba(99,102,241,0.35);
+border:1.5px solid var(--rcm-border-soft);
 border-radius:18px;
 padding:35px 25px;
 background:transparent;
@@ -578,7 +584,7 @@ position:absolute;
 top:-16px;
 left:50%;
 transform:translateX(-50%);
-background:#6366f1;
+background:var(--rcm-blue);
 color:white;
 padding:6px 18px;
 border-radius:20px;
@@ -597,14 +603,15 @@ margin:14px 0;
 }
 /* LARGE ICON */
 .rcm-item svg{
-width:52px;
-height:52px;
-stroke:#8b5cf6;
+width:44px;
+height:44px;
+stroke:var(--rcm-blue);
+stroke-width:2;
 }
 /* TEXT */
 .rcm-item span{
 font-size:13px;
-color:white;
+color:#ffffff;
 }
 /* ROW */
 .rcm-row{
@@ -616,7 +623,7 @@ justify-content:center;
 .rcm-card:hover{
 transform:translateY(-6px);
 border-color:var(--accent-2);
-box-shadow:0 25px 70px rgba(0,0,0,.4);
+box-shadow:0 8px 25px rgba(0,0,0,.35);
 }
 /* RESPONSIVE */
 @media (max-width:900px){
