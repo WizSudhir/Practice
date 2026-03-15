@@ -58,7 +58,6 @@ const particleCount = window.innerWidth < 768 ? 14 : 25;
 for(let i=0;i<particleCount;i++){
 createParticle();
 }
-
 // 3. DATA FLOW LINES //
 
 const svg = document.querySelector(".data-lines");
@@ -112,10 +111,10 @@ universeContainer.clientHeight
 renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
 universeContainer.appendChild(renderer.domElement);
 /* create particles */
-const particleCount = window.innerWidth < 768 ? 120 : 220;
+const universeParticleCount = window.innerWidth < 768 ? 120 : 220;
 const geometry = new THREE.BufferGeometry();
 const positions = new Float32Array(particleCount*3);
-for(let i=0;i<particleCount;i++){
+for(let i=0;i<universeParticleCount;i++){
 positions[i*3] = (Math.random()-0.5)*20;
 positions[i*3+1] = (Math.random()-0.5)*12;
 positions[i*3+2] = (Math.random()-0.5)*10;
