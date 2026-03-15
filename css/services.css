@@ -252,7 +252,16 @@ background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
 /* =========================================================
 2. REVENUE LEAKAGE CALCULATOR
 ========================================================= */
-
+/* CALCULATOR SECTION CONTAINER */
+.calc-section{
+position:relative;
+padding:120px 0;
+background:
+radial-gradient(circle at 25% 30%, rgba(99,102,241,.18), transparent 45%),
+radial-gradient(circle at 80% 70%, rgba(56,189,248,.15), transparent 45%),
+#050a19;
+overflow:hidden;
+}
 .calc-layout{
 min-height:100vh;
 display:grid;
