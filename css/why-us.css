@@ -838,13 +838,13 @@ pointer-events:none;
 
 .network-lines line{
 
-stroke:#3b82f6;
+stroke:#6366f1;
 
 stroke-width:2;
 
-stroke-dasharray:6 6;
+stroke-dasharray:8 6;
 
-opacity:.5;
+opacity:.8;
 
 }
 .data-pulse{
