@@ -246,6 +246,7 @@ const line = ecoSvg.children[nodeIndex];
 if(!line) return;
 line.style.strokeDasharray="3 8";
 line.style.strokeDashoffset="80";
+line.classList.add("active");
 line.animate(
 [
 {strokeDashoffset:80},
@@ -256,6 +257,9 @@ duration:900,
 easing:"ease-out"
 }
 );
+setTimeout(()=>{
+line.classList.remove("active");
+},900);
 setTimeout(()=>{
 ecoCore.classList.add("data-glow");
 setTimeout(()=>ecoCore.classList.remove("data-glow"),400);
