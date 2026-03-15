@@ -410,6 +410,7 @@ svg.appendChild(path)
 window.addEventListener("load", drawLines)
 window.addEventListener("resize", drawLines)
 setTimeout(drawLines, 200)
+
 function animateMetric(el,value){
 
 let numeric = parseInt(
@@ -433,14 +434,8 @@ el.innerText = Math.floor(current)
 },20)
 
 }
- // ======================================
-// PLATFORM DATA FLOW PULSE
-// ====================================== 
+
 function sendDataPulse(fromElement){
-
-const engine = document.querySelector(".engine-circle")
-
-if(!engine) return
 
 const pulse = document.createElement("div")
 pulse.className = "data-pulse"
@@ -471,3 +466,5 @@ pulse.remove()
 },900)
 
 }
+
+});   // DOMContentLoaded close
