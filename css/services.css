@@ -509,58 +509,34 @@ font-size:16px;
 }
 
 /* ======================================
-4. RCM PROCESS TIMELINE
+4. RCM INFRASTRUCTURE
 ====================================== */
-/* ===============================
-RCM INFRASTRUCTURE
-=============================== */
-
 .rcm-infrastructure-section{
 padding:120px 0;
 }
-
 .rcm-infrastructure{
-
 position:relative;
-
 border:1px solid rgba(255,255,255,0.08);
 border-radius:24px;
-
 padding:90px 40px 40px;
-
 background:var(--bg-elevated);
-
 }
-
 /* INFRA TITLE */
-
 .infra-title{
-
 position:absolute;
 top:-18px;
 left:50%;
-
 transform:translateX(-50%);
-
 background:linear-gradient(135deg,var(--accent),var(--accent-2));
-
 color:#fff;
-
 padding:8px 22px;
-
 border-radius:40px;
-
 font-size:14px;
 font-weight:600;
-
 letter-spacing:.05em;
-
 }
 
-/* ===============================
-GRID LAYOUT
-=============================== */
-
+/* GRID LAYOUT */
 .rcm-layout{
 display:grid;
 grid-template-columns:repeat(4,1fr);
@@ -578,136 +554,75 @@ grid-template-areas:
 .intelligence{grid-area:intelligence;}
 .documentation{grid-area:documentation;}
 .credentialing{grid-area:credentialing;}
-
-/* ===============================
-CARDS
-=============================== */
-
+/* CARDS */
 .rcm-card{
 height:100%;
 position:relative;
-
 border:1px solid rgba(255,255,255,0.06);
 border-radius:18px;
-
 padding:35px 25px;
-
 background:rgba(255,255,255,0.02);
-
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-
 text-align:center;
-
 }
-
 /* CENTERED TITLE */
-
 .rcm-card-title{
-
 position:absolute;
-
 top:-14px;
 left:50%;
-
 transform:translateX(-50%);
-
 background:var(--bg-primary);
-
 padding:6px 18px;
-
 border-radius:30px;
-
 font-size:12px;
-
 letter-spacing:.06em;
-
 border:1px solid rgba(255,255,255,0.08);
-
 }
-
-/* ===============================
-ITEMS
-=============================== */
-
+/* ITEMS */
 .rcm-item{
-
 display:flex;
 flex-direction:column;
 align-items:center;
-
 gap:10px;
-
 margin:14px 0;
-
 }
-
 /* LARGE ICON */
-
 .rcm-item svg{
-
 width:52px;
 height:52px;
-
 stroke:var(--accent-2);
-
 }
-
 /* TEXT */
-
 .rcm-item span{
-
 font-size:13px;
-
 color:var(--text-secondary);
-
 }
-
 /* ROW */
-
 .rcm-row{
-
 display:flex;
 gap:40px;
 justify-content:center;
-
 }
-
-/* ===============================
-HOVER
-=============================== */
-
+/* HOVER */
 .rcm-card:hover{
-
 transform:translateY(-6px);
-
 border-color:var(--accent-2);
-
 box-shadow:0 25px 70px rgba(0,0,0,.4);
-
 }
-
-/* ===============================
-RESPONSIVE
-=============================== */
-
+/* RESPONSIVE */
 @media (max-width:900px){
-
 .rcm-layout{
-
 grid-template-columns:1fr;
 grid-template-rows:auto;
-
 }
-
 .patient,
 .documentation{
 grid-column:auto;
 grid-row:auto;
 }
-
 }
 /* =========================================================
 5. RCM SERVICES LAYOUT + STICKY NAV
