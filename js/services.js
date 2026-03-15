@@ -38,16 +38,32 @@ updateHeroStages();
 // ===============================
 
 function calculateRevenue(){
-let claims = document.getElementById("claims").value || 0;
-let reimbursement = document.getElementById("reimbursement").value || 0;
-let denial = document.getElementById("denial").value || 0;
+let claims = Number(document.getElementById("claims").value) || 0;
+let reimbursement = Number(document.getElementById("reimbursement").value) || 0;
+let denial = Number(document.getElementById("denial").value) || 0;
 let monthlyRevenue = claims * reimbursement;
-let lostRevenue = monthlyRevenue * (denial / 100);
-let yearlyLoss = lostRevenue * 12;
-document.getElementById("roiResult").innerText =
-"$" + yearlyLoss.toLocaleString();
+let monthlyLoss = monthlyRevenue * (denial / 100);
+let yearlyLoss = monthlyLoss * 12;
+let dailyLoss = monthlyLoss / 30;
+animateValue("roiResult", yearlyLoss);
+animateValue("monthlyLoss", monthlyLoss);
+animateValue("dailyLoss", dailyLoss);
 }
 
+function animateValue(id,value){
+let element = document.getElementById(id);
+let start = 0;
+let duration = 900;
+let step = value / 40;
+let interval = setInterval(()=>{
+start += step;
+if(start >= value){
+start = value;
+clearInterval(interval);
+}
+element.innerText = "$" + Math.floor(start).toLocaleString();
+},duration/40);
+}
 // ===============================
 // Hero Revenue Counter
 // ===============================
