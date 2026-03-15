@@ -220,7 +220,6 @@ dashboard.style.transform =
 // ======================================
 // PLATFORM DATA FLOW ANIMATION
 // ======================================
-document.addEventListener("DOMContentLoaded",()=>{
 
 const inputs = document.querySelectorAll(".input-node")
 
@@ -256,7 +255,8 @@ l1:"Eligibility Checks",
 m2:6,
 l2:"Coverage Errors",
 m3:"$3,800",
-l3:"Prevented Denials"
+l3:"Prevented Denials",
+status:"Verifying insurance eligibility..."
 },
 
 coding:{
@@ -265,7 +265,8 @@ l1:"Coding Issues",
 m2:41,
 l2:"Denial Risks",
 m3:"$9,200",
-l3:"Revenue Protected"
+l3:"Revenue Protected",
+status:"Checking coding accuracy..."
 },
 
 payer:{
@@ -274,7 +275,8 @@ l1:"Payer Alerts",
 m2:11,
 l2:"Policy Changes",
 m3:"$5,400",
-l3:"Billing Adjustments"
+l3:"Billing Adjustments",
+status:"Analyzing payer rules..."
 },
 
 documentation:{
@@ -283,7 +285,8 @@ l1:"Docs Reviewed",
 m2:9,
 l2:"Missing Items",
 m3:"$6,700",
-l3:"Recovered Revenue"
+l3:"Recovered Revenue",
+status:"Validating documentation..."
 }
 
 }
@@ -297,11 +300,18 @@ node.addEventListener("mouseenter",()=>{
 
 sendDataPulse(node)
 
-engineStatus.innerText = d.status
+inputs.forEach(node=>{
 
+node.addEventListener("mouseenter",()=>{
 
 const type = node.dataset.type
 const d = data[type]
+
+sendDataPulse(node)
+
+if(engineStatus && d.status){
+engineStatus.innerText = d.status
+}
 
 animateMetric(metric1,d.m1)
 animateMetric(metric2,d.m2)
@@ -314,8 +324,6 @@ label3.innerText = d.l3
 })
 
 })
-
-
 /* DRAW NETWORK LINES */
 
 function drawLines(){
@@ -349,13 +357,36 @@ line.setAttribute(
 svg.appendChild(line)
 
 })
+/* ENGINE → DASHBOARD CONNECTION */
 
+const dashboard = document.querySelector(".dashboard-card")
+
+if(dashboard){
+
+const dashRect = dashboard.getBoundingClientRect()
+
+const line = document.createElementNS(
+"http://www.w3.org/2000/svg","line")
+
+line.setAttribute(
+"x1", engineRect.right - cont.left)
+
+line.setAttribute(
+"y1", engineRect.top + engineRect.height/2 - cont.top)
+
+line.setAttribute(
+"x2", dashRect.left - cont.left)
+
+line.setAttribute(
+"y2", dashRect.top + dashRect.height/2 - cont.top)
+
+svg.appendChild(line)
+
+}
 }
 
 window.addEventListener("load",drawLines)
 window.addEventListener("resize",drawLines)
-const dashboard = document.querySelector(".dashboard-card")
-const dashRect = dashboard.getBoundingClientRect()
 
 const line = document.createElementNS(
 "http://www.w3.org/2000/svg","line")
@@ -400,6 +431,10 @@ el.innerText = Math.floor(current)
 // ====================================== 
 function sendDataPulse(fromElement){
 
+const engine = document.querySelector(".engine-circle")
+
+if(!engine) return
+
 const pulse = document.createElement("div")
 pulse.className = "data-pulse"
 
@@ -420,10 +455,8 @@ pulse.style.left = startX + "px"
 pulse.style.top = startY + "px"
 
 requestAnimationFrame(()=>{
-
 pulse.style.transform =
 `translate(${endX-startX}px,${endY-startY}px)`
-
 })
 
 setTimeout(()=>{
