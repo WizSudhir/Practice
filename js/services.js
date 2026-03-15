@@ -53,7 +53,7 @@ animateValue("dailyLoss", dailyLoss);
 function animateValue(id,value){
 let element = document.getElementById(id);
 let start = 0;
-let duration = 900;
+let duration = 1800;
 let step = value / 40;
 let interval = setInterval(()=>{
 start += step;
@@ -62,8 +62,10 @@ start = value;
 clearInterval(interval);
 }
 element.innerText = "$" + Math.floor(start).toLocaleString();
-},duration/40);
-}
+element.classList.add("animate");
+setTimeout(()=>{
+element.classList.remove("animate");
+},400);
 // ===============================
 // Hero Revenue Counter
 // ===============================
