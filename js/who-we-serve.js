@@ -222,7 +222,7 @@ const elbowX = nodeX + horizontalDir * offset;
 /* vertical alignment */
 const elbowY = coreY;
 /* final horizontal */
-const endX = coreX - horizontalDir * 80;
+const endX = coreX - horizontalDir * (window.innerWidth < 768 ? 45 : 80);
 const endY = coreY;
 /* segmented path */
 const pathData = `
