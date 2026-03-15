@@ -293,13 +293,7 @@ status:"Validating documentation..."
 
 
 /* HOVER EVENTS */
-
-inputs.forEach(node=>{
-
-node.addEventListener("mouseenter",()=>{
-
-sendDataPulse(node)
-
+if(inputs.length > 0){
 inputs.forEach(node=>{
 
 node.addEventListener("mouseenter",()=>{
@@ -324,6 +318,12 @@ label3.innerText = d.l3
 })
 
 })
+}
+node.addEventListener("mouseleave",()=>{
+if(engineStatus){
+engineStatus.innerText = "Awaiting healthcare data input..."
+}
+})
 /* DRAW NETWORK LINES */
 
 function drawLines(){
@@ -336,25 +336,6 @@ const cont = container.getBoundingClientRect()
 const engineRect = engine.getBoundingClientRect()
 
 inputs.forEach(input=>{
-
-const line = document.createElementNS(
-"http://www.w3.org/2000/svg","line")
-
-const rect = input.getBoundingClientRect()
-
-line.setAttribute(
-"x1", rect.right - cont.left)
-
-line.setAttribute(
-"y1", rect.top + rect.height/2 - cont.top)
-
-line.setAttribute(
-"x2", engineRect.left - cont.left)
-
-line.setAttribute(
-"y2", engineRect.top + engineRect.height/2 - cont.top)
-
-svg.appendChild(line)
 
 })
 /* ENGINE → DASHBOARD CONNECTION */
