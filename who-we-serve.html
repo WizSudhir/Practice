@@ -22,13 +22,11 @@
 
 <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
+<script defer src="js/root.js"></script>
 <script defer src="js/who-we-serve.js"></script>
 </head>
 
 <body>
-  
-<!-- FLOATING CTA -->
-<a href="contact.html" class="floating-cta">Free Audit</a>
 
 <!-- NAVBAR -->
 <header class="navbar">
@@ -40,21 +38,23 @@
       </a>
     </div>
 
-    <nav class="nav-menu">
-      <ul>
+      <nav class="nav-menu">
+        <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="services.html">Services</a></li>
         <li><a href="who-we-serve.html">Who We Serve</a></li>
         <li><a href="why-us.html">Why Us</a></li>
         <li><a href="blog/">Blog</a></li>
-        <li><a href="contact.html" class="btn-primary">Get Started</a></li>
-      </ul>
-    </nav>
+        <li><a href="contact.html" class="btn-primary">Connect With Us</a></li>
+        </ul>
+      </nav>
 
     <!-- MOBILE TOGGLE -->
-       <button class="nav-toggle">
-        Menu
-        </button>
+          <button class="nav-toggle" aria-label="Toggle Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+          </button>
 
   </div>
 </header>
@@ -149,7 +149,7 @@ RCM Support
 
 <div class="container">
 
-<h2 class="ecosystem-title">
+<h2 class="section-title">
 How PracticeGrid Connects Your Revenue Cycle
 </h2>
 
@@ -223,7 +223,7 @@ accelerate payments for modern healthcare practices.
 <section class="serve-organizations">
 
 <div class="container">
-<div class="section-header">
+<div class="section-title">
 <h2>Healthcare Organizations We Support</h2>
 <p> PracticeGrid works with healthcare organizations across the United States —
 from independent physician practices to multi-location medical groups and specialty surgical facilities. </p>
@@ -345,7 +345,7 @@ procedure and facility billing.
 
 <!-- SECTION HEADER -->
 
-<div class="section-header">
+<div class="section-title">
 
 <h2>Medical Specialties We Support</h2>
 
@@ -556,31 +556,24 @@ pain management, and many others.
 </section>
   
 <!-- ENTERPRISE CTA -->
-<section class="cta cta-enterprise">
+<section class="cta-stripe">
+<canvas id="cta-rays"></canvas>
+<div class="container">
+<div class="cta-content">
+<h2>
+Take the First Step Towards<br>
+Smarter Healthcare Operations
+</h2>
+<p>
+Our team works with a wide range of healthcare specialties across the United States.
+Speak with us to see how we can support your practice.
+</p>
+<a href="contact.html" class="btn-primary">
+Contact Our Team
+</a>
 
-  <div class="cta-bg"></div>
-
-  <div class="cta-shape">
-
-    <div class="cta-content">
-
-      <h2>
-        Explore How We Can<br>
-        Support Your Specialty
-      </h2>
-
-      <p>
-        Our team works with a wide range of healthcare specialties across the United States.
-        Speak with us to see how we can support your practice.
-      </p>
-
-      <a href="contact.html" class="btn-primary">
-        Contact Our Team
-      </a>
-
-    </div>
-
-  </div>
+</div>
+</div>
 
 </section>
 
@@ -591,6 +584,14 @@ pain management, and many others.
     <div class="footer-brand">
       <img src="images/logo.png" alt="PracticeGrid Solutions">
       <p>Elite Revenue Cycle Management for Modern Healthcare Practices.</p>
+      <div class="footer-social">
+        <a href="https://wa.me/17276741458" target="_blank">
+          <img src="images/whatsapplogo.svg" alt="WhatsApp">
+        </a>
+        <a href="https://www.linkedin.com/company/practicegridsolutions" target="_blank">
+          <img src="images/linkedinlogo.svg" alt="LinkedIn">
+        </a>
+      </div>
     </div>
 
     <div class="footer-links">
@@ -645,7 +646,10 @@ pain management, and many others.
 
     <div class="footer-hipaa">
       <img src="images/hipaa-official.png" alt="HIPAA Compliant">
-      <span class="hipaa-text">HIPAA Compliant</span>
+      <div class="hipaa-label">
+      <span class="hipaa-title">HIPAA</span>
+      <span class="hipaa-sub">Compliant</span>
+      </div>
     </div>
 
   </div>
@@ -654,3 +658,6 @@ pain management, and many others.
     © PracticeGrid Solutions. All rights reserved.
   </div>
 </footer>
+
+</body>
+</html>
