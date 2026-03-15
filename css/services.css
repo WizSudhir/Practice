@@ -511,6 +511,10 @@ font-size:16px;
 /* ======================================
 4. RCM PROCESS TIMELINE
 ====================================== */
+/* ===============================
+RCM INFRASTRUCTURE
+=============================== */
+
 .rcm-infrastructure-section{
 padding:120px 0;
 }
@@ -522,13 +526,13 @@ position:relative;
 border:1px solid rgba(255,255,255,0.08);
 border-radius:24px;
 
-padding:80px 40px 40px;
+padding:90px 40px 40px;
 
 background:var(--bg-elevated);
 
 }
 
-/* INFRASTRUCTURE TITLE */
+/* INFRA TITLE */
 
 .infra-title{
 
@@ -543,28 +547,35 @@ background:linear-gradient(135deg,var(--accent),var(--accent-2));
 color:#fff;
 
 padding:8px 22px;
+
 border-radius:40px;
 
 font-size:14px;
 font-weight:600;
 
-letter-spacing:.06em;
+letter-spacing:.05em;
 
 }
 
-/* GRID */
+/* ===============================
+GRID LAYOUT
+=============================== */
 
 .rcm-layout{
 
 display:grid;
 
-grid-template-columns:1fr 1.2fr 1fr;
+grid-template-columns:1.1fr 1.3fr 1fr;
+
+grid-template-rows:220px 260px 160px;
 
 gap:40px;
 
 }
 
-/* CARD */
+/* ===============================
+CARDS
+=============================== */
 
 .rcm-card{
 
@@ -573,15 +584,20 @@ position:relative;
 border:1px solid rgba(255,255,255,0.06);
 border-radius:18px;
 
-padding:35px 25px 30px;
+padding:35px 25px;
 
 background:rgba(255,255,255,0.02);
+
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
 
 text-align:center;
 
 }
 
-/* CENTERED CARD TITLE */
+/* CENTERED TITLE */
 
 .rcm-card-title{
 
@@ -594,33 +610,35 @@ transform:translateX(-50%);
 
 background:var(--bg-primary);
 
-padding:6px 16px;
+padding:6px 18px;
 
 border-radius:30px;
 
 font-size:12px;
+
 letter-spacing:.06em;
 
 border:1px solid rgba(255,255,255,0.08);
 
 }
 
-/* ITEMS */
+/* ===============================
+ITEMS
+=============================== */
 
 .rcm-item{
 
 display:flex;
 flex-direction:column;
-
 align-items:center;
 
-gap:8px;
+gap:10px;
 
-margin-top:20px;
+margin:14px 0;
 
 }
 
-/* LARGE ICONS */
+/* LARGE ICON */
 
 .rcm-item svg{
 
@@ -636,48 +654,58 @@ stroke:var(--accent-2);
 .rcm-item span{
 
 font-size:13px;
+
 color:var(--text-secondary);
 
 }
 
-/* ROW (DOCUMENTATION) */
+/* ROW */
 
 .rcm-row{
 
 display:flex;
-gap:30px;
+gap:40px;
 justify-content:center;
 
 }
 
-/* POSITIONING */
+/* ===============================
+GRID POSITIONS
+=============================== */
+
+.claim{
+grid-column:1;
+grid-row:1;
+}
 
 .patient{
 grid-column:2;
 grid-row:1 / span 2;
 }
 
-.claim{
-grid-column:1;
-}
-
 .recovery{
 grid-column:1;
+grid-row:2;
 }
 
 .intelligence{
 grid-column:2;
+grid-row:2;
 }
 
 .documentation{
 grid-column:1 / span 2;
+grid-row:3;
 }
 
 .credentialing{
 grid-column:3;
+grid-row:3;
 }
 
-/* HOVER */
+/* ===============================
+HOVER
+=============================== */
 
 .rcm-card:hover{
 
@@ -689,12 +717,17 @@ box-shadow:0 25px 70px rgba(0,0,0,.4);
 
 }
 
-/* RESPONSIVE */
+/* ===============================
+RESPONSIVE
+=============================== */
 
 @media (max-width:900px){
 
 .rcm-layout{
+
 grid-template-columns:1fr;
+grid-template-rows:auto;
+
 }
 
 .patient,
