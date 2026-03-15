@@ -342,24 +342,34 @@ const engineRect = engine.getBoundingClientRect()
 
 inputs.forEach(input=>{
 
-const line = document.createElementNS(
-"http://www.w3.org/2000/svg","line")
-
 const rect = input.getBoundingClientRect()
 
-line.setAttribute(
-"x1", rect.right - cont.left)
+const nodeX = rect.right - cont.left
+const nodeY = rect.top + rect.height/2 - cont.top
 
-line.setAttribute(
-"y1", rect.top + rect.height/2 - cont.top)
+const coreX = engineRect.left - cont.left
+const coreY = engineRect.top + engineRect.height/2 - cont.top
 
-line.setAttribute(
-"x2", engineRect.left - cont.left)
+const offset = 70
 
-line.setAttribute(
-"y2", engineRect.top + engineRect.height/2 - cont.top)
+const elbowX = nodeX + offset
 
-svg.appendChild(line)
+const endX = coreX - 90
+
+const path = document.createElementNS(
+"http://www.w3.org/2000/svg","path"
+)
+
+const pathData = `
+M ${nodeX} ${nodeY}
+L ${elbowX} ${nodeY}
+L ${elbowX} ${coreY}
+L ${endX} ${coreY}
+`
+
+path.setAttribute("d",pathData)
+
+svg.appendChild(path)
 
 })
 /* ENGINE → DASHBOARD CONNECTION */
@@ -370,22 +380,36 @@ if(dashboard){
 
 const dashRect = dashboard.getBoundingClientRect()
 
-const line = document.createElementNS(
-"http://www.w3.org/2000/svg","line")
+const dashboard = document.querySelector(".dashboard-card")
 
-line.setAttribute(
-"x1", engineRect.right - cont.left)
+if(dashboard){
 
-line.setAttribute(
-"y1", engineRect.top + engineRect.height/2 - cont.top)
+const dashRect = dashboard.getBoundingClientRect()
 
-line.setAttribute(
-"x2", dashRect.left - cont.left)
+const startX = engineRect.right - cont.left
+const startY = engineRect.top + engineRect.height/2 - cont.top
 
-line.setAttribute(
-"y2", dashRect.top + dashRect.height/2 - cont.top)
+const endX = dashRect.left - cont.left
+const endY = dashRect.top + dashRect.height/2 - cont.top
 
-svg.appendChild(line)
+const offset = 80
+
+const elbowX = startX + offset
+
+const path = document.createElementNS(
+"http://www.w3.org/2000/svg","path"
+)
+
+const pathData = `
+M ${startX} ${startY}
+L ${elbowX} ${startY}
+L ${elbowX} ${endY}
+L ${endX} ${endY}
+`
+
+path.setAttribute("d",pathData)
+
+svg.appendChild(path)
 
 }
 }
