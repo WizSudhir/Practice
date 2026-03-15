@@ -549,96 +549,51 @@ pointer-events:none;
 PRACTICEGRID PLATFORM ARCHITECTURE
 ========================================================= */
 .pg-architecture{
-
 padding:120px 0;
 background:#050a19;
 position:relative;
-
 }
-
-
 .architecture-grid{
-
 display:grid;
-
 grid-template-columns:1fr 1.2fr 1fr;
-
 align-items:center;
-
 max-width:1200px;
-
 margin:auto;
-
 position:relative;
-
 height:650px;
-
 }
-
-
 /* INPUTS */
-
 .arch-inputs{
-
 display:flex;
-
 flex-direction:column;
-
 gap:20px;
-
 }
-
-
 .input-node{
-
 width:180px;
 height:48px;
-
 display:flex;
 align-items:center;
 justify-content:center;
-
 border-radius:12px;
-
-background:linear-gradient(
-135deg,
-rgba(99,102,241,.8),
-rgba(59,130,246,.8)
-);
-
+background:linear-gradient(135deg,rgba(99,102,241,.8),rgba(59,130,246,.8));
 font-size:13px;
 font-weight:600;
-
 cursor:pointer;
-
 box-shadow:
 0 10px 30px rgba(0,0,0,.4);
-
 transition:.3s;
-
 }
-
 .input-node:hover{
-
 transform:translateX(8px);
 box-shadow:
 0 0 25px rgba(99,102,241,.6);
-
 }
-
-
 /* ENGINE */
-
 .arch-engine{
-
 position:relative;
-
 display:flex;
-
 justify-content:center;
-
 align-items:center;
-
 }
 .arch-engine::before{
 content:"";
@@ -646,64 +601,36 @@ position:absolute;
 width:360px;
 height:360px;
 border-radius:50%;
-
 background:
-radial-gradient(
-circle,
-rgba(99,102,241,.25) 0%,
-rgba(99,102,241,.12) 30%,
-transparent 70%
-);
-
+radial-gradient(circle,rgba(99,102,241,.25) 0%,rgba(99,102,241,.12) 30%,transparent 70%);
 filter:blur(40px);
 pointer-events:none;
 }
-
 .arch-engine::after{
 content:"";
 position:absolute;
 width:480px;
 height:480px;
 border-radius:50%;
-
 background:
-radial-gradient(
-circle,
-rgba(59,130,246,.18) 0%,
-transparent 70%
-);
-
+radial-gradient(circle,rgba(59,130,246,.18) 0%,transparent 70%);
 filter:blur(80px);
 pointer-events:none;
 }
-
 .engine-circle{
-
 width:220px;
-
 height:220px;
-
 border-radius:50%;
-
 background:
-
 linear-gradient(180deg,rgba(20,25,55,.9),rgba(10,15,35,.95));
-
 border:1px solid rgba(255,255,255,.08);
-
 display:flex;
-
 align-items:center;
-
 justify-content:center;
-
 text-align:center;
-
 font-weight:700;
-
 box-shadow:
 0 20px 40px rgba(0,0,0,.6);
-
 }
 .engine-inner{
 text-align:center;
@@ -712,162 +639,96 @@ flex-direction:column;
 gap:8px;
 align-items:center;
 }
-
 .engine-sub{
 font-size:13px;
 opacity:.7;
 }
-
 .engine-status{
 font-size:13px;
 color:#93c5fd;
 opacity:.9;
 animation:enginePulse 2s infinite;
 }
-
 @keyframes enginePulse{
 0%{opacity:.4}
 50%{opacity:1}
 100%{opacity:.4}
 }
 .engine-icon{
-
 width:32px;
 height:32px;
-
 color:#93c5fd;
-
 margin-bottom:8px;
-
 }
 /* EMR RING */
-
 .emr-ring{
-
 position:absolute;
-
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
 width:360px;
-
 height:360px;
-
+pointer-events:none;
 }
-
-
 .emr{
-
 position:absolute;
-
 width:46px;
-
 height:46px;
-
 background:white;
-
 padding:6px;
-
 border-radius:10px;
-
 }
-
-
 .emr1{ top:0; left:50%; transform:translateX(-50%); }
 .emr2{ right:0; top:40%; }
 .emr3{ bottom:0; left:50%; transform:translateX(-50%); }
 .emr4{ left:0; top:40%; }
 .emr5{ top:20%; left:15%; }
-
-
 /* DASHBOARD */
-
 .arch-dashboard{
-
 display:flex;
-
 justify-content:center;
-
 }
-
-
 .dashboard-card{
-
 background:rgba(20,25,55,.9);
-
 padding:30px;
-
 border-radius:16px;
-
 border:1px solid rgba(255,255,255,.08);
-
 width:240px;
-
 }
-
-
 .dashboard-metric{
-
 margin-top:20px;
-
 text-align:center;
-
 }
-
-
 .dashboard-metric span{
-
 font-size:28px;
-
 font-weight:800;
-
 color:#22c55e;
-
 }
-
-
 /* NETWORK LINES */
-
 .network-lines{
-
 position:absolute;
-
 inset:0;
-
 pointer-events:none;
-
 }
-
-
 .network-lines line{
-
 stroke:#6366f1;
-
 stroke-width:2;
-
 stroke-dasharray:8 6;
-
 opacity:.8;
-
 }
 .data-pulse{
-
 position:absolute;
-
 width:8px;
 height:8px;
-
 background:#3b82f6;
-
 border-radius:50%;
-
 box-shadow:
 0 0 10px #3b82f6;
-
 pointer-events:none;
-
 z-index:20;
-
 transition:transform .9s linear;
-
 }
+
 /* =========================================================
 PRACTICEGRID REVENUE FLOW
 ========================================================= */
