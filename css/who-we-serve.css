@@ -242,15 +242,6 @@ opacity:.7;
 /* ======================================
 2. ECOSYSTEM NETWORK — STRIPE STYLE
 ====================================== */
-.ecosystem-title{
-font-size:44px;
-text-align:center;
-margin-bottom:24px;
-background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-font-weight:700;
-}
 .ecosystem-network{
 position:relative;
 max-width:900px;
@@ -332,18 +323,6 @@ color:#cbd5f5;
 width:26px;
 height:26px;
 margin-bottom:8px;
-}
-.eco-pulse{
-position:absolute;
-width:8px;
-height:8px;
-border-radius:50%;
-background:#93c5fd;
-box-shadow:
-0 0 10px #6366f1,
-0 0 20px #6366f1,
-0 0 40px rgba(99,102,241,.8);
-pointer-events:none;
 }
 .eco-core.data-glow{
 box-shadow:
@@ -552,17 +531,6 @@ color:#cbd5f5;
 opacity:.9;
 margin-bottom:18px;
 }
-/* LINK */
-.org-link{
-font-weight:600;
-color:#93c5fd;
-font-size:14px;
-letter-spacing:.3px;
-transition:.3s;
-}
-.org-card:hover .org-link{
-color:white;
-}
 
 /* ======================================
 4. SPECIALTY CARDS
@@ -587,13 +555,6 @@ position:relative;
 overflow:hidden;
 }
 /* SECTION HEADER */
-.serve-specialties .section-header{
-max-width:720px;
-margin:0 auto 70px;
-text-align:center;
-color:#cbd5f5;
-opacity:.9;
-}
 .serve-specialties h2{
 font-size:38px;
 font-weight:800;
