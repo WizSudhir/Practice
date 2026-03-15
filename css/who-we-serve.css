@@ -7,17 +7,12 @@ Dark SaaS System
 BASE
 ====================================== */
 section{
-padding:140px 0;
+padding:100px 0;
 position:relative;
 }
 body{
 background:#050a19;
 color:white;
-}
-.container{
-max-width:1200px;
-margin:auto;
-padding:0 24px;
 }
 
 /* ======================================
@@ -442,18 +437,17 @@ animation:dataFlow 6s linear infinite;
 3. ORG CARDS
 ====================================== */
 /* SECTION HEADERS */
-.section-header{
+.section-title{
 text-align:center;
 max-width:1000px;
 margin:0 auto 80px;
 }
-.section-header p{
+.section-title p{
 font-size:18px;
 line-height:1.7;
 color:#cbd5f5;
-opacity:.9;
-max-width:680px;
-margin:0 auto;
+-webkit-text-fill-color:unset;
+background:none;
 }
 .org-grid{
 display:grid;
