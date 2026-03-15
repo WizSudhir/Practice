@@ -562,33 +562,21 @@ GRID LAYOUT
 =============================== */
 
 .rcm-layout{
-
 display:grid;
-
-grid-template-columns:1.1fr 1.3fr 1fr;
-
-grid-template-rows:220px 260px 160px;
-
+grid-template-columns:repeat(4,1fr);
+grid-template-rows:220px 220px 180px;
 gap:40px;
 grid-template-areas:
-
 "claim claim recovery recovery"
 "patient intelligence recovery recovery"
 "patient documentation documentation credentialing";
-
 }
 /* Assign areas */
-
 .claim{grid-area:claim;}
-
 .recovery{grid-area:recovery;}
-
 .patient{grid-area:patient;}
-
 .intelligence{grid-area:intelligence;}
-
 .documentation{grid-area:documentation;}
-
 .credentialing{grid-area:credentialing;}
 
 /* ===============================
@@ -596,7 +584,7 @@ CARDS
 =============================== */
 
 .rcm-card{
-
+height:100%;
 position:relative;
 
 border:1px solid rgba(255,255,255,0.06);
@@ -685,40 +673,6 @@ display:flex;
 gap:40px;
 justify-content:center;
 
-}
-
-/* ===============================
-GRID POSITIONS
-=============================== */
-
-.claim{
-grid-column:1;
-grid-row:1;
-}
-
-.patient{
-grid-column:2;
-grid-row:1 / span 2;
-}
-
-.recovery{
-grid-column:1;
-grid-row:2;
-}
-
-.intelligence{
-grid-column:2;
-grid-row:2;
-}
-
-.documentation{
-grid-column:1 / span 2;
-grid-row:3;
-}
-
-.credentialing{
-grid-column:3;
-grid-row:3;
 }
 
 /* ===============================
