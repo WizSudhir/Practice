@@ -280,13 +280,17 @@ requestAnimationFrame(animate)
 Scroll Reveal Animation - Infrastructure
 ===================================== */
 const cards = document.querySelectorAll(".rcm-card");
-const observer = new IntersectionObserver(entries=>{
+const observer = new IntersectionObserver((entries)=>{
 entries.forEach(entry=>{
 if(entry.isIntersecting){
 entry.target.classList.add("show");
+}else{
+setTimeout(()=>{
+entry.target.classList.remove("show");
+},200);
 }
 });
 },{
-threshold:0.3
+threshold:0.35
 });
 cards.forEach(card => observer.observe(card));
