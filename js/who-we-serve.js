@@ -214,7 +214,7 @@ const line = document.createElementNS(
 /* direction detection */
 const direction = nodeX < coreX ? -1 : 1;
 /* ORTHOGONAL ROUTING */
-const offset = 60;
+const offset = window.innerWidth < 768 ? 25 : 60;
 /* determine direction */
 const horizontalDir = nodeX < coreX ? 1 : -1;
 /* first horizontal segment */
