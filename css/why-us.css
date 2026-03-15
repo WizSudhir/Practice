@@ -702,8 +702,7 @@ text-align:center;
 font-weight:700;
 
 box-shadow:
-
-0 0 60px rgba(99,102,241,.4);
+0 20px 40px rgba(0,0,0,.6);
 
 }
 .engine-inner{
@@ -731,7 +730,16 @@ animation:enginePulse 2s infinite;
 50%{opacity:1}
 100%{opacity:.4}
 }
+.engine-icon{
 
+width:32px;
+height:32px;
+
+color:#93c5fd;
+
+margin-bottom:8px;
+
+}
 /* EMR RING */
 
 .emr-ring{
