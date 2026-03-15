@@ -971,7 +971,8 @@ color:var(--text-secondary);
 .reveal{
 opacity:0;
 transform:translateY(20px);
-transition:all .6s ease;
+transition:opacity .5s ease, transform .5s ease;
+will-change:transform,opacity;
 }
 .reveal.active{
 opacity:1;
@@ -1122,19 +1123,16 @@ padding:26px;
 /* MOBILE */
 @media (max-width:768px){
 .pg-hero{
-height:auto;
-min-height:100vh;
+height:220vh;
 }
 .pg-sticky{
-position:relative;
-height:auto;
+position:sticky;
+top:0;
+height:100vh;
 }
 .pg-stage{
-position:relative;
-height:auto;
-opacity:1;
-transform:none;
-pointer-events:auto;
+position:absolute;
+height:100vh;
 padding:120px 20px 60px;
 }
 .pg-title{
@@ -1169,10 +1167,11 @@ min-height:auto;
 font-size:34px;
 }
 .calc-section{
-padding:60px 20px;
+padding:50px 20px 30px;
 }
 .calc-layout{
 padding:25px;
+margin:20px auto;
 }
 .calc-grid input{
 padding:14px;
@@ -1192,6 +1191,9 @@ font-size:30px;
 .transform-sub{
 font-size:15px;
 }
+.transform-section{
+padding:40px 20px;
+}
 .transform-card{
 padding:30px;
 }
@@ -1210,10 +1212,12 @@ grid-template-areas:
 }
 .rcm-card{
 padding:18px;
+transition:opacity .5s ease, transform .5s ease;
 }
 .rcm-item svg{
 width:30px;
 height:30px;
+animation:none;
 }
 .rcm-services{
 padding:60px 20px;
@@ -1229,6 +1233,12 @@ grid-template-columns:1fr;
 }
 .service-card{
 padding:24px;
+}
+.calc-layout,
+.service-card,
+.transform-card,
+.services-nav{
+backdrop-filter:none;
 }
 }
 /* SMALL MOBILE */
