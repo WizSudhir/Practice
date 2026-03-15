@@ -591,28 +591,38 @@ gap:20px;
 
 .input-node{
 
-padding:16px 20px;
+width:180px;
+height:48px;
+
+display:flex;
+align-items:center;
+justify-content:center;
 
 border-radius:12px;
 
-background:rgba(20,25,55,.9);
+background:linear-gradient(
+135deg,
+rgba(99,102,241,.8),
+rgba(59,130,246,.8)
+);
 
-border:1px solid rgba(255,255,255,.08);
-
+font-size:13px;
 font-weight:600;
 
 cursor:pointer;
+
+box-shadow:
+0 10px 30px rgba(0,0,0,.4);
 
 transition:.3s;
 
 }
 
-
 .input-node:hover{
 
-transform:translateX(6px);
-
-border-color:#6366f1;
+transform:translateX(8px);
+box-shadow:
+0 0 25px rgba(99,102,241,.6);
 
 }
 
@@ -630,7 +640,35 @@ justify-content:center;
 align-items:center;
 
 }
+.arch-engine::before{
+content:"";
+position:absolute;
+width:340px;
+height:340px;
+border-radius:50%;
+border:1px dashed rgba(99,102,241,.35);
+animation:ringSpin 40s linear infinite;
+}
 
+.arch-engine::after{
+content:"";
+position:absolute;
+width:420px;
+height:420px;
+border-radius:50%;
+border:1px dashed rgba(59,130,246,.2);
+animation:ringSpinReverse 60s linear infinite;
+}
+
+@keyframes ringSpin{
+0%{transform:rotate(0)}
+100%{transform:rotate(360deg)}
+}
+
+@keyframes ringSpinReverse{
+0%{transform:rotate(360deg)}
+100%{transform:rotate(0)}
+}
 
 .engine-circle{
 
@@ -661,7 +699,31 @@ box-shadow:
 0 0 60px rgba(99,102,241,.4);
 
 }
+.engine-inner{
+text-align:center;
+display:flex;
+flex-direction:column;
+gap:8px;
+align-items:center;
+}
 
+.engine-sub{
+font-size:13px;
+opacity:.7;
+}
+
+.engine-status{
+font-size:13px;
+color:#93c5fd;
+opacity:.9;
+animation:enginePulse 2s infinite;
+}
+
+@keyframes enginePulse{
+0%{opacity:.4}
+50%{opacity:1}
+100%{opacity:.4}
+}
 
 /* EMR RING */
 
@@ -768,6 +830,27 @@ stroke-width:2;
 stroke-dasharray:6 6;
 
 opacity:.5;
+
+}
+.data-pulse{
+
+position:absolute;
+
+width:8px;
+height:8px;
+
+background:#3b82f6;
+
+border-radius:50%;
+
+box-shadow:
+0 0 10px #3b82f6;
+
+pointer-events:none;
+
+z-index:20;
+
+transition:transform .9s linear;
 
 }
 /* =========================================================
