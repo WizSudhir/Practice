@@ -274,7 +274,7 @@ background:rgba(99,102,241,.15);
 ================================= */
 .footer {
 position: relative;
-padding:110px 0 40px;
+padding:70px 0 30px;
 text-align:center;
 background:
 radial-gradient(circle at 20% 30%, rgba(99,102,241,0.18), transparent 50%),
@@ -285,11 +285,11 @@ overflow:hidden;
 .footer::before{
 content:"";
 position:absolute;
-top:-200px;
+top:-120px;
+height:700px;
 left:50%;
 transform:translateX(-50%);
 width:900px;
-height:900px;
 background:radial-gradient(circle,rgba(139,92,246,0.12),transparent 60%);
 filter:blur(120px);
 pointer-events:none;
@@ -441,7 +441,7 @@ letter-spacing:.1em;
 text-transform:uppercase;
 }
 .footer-bottom{
-margin-top:70px;
+margin-top:30px;
 padding-top:25px;
 display:flex;
 justify-content:center;
@@ -520,4 +520,7 @@ width:28px;
 height:28px;
 flex-shrink:0;
 color:var(--accent-2);
+}
+.section:last-of-type{
+padding-bottom:60px;
 }
