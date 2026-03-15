@@ -12,26 +12,7 @@ entry.target.classList.add("show");
 },{threshold:.15});
 revealCards.forEach(card=>observer.observe(card));
 
-// 2. FILTER SYSTEM //
-
-const filterBtns = document.querySelectorAll(".filter-btn");
-const cards = document.querySelectorAll(".specialty-card");
-filterBtns.forEach(btn=>{
-btn.addEventListener("click",()=>{
-filterBtns.forEach(b=>b.classList.remove("active"));
-btn.classList.add("active");
-const filter = btn.dataset.filter;
-cards.forEach(card=>{
-if(filter==="all" || card.dataset.category===filter){
-card.style.display="block";
-}else{
-card.style.display="none";
-}
-});
-});
-});
-
-// 3. ORBIT DATA PARTICLES //
+// 2. ORBIT DATA PARTICLES //
 
 const container = document.querySelector(".particle-system");
 const orbitRadii = [110,160,210]; // orbit1 orbit2 orbit3
@@ -68,7 +49,7 @@ for(let i=0;i<25;i++){
 createParticle();
 }
 
-// 4. DATA FLOW LINES //
+// 3. DATA FLOW LINES //
 
 const svg = document.querySelector(".data-lines");
 const center = {x:210,y:210};
@@ -90,10 +71,9 @@ line.setAttribute("y1",n.y);
 line.setAttribute("x2",center.x);
 line.setAttribute("y2",center.y);
 svg.appendChild(line);
-
 });
 
-// 5. 3D PARALLAX HERO EFFECT //
+// 4. 3D PARALLAX HERO EFFECT //
 
 const orbitSystem = document.querySelector(".orbit-system");
 if(orbitSystem){
@@ -104,7 +84,8 @@ orbitSystem.style.transform =
 `rotateY(${x}deg) rotateX(${y}deg)`;
 });
 }
-// 6. WEBGL HERO PARTICLE UNIVERSE //
+
+// 5. WEBGL HERO PARTICLE UNIVERSE //
 
 const universeContainer = document.getElementById("hero-universe");
 const scene = new THREE.Scene();
@@ -184,126 +165,78 @@ universeContainer.clientHeight
 );
 });
 
-// 7. LUCIDE ICONS //
+// 6. LUCIDE ICONS //
 lucide.createIcons();
 
-// 8. ECOSYSTEM SCROLL ANIMATION //
+// 7. ECOSYSTEM SCROLL ANIMATION //
 const ecoContainer = document.querySelector(".ecosystem-network");
 const ecoCore = document.querySelector(".eco-core");
 const ecoNodes = document.querySelectorAll(".eco-node");
 const ecoSvg = document.querySelector(".eco-lines");
-
 /* DRAW LINES */
-
 function drawLines(){
-
 ecoSvg.innerHTML = "";
-
 const coreRect = ecoCore.getBoundingClientRect();
 const containerRect = ecoContainer.getBoundingClientRect();
-
 const coreX = coreRect.left + coreRect.width/2 - containerRect.left;
 const coreY = coreRect.top + coreRect.height/2 - containerRect.top;
 ecoNodes.forEach(node=>{
-
 const rect = node.getBoundingClientRect();
-
 const nodeCenterX = rect.left + rect.width/2 - containerRect.left;
 const nodeCenterY = rect.top + rect.height/2 - containerRect.top;
-
 /* determine connection side */
-
 let nodeX = nodeCenterX;
 let nodeY = nodeCenterY;
-
 if(nodeCenterX < coreX){
 nodeX = rect.right - containerRect.left;   // right edge
 }
-
 if(nodeCenterX > coreX){
 nodeX = rect.left - containerRect.left;    // left edge
 }
-
 if(nodeCenterY < coreY){
 nodeY = rect.bottom - containerRect.top;   // bottom edge
 }
-
 if(nodeCenterY > coreY){
 nodeY = rect.top - containerRect.top;      // top edge
 }
-
 const line = document.createElementNS(
 "http://www.w3.org/2000/svg","path"
 );
-
-/* curve strength */
-const curve = 80;
-
 /* direction detection */
 const direction = nodeX < coreX ? -1 : 1;
-
-/* spline control points */
-
-const cp1x = nodeX + (direction * curve);
-const cp1y = nodeY + (coreY - nodeY) * 0.25;
-
-const cp2x = coreX - (direction * curve);
-const cp2y = coreY - (coreY - nodeY) * 0.25;
-
 /* ORTHOGONAL ROUTING */
-
 const offset = 60;
-
 /* determine direction */
-
 const horizontalDir = nodeX < coreX ? 1 : -1;
-
 /* first horizontal segment */
-
 const elbowX = nodeX + horizontalDir * offset;
-
 /* vertical alignment */
-
 const elbowY = coreY;
-
 /* final horizontal */
-
 const endX = coreX - horizontalDir * 80;
 const endY = coreY;
-
 /* segmented path */
-
 const pathData = `
 M ${nodeX} ${nodeY}
 L ${elbowX} ${nodeY}
 L ${elbowX} ${elbowY}
 L ${endX} ${endY}
 `;
-
 line.setAttribute("d", pathData);
-
 line.setAttribute("stroke","#6366f1");
 line.setAttribute("stroke-width","1.4");
 line.setAttribute("stroke-dasharray","3 8");
-
 ecoSvg.appendChild(line);
-
 });
-
 }
-
 window.addEventListener("load",drawLines);
-
 window.addEventListener("resize",drawLines);
 /* LINE FEED ANIMATION */
 function triggerDataFlow(nodeIndex){
-
 const line = ecoSvg.children[nodeIndex];
 if(!line) return;
-
 line.style.strokeDasharray="3 8";
 line.style.strokeDashoffset="80";
-
 line.animate(
 [
 {strokeDashoffset:80},
@@ -314,12 +247,10 @@ duration:900,
 easing:"ease-out"
 }
 );
-
 setTimeout(()=>{
 ecoCore.classList.add("data-glow");
 setTimeout(()=>ecoCore.classList.remove("data-glow"),400);
 },700);
-
 }
 setInterval(()=>{
 const index = Math.floor(Math.random()*ecoNodes.length);
