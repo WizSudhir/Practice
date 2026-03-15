@@ -417,7 +417,12 @@ animation:dataFlow 6s linear infinite;
 0%{stroke-dashoffset:0}
 100%{stroke-dashoffset:-60}
 }
-
+.eco-lines path.active{
+stroke:#8b9cff;
+filter:
+drop-shadow(0 0 12px #6366f1)
+drop-shadow(0 0 30px #6366f1);
+}
 /* ======================================
 3. ORG CARDS
 ====================================== */
