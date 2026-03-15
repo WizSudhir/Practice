@@ -17,7 +17,6 @@ if(index === stageIndex){
 stage.classList.add("active");
 // TRIGGER ANIMATIONS WHEN STAGE APPEARS
 if(stage.classList.contains("stage-cta")){
-let revenueAnimating = false;
 startRevenueCounter();
 }else{
 resetRevenue();
@@ -92,7 +91,10 @@ revenueAnimating = false;
 }
 requestAnimationFrame(animate);
 }
-
+function resetRevenue(){
+revenueAnimating = false;
+document.getElementById("revenueCounter").innerText = "$0";
+}
 // ===============================
 // Dashboard Metrics Animation
 // ===============================
