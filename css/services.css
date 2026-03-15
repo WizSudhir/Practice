@@ -1240,6 +1240,11 @@ padding:24px;
 .services-nav{
 backdrop-filter:none;
 }
+.stage-intro,
+.stage-pipeline,
+.stage-cta{
+background:none;
+}
 }
 /* SMALL MOBILE */
 @media (max-width:480px){
