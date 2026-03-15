@@ -254,17 +254,18 @@ background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
 ========================================================= */
 
 .calc-layout{
+min-height:100vh;
 display:grid;
 grid-template-columns:1fr 1fr;
 align-items:center;
 gap:60px;
 max-width:1200px;
-margin:120px auto;
+margin:60px auto;
 padding:0 24px;
 }
 .rcm-calculator{
 background:var(--bg-secondary);
-padding:50px;
+padding:40px;
 border-radius:var(--radius-lg);
 box-shadow:var(--shadow-soft);
 }
@@ -281,7 +282,7 @@ background:var(--bg-primary);
 color:var(--text-primary);
 }
 .calc-result{
-margin-top:40px;
+margin-top:25px;
 text-align:center;
 display:flex;
 flex-direction:column;
@@ -294,7 +295,9 @@ margin-top:10px;
 }
 .calc-right img{
 width:100%;
-max-width:500px;
+max-width:480px;
+max-height:420px;
+object-fit:contain;
 }
 .calc-field{
 display:flex;
