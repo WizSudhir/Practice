@@ -1,6 +1,6 @@
 /* =========================================================
    PRACTICEGRID — SERVICES PAGE CSS
-   Uses global tokens from index.css
+   Uses global tokens from root.css
 ========================================================= */
 
 /* =========================================================
@@ -1019,4 +1019,248 @@ margin-bottom:6px;
 .pipeline-title p{
 font-size:13px;
 color:var(--text-secondary);
+}
+/* =========================================================
+6. RESPONSIVE SYSTEM
+PracticeGrid Services Page
+========================================================= */
+/* LARGE LAPTOP */
+@media (max-width:1200px){
+.pg-title{
+font-size:48px;
+}
+.dashboard{
+grid-template-columns:repeat(2,1fr);
+}
+.calc-layout{
+grid-template-columns:1fr;
+gap:40px;
+}
+.calc-layout::after{
+display:none;
+}
+.transform-grid{
+grid-template-columns:1fr;
+gap:30px;
+}
+.transform-arrow{
+transform:rotate(90deg);
+}
+.services-layout{
+grid-template-columns:240px 1fr;
+gap:50px;
+}
+.rcm-layout{
+grid-template-columns:repeat(2,1fr);
+grid-template-areas:
+"claim claim"
+"patient intelligence"
+"documentation documentation"
+"recovery recovery"
+"credentialing credentialing";
+}
+}
+/* TABLET */
+@media (max-width:992px){
+.pg-title{
+font-size:40px;
+}
+.pg-sub{
+font-size:16px;
+}
+.pg-stage{
+padding:120px 30px 40px;
+}
+.dashboard{
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+.metric{
+min-height:140px;
+padding:22px;
+}
+.revenue-live h3{
+font-size:40px;
+}
+.calc-layout{
+padding:35px;
+}
+.transform-title{
+font-size:36px;
+}
+.services-layout{
+grid-template-columns:1fr;
+gap:40px;
+}
+.services-nav{
+position:relative;
+top:auto;
+flex-direction:row;
+flex-wrap:wrap;
+gap:10px;
+}
+.services-nav a{
+font-size:13px;
+padding:8px 10px;
+}
+.services-content{
+padding-left:0;
+}
+.services-content::before{
+display:none;
+}
+.rcm-phase{
+padding:40px;
+}
+.phase-header h2{
+font-size:26px;
+}
+.service-card{
+padding:26px;
+}
+}
+/* MOBILE */
+@media (max-width:768px){
+.pg-hero{
+height:auto;
+min-height:100vh;
+}
+.pg-sticky{
+position:relative;
+height:auto;
+}
+.pg-stage{
+position:relative;
+height:auto;
+opacity:1;
+transform:none;
+pointer-events:auto;
+padding:120px 20px 60px;
+}
+.pg-title{
+font-size:32px;
+line-height:1.2;
+}
+.pg-sub{
+font-size:15px;
+}
+.pg-buttons{
+flex-direction:column;
+align-items:center;
+}
+.pipeline{
+gap:10px;
+}
+.node{
+font-size:12px;
+padding:10px 16px;
+}
+.dashboard{
+grid-template-columns:1fr;
+gap:18px;
+}
+.metric span{
+font-size:28px;
+}
+.metric{
+min-height:auto;
+}
+.revenue-live h3{
+font-size:34px;
+}
+.calc-section{
+padding:60px 20px;
+}
+.calc-layout{
+padding:25px;
+}
+.calc-grid input{
+padding:14px;
+}
+.calc-result h3{
+font-size:30px;
+}
+.impact-box{
+padding:30px;
+}
+.impact-number{
+font-size:36px;
+}
+.transform-title{
+font-size:30px;
+}
+.transform-sub{
+font-size:15px;
+}
+.transform-card{
+padding:30px;
+}
+.rcm-infrastructure{
+padding:30px 20px;
+}
+.rcm-layout{
+grid-template-columns:1fr;
+grid-template-areas:
+"claim"
+"patient"
+"documentation"
+"recovery"
+"intelligence"
+"credentialing";
+}
+.rcm-card{
+padding:18px;
+}
+.rcm-item svg{
+width:30px;
+height:30px;
+}
+.rcm-services{
+padding:60px 20px;
+}
+.rcm-services .section-title{
+font-size:30px;
+}
+.phase-header h2{
+font-size:24px;
+}
+.phase-grid{
+grid-template-columns:1fr;
+}
+.service-card{
+padding:24px;
+}
+}
+/* SMALL MOBILE */
+@media (max-width:480px){
+.pg-title{
+font-size:28px;
+}
+.pg-sub{
+font-size:14px;
+}
+.pg-stage{
+padding:110px 16px 40px;
+}
+.metric span{
+font-size:24px;
+}
+.revenue-live h3{
+font-size:30px;
+}
+.calc-result h3{
+font-size:26px;
+}
+.impact-number{
+font-size:30px;
+}
+.transform-title{
+font-size:26px;
+}
+.service-card h3{
+font-size:16px;
+}
+.service-card p{
+font-size:13px;
+}
 }
