@@ -280,6 +280,7 @@ pointer-events:none;
 100%{transform:translate(120px,80px)}
 }
 .calc-layout{
+position:relative;
 min-height:100vh;
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -295,6 +296,15 @@ padding:50px;
 box-shadow:
 0 30px 80px rgba(0,0,0,.6),
 0 0 40px rgba(99,102,241,.15);
+}
+.calc-layout::after{
+content:"";
+position:absolute;
+top:40px;
+bottom:40px;
+left:50%;
+width:1px;
+background:linear-gradient(transparent,rgba(255,255,255,.1),transparent);
 }
 .rcm-calculator{
 background:transparent;
@@ -313,6 +323,10 @@ border-radius:12px;
 border:1px solid rgba(255,255,255,0.08);
 background:var(--bg-primary);
 color:var(--text-primary);
+}
+.calc-grid input:focus{
+border-color:#6366f1;
+box-shadow:0 0 0 2px rgba(99,102,241,.25);
 }
 .calc-result{
 margin-top:18px;
@@ -362,6 +376,15 @@ max-width:420px;
 text-align:center;
 box-shadow:var(--shadow-soft);
 }
+.impact-box::before{
+content:"";
+position:absolute;
+inset:-1px;
+border-radius:inherit;
+background:linear-gradient(120deg,transparent,rgba(99,102,241,.35),transparent);
+opacity:.25;
+pointer-events:none;
+}
 .impact-title{
 font-size:18px;
 color:var(--text-secondary);
@@ -374,6 +397,10 @@ margin-bottom:20px;
 background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
+transition:transform .3s ease;
+}
+.impact-number.animate{
+transform:scale(1.08);
 }
 .impact-breakdown{
 display:flex;
@@ -386,6 +413,10 @@ display:flex;
 justify-content:space-between;
 font-size:14px;
 color:var(--text-secondary);
+}
+.impact-row strong{
+font-weight:700;
+color:#fff;
 }
 .impact-message{
 font-size:14px;
