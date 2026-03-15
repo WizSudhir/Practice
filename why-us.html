@@ -208,115 +208,102 @@ PracticeGrid Revenue Recovery Engine Activated
 <!-- =========================================
 PRACTICEGRID PLATFORM ARCHITECTURE
 ========================================= -->
-
-<section class="pg-platform-architecture">
+<section class="pg-architecture">
 
 <div class="container">
 
 <div class="section-header">
 
-<h2 class="section-title">
-Inside the PracticeGrid Revenue Intelligence Platform
-</h2>
+<h2>Inside the PracticeGrid Revenue Intelligence Platform</h2>
 
 <p>
-PracticeGrid connects with your practice systems, analyzes billing workflows,
-detects denial risks, and activates automated recovery processes that improve
-collections and financial performance.
+PracticeGrid connects your practice systems, analyzes revenue workflows,
+and delivers real-time financial intelligence for healthcare practices.
 </p>
 
 </div>
 
+<div class="architecture-grid">
 
-<div class="platform-diagram">
+<!-- LEFT INPUTS -->
 
-<!-- ===============================
-DATA SOURCES
-================================= -->
+<div class="arch-inputs">
 
-<div class="platform-layer sources">
-
-<div class="source-node">EHR / EMR</div>
-<div class="source-node">Claims Data</div>
-<div class="source-node">Payer Rules</div>
-<div class="source-node">Scheduling</div>
-<div class="source-node">Clinical Documentation</div>
+<div class="input-node" data-type="claims">Claims Data</div>
+<div class="input-node" data-type="eligibility">Eligibility Data</div>
+<div class="input-node" data-type="coding">Coding Data</div>
+<div class="input-node" data-type="payer">Payer Rules</div>
+<div class="input-node" data-type="documentation">Documentation</div>
 
 </div>
 
 
-<div class="flow-arrow arrow-down"></div>
+<!-- CENTER ENGINE -->
 
+<div class="arch-engine">
 
-<!-- ===============================
-CORE PLATFORM
-================================= -->
+<div class="engine-circle">
 
-<div class="platform-core">
-
-<div class="core-inner">
-
-<h3>PracticeGrid Revenue Intelligence Engine</h3>
-
-<div class="core-modules">
-
-<div class="core-module">
-<h4>Revenue Intelligence</h4>
-<p>Detects payer behavior patterns</p>
-</div>
-
-<div class="core-module">
-<h4>Denial Prevention</h4>
-<p>Validates claims before submission</p>
-</div>
-
-<div class="core-module">
-<h4>Workflow Optimization</h4>
-<p>Routes claims to recovery queues</p>
-</div>
-
-<div class="core-module">
-<h4>AR Recovery</h4>
-<p>Appeals denied claims efficiently</p>
+<div class="engine-title">
+PracticeGrid<br>
+Revenue Intelligence Engine
 </div>
 
 </div>
+
+
+<!-- EMR ECOSYSTEM -->
+
+<div class="emr-ring">
+
+<img src="images/epic.png" class="emr emr1">
+<img src="images/athena.png" class="emr emr2">
+<img src="images/kareo.png" class="emr emr3">
+<img src="images/nextgen.png" class="emr emr4">
+<img src="images/cerner.png" class="emr emr5">
 
 </div>
 
 </div>
 
 
-<div class="flow-arrow arrow-down"></div>
+<!-- RIGHT DASHBOARD -->
 
+<div class="arch-dashboard">
 
-<!-- ===============================
-OUTCOMES
-================================= -->
+<div class="dashboard-card">
 
-<div class="platform-layer outcomes">
+<h3>Revenue Intelligence</h3>
 
-<div class="outcome-node">
-<span class="outcome-value">98%</span>
-<p>Clean Claim Rate</p>
-</div>
+<div class="dashboard-metric">
 
-<div class="outcome-node">
-<span class="outcome-value">35%</span>
-<p>Denial Reduction</p>
-</div>
-
-<div class="outcome-node">
-<span class="outcome-value">30%</span>
-<p>Faster Collections</p>
-</div>
-
-<div class="outcome-node">
-<span class="outcome-value">$250k+</span>
-<p>Revenue Recovered</p>
-</div>
+<span id="metric1">0</span>
+<p id="label1">Claims Analyzed</p>
 
 </div>
+
+<div class="dashboard-metric">
+
+<span id="metric2">0</span>
+<p id="label2">Denial Risks</p>
+
+</div>
+
+<div class="dashboard-metric">
+
+<span id="metric3">$0</span>
+<p id="label3">Revenue Opportunity</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- SVG NETWORK -->
+
+<svg class="network-lines"></svg>
 
 </div>
 
