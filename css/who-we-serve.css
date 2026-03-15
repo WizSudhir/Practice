@@ -881,6 +881,13 @@ height:560px;
 width:90px;
 height:90px;
 }
+.eco-core h3{
+font-size:14px;
+}
+.eco-core span{
+font-size:10px;
+line-height:1.2;
+}
 .eco-node{
 width:150px;
 height:52px;
@@ -891,12 +898,22 @@ padding:10px 12px;
 width:18px;
 height:18px;
 }
-.node-sdk{top:50px;left:10px;}
-.node-market{top:230px;left:5px;}
-.node-orchestration{top:410px;left:15px;}
-.node-events{top:50px;right:10px;}
-.node-pipeline{top:230px;right:5px;}
-.node-management{top:410px;right:15px;}
+.node-sdk{top:40px;left:8px;}
+.node-events{top:40px;right:8px;}
+.node-market{top:190px;left:8px;}
+.node-pipeline{top:190px;right:8px;}
+.node-orchestration{top:340px;left:8px;}
+.node-management{top:340px;right:8px;}
+.eco-lines path{
+stroke:#6366f1;
+stroke-width:1.4;
+stroke-dasharray:3 8;
+opacity:.6;
+filter:
+drop-shadow(0 0 6px rgba(99,102,241,.6))
+drop-shadow(0 0 14px rgba(99,102,241,.6));
+transition:all .4s ease;
+}
 /* ORG GRID */
 .org-grid{
 grid-template-columns:1fr;
@@ -971,7 +988,7 @@ width:90px;
 height:90px;
 }
 .ecosystem-network{
-height:380px;
+height:560px;
 }
 .eco-node{
 width:130px;
