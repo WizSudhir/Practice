@@ -577,6 +577,13 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
+opacity:0;
+transform:translateY(20px);
+transition:all .6s ease;
+}
+.rcm-card.show{
+opacity:1;
+transform:translateY(0);
 }
 /* CENTERED TITLE */
 .rcm-card-title{
