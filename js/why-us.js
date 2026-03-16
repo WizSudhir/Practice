@@ -303,8 +303,6 @@ const d = data[type]
 
 if(!d) return
 
-sendDataPulse(node)
-
 if(engineStatus && d.status){
 engineStatus.innerText = d.status
 }
@@ -354,7 +352,7 @@ const offset = 70
 
 const elbowX = nodeX + offset
 
-const endX = coreX - 90
+const endX = coreX - 110
 
 const path = document.createElementNS(
 "http://www.w3.org/2000/svg","path"
@@ -368,6 +366,10 @@ L ${endX} ${coreY}
 `
 
 path.setAttribute("d",pathData)
+path.setAttribute("stroke","#6366f1")
+path.setAttribute("stroke-width","1.6")
+path.setAttribute("stroke-dasharray","3 8")
+path.setAttribute("fill","none")
 
 svg.appendChild(path)
 
@@ -403,6 +405,10 @@ L ${endX} ${endY}
 `
 
 path.setAttribute("d",pathData)
+path.setAttribute("stroke","#6366f1")
+path.setAttribute("stroke-width","1.6")
+path.setAttribute("stroke-dasharray","3 8")
+path.setAttribute("fill","none")
 
 svg.appendChild(path)
 }
@@ -441,6 +447,7 @@ const pulse = document.createElement("div")
 pulse.className = "data-pulse"
 
 const container = document.querySelector(".architecture-grid")
+if(!container) return
 container.appendChild(pulse)
 
 const from = fromElement.getBoundingClientRect()
