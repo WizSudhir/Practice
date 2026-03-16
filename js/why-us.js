@@ -202,15 +202,13 @@ ticking = false
 ticking = true
 }
 })
-
+}
 // ===============================
 // SaaS Hero Parallax System
 // ===============================
 
 const dashboard =
 document.querySelector(".workflow-dashboard")
-const hero =
-document.querySelector(".hero-enterprise")
 if(hero && dashboard){
 hero.addEventListener("mousemove",(e)=>{
 const x = (window.innerWidth/2 - e.clientX)/40
@@ -310,7 +308,7 @@ p.style.opacity = ".1"
 })
 /* activate hovered node line */
 const index = [...inputs].indexOf(node)
-const activeLine = svg.children[index]
+const activeLine = svg.querySelectorAll("path")[index]
 if(activeLine){
 activeLine.style.opacity="1"
 activeLine.style.strokeDasharray="6 10"
@@ -430,7 +428,7 @@ svg.appendChild(path)
 }
 window.addEventListener("load", drawLines)
 window.addEventListener("resize", drawLines)
-
+drawLines()
 function animateMetric(el,value){
 
 let numeric = parseInt(
