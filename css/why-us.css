@@ -614,24 +614,20 @@ z-index:2;
 .arch-engine::before{
 content:"";
 position:absolute;
-width:360px;
-height:360px;
+width:420px;
+height:420px;
 border-radius:50%;
-background:
-radial-gradient(circle,rgba(99,102,241,.25) 0%,rgba(99,102,241,.12) 30%,transparent 70%);
-filter:blur(40px);
-pointer-events:none;
+background:radial-gradient(circle,rgba(99,102,241,.22) 0%,rgba(99,102,241,.16) 20%,rgba(99,102,241,.10) 35%,transparent 60%);
+filter:blur(10px);
 }
 .arch-engine::after{
 content:"";
 position:absolute;
-width:480px;
-height:480px;
+width:560px;
+height:560px;
 border-radius:50%;
-background:
-radial-gradient(circle,rgba(59,130,246,.18) 0%,transparent 70%);
-filter:blur(80px);
-pointer-events:none;
+background:radial-gradient(circle,rgba(59,130,246,.18) 0%,rgba(59,130,246,.10) 30%,rgba(59,130,246,.05) 50%,transparent 70%);
+filter:blur(20px);
 }
 .engine-circle{
 width:220px;
@@ -639,11 +635,11 @@ height:220px;
 border-radius:50%;
 background:
 linear-gradient(180deg,rgba(20,25,55,.9),rgba(10,15,35,.95));
-border:2px solid rgba(255,255,255,.35);
+border:3px solid rgba(255,255,255,.45);
 box-shadow:
-0 0 0 6px rgba(255,255,255,.05),
-0 20px 40px rgba(0,0,0,.6),
-0 0 40px rgba(99,102,241,.25);
+0 0 0 8px rgba(255,255,255,.05),
+0 0 30px rgba(59,130,246,.25),
+0 20px 40px rgba(0,0,0,.6);
 display:flex;
 align-items:center;
 justify-content:center;
@@ -651,29 +647,6 @@ text-align:center;
 font-weight:700;
 position:relative;
 z-index:2;
-}
-.engine-circle::before{
-content:"";
-position:absolute;
-width:320px;
-height:320px;
-border-radius:50%;
-background:radial-gradient(circle,transparent 65%,rgba(255,255,255,.15) 66%,transparent 67%);
-animation:ringSpin 40s linear infinite;
-}
-.engine-circle::after{
-content:"";
-position:absolute;
-width:420px;
-height:420px;
-border-radius:50%;
-background:repeating-radial-gradient(circle,rgba(255,255,255,.08) 0px,rgba(255,255,255,.08) 2px,transparent 2px,transparent 18px);
-opacity:.7;
-animation:ringSpin 60s linear reverse infinite;
-}
-@keyframes ringSpin{
-0%{transform:rotate(0deg)}
-100%{transform:rotate(360deg)}
 }
 .engine-inner{
 display:flex;
