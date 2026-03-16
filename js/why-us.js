@@ -107,9 +107,9 @@ const leakageMetric = document.querySelector(".metric-box .metric-value")
 if(leakageMetric){
 leakageMetric.innerText="$8,490"
 }
-const leakageMetric = document.querySelector(".metric-box.recovered .metric-value")
-if(leakageMetric){
-leakageMetric.innerText="$0"
+const recoveredMetric = document.querySelector(".metric-box.recovered .metric-value")
+if(recoveredMetric){
+recoveredMetric.innerText="$0"
 }
 fixBanner.classList.remove("active")
 document.querySelector(".revenue-stage")
@@ -185,7 +185,7 @@ fixBanner.classList.add("active")
 // ===============================
 // Aurora Background Interaction
 // ===============================
-
+const hero = document.querySelector(".hero-enterprise")
 const auroras = document.querySelectorAll(".hero-aurora")
 let ticking = false
 if(hero){
@@ -352,18 +352,41 @@ const container = document.querySelector(".architecture-grid")
 if(!container) return
 const cont = container.getBoundingClientRect()
 const engineRect = engine.getBoundingClientRect()
+
 inputs.forEach((input,index)=>{
+
 const rect = input.getBoundingClientRect()
+
 const nodeX = rect.right - cont.left
 const nodeY = rect.top + rect.height/2 - cont.top
+
 const coreX = engineRect.left - cont.left
 const coreY = engineRect.top + engineRect.height/2 - cont.top
+
+const offset = 60
+const elbowX = nodeX + offset
+
+const endX = coreX + engineRect.width * 0.1
+
+const spread = 70
+const endY = coreY - spread/2 + (index * (spread/(inputs.length-1)))
+
+const path = document.createElementNS(
+"http://www.w3.org/2000/svg","path"
+)
+
+const pathData = `
+M ${nodeX} ${nodeY}
+L ${elbowX} ${nodeY}
+L ${elbowX} ${endY}
+L ${endX} ${endY}
+`
+
 path.setAttribute("d",pathData)
+path.setAttribute("stroke","#60a5fa")
+path.setAttribute("stroke-width","2.4")
 path.setAttribute("fill","none")
-path.style.strokeLinecap = "round"
-path.style.strokeLinejoin = "round"
-path.style.opacity = ".65"
-path.style.filter="drop-shadow(0 0 6px rgba(99,102,241,.5))"
+
 svg.appendChild(path)
 
 })
