@@ -326,7 +326,7 @@ node.addEventListener("mouseleave",()=>{
 /* restore all lines */
 svg.querySelectorAll("path").forEach(p=>{
 p.style.opacity=".65"
-p.style.strokeDasharray="3 8"
+p.style.strokeDasharray="6 10"
 p.style.animation="dataFlow 6s linear infinite"
 })
 if(engineStatus){
@@ -344,7 +344,7 @@ const container = document.querySelector(".architecture-grid")
 if(!container) return
 const cont = container.getBoundingClientRect()
 const engineRect = engine.getBoundingClientRect()
-inputs.forEach(input=>{
+inputs.forEach((input,index)=>{
 const rect = input.getBoundingClientRect()
 const nodeX = rect.right - cont.left
 const nodeY = rect.top + rect.height/2 - cont.top
