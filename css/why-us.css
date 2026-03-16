@@ -309,7 +309,8 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 height:260px;
-padding:40px 30px;
+padding:50px 60px;
+gap:40px;
 background:rgba(15,23,42,.6);
 border:1px solid rgba(255,255,255,.08);
 border-radius:20px;
@@ -335,23 +336,6 @@ animation:pipelineMove 4s linear infinite;
 @keyframes pipelineMove{
 0%{background-position:0% 0;}
 100%{background-position:200% 0;}
-}
-.workflow::after{
-content:"";
-position:absolute;
-left:40px;
-right:40px;
-top:68%;
-height:6px;
-transform:translateY(-50%);
-background:
-repeating-linear-gradient(90deg,transparent 0px,transparent 30px,#22c55e 30px,#22c55e 40px);
-animation:flow 2s linear infinite;
-opacity:.5;
-}
-@keyframes flow{
-0%{background-position:0 0;}
-100%{background-position:80px 0;}
 }
 .dashboard-metrics{
 display:flex;
@@ -398,11 +382,12 @@ position:relative;
 .stage:not(:last-child)::after{
 content:"";
 position:absolute;
-top:60%;
-right:-40%;
-width:80%;
+top:50%;
+left:100%;
+width:100%;
 height:2px;
-background:rgba(255,255,255,.1);
+background:rgba(255,255,255,.15);
+transform:translateY(-50%);
 }
 .stage-node{
 width:70px;
@@ -468,14 +453,14 @@ animation:dangerBlink 1.2s infinite;
 }
 .revenue-token{
 position:absolute;
-top:calc(60% - 8px);
+top:68%;
 transform:translateY(-50%);
-background:#22c55e;
+background:linear-gradient(135deg,#22c55e,#16a34a);
+font-size:13px;
+padding:6px 14px;
 color:white;
 font-weight:700;
-padding:10px 16px;
 border-radius:16px;
-font-size:14px;
 box-shadow:
 0 0 20px rgba(34,197,94,.7),
 0 10px 25px rgba(0,0,0,.45);
@@ -566,15 +551,16 @@ overflow:hidden;
 content:"";
 position:absolute;
 inset:0;
-background-image:
-linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+background-image:radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
+background-size:18px 18px;
+opacity:.25;
 background-size:80px 80px;
 pointer-events:none;
 }
 .architecture-grid{
 display:grid;
-grid-template-columns:1fr 1.2fr 1fr;
+grid-template-columns:320px 1fr 300px;
+gap:80px;
 align-items:center;
 max-width:1200px;
 margin:auto;
@@ -627,13 +613,13 @@ position:relative;
 display:flex;
 justify-content:center;
 align-items:center;
-z-index:2;
+z-index:5;
 }
 .arch-engine::before{
 content:"";
 position:absolute;
-width:420px;
-height:420px;
+width:320px;
+height:320px;
 border-radius:50%;
 background:radial-gradient(circle,rgba(99,102,241,.22) 0%,rgba(99,102,241,.16) 20%,rgba(99,102,241,.10) 35%,transparent 60%);
 filter:blur(10px);
@@ -745,13 +731,13 @@ animation:logoFix 30s linear infinite;
 100%{transform:rotate(-360deg)}
 }
 .emr1{ top:-24px; left:50%; transform:translateX(-50%); }
-.emr2{ top:20%; right:-24px; }
+.emr2{ top:15%; right:-24px; }
 .emr3{ bottom:-24px; left:50%; transform:translateX(-50%); }
-.emr4{ top:20%; left:-24px; }
-.emr5{ top:8%; left:25%; }
-.emr6{ top:8%; right:25%; }
-.emr7{ bottom:8%; right:25%; }
-.emr8{ bottom:8%; left:25%; }
+.emr4{ top:15%; left:-24px; }
+.emr5{ top:5%; left:30%; }
+.emr6{ top:5%; right:30%; }
+.emr7{ bottom:5%; right:30%; }
+.emr8{ bottom:5%; left:30%; }
 /* DASHBOARD */
 .arch-dashboard{
 display:flex;
