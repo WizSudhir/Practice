@@ -301,7 +301,6 @@ status:"Validating documentation..."
 if(inputs.length > 0){
 inputs.forEach(node=>{
 node.addEventListener("mouseenter",()=>{
-sendDataPulse(node)
 /* fade all lines */
 svg.querySelectorAll("path").forEach(p=>{
 p.style.opacity = ".1"
@@ -363,6 +362,7 @@ const coreY = engineRect.top + engineRect.height/2 - cont.top
 
 const offset = 60
 const elbowX = nodeX + offset
+const elbowY = nodeY + (index * 6)   // spreads lines
 
 const endX = coreX + engineRect.width * 0.1
 
