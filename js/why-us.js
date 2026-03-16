@@ -335,14 +335,7 @@ engineStatus.innerText =
 }
 })
 })
-}
-node.addEventListener("mouseleave",()=>{
-svg.querySelectorAll("path").forEach(p=>{
-p.style.opacity=".65"
-p.style.strokeDasharray="3 8"
-})
-})
-  
+} 
 /* DRAW NETWORK LINES */
 function drawLines(){
 if(!svg || !engine || inputs.length === 0) return
