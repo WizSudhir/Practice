@@ -561,6 +561,16 @@ max-width:1200px;
 margin:auto;
 position:relative;
 height:650px;
+overflow:visible;
+}
+.network-lines{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:650px;
+pointer-events:none;
+z-index:4;
 }
 /* INPUTS */
 .arch-inputs{
@@ -626,7 +636,11 @@ height:220px;
 border-radius:50%;
 background:
 linear-gradient(180deg,rgba(20,25,55,.9),rgba(10,15,35,.95));
-border:1px solid rgba(255,255,255,.08);
+border:2px solid rgba(255,255,255,.35);
+box-shadow:
+0 0 0 6px rgba(255,255,255,.05),
+0 20px 40px rgba(0,0,0,.6),
+0 0 40px rgba(99,102,241,.25);
 display:flex;
 align-items:center;
 justify-content:center;
@@ -634,6 +648,28 @@ text-align:center;
 font-weight:700;
 box-shadow:
 0 20px 40px rgba(0,0,0,.6);
+}
+.engine-circle::before{
+content:"";
+position:absolute;
+width:320px;
+height:320px;
+border-radius:50%;
+border:1px solid rgba(255,255,255,.15);
+animation:ringSpin 40s linear infinite;
+}
+.engine-circle::after{
+content:"";
+position:absolute;
+width:420px;
+height:420px;
+border-radius:50%;
+border:1px solid rgba(255,255,255,.08);
+animation:ringSpin 60s linear reverse infinite;
+}
+@keyframes ringSpin{
+0%{transform:rotate(0deg)}
+100%{transform:rotate(360deg)}
 }
 .engine-inner{
 display:flex;
@@ -680,14 +716,6 @@ width:360px;
 height:360px;
 pointer-events:none;
 }
-.emr{
-position:absolute;
-width:46px;
-height:46px;
-background:white;
-padding:6px;
-border-radius:10px;
-}
 .emr-ring{
 position:absolute;
 top:50%;
@@ -701,10 +729,16 @@ animation:orbitRotate 30s linear infinite;
 0%{transform:translate(-50%,-50%) rotate(0deg)}
 100%{transform:translate(-50%,-50%) rotate(360deg)}
 }
-.emr img{
-width:100%;
-height:100%;
-object-fit:contain;
+.emr{
+position:absolute;
+width:48px;
+height:48px;
+background:white;
+padding:6px;
+border-radius:50%;
+border:1px solid rgba(255,255,255,.2);
+box-shadow:
+0 6px 20px rgba(0,0,0,.45);
 animation:logoFix 30s linear infinite;
 }
 @keyframes logoFix{
@@ -776,10 +810,10 @@ font-weight:900;
 letter-spacing:.5px;
 }
 .dashboard-metric:nth-child(1) span{
-color:#60a5fa;
+color:#f59e0b;
 }
 .dashboard-metric:nth-child(2) span{
-color:#f59e0b;
+color:#ef4444;
 }
 .dashboard-metric:nth-child(3) span{
 color:#22c55e;
