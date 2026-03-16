@@ -537,6 +537,15 @@ pointer-events:none;
 /* =========================================================
 PRACTICEGRID PLATFORM ARCHITECTURE
 ========================================================= */
+.section-title p{
+background:none;
+-webkit-text-fill-color:initial;
+color:#cbd5f5;
+font-size:18px;
+line-height:1.7;
+margin-top:18px;
+max-width:720px;
+}
 .pg-architecture{
 padding:140px 0;
 position:relative;
