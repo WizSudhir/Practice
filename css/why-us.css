@@ -552,6 +552,7 @@ PRACTICEGRID PLATFORM ARCHITECTURE
 padding:120px 0;
 background:#050a19;
 position:relative;
+z-index:1;
 }
 .architecture-grid{
 display:grid;
@@ -570,7 +571,7 @@ left:0;
 width:100%;
 height:650px;
 pointer-events:none;
-z-index:4;
+z-index:10;
 }
 /* INPUTS */
 .arch-inputs{
@@ -594,6 +595,8 @@ cursor:pointer;
 box-shadow:
 0 10px 30px rgba(0,0,0,.4);
 transition:.3s;
+position:relative;
+z-index:2;
 }
 .input-node:hover{
 transform:translateX(8px);
@@ -646,8 +649,8 @@ align-items:center;
 justify-content:center;
 text-align:center;
 font-weight:700;
-box-shadow:
-0 20px 40px rgba(0,0,0,.6);
+position:relative;
+z-index:2;
 }
 .engine-circle::before{
 content:"";
@@ -655,7 +658,7 @@ position:absolute;
 width:320px;
 height:320px;
 border-radius:50%;
-border:1px solid rgba(255,255,255,.15);
+background:radial-gradient(circle,transparent 65%,rgba(255,255,255,.15) 66%,transparent 67%);
 animation:ringSpin 40s linear infinite;
 }
 .engine-circle::after{
@@ -664,7 +667,8 @@ position:absolute;
 width:420px;
 height:420px;
 border-radius:50%;
-border:1px solid rgba(255,255,255,.08);
+background:repeating-radial-gradient(circle,rgba(255,255,255,.08) 0px,rgba(255,255,255,.08) 2px,transparent 2px,transparent 18px);
+opacity:.7;
 animation:ringSpin 60s linear reverse infinite;
 }
 @keyframes ringSpin{
@@ -776,6 +780,8 @@ background:linear-gradient(180deg,rgba(20,25,55,.95),rgba(10,15,35,.98));
 box-shadow:
 0 25px 80px rgba(0,0,0,.55),
 0 0 40px rgba(99,102,241,.2);
+position:relative;
+z-index:2;
 }
 .dashboard-card h3{
 font-size:20px;
@@ -809,15 +815,9 @@ font-size:30px;
 font-weight:900;
 letter-spacing:.5px;
 }
-.dashboard-metric:nth-child(1) span{
-color:#f59e0b;
-}
-.dashboard-metric:nth-child(2) span{
-color:#ef4444;
-}
-.dashboard-metric:nth-child(3) span{
-color:#22c55e;
-}
+#metric1{color:#f59e0b;   /* yellow */}
+#metric2{color:#ef4444;   /* red */}
+#metric3{color:#22c55e;   /* green */}
 /* NETWORK LINES */
 .network-lines{
 position:absolute;
@@ -826,14 +826,16 @@ pointer-events:none;
 z-index:4;
 }
 .network-lines path{
-stroke:#6366f1;
-stroke-width:1.6;
-stroke-dasharray:3 8;
+stroke:#60a5fa;
+stroke-width:2.4;
+stroke-dasharray:6 10;
 stroke-linecap:round;
+opacity:.9;
 fill:none;
-opacity:.7;
-filter:drop-shadow(0 0 8px rgba(99,102,241,.5));
-animation:dataFlow 6s linear infinite;
+filter:
+drop-shadow(0 0 6px rgba(96,165,250,.6))
+drop-shadow(0 0 12px rgba(96,165,250,.3));
+animation:dataFlow 4s linear infinite;
 }
 @keyframes dataFlow{
 0%{stroke-dashoffset:0}
