@@ -305,7 +305,7 @@ const index = [...inputs].indexOf(node)
 const activeLine = svg.children[index]
 if(activeLine){
 activeLine.style.opacity="1"
-activeLine.style.strokeDasharray="6 6"
+activeLine.style.strokeDasharray="6 10"
 activeLine.style.animation="dataFlow 1s linear infinite"
 }
 /* dashboard metrics */
@@ -353,8 +353,7 @@ const coreY = engineRect.top + engineRect.height/2 - cont.top
 const offset = 60
 const elbowX = nodeX + offset
 const coreRadius = engineRect.width / 2
-const endX = coreX - coreRadius
-const index = [...inputs].indexOf(input)
+const endX = coreX - coreRadius + 3
 const spread = 70
 const endY = coreY - spread/2 + (index * (spread/(inputs.length-1)))
 const path = document.createElementNS(
@@ -367,9 +366,6 @@ L ${endX} ${endY}
 `
 
 path.setAttribute("d",pathData)
-path.setAttribute("stroke","#6366f1")
-path.setAttribute("stroke-width","1.6")
-path.setAttribute("stroke-dasharray","3 8")
 path.setAttribute("fill","none")
 path.style.strokeLinecap = "round"
 path.style.strokeLinejoin = "round"
@@ -418,7 +414,6 @@ svg.appendChild(path)
 }
 window.addEventListener("load", drawLines)
 window.addEventListener("resize", drawLines)
-setTimeout(drawLines, 200)
 
 function animateMetric(el,value){
 
