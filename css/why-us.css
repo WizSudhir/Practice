@@ -596,7 +596,7 @@ align-items:center;
 max-width:1200px;
 margin:auto;
 position:relative;
-height:650px;
+height:720px;
 overflow:visible;
 }
 .network-lines{
@@ -746,33 +746,29 @@ position:absolute;
 width:48px;
 height:48px;
 background:white;
-padding:6px;
-border-radius:50%;
+padding:8px;
+border-radius:12px;
 border:1px solid rgba(255,255,255,.2);
 box-shadow:
 0 6px 20px rgba(0,0,0,.45);
+display:flex;
+align-items:center;
+justify-content:center;
+object-fit:contain;
 animation:logoFix 30s linear infinite;
 }
 @keyframes logoFix{
 0%{transform:rotate(0deg)}
 100%{transform:rotate(-360deg)}
 }
-.emr{
-position:absolute;
-width:46px;
-height:46px;
-background:white;
-padding:6px;
-border-radius:10px;
-}
-.emr1{ top:-20px; left:50%; transform:translateX(-50%); }
-.emr2{ top:20%; right:-20px; }
-.emr3{ bottom:-20px; left:50%; transform:translateX(-50%); }
-.emr4{ top:20%; left:-20px; }
-.emr5{ top:5%; left:25%; }
-.emr6{ top:5%; right:25%; }
-.emr7{ bottom:5%; right:25%; }
-.emr8{ bottom:5%; left:25%; }
+.emr1{ top:-24px; left:50%; transform:translateX(-50%); }
+.emr2{ top:20%; right:-24px; }
+.emr3{ bottom:-24px; left:50%; transform:translateX(-50%); }
+.emr4{ top:20%; left:-24px; }
+.emr5{ top:8%; left:25%; }
+.emr6{ top:8%; right:25%; }
+.emr7{ bottom:8%; right:25%; }
+.emr8{ bottom:8%; left:25%; }
 /* DASHBOARD */
 .arch-dashboard{
 display:flex;
