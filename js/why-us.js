@@ -352,8 +352,11 @@ const coreX = engineRect.left - cont.left
 const coreY = engineRect.top + engineRect.height/2 - cont.top
 const offset = 60
 const elbowX = nodeX + offset
-const endX = coreX - 110
-const endY = coreY
+const coreRadius = engineRect.width / 2
+const endX = coreX - coreRadius
+const index = [...inputs].indexOf(input)
+const spread = 70
+const endY = coreY - spread/2 + (index * (spread/(inputs.length-1)))
 const path = document.createElementNS(
 "http://www.w3.org/2000/svg","path"
 )
