@@ -359,12 +359,13 @@ const endY = coreY - spread/2 + (index * (spread/(inputs.length-1)))
 const path = document.createElementNS(
 "http://www.w3.org/2000/svg","path"
 )
-const curveX = nodeX + 60
+const elbowX = nodeX + 60
+
 const pathData = `
 M ${nodeX} ${nodeY}
-C ${curveX} ${nodeY},
-${curveX} ${endY},
-${endX} ${endY}
+L ${elbowX} ${nodeY}
+L ${elbowX} ${endY}
+L ${endX} ${endY}
 `
 
 path.setAttribute("d",pathData)
