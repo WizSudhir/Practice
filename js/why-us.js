@@ -103,8 +103,14 @@ leak.style.opacity = "0"
 })
 workflow.style.borderColor = ""
 workflow.classList.remove("pipeline-fixed")
-document.querySelector(".metric-box .metric-value").innerText="$8,490"
-document.querySelector(".metric-box.recovered .metric-value").innerText="$0"
+const leakageMetric = document.querySelector(".metric-box .metric-value")
+if(leakageMetric){
+leakageMetric.innerText="$8,490"
+}
+const leakageMetric = document.querySelector(".metric-box.recovered .metric-value")
+if(leakageMetric){
+leakageMetric.innerText="$0"
+}
 fixBanner.classList.remove("active")
 document.querySelector(".revenue-stage")
 .style.boxShadow="0 0 20px rgba(34,197,94,.6)"
@@ -182,7 +188,8 @@ fixBanner.classList.add("active")
 
 const auroras = document.querySelectorAll(".hero-aurora")
 let ticking = false
-document.addEventListener("mousemove",(e)=>{
+if(hero){
+hero.addEventListener("mousemove",(e)=>{
 if(!ticking){
 requestAnimationFrame(()=>{
 const x = (window.innerWidth/2 - e.clientX)/80
@@ -296,6 +303,7 @@ status:"Validating documentation..."
 if(inputs.length > 0){
 inputs.forEach(node=>{
 node.addEventListener("mouseenter",()=>{
+sendDataPulse(node)
 /* fade all lines */
 svg.querySelectorAll("path").forEach(p=>{
 p.style.opacity = ".1"
@@ -350,24 +358,6 @@ const nodeX = rect.right - cont.left
 const nodeY = rect.top + rect.height/2 - cont.top
 const coreX = engineRect.left - cont.left
 const coreY = engineRect.top + engineRect.height/2 - cont.top
-const offset = 60
-const elbowX = nodeX + offset
-const coreRadius = engineRect.width / 2
-const endX = coreX + engineRect.width * 0.1
-const spread = 70
-const endY = coreY - spread/2 + (index * (spread/(inputs.length-1)))
-const path = document.createElementNS(
-"http://www.w3.org/2000/svg","path"
-)
-const elbowX = nodeX + 60
-
-const pathData = `
-M ${nodeX} ${nodeY}
-L ${elbowX} ${nodeY}
-L ${elbowX} ${endY}
-L ${endX} ${endY}
-`
-
 path.setAttribute("d",pathData)
 path.setAttribute("fill","none")
 path.style.strokeLinecap = "round"
@@ -425,7 +415,7 @@ value.toString().replace(/[^0-9]/g,'')
 )
 
 let current = 0
-let step = numeric / 30
+let step = Math.max(1, numeric / 40)
 
 const interval = setInterval(()=>{
 
