@@ -757,13 +757,13 @@ padding:6px;
 border-radius:10px;
 }
 .emr1{ top:-20px; left:50%; transform:translateX(-50%); }
-.emr2{ top:50%; right:-20px; transform:translateY(-50%); }
+.emr2{ top:20%; right:-20px; }
 .emr3{ bottom:-20px; left:50%; transform:translateX(-50%); }
-.emr4{ top:50%; left:-20px; transform:translateY(-50%); }
-.emr5{ top:15%; left:15%; }
-.emr6{ bottom:15%; right:15%; }
-.emr7{ top:15%; right:15%; }
-.emr8{ bottom:15%; left:15%; }
+.emr4{ top:20%; left:-20px; }
+.emr5{ top:5%; left:25%; }
+.emr6{ top:5%; right:25%; }
+.emr7{ bottom:5%; right:25%; }
+.emr8{ bottom:5%; left:25%; }
 /* DASHBOARD */
 .arch-dashboard{
 display:flex;
