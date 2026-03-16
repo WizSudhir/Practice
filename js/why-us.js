@@ -353,16 +353,18 @@ const coreY = engineRect.top + engineRect.height/2 - cont.top
 const offset = 60
 const elbowX = nodeX + offset
 const coreRadius = engineRect.width / 2
-const endX = coreX - coreRadius + 3
+const endX = coreX + engineRect.width * 0.1
 const spread = 70
 const endY = coreY - spread/2 + (index * (spread/(inputs.length-1)))
 const path = document.createElementNS(
 "http://www.w3.org/2000/svg","path"
 )
+const curveX = nodeX + 60
 const pathData = `
 M ${nodeX} ${nodeY}
-L ${elbowX} ${nodeY}
-L ${endX} ${endY}
+C ${curveX} ${nodeY},
+${curveX} ${endY},
+${endX} ${endY}
 `
 
 path.setAttribute("d",pathData)
