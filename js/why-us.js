@@ -293,51 +293,47 @@ status:"Validating documentation..."
 
 
 /* HOVER EVENTS */
+if(inputs.length > 0){
+inputs.forEach(node=>{
 node.addEventListener("mouseenter",()=>{
-
+/* fade all lines */
 svg.querySelectorAll("path").forEach(p=>{
 p.style.opacity = ".1"
 })
-
+/* activate hovered node line */
 const index = [...inputs].indexOf(node)
-
 const activeLine = svg.children[index]
-
 if(activeLine){
 activeLine.style.opacity="1"
 activeLine.style.strokeDasharray="6 6"
 activeLine.style.animation="dataFlow 1s linear infinite"
 }
-if(inputs.length > 0){
-inputs.forEach(node=>{
-
-node.addEventListener("mouseenter",()=>{
-
+/* dashboard metrics */
 const type = node.dataset.type
 const d = data[type]
-
 if(!d) return
-
 if(engineStatus && d.status){
 engineStatus.innerText = d.status
 }
-
 if(metric1) animateMetric(metric1,d.m1)
 if(metric2) animateMetric(metric2,d.m2)
 if(metric3) metric3.innerText = d.m3
-
 if(label1) label1.innerText = d.l1
 if(label2) label2.innerText = d.l2
 if(label3) label3.innerText = d.l3
-
 })
 node.addEventListener("mouseleave",()=>{
+/* restore all lines */
+svg.querySelectorAll("path").forEach(p=>{
+p.style.opacity=".65"
+p.style.strokeDasharray="3 8"
+p.style.animation="dataFlow 6s linear infinite"
+})
 if(engineStatus){
 engineStatus.innerText =
 "Awaiting healthcare data input..."
 }
 })
-  
 })
 }
 node.addEventListener("mouseleave",()=>{
@@ -346,40 +342,28 @@ p.style.opacity=".65"
 p.style.strokeDasharray="3 8"
 })
 })
+  
 /* DRAW NETWORK LINES */
-
 function drawLines(){
-
 if(!svg || !engine || inputs.length === 0) return
-
 svg.innerHTML=""
-
 const container = document.querySelector(".architecture-grid")
+if(!container) return
 const cont = container.getBoundingClientRect()
-
 const engineRect = engine.getBoundingClientRect()
-
 inputs.forEach(input=>{
-
 const rect = input.getBoundingClientRect()
-
 const nodeX = rect.right - cont.left
 const nodeY = rect.top + rect.height/2 - cont.top
-
 const coreX = engineRect.left - cont.left
 const coreY = engineRect.top + engineRect.height/2 - cont.top
-
 const offset = 60
-
 const elbowX = nodeX + offset
-
 const endX = coreX - 110
 const endY = coreY
-
 const path = document.createElementNS(
 "http://www.w3.org/2000/svg","path"
 )
-
 const pathData = `
 M ${nodeX} ${nodeY}
 L ${elbowX} ${nodeY}
@@ -391,11 +375,10 @@ path.setAttribute("stroke","#6366f1")
 path.setAttribute("stroke-width","1.6")
 path.setAttribute("stroke-dasharray","3 8")
 path.setAttribute("fill","none")
-
+path.style.opacity = ".65"
 svg.appendChild(path)
 
 })
-/* ENGINE → DASHBOARD CONNECTION */
 /* ENGINE → DASHBOARD CONNECTION */
 
 const dashboardCard = document.querySelector(".dashboard-card")
