@@ -571,14 +571,14 @@ z-index:3;
 position:relative;
 }
 .input-node{
-width:180px;
-height:48px;
+width:150px;
+height:38px;
+font-size:12px;
+border-radius:10px;
 display:flex;
 align-items:center;
 justify-content:center;
-border-radius:12px;
 background:linear-gradient(135deg,rgba(99,102,241,.8),rgba(59,130,246,.8));
-font-size:13px;
 font-weight:600;
 cursor:pointer;
 box-shadow:
@@ -636,18 +636,25 @@ box-shadow:
 0 20px 40px rgba(0,0,0,.6);
 }
 .engine-inner{
-text-align:center;
 display:flex;
 flex-direction:column;
-gap:8px;
 align-items:center;
+gap:4px;
+padding:10px 18px;
+text-align:center;
+}
+.engine-inner h3{
+font-size:18px;
+margin:0;
 }
 .engine-sub{
-font-size:13px;
-opacity:.7;
+font-size:12px;
+opacity:.8;
 }
 .engine-status{
 font-size:13px;
+line-height:1.3;
+max-width:140px;
 color:#93c5fd;
 opacity:.9;
 animation:enginePulse 2s infinite;
@@ -681,11 +688,33 @@ background:white;
 padding:6px;
 border-radius:10px;
 }
-.emr1{ top:0; left:50%; transform:translateX(-50%); }
-.emr2{ right:0; top:40%; }
-.emr3{ bottom:0; left:50%; transform:translateX(-50%); }
-.emr4{ left:0; top:40%; }
-.emr5{ top:20%; left:15%; }
+.emr-ring{
+position:absolute;
+top:50%;
+left:50%;
+width:360px;
+height:360px;
+transform:translate(-50%,-50%);
+animation:orbitRotate 30s linear infinite;
+}
+@keyframes orbitRotate{
+0%{transform:translate(-50%,-50%) rotate(0deg)}
+100%{transform:translate(-50%,-50%) rotate(360deg)}
+}
+.emr{
+position:absolute;
+width:46px;
+height:46px;
+background:white;
+padding:6px;
+border-radius:10px;
+}
+.emr1{ top:-20px; left:50%; transform:translateX(-50%); }
+.emr2{ top:50%; right:-20px; transform:translateY(-50%); }
+.emr3{ bottom:-20px; left:50%; transform:translateX(-50%); }
+.emr4{ top:50%; left:-20px; transform:translateY(-50%); }
+.emr5{ top:15%; left:15%; }
+.emr6{ bottom:15%; right:15%; }
 /* DASHBOARD */
 .arch-dashboard{
 display:flex;
@@ -705,6 +734,14 @@ text-align:center;
 .dashboard-metric span{
 font-size:28px;
 font-weight:800;
+}
+.dashboard-metric:nth-child(1) span{
+color:#60a5fa;
+}
+.dashboard-metric:nth-child(2) span{
+color:#f59e0b;
+}
+.dashboard-metric:nth-child(3) span{
 color:#22c55e;
 }
 /* NETWORK LINES */
