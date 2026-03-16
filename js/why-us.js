@@ -375,6 +375,8 @@ path.setAttribute("stroke","#6366f1")
 path.setAttribute("stroke-width","1.6")
 path.setAttribute("stroke-dasharray","3 8")
 path.setAttribute("fill","none")
+path.style.strokeLinecap = "round"
+path.style.strokeLinejoin = "round"
 path.style.opacity = ".65"
 path.style.filter="drop-shadow(0 0 6px rgba(99,102,241,.5))"
 svg.appendChild(path)
