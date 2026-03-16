@@ -293,6 +293,21 @@ status:"Validating documentation..."
 
 
 /* HOVER EVENTS */
+node.addEventListener("mouseenter",()=>{
+
+svg.querySelectorAll("path").forEach(p=>{
+p.style.opacity = ".1"
+})
+
+const index = [...inputs].indexOf(node)
+
+const activeLine = svg.children[index]
+
+if(activeLine){
+activeLine.style.opacity="1"
+activeLine.style.strokeDasharray="6 6"
+activeLine.style.animation="dataFlow 1s linear infinite"
+}
 if(inputs.length > 0){
 inputs.forEach(node=>{
 
@@ -325,6 +340,12 @@ engineStatus.innerText =
   
 })
 }
+node.addEventListener("mouseleave",()=>{
+svg.querySelectorAll("path").forEach(p=>{
+p.style.opacity=".65"
+p.style.strokeDasharray="3 8"
+})
+})
 /* DRAW NETWORK LINES */
 
 function drawLines(){
@@ -348,11 +369,12 @@ const nodeY = rect.top + rect.height/2 - cont.top
 const coreX = engineRect.left - cont.left
 const coreY = engineRect.top + engineRect.height/2 - cont.top
 
-const offset = 70
+const offset = 60
 
 const elbowX = nodeX + offset
 
 const endX = coreX - 110
+const endY = coreY
 
 const path = document.createElementNS(
 "http://www.w3.org/2000/svg","path"
@@ -361,8 +383,7 @@ const path = document.createElementNS(
 const pathData = `
 M ${nodeX} ${nodeY}
 L ${elbowX} ${nodeY}
-L ${elbowX} ${coreY}
-L ${endX} ${coreY}
+L ${endX} ${endY}
 `
 
 path.setAttribute("d",pathData)
