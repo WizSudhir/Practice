@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 // ===============================
 let blogs = [];
 try {
-  const res = await fetch("blogs.json");
+  const res = await fetch("/blog/blogs.json");
   blogs = await res.json();
 } catch (err) {
   console.error("Error loading blogs:", err);
