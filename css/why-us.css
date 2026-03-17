@@ -652,14 +652,14 @@ transition:transform .3s ease;
 .emr:hover{
 transform:translateY(-6px) scale(1.05);
 }
-.emr1{ transform:rotate(0deg) translateX(220px) rotate(0deg); }
-.emr2{ transform:rotate(45deg) translateX(220px) rotate(-45deg); }
-.emr3{ transform:rotate(90deg) translateX(220px) rotate(-90deg); }
-.emr4{ transform:rotate(135deg) translateX(220px) rotate(-135deg); }
-.emr5{ transform:rotate(180deg) translateX(220px) rotate(-180deg); }
-.emr6{ transform:rotate(225deg) translateX(220px) rotate(-225deg); }
-.emr7{ transform:rotate(270deg) translateX(220px) rotate(-270deg); }
-.emr8{ transform:rotate(315deg) translateX(220px) rotate(-315deg); }
+.emr1{ transform:rotate(0deg) translateX(200px) rotate(0deg); }
+.emr2{ transform:rotate(45deg) translateX(200px) rotate(-45deg); }
+.emr3{ transform:rotate(90deg) translateX(200px) rotate(-90deg); }
+.emr4{ transform:rotate(135deg) translateX(200px) rotate(-135deg); }
+.emr5{ transform:rotate(180deg) translateX(200px) rotate(-180deg); }
+.emr6{ transform:rotate(225deg) translateX(200px) rotate(-225deg); }
+.emr7{ transform:rotate(270deg) translateX(200px) rotate(-270deg); }
+.emr8{ transform:rotate(315deg) translateX(200px) rotate(-315deg); }
 /* DASHBOARD */
 .arch-dashboard{
 display:flex;
