@@ -105,59 +105,86 @@
   </div>
 </section>
 
-
 <!-- =========================================
 2. FORM
 ========================================= -->
-<section class="contact-section" style="height:auto; min-height:100vh; padding-top:140px; padding-bottom:60px;">
-<div class="container contact-container" style="display:flex; align-items:center; gap:40px;">
+<section class="contact-section">
+  <div class="container contact-container">
     
-    <div class="contact-left" style="max-width:550px; z-index:10;">
-      <h1 style="margin-bottom:20px;">Contact Us</h1>
-      <p style="font-size:18px; margin-bottom:30px;">Have questions or want to discuss how we can help your practice? Reach out to us—we respond promptly!</p>
+    <div class="contact-left">
+      <h1>Contact Us</h1>
+      <p>
+        Have questions or want to discuss how we can help your practice? 
+        Reach out to us—we respond promptly!
+      </p>
       
-      <div style="display:flex; gap:25px; align-items:center; margin-top:25px; padding:20px 25px; background:rgba(255,255,255,0.08); border-radius:var(--radius-lg); width:fit-content; border:1px solid rgba(255,255,255,0.15);">
-        <span style="font-size:16px; font-weight:600; text-transform:uppercase; letter-spacing:1px; color:var(--text-secondary);">Connect:</span>
-        <a href="https://wa.me/17276741458" target="_blank" style="transition:0.3s;">
-          <img src="images/whatsapp.png" alt="WhatsApp" style="width:90px; filter: drop-shadow(0 0 12px rgba(37,211,102,0.5));">
+      <div class="contact-social-box">
+        <span class="contact-social-label">Connect:</span>
+
+        <a href="https://wa.me/17276741458" target="_blank">
+          <img src="images/whatsapp.png" alt="WhatsApp">
         </a>
-        <a href="https://www.linkedin.com/company/practicegridsolutions" target="_blank" style="transition:0.3s;">
-          <img src="images/linkedin.png" alt="LinkedIn" style="width:90px; filter: drop-shadow(0 0 12px rgba(10,102,194,0.5));">
+
+        <a href="https://www.linkedin.com/company/practicegridsolutions" target="_blank">
+          <img src="images/linkedin.png" alt="LinkedIn">
         </a>
       </div>
     </div>
-   <div class="contact-right" style="flex:1; max-width:550px; z-index:10;">
-     <div class="contact-expectation" style="margin-bottom:25px; background:rgba(255,255,255,0.05); padding:20px; border-radius:12px; border:1px solid rgba(255,255,255,0.08);">
-        <h3 style="margin-bottom:10px;">What happens next?</h3>
-        <ul style="font-size:14px; line-height:1.6; color:var(--text-secondary); padding-left:18px;">
+
+    <div class="contact-right">
+
+      <div class="contact-expectation">
+        <h3>What happens next?</h3>
+        <ul>
           <li>We review your inquiry within 24 hours</li>
           <li>Schedule a call to understand your practice</li>
           <li>Provide a tailored revenue improvement plan</li>
         </ul>
-    </div>
-      <form id="contactForm" action="https://formspree.io/f/xdaljyne" method="POST" onsubmit="return validateRecaptcha()" class="contact-form" style="display:flex; flex-direction:column; gap:15px; background:rgba(15, 23, 42, 0.6); padding:45px; border-radius:var(--radius-lg); backdrop-filter:blur(30px); border: 1px solid rgba(255,255,255,0.1); box-shadow: var(--shadow-hover);">
-        <h3 style="margin-bottom:10px;">Send a Message</h3>
-        <input type="hidden" name="_next" value="https://practicegridsolutions.com/thank-you.html">
-        <input type="text" name="name" placeholder="Full Name" required style="padding:16px 20px; border-radius:var(--radius-pill); border:1px solid rgba(255,255,255,0.1); background:var(--bg-secondary); color:#fff; outline:none;">
-        <input type="email" name="email" placeholder="Email Address" required style="padding:16px 20px; border-radius:var(--radius-pill); border:1px solid rgba(255,255,255,0.1); background:var(--bg-secondary); color:#fff; outline:none;">
-        <input type="tel" name="phone" placeholder="Phone Number" required style="padding:16px 20px; border-radius:var(--radius-pill); border:1px solid rgba(255,255,255,0.1); background:var(--bg-secondary); color:#fff; outline:none;">
-        <textarea name="message" rows="4" placeholder="How can we help?" required style="padding:16px 20px; border-radius:var(--radius-lg); border:1px solid rgba(255,255,255,0.1); background:var(--bg-secondary); color:#fff; outline:none; resize:none;"></textarea>
-        
-        <div class="g-recaptcha" data-sitekey="6LdRZHosAAAAALlveHHjK8Lc-TD8gd1CWfxuQhaL" data-theme="dark" style="margin-bottom: 5px;"></div>
+      </div>
 
-        <label style="font-size:12px; color:var(--text-secondary); cursor:pointer;">
-          <input type="checkbox" required style="margin-right:8px;"> I consent to the Privacy Policy.
+      <form id="contactForm"
+            action="https://formspree.io/f/xdaljyne"
+            method="POST"
+            onsubmit="return validateRecaptcha()"
+            class="contact-form">
+
+        <h3>Send a Message</h3>
+
+        <input type="hidden" name="_next" value="https://practicegridsolutions.com/thank-you.html">
+
+        <input type="text" name="name" placeholder="Full Name" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+        <input type="tel" name="phone" placeholder="Phone Number" required>
+
+        <textarea name="message" rows="4" placeholder="How can we help?" required></textarea>
+
+        <div class="g-recaptcha"
+             data-sitekey="6LdRZHosAAAAALlveHHjK8Lc-TD8gd1CWfxuQhaL"
+             data-theme="dark">
+        </div>
+
+        <label class="contact-consent">
+          <input type="checkbox" required>
+          I consent to the Privacy Policy.
         </label>
-        <button type="submit" class="btn-primary" style="align-self:stretch; text-align:center; cursor:pointer; background:var(--gradient-primary); color:#fff; border:none; font-size:16px;">Send Message</button>
-         <p style="font-size:12px; color:var(--text-secondary); text-align:center; margin-top:10px;">
-            No spam. No obligations. Your information is 100% secure.
-         </p>
+
+        <button type="submit" class="btn-primary contact-submit">
+          Send Message
+        </button>
+
+        <p class="contact-note">
+          No spam. No obligations. Your information is 100% secure.
+        </p>
+
       </form>
+
     </div>
   </div>
 </section>
 
-
+<!-- =========================================
+3. FOOTER
+========================================= -->
 
 <footer class="footer">
   <div class="container footer-grid">
