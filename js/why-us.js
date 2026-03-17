@@ -364,13 +364,26 @@ const goingDown = endY > nodeY;
 const sweep1 = goingDown ? 1 : 0;
 const sweep2 = goingDown ? 0 : 1;
 
-const pathData = `
-M ${nodeX} ${nodeY}
-L ${midX - radius} ${nodeY}
-A ${radius} ${radius} 0 0 ${goingDown ? 1 : 0} ${midX} ${nodeY + (goingDown ? radius : -radius)}
-L ${midX} ${endY}
-L ${endX} ${endY}
-`;
+let pathData;
+if(isCenter){
+  // ✅ PERFECT STRAIGHT LINE (CODING DATA)
+  pathData = `
+  M ${nodeX} ${nodeY}
+  L ${endX} ${nodeY}
+  `;
+}else{
+  const verticalDir = endY > nodeY ? 1 : -1;
+  pathData = `
+  M ${nodeX} ${nodeY}
+  L ${midX - radius} ${nodeY}
+  A ${radius} ${radius} 0 0 ${verticalDir === 1 ? 1 : 0}
+    ${midX} ${nodeY + (verticalDir * radius)}
+  L ${midX} ${endY - (verticalDir * radius)}
+  A ${radius} ${radius} 0 0 ${verticalDir === 1 ? 0 : 1}
+    ${midX + radius} ${endY}
+  L ${endX} ${endY}
+  `;
+}
 path.setAttribute("d",pathData)
 path.setAttribute("stroke","#60a5fa")
 path.setAttribute("stroke-width","2.4")
@@ -390,26 +403,6 @@ const elbowX = startX + offset
 const path = document.createElementNS(
 "http://www.w3.org/2000/svg","path"
 )
-let pathData;
-if(isCenter){
-  // 🔥 PERFECTLY STRAIGHT LINE (3rd one)
-  pathData = `
-  M ${nodeX} ${nodeY}
-  L ${endX} ${nodeY}
-  `;
-}else{
-  const verticalDir = endY > nodeY ? 1 : -1;
-  pathData = `
-  M ${nodeX} ${nodeY}
-  L ${midX - radius} ${nodeY}
-  A ${radius} ${radius} 0 0 ${verticalDir === 1 ? 1 : 0}
-    ${midX} ${nodeY + (verticalDir * radius)}
-  L ${midX} ${endY - (verticalDir * radius)}
-  A ${radius} ${radius} 0 0 ${verticalDir === 1 ? 0 : 1}
-    ${midX + radius} ${endY}
-  L ${endX} ${endY}
-  `;
-}
 path.setAttribute("d",pathData)
 path.setAttribute("stroke","#6366f1")
 path.setAttribute("stroke-width","1.6")
