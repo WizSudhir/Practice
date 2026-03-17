@@ -319,7 +319,7 @@ node.addEventListener("mouseleave",()=>{
 /* restore all lines */
 svg.querySelectorAll("path").forEach(p=>{
 p.style.opacity=".65"
-p.style.strokeDasharray="6 10"
+p.style.strokeDasharray="1 8"
 p.style.animation="dataFlow 6s linear infinite"
 })
 if(engineStatus){
@@ -349,18 +349,17 @@ const spacing = 30;
 const elbowY = nodeY + (index * spacing);   // spreads lines
 const radius = engineRect.width / 2;
 const endX = coreX + 4; // slight padding from border
-const spread = 70
-const endY = coreY - spread/2 + (index * (spread/(inputs.length-1)))
+const spread = 120; // increase spacing
+const step = spread / (inputs.length - 1);
+const endY = coreY - spread/2 + (index * step);
 const path = document.createElementNS(
 "http://www.w3.org/2000/svg","path"
 )
 const pathData = `
 M ${nodeX} ${nodeY}
-L ${elbowX - 20} ${nodeY}
-Q ${elbowX} ${nodeY}, ${elbowX} ${nodeY + 20}
-L ${elbowX} ${endY - 20}
-Q ${elbowX} ${endY}, ${elbowX + 20} ${endY}
-L ${endX} ${endY}
+C ${nodeX + 80} ${nodeY},
+  ${coreX - 120} ${endY},
+  ${endX} ${endY}
 `;
 path.setAttribute("d",pathData)
 path.setAttribute("stroke","#60a5fa")
