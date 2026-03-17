@@ -1211,6 +1211,28 @@ background:linear-gradient(90deg,#22c55e,#3b82f6);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
+.kpi-style{
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+}
+.kpi-style .roi-main{
+font-size:48px;
+background:linear-gradient(90deg,#22c55e,#4ade80);
+}
+.kpi-style::before{
+content:"●";
+color:#22c55e;
+font-size:10px;
+margin-bottom:6px;
+animation:pulseDot 1.5s infinite;
+}
+@keyframes pulseDot{
+0%{opacity:.4}
+50%{opacity:1}
+100%{opacity:.4}
+}
 /* ALTERNATING LAYOUT */
 .pg-story:nth-child(even){
 grid-template-columns:.8fr 1.2fr;
@@ -1221,7 +1243,10 @@ order:2;
 .pg-story:nth-child(even) .pg-story-right{
 order:1;
 }
-
+.pg-story:nth-child(2) .pg-metric-card{
+background:linear-gradient(180deg,#0b1220,#020617);
+border:1px solid rgba(59,130,246,.25);
+}
 /* =========================================================
 3. RCM MATURITY SCORE GAUGE
 ========================================================= */
