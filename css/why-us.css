@@ -1695,8 +1695,6 @@ color:#9ca3af;
     gap:30px;
   }
 }
-
-
 /* ≤ 1024px (Tablet) */
 @media (max-width:1024px){
   section + section{
@@ -1829,6 +1827,9 @@ body{
     width:52px;
     height:52px;
     font-size:16px;
+  }
+  .hero-enterprise{
+    display:none;
   }
 }
 /* ≤ 600px (Mobile Portrait) */
