@@ -11,4 +11,52 @@
     "description": "Top billing errors reducing practice revenue.",
     "featured": true
   }
+  {
+    "id": "billing-hazards",
+    "title": "9 Common Medical Billing Mistakes...",
+    "category": "denial",
+    "tags": ["billing", "denial", "rcm"],
+    "date": "2026-05-02",
+    "readTime": "6 min",
+    "image": "images/blog1.jpg",
+    "url": "posts/10-Common-Medical-Billing-Mistakes.html",
+    "description": "Top billing errors reducing practice revenue.",
+    "featured": false
+  }
+  {
+    "id": "billing-wizards",
+    "title": "8 Common Medical Billing Mistakes...",
+    "category": "payment",
+    "tags": ["billing", "denial", "rcm"],
+    "date": "2026-05-03",
+    "readTime": "5 min",
+    "image": "images/blog1.jpg",
+    "url": "posts/10-Common-Medical-Billing-Mistakes.html",
+    "description": "Top billing errors reducing practice revenue.",
+    "featured": true
+  }
+  {
+    "id": "billing-lizards",
+    "title": "7 Common Medical Billing Mistakes...",
+    "category": "credentialing",
+    "tags": ["billing", "denial", "rcm"],
+    "date": "2026-05-04",
+    "readTime": "4 min",
+    "image": "images/blog1.jpg",
+    "url": "posts/10-Common-Medical-Billing-Mistakes.html",
+    "description": "Top billing errors reducing practice revenue.",
+    "featured": false
+  }
+  {
+    "id": "billing-blizard",
+    "title": "6 Common Medical Billing Mistakes...",
+    "category": "analytics",
+    "tags": ["billing", "denial", "rcm"],
+    "date": "2026-05-05",
+    "readTime": "3 min",
+    "image": "images/blog1.jpg",
+    "url": "posts/10-Common-Medical-Billing-Mistakes.html",
+    "description": "Top billing errors reducing practice revenue.",
+    "featured": false
+  }
 ]
