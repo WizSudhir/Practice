@@ -355,6 +355,7 @@ const endY = coreY - spread/2 + (index * step);
 const path = document.createElementNS(
 "http://www.w3.org/2000/svg","path"
 )
+const curveStrength = 120 + (index * 20);
 const verticalPull = 80; // 🔥 THIS CREATES THE BEND
 const pathData = `
 M ${nodeX} ${nodeY}
