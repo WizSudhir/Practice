@@ -486,11 +486,14 @@ const type = parent ? parent.dataset.type : "metric"
 valueEl.innerText = type === "currency" ? "$0" : "0%"
 const target = parseInt(valueEl.dataset.target)
 let current = 0
-const interval = setInterval(()=>{
+if(valueEl._interval){
+clearInterval(valueEl._interval)
+}
+valueEl._interval = setInterval(()=>{
 current += Math.ceil(target/40)
 if(current >= target){
 current = target
-clearInterval(interval)
+clearInterval(valueEl._interval)
 }
 // FORMAT BASED ON TYPE
 if(type === "currency"){
