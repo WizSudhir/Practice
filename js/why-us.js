@@ -367,11 +367,21 @@ if(isCenter){
   L ${endX} ${nodeY}
   `;
 }else{
-  const elbowX = nodeX + 120; // how far before turning
+  const elbowX = nodeX + 120;
+  const r = 16; // 🔥 controls roundness
+  const beforeTurnX = elbowX - r;
+  const afterTurnY = nodeY + (endY > nodeY ? r : -r);
+  const beforeEndY = endY - (endY > nodeY ? r : -r);
+  const sweep1 = endY > nodeY ? 1 : 0;
+  const sweep2 = endY > nodeY ? 0 : 1;
   pathData = `
   M ${nodeX} ${nodeY}
-  L ${elbowX} ${nodeY}
-  L ${elbowX} ${endY}
+  L ${beforeTurnX} ${nodeY}
+  A ${r} ${r} 0 0 ${sweep1}
+    ${elbowX} ${afterTurnY}
+  L ${elbowX} ${beforeEndY}
+  A ${r} ${r} 0 0 ${sweep2}
+    ${elbowX + r} ${endY}
   L ${endX} ${endY}
   `;
 }
