@@ -77,8 +77,8 @@ h = raysCanvas.height = raysCanvas.offsetHeight * DPR
 raysCanvas.style.width = raysCanvas.offsetWidth + "px"
 raysCanvas.style.height = raysCanvas.offsetHeight + "px"
 raysCtx.setTransform(DPR, 0, 0, DPR, 0, 0)
-originX = w/2
-originY = h
+originX = raysCanvas.offsetWidth / 2
+originY = raysCanvas.offsetHeight
 }
 window.addEventListener("resize",resize)
 resize()
@@ -123,7 +123,6 @@ raysCtx.shadowBlur = 0
 raysCtx.beginPath()
 raysCtx.arc(this.x,this.y,this.size,0,Math.PI*2)
 raysCtx.fillStyle="rgba(255,255,255,0.8)"
-raysCtx.shadowBlur=6
 raysCtx.fill()
 raysCtx.shadowBlur=0
 }
@@ -134,7 +133,7 @@ p.angle = (i / PARTICLE_COUNT) * Math.PI * 2 + (Math.random()*0.05)
 particles.push(p)
 }
 let mouse={x:-1000,y:-1000}
-if(ctaSection && window.innerWidth > 768){
+if(ctaSection){
 let mouseMoveTimeout;
 window.addEventListener("mousemove",(e)=>{
 if(mouseMoveTimeout) return;
@@ -146,11 +145,20 @@ mouseMoveTimeout = null;
 },30);
 });
 let lastTime = 0
+let isVisible = true;
+document.addEventListener("visibilitychange", () => {
+  isVisible = !document.hidden;
+});
 function animate(time){
+  if(!isVisible){
+    requestAnimationFrame(animate);
+    return;
+  }
   if(time - lastTime < 32) { // ~30 FPS
     requestAnimationFrame(animate)
     return
   }
+  requestAnimationFrame(animate)
   lastTime = time
   raysCtx.clearRect(0,0,w,h)
   particles.forEach(p=>{
