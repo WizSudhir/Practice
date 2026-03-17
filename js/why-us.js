@@ -462,7 +462,7 @@ const roiObserver = new IntersectionObserver(entries=>{
 entries.forEach(entry=>{
 
 const bars = entry.target.querySelectorAll(".roi-bar")
-const valueEl = entry.target.querySelector(".roi-main")
+const valueEl = entry.target.querySelector(".roi-value .roi-main")
 const line = entry.target.querySelector(".line-path")
 
 if(entry.isIntersecting){
