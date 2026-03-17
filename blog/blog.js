@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 // ===============================
 let blogs = [];
 try {
-  const res = await fetch("/blog/blogs.json");
+  const res = await fetch("./blogs.json");
   blogs = await res.json();
 } catch (err) {
   console.error("Error loading blogs:", err);
@@ -112,26 +112,31 @@ const searchInput = document.getElementById("blogSearch");
 const filterButtons = document.querySelectorAll(".filter-btn");
 let activeFilter = "all";
 // SORT BY LATEST (important)
-blogs.sort((a, b) => new Date(b.date) - new Date(a.date));
+blogs.sort((a, b) => {
+  const d1 = new Date(a.date);
+  const d2 = new Date(b.date);
+  return d2 - d1;
+});
 // FEATURED
-const featured = blogs.find(b => b.featured) || blogs[0];
+const featuredPosts = blogs.filter(b => b.featured);
 if (featuredContainer) {
-  featuredContainer.innerHTML = `
-    <img src="${featured.image}" alt="${featured.title}">
-    <div class="blog-content">
-      <div class="blog-meta">
-        <span>${featured.category}</span>
-        <span>${featured.readTime}</span>
+  featuredContainer.innerHTML = featuredPosts.map(post => `
+    <div class="featured-card">
+      <img src="${post.image}" alt="${post.title}">
+      <div class="blog-content">
+        <div class="blog-meta">
+          <span>${post.category}</span>
+          <span>${post.readTime}</span>
+        </div>
+        <h3>${post.title}</h3>
+        <p>${post.description}</p>
+        <a href="${post.url}" class="blog-read">Read Article →</a>
       </div>
-      <h3>${featured.title}</h3>
-      <p>${featured.description}</p>
-      <a href="${featured.url}" class="blog-read">Read Article →</a>
     </div>
-  `;
+  `).join("");
 }
 // REMOVE featured from grid
-let filteredBlogs = blogs.filter(b => b !== featured);
-
+let filteredBlogs = blogs.filter(b => !b.featured);
 // ===============================
 // RENDER FUNCTION
 // ===============================
@@ -158,7 +163,7 @@ function renderBlogs(list) {
 // ===============================
 function applyFilters() {
   const searchTerm = searchInput.value.toLowerCase();
-  let result = blogs.filter(blog => blog !== featured);
+  let result = blogs.filter(blog => !blog.featured);
   // CATEGORY FILTER
   if (activeFilter !== "all") {
     result = result.filter(b => b.category === activeFilter);
