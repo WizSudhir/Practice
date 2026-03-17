@@ -513,5 +513,23 @@ rootMargin: "0px 0px -50px 0px"
 roiCards.forEach(card=>{
 roiObserver.observe(card)
 })
+// ===============================
+// FRAMEWORK TIMELINE ANIMATION
+// ===============================
 
+const frameworkSteps = document.querySelectorAll(".framework-step");
+
+const frameworkObserver = new IntersectionObserver((entries)=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add("visible");
+}
+});
+},{
+threshold:0.3
+});
+
+frameworkSteps.forEach(step=>{
+frameworkObserver.observe(step);
+});
 });   // DOMContentLoaded close
