@@ -227,23 +227,18 @@ dashboard.style.transform =
 // ======================================
 
 const inputs = document.querySelectorAll(".input-node")
-
 const metric1 = document.getElementById("metric1")
 const metric2 = document.getElementById("metric2")
 const metric3 = document.getElementById("metric3")
-
 const label1 = document.getElementById("label1")
 const label2 = document.getElementById("label2")
 const label3 = document.getElementById("label3")
-
 const engine = document.querySelector(".engine-circle")
 const svg = document.querySelector(".network-lines")
 /* ENGINE STATUS */
 const engineStatus = document.getElementById("engineStatus")  
 /* DATA */
-
 const data = {
-
 claims:{
 m1:3842,
 l1:"Claims Analyzed",
@@ -253,7 +248,6 @@ m3:"$12,500",
 l3:"Revenue Opportunity",
 status:"Analyzing claim submissions..."
 },
-
 eligibility:{
 m1:1280,
 l1:"Eligibility Checks",
@@ -263,7 +257,6 @@ m3:"$3,800",
 l3:"Prevented Denials",
 status:"Verifying insurance eligibility..."
 },
-
 coding:{
 m1:126,
 l1:"Coding Issues",
@@ -273,7 +266,6 @@ m3:"$9,200",
 l3:"Revenue Protected",
 status:"Checking coding accuracy..."
 },
-
 payer:{
 m1:48,
 l1:"Payer Alerts",
@@ -283,7 +275,6 @@ m3:"$5,400",
 l3:"Billing Adjustments",
 status:"Analyzing payer rules..."
 },
-
 documentation:{
 m1:87,
 l1:"Docs Reviewed",
@@ -293,10 +284,7 @@ m3:"$6,700",
 l3:"Recovered Revenue",
 status:"Validating documentation..."
 }
-
 }
-
-
 /* HOVER EVENTS */
 if(inputs.length > 0){
 inputs.forEach(node=>{
@@ -349,80 +337,57 @@ const container = document.querySelector(".architecture-grid")
 if(!container) return
 const cont = container.getBoundingClientRect()
 const engineRect = engine.getBoundingClientRect()
-
 inputs.forEach((input,index)=>{
-
 const rect = input.getBoundingClientRect()
-
 const nodeX = rect.right - cont.left
 const nodeY = rect.top + rect.height/2 - cont.top
-
 const coreX = engineRect.left - cont.left
 const coreY = engineRect.top + engineRect.height/2 - cont.top
-
 const offset = 60
 const elbowX = nodeX + offset
 const elbowY = nodeY + (index * 6)   // spreads lines
-
 const endX = coreX + engineRect.width * 0.1
-
 const spread = 70
 const endY = coreY - spread/2 + (index * (spread/(inputs.length-1)))
-
 const path = document.createElementNS(
 "http://www.w3.org/2000/svg","path"
 )
-
 const pathData = `
 M ${nodeX} ${nodeY}
 L ${elbowX} ${nodeY}
 L ${elbowX} ${endY}
 L ${endX} ${endY}
 `
-
 path.setAttribute("d",pathData)
 path.setAttribute("stroke","#60a5fa")
 path.setAttribute("stroke-width","2.4")
 path.setAttribute("fill","none")
-
 svg.appendChild(path)
-
 })
 /* ENGINE → DASHBOARD CONNECTION */
-
 const dashboardCard = document.querySelector(".dashboard-card")
-
 if(dashboardCard){
-
 const dashRect = dashboardCard.getBoundingClientRect()
-
 const startX = engineRect.right - cont.left
 const startY = engineRect.top + engineRect.height/2 - cont.top
-
 const endX = dashRect.left - cont.left
 const endY = dashRect.top + dashRect.height/2 - cont.top
-
 const offset = 80
-
 const elbowX = startX + offset
-
 const path = document.createElementNS(
 "http://www.w3.org/2000/svg","path"
 )
-
 const pathData = `
 M ${startX} ${startY}
 L ${elbowX} ${startY}
 L ${elbowX} ${endY}
 L ${endX} ${endY}
 `
-
 path.setAttribute("d",pathData)
 path.setAttribute("stroke","#6366f1")
 path.setAttribute("stroke-width","1.6")
 path.setAttribute("stroke-dasharray","3 8")
 path.setAttribute("fill","none")
-
 svg.appendChild(path)
 }
 }
@@ -430,60 +395,59 @@ window.addEventListener("load", drawLines)
 window.addEventListener("resize", drawLines)
 drawLines()
 function animateMetric(el,value){
-
 let numeric = parseInt(
 value.toString().replace(/[^0-9]/g,'')
 )
-
 let current = 0
 let step = Math.max(1, numeric / 40)
-
 const interval = setInterval(()=>{
-
 current += step
-
 if(current >= numeric){
 current = numeric
 clearInterval(interval)
 }
-
 el.innerText = Math.floor(current)
-
 },20)
-
 }
-
 function sendDataPulse(fromElement){
-
 const pulse = document.createElement("div")
 pulse.className = "data-pulse"
-
 const container = document.querySelector(".architecture-grid")
 if(!container) return
 container.appendChild(pulse)
-
 const from = fromElement.getBoundingClientRect()
 const to = engine.getBoundingClientRect()
 const cont = container.getBoundingClientRect()
-
 const startX = from.right - cont.left
 const startY = from.top + from.height/2 - cont.top
-
 const endX = to.left - cont.left + to.width/2
 const endY = to.top - cont.top + to.height/2
-
 pulse.style.left = startX + "px"
 pulse.style.top = startY + "px"
-
 requestAnimationFrame(()=>{
 pulse.style.transform =
 `translate(${endX-startX}px,${endY-startY}px)`
 })
-
 setTimeout(()=>{
 pulse.remove()
 },900)
-
 }
-
+  
+// ===============================
+// OUTCOMES SCROLL REVEAL
+// ===============================
+const stories = document.querySelectorAll(".pg-story")
+const storyObserver = new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add("visible")
+}
+})
+},{
+threshold:0.2
+})
+stories.forEach(story=>{
+storyObserver.observe(story)
+})
+  
 });   // DOMContentLoaded close
