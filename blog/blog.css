@@ -185,7 +185,12 @@
   font-weight:600;
   color:#c4b5fd;
 }
-
+.seo-content {
+  max-width: 900px;
+  margin: auto;
+  text-align: center;
+  color: #cbd5f5;
+}
 /* =========================================================
 2. SEARCH + FILTER
 ========================================================= */
