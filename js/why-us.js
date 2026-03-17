@@ -355,10 +355,11 @@ const endY = coreY - spread/2 + (index * step);
 const path = document.createElementNS(
 "http://www.w3.org/2000/svg","path"
 )
+const curveStrength = 120 + (index * 20);
 const pathData = `
 M ${nodeX} ${nodeY}
-C ${nodeX + 80} ${nodeY},
-  ${coreX - 120} ${endY},
+C ${nodeX + curveStrength} ${nodeY},
+  ${coreX - curveStrength} ${endY},
   ${endX} ${endY}
 `;
 path.setAttribute("d",pathData)
