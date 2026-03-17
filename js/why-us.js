@@ -379,9 +379,16 @@ if(isCenter){
   L ${startX} ${startY}
   A ${r} ${r} 0 0 ${verticalDir === 1 ? 1 : 0}
     ${curve1EndX} ${curve1EndY}
-  L ${midX} ${curve2StartY}
-  A ${r} ${r} 0 0 ${verticalDir === 1 ? 0 : 1}
-    ${midX + r} ${endY}
+const finalX = endX - r;
+pathData = `
+M ${nodeX} ${nodeY}
+L ${startX} ${startY}
+A ${r} ${r} 0 0 ${verticalDir === 1 ? 1 : 0}
+  ${curve1EndX} ${curve1EndY}
+L ${finalX} ${endY}
+A ${r} ${r} 0 0 ${verticalDir === 1 ? 0 : 1}
+  ${endX} ${endY}
+`;
   L ${endX} ${endY}
   `;
 }
