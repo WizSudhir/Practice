@@ -642,9 +642,11 @@ align-items:center;
 justify-content:center;
 pointer-events:none;
 transform-origin: center;
-animation: rotateRing 20s linear infinite;
+backface-visibility: hidden;
+transform-style: preserve-3d;
+animation: rotateCW 20s linear infinite;
 }
-@keyframes rotateRing{
+@keyframes rotateCW{
 from{ transform: rotate(0deg); }
 to{ transform: rotate(360deg); }
 }
@@ -670,16 +672,20 @@ height:100%;
 display:flex;
 align-items:center;
 justify-content:center;
-animation: counterRotate 20s linear infinite; /* 🔥 PERFECT COUNTER ROTATION */
+transform-origin:center;
+will-change: transform;
+backface-visibility: hidden;
+transform-style: preserve-3d;
+animation: rotateCCW 20s linear infinite;
+}
+@keyframes rotateCCW{
+from{ transform: rotate(0deg); }
+to{ transform: rotate(-360deg); }
 }
 .emr-inner img{
 width:100%;
 height:100%;
 object-fit:cover;
-}
-@keyframes counterRotate{
-from{ transform: rotate(0deg); }
-to{ transform: rotate(-360deg); }
 }
 .emr:hover{
 filter:brightness(1.1);
