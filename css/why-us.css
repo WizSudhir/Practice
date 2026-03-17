@@ -629,6 +629,12 @@ transform:translate(-50%,-50%);
 width:440px;
 height:440px;
 pointer-events:none;
+animation: rotateRing 20s linear infinite;
+transform-origin: center;
+}
+@keyframes rotateRing{
+from{ transform:translate(-50%,-50%) rotate(0deg); }
+to{ transform:translate(-50%,-50%) rotate(360deg); }
 }
 .emr{
 position:absolute;
@@ -636,30 +642,36 @@ top:50%;
 left:50%;
 width:64px;
 height:64px;
-background:white;
-padding:12px;
 border-radius:14px;
-background:rgba(255,255,255,.95);
-border:1px solid rgba(255,255,255,.2);
-box-shadow:
-0 6px 20px rgba(0,0,0,.45);
+background:white;
+padding:6px; /* reduced */
 display:flex;
 align-items:center;
 justify-content:center;
-object-fit:contain;
-transition:transform .3s ease;
+overflow:hidden; /* IMPORTANT */
+box-shadow:
+0 6px 20px rgba(0,0,0,.45);
+object-fit:cover; 
+animation: counterRotate 20s linear infinite;
+}
+@keyframes counterRotate{
+from{ transform: rotate(0deg); }
+to{ transform: rotate(-360deg); }
+}
+.emr img
+object-fit:cover;   /* ✅ fills container */
 }
 .emr:hover{
 transform:translateY(-6px) scale(1.05);
 }
-.emr1{ transform:rotate(0deg) translateX(200px) rotate(0deg); }
-.emr2{ transform:rotate(45deg) translateX(200px) rotate(-45deg); }
-.emr3{ transform:rotate(90deg) translateX(200px) rotate(-90deg); }
-.emr4{ transform:rotate(135deg) translateX(200px) rotate(-135deg); }
-.emr5{ transform:rotate(180deg) translateX(200px) rotate(-180deg); }
-.emr6{ transform:rotate(225deg) translateX(200px) rotate(-225deg); }
-.emr7{ transform:rotate(270deg) translateX(200px) rotate(-270deg); }
-.emr8{ transform:rotate(315deg) translateX(200px) rotate(-315deg); }
+.emr:nth-child(1){ transform: rotate(0deg) translateX(200px); }
+.emr:nth-child(2){ transform: rotate(45deg) translateX(200px); }
+.emr:nth-child(3){ transform: rotate(90deg) translateX(200px); }
+.emr:nth-child(4){ transform: rotate(135deg) translateX(200px); }
+.emr:nth-child(5){ transform: rotate(180deg) translateX(200px); }
+.emr:nth-child(6){ transform: rotate(225deg) translateX(200px); }
+.emr:nth-child(7){ transform: rotate(270deg) translateX(200px); }
+.emr:nth-child(8){ transform: rotate(315deg) translateX(200px); }
 /* DASHBOARD */
 .arch-dashboard{
 display:flex;
@@ -726,7 +738,8 @@ z-index:10;
 .network-lines path{
 stroke:#60a5fa;
 stroke-width:2.4;
-stroke-dasharray: 1 8;   /* creates dots */
+stroke-dasharray: 1 8;
+stroke-dashoffset: 0;
 stroke-linecap:round;
 opacity:.9;
 fill:none;
