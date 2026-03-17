@@ -71,14 +71,18 @@ let particles=[]
 let originX
 let originY
 function resize(){
-w = raysCanvas.width = raysCanvas.offsetWidth
-h = raysCanvas.height = raysCanvas.offsetHeight
+const DPR = Math.min(window.devicePixelRatio || 1, 1.5)
+w = raysCanvas.width = raysCanvas.offsetWidth * DPR
+h = raysCanvas.height = raysCanvas.offsetHeight * DPR
+raysCanvas.style.width = raysCanvas.offsetWidth + "px"
+raysCanvas.style.height = raysCanvas.offsetHeight + "px"
+raysCtx.setTransform(DPR, 0, 0, DPR, 0, 0)
 originX = w/2
 originY = h
 }
 window.addEventListener("resize",resize)
 resize()
-const PARTICLE_COUNT = 250
+const PARTICLE_COUNT = window.innerWidth < 768 ? 80 : 140
 class Particle{
 constructor(){
 this.angle = Math.random()*Math.PI*2
@@ -107,15 +111,13 @@ originX,originY,
 this.x,this.y
 )
 grad.addColorStop(0,"rgba(255,255,255,0)")
-grad.addColorStop(.2,"rgba(147,197,253,0.35)")
-grad.addColorStop(.5,"rgba(99,102,241,0.65)")
-grad.addColorStop(.8,"rgba(139,92,246,0.45)")
+grad.addColorStop(.5,"rgba(99,102,241,0.6)")
 grad.addColorStop(1,"rgba(255,255,255,0)")
 raysCtx.globalAlpha = 0.6
 raysCtx.strokeStyle = grad
 raysCtx.lineWidth = 1.6
 raysCtx.shadowColor = "rgba(99,102,241,0.4)"
-raysCtx.shadowBlur = 8
+raysCtx.shadowBlur = 0
 raysCtx.stroke()
 raysCtx.shadowBlur = 0
 raysCtx.beginPath()
@@ -132,7 +134,7 @@ p.angle = (i / PARTICLE_COUNT) * Math.PI * 2 + (Math.random()*0.05)
 particles.push(p)
 }
 let mouse={x:-1000,y:-1000}
-if(ctaSection){
+if(ctaSection && window.innerWidth > 768){
 let mouseMoveTimeout;
 window.addEventListener("mousemove",(e)=>{
 if(mouseMoveTimeout) return;
@@ -143,25 +145,28 @@ mouse.y = e.clientY - rect.top;
 mouseMoveTimeout = null;
 },30);
 });
-function animate(){
-raysCtx.clearRect(0,0,w,h)
-particles.forEach(p=>{
-const dx = p.x - mouse.x
-const dy = p.y - mouse.y
-const dist = Math.sqrt(dx*dx + dy*dy)
-if(dist < 280){
-p.radius += (280 - dist) * 0.06
-p.radius = Math.min(p.radius, p.baseRadius + 260)
-}else{
-p.radius += (p.baseRadius - p.radius) * 0.05
+let lastTime = 0
+function animate(time){
+  if(time - lastTime < 32) { // ~30 FPS
+    requestAnimationFrame(animate)
+    return
+  }
+  lastTime = time
+  raysCtx.clearRect(0,0,w,h)
+  particles.forEach(p=>{
+    const dx = p.x - mouse.x
+    const dy = p.y - mouse.y
+    const dist = Math.sqrt(dx*dx + dy*dy)
+    if(dist < 280){
+      p.radius += (280 - dist) * 0.06
+      p.radius = Math.min(p.radius, p.baseRadius + 260)
+    } else {
+      p.radius += (p.baseRadius - p.radius) * 0.05
+    }
+    p.update()
+    p.draw()
+  })
+  requestAnimationFrame(animate)
 }
-p.update()
-p.draw()
-})
-requestAnimationFrame(animate)
-}
-requestAnimationFrame(animate)
-}
-} 
 }); // DOMContentLoaded close
 
