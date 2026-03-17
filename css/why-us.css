@@ -1638,3 +1638,272 @@ color:#9ca3af;
   display:flex;
   align-items:center;
 }
+
+/* =========================================================
+🔥 RESPONSIVE SYSTEM — MOBILE FIRST
+========================================================= */
+
+/* ≤ 1200px (Laptops / Small Desktop) */
+@media (max-width:1200px){
+  .hero-grid{
+    grid-template-columns:1fr;
+    gap:50px;
+  }
+  .hero-left{
+    text-align:center;
+    padding-right:0;
+    align-items:center;
+  }
+  .hero-right{
+    margin:auto;
+    max-width:100%;
+    padding:20px;
+  }
+  .architecture-grid{
+    grid-template-columns:1fr;
+    gap:60px;
+  }
+  .arch-inputs{
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  .input-node{
+    width:auto;
+    padding:10px 16px;
+  }
+  .transform-grid{
+    grid-template-columns:1fr;
+    gap:30px;
+  }
+  .transform-arrow{
+    display:none;
+  }
+  .rcm-score-layout{
+    grid-template-columns:1fr;
+    gap:40px;
+  }
+  .framework-wrapper{
+    grid-template-columns:1fr;
+  }
+  .pg-story{
+    grid-template-columns:1fr;
+    gap:30px;
+  }
+}
+
+
+/* ≤ 1024px (Tablet) */
+@media (max-width:1024px){
+  section + section{
+    margin-top:-20px;
+  }
+  .hero-enterprise{
+    padding:100px 20px 60px;
+  }
+  .workflow{
+    padding:30px;
+    height:auto;
+    flex-wrap:wrap;
+  }
+  .stage{
+    flex:1 1 45%;
+    margin-bottom:30px;
+  }
+  .stage:not(:last-child)::after{
+    display:none;
+  }
+  .dashboard-metrics{
+    flex-direction:column;
+  }
+  .revenue-flow{
+    grid-template-columns:repeat(2,1fr);
+  }
+  .flow-step{
+    min-height:auto;
+  }
+  .architecture-grid{
+    gap:50px;
+  }
+  .engine-circle{
+    width:180px;
+    height:180px;
+  }
+  .emr-ring{
+    width:340px;
+    height:340px;
+  }
+  .dashboard-card{
+    width:100%;
+  }
+}
+/* ≤ 768px (Mobile Landscape) */
+@media (max-width:768px){
+  .hero-left h1{
+    font-size:32px;
+  }
+  .hero-sub{
+    font-size:15px;
+  }
+  .hero-cta{
+    flex-direction:column;
+    width:100%;
+  }
+  .hero-cta a{
+    width:100%;
+  }
+  .workflow-dashboard{
+    transform:none;
+  }
+  .hero-right{
+    animation:none;
+  }
+  .workflow{
+    flex-direction:column;
+    gap:30px;
+  }
+  .stage{
+    width:100%;
+  }
+  .revenue-token{
+    display:none;
+  }
+  .revenue-flow{
+    grid-template-columns:1fr;
+  }
+  .flow-step{
+    padding:30px 20px;
+  }
+  .flow-icon{
+    width:64px;
+    height:64px;
+  }
+  .flow-step h3{
+    font-size:18px;
+  }
+  .transform-card{
+    padding:30px;
+  }
+  .rcm-questions{
+    padding:25px;
+  }
+  .gauge{
+    width:200px;
+  }
+  .score-number{
+    font-size:30px;
+  }
+  .framework-step{
+    grid-template-columns:60px 1fr;
+  }
+  .framework-circle{
+    width:52px;
+    height:52px;
+    font-size:16px;
+  }
+}
+/* ≤ 600px (Mobile Portrait) */
+@media (max-width:600px){
+  .hero-enterprise{
+    padding:80px 16px 40px;
+  }
+  .hero-proof{
+    font-size:13px;
+  }
+  .hero-left{
+    min-height:auto;
+  }
+  .workflow{
+    padding:20px;
+  }
+  .stage-node{
+    width:60px;
+    height:60px;
+    font-size:10px;
+  }
+  .metric-value{
+    font-size:18px;
+  }
+  .pg-architecture{
+    padding:70px 0 40px;
+  }
+  .engine-circle{
+    width:150px;
+    height:150px;
+  }
+  .emr-ring{
+    width:260px;
+    height:260px;
+  }
+  .emr{
+    width:48px;
+    height:48px;
+  }
+  .dashboard-card{
+    padding:20px;
+  }
+  .pg-revenue-flow{
+    padding:50px 0 30px;
+  }
+  .flow-step{
+    padding:25px 16px;
+  }
+  .flow-stat{
+    min-width:auto;
+    width:100%;
+  }
+  .transform-section{
+    padding:60px 0;
+  }
+  .transform-card{
+    padding:25px;
+  }
+  .rcm-score-section{
+    padding:60px 0 40px;
+  }
+  .rcm-questions{
+    padding:20px;
+  }
+  .pg-outcomes{
+    padding:70px 0 40px;
+  }
+  .pg-metric-card{
+    width:100%;
+  }
+  .framework-timeline{
+    gap:40px;
+  }
+}
+
+
+/* ≤ 420px (Small Devices) */
+@media (max-width:420px){
+  .hero-left h1{
+    font-size:26px;
+  }
+  .hero-sub{
+    font-size:14px;
+  }
+  .hero-cta a{
+    height:48px;
+    font-size:14px;
+  }
+  .flow-step h3{
+    font-size:16px;
+  }
+  .flow-step p{
+    font-size:14px;
+  }
+  .pg-metric-card h3{
+    font-size:32px;
+  }
+  .roi-main{
+    font-size:28px;
+  }
+  .framework-content h3{
+    font-size:16px;
+  }
+  .framework-content p{
+    font-size:13px;
+  }
+}
