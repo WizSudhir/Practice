@@ -834,12 +834,14 @@ opacity:.3;
 pointer-events:none;
 }
 .pg-revenue-flow .section-header{
+max-width:1100px
 text-align:center;
 max-width:760px;
 margin:0 auto 60px;
 }
 .pg-revenue-flow h2{
-font-size:clamp(32px,3.5vw,44px);
+overflow:visible;
+font-size:clamp(28px,3vw,44px);
 white-space:nowrap;
 font-weight:800;
 margin-bottom:20px;
@@ -879,10 +881,12 @@ margin:auto;
 .flow-step{
 display:flex;
 flex-direction:column;
+justify-content:space-between;
 align-items:center;
 text-align:center;
 position:relative;
 padding:30px 20px;
+height:100%;
 background:linear-gradient(180deg,rgba(20,25,55,.7),rgba(10,15,35,.9));
 border:1px solid rgba(255,255,255,.06);
 border-radius:20px;
@@ -968,9 +972,11 @@ max-width:240px;
 }
 /* STAT */
 .flow-stat{
+min-width:190px;
 display:flex;
 flex-direction:column;
 align-items:center;
+text-align:center;
 justify-content:space-between;
 font-size:13px;
 font-weight:700;
