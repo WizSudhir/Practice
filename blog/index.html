@@ -137,117 +137,61 @@ JSON-LD STRUCTURED DATA
 <!-- ===============================
 SEARCH + FILTER
 ================================= -->
+<section class="blog-controls">
+  <div class="container">
 
-<section class="section">
+    <div class="blog-controls-inner">
+      <!-- Search -->
+      <div class="blog-search">
+        <input type="text" id="blogSearch" placeholder="Search articles...">
+      </div>
+      <!-- Filters -->
+      <div class="blog-filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="billing">Billing</button>
+        <button class="filter-btn" data-filter="rcm">RCM</button>
+        <button class="filter-btn" data-filter="denial">Denials</button>
+        <button class="filter-btn" data-filter="credentialing">Credentialing</button>
+        <button class="filter-btn" data-filter="analytics">Analytics</button>
+      </div>
 
-<div class="container">
+    </div>
 
-<!-- Search -->
-
-<div style="max-width:600px;margin:auto;display:flex;gap:10px">
-
-<input
-type="text"
-id="blogSearch"
-placeholder="Search articles..."
-style="flex:1;padding:16px 22px;border-radius:50px;border:none;background:var(--bg-secondary);color:var(--text-primary);font-size:16px;"
->
-
-<button class="btn-primary" onclick="searchBlogs()">Go</button>
-
-</div>
-
-<!-- Category filters -->
-
-<div style="margin-top:40px;text-align:center">
-
-<button class="btn-primary filter-btn" data-filter="all">All</button>
-<button class="btn-outline filter-btn" data-filter="billing">Medical Billing</button>
-<button class="btn-outline filter-btn" data-filter="rcm">Revenue Cycle</button>
-<button class="btn-outline filter-btn" data-filter="denial">Denial Management</button>
-<button class="btn-outline filter-btn" data-filter="credentialing">Credentialing</button>
-<button class="btn-outline filter-btn" data-filter="analytics">Healthcare Analytics</button>
-<button class="btn-outline filter-btn" data-filter="growth">Practice Growth</button>
-
-</div>
-
-</div>
+  </div>
 </section>
-
 
 <!-- ===============================
 FEATURED BLOG
 ================================= -->
+<section class="blog-featured">
+  <div class="container">
+    <h2>Featured Insight</h2>
+    <div class="featured-card">
+      ...
+    </div>
 
-<section class="section">
-
-<div class="container">
-
-<h2 class="reveal">Featured Insight</h2>
-
-<div class="blog-card reveal" style="margin-top:40px">
-
-<img src="../images/blog-featured.jpg" alt="Featured Blog">
-
-<div class="blog-content">
-
-<div class="blog-meta">
-<span>Revenue Cycle</span>
-<span>10 min read</span>
-</div>
-
-<h3>
-The Future of Revenue Cycle Management in 2026
-</h3>
-
-<p>
-How automation, analytics, and AI-driven claim processing
-are transforming the financial performance of healthcare practices.
-</p>
-
-<a href="future-of-rcm.html" class="blog-read">
-Read Article →
-</a>
-
-</div>
-</div>
-
-</div>
+  </div>
 </section>
 
-
-
 <!-- ===============================
-BLOG GRID
+BLOG GRID & PAGINATION
 ================================= -->
-
 <section class="section">
-
+  
 <div class="container">
-
 <h2 class="reveal">Latest Articles</h2>
-
 <div class="blog-grid" id="blogGrid">
 <!-- Blog posts will load automatically here -->
 </div>
-  
-<!-- ===============================
-PAGINATION
-================================= -->
 
 <div class="blog-pagination">
-
-<a href="#">Previous</a>
-<a href="#" class="active">1</a>
-<a href="#">2</a>
-<a href="#">3</a>
-<a href="#">Next</a>
-
+  <button>← Previous</button>
+  <span>Page 1 of 3</span>
+  <button>Next →</button>
 </div>
 
 </div>
 </section>
-
 
 <!-- ===============================
 FOOTER
