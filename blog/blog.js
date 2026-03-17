@@ -29,10 +29,10 @@ document.addEventListener("DOMContentLoaded", () => {
     reset() {
       this.x = Math.random() * width;
       this.y = Math.random() * height;
-      this.size = Math.random() * 2 + 0.5;
+      this.size = Math.random() * 2.5 + 1;
       this.speedX = (Math.random() - 0.5) * 0.3;
       this.speedY = (Math.random() - 0.5) * 0.3;
-      this.opacity = Math.random() * 0.5 + 0.2;
+      this.opacity = Math.random() * 0.6 + 0.4;
     }
     update() {
       this.x += this.speedX;
@@ -46,8 +46,12 @@ document.addEventListener("DOMContentLoaded", () => {
     draw() {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(99,102,241,${this.opacity})`;
+      // brighter + slightly whiter tone
+      ctx.fillStyle = `rgba(180, 200, 255, ${this.opacity})`;
+      ctx.shadowColor = "rgba(99,102,241,0.8)";
+      ctx.shadowBlur = 8;
       ctx.fill();
+      ctx.shadowBlur = 0;
     }
   }
   // INIT PARTICLES //
@@ -67,8 +71,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const dist = dx * dx + dy * dy;
         if (dist < 12000) {
           ctx.beginPath();
-          ctx.strokeStyle = "rgba(99,102,241,0.08)";
-          ctx.lineWidth = 1;
+          ctx.strokeStyle = "rgba(140,160,255,0.18)";
+          ctx.lineWidth = 1.2;
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
           ctx.stroke();
