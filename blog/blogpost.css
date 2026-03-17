@@ -5,14 +5,30 @@ BLOG POST CSS
 /* BLOG POST PAGE */
 
 .breadcrumb {
+  position: absolute;
+  top: 90px;
+  right: 40px;
+  font-size: 14px;
   text-align: right;
   padding: 20px;
-  font-size: 14px;
-  color: #94a3b8;
+  color: var(--text-secondary);
+  z-index: 10;
 }
 .blog-post-header {
-  padding: 80px 0 40px;
+  background: var(--gradient-hero);
+  position: relative;
   text-align: center;
+}
+.blog-post-header::before {
+  content: "";
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(99,102,241,0.25), transparent 70%);
+  filter: blur(100px);
 }
 .blog-post-header h1 {
   font-size: 40px;
