@@ -586,6 +586,7 @@ text-align:center;
 font-weight:700;
 position:relative;
 z-index:3;
+margin:auto;
 }
 .engine-inner{
 display:flex;
@@ -630,9 +631,12 @@ left:50%;
 transform:translate(-50%, -50%);
 width:440px;
 height:440px;
+display:flex;
+align-items:center;
+justify-content:center;
 pointer-events:none;
 animation: rotateRing 20s linear infinite;
-transform-origin: center;
+transform-origin: center center;
 }
 @keyframes rotateRing{
 from{ transform:translate(-50%,-50%) rotate(0deg); }
