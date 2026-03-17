@@ -475,9 +475,6 @@ clearInterval(valueEl._interval)
 if(type === "currency"){
 valueEl.innerText = "$" + current.toLocaleString()
 }
-if(type === "currency"){
-  valueEl.innerText = "$" + current.toLocaleString()
-}
 else if(type === "percentage" || type === "metric"){
   valueEl.innerText = current + "%"
 }
