@@ -298,6 +298,12 @@
   font-weight: 600;
   text-decoration: none;
 }
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
 /* =========================================================
 4. BLOG GRID
 ========================================================= */
