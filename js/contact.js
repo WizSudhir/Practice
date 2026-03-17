@@ -78,7 +78,7 @@ raysCanvas.style.width = raysCanvas.offsetWidth + "px"
 raysCanvas.style.height = raysCanvas.offsetHeight + "px"
 raysCtx.setTransform(DPR, 0, 0, DPR, 0, 0)
 originX = raysCanvas.offsetWidth / 2
-originY = raysCanvas.offsetHeight
+originY = raysCanvas.offsetHeight * 0.7;
 }
 let resizeTimeout;
 window.addEventListener("resize", () => {
@@ -86,7 +86,7 @@ window.addEventListener("resize", () => {
   resizeTimeout = setTimeout(resize, 150);
 });
 resize()
-const PARTICLE_COUNT = window.innerWidth < 768 ? 80 : 140
+const PARTICLE_COUNT = window.innerWidth < 768 ? 40 : 70
 class Particle{
 constructor(){
 this.angle = Math.random()*Math.PI*2
@@ -118,10 +118,10 @@ grad.addColorStop(0,"rgba(255,255,255,0)")
 grad.addColorStop(.5,"rgba(99,102,241,1)")
 grad.addColorStop(1,"rgba(255,255,255,0)")
 raysCtx.globalAlpha = 0.9;
-raysCtx.lineWidth = 2;
+raysCtx.lineWidth = 1.5;
 raysCtx.strokeStyle = grad
 raysCtx.shadowColor = "rgba(99,102,241,0.4)"
-raysCtx.shadowBlur = 5
+raysCtx.shadowBlur = 8
 raysCtx.stroke()
 raysCtx.shadowBlur = 0
 raysCtx.beginPath()
@@ -180,5 +180,7 @@ function animate(time){
   requestAnimationFrame(animate); // ✅ ONLY ONCE
 }
 requestAnimationFrame(animate);
+}
+}
 }); // DOMContentLoaded close
 
