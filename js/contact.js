@@ -179,5 +179,6 @@ function animate(time){
   });
   requestAnimationFrame(animate); // ✅ ONLY ONCE
 }
+requestAnimationFrame(animate);
 }); // DOMContentLoaded close
 
