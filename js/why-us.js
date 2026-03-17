@@ -356,7 +356,7 @@ const elbowOffsetX = 80;
 const radius = 18;
 
 const midX = nodeX + elbowOffsetX;
-const midY = nodeY + (endY - nodeY) * 0.5;
+const midY = endY;
 
 const goingDown = endY > nodeY;
 const sweep1 = goingDown ? 1 : 0;
@@ -365,10 +365,9 @@ const sweep2 = goingDown ? 0 : 1;
 const pathData = `
 M ${nodeX} ${nodeY}
 L ${midX - radius} ${nodeY}
-A ${radius} ${radius} 0 0 ${sweep1} ${midX} ${nodeY + (goingDown ? radius : -radius)}
-L ${midX} ${midY - (goingDown ? radius : -radius)}
-A ${radius} ${radius} 0 0 ${sweep2} ${midX + radius} ${midY}
-L ${endX} ${midY}
+A ${radius} ${radius} 0 0 ${goingDown ? 1 : 0} ${midX} ${nodeY + (goingDown ? radius : -radius)}
+L ${midX} ${endY}
+L ${endX} ${endY}
 `;
 path.setAttribute("d",pathData)
 path.setAttribute("stroke","#60a5fa")
