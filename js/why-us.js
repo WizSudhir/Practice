@@ -348,21 +348,16 @@ const coreY = engineRect.top + engineRect.height/2 - cont.top
 const offset = 60
 const engineRadius = engineRect.width / 2;
 const endX = coreX + 4; // slight padding from border
-const spread = 180; // increase spacing
+const spread = 220; // increase spacing
 const step = spread / (inputs.length - 1);
 const endY = coreY - spread/2 + (index * step);
 const path = document.createElementNS(
 "http://www.w3.org/2000/svg","path"
 )
-const elbowOffsetX = 80;
+const elbowOffsetX = 110;
 const radius = 18;
 
 const midX = nodeX + elbowOffsetX;
-const midY = endY;
-
-const goingDown = endY > nodeY;
-const sweep1 = goingDown ? 1 : 0;
-const sweep2 = goingDown ? 0 : 1;
 
 let pathData;
 if(isCenter){
@@ -373,20 +368,26 @@ if(isCenter){
   `;
 }else{
   const verticalDir = endY > nodeY ? 1 : -1;
+  const r = 26; // 🔥 smoother bend (increase from 18)
+  const startX = midX - r;
+  const startY = nodeY;
+  const curve1EndX = midX;
+  const curve1EndY = nodeY + (verticalDir * r);
+  const curve2StartY = endY - (verticalDir * r);
   pathData = `
   M ${nodeX} ${nodeY}
-  L ${midX - radius} ${nodeY}
-  A ${radius} ${radius} 0 0 ${verticalDir === 1 ? 1 : 0}
-    ${midX} ${nodeY + (verticalDir * radius)}
-  L ${midX} ${endY - (verticalDir * radius)}
-  A ${radius} ${radius} 0 0 ${verticalDir === 1 ? 0 : 1}
-    ${midX + radius} ${endY}
+  L ${startX} ${startY}
+  A ${r} ${r} 0 0 ${verticalDir === 1 ? 1 : 0}
+    ${curve1EndX} ${curve1EndY}
+  L ${midX} ${curve2StartY}
+  A ${r} ${r} 0 0 ${verticalDir === 1 ? 0 : 1}
+    ${midX + r} ${endY}
   L ${endX} ${endY}
   `;
 }
 path.setAttribute("d",pathData)
 path.setAttribute("stroke","#60a5fa")
-path.setAttribute("stroke-width","2.4")
+path.setAttribute("stroke-width","2")
 path.setAttribute("fill","none")
 svg.appendChild(path)
 })
