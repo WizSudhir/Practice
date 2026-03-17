@@ -480,7 +480,7 @@ line.style.strokeDashoffset = "0"
 
 // animate number
 if(valueEl){
-const type = valueEl.parentElement.getAttribute("data-type")
+const type = valueEl.closest(".roi-value").dataset.type
 const target = parseInt(valueEl.dataset.target)
 let current = 0
 const interval = setInterval(()=>{
@@ -513,7 +513,7 @@ line.style.strokeDashoffset = "200"
 }
 
 // RESET number
-const type = valueEl.parentElement.getAttribute("data-type")
+const type = valueEl.closest(".roi-value").dataset.type
 
 if(type === "currency"){
 valueEl.innerText = "$0"
