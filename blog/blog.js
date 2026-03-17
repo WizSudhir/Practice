@@ -97,7 +97,15 @@ document.addEventListener("DOMContentLoaded", async () => {
  // ===============================
 // BLOG SYSTEM + FILTERING
 // ===============================
-
+let blogs = [];
+try {
+  const res = await fetch("blogs.json");
+  blogs = await res.json();
+} catch (err) {
+  console.error("Error loading blogs:", err);
+  return;
+}
+if (!blogs.length) return;
 const featuredContainer = document.getElementById("featuredPost");
 const grid = document.getElementById("blogGrid");
 const searchInput = document.getElementById("blogSearch");
@@ -169,11 +177,14 @@ function applyFilters() {
 // EVENTS
 // ===============================
 // Live search
-searchInput.addEventListener("input", applyFilters);
+if (searchInput) {
+  searchInput.addEventListener("input", applyFilters);
+}
 // Filter buttons
 filterButtons.forEach(btn => {
   btn.addEventListener("click", () => {
-    document.querySelector(".filter-btn.active")?.classList.remove("active");
+    filterButtons.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
     btn.classList.add("active");
     activeFilter = btn.dataset.filter;
     applyFilters();
