@@ -403,7 +403,13 @@ const elbowX = startX + offset
 const path = document.createElementNS(
 "http://www.w3.org/2000/svg","path"
 )
-path.setAttribute("d",pathData)
+const pathDataDash = `
+M ${startX} ${startY}
+L ${elbowX} ${startY}
+L ${elbowX} ${endY}
+L ${endX} ${endY}
+`;
+path.setAttribute("d", pathDataDash)
 path.setAttribute("stroke","#6366f1")
 path.setAttribute("stroke-width","1.6")
 path.setAttribute("stroke-dasharray","3 8")
