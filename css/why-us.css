@@ -1212,16 +1212,6 @@ display:flex;
 flex-direction:column;
 gap:55px;
 }
-.framework-timeline::before{
-content:"";
-position:absolute;
-left:32px;
-top:0;
-transform:none;
-width:2px;
-height:100%;
-background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(99,102,241,.6),rgba(255,255,255,.1));
-}
 /* STEP */
 .framework-step{
 display:grid;
@@ -1240,6 +1230,20 @@ grid-column:3;
 .framework-step.visible{
 opacity:1;
 transform:translateY(0);
+}
+.framework-step:not(:last-child)::before{
+content:"";
+position:absolute;
+left:32px;
+top:64px; /* starts EXACTLY from bottom of circle */
+width:2px;
+height:calc(100% - 64px);
+background:linear-gradient(
+180deg,
+rgba(99,102,241,.6),
+rgba(59,130,246,.6)
+);
+opacity:.6;
 }
 /* CIRCLE */
 .framework-circle{
@@ -1305,22 +1309,42 @@ line-height:1.5;
 max-width:420px;
 color:#cbd5f5;
 }
-/* SMALL CONNECTOR DOT */
-.framework-circle::after{
-content:"";
-position:absolute;
-bottom:-32px;
-width:8px;
-height:8px;
-left:50%;
-transform:translateX(-50%);
-border-radius:50%;
-background:#3b82f6;
-box-shadow:0 0 10px #3b82f6;
+/* Framework Right */
+.framework-wrapper{
+display:grid;
+grid-template-columns:1fr 420px;
+gap:80px;
+align-items:start;
+max-width:1100px;
+margin:50px auto 0;
 }
-/* LAST REMOVE DOT */
-.framework-step:last-child .framework-circle::after{
-display:none;
+.framework-card{
+background:
+linear-gradient(180deg,#0f172a,#020617);
+border:1px solid rgba(255,255,255,.08);
+border-radius:20px;
+padding:30px;
+box-shadow:
+0 30px 80px rgba(0,0,0,.6),
+0 0 40px rgba(59,130,246,.15);
+}
+.framework-card h4{
+font-size:18px;
+margin-bottom:10px;
+}
+.framework-card p{
+font-size:14px;
+color:#cbd5f5;
+line-height:1.6;
+margin-bottom:16px;
+}
+.framework-card ul{
+padding-left:18px;
+}
+.framework-card li{
+font-size:13px;
+margin-bottom:8px;
+color:#9ca3af;
 }
 /* =========================================================
 3. RCM MATURITY SCORE GAUGE
