@@ -12,6 +12,14 @@
   transform: translateX(-50%);
   background: linear-gradient(90deg,transparent,rgba(99,102,241,0.3),transparent);
 }
+.section h2 {
+  font-size: 32px;
+  font-weight: 800;
+  text-align: center;
+  background: linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 /* =========================================================
 1. BLOG HERO
 ========================================================= */
@@ -237,6 +245,14 @@
   overflow: hidden;
   border: 1px solid rgba(255,255,255,0.08);
   transition: all .3s;
+}
+.blog-featured h2 {
+  font-size: 32px;
+  font-weight: 800;
+  text-align: center;
+  background: linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .featured-card:hover {
   transform: translateY(-6px);
