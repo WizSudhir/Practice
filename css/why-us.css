@@ -1215,9 +1215,9 @@ gap:55px;
 .framework-timeline::before{
 content:"";
 position:absolute;
-left:50%;
+left:32px;
 top:0;
-transform:translateX(-50%);
+transform:none;
 width:2px;
 height:100%;
 background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(99,102,241,.6),rgba(255,255,255,.1));
@@ -1225,8 +1225,9 @@ background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(99,102,241,.6),rgba(
 /* STEP */
 .framework-step{
 display:grid;
-grid-template-columns:1fr 80px 1fr;
-align-items:center;
+grid-template-columns:80px 1fr;
+align-items:start; /* 🔥 THIS FIXES ALIGNMENT */
+column-gap:24px;
 position:relative;
 opacity:0;
 transform:translateY(40px);
@@ -1249,7 +1250,7 @@ border-radius:50%;
 display:flex;
 align-items:center;
 justify-content:center;
-grid-column:2;
+grid-column:1;
 justify-self:center;
 font-weight:900;
 color:#22c55e;
@@ -1288,9 +1289,9 @@ color:#4ade80;
 }
 /* CONTENT */
 .framework-content{
-grid-column:1;
-text-align:right;
-padding-right:20px;
+grid-column:2;
+text-align:left;
+padding-top:2px;
 }
 .framework-content h3{
 font-size:18px;
