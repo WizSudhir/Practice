@@ -1,262 +1,167 @@
 document.addEventListener("DOMContentLoaded", () => {
+// ======================================================
+// PRACTICEGRID SOLUTIONS - GLOBAL JS ARCHITECTURE
+// ======================================================
 
-// AI PLATFORM NODE INTERACTION
 // ===============================
+// 1. HEADER SCROLL EFFECT
+// ===============================
+const navbar = document.querySelector(".navbar");
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 60) {
+    navbar?.classList.add("scrolled");
+  } else {
+    navbar?.classList.remove("scrolled");
+  }
+});
 
-const modules = document.querySelectorAll(".ai-module")
-const brain = document.querySelector(".ai-core")
-const metric1 = document.getElementById("metric1")
-const metric2 = document.getElementById("metric2")
-const metric3 = document.getElementById("metric3")
-const label1 = document.getElementById("metricLabel1")
-const label2 = document.getElementById("metricLabel2")
-const label3 = document.getElementById("metricLabel3")
-let currentIndex = 0
-let scanInterval
-let userHovering = false
-function animateMetric(element, value){
-let current = 0
-const duration = 600
-const steps = 30
-const increment = value / steps
-const interval = setInterval(()=>{
-current += increment
-if(current >= value){
-current = value
-clearInterval(interval)
+// ===============================
+// 2. Mobile navigation bar
+// ===============================
+// MOBILE MENU TOGGLE LOGIC
+const navToggle = document.querySelector('.nav-toggle');
+const navMenu = document.querySelector('.nav-menu');
+if (navToggle && navMenu) {
+  navToggle.addEventListener('click', () => {
+   navMenu.classList.toggle('active');
+   navToggle.classList.toggle('active');
+   document.body.classList.toggle("menu-open");
+    // Optional: Animate the hamburger spans to an 'X'
+    const spans = navToggle.querySelectorAll('span');
+    spans.forEach(span => span.classList.toggle('open'));
+  });
 }
-element.innerText = Math.floor(current).toLocaleString()
-}, duration / steps)
+// Close menu when a link is clicked
+document.querySelectorAll('.nav-menu a').forEach(link => {
+  link.addEventListener('click', () => {
+    navMenu.classList.remove('active');
+    navToggle.classList.remove('active');
+  });
+});
+// Close menu when clicking outside
+document.addEventListener("click",(e)=>{
+  if(
+    navMenu.classList.contains("active") &&
+    !navMenu.contains(e.target) &&
+    !navToggle.contains(e.target)
+  ){
+    navMenu.classList.remove("active")
+    navToggle.classList.remove("active")
+  }
+})
+// Close menu if screen becomes desktop size
+window.addEventListener("resize",()=>{
+  if(window.innerWidth > 992){
+    navMenu.classList.remove("active")
+    navToggle.classList.remove("active")
+  }
+})
+
+/* =====================================
+3. Stripe-style flowing animation
+===================================== */
+const ctaSection = document.querySelector(".cta-stripe")
+const raysCanvas = document.getElementById("cta-rays")
+if(!raysCanvas){
+  console.warn("CTA rays canvas not found");
+} else {
+const raysCtx = raysCanvas.getContext("2d")
+let w,h
+let particles=[]
+let originX
+let originY
+function resize(){
+w = raysCanvas.width = raysCanvas.offsetWidth
+h = raysCanvas.height = raysCanvas.offsetHeight
+originX = w/2
+originY = h
 }
-// MODULE DATA LOGIC
-function activateModule(module){
-modules.forEach(m=>m.classList.remove("active"))
-module.classList.add("active")
-sendAIPulse(module, brain)
-document.getElementById("aiStatus").innerText =
-module.querySelector("h4").innerText + " processing..."
-brain.classList.add("receiving")
-const type = module.dataset.node
-if(type === "intelligence"){
-animateMetric(metric1,3842)
-label1.innerText = "Claims Analyzed"
-animateMetric(metric2,14)
-label2.innerText = "Payer Behavior Alerts"
-animateMetric(metric3,12500)
-label3.innerText = "Revenue Opportunities"
+window.addEventListener("resize",resize)
+resize()
+const PARTICLE_COUNT = 250
+class Particle{
+constructor(){
+this.angle = Math.random()*Math.PI*2
+this.radius = Math.random()*400 + 80
+this.baseRadius = this.radius
+this.speed = 0.0002 + Math.random()*0.0003
+this.x = originX
+this.y = originY
+this.size = Math.random()*2+1
 }
-if(type === "denial"){
-animateMetric(metric1,126)
-label1.innerText = "Coding Issues Detected"
-animateMetric(metric2,41)
-label2.innerText = "Denial Risks Prevented"
-animateMetric(metric3,9200)
-label3.innerText = "Revenue Protected"
+update(){
+this.angle += this.speed
+this.x =
+originX +
+Math.cos(this.angle)*this.radius
+this.y =
+originY -
+Math.sin(this.angle)*this.radius
 }
-if(type === "workflow"){
-animateMetric(metric1,214)
-label1.innerText = "Claims Routed"
-animateMetric(metric2,36)
-label2.innerText = "Workflow Bottlenecks"
-animateMetric(metric3,7850)
-label3.innerText = "Processing Efficiency"
+draw(){
+raysCtx.beginPath()
+raysCtx.moveTo(originX,originY)
+raysCtx.lineTo(this.x,this.y)
+const grad = raysCtx.createLinearGradient(
+originX,originY,
+this.x,this.y
+)
+grad.addColorStop(0,"rgba(255,255,255,0)")
+grad.addColorStop(.2,"rgba(147,197,253,0.35)")
+grad.addColorStop(.5,"rgba(99,102,241,0.65)")
+grad.addColorStop(.8,"rgba(139,92,246,0.45)")
+grad.addColorStop(1,"rgba(255,255,255,0)")
+raysCtx.globalAlpha = 0.6
+raysCtx.strokeStyle = grad
+raysCtx.lineWidth = 1.6
+raysCtx.shadowColor = "rgba(99,102,241,0.4)"
+raysCtx.shadowBlur = 8
+raysCtx.stroke()
+raysCtx.shadowBlur = 0
+raysCtx.beginPath()
+raysCtx.arc(this.x,this.y,this.size,0,Math.PI*2)
+raysCtx.fillStyle="rgba(255,255,255,0.8)"
+raysCtx.shadowBlur=6
+raysCtx.fill()
+raysCtx.shadowBlur=0
 }
-if(type === "recovery"){
-animateMetric(metric1,87)
-label1.innerText = "Denied Claims Reopened"
-animateMetric(metric2,53)
-label2.innerText = "Successful Appeals"
-animateMetric(metric3,18450)
-label3.innerText = "Recovered Revenue"
 }
-if(type === "performance"){
-metric1.innerText = "98%"
-label1.innerText = "Clean Claim Rate"
-metric2.innerText = "30%"
-label2.innerText = "Faster Collections"
-metric3.innerText = "$250k+"
-label3.innerText = "Revenue Growth Potential"
+for(let i=0;i<PARTICLE_COUNT;i++){
+let p = new Particle()
+p.angle = (i / PARTICLE_COUNT) * Math.PI * 2 + (Math.random()*0.05)
+particles.push(p)
 }
-}
-// HOVER LINE SYSTEM
-const svg = document.querySelector(".ai-network")
-function drawNetwork(){
-svg.innerHTML = ""
-const container = document.querySelector(".ai-system")
-const cont = container.getBoundingClientRect()
-const core = brain.getBoundingClientRect()
-modules.forEach(module=>{
-const line = document.createElementNS(
-"http://www.w3.org/2000/svg","line")
-const mod = module.getBoundingClientRect()
-const fromX =
-mod.left + mod.width/2 - cont.left
-const fromY =
-mod.top + mod.height/2 - cont.top
-const toX =
-core.left + core.width/2 - cont.left
-const toY =
-core.top + core.height/2 - cont.top
-const dx = toX - fromX
-const dy = toY - fromY
+let mouse={x:-1000,y:-1000}
+if(ctaSection){
+let mouseMoveTimeout;
+window.addEventListener("mousemove",(e)=>{
+if(mouseMoveTimeout) return;
+mouseMoveTimeout = setTimeout(()=>{
+const rect = raysCanvas.getBoundingClientRect();
+mouse.x = e.clientX - rect.left;
+mouse.y = e.clientY - rect.top;
+mouseMoveTimeout = null;
+},30);
+});
+function animate(){
+raysCtx.clearRect(0,0,w,h)
+particles.forEach(p=>{
+const dx = p.x - mouse.x
+const dy = p.y - mouse.y
 const dist = Math.sqrt(dx*dx + dy*dy)
-const nx = dx/dist
-const ny = dy/dist
-const moduleRadius = mod.width/2
-const coreRadius = core.width/2
-line.setAttribute("x1", fromX + nx*moduleRadius)
-line.setAttribute("y1", fromY + ny*moduleRadius)
-line.setAttribute("x2", toX - nx*coreRadius)
-line.setAttribute("y2", toY - ny*coreRadius)
-svg.appendChild(line)
-})
+if(dist < 280){
+p.radius += (280 - dist) * 0.06
+p.radius = Math.min(p.radius, p.baseRadius + 260)
+}else{
+p.radius += (p.baseRadius - p.radius) * 0.05
 }
-window.addEventListener("load", drawNetwork)
-window.addEventListener("resize", drawNetwork)
-// AUTO AI SCANNING
-function startAIScan(){
-scanInterval = setInterval(()=>{
-if(userHovering) return
-const module = modules[currentIndex]
-activateModule(module)
-currentIndex++
-if(currentIndex >= modules.length){
-currentIndex = 0
-}
-},3500)
-}
-// USER INTERACTION
-modules.forEach((module, index)=>{
-module.addEventListener("mouseenter",()=>{
-userHovering = true
-activateModule(module)
-// hide the dashed connection
-svg.children[index].style.opacity = 0
+p.update()
+p.draw()
 })
-module.addEventListener("mouseleave",()=>{
-userHovering = false
-// restore dashed connection
-svg.children[index].style.opacity = .4
-})
+requestAnimationFrame(animate)
+}
+requestAnimationFrame(animate)
+}
+} 
+}); // DOMContentLoaded close
 
-})
-// start AI scan
-startAIScan()
-  
-// ========================================
-// LIVE CLAIM FLOW DEMO (SaaS PRODUCT FEEL)
-// ========================================
-const claimPacket = document.getElementById("claimPacket")
-function sendAIPulse(fromElement, toElement){
-const pulse = document.createElement("div")
-pulse.className = "ai-pulse"
-const container = document.querySelector(".ai-system")
-container.appendChild(pulse)
-const fromRect = fromElement.getBoundingClientRect()
-const toRect = toElement.getBoundingClientRect()
-const containerRect = container.getBoundingClientRect()
-const fromX =
-fromRect.left + fromRect.width/2 - containerRect.left
-const fromY =
-fromRect.top + fromRect.height/2 - containerRect.top
-const toX =
-toRect.left + toRect.width/2 - containerRect.left
-const toY =
-toRect.top + toRect.height/2 - containerRect.top
-const dx = toX - fromX
-const dy = toY - fromY
-const distance = Math.sqrt(dx*dx + dy*dy)
-const nx = dx / distance
-const ny = dy / distance
-const moduleRadius = fromRect.width/2
-const coreRadius = toRect.width/2
-const startX = fromX + nx * moduleRadius
-const startY = fromY + ny * moduleRadius
-const endX = toX - nx * coreRadius
-const endY = toY - ny * coreRadius
-pulse.style.left = startX + "px"
-pulse.style.top = startY + "px"
-requestAnimationFrame(()=>{
-pulse.style.transform =
-`translate(${endX-startX}px,${endY-startY}px)`
-})
-setTimeout(()=>{
-pulse.remove()
-},900)
-}
-const modulePositions = {
-core: document.querySelector(".ai-core"),
-intelligence: document.querySelector(".module-intelligence"),
-denial: document.querySelector(".module-denial"),
-workflow: document.querySelector(".module-workflow"),
-recovery: document.querySelector(".module-recovery"),
-performance: document.querySelector(".module-performance")
-}
-function moveClaim(target){
-const x = target.offsetLeft + target.offsetWidth/2
-const y = target.offsetTop - 40
-claimPacket.style.left = x + "px"
-claimPacket.style.top = y + "px"
-modules.forEach(m => m.classList.remove("module-highlight"))
-target.classList.add("module-highlight")
-sendAIPulse(target, document.querySelector(".ai-core"))
-}
-function runClaimDemo(){
-setTimeout(()=>{
-moveClaim(modulePositions.intelligence)
-claimPacket.innerText="Claim Submitted"
-},1000)
-setTimeout(()=>{
-moveClaim(modulePositions.core)
-claimPacket.innerText="Processing Claim"
-},2500)
-setTimeout(()=>{
-moveClaim(modulePositions.denial)
-claimPacket.innerText="Denial Risk Detected"
-},4500)
-setTimeout(()=>{
-moveClaim(modulePositions.core)
-claimPacket.innerText="Routing Claim"
-},6500)
-setTimeout(()=>{
-moveClaim(modulePositions.workflow)
-claimPacket.innerText="Claim Routed"
-},8500)
-setTimeout(()=>{
-moveClaim(modulePositions.core)
-claimPacket.innerText="Recovery Analysis"
-},10500)
-setTimeout(()=>{
-moveClaim(modulePositions.recovery)
-claimPacket.innerText="Appeal Submitted"
-},12000)
-setTimeout(()=>{
-moveClaim(modulePositions.performance)
-claimPacket.innerText="Payment Posted"
-},14000)
-}
-// repeat loop
-setInterval(runClaimDemo,18000)
-runClaimDemo()
-
-/* =========================================
-REVENUE FLOW INTERACTION
-========================================= */
-const steps = document.querySelectorAll(".flow-step")
-const observer = new IntersectionObserver((entries)=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-entry.target.style.opacity = 1
-entry.target.style.transform = "translateY(0)"
-}
-})
-},{threshold:.3})
-steps.forEach(step=>{
-step.style.opacity=0
-step.style.transform="translateY(40px)"
-step.style.transition="all .6s ease"
-observer.observe(step)
-})
-
-
-})
