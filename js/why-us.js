@@ -449,5 +449,44 @@ threshold:0.2
 stories.forEach(story=>{
 storyObserver.observe(story)
 })
-  
+
+// ===============================
+// ROI ANIMATION
+// ===============================
+
+const roiCards = document.querySelectorAll(".animated-roi")
+
+const roiObserver = new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+
+// animate bars
+const bars = entry.target.querySelectorAll(".roi-bar")
+bars.forEach(bar=>{
+const val = bar.getAttribute("data-value")
+bar.style.height = val + "%"
+})
+
+// animate number
+const number = entry.target.querySelector(".roi-number")
+const target = parseInt(number.getAttribute("data-target"))
+let current = 0
+
+const interval = setInterval(()=>{
+current += Math.ceil(target/30)
+if(current >= target){
+current = target
+clearInterval(interval)
+}
+number.innerText = current + "%"
+},30)
+
+}
+})
+},{threshold:0.4})
+
+roiCards.forEach(card=>{
+roiObserver.observe(card)
+})
+
 });   // DOMContentLoaded close
