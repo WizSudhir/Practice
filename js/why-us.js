@@ -441,6 +441,8 @@ const storyObserver = new IntersectionObserver(entries=>{
 entries.forEach(entry=>{
 if(entry.isIntersecting){
 entry.target.classList.add("visible")
+}else{
+entry.target.classList.remove("visible") // RESET
 }
 })
 },{
@@ -459,26 +461,30 @@ const roiCards = document.querySelectorAll(".animated-roi")
 const roiObserver = new IntersectionObserver(entries=>{
 entries.forEach(entry=>{
 if(entry.isIntersecting){
+   // run animation
+}else{
+   // RESET
+   const bars = entry.target.querySelectorAll(".roi-bar")
+   bars.forEach(bar=> bar.style.height = "0")
 
-// animate bars
-const bars = entry.target.querySelectorAll(".roi-bar")
-bars.forEach(bar=>{
-const val = bar.getAttribute("data-value")
-bar.style.height = val + "%"
-})
+   const valueEl = entry.target.querySelector(".roi-main")
+   if(valueEl){
+      valueEl.innerText = "$0"
+   }
+}
 
 // animate number
 const number = entry.target.querySelector(".roi-number")
-const target = parseInt(number.getAttribute("data-target"))
+const valueEl = entry.target.querySelector(".roi-main")
+const target = parseInt(valueEl.dataset.target)
 let current = 0
-
 const interval = setInterval(()=>{
-current += Math.ceil(target/30)
+current += Math.ceil(target/40)
 if(current >= target){
 current = target
 clearInterval(interval)
 }
-number.innerText = current + "%"
+valueEl.innerText = "$" + current.toLocaleString()
 },30)
 
 }
