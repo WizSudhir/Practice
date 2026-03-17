@@ -115,13 +115,13 @@ originX,originY,
 this.x,this.y
 )
 grad.addColorStop(0,"rgba(255,255,255,0)")
-grad.addColorStop(.5,"rgba(99,102,241,0.6)")
+grad.addColorStop(.5,"rgba(99,102,241,1)")
 grad.addColorStop(1,"rgba(255,255,255,0)")
-raysCtx.globalAlpha = 0.6
+raysCtx.globalAlpha = 0.9;
+raysCtx.lineWidth = 2;
 raysCtx.strokeStyle = grad
-raysCtx.lineWidth = 1.6
 raysCtx.shadowColor = "rgba(99,102,241,0.4)"
-raysCtx.shadowBlur = 0
+raysCtx.shadowBlur = 5
 raysCtx.stroke()
 raysCtx.shadowBlur = 0
 raysCtx.beginPath()
