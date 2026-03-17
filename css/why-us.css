@@ -1056,9 +1056,7 @@ display:flex;
 flex-direction:column;
 gap:80px;
 }
-
 /* STORY LAYOUT */
-
 .pg-story{
 display:grid;
 grid-template-columns:1.2fr .8fr;
@@ -1073,11 +1071,9 @@ opacity:1;
 transform:translateY(0);
 }
 /* LEFT CONTENT */
-
 .pg-story-left{
 max-width:650px;
 }
-
 .pg-label{
 font-size:12px;
 font-weight:700;
@@ -1087,32 +1083,26 @@ color:#93c5fd;
 display:block;
 margin-bottom:16px;
 }
-
 .pg-story-left p{
 font-size:16px;
 line-height:1.7;
 color:#cbd5f5;
 margin-bottom:18px;
 }
-
 .pg-story-left ul{
 margin-top:20px;
 padding-left:18px;
 }
-
 .pg-story-left li{
 margin-bottom:10px;
 color:#e0e7ff;
 font-size:15px;
 }
-
 /* RIGHT METRIC */
-
 .pg-story-right{
 display:flex;
 justify-content:center;
 }
-
 .pg-metric-card{
 width:240px;
 height:200px;
@@ -1130,20 +1120,17 @@ box-shadow:
 0 0 40px rgba(59,130,246,.25);
 transition:.4s;
 }
-
 .pg-metric-card:hover{
 transform:translateY(-10px) scale(1.03);
 box-shadow:
 0 40px 120px rgba(0,0,0,.7),
 0 0 60px rgba(99,102,241,.4);
 }
-
 .metric-icon{
 font-size:26px;
 margin-bottom:12px;
 opacity:.8;
 }
-
 .pg-metric-card h3{
 font-size:42px;
 font-weight:900;
@@ -1152,53 +1139,48 @@ background:linear-gradient(90deg,#22c55e,#3b82f6);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
-
 .pg-metric-card p{
 font-size:14px;
 opacity:.75;
 }
-
+/* ROI GRAPH */
+.roi-graph{
+display:flex;
+align-items:flex-end;
+gap:6px;
+height:60px;
+margin-bottom:14px;
+}
+.roi-bar{
+width:10px;
+height:0;
+background:rgba(255,255,255,0.2);
+border-radius:4px;
+transition:height 1.2s ease;
+}
+.roi-bar.highlight{
+background:linear-gradient(180deg,#22c55e,#3b82f6);
+box-shadow:0 0 12px rgba(59,130,246,.6);
+}
+/* NUMBER ANIMATION */
+.roi-number{
+font-size:42px;
+font-weight:900;
+background:linear-gradient(90deg,#22c55e,#3b82f6);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
 /* ALTERNATING LAYOUT */
-
 .pg-story:nth-child(even){
 grid-template-columns:.8fr 1.2fr;
 }
-
 .pg-story:nth-child(even) .pg-story-left{
 order:2;
 }
-
 .pg-story:nth-child(even) .pg-story-right{
 order:1;
 }
 
-/* RESPONSIVE */
-
-@media(max-width:900px){
-
-.pg-story{
-grid-template-columns:1fr;
-gap:40px;
-}
-
-.pg-story:nth-child(even){
-grid-template-columns:1fr;
-}
-
-.pg-story-left{
-order:1 !important;
-}
-
-.pg-story-right{
-order:2 !important;
-}
-
-.pg-metric-card{
-width:100%;
-max-width:320px;
-}
-
-}
 /* =========================================================
 3. RCM MATURITY SCORE GAUGE
 ========================================================= */
