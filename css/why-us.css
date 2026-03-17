@@ -763,8 +763,8 @@ z-index:10;
 }
 .network-lines path{
 stroke:#60a5fa;
-stroke-width:2.4;
-stroke-dasharray: 1 8;
+stroke-width:2;
+stroke-dasharray: 3 6;
 stroke-dashoffset: 0;
 stroke-linecap:round;
 stroke-linejoin: round;
