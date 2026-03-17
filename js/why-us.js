@@ -460,34 +460,59 @@ const roiCards = document.querySelectorAll(".animated-roi")
 
 const roiObserver = new IntersectionObserver(entries=>{
 entries.forEach(entry=>{
-if(entry.isIntersecting){
-   // run animation
-}else{
-   // RESET
-   const bars = entry.target.querySelectorAll(".roi-bar")
-   bars.forEach(bar=> bar.style.height = "0")
 
-   const valueEl = entry.target.querySelector(".roi-main")
-   if(valueEl){
-      valueEl.innerText = "$0"
-   }
+const bars = entry.target.querySelectorAll(".roi-bar")
+const valueEl = entry.target.querySelector(".roi-main")
+const line = entry.target.querySelector(".line-path")
+
+if(entry.isIntersecting){
+
+// animate bars
+bars.forEach(bar=>{
+const val = bar.getAttribute("data-value")
+bar.style.height = val + "%"
+})
+
+// animate line
+if(line){
+line.style.strokeDashoffset = "0"
 }
 
 // animate number
-const number = entry.target.querySelector(".roi-number")
-const valueEl = entry.target.querySelector(".roi-main")
+if(valueEl){
 const target = parseInt(valueEl.dataset.target)
 let current = 0
+
 const interval = setInterval(()=>{
 current += Math.ceil(target/40)
+
 if(current >= target){
 current = target
 clearInterval(interval)
 }
+
 valueEl.innerText = "$" + current.toLocaleString()
+
 },30)
+}
+
+}else{
+
+// RESET bars
+bars.forEach(bar=> bar.style.height = "0")
+
+// RESET line
+if(line){
+line.style.strokeDashoffset = "200"
+}
+
+// RESET number
+if(valueEl){
+valueEl.innerText = "$0"
+}
 
 }
+
 })
 },{threshold:0.4})
 
