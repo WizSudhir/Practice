@@ -1037,6 +1037,19 @@ background:radial-gradient(circle, rgba(255,255,255,0.04), transparent 70%);
 filter:blur(120px);
 pointer-events:none;
 }
+.pg-outcomes .section-header{
+position:relative;
+z-index:2;
+}
+.pg-outcomes .section-header::after{
+content:"";
+display:block;
+width:120px;
+height:3px;
+margin:20px auto 0;
+background:linear-gradient(90deg,#22c55e,#3b82f6);
+opacity:.8;
+}
 .pg-outcomes h2{
 font-size:clamp(34px,4vw,52px);
 font-weight:900;
