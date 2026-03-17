@@ -1219,9 +1219,8 @@ grid-template-columns:80px 1fr;
 align-items:start; /* 🔥 THIS FIXES ALIGNMENT */
 column-gap:24px;
 position:relative;
-opacity:0;
-transform:translateY(40px);
-transition:.6s ease;
+opacity:1;
+transform:none;
 }
 .framework-step::after{
 content:"";
@@ -1237,7 +1236,7 @@ position:absolute;
 left:32px;
 top:64px; /* starts EXACTLY from bottom of circle */
 width:2px;
-height:calc(100% - 64px);
+min-height:90px;
 background:linear-gradient(
 180deg,
 rgba(99,102,241,.6),
@@ -1313,6 +1312,7 @@ color:#cbd5f5;
 .framework-wrapper{
 display:grid;
 grid-template-columns:1fr 420px;
+min-width:0;
 gap:80px;
 align-items:start;
 max-width:1100px;
