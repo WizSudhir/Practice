@@ -195,15 +195,6 @@
   width: 100%;
   max-width: 600px;
 }
-.blog-search input {
-  width: 100%;
-  padding: 16px 22px;
-  border-radius: 50px;
-  border: 1px solid rgba(255,255,255,0.1);
-  background: var(--bg-secondary);
-  color: #fff;
-  font-size: 16px;
-}
 /* Filters */
 .blog-filters {
   display: flex;
