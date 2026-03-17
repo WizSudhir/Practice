@@ -480,19 +480,25 @@ line.style.strokeDashoffset = "0"
 
 // animate number
 if(valueEl){
+const type = valueEl.parentElement.getAttribute("data-type")
 const target = parseInt(valueEl.dataset.target)
 let current = 0
-
 const interval = setInterval(()=>{
 current += Math.ceil(target/40)
-
 if(current >= target){
 current = target
 clearInterval(interval)
 }
-
+// FORMAT BASED ON TYPE
+if(type === "currency"){
 valueEl.innerText = "$" + current.toLocaleString()
-
+}
+else if(type === "percentage"){
+valueEl.innerText = current + "%"
+}
+else if(type === "metric"){
+valueEl.innerText = current + "%"
+}
 },30)
 }
 
@@ -507,8 +513,13 @@ line.style.strokeDashoffset = "200"
 }
 
 // RESET number
-if(valueEl){
+const type = valueEl.parentElement.getAttribute("data-type")
+
+if(type === "currency"){
 valueEl.innerText = "$0"
+}
+else if(type === "percentage" || type === "metric"){
+valueEl.innerText = "0%"
 }
 
 }
