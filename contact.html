@@ -8,11 +8,12 @@
 <meta name="keywords" content="Contact, Medical Billing, Revenue Cycle, Email, Phone">
 <meta name="author" content="PracticeGrid Solutions">
 <link rel="icon" type="image/png" href="images/favicon.png">
+  
 <link rel="stylesheet" href="css/root.css">
 <link rel="stylesheet" href="css/contact.css">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-<script defer src="js/index.js"></script>
+
 <script defer src="js/contact.js"></script>
 </head>
 
@@ -34,26 +35,35 @@
   
 <body>
 <a href="contact.html" class="floating-cta">Free Audit</a>
+
+<!-- NAVBAR -->
 <header class="navbar">
   <div class="container navbar-inner">
+
     <div class="logo">
       <a href="index.html">
         <img src="images/logo.png" alt="PracticeGrid Solutions Logo">
       </a>
     </div>
-    <nav class="nav-menu">
-      <ul>
+
+      <nav class="nav-menu">
+        <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="services.html">Services</a></li>
         <li><a href="who-we-serve.html">Who We Serve</a></li>
         <li><a href="why-us.html">Why Us</a></li>
         <li><a href="blog/">Blog</a></li>
-        <li><a href="contact.html" class="btn-primary">Get Started</a></li>
-      </ul>
-    </nav>
-  <button class="nav-toggle">
-Menu
-</button>
+        <li><a href="contact.html" class="btn-primary">Connect With Us</a></li>
+        </ul>
+      </nav>
+
+    <!-- MOBILE TOGGLE -->
+          <button class="nav-toggle" aria-label="Toggle Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+          </button>
+
   </div>
 </header>
   
@@ -163,68 +173,89 @@ Menu
     <p style="font-size:16px;">Speak directly with our billing experts today.<br><strong style="color:var(--accent-2); font-size:18px;">+1 (727) 674-1458</strong></p>
   </a>
 </section>
+
+
 <footer class="footer">
   <div class="container footer-grid">
+
     <div class="footer-brand">
       <img src="images/logo.png" alt="PracticeGrid Solutions">
       <p>Elite Revenue Cycle Management for Modern Healthcare Practices.</p>
+      <div class="footer-social">
+        <a href="https://wa.me/17276741458" target="_blank">
+          <img src="images/whatsapplogo.svg" alt="WhatsApp">
+        </a>
+        <a href="https://www.linkedin.com/company/practicegridsolutions" target="_blank">
+          <img src="images/linkedinlogo.svg" alt="LinkedIn">
+        </a>
+      </div>
     </div>
+
     <div class="footer-links">
       <h4>Company</h4>
-      <a href="#">Home</a>
+      <a href="index.html">Home</a>
       <a href="services.html">Services</a>
+      <a href="who-we-serve.html">Who We Serve</a>
       <a href="why-us.html">Why Us</a>
+      <a href="blog/">Blog</a>
       <a href="contact.html">Contact</a>
     </div>
-    <div class="footer-contact">
-  <h4><a href="contact.html" style="text-decoration:none; color:inherit;">Contact</a></h4>
-  <a href="tel:+17276741458" style="display:flex; align-items:center; gap:10px;">
-    <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2">
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 
-      19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67 
-      A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 
-      c.12.9.37 1.77.73 2.6a2 2 0 0 1-.45 2.11L8.09 9.91
-      a16 16 0 0 0 6 6l1.48-1.48a2 2 0 0 1 2.11-.45
-      c.83.36 1.7.61 2.6.73a2 2 0 0 1 1.72 2z"/>
-    </svg>
+
+<div class="footer-contact">
+
+  <h4>
+    <a href="contact.html" style="text-decoration:none; color:inherit;">Contact</a>
+  </h4>
+
+  <a href="tel:+17276741458" class="footer-contact-item">
+    <div class="footer-contact-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2
+        19.79 19.79 0 0 1-8.63-3.07
+        19.5 19.5 0 0 1-6-6
+        19.79 19.79 0 0 1-3.07-8.67
+        A2 2 0 0 1 4.11 2h3
+        a2 2 0 0 1 2 1.72
+        c.12.9.37 1.77.73 2.6
+        a2 2 0 0 1-.45 2.11L8.09 9.91
+        a16 16 0 0 0 6 6l1.48-1.48
+        a2 2 0 0 1 2.11-.45
+        c.83.36 1.7.61 2.6.73
+        a2 2 0 0 1 1.72 2z"/>
+      </svg>
+    </div>
+
     <span>+1 (727) 674-1458</span>
   </a>
- <a href="mailto:contact@practicegridsolutions.com" class="footer-contact-item">
-  <div class="footer-contact-icon">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="3" y="5" width="18" height="14" rx="2"></rect>
-      <polyline points="3 7 12 13 21 7"></polyline>
-    </svg>
-  </div>
-  <span>contact@practicegridsolutions.com</span>
-</a>
+
+  <a href="mailto:contact@practicegridsolutions.com" class="footer-contact-item">
+    <div class="footer-contact-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+        <polyline points="3 7 12 13 21 7"></polyline>
+      </svg>
+    </div>
+
+    <span>contact@practicegridsolutions.com</span>
+  </a>
+
 </div>
+
     <div class="footer-hipaa">
       <img src="images/hipaa-official.png" alt="HIPAA Compliant">
-      <span class="hipaa-text">HIPAA Compliant</span>
+      <div class="hipaa-label">
+      <span class="hipaa-title">HIPAA</span>
+      <span class="hipaa-sub">Compliant</span>
+      </div>
     </div>
+
   </div>
+
   <div class="footer-bottom">
-    © 2026 PracticeGrid Solutions. All rights reserved.
+    © PracticeGrid Solutions. All rights reserved.
   </div>
 </footer>
-<script>
-  // Script preserved: Handling card hover animations
-  const cards = document.querySelectorAll('.contact-card');
-  cards.forEach(card => {
-    card.addEventListener('mouseenter', () => {
-      card.style.transform = 'translateY(-12px) scale(1.02)';
-      card.style.boxShadow = '0 30px 60px rgba(99,102,241,0.3)';
-    });
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = 'translateY(0) scale(1)';
-      card.style.boxShadow = 'var(--shadow-soft)';
-    });
-  });
-</script>
-
-</section>
-
+  
 
 </body>
 </html>
