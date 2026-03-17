@@ -481,9 +481,9 @@ line.style.strokeDashoffset = "0"
 
 // animate number
 if(!valueEl) return;
-valueEl.innerText = type === "currency" ? "$0" : "0%"
 const parent = valueEl.closest(".roi-value")
 const type = parent ? parent.dataset.type : "metric"
+valueEl.innerText = type === "currency" ? "$0" : "0%"
 const target = parseInt(valueEl.dataset.target)
 let current = 0
 const interval = setInterval(()=>{
@@ -501,9 +501,7 @@ valueEl.innerText = current + "%"
 }
 else if(type === "metric"){
 valueEl.innerText = current + "%"
-}
 },30)
-}
 
 }else{
 
@@ -516,6 +514,7 @@ line.style.strokeDashoffset = "200"
 }
 
 // RESET number
+if(!valueEl) return;
 const parent = valueEl.closest(".roi-value")
 const type = parent ? parent.dataset.type : "metric"
 
