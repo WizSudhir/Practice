@@ -632,6 +632,9 @@ left:50%;
 transform:translate(-50%, -50%); /* 🔥 EXACT CENTER OF ENGINE */
 width:440px;
 height:440px;
+display:flex;
+align-items:center;
+justify-content:center;
 pointer-events:none;
 transform-origin: center;
 animation: rotateRing 20s linear infinite;
