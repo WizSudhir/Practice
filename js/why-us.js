@@ -356,11 +356,19 @@ const spreadFactor = (index - (inputs.length - 1)/2); // controls how far lines 
 const verticalSpread = 70; // controls how curvy lines are
 const curveStrength = 140; // dynamic vertical bending (THIS IS THE FIX)
 const controlOffsetY = spreadFactor * verticalSpread;
+const elbowOffsetX = 80;   // distance before first turn
+const radius = 18;         // roundness of corner
+
+const midX = nodeX + elbowOffsetX;
+const midY = endY;
+
 const pathData = `
 M ${nodeX} ${nodeY}
-C ${nodeX + curveStrength} ${nodeY + controlOffsetY},
-  ${coreX - curveStrength} ${endY - controlOffsetY},
-  ${endX} ${endY}
+L ${midX - radius} ${nodeY}
+A ${radius} ${radius} 0 0 1 ${midX} ${nodeY + radius}
+L ${midX} ${midY - radius}
+A ${radius} ${radius} 0 0 0 ${midX + radius} ${midY}
+L ${endX} ${midY}
 `;
 path.setAttribute("d",pathData)
 path.setAttribute("stroke","#60a5fa")
