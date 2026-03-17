@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://practicegridsolutions.com/</loc>
+  </url>
+
+  <!-- Core Pages -->
+  <url>
+    <loc>https://practicegridsolutions.com/services.html</loc>
+  </url>
+
+  <url>
+    <loc>https://practicegridsolutions.com/who-we-serve.html</loc>
+  </url>
+
+  <url>
+    <loc>https://practicegridsolutions.com/why-us.html</loc>
+  </url>
+
+  <url>
+    <loc>https://practicegridsolutions.com/contact.html</loc>
+  </url>
+
+  <!-- Blog Index -->
+  <url>
+    <loc>https://practicegridsolutions.com/blog/</loc>
+  </url>
+
+  <!-- Blog Posts -->
+  <url>
+    <loc>https://practicegridsolutions.com/blog/posts/10-Common-Medical-Billing-Mistakes.html</loc>
+  </url>
+
+</urlset>
