@@ -367,21 +367,12 @@ if(isCenter){
   L ${endX} ${nodeY}
   `;
 }else{
-  const verticalDir = endY > nodeY ? 1 : -1;
-  const r = 26;
-  const startX = midX - r;
-  const startY = nodeY;
-  const curve1EndX = midX;
-  const curve1EndY = nodeY + (verticalDir * r);
-  const finalX = endX - r;
+  const elbowX = nodeX + 120; // how far before turning
   pathData = `
   M ${nodeX} ${nodeY}
-  L ${startX} ${startY}
-  A ${r} ${r} 0 0 ${verticalDir === 1 ? 1 : 0}
-    ${curve1EndX} ${curve1EndY}
-  L ${finalX} ${endY}
-  A ${r} ${r} 0 0 ${verticalDir === 1 ? 0 : 1}
-    ${endX} ${endY}
+  L ${elbowX} ${nodeY}
+  L ${elbowX} ${endY}
+  L ${endX} ${endY}
   `;
 }
 path.setAttribute("d",pathData)
