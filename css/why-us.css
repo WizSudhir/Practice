@@ -1144,6 +1144,18 @@ font-size:14px;
 opacity:.75;
 }
 /* ROI GRAPH */
+.roi-main{
+font-size:40px;
+font-weight:900;
+background:linear-gradient(90deg,#22c55e,#3b82f6);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+.roi-sub{
+font-size:13px;
+opacity:.7;
+margin-top:4px;
+}
 .roi-graph{
 display:flex;
 align-items:flex-end;
