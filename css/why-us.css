@@ -1144,6 +1144,22 @@ font-size:14px;
 opacity:.75;
 }
 /* ROI GRAPH */
+.roi-line-graph{
+height:60px;
+margin-bottom:12px;
+}
+.line-svg{
+width:100%;
+height:100%;
+}
+.line-path{
+fill:none;
+stroke:url(#lineGradient);
+stroke-width:2.5;
+stroke-dasharray:200;
+stroke-dashoffset:200;
+transition:stroke-dashoffset 1.5s ease;
+}
 .roi-main{
 font-size:40px;
 font-weight:900;
