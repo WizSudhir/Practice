@@ -97,30 +97,67 @@ JSON-LD STRUCTURED DATA
   </div>
 </header>
 
-<!-- HERO -->
-<section class="hero">
-  <canvas id="particles"></canvas>
-  <div class="hero-blob blob-1"></div>
-  <div class="hero-blob blob-2"></div>
-  
-  <div class="container hero-container">
-    <div class="hero-left parallax" data-speed="2">
+<!-- =========================================
+1. BLOG HERO
+========================================= -->
+<section class="blog-hero">
 
-<h1>Revenue Cycle Insights</h1>
+  <!-- Background Effects -->
+  <canvas id="blog-particles"></canvas>
+  <div class="blog-glow"></div>
+  <div class="container blog-hero-container">
+    <div class="blog-hero-content">
 
-<p>
-Expert insights on medical billing, revenue cycle management,
-denial prevention, credentialing, and healthcare analytics.
-</p>
+      <div class="blog-badge">
+        Revenue Cycle Knowledge Hub
+      </div>
+      <h1>
+        Revenue Cycle <span>Insights & Intelligence</span>
+      </h1>
+      <p>
+        Deep insights, proven strategies, and expert guidance to help healthcare practices
+        maximize revenue, reduce denials, and scale profitably.
+      </p>
 
-</div>
+      <!-- CTA + Search -->
+      <div class="blog-hero-actions">
+        <a href="#blogGrid" class="btn-primary">
+          Explore Articles
+        </a>
+        <div class="blog-search-box">
+          <input
+            type="text"
+            id="heroSearch"
+            placeholder="Search insights, billing tips, RCM strategies..."
+          >
+        </div>
+      </div>
 
-</div>
-<div class="hero-right parallax" data-speed="4">
-      <img src="images/revenue-cycle-insights.png" alt="Healthcare revenue cycle management illustration" fetchpriority="high" loading="eager">
+      <!-- Trust Row -->
+      <div class="blog-trust">
+        <span>Trusted by healthcare providers across the U.S.</span>
+      </div>
+
     </div>
-</section>
 
+    <!-- Right Side Visual Card -->
+    <div class="blog-hero-visual">
+      <div class="blog-hero-card">
+        <div class="blog-card-label">Featured Insight</div>
+        <h3>
+          10 Medical Billing Mistakes Costing Practices Thousands
+        </h3>
+        <p>
+          Identify revenue leaks, fix claim errors, and boost collections instantly.
+        </p>
+        <a href="#" class="blog-card-link">
+          Read Article →
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
 
 <!-- ===============================
 SEARCH + FILTER
