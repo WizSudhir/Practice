@@ -498,8 +498,11 @@ opacity:.6;
 pointer-events:none;
 z-index:1;
 }
+.pg-architecture .section-title{
+margin-bottom:30px;
+}
 .pg-architecture .section-title p{
-  margin:18px auto 0;
+  margin:12px auto 0;
 }
 .architecture-grid{
 display:grid;
@@ -509,7 +512,6 @@ align-items:center;
 max-width:1200px;
 margin:auto;
 position:relative;
-height:720px;
 overflow:visible;
 z-index:1;
 }
