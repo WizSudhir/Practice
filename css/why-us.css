@@ -783,6 +783,7 @@ animation:dataFlow 4s linear infinite;
 0%{stroke-dashoffset:0}
 100%{stroke-dashoffset:-60}
 }
+
 /* =========================================================
 3. PRACTICEGRID REVENUE FLOW
 ========================================================= */
@@ -975,6 +976,7 @@ font-size:20px;
 font-weight:700;
 color:#e0e7ff;
 }
+
 /* =========================================================
 4. THE “BEFORRE V/S AFTER RCM TRANSFORMATION
 ========================================================= */
@@ -1118,8 +1120,9 @@ margin-top:6px;
 margin-bottom:30px;
 font-size:16px;
 }
+
 /* =========================================================
-3. RCM MATURITY SCORE GAUGE
+5. RCM MATURITY SCORE GAUGE
 ========================================================= */
 .section-sub{
 text-align:center;
@@ -1218,8 +1221,9 @@ border:1px solid rgba(255,255,255,0.05);
 display:block;
 margin:30px auto 0;
 }
+
 /* =========================================================
-PRACTICEGRID OUTCOMES
+6. PRACTICEGRID OUTCOMES
 ========================================================= */
 .pg-outcomes .container{
 position:relative;
@@ -1477,8 +1481,9 @@ order:1;
 background:linear-gradient(180deg,#0b1220,#020617);
 border:1px solid rgba(59,130,246,.25);
 }
+
 /* =========================================================
-RCM FRAMEWORK TIMELINE
+7. RCM FRAMEWORK TIMELINE
 ========================================================= */
 
 .pg-framework{
