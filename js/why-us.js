@@ -461,26 +461,29 @@ const roiCards = document.querySelectorAll(".animated-roi")
 const roiObserver = new IntersectionObserver(entries=>{
 entries.forEach(entry=>{
 
-const bars = entry.target.querySelectorAll(".roi-bar")
+const bars = entry.target.querySelectorAll(".roi-bar") || []
 const valueEl = entry.target.querySelector(".roi-value .roi-main")
 const line = entry.target.querySelector(".line-path")
 
 if(entry.isIntersecting){
 
 // animate bars
+if(bars.length){
 bars.forEach(bar=>{
 const val = bar.getAttribute("data-value")
 bar.style.height = val + "%"
 })
-
+}
 // animate line
 if(line){
 line.style.strokeDashoffset = "0"
 }
 
 // animate number
-if(valueEl){
-const type = valueEl.closest(".roi-value").dataset.type
+if(!valueEl) return;
+valueEl.innerText = type === "currency" ? "$0" : "0%"
+const parent = valueEl.closest(".roi-value")
+const type = parent ? parent.dataset.type : "metric"
 const target = parseInt(valueEl.dataset.target)
 let current = 0
 const interval = setInterval(()=>{
@@ -513,7 +516,8 @@ line.style.strokeDashoffset = "200"
 }
 
 // RESET number
-const type = valueEl.closest(".roi-value").dataset.type
+const parent = valueEl.closest(".roi-value")
+const type = parent ? parent.dataset.type : "metric"
 
 if(type === "currency"){
 valueEl.innerText = "$0"
