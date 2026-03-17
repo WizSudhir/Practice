@@ -1011,153 +1011,157 @@ PRACTICEGRID OUTCOMES
 
 .pg-outcomes{
 padding:140px 0;
-position:relative;
 background:
-radial-gradient(circle at 20% 30%, rgba(99,102,241,.18), transparent 40%),
-radial-gradient(circle at 80% 70%, rgba(59,130,246,.18), transparent 40%),
+radial-gradient(circle at 20% 30%, rgba(99,102,241,.15), transparent 40%),
+radial-gradient(circle at 80% 70%, rgba(34,197,94,.12), transparent 40%),
 #050a19;
 }
 
-/* GRID */
+.section-header.center{
+text-align:center;
+max-width:800px;
+margin:0 auto 80px;
+}
 
-.outcome-grid{
+.pg-stories{
+display:flex;
+flex-direction:column;
+gap:80px;
+}
+
+/* STORY LAYOUT */
+
+.pg-story{
 display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:40px;
-margin-top:80px;
-}
-
-/* STORY CARD */
-
-.outcome-story{
-background:linear-gradient(
-180deg,
-rgba(20,25,55,.9),
-rgba(10,15,35,.95)
-);
-border-radius:24px;
-padding:40px;
-border:1px solid rgba(255,255,255,.08);
-transition:.4s;
-position:relative;
-}
-
-.outcome-story:hover{
-transform:translateY(-10px);
-box-shadow:
-0 40px 100px rgba(0,0,0,.6),
-0 0 60px rgba(99,102,241,.35);
-}
-
-/* HEADER */
-
-.outcome-header{
-display:flex;
+grid-template-columns:1.2fr .8fr;
+gap:60px;
 align-items:center;
-gap:14px;
-margin-bottom:20px;
 }
 
-.outcome-header svg{
-width:30px;
-height:30px;
-color:#93c5fd;
+/* LEFT CONTENT */
+
+.pg-story-left{
+max-width:650px;
 }
 
-.outcome-header h3{
-font-size:22px;
+.pg-label{
+font-size:12px;
 font-weight:700;
-}
-
-/* TEXT */
-
-.outcome-problem{
-opacity:.85;
-margin-bottom:16px;
-line-height:1.6;
-}
-
-.outcome-system{
-opacity:.8;
-margin-bottom:24px;
-line-height:1.6;
-}
-
-/* RESULTS */
-
-.outcome-result{
-display:flex;
-gap:30px;
-margin-top:10px;
-}
-
-.result-metric span{
-font-size:32px;
-font-weight:800;
+letter-spacing:.1em;
+text-transform:uppercase;
+color:#93c5fd;
 display:block;
-background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
+margin-bottom:16px;
+}
+
+.pg-story-left p{
+font-size:16px;
+line-height:1.7;
+color:#cbd5f5;
+margin-bottom:18px;
+}
+
+.pg-story-left ul{
+margin-top:20px;
+padding-left:18px;
+}
+
+.pg-story-left li{
+margin-bottom:10px;
+color:#e0e7ff;
+font-size:15px;
+}
+
+/* RIGHT METRIC */
+
+.pg-story-right{
+display:flex;
+justify-content:center;
+}
+
+.pg-metric-card{
+width:240px;
+height:200px;
+border-radius:18px;
+background:
+linear-gradient(180deg,#0f172a,#020617);
+border:1px solid rgba(255,255,255,.08);
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+box-shadow:
+0 30px 80px rgba(0,0,0,.6),
+0 0 40px rgba(59,130,246,.25);
+transition:.4s;
+}
+
+.pg-metric-card:hover{
+transform:translateY(-10px) scale(1.03);
+box-shadow:
+0 40px 120px rgba(0,0,0,.7),
+0 0 60px rgba(99,102,241,.4);
+}
+
+.metric-icon{
+font-size:26px;
+margin-bottom:12px;
+opacity:.8;
+}
+
+.pg-metric-card h3{
+font-size:42px;
+font-weight:900;
+margin-bottom:6px;
+background:linear-gradient(90deg,#22c55e,#3b82f6);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
 
-.result-metric p{
-font-size:13px;
+.pg-metric-card p{
+font-size:14px;
 opacity:.75;
 }
 
-/* OUTCOMES BAR */
+/* ALTERNATING LAYOUT */
 
-.outcomes-bar{
-display:flex;
-justify-content:space-between;
-margin-top:100px;
-padding:40px;
-border-radius:24px;
-background:rgba(20,25,55,.6);
-border:1px solid rgba(255,255,255,.08);
+.pg-story:nth-child(even){
+grid-template-columns:.8fr 1.2fr;
 }
 
-.bar-metric{
-text-align:center;
-flex:1;
+.pg-story:nth-child(even) .pg-story-left{
+order:2;
 }
 
-.bar-metric h4{
-font-size:42px;
-font-weight:900;
-background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
-
-.bar-metric p{
-font-size:14px;
-opacity:.8;
-}
-
-/* CTA */
-
-.outcomes-cta{
-text-align:center;
-margin-top:70px;
-}
-
-.outcomes-cta p{
-margin-bottom:20px;
-font-size:18px;
+.pg-story:nth-child(even) .pg-story-right{
+order:1;
 }
 
 /* RESPONSIVE */
 
-@media(max-width:1000px){
+@media(max-width:900px){
 
-.outcome-grid{
+.pg-story{
+grid-template-columns:1fr;
+gap:40px;
+}
+
+.pg-story:nth-child(even){
 grid-template-columns:1fr;
 }
 
-.outcomes-bar{
-flex-direction:column;
-gap:30px;
+.pg-story-left{
+order:1 !important;
+}
+
+.pg-story-right{
+order:2 !important;
+}
+
+.pg-metric-card{
+width:100%;
+max-width:320px;
 }
 
 }
