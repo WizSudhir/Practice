@@ -629,15 +629,12 @@ margin-bottom:8px;
 position:absolute;
 top:50%;
 left:50%;
-transform:translate(-50%, -50%);
+transform:translate(-50%, -50%); /* 🔥 EXACT CENTER OF ENGINE */
 width:440px;
 height:440px;
-display:flex;
-align-items:center;
-justify-content:center;
 pointer-events:none;
+transform-origin: center;
 animation: rotateRing 20s linear infinite;
-transform-origin: center center;
 }
 @keyframes rotateRing{
 from{ transform:translate(-50%,-50%) rotate(0deg); }
@@ -679,7 +676,7 @@ from{ transform: rotate(0deg); }
 to{ transform: rotate(-360deg); }
 }
 .emr:hover{
-transform:translateY(-6px) scale(1.05);
+filter:brightness(1.1);
 }
 .emr:nth-child(1){ transform: rotate(0deg) translateX(200px); }
 .emr:nth-child(2){ transform: rotate(45deg) translateX(200px); }
