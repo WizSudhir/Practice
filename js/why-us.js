@@ -344,23 +344,22 @@ const nodeY = rect.top + rect.height/2 - cont.top
 const coreX = engineRect.left - cont.left
 const coreY = engineRect.top + engineRect.height/2 - cont.top
 const offset = 60
-const elbowX = nodeX + offset
-const spacing = 30;
-const elbowY = nodeY + (index * spacing);   // spreads lines
 const radius = engineRect.width / 2;
 const endX = coreX + 4; // slight padding from border
-const spread = 120; // increase spacing
+const spread = 180; // increase spacing
 const step = spread / (inputs.length - 1);
 const endY = coreY - spread/2 + (index * step);
 const path = document.createElementNS(
 "http://www.w3.org/2000/svg","path"
 )
-const curveStrength = 120 + (index * 20);
-const verticalPull = 80; // 🔥 THIS CREATES THE BEND
+const spreadFactor = (index - (inputs.length - 1)/2); // controls how far lines spread vertically
+const verticalSpread = 70; // controls how curvy lines are
+const curveStrength = 140; // dynamic vertical bending (THIS IS THE FIX)
+const controlOffsetY = spreadFactor * verticalSpread;
 const pathData = `
 M ${nodeX} ${nodeY}
-C ${nodeX + curveStrength} ${nodeY + verticalPull},
-  ${coreX - curveStrength} ${endY - verticalPull},
+C ${nodeX + curveStrength} ${nodeY + controlOffsetY},
+  ${coreX - curveStrength} ${endY - controlOffsetY},
   ${endX} ${endY}
 `;
 path.setAttribute("d",pathData)
