@@ -86,7 +86,7 @@ window.addEventListener("resize", () => {
   resizeTimeout = setTimeout(resize, 150);
 });
 resize()
-const PARTICLE_COUNT = window.innerWidth < 768 ? 40 : 70
+const PARTICLE_COUNT = window.innerWidth < 768 ? 40 : 120
 class Particle{
 constructor(){
 this.angle = Math.random()*Math.PI*2
