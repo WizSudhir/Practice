@@ -94,57 +94,92 @@ document.addEventListener("DOMContentLoaded", async () => {
     requestAnimationFrame(animate);
   }
 
-  // ===============================
-  // BLOG SYSTEM
-  // ===============================
-  let blogs = [];
+ // ===============================
+// BLOG SYSTEM + FILTERING
+// ===============================
 
-  try {
-    const res = await fetch("blogs.json");
-    blogs = await res.json();
-  } catch (err) {
-    console.error(err);
-    return;
-  }
+const featuredContainer = document.getElementById("featuredPost");
+const grid = document.getElementById("blogGrid");
+const searchInput = document.getElementById("blogSearch");
+const filterButtons = document.querySelectorAll(".filter-btn");
+let activeFilter = "all";
+// SORT BY LATEST (important)
+blogs.sort((a, b) => new Date(b.date) - new Date(a.date));
+// FEATURED
+const featured = blogs.find(b => b.featured) || blogs[0];
+if (featuredContainer) {
+  featuredContainer.innerHTML = `
+    <img src="${featured.image}" alt="${featured.title}">
+    <div class="blog-content">
+      <div class="blog-meta">
+        <span>${featured.category}</span>
+        <span>${featured.readTime}</span>
+      </div>
+      <h3>${featured.title}</h3>
+      <p>${featured.description}</p>
+      <a href="${featured.url}" class="blog-read">Read Article →</a>
+    </div>
+  `;
+}
+// REMOVE featured from grid
+let filteredBlogs = blogs.filter(b => b !== featured);
 
-  if (!blogs.length) return;
-
-  const featuredContainer = document.getElementById("featuredPost");
-  const grid = document.getElementById("blogGrid");
-
-  const featured = blogs.find(b => b.featured) || blogs[0];
-  const remainingBlogs = blogs.filter(b => b !== featured);
-
-  if (featuredContainer) {
-    featuredContainer.innerHTML = `
-      <img src="${featured.image}" alt="${featured.title}">
+// ===============================
+// RENDER FUNCTION
+// ===============================
+function renderBlogs(list) {
+  if (!grid) return;
+  grid.innerHTML = list.map(blog => `
+    <div class="blog-card">
+      <img src="${blog.image}" alt="${blog.title}">
       <div class="blog-content">
         <div class="blog-meta">
-          <span>${featured.category}</span>
-          <span>${featured.readTime}</span>
+          <span>${blog.category}</span>
+          <span>${blog.readTime}</span>
         </div>
-        <h3>${featured.title}</h3>
-        <p>${featured.description}</p>
-        <a href="${featured.url}" class="blog-read">Read Article →</a>
+        <h3>${blog.title}</h3>
+        <p>${blog.description}</p>
+        <a href="${blog.url}" class="blog-read">Read Article →</a>
       </div>
-    `;
-  }
+    </div>
+  `).join("");
+}
 
-  if (grid) {
-    grid.innerHTML = remainingBlogs.map(blog => `
-      <div class="blog-card">
-        <img src="${blog.image}" alt="${blog.title}">
-        <div class="blog-content">
-          <div class="blog-meta">
-            <span>${blog.category}</span>
-            <span>${blog.readTime}</span>
-          </div>
-          <h3>${blog.title}</h3>
-          <p>${blog.description}</p>
-          <a href="${blog.url}" class="blog-read">Read Article →</a>
-        </div>
-      </div>
-    `).join("");
+// ===============================
+// FILTER + SEARCH LOGIC
+// ===============================
+function applyFilters() {
+  const searchTerm = searchInput.value.toLowerCase();
+  let result = blogs.filter(blog => blog !== featured);
+  // CATEGORY FILTER
+  if (activeFilter !== "all") {
+    result = result.filter(b => b.category === activeFilter);
   }
+  // SEARCH FILTER
+  if (searchTerm) {
+    result = result.filter(b =>
+      b.title.toLowerCase().includes(searchTerm) ||
+      b.description.toLowerCase().includes(searchTerm)
+    );
+  }
+  renderBlogs(result);
+}
+
+// ===============================
+// EVENTS
+// ===============================
+// Live search
+searchInput.addEventListener("input", applyFilters);
+// Filter buttons
+filterButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelector(".filter-btn.active")?.classList.remove("active");
+    btn.classList.add("active");
+    activeFilter = btn.dataset.filter;
+    applyFilters();
+  });
+});
+// INITIAL RENDER
+renderBlogs(filteredBlogs);
 
 }); // DOM Close
