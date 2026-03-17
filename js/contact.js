@@ -80,7 +80,11 @@ raysCtx.setTransform(DPR, 0, 0, DPR, 0, 0)
 originX = raysCanvas.offsetWidth / 2
 originY = raysCanvas.offsetHeight
 }
-window.addEventListener("resize",resize)
+let resizeTimeout;
+window.addEventListener("resize", () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(resize, 150);
+});
 resize()
 const PARTICLE_COUNT = window.innerWidth < 768 ? 80 : 140
 class Particle{
@@ -154,27 +158,26 @@ function animate(time){
     requestAnimationFrame(animate);
     return;
   }
-  if(time - lastTime < 32) { // ~30 FPS
-    requestAnimationFrame(animate)
-    return
+  if(time - lastTime < 32){
+    requestAnimationFrame(animate);
+    return;
   }
-  requestAnimationFrame(animate)
-  lastTime = time
-  raysCtx.clearRect(0,0,w,h)
+  lastTime = time;
+  raysCtx.clearRect(0,0,w,h);
   particles.forEach(p=>{
-    const dx = p.x - mouse.x
-    const dy = p.y - mouse.y
-    const dist = Math.sqrt(dx*dx + dy*dy)
+    const dx = p.x - mouse.x;
+    const dy = p.y - mouse.y;
+    const dist = Math.sqrt(dx*dx + dy*dy);
     if(dist < 280){
-      p.radius += (280 - dist) * 0.06
-      p.radius = Math.min(p.radius, p.baseRadius + 260)
+      p.radius += (280 - dist) * 0.06;
+      p.radius = Math.min(p.radius, p.baseRadius + 260);
     } else {
-      p.radius += (p.baseRadius - p.radius) * 0.05
+      p.radius += (p.baseRadius - p.radius) * 0.05;
     }
-    p.update()
-    p.draw()
-  })
-  requestAnimationFrame(animate)
+    p.update();
+    p.draw();
+  });
+  requestAnimationFrame(animate); // ✅ ONLY ONCE
 }
 }); // DOMContentLoaded close
 
