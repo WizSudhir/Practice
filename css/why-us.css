@@ -8,6 +8,7 @@ margin-top:-40px;
 1. HERO
 ========================================================= */
 .hero-aurora{
+max-width:100%;
 position:absolute;
 width:900px;
 height:900px;
@@ -23,6 +24,7 @@ pointer-events:none;
 z-index:0;
 }
 .hero-aurora-2{
+max-width:100%;
 top:200px;
 left:auto;
 right:-200px;
@@ -49,7 +51,7 @@ pointer-events:none;
 z-index:0;
 }
 .hero-enterprise{
-padding:140px 20px 80px;
+padding:100px 20px 60px;
 position:relative;
 overflow:hidden;
 }
@@ -135,7 +137,7 @@ transition:opacity .4s ease;
 display:flex;
 flex-direction:column;
 justify-content:center;
-min-height:460px;
+min-height:auto;
 padding-right:20px;
 flex:1;
 max-width: none;
@@ -440,6 +442,7 @@ background:#16a34a;
 box-shadow:0 0 20px rgba(34,197,94,.6);
 }
 .hero-enterprise::before{
+max-width:100%;
 content:"";
 position:absolute;
 width:800px;
@@ -452,6 +455,7 @@ filter:blur(120px);
 pointer-events:none;
 }
 .hero-enterprise::after{
+max-width:100%;
 content:"";
 position:absolute;
 width:600px;
@@ -1742,6 +1746,15 @@ color:#9ca3af;
 }
 /* ≤ 768px (Mobile Landscape) */
 @media (max-width:768px){
+body{
+  overflow-x:hidden;
+}
+  .hero-aurora,
+  .hero-aurora-2{
+    width:400px;
+    height:400px;
+    filter:blur(80px);
+  }
   .hero-left h1{
     font-size:32px;
   }
@@ -1758,15 +1771,28 @@ color:#9ca3af;
   .workflow-dashboard{
     transform:none;
   }
-  .hero-right{
-    animation:none;
+.hero-right{
+    display:none;
   }
   .workflow{
+    height:auto;
+    padding:20px;
     flex-direction:column;
     gap:30px;
   }
+  .workflow::before{
+    display:none; /* remove pipeline line */
+  }
   .stage{
     width:100%;
+  }
+  .emr-ring{
+    width:260px;
+    height:260px;
+  }
+  .emr{
+    width:40px;
+    height:40px;
   }
   .revenue-token{
     display:none;
