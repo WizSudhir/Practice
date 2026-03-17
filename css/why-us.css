@@ -678,14 +678,14 @@ to{ transform: rotate(-360deg); }
 .emr:hover{
 filter:brightness(1.1);
 }
-.emr:nth-child(1){ transform: rotate(0deg) translateX(200px); }
-.emr:nth-child(2){ transform: rotate(45deg) translateX(200px); }
-.emr:nth-child(3){ transform: rotate(90deg) translateX(200px); }
-.emr:nth-child(4){ transform: rotate(135deg) translateX(200px); }
-.emr:nth-child(5){ transform: rotate(180deg) translateX(200px); }
-.emr:nth-child(6){ transform: rotate(225deg) translateX(200px); }
-.emr:nth-child(7){ transform: rotate(270deg) translateX(200px); }
-.emr:nth-child(8){ transform: rotate(315deg) translateX(200px); }
+.emr:nth-child(1){ transform: rotate(0deg) translateX(200px) rotate(0deg); }
+.emr:nth-child(2){ transform: rotate(45deg) translateX(200px) rotate(-45deg); }
+.emr:nth-child(3){ transform: rotate(90deg) translateX(200px) rotate(-90deg); }
+.emr:nth-child(4){ transform: rotate(135deg) translateX(200px) rotate(-135deg); }
+.emr:nth-child(5){ transform: rotate(180deg) translateX(200px) rotate(-180deg); }
+.emr:nth-child(6){ transform: rotate(225deg) translateX(200px) rotate(-225deg); }
+.emr:nth-child(7){ transform: rotate(270deg) translateX(200px) rotate(-270deg); }
+.emr:nth-child(8){ transform: rotate(315deg) translateX(200px) rotate(-315deg); }
 /* DASHBOARD */
 .arch-dashboard{
 display:flex;
