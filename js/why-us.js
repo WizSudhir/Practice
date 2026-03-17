@@ -419,7 +419,6 @@ entries.forEach(entry=>{
 if(entry.isIntersecting){
 entry.target.classList.add("visible")
 }else{
-entry.target.classList.remove("visible") // RESET
 }
 })
 },{
@@ -476,8 +475,11 @@ clearInterval(valueEl._interval)
 if(type === "currency"){
 valueEl.innerText = "$" + current.toLocaleString()
 }
-else{
-valueEl.innerText = current + "%"
+if(type === "currency"){
+  valueEl.innerText = "$" + current.toLocaleString()
+}
+else if(type === "percentage" || type === "metric"){
+  valueEl.innerText = current + "%"
 }
 },30)
 
@@ -506,8 +508,8 @@ valueEl.innerText = "0%"
 }
 
 })
-},{threshold:0.4})
-
+},{ threshold:0.1 })
+rootMargin: "0px 0px -50px 0px"
 roiCards.forEach(card=>{
 roiObserver.observe(card)
 })
