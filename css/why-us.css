@@ -1010,19 +1010,44 @@ PRACTICEGRID OUTCOMES
 ========================================================= */
 
 .pg-outcomes{
-padding:140px 0;
-background:
-radial-gradient(circle at 20% 30%, rgba(99,102,241,.15), transparent 40%),
-radial-gradient(circle at 80% 70%, rgba(34,197,94,.12), transparent 40%),
-#050a19;
-}
+padding:160px 0;
 
+background:
+radial-gradient(circle at 50% 40%, rgba(34,197,94,0.18), transparent 40%),
+radial-gradient(circle at 20% 20%, rgba(99,102,241,0.18), transparent 40%),
+radial-gradient(circle at 80% 80%, rgba(59,130,246,0.12), transparent 40%),
+linear-gradient(180deg,#020617 0%, #020617 100%);
+border-top:1px solid rgba(255,255,255,0.08);
+box-shadow:inset 0 40px 80px rgba(0,0,0,.6);
+position:relative;
+overflow:hidden;
+}
+.pg-outcomes::before{
+content:"";
+position:absolute;
+width:900px;
+height:900px;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:radial-gradient(circle, rgba(255,255,255,0.04), transparent 70%);
+filter:blur(120px);
+pointer-events:none;
+}
+.pg-outcomes h2{
+font-size:clamp(34px,4vw,52px);
+font-weight:900;
+letter-spacing:-0.02em;
+text-align:center;
+background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
 .section-header.center{
 text-align:center;
 max-width:800px;
 margin:0 auto 80px;
 }
-
 .pg-stories{
 display:flex;
 flex-direction:column;
@@ -1036,8 +1061,14 @@ display:grid;
 grid-template-columns:1.2fr .8fr;
 gap:60px;
 align-items:center;
+opacity:0;
+transform:translateY(40px);
+transition:.8s ease;
 }
-
+.pg-story.visible{
+opacity:1;
+transform:translateY(0);
+}
 /* LEFT CONTENT */
 
 .pg-story-left{
