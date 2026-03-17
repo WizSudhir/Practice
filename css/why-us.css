@@ -136,7 +136,7 @@ justify-content:center;
 min-height:460px;
 padding-right:20px;
 flex:1;
-max-width:720px;
+max-width: none;
 }
 .hero-right{
 padding:40px;
@@ -726,7 +726,7 @@ z-index:10;
 .network-lines path{
 stroke:#60a5fa;
 stroke-width:2.4;
-stroke-dasharray:1 10;   /* creates dots */
+stroke-dasharray: 1 8;   /* creates dots */
 stroke-linecap:round;
 opacity:.9;
 fill:none;
