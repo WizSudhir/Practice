@@ -338,6 +338,8 @@ if(!container) return
 const cont = container.getBoundingClientRect()
 const engineRect = engine.getBoundingClientRect()
 inputs.forEach((input,index)=>{
+const centerIndex = Math.floor(inputs.length / 2);
+const isCenter = index === centerIndex;  
 const rect = input.getBoundingClientRect()
 const nodeX = rect.right - cont.left
 const nodeY = rect.top + rect.height/2 - cont.top
@@ -388,12 +390,26 @@ const elbowX = startX + offset
 const path = document.createElementNS(
 "http://www.w3.org/2000/svg","path"
 )
-const pathData = `
-M ${startX} ${startY}
-L ${elbowX} ${startY}
-L ${elbowX} ${endY}
-L ${endX} ${endY}
-`
+let pathData;
+if(isCenter){
+  // 🔥 PERFECTLY STRAIGHT LINE (3rd one)
+  pathData = `
+  M ${nodeX} ${nodeY}
+  L ${endX} ${nodeY}
+  `;
+}else{
+  const verticalDir = endY > nodeY ? 1 : -1;
+  pathData = `
+  M ${nodeX} ${nodeY}
+  L ${midX - radius} ${nodeY}
+  A ${radius} ${radius} 0 0 ${verticalDir === 1 ? 1 : 0}
+    ${midX} ${nodeY + (verticalDir * radius)}
+  L ${midX} ${endY - (verticalDir * radius)}
+  A ${radius} ${radius} 0 0 ${verticalDir === 1 ? 0 : 1}
+    ${midX + radius} ${endY}
+  L ${endX} ${endY}
+  `;
+}
 path.setAttribute("d",pathData)
 path.setAttribute("stroke","#6366f1")
 path.setAttribute("stroke-width","1.6")
