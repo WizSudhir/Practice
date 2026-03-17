@@ -496,11 +496,9 @@ clearInterval(interval)
 if(type === "currency"){
 valueEl.innerText = "$" + current.toLocaleString()
 }
-else if(type === "percentage"){
+else{
 valueEl.innerText = current + "%"
 }
-else if(type === "metric"){
-valueEl.innerText = current + "%"
 },30)
 
 }else{
