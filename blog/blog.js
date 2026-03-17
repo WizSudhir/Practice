@@ -99,3 +99,79 @@ document.addEventListener("DOMContentLoaded", () => {
   requestAnimationFrame(animate);
 
 }); // DOM Cloce
+document.addEventListener("DOMContentLoaded", async () => {
+
+  // ===============================
+  // FETCH BLOG DATA
+  // ===============================
+  let blogs = [];
+
+  try {
+    const res = await fetch("blogs.json");
+    blogs = await res.json();
+  } catch (err) {
+    console.error("Error loading blogs:", err);
+    return;
+  }
+
+  if (!blogs.length) return;
+
+  // ===============================
+  // FEATURED POST (FIRST BLOG)
+  // ===============================
+  const featuredContainer = document.getElementById("featuredPost");
+
+  const featured = blogs[0];
+
+  featuredContainer.innerHTML = `
+    <img src="${featured.image}" alt="${featured.title}">
+
+    <div class="blog-content">
+      <div class="blog-meta">
+        <span>${featured.category}</span>
+        <span>${featured.readTime}</span>
+      </div>
+
+      <h3>${featured.title}</h3>
+
+      <p>${featured.description}</p>
+
+      <a href="${featured.url}" class="blog-read">
+        Read Article →
+      </a>
+    </div>
+  `;
+
+  // ===============================
+  // BLOG GRID (REST OF BLOGS)
+  // ===============================
+  const grid = document.getElementById("blogGrid");
+
+  const remainingBlogs = blogs.slice(1);
+
+  grid.innerHTML = remainingBlogs.map(blog => `
+    <div class="blog-card">
+
+      <img src="${blog.image}" alt="${blog.title}">
+
+      <div class="blog-content">
+
+        <div class="blog-meta">
+          <span>${blog.category}</span>
+          <span>${blog.readTime}</span>
+        </div>
+
+        <h3>${blog.title}</h3>
+
+        <p>${blog.description}</p>
+
+        <a href="${blog.url}" class="blog-read">
+          Read Article →
+        </a>
+
+      </div>
+
+    </div>
+  `).join("");
+
+});
