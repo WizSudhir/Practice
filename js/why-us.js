@@ -344,7 +344,7 @@ const nodeY = rect.top + rect.height/2 - cont.top
 const coreX = engineRect.left - cont.left
 const coreY = engineRect.top + engineRect.height/2 - cont.top
 const offset = 60
-const radius = engineRect.width / 2;
+const engineRadius = engineRect.width / 2;
 const endX = coreX + 4; // slight padding from border
 const spread = 180; // increase spacing
 const step = spread / (inputs.length - 1);
@@ -352,22 +352,22 @@ const endY = coreY - spread/2 + (index * step);
 const path = document.createElementNS(
 "http://www.w3.org/2000/svg","path"
 )
-const spreadFactor = (index - (inputs.length - 1)/2); // controls how far lines spread vertically
-const verticalSpread = 70; // controls how curvy lines are
-const curveStrength = 140; // dynamic vertical bending (THIS IS THE FIX)
-const controlOffsetY = spreadFactor * verticalSpread;
-const elbowOffsetX = 80;   // distance before first turn
-const radius = 18;         // roundness of corner
+const elbowOffsetX = 80;
+const radius = 18;
 
 const midX = nodeX + elbowOffsetX;
-const midY = endY;
+const midY = nodeY + (endY - nodeY) * 0.5;
+
+const goingDown = endY > nodeY;
+const sweep1 = goingDown ? 1 : 0;
+const sweep2 = goingDown ? 0 : 1;
 
 const pathData = `
 M ${nodeX} ${nodeY}
 L ${midX - radius} ${nodeY}
-A ${radius} ${radius} 0 0 1 ${midX} ${nodeY + radius}
-L ${midX} ${midY - radius}
-A ${radius} ${radius} 0 0 0 ${midX + radius} ${midY}
+A ${radius} ${radius} 0 0 ${sweep1} ${midX} ${nodeY + (goingDown ? radius : -radius)}
+L ${midX} ${midY - (goingDown ? radius : -radius)}
+A ${radius} ${radius} 0 0 ${sweep2} ${midX + radius} ${midY}
 L ${endX} ${midY}
 `;
 path.setAttribute("d",pathData)
