@@ -81,20 +81,6 @@
   justify-content:center;
   transition:.3s;
 }
-/* Buttons */
-.btn-primary{
-  background:linear-gradient(135deg,#6366f1,#3b82f6);
-  color:#fff;
-  box-shadow:0 10px 30px rgba(99,102,241,.4);
-}
-.btn-primary:hover{
-  transform:translateY(-2px);
-}
-.btn-secondary{
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(255,255,255,0.1);
-  color:#e0e7ff;
-}
 /* Proof */
 .contact-proof{
   margin-top:24px;
