@@ -319,7 +319,7 @@ node.addEventListener("mouseleave",()=>{
 /* restore all lines */
 svg.querySelectorAll("path").forEach(p=>{
 p.style.opacity=".65"
-p.style.strokeDasharray="1 8"
+p.style.strokeDasharray="3 6"
 p.style.animation="dataFlow 6s linear infinite"
 })
 if(engineStatus){
@@ -389,6 +389,8 @@ path.setAttribute("d",pathData)
 path.setAttribute("stroke","#60a5fa")
 path.setAttribute("stroke-width","2")
 path.setAttribute("fill","none")
+path.setAttribute("stroke-linejoin","round")
+path.setAttribute("stroke-linecap","round")
 svg.appendChild(path)
 })
 /* ENGINE → DASHBOARD CONNECTION */
