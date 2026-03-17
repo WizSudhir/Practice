@@ -298,7 +298,7 @@ const index = [...inputs].indexOf(node)
 const activeLine = svg.querySelectorAll("path")[index]
 if(activeLine){
 activeLine.style.opacity="1"
-activeLine.style.strokeDasharray="6 10"
+activeLine.style.strokeDasharray = "1 8";
 activeLine.style.animation="dataFlow 1s linear infinite"
 }
 /* dashboard metrics */
@@ -345,7 +345,8 @@ const coreX = engineRect.left - cont.left
 const coreY = engineRect.top + engineRect.height/2 - cont.top
 const offset = 60
 const elbowX = nodeX + offset
-const elbowY = nodeY + (index * 6)   // spreads lines
+const spacing = 30;
+const elbowY = nodeY + (index * spacing);   // spreads lines
 const endX = coreX + engineRect.width * 0.1
 const spread = 70
 const endY = coreY - spread/2 + (index * (spread/(inputs.length-1)))
@@ -354,10 +355,12 @@ const path = document.createElementNS(
 )
 const pathData = `
 M ${nodeX} ${nodeY}
-L ${elbowX} ${nodeY}
-L ${elbowX} ${endY}
+L ${elbowX - 20} ${nodeY}
+Q ${elbowX} ${nodeY}, ${elbowX} ${nodeY + 20}
+L ${elbowX} ${endY - 20}
+Q ${elbowX} ${endY}, ${elbowX + 20} ${endY}
 L ${endX} ${endY}
-`
+`;
 path.setAttribute("d",pathData)
 path.setAttribute("stroke","#60a5fa")
 path.setAttribute("stroke-width","2.4")
