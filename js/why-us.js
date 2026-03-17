@@ -409,29 +409,6 @@ clearInterval(interval)
 el.innerText = Math.floor(current)
 },20)
 }
-function sendDataPulse(fromElement){
-const pulse = document.createElement("div")
-pulse.className = "data-pulse"
-const container = document.querySelector(".architecture-grid")
-if(!container) return
-container.appendChild(pulse)
-const from = fromElement.getBoundingClientRect()
-const to = engine.getBoundingClientRect()
-const cont = container.getBoundingClientRect()
-const startX = from.right - cont.left
-const startY = from.top + from.height/2 - cont.top
-const endX = to.left - cont.left + to.width/2
-const endY = to.top - cont.top + to.height/2
-pulse.style.left = startX + "px"
-pulse.style.top = startY + "px"
-requestAnimationFrame(()=>{
-pulse.style.transform =
-`translate(${endX-startX}px,${endY-startY}px)`
-})
-setTimeout(()=>{
-pulse.remove()
-},900)
-}
   
 // ===============================
 // OUTCOMES SCROLL REVEAL
