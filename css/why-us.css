@@ -625,6 +625,12 @@ color:#93c5fd;
 margin-bottom:8px;
 }
 /* EMR RING */
+.emr-ring-wrapper{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%, -50%);
+}
 .emr-ring{
 position:absolute;
 top:50%;
@@ -640,8 +646,8 @@ transform-origin: center;
 animation: rotateRing 20s linear infinite;
 }
 @keyframes rotateRing{
-from{ transform:translate(-50%,-50%) rotate(0deg); }
-to{ transform:translate(-50%,-50%) rotate(360deg); }
+from{ transform: rotate(0deg); }
+to{ transform: rotate(360deg); }
 }
 .emr{
 position:absolute;
@@ -649,7 +655,7 @@ top:50%;
 left:50%;
 width:64px;
 height:64px;
-border-radius:14px;
+border-radius:50%;
 background:white;
 padding:6px; /* reduced */
 display:flex;
@@ -681,14 +687,14 @@ to{ transform: rotate(-360deg); }
 .emr:hover{
 filter:brightness(1.1);
 }
-.emr:nth-child(1){ transform: rotate(0deg) translateX(200px) rotate(0deg); }
-.emr:nth-child(2){ transform: rotate(45deg) translateX(200px) rotate(-45deg); }
-.emr:nth-child(3){ transform: rotate(90deg) translateX(200px) rotate(-90deg); }
-.emr:nth-child(4){ transform: rotate(135deg) translateX(200px) rotate(-135deg); }
-.emr:nth-child(5){ transform: rotate(180deg) translateX(200px) rotate(-180deg); }
-.emr:nth-child(6){ transform: rotate(225deg) translateX(200px) rotate(-225deg); }
-.emr:nth-child(7){ transform: rotate(270deg) translateX(200px) rotate(-270deg); }
-.emr:nth-child(8){ transform: rotate(315deg) translateX(200px) rotate(-315deg); }
+.emr:nth-child(1){ transform: translate(-50%, -50%) rotate(0deg) translateX(170px); }
+.emr:nth-child(2){ transform: translate(-50%, -50%) rotate(45deg) translateX(170px); }
+.emr:nth-child(3){ transform: translate(-50%, -50%) rotate(90deg) translateX(170px); }
+.emr:nth-child(4){ transform: translate(-50%, -50%) rotate(135deg) translateX(170px); }
+.emr:nth-child(5){ transform: translate(-50%, -50%) rotate(180deg) translateX(170px); }
+.emr:nth-child(6){ transform: translate(-50%, -50%) rotate(225deg) translateX(170px); }
+.emr:nth-child(7){ transform: translate(-50%, -50%) rotate(270deg) translateX(170px); }
+.emr:nth-child(8){ transform: translate(-50%, -50%) rotate(315deg) translateX(170px); }
 /* DASHBOARD */
 .arch-dashboard{
 display:flex;
