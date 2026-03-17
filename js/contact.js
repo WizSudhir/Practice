@@ -78,7 +78,7 @@ raysCanvas.style.width = raysCanvas.offsetWidth + "px"
 raysCanvas.style.height = raysCanvas.offsetHeight + "px"
 raysCtx.setTransform(DPR, 0, 0, DPR, 0, 0)
 originX = raysCanvas.offsetWidth / 2
-originY = raysCanvas.offsetHeight + 120;
+originY = raysCanvas.offsetHeight;
 }
 let resizeTimeout;
 window.addEventListener("resize", () => {
