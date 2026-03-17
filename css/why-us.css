@@ -767,6 +767,7 @@ stroke-width:2.4;
 stroke-dasharray: 1 8;
 stroke-dashoffset: 0;
 stroke-linecap:round;
+stroke-linejoin: round;
 opacity:.9;
 fill:none;
 filter:
