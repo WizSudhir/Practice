@@ -123,20 +123,22 @@ blogs.sort((a, b) => {
 // FEATURED
 const featuredPosts = blogs.filter(b => b.featured);
 if (featuredContainer) {
-  featuredContainer.innerHTML = featuredPosts.map(post => `
-    <div class="featured-card">
-      <img src="${post.image}" alt="${post.title}">
-      <div class="blog-content">
-        <div class="blog-meta">
-          <span>${post.category}</span>
-          <span>${post.readTime}</span>
-        </div>
-        <h3>${post.title}</h3>
-        <p>${post.description}</p>
-        <a href="${post.url}" class="blog-read">Read Article →</a>
-      </div>
+featuredContainer.innerHTML = featuredPosts.map(post => `
+  <div class="featured-stripe">
+    
+    <div class="stripe-left">
+      <span class="stripe-tag">${post.category}</span>
+      <h3>${post.title}</h3>
+      <p>${post.description}</p>
+      <a href="${post.url}" class="stripe-btn">Read Article →</a>
     </div>
-  `).join("");
+
+    <div class="stripe-right">
+      <img src="${post.image}" alt="${post.title}">
+    </div>
+
+  </div>
+`).join("");
 }
 // REMOVE featured from grid
 let filteredBlogs = blogs.filter(b => !b.featured);
@@ -214,8 +216,17 @@ function applyFilters() {
 // ===============================
 // Live search
 if (searchInput) {
-  searchInput.addEventListener("input", applyFilters);
+  searchInput.addEventListener("input", () => {
+  currentPage = 1;
+  applyFilters();
+});
 }
+searchInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    currentPage = 1; // reset pagination
+    applyFilters();
+  }
+});
 // Filter buttons
 filterButtons.forEach(btn => {
   btn.addEventListener("click", () => {
