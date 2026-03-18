@@ -152,7 +152,9 @@ function renderBlogs(list) {
   const paginated = list.slice(start, end);
   grid.innerHTML = paginated.map(blog => `
     <div class="blog-card">
-      <img src="${blog.image}" alt="${blog.title}">
+        <div class="blog-card-img">
+          <img src="${blog.image}" alt="${blog.title}">
+        </div>
       <div class="blog-content">
         <div class="blog-meta">
           <span>${blog.category}</span>
