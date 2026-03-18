@@ -194,50 +194,7 @@
   overflow: hidden;
 }
 /* =========================================================
-2. SEARCH + FILTER
-========================================================= */
-.blog-controls {
-  padding: 60px 0 20px;
-}
-.blog-controls-inner {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  align-items: center;
-}
-/* Search */
-.blog-search {
-  width: 100%;
-  max-width: 600px;
-}
-/* Filters */
-.blog-filters {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.filter-btn {
-  padding: 10px 20px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  cursor: pointer;
-  transition: all .25s ease;
-  color: #cbd5f5;
-}
-.filter-btn:hover {
-  transform: translateY(-2px);
-  background: rgba(255,255,255,0.1);
-}
-.filter-btn.active {
-  background: var(--gradient-primary);
-  color: #fff;
-  box-shadow: 0 10px 25px rgba(99,102,241,0.4);
-}
-
-/* =========================================================
-3. FEATURED BLOG
+2. FEATURED BLOG
 ========================================================= */
 .blog-featured {
   padding: 80px 0;
@@ -358,6 +315,49 @@
   min-width: 700px;
   flex-shrink: 0;
 }
+/* =========================================================
+3. SEARCH + FILTER
+========================================================= */
+.blog-controls {
+  padding: 60px 0 20px;
+}
+.blog-controls-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+}
+/* Search */
+.blog-search {
+  width: 100%;
+  max-width: 600px;
+}
+/* Filters */
+.blog-filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.filter-btn {
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  cursor: pointer;
+  transition: all .25s ease;
+  color: #cbd5f5;
+}
+.filter-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.1);
+}
+.filter-btn.active {
+  background: var(--gradient-primary);
+  color: #fff;
+  box-shadow: 0 10px 25px rgba(99,102,241,0.4);
+}
+
 /* =========================================================
 4. BLOG GRID
 ========================================================= */
