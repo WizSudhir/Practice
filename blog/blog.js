@@ -143,7 +143,6 @@ featuredContainer.innerHTML = featuredPosts.map((post, index) => `
 
   </div>
 `).join("");
-cards = document.querySelectorAll(".featured-card-new");
 }
 // REMOVE featured from grid
 let filteredBlogs = blogs.filter(b => !b.featured);
@@ -184,10 +183,27 @@ let currentFeatured = 0;
 
 const track = document.querySelector(".featured-track");
 let cards = [];
+cards = document.querySelectorAll(".featured-card-new");
+cards.forEach((card, i) => {
+  card.addEventListener("mouseenter", () => {
+    if (i !== currentFeatured) {
+      card.style.width = (card.offsetWidth + 20) + "px";
+    }
+  });
+
+  card.addEventListener("mouseleave", () => {
+    updateFeatured();
+  });
+
+  card.addEventListener("click", () => {
+    currentFeatured = i;
+    updateFeatured();
+  });
+});
 const desc = document.getElementById("featuredDescription");
 
 function updateFeatured() {
-
+  const sizes = [52, 20, 12, 8, 6];
   const total = cards.length;
   const GAP = 16; // px gap between cards
   const containerWidth = track.offsetWidth;
@@ -214,19 +230,6 @@ for (let j = 0; j < sizes.length; j++) {
   }
   left += px(sizes[j]) + GAP;
 }
-card.addEventListener("mouseenter", () => {
-  if (pos !== 0) {
-    card.style.width = (card.offsetWidth + 20) + "px";
-  }
-});
-
-card.addEventListener("mouseleave", () => {
-  updateFeatured();
-});
-card.addEventListener("click", () => {
-  currentFeatured = i;
-  updateFeatured();
-});
 // remaining stacked
 if (pos >= sizes.length) {
   card.style.left = left + "px";
@@ -253,7 +256,9 @@ currentFeatured = (currentFeatured - 1 + cards.length) % cards.length;
 updateFeatured();
 });
 // INIT
-setTimeout(updateFeatured, 50);
+requestAnimationFrame(() => {
+  updateFeatured();
+});
 // ===============================
 // PAGINATION LOGIC
 // ===============================
