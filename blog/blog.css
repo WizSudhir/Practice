@@ -296,6 +296,7 @@
 }
 /* OVERLAY */
 .featured-overlay {
+  width: 100%;
   position: absolute;
   inset: 0;
   display: flex;
@@ -328,6 +329,7 @@
 }
 /* TITLE */
 .featured-title {
+  white-space: normal !important;
   display: -webkit-box;
   -webkit-line-clamp: 2;   /* allow 2 lines */
   -webkit-box-orient: vertical;
@@ -335,7 +337,7 @@
   line-height: 1.3;
   font-size: 18px;
   font-weight: 600;
-  max-width: 90%;
+  max-width: 100%;
   min-height: 46px;
   word-break: break-word;
 }
@@ -425,6 +427,7 @@
   margin-top: 50px;
 }
 .blog-card {
+  position: relative;
   height: 320px;
   display: flex;
   flex-direction: column;
@@ -462,7 +465,6 @@
 .blog-card img {
   position: relative;
   width: 100%;
-  height: 50%;
   overflow: hidden;
   flex-shrink: 0;
   object-fit: cover;
