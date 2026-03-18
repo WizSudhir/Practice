@@ -196,124 +196,89 @@
 /* =========================================================
 2. FEATURED BLOG
 ========================================================= */
-.blog-featured {
-  padding: 80px 0;
-}
-.featured-card > * {
-  min-width: 0;
-}
-.featured-card {
-  display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: 0;
-  margin-top: 50px;
-  background: rgba(255,255,255,0.05);
-  border-radius: 24px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.08);
-  transition: all .3s;
-}
-.blog-featured h2 {
-  font-size: 32px;
-  font-weight: 800;
-  text-align: center;
-  background: linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.featured-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 25px 80px rgba(0,0,0,0.5);
-}
-.featured-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.featured-card .blog-content {
-  padding: 40px;
-}
-.featured-card .blog-meta {
+/* HEADER */
+.featured-header {
   display: flex;
-  gap: 15px;
-  font-size: 13px;
-  color: #94a3b8;
-  margin-bottom: 12px;
-}
-.featured-card h3 {
-  font-size: 24px;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 12px;
-}
-.featured-card p {
-  color: #cbd5f5;
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
-.featured-card .blog-read {
-  color: #c4b5fd;
-  font-weight: 600;
-  text-decoration: none;
-}
-.featured-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 30px;
-  margin-top: 50px;
-}
-/* STRIPE STYLE FEATURED */
-.featured-stripe {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  justify-content: space-between;
   align-items: center;
-  gap: 40px;
-  padding: 50px;
-  border-radius: 24px;
-  background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(59,130,246,0.08));
-  border: 1px solid rgba(255,255,255,0.08);
   margin-bottom: 40px;
-  transition: all 0.3s ease;
 }
-.featured-stripe:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
-}
-.stripe-tag {
-  display: inline-block;
-  font-size: 12px;
-  color: #93c5fd;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-}
-.stripe-left h3 {
+.featured-header h2 {
   font-size: 28px;
-  margin-bottom: 15px;
 }
-.stripe-left p {
-  color: #cbd5f5;
-  margin-bottom: 20px;
+.featured-header p {
+  color: #94a3b8;
 }
-.stripe-btn {
-  color: #c4b5fd;
-  font-weight: 600;
-  text-decoration: none;
+/* NAV BUTTONS */
+.featured-nav button {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  padding: 10px 14px;
+  margin-left: 10px;
+  border-radius: 10px;
+  cursor: pointer;
 }
-.stripe-right img {
-  width: 100%;
-  border-radius: 16px;
+/* VIEWPORT */
+.featured-viewport {
+  overflow: hidden;
 }
-.featured-stripe-wrapper {
+/* TRACK */
+.featured-track {
   display: flex;
-  gap: 30px;
-  overflow-x: auto;
-  padding-bottom: 10px;
+  gap: 20px;
+  transition: transform 0.4s ease;
 }
-
-.featured-stripe {
-  min-width: 700px;
-  flex-shrink: 0;
+/* CARD */
+.featured-card-new {
+  min-width: 300px;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+/* IMAGE */
+.featured-card-new img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+/* OVERLAY */
+.featured-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+/* TOP INFO */
+.featured-top {
+  display: flex;
+  justify-content: space-between;
+}
+.read-time {
+  background: rgba(0,0,0,0.5);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+.tags {
+  font-size: 12px;
+  background: rgba(99,102,241,0.5);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+/* TITLE */
+.featured-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+/* BOTTOM DESCRIPTION */
+.featured-description {
+  margin-top: 20px;
+  color: #cbd5f5;
+  max-width: 700px;
 }
 /* =========================================================
 3. SEARCH + FILTER
