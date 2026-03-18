@@ -123,18 +123,22 @@ blogs.sort((a, b) => {
 // FEATURED
 const featuredPosts = blogs.filter(b => b.featured);
 if (featuredContainer) {
-featuredContainer.innerHTML = featuredPosts.map(post => `
-  <div class="featured-stripe">
-    
-    <div class="stripe-left">
-      <span class="stripe-tag">${post.category}</span>
-      <h3>${post.title}</h3>
-      <p>${post.description}</p>
-      <a href="${post.url}" class="stripe-btn">Read Article →</a>
-    </div>
+let currentFeatured = 0;
 
-    <div class="stripe-right">
-      <img src="${post.image}" alt="${post.title}">
+featuredContainer.innerHTML = featuredPosts.map((post, index) => `
+  <div class="featured-card-new" data-index="${index}">
+    
+    <img src="${post.image}" alt="${post.title}">
+
+    <div class="featured-overlay">
+      
+      <div class="featured-top">
+        <span class="read-time">⏱ ${post.readTime}</span>
+        <span class="tags">${post.category}</span>
+      </div>
+
+      <div class="featured-title">${post.title}</div>
+
     </div>
 
   </div>
@@ -143,7 +147,7 @@ featuredContainer.innerHTML = featuredPosts.map(post => `
 // REMOVE featured from grid
 let filteredBlogs = blogs.filter(b => !b.featured);
 // ===============================
-// RENDER FUNCTION
+// RENDER FUNCTION - - FEATURED BLOGS
 // ===============================
 function renderBlogs(list) {
   if (!grid) return;
@@ -172,6 +176,9 @@ function renderBlogs(list) {
   `).join("");
   renderPagination(list.length);
 }
+// ===============================
+// SLIDER LOGIC - FEATURED BLOGS
+// ===============================
 // ===============================
 // PAGINATION LOGIC
 // ===============================
