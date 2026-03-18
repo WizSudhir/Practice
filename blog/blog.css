@@ -300,7 +300,7 @@
   inset: 0;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: 10px;
   padding: 20px;
   opacity: 0;                 /* 🔥 hidden by default */
@@ -337,6 +337,7 @@
   font-weight: 600;
   max-width: 90%;
   min-height: 46px;
+  word-break: break-word;
 }
 /* BOTTOM DESCRIPTION */
 .featured-description {
@@ -461,7 +462,7 @@
 .blog-card img {
   position: relative;
   width: 100%;
-  height: 180px;
+  height: 50%;
   overflow: hidden;
   flex-shrink: 0;
   object-fit: cover;
@@ -471,6 +472,7 @@
   display: flex;
   flex-direction: column;
   flex: 1;
+  min-height: 0;
   justify-content: flex-start;
   gap: 8px;
 }
@@ -512,6 +514,7 @@
   font-size: 17px;
   margin: 8px 0;
   min-height: 72px;
+  word-break: break-word;
 }
 .blog-meta {
   display: flex;
