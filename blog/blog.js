@@ -98,6 +98,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 // BLOG SYSTEM + FILTERING
 // ===============================
 let blogs = [];
+let filteredBlogsState = []; // IMPORTANT: global filtered list
+const POSTS_PER_PAGE = 6;
+let currentPage = 1;
 try {
   const res = await fetch("./blogs.json");
   blogs = await res.json();
@@ -142,7 +145,10 @@ let filteredBlogs = blogs.filter(b => !b.featured);
 // ===============================
 function renderBlogs(list) {
   if (!grid) return;
-  grid.innerHTML = list.map(blog => `
+  const start = (currentPage - 1) * POSTS_PER_PAGE;
+  const end = start + POSTS_PER_PAGE;
+  const paginated = list.slice(start, end);
+  grid.innerHTML = paginated.map(blog => `
     <div class="blog-card">
       <img src="${blog.image}" alt="${blog.title}">
       <div class="blog-content">
@@ -152,12 +158,37 @@ function renderBlogs(list) {
         </div>
         <h3>${blog.title}</h3>
         <p>${blog.description}</p>
-        <a href="${blog.url}" class="blog-read">Read Article →</a>
+        <a href="${blog.url}?id=${blog.id}" class="blog-read">Read Article →</a>
       </div>
     </div>
   `).join("");
+  renderPagination(list.length);
 }
+// ===============================
+// PAGINATION LOGIC
+// ===============================
+function renderPagination(totalPosts) {
+  const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
+  const pagination = document.querySelector(".blog-pagination");
 
+  if (!pagination) return;
+
+  pagination.innerHTML = `
+    <button ${currentPage === 1 ? "disabled" : ""} id="prevPage">← Previous</button>
+    <span>Page ${currentPage} of ${totalPages}</span>
+    <button ${currentPage === totalPages ? "disabled" : ""} id="nextPage">Next →</button>
+  `;
+
+  document.getElementById("prevPage")?.addEventListener("click", () => {
+    currentPage--;
+    applyFilters();
+  });
+
+  document.getElementById("nextPage")?.addEventListener("click", () => {
+    currentPage++;
+    applyFilters();
+  });
+}
 // ===============================
 // FILTER + SEARCH LOGIC
 // ===============================
