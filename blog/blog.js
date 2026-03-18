@@ -171,7 +171,7 @@ function renderBlogs(list) {
         <h3>${blog.title}</h3>
         <p>${blog.description}</p>
       </div>
-    </div>
+    </a>
   `).join("");
   renderPagination(list.length);
 }
@@ -291,9 +291,9 @@ function renderPagination(totalPosts) {
   if (!pagination) return;
 
   pagination.innerHTML = `
-    <button ${currentPage === 1 ? "disabled" : ""} id="prevPage">← Previous</button>
+    <button ${currentPage === 1 ? "disabled" : ""} id="prevPage">Prev</button>
     <span>Page ${currentPage} of ${totalPages}</span>
-    <button ${currentPage === totalPages ? "disabled" : ""} id="nextPage">Next →</button>
+    <button ${currentPage === totalPages ? "disabled" : ""} id="nextPage">Next</button>
   `;
 
   document.getElementById("prevPage")?.addEventListener("click", () => {
