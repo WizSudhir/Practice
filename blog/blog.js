@@ -214,7 +214,19 @@ for (let j = 0; j < sizes.length; j++) {
   }
   left += px(sizes[j]) + GAP;
 }
+card.addEventListener("mouseenter", () => {
+  if (pos !== 0) {
+    card.style.width = (card.offsetWidth + 20) + "px";
+  }
+});
 
+card.addEventListener("mouseleave", () => {
+  updateFeatured();
+});
+card.addEventListener("click", () => {
+  currentFeatured = i;
+  updateFeatured();
+});
 // remaining stacked
 if (pos >= sizes.length) {
   card.style.left = left + "px";
@@ -240,21 +252,8 @@ document.getElementById("featuredPrev")?.addEventListener("click", () => {
 currentFeatured = (currentFeatured - 1 + cards.length) % cards.length;
 updateFeatured();
 });
-card.addEventListener("mouseenter", () => {
-  if (pos !== 0) {
-    card.style.width = (card.offsetWidth + 20) + "px";
-  }
-});
-
-card.addEventListener("mouseleave", () => {
-  updateFeatured();
-});
-card.addEventListener("click", () => {
-  currentFeatured = i;
-  updateFeatured();
-});
 // INIT
-updateFeatured();
+setTimeout(updateFeatured, 50);
 // ===============================
 // PAGINATION LOGIC
 // ===============================
