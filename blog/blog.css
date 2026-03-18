@@ -259,6 +259,7 @@
 /* CARD */
 .featured-card-new {
   min-width: 300px;
+  height: 100%;
   border-radius: 12px;
   overflow: hidden;
   position: relative;
