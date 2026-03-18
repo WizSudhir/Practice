@@ -199,8 +199,9 @@ function updateFeatured() {
     // RESET
     card.style.position = "absolute";
     card.style.top = "0";
-    card.style.transition = "all 0.6s cubic-bezier(0.4,0,0.2,1)";
-
+    card.style.transition = "all 0.6s cubic-bezier(0.22,1,0.36,1)";
+    card.style.transform = `scale(${1 - pos * 0.05})`;
+    
     // POSITION SYSTEM (Stripe style)
 if (pos === 0) {
   card.style.left = "0px";
