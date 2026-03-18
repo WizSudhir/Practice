@@ -4,52 +4,120 @@
 /* ===============================
    9. HERO SECTION
 ================================= */
-.hero-dashboard {
-  background: rgba(255,255,255,0.03);
-  backdrop-filter: blur(20px);
-  border-radius: 20px;
+/* ===== PIPELINE SYSTEM ===== */
+
+.pipeline-system {
+  position: relative;
   padding: 30px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(25px);
   border: 1px solid rgba(255,255,255,0.08);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
   color: #fff;
+  max-width: 600px;
 }
 
-.dashboard-header {
+/* Header */
+.pipeline-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
-.status-live {
-  color: #22c55e;
+.pipeline-status {
   font-size: 14px;
-}
-
-.dashboard-main h2 {
-  font-size: 36px;
   color: #22c55e;
 }
 
-.dashboard-metrics {
+/* Pipeline Layout */
+.pipeline {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  align-items: center;
+  position: relative;
 }
 
-.metric span {
+/* Nodes */
+.node {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.node-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
   font-size: 20px;
-  font-weight: 600;
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: 0.3s ease;
 }
 
-.dashboard-flow {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
+/* States */
+.node.success .node-icon {
+  background: rgba(34,197,94,0.15);
+  border-color: #22c55e;
+  color: #22c55e;
 }
 
-.warning { color: #ef4444; }
-.success { color: #22c55e; }
+.node.warning .node-icon {
+  background: rgba(239,68,68,0.15);
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+.node.fix .node-icon {
+  background: rgba(59,130,246,0.15);
+  border-color: #3b82f6;
+  color: #3b82f6;
+}
+
+.node.highlight .node-icon {
+  box-shadow: 0 0 20px rgba(34,197,94,0.6);
+}
+
+/* Labels */
+.node p {
+  margin-top: 8px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+}
+
+/* Flow Line */
+.flow-line {
+  position: absolute;
+  top: 60px;
+  left: 5%;
+  width: 90%;
+  height: 2px;
+  background: linear-gradient(to right, #444, #22c55e);
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Moving Dot */
+.flow-dot {
+  width: 10px;
+  height: 10px;
+  background: #22c55e;
+  border-radius: 50%;
+  position: absolute;
+  top: -4px;
+  left: 0;
+  animation: moveFlow 4s linear infinite;
+  box-shadow: 0 0 10px #22c55e;
+}
+
+@keyframes moveFlow {
+  0% { left: 0%; }
+  100% { left: 100%; }
+}
 /* ===============================
    11. HIPAA SECTION
 ================================= */
