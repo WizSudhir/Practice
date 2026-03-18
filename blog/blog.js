@@ -247,6 +247,7 @@ for (let j = 0; j < sizes.length; j++) {
   if (pos === j) {
     card.style.left = (left + (j * GAP)) + "px";
     card.style.width = px(sizes[j]) + "px";
+    card.style.minWidth = "250px";
     break;
   }
   left += px(sizes[j]);
