@@ -143,6 +143,7 @@ featuredContainer.innerHTML = featuredPosts.map((post, index) => `
 
   </div>
 `).join("");
+cards = document.querySelectorAll(".featured-card-new");
 }
 // REMOVE featured from grid
 let filteredBlogs = blogs.filter(b => !b.featured);
@@ -182,7 +183,7 @@ function renderBlogs(list) {
 let currentFeatured = 0;
 
 const track = document.querySelector(".featured-track");
-const cards = document.querySelectorAll(".featured-card-new");
+let cards = [];
 const desc = document.getElementById("featuredDescription");
 
 function updateFeatured() {
@@ -203,31 +204,22 @@ function updateFeatured() {
     card.style.transform = `scale(${1 - pos * 0.05})`;
     
     // POSITION SYSTEM (Stripe style)
-if (pos === 0) {
-  card.style.left = "0px";
-  card.style.width = px(65) + "px";
+let left = 0;
+
+for (let j = 0; j < sizes.length; j++) {
+  if (pos === j) {
+    card.style.left = left + "px";
+    card.style.width = px(sizes[j]) + "px";
+    break;
+  }
+  left += px(sizes[j]) + GAP;
 }
 
-else if (pos === 1) {
-  card.style.left = px(65) + GAP + "px";
-  card.style.width = px(15) + "px";
+// remaining stacked
+if (pos >= sizes.length) {
+  card.style.left = left + "px";
+  card.style.width = "4px";
 }
-
-else if (pos === 2) {
-  card.style.left = px(65) + px(15) + GAP * 2 + "px";
-  card.style.width = px(8) + "px";
-}
-
-else if (pos === 3) {
-  card.style.left = px(65) + px(15) + px(8) + GAP * 3 + "px";
-  card.style.width = px(4) + "px";
-}
-
-else {
-  card.style.left = px(65) + px(15) + px(8) + px(4) + GAP * 4 + "px";
-  card.style.width = "6px"; // thin stack
-}
-
   });
 
   // UPDATE DESCRIPTION
