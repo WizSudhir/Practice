@@ -283,7 +283,6 @@
 }
 .featured-card-new:hover {
   filter: brightness(1.1);
-  transform: scale(1.02);
   z-index: 10;
 }
 /* IMAGE */
