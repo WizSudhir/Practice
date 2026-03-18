@@ -341,6 +341,17 @@
   font-weight: 600;
   text-decoration: none;
 }
+.desc-inner {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.desc-inner p {
+  flex: 1;
+}
+.read-more {
+  margin-left: auto;
+}
 /* =========================================================
 3. SEARCH + FILTER
 ========================================================= */
