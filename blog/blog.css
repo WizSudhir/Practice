@@ -186,10 +186,12 @@
   color:#c4b5fd;
 }
 .seo-content {
-  max-width: 900px;
-  margin: auto;
-  text-align: center;
-  color: #cbd5f5;
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 /* =========================================================
 2. SEARCH + FILTER
