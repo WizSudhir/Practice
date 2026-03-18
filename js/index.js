@@ -80,64 +80,71 @@ this.innerText = "Read More →";
 // ===============================
 // NEW HERO
 // ===============================
-const chaosContainer = document.querySelector(".chaos-container");
-const gridContainer = document.querySelector(".grid-container");
-const stackContainer = document.querySelector(".revenue-stack");
+const cards = document.querySelectorAll(".issue-card");
+const revenueLayer = document.getElementById("revenueLayer");
 
-// CREATE CHAOS DOTS
-for (let i = 0; i < 25; i++) {
-  let dot = document.createElement("div");
-  dot.classList.add("chaos-dot");
-  dot.style.top = Math.random() * 100 + "%";
-  dot.style.left = Math.random() * 100 + "%";
-  chaosContainer.appendChild(dot);
-}
+// PROBLEM → SOLUTION MAP
+const solutions = [
+  "✓ Eligibility Verified",
+  "✓ Authorization Approved",
+  "✓ Coding Optimized",
+  "✓ Denial Resolved",
+  "✓ AR Follow-Up Completed",
+  "✓ Appeal Submitted"
+];
 
-// CREATE GRID
-for (let i = 0; i < 40; i++) {
-  let cell = document.createElement("div");
-  cell.classList.add("grid-cell");
-  gridContainer.appendChild(cell);
-}
+// REVENUE VALUES
+const revenueValues = ["+$120", "+$340", "+$780", "+$1240", "+$1890"];
 
-// REVENUE STACK VALUES
-const values = ["+$120", "+$340", "+$560", "+$890", "+$1240"];
+// MAIN LOOP
+function runStory() {
 
-// LOOP SYSTEM
-function runCycle() {
+  // RESET
+  revenueLayer.innerHTML = "";
 
-  // PHASE 1: CHAOS
-  chaosContainer.style.opacity = 1;
-  gridContainer.style.opacity = 0;
-  stackContainer.innerHTML = "";
+  cards.forEach((card, i) => {
+    card.classList.remove("success");
+    card.innerText = [
+      "⚠ Eligibility Not Verified",
+      "⚠ Missing Authorization",
+      "⚠ Incorrect CPT Code",
+      "⚠ Claim Denied",
+      "⚠ No AR Follow-Up",
+      "⚠ Appeal Pending"
+    ][i];
+  });
+
+  // STEP 1 → CHAOS (visible already)
 
   setTimeout(() => {
 
-    // PHASE 2: CONTROL
-    chaosContainer.style.opacity = 0.2;
-    gridContainer.style.opacity = 1;
+    // STEP 2 → FIX
+    cards.forEach((card, i) => {
+      card.classList.add("success");
+      card.innerText = solutions[i];
+    });
 
   }, 2500);
 
   setTimeout(() => {
 
-    // PHASE 3: STACKING
-    stackContainer.innerHTML = "";
+    // STEP 3 → REVENUE STACK
+    revenueLayer.innerHTML = "";
 
-    values.forEach((val, i) => {
-      let item = document.createElement("div");
-      item.classList.add("stack-item");
-      item.innerText = val;
-      item.style.animationDelay = i * 0.3 + "s";
-      stackContainer.appendChild(item);
+    revenueValues.forEach((val, i) => {
+      const el = document.createElement("div");
+      el.classList.add("revenue-item");
+      el.innerText = val;
+      el.style.animationDelay = i * 0.25 + "s";
+      revenueLayer.appendChild(el);
     });
 
   }, 4500);
 
 }
 
-// LOOP EVERY 8s
-runCycle();
-setInterval(runCycle, 8000);
+// LOOP
+runStory();
+setInterval(runStory, 8000);
 
 }); // DOMContentLoaded close
