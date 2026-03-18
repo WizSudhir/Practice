@@ -188,7 +188,13 @@ const desc = document.getElementById("featuredDescription");
 function updateFeatured() {
   const cardWidth = cards[0].offsetWidth + 20;
   track.style.transform = `translateX(-${currentFeatured * cardWidth}px)`;
-
+  // Active featured cards  
+cards.forEach((card, index) => {
+  card.classList.remove("active");
+  if (index === currentFeatured) {
+    card.classList.add("active");
+  }
+});
   // Update bottom description
   desc.innerHTML = `
     <div style="display:flex; justify-content:space-between; align-items:center;">
