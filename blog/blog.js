@@ -183,28 +183,45 @@ let currentFeatured = 0;
 
 const track = document.querySelector(".featured-track");
 let cards = [];
+let hoveredIndex = null;
 cards = document.querySelectorAll(".featured-card-new");
-cards.forEach((card, i) => {
-  card.addEventListener("mouseenter", () => {
-    if (i !== currentFeatured) {
-      card.style.width = (card.offsetWidth + 20) + "px";
-    }
-  });
 
-  card.addEventListener("mouseleave", () => {
+cards.forEach((card, i) => {
+
+  // ✅ HOVER START
+  card.addEventListener("mouseenter", () => {
+    hoveredIndex = i;
     updateFeatured();
   });
 
+  // ✅ HOVER END
+  card.addEventListener("mouseleave", () => {
+    hoveredIndex = null;
+    updateFeatured();
+  });
+
+  // ✅ CLICK
   card.addEventListener("click", () => {
     currentFeatured = i;
     updateFeatured();
   });
+
 });
 const desc = document.getElementById("featuredDescription");
 
 function updateFeatured() {
-  const sizes = [65, 18, 8, 5, 2];
   const total = cards.length;
+  let sizes = [65, 18, 8, 5, 2];
+// 🔥 HOVER ADJUSTMENT (Stripe behavior)
+if (hoveredIndex !== null) {
+  const hoverPos = (hoveredIndex - currentFeatured + total) % total;
+  sizes = [...sizes];
+  if (hoverPos < sizes.length) {
+    sizes[hoverPos] += 4; // hovered grows
+    if (hoverPos > 0) sizes[hoverPos - 1] -= 2;
+    if (hoverPos < sizes.length - 1) sizes[hoverPos + 1] -= 2;
+  }
+}
   const GAP = 16; // px gap between cards
   const containerWidth = track.offsetWidth;
 function px(percent) {
@@ -222,7 +239,7 @@ function px(percent) {
     // RESET
     card.style.position = "absolute";
     card.style.top = "0";
-    card.style.transition = "all 0.6s cubic-bezier(0.22,1,0.36,1)";
+    card.style.transition = "all 0.45s cubic-bezier(0.4,0,0.2,1)";
     card.style.transform = "none";
     
     // POSITION SYSTEM (Stripe style)
