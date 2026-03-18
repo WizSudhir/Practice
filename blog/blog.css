@@ -247,6 +247,12 @@
   transform: scale(0.9);
   opacity: 0.6;
 }
+.featured-card-new::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent 60%);
+}
 .featured-card-new.active {
   transform: scale(1);
   opacity: 1;
@@ -294,9 +300,24 @@
 }
 /* BOTTOM DESCRIPTION */
 .featured-description {
-  margin-top: 20px;
+  margin-top: 30px;
+  padding: 20px 25px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.featured-description p {
+  margin: 0;
   color: #cbd5f5;
-  max-width: 700px;
+  max-width: 70%;
+}
+.read-more {
+  color: #c4b5fd;
+  font-weight: 600;
+  text-decoration: none;
 }
 /* =========================================================
 3. SEARCH + FILTER
