@@ -80,48 +80,64 @@ this.innerText = "Read More →";
 // ===============================
 // NEW HERO
 // ===============================
-const stages = document.querySelectorAll(".stage");
-const statusText = document.querySelector(".pipeline-status");
+const chaosContainer = document.querySelector(".chaos-container");
+const gridContainer = document.querySelector(".grid-container");
+const stackContainer = document.querySelector(".revenue-stack");
 
-let step = 0;
-
-function simulatePipeline() {
-
-  stages.forEach(s => s.classList.remove("active"));
-
-  let current = stages[step];
-  current.classList.add("active");
-
-  // Update header status
-  statusText.innerText = "Analyzing " + current.dataset.stage + "...";
-
-  // Denial logic
-  if (current.dataset.stage === "denial") {
-
-    current.querySelector(".status").innerText = "Issue Detected ⚠";
-    current.querySelector(".meta").innerText = "Missing modifier";
-
-    setTimeout(() => {
-      current.classList.remove("warning");
-
-      current.querySelector(".status").innerText = "Resolved ✓";
-      current.querySelector(".status").className = "status success";
-      current.querySelector(".meta").innerText = "Resubmitted successfully";
-
-    }, 1500);
-  }
-
-  // Payment logic
-  if (current.dataset.stage === "payment") {
-    current.querySelector(".status").innerText = "Payment Released 💰";
-    current.querySelector(".status").className = "status success";
-    current.querySelector(".meta").innerText = "Revenue collected";
-  }
-
-  step = (step + 1) % stages.length;
+// CREATE CHAOS DOTS
+for (let i = 0; i < 25; i++) {
+  let dot = document.createElement("div");
+  dot.classList.add("chaos-dot");
+  dot.style.top = Math.random() * 100 + "%";
+  dot.style.left = Math.random() * 100 + "%";
+  chaosContainer.appendChild(dot);
 }
 
-// Run simulation
-setInterval(simulatePipeline, 2000);
+// CREATE GRID
+for (let i = 0; i < 40; i++) {
+  let cell = document.createElement("div");
+  cell.classList.add("grid-cell");
+  gridContainer.appendChild(cell);
+}
+
+// REVENUE STACK VALUES
+const values = ["+$120", "+$340", "+$560", "+$890", "+$1240"];
+
+// LOOP SYSTEM
+function runCycle() {
+
+  // PHASE 1: CHAOS
+  chaosContainer.style.opacity = 1;
+  gridContainer.style.opacity = 0;
+  stackContainer.innerHTML = "";
+
+  setTimeout(() => {
+
+    // PHASE 2: CONTROL
+    chaosContainer.style.opacity = 0.2;
+    gridContainer.style.opacity = 1;
+
+  }, 2500);
+
+  setTimeout(() => {
+
+    // PHASE 3: STACKING
+    stackContainer.innerHTML = "";
+
+    values.forEach((val, i) => {
+      let item = document.createElement("div");
+      item.classList.add("stack-item");
+      item.innerText = val;
+      item.style.animationDelay = i * 0.3 + "s";
+      stackContainer.appendChild(item);
+    });
+
+  }, 4500);
+
+}
+
+// LOOP EVERY 8s
+runCycle();
+setInterval(runCycle, 8000);
 
 }); // DOMContentLoaded close
