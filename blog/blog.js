@@ -202,18 +202,23 @@ function renderPagination(totalPosts) {
 // ===============================
 function applyFilters() {
   const searchTerm = searchInput.value.toLowerCase();
+
   let result = blogs.filter(blog => !blog.featured);
-  // CATEGORY FILTER
+
   if (activeFilter !== "all") {
     result = result.filter(b => b.category === activeFilter);
   }
-  // SEARCH FILTER
+
   if (searchTerm) {
     result = result.filter(b =>
       b.title.toLowerCase().includes(searchTerm) ||
       b.description.toLowerCase().includes(searchTerm)
     );
   }
+
+  const totalPages = Math.ceil(result.length / POSTS_PER_PAGE);
+  if (currentPage > totalPages) currentPage = 1;
+
   renderBlogs(result);
 }
 
