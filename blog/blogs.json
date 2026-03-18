@@ -20,7 +20,7 @@
     "readTime": "6 min",
     "image": "images/blog1.jpg",
     "url": "posts/10-Common-Medical-Billing-Mistakes.html",
-    "description": "Top billing errors reducing practice revenue.",
+    "description": "Top denial errors reducing practice revenue.",
     "featured": true
   },
   {
@@ -32,7 +32,7 @@
     "readTime": "5 min",
     "image": "images/blog1.jpg",
     "url": "posts/10-Common-Medical-Billing-Mistakes.html",
-    "description": "Top billing errors reducing practice revenue.",
+    "description": "Top payment errors reducing practice revenue.",
     "featured": true
   },
   {
@@ -44,7 +44,7 @@
     "readTime": "4 min",
     "image": "images/blog1.jpg",
     "url": "posts/10-Common-Medical-Billing-Mistakes.html",
-    "description": "Top billing errors reducing practice revenue.",
+    "description": "Top credentialing errors reducing practice revenue.",
     "featured": true
   },
   {
@@ -56,7 +56,7 @@
     "readTime": "3 min",
     "image": "images/blog1.jpg",
     "url": "posts/10-Common-Medical-Billing-Mistakes.html",
-    "description": "Top billing errors reducing practice revenue.",
+    "description": "Top analytics errors reducing practice revenue.",
     "featured": true
   }
 ]
