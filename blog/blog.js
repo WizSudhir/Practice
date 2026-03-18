@@ -169,7 +169,6 @@ function renderBlogs(list) {
           <span class="blog-time">⏱ ${blog.readTime}</span>
         </div>
         <h3>${blog.title}</h3>
-        <p>${blog.description}</p>
       </div>
     </a>
   `).join("");
