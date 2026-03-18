@@ -80,26 +80,48 @@ this.innerText = "Read More →";
 // ===============================
 // NEW HERO
 // ===============================
-// Simulate pipeline activity
-const nodes = document.querySelectorAll(".node");
+const stages = document.querySelectorAll(".stage");
+const statusText = document.querySelector(".pipeline-status");
 
-let current = 0;
+let step = 0;
 
-function updatePipeline() {
-  nodes.forEach((node, index) => {
-    node.classList.remove("active");
+function simulatePipeline() {
 
-    if (index === current) {
-      node.classList.add("active");
-      node.querySelector(".node-icon").style.transform = "scale(1.2)";
-    } else {
-      node.querySelector(".node-icon").style.transform = "scale(1)";
-    }
-  });
+  stages.forEach(s => s.classList.remove("active"));
 
-  current = (current + 1) % nodes.length;
+  let current = stages[step];
+  current.classList.add("active");
+
+  // Update header status
+  statusText.innerText = "Analyzing " + current.dataset.stage + "...";
+
+  // Denial logic
+  if (current.dataset.stage === "denial") {
+
+    current.querySelector(".status").innerText = "Issue Detected ⚠";
+    current.querySelector(".meta").innerText = "Missing modifier";
+
+    setTimeout(() => {
+      current.classList.remove("warning");
+
+      current.querySelector(".status").innerText = "Resolved ✓";
+      current.querySelector(".status").className = "status success";
+      current.querySelector(".meta").innerText = "Resubmitted successfully";
+
+    }, 1500);
+  }
+
+  // Payment logic
+  if (current.dataset.stage === "payment") {
+    current.querySelector(".status").innerText = "Payment Released 💰";
+    current.querySelector(".status").className = "status success";
+    current.querySelector(".meta").innerText = "Revenue collected";
+  }
+
+  step = (step + 1) % stages.length;
 }
 
-setInterval(updatePipeline, 1500);
+// Run simulation
+setInterval(simulatePipeline, 2000);
 
 }); // DOMContentLoaded close
