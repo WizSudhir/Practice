@@ -59,43 +59,55 @@
 
 
 <!-- HERO -->
-<div class="hero-dashboard">
+<div class="pipeline-system">
 
-  <!-- HEADER -->
-  <div class="dashboard-header">
-    <h4>Revenue Intelligence System</h4>
-    <span class="status-live">● Live</span>
+  <div class="pipeline-header">
+    <h4>Revenue Cycle Pipeline</h4>
+    <span class="pipeline-status">System Active</span>
   </div>
 
-  <!-- MAIN METRIC -->
-  <div class="dashboard-main">
-    <p>Revenue Recovered</p>
-    <h2 id="revenueCounter">$0</h2>
+  <div class="pipeline">
+
+    <div class="node">
+      <div class="node-icon">👤</div>
+      <p>Intake</p>
+    </div>
+
+    <div class="node success">
+      <div class="node-icon">✔</div>
+      <p>Eligibility</p>
+    </div>
+
+    <div class="node success">
+      <div class="node-icon">✔</div>
+      <p>Coding</p>
+    </div>
+
+    <div class="node">
+      <div class="node-icon">📤</div>
+      <p>Claim</p>
+    </div>
+
+    <div class="node warning">
+      <div class="node-icon">⚠</div>
+      <p>Denial</p>
+    </div>
+
+    <div class="node fix">
+      <div class="node-icon">🔧</div>
+      <p>Fixed</p>
+    </div>
+
+    <div class="node success highlight">
+      <div class="node-icon">💰</div>
+      <p>Payment</p>
+    </div>
+
   </div>
 
-  <!-- METRICS -->
-  <div class="dashboard-metrics">
-    <div class="metric">
-      <span id="claims">0</span>
-      <p>Claims Analyzed</p>
-    </div>
-
-    <div class="metric">
-      <span id="denials">0</span>
-      <p>Denials Detected</p>
-    </div>
-
-    <div class="metric">
-      <span id="cleanRate">0%</span>
-      <p>Clean Claim Rate</p>
-    </div>
-  </div>
-
-  <!-- FLOW -->
-  <div class="dashboard-flow">
-    <span>Claim</span>
-    <span class="warning">Denial</span>
-    <span class="success">Paid</span>
+  <!-- FLOW LINE -->
+  <div class="flow-line">
+    <div class="flow-dot"></div>
   </div>
 
 </div>
