@@ -301,6 +301,11 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 20px;
+  opacity: 0;                 /* 🔥 hidden by default */
+  transition: opacity 0.3s ease;
+}
+.featured-card-new.active .featured-overlay {
+  opacity: 1;   /* 🔥 only active card shows content */
 }
 /* TOP INFO */
 .featured-top {
