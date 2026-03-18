@@ -203,13 +203,15 @@ cards.forEach((card, i) => {
 const desc = document.getElementById("featuredDescription");
 
 function updateFeatured() {
-  const sizes = [48, 22, 14, 10, 6];
+  const sizes = [65, 18, 8, 5, 2];
   const total = cards.length;
   const GAP = 16; // px gap between cards
   const containerWidth = track.offsetWidth;
-  function px(percent) {
-  return (percent / 100) * containerWidth;
-  }
+function px(percent) {
+  const totalGap = GAP * (sizes.length - 1);
+  const usableWidth = containerWidth - totalGap;
+  return (percent / 100) * usableWidth;
+}
   cards.forEach((card, i) => {
     let pos = (i - currentFeatured + total) % total;
 
@@ -232,7 +234,7 @@ for (let j = 0; j < sizes.length; j++) {
 }
 // remaining stacked
 if (pos >= sizes.length) {
-  card.style.left = left + "px";
+  card.style.left = (left + (sizes.length * GAP)) + "px";
   card.style.width = "4px";
 }
   });
