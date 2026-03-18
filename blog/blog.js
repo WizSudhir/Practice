@@ -123,7 +123,6 @@ blogs.sort((a, b) => {
 // FEATURED
 const featuredPosts = blogs.filter(b => b.featured);
 if (featuredContainer) {
-let currentFeatured = 0;
 
 featuredContainer.innerHTML = featuredPosts.map((post, index) => `
   <div class="featured-card-new" data-index="${index}">
