@@ -150,6 +150,10 @@ function renderBlogs(list) {
   const start = (currentPage - 1) * POSTS_PER_PAGE;
   const end = start + POSTS_PER_PAGE;
   const paginated = list.slice(start, end);
+  if (!paginated.length) {
+  grid.innerHTML = `<p style="text-align:center;">No articles found.</p>`;
+  return;
+  }
   grid.innerHTML = paginated.map(blog => `
     <div class="blog-card">
         <div class="blog-card-img">
