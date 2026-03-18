@@ -219,7 +219,7 @@ function px(percent) {
     card.style.position = "absolute";
     card.style.top = "0";
     card.style.transition = "all 0.6s cubic-bezier(0.22,1,0.36,1)";
-    card.style.transform = `translateY(${pos * 10}px)`;
+  card.style.transform = `translateY(${pos * 4}px)`;
     
     // POSITION SYSTEM (Stripe style)
 let left = 0;
