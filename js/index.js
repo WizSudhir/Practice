@@ -152,4 +152,35 @@ this.innerText = "Read More →";
 });
 });
 
+function animateValue(id, start, end, duration, isCurrency=false, isPercent=false) {
+  let obj = document.getElementById(id);
+  let startTime = null;
+
+  function update(currentTime) {
+    if (!startTime) startTime = currentTime;
+    let progress = Math.min((currentTime - startTime) / duration, 1);
+    let value = Math.floor(progress * (end - start) + start);
+
+    if (isCurrency) {
+      obj.innerText = "$" + value.toLocaleString();
+    } else if (isPercent) {
+      obj.innerText = value + "%";
+    } else {
+      obj.innerText = value.toLocaleString();
+    }
+
+    if (progress < 1) requestAnimationFrame(update);
+  }
+
+  requestAnimationFrame(update);
+}
+
+// RUN ON LOAD
+window.onload = () => {
+  animateValue("revenueCounter", 0, 1248320, 2000, true);
+  animateValue("claims", 0, 8421, 2000);
+  animateValue("denials", 0, 932, 2000);
+  animateValue("cleanRate", 0, 97, 2000, false, true);
+};
+
 }); // DOMContentLoaded close
