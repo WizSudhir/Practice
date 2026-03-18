@@ -413,6 +413,8 @@
   margin-top: 50px;
 }
 .blog-card {
+  display: flex;
+  flex-direction: column;
   background: rgba(255,255,255,0.04);
   border-radius: 18px;
   overflow: hidden;
@@ -430,6 +432,9 @@
 }
 .blog-card .blog-content {
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;   /* 🔥 important */
 }
 .blog-card-img {
   overflow: hidden;
@@ -469,12 +474,17 @@
   gap: 4px;
 }
 .blog-read {
+  margin-top: auto;
+  align-self: flex-end;
   display: inline-block;
   margin-top: 16px;
   padding: 8px 14px;
   border-radius: 8px;
   background: rgba(99,102,241,0.15);
   color: #c4b5fd;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease;
 }
 .blog-read:hover {
   color: #ffffff;
