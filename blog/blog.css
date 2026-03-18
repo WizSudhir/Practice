@@ -441,12 +441,12 @@
   padding: 18px;
   display: flex;
   flex-direction: column;
-  height: 40%;
+  height: 50%;
   justify-content: space-between;
   gap: 8px;
 }
 .blog-card-img {
-  height: 60%;
+  height: 50%;
   position: relative;
   overflow: hidden;
 }
