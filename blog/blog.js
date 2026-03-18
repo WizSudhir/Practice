@@ -159,7 +159,7 @@ function renderBlogs(list) {
   return;
   }
   grid.innerHTML = paginated.map(blog => `
-    <div class="blog-card">
+    <a href="${blog.url}?id=${blog.id}" class="blog-card">
         <div class="blog-card-img">
           <img src="${blog.image}" alt="${blog.title}">
         </div>
@@ -170,7 +170,6 @@ function renderBlogs(list) {
         </div>
         <h3>${blog.title}</h3>
         <p>${blog.description}</p>
-        <a href="${blog.url}?id=${blog.id}" class="blog-read">Read Article →</a>
       </div>
     </div>
   `).join("");
