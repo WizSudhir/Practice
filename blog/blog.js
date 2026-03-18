@@ -186,16 +186,61 @@ const cards = document.querySelectorAll(".featured-card-new");
 const desc = document.getElementById("featuredDescription");
 
 function updateFeatured() {
-  const cardWidth = cards[0].offsetWidth + 20;
-  track.style.transform = `translateX(-${currentFeatured * cardWidth}px)`;
-  // Active featured cards  
-cards.forEach((card, index) => {
-  card.classList.remove("active");
-  if (index === currentFeatured) {
-    card.classList.add("active");
-  }
-});
-  // Update bottom description
+
+  const total = cards.length;
+
+  cards.forEach((card, i) => {
+    let pos = (i - currentFeatured + total) % total;
+
+    // RESET
+    card.style.position = "absolute";
+    card.style.top = "0";
+    card.style.transition = "all 0.6s cubic-bezier(0.4,0,0.2,1)";
+
+    // POSITION SYSTEM (Stripe style)
+    if (pos === 0) {
+      // MAIN CARD (65%)
+      card.style.left = "0%";
+      card.style.width = "65%";
+      card.style.zIndex = "5";
+      card.style.opacity = "1";
+    }
+
+    else if (pos === 1) {
+      // SECOND (15%)
+      card.style.left = "67%";
+      card.style.width = "15%";
+      card.style.zIndex = "4";
+      card.style.opacity = "0.9";
+    }
+
+    else if (pos === 2) {
+      // THIRD (8%)
+      card.style.left = "83%";
+      card.style.width = "8%";
+      card.style.zIndex = "3";
+      card.style.opacity = "0.7";
+    }
+
+    else if (pos === 3) {
+      // FOURTH (4%)
+      card.style.left = "92%";
+      card.style.width = "4%";
+      card.style.zIndex = "2";
+      card.style.opacity = "0.5";
+    }
+
+    else {
+      // REMAINING STACK (1%)
+      card.style.left = "96%";
+      card.style.width = "2%";
+      card.style.zIndex = "1";
+      card.style.opacity = "0.3";
+    }
+
+  });
+
+  // UPDATE DESCRIPTION
   desc.innerHTML = `
     <div style="display:flex; justify-content:space-between; align-items:center;">
       <p>${featuredPosts[currentFeatured].description}</p>
@@ -205,17 +250,13 @@ cards.forEach((card, index) => {
 }
 
 document.getElementById("featuredNext")?.addEventListener("click", () => {
-  if (currentFeatured < cards.length - 1) {
-    currentFeatured++;
-    updateFeatured();
-  }
+currentFeatured = (currentFeatured + 1) % cards.length;
+updateFeatured();
 });
 
 document.getElementById("featuredPrev")?.addEventListener("click", () => {
-  if (currentFeatured > 0) {
-    currentFeatured--;
-    updateFeatured();
-  }
+currentFeatured = (currentFeatured - 1 + cards.length) % cards.length;
+updateFeatured();
 });
 
 // INIT
