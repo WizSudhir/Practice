@@ -196,6 +196,16 @@
 /* =========================================================
 2. FEATURED BLOG
 ========================================================= */
+.blog-featured {
+  padding: 60px 0 40px;
+}
+.blog-featured .container {
+  padding: 40px;
+  border-radius: 24px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+}
 /* HEADER */
 .featured-header {
   display: flex;
@@ -204,7 +214,11 @@
   margin-bottom: 40px;
 }
 .featured-header h2 {
-  font-size: 28px;
+  font-size: 32px;
+  font-weight: 800;
+  background: linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .featured-header p {
   color: #94a3b8;
