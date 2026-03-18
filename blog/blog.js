@@ -164,9 +164,9 @@ function renderBlogs(list) {
           <img src="${blog.image}" alt="${blog.title}">
         </div>
       <div class="blog-content">
-        <div class="blog-meta">
-          <span>${blog.category}</span>
-          <span>${blog.readTime}</span>
+         <div class="blog-meta">
+          <span class="blog-category">${blog.category}</span>
+          <span class="blog-time">⏱ ${blog.readTime}</span>
         </div>
         <h3>${blog.title}</h3>
         <p>${blog.description}</p>
