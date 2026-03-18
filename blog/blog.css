@@ -263,6 +263,9 @@
 .featured-card-new:not(.active) {
   transform: scale(0.9) translateY(20px);
 }
+.featured-card-new:hover {
+  filter: brightness(1.1);
+}
 /* IMAGE */
 .featured-card-new img {
   width: 100%;
