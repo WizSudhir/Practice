@@ -306,6 +306,47 @@
   gap: 30px;
   margin-top: 50px;
 }
+/* STRIPE STYLE FEATURED */
+.featured-stripe {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: center;
+  gap: 40px;
+  padding: 50px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(59,130,246,0.08));
+  border: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 40px;
+  transition: all 0.3s ease;
+}
+.featured-stripe:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+}
+.stripe-tag {
+  display: inline-block;
+  font-size: 12px;
+  color: #93c5fd;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.stripe-left h3 {
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+.stripe-left p {
+  color: #cbd5f5;
+  margin-bottom: 20px;
+}
+.stripe-btn {
+  color: #c4b5fd;
+  font-weight: 600;
+  text-decoration: none;
+}
+.stripe-right img {
+  width: 100%;
+  border-radius: 16px;
+}
 /* =========================================================
 4. BLOG GRID
 ========================================================= */
