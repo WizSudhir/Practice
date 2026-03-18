@@ -247,7 +247,19 @@ document.getElementById("featuredPrev")?.addEventListener("click", () => {
 currentFeatured = (currentFeatured - 1 + cards.length) % cards.length;
 updateFeatured();
 });
+card.addEventListener("mouseenter", () => {
+  if (pos !== 0) {
+    card.style.width = (card.offsetWidth + 20) + "px";
+  }
+});
 
+card.addEventListener("mouseleave", () => {
+  updateFeatured();
+});
+card.addEventListener("click", () => {
+  currentFeatured = i;
+  updateFeatured();
+});
 // INIT
 updateFeatured();
 // ===============================
