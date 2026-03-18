@@ -414,7 +414,6 @@
   margin-top: 50px;
 }
 .blog-card {
-  height: 360px;
   display: flex;
   flex-direction: column;
   background: linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02));
@@ -502,7 +501,7 @@
   font-size: 14px;
   color: #94a3b8;
   display: -webkit-box;
-  -webkit-line-clamp: 1;   /* 🔥 limits text */
+  -webkit-line-clamp: 2;   /* 🔥 limits text */
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
