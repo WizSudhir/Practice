@@ -214,7 +214,11 @@ function px(percent) {
 }
   cards.forEach((card, i) => {
     let pos = (i - currentFeatured + total) % total;
-
+      // 🔥 ACTIVE CONTROL
+      card.classList.remove("active");
+      if (pos === 0) {
+       card.classList.add("active");
+      }
     // RESET
     card.style.position = "absolute";
     card.style.top = "0";
