@@ -177,8 +177,43 @@ function renderBlogs(list) {
   renderPagination(list.length);
 }
 // ===============================
-// SLIDER LOGIC - FEATURED BLOGS
+// SLIDER LOGIC - FEATURED SECTION
 // ===============================
+let currentFeatured = 0;
+
+const track = document.querySelector(".featured-track");
+const cards = document.querySelectorAll(".featured-card-new");
+const desc = document.getElementById("featuredDescription");
+
+function updateFeatured() {
+  const cardWidth = cards[0].offsetWidth + 20;
+  track.style.transform = `translateX(-${currentFeatured * cardWidth}px)`;
+
+  // Update bottom description
+  desc.innerHTML = `
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <p>${featuredPosts[currentFeatured].description}</p>
+      <a href="${featuredPosts[currentFeatured].url}" class="read-more">Read More →</a>
+    </div>
+  `;
+}
+
+document.getElementById("featuredNext")?.addEventListener("click", () => {
+  if (currentFeatured < cards.length - 1) {
+    currentFeatured++;
+    updateFeatured();
+  }
+});
+
+document.getElementById("featuredPrev")?.addEventListener("click", () => {
+  if (currentFeatured > 0) {
+    currentFeatured--;
+    updateFeatured();
+  }
+});
+
+// INIT
+updateFeatured();
 // ===============================
 // PAGINATION LOGIC
 // ===============================
