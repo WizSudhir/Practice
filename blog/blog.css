@@ -234,6 +234,7 @@
   display: flex;
   gap: 20px;
   transition: transform 0.4s ease;
+  perspective: 1000px;
 }
 /* CARD */
 .featured-card-new {
@@ -242,6 +243,16 @@
   overflow: hidden;
   position: relative;
   cursor: pointer;
+  transition: all 0.4s ease;
+  transform: scale(0.9);
+  opacity: 0.6;
+}
+.featured-card-new.active {
+  transform: scale(1);
+  opacity: 1;
+}
+.featured-card-new:not(.active) {
+  transform: scale(0.9) translateY(20px);
 }
 /* IMAGE */
 .featured-card-new img {
