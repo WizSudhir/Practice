@@ -262,13 +262,13 @@
   cursor: pointer;
   transition: all 0.4s ease;
   transform: scale(0.9);
-  opacity: 0.6;
+  opacity: 1;
 }
 .featured-card-new::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent 60%);
+ background: linear-gradient(to top, rgba(0,0,0,0.35), transparent 60%);
 }
 .featured-card-new.active {
   transform: scale(1);
