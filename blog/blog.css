@@ -252,13 +252,13 @@
 .featured-track {
   gap: 20px;
   position: relative;
+  width: 100%;
   height: 100%;
   transition: transform 0.4s ease;
   perspective: 1000px;
 }
 /* CARD */
 .featured-card-new {
-  min-width: 300px;
   height: 100%;
   border-radius: 12px;
   overflow: hidden;
