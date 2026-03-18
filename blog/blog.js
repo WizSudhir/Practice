@@ -322,8 +322,10 @@ function applyFilters() {
   if (searchTerm) {
     result = result.filter(b =>
       b.title.toLowerCase().includes(searchTerm) ||
-      b.description.toLowerCase().includes(searchTerm)
-    );
+      b.description.toLowerCase().includes(searchTerm) ||
+      b.category.toLowerCase().includes(searchTerm) ||
+      (b.tags && b.tags.join(" ").toLowerCase().includes(searchTerm))
+      );
   }
 
   const totalPages = Math.ceil(result.length / POSTS_PER_PAGE);
