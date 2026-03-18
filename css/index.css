@@ -5,7 +5,7 @@
    9. HERO SECTION
 ================================= */
 /* HERO BASE */
-.hero-chaos {
+.hero-story {
   position: relative;
   min-height: 100vh;
   overflow: hidden;
@@ -24,7 +24,7 @@
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(0,0,0,0.6), rgba(0,0,0,0.9));
+  background: radial-gradient(circle at center, rgba(0,0,0,0.65), rgba(0,0,0,0.9));
   z-index: 2;
 }
 
@@ -38,86 +38,98 @@
   max-width: 600px;
 }
 
-/* CHAOS PARTICLES */
-.chaos-container {
+/* =========================
+CARDS (CHAOS)
+========================= */
+
+.cards-layer {
   position: absolute;
   inset: 0;
 }
 
-.chaos-dot {
+.issue-card {
   position: absolute;
-  width: 6px;
-  height: 6px;
-  background: rgba(239,68,68,0.6);
-  border-radius: 50%;
-  animation: floatChaos 6s infinite ease-in-out;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(239,68,68,0.4);
+  color: #fca5a5;
+  border-radius: 8px;
+  font-size: 13px;
+  backdrop-filter: blur(10px);
+  animation: floatCard 6s infinite ease-in-out;
 }
 
-/* CHAOS MOTION */
-@keyframes floatChaos {
-  0% { transform: translate(0,0); opacity: 0.6; }
-  50% { transform: translate(30px, -40px); opacity: 1; }
-  100% { transform: translate(-20px, 20px); opacity: 0.6; }
+/* RANDOM POSITIONS */
+.issue-card:nth-child(1){ top:20%; left:10%;}
+.issue-card:nth-child(2){ top:35%; left:25%;}
+.issue-card:nth-child(3){ top:60%; left:15%;}
+.issue-card:nth-child(4){ top:25%; right:20%;}
+.issue-card:nth-child(5){ top:50%; right:10%;}
+.issue-card:nth-child(6){ bottom:20%; left:40%;}
+
+/* FLOAT */
+@keyframes floatCard {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
 }
 
-/* GRID (CONTROL) */
-.grid-container {
+/* SUCCESS STATE */
+.issue-card.success {
+  border-color: rgba(34,197,94,0.5);
+  color: #86efac;
+}
+
+/* =========================
+REVENUE STACK
+========================= */
+
+.revenue-layer {
   position: absolute;
-  inset: 0;
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  opacity: 0;
-  transition: opacity 1.5s ease;
-}
-
-.grid-cell {
-  border: 1px solid rgba(255,255,255,0.03);
-}
-
-/* REVENUE STACK */
-.revenue-stack {
-  position: absolute;
+  right: 10%;
   bottom: 20%;
-  right: 15%;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 6px;
 }
 
-.stack-item {
+.revenue-item {
   color: #22c55e;
   font-size: 14px;
   opacity: 0;
   transform: translateY(20px);
-  animation: stackUp 1s forwards;
+  animation: rise 0.8s forwards;
 }
 
-/* STACK ANIMATION */
-@keyframes stackUp {
+@keyframes rise {
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-/* TEXT */
-.hero-sub {
-  margin-top: 15px;
-  color: rgba(255,255,255,0.7);
+/* =========================
+TEXT
+========================= */
+
+.hero-badge {
+  margin-bottom: 10px;
+  color: #93c5fd;
 }
 
-.hero-trust {
-  display: flex;
-  gap: 20px;
-  margin-top: 20px;
-  font-size: 14px;
+.hero-content p {
+  margin-top: 15px;
   color: rgba(255,255,255,0.7);
 }
 
 /* MOBILE */
 @media (max-width: 768px) {
-  .grid-container {
-    display: none;
+  .issue-card {
+    font-size: 11px;
+  }
+
+  .revenue-layer {
+    right: 5%;
   }
 }
 /* ===============================
