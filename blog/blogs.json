@@ -21,7 +21,7 @@
     "image": "images/blog1.jpg",
     "url": "posts/10-Common-Medical-Billing-Mistakes.html",
     "description": "Top billing errors reducing practice revenue.",
-    "featured": false
+    "featured": true
   },
   {
     "id": "billing-wizards",
