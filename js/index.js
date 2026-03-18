@@ -49,81 +49,6 @@ if (counters.length > 0) {
 }
 
 // ===============================
-// 4. OPTIMIZED PARTICLE SYSTEM
-// ===============================
-const canvas = document.getElementById("particles");
-if (canvas) {
-  const ctx = canvas.getContext("2d");
-  let particlesArray = [];
-  // High-performance check: If screen is small, we show fewer, slower dots.
-  const isMobile = window.innerWidth < 768;
-  const particleCount = isMobile ? 15 : 40; 
-  function setCanvasSize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  setCanvasSize();
-  class Particle {
-    constructor() {
-      this.init();
-    }
-    init() {
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height;
-      this.size = Math.random() * 3 + 2;
-      // Much slower speeds = smoother look on mobile
-      this.speedX = Math.random() * 0.2 - 0.1;
-      this.speedY = Math.random() * 0.2 - 0.1;
-    }
-    update() {
-      this.x += this.speedX;
-      this.y += this.speedY;
-      if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
-        this.init();
-      }
-    }
-    draw() {
-      ctx.fillStyle = "rgba(255, 255, 255, 0.6)"; 
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  }
-  function initParticles() {
-    particlesArray = [];
-    for (let i = 0; i < particleCount; i++) {
-      particlesArray.push(new Particle());
-    }
-  }
-  function animateParticles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (let i = 0; i < particlesArray.length; i++) {
-      particlesArray[i].update();
-      particlesArray[i].draw();
-    }
-    requestAnimationFrame(animateParticles);
-  }
-  initParticles();
-  animateParticles();
-
-  window.addEventListener("resize", () => {
-    setCanvasSize();
-    initParticles();
-  });
-}
-// ===============================
-// 5. PARALLAX (Disabled for Mobile Speed)
-// ===============================
-const parallaxElements = document.querySelectorAll(".parallax");
-window.addEventListener("scroll", () => {
-  if (window.innerWidth < 992) return; // This stops the heavy "jumping" effect on phones
-  const scrollY = window.scrollY;
-  parallaxElements.forEach(el => {
-    const speed = el.getAttribute("data-speed") || 0.3;
-    el.style.transform = `translateY(${scrollY * (speed * 0.1)}px)`;
-  });
-});
-// ===============================
 // 6. CONTACT STRIP REVEAL
 // ===============================
 const contactStrip = document.querySelector(".contact-strip");
@@ -151,36 +76,30 @@ this.innerText = "Read More →";
 }
 });
 });
+  
+// ===============================
+// NEW HERO
+// ===============================
+// Simulate pipeline activity
+const nodes = document.querySelectorAll(".node");
 
-function animateValue(id, start, end, duration, isCurrency=false, isPercent=false) {
-  let obj = document.getElementById(id);
-  let startTime = null;
+let current = 0;
 
-  function update(currentTime) {
-    if (!startTime) startTime = currentTime;
-    let progress = Math.min((currentTime - startTime) / duration, 1);
-    let value = Math.floor(progress * (end - start) + start);
+function updatePipeline() {
+  nodes.forEach((node, index) => {
+    node.classList.remove("active");
 
-    if (isCurrency) {
-      obj.innerText = "$" + value.toLocaleString();
-    } else if (isPercent) {
-      obj.innerText = value + "%";
+    if (index === current) {
+      node.classList.add("active");
+      node.querySelector(".node-icon").style.transform = "scale(1.2)";
     } else {
-      obj.innerText = value.toLocaleString();
+      node.querySelector(".node-icon").style.transform = "scale(1)";
     }
+  });
 
-    if (progress < 1) requestAnimationFrame(update);
-  }
-
-  requestAnimationFrame(update);
+  current = (current + 1) % nodes.length;
 }
 
-// RUN ON LOAD
-window.onload = () => {
-  animateValue("revenueCounter", 0, 1248320, 2000, true);
-  animateValue("claims", 0, 8421, 2000);
-  animateValue("denials", 0, 932, 2000);
-  animateValue("cleanRate", 0, 97, 2000, false, true);
-};
+setInterval(updatePipeline, 1500);
 
 }); // DOMContentLoaded close
