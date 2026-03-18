@@ -208,7 +208,7 @@ function updateFeatured() {
 
     else if (pos === 1) {
       // SECOND (15%)
-      card.style.left = "67%";
+      card.style.left = "68%";
       card.style.width = "15%";
       card.style.zIndex = "4";
       card.style.opacity = "0.9";
@@ -216,7 +216,7 @@ function updateFeatured() {
 
     else if (pos === 2) {
       // THIRD (8%)
-      card.style.left = "83%";
+      card.style.left = "85%";
       card.style.width = "8%";
       card.style.zIndex = "3";
       card.style.opacity = "0.7";
@@ -224,7 +224,7 @@ function updateFeatured() {
 
     else if (pos === 3) {
       // FOURTH (4%)
-      card.style.left = "92%";
+      card.style.left = "94%";
       card.style.width = "4%";
       card.style.zIndex = "2";
       card.style.opacity = "0.5";
