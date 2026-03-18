@@ -223,12 +223,12 @@ if (pos >= sizes.length) {
   });
 
   // UPDATE DESCRIPTION
-  desc.innerHTML = `
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-      <p>${featuredPosts[currentFeatured].description}</p>
-      <a href="${featuredPosts[currentFeatured].url}" class="read-more">Read More →</a>
-    </div>
-  `;
+desc.innerHTML = `
+  <div class="desc-inner">
+    <p>${featuredPosts[currentFeatured].description}</p>
+    <a href="${featuredPosts[currentFeatured].url}" class="read-more">Read More →</a>
+  </div>
+`;
 }
 
 document.getElementById("featuredNext")?.addEventListener("click", () => {
