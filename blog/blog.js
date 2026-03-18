@@ -203,7 +203,7 @@ cards.forEach((card, i) => {
 const desc = document.getElementById("featuredDescription");
 
 function updateFeatured() {
-  const sizes = [52, 20, 12, 8, 6];
+  const sizes = [48, 22, 14, 10, 6];
   const total = cards.length;
   const GAP = 16; // px gap between cards
   const containerWidth = track.offsetWidth;
@@ -217,18 +217,18 @@ function updateFeatured() {
     card.style.position = "absolute";
     card.style.top = "0";
     card.style.transition = "all 0.6s cubic-bezier(0.22,1,0.36,1)";
-    card.style.transform = `scale(${1 - pos * 0.05})`;
+    card.style.transform = `translateY(${pos * 10}px)`;
     
     // POSITION SYSTEM (Stripe style)
 let left = 0;
 
 for (let j = 0; j < sizes.length; j++) {
   if (pos === j) {
-    card.style.left = left + "px";
+    card.style.left = (left + (j * GAP)) + "px";
     card.style.width = px(sizes[j]) + "px";
     break;
   }
-  left += px(sizes[j]) + GAP;
+  left += px(sizes[j]);
 }
 // remaining stacked
 if (pos >= sizes.length) {
