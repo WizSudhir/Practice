@@ -59,168 +59,74 @@
 
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-light"></div>
-  <canvas id="particles"></canvas>
-  <div class="hero-blob blob-1"></div>
-  <div class="hero-blob blob-2"></div>
-  
-  <div class="container hero-container">
-    <div class="hero-left parallax" data-speed="2">
-      <div class="hero-badge">
-        HIPAA-Compliant Revenue Cycle Management
-      </div>
-      <h1>
-        Maximize <span class="gradient-text">Revenue</span>.<br>
-        Minimize Denials.
-      </h1>
-      <p>Elite medical billing & revenue cycle management built for modern healthcare practices.</p>
+<div class="hero-dashboard">
 
-      <div class="hero-buttons">
-        <a href="contact.html" class="btn-primary">Free Consultation</a>
-        <a href="services.html" class="btn-outline">Explore Services</a>
-      </div>
-
-      <!-- STATS -->
-      <div class="stats">
-        <div class="stat">
-          <h2><span class="counter" data-target="35">0</span>%</h2>
-          <p>Revenue Boosted</p>
-        </div>
-
-        <div class="stat">
-          <h2><span class="counter" data-target="99">0</span>%</h2>
-          <p>Claim Accuracy</p>
-        </div>
-
-        <div class="stat">
-          <h2><span class="counter" data-target="45">0</span>+</h2>
-          <p>Practices Served</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="hero-right parallax" data-speed="4">
-      <img src="images/hero-healthcare.png" alt="Healthcare revenue cycle management illustration" fetchpriority="high" loading="eager">
-    </div>
-
+  <!-- HEADER -->
+  <div class="dashboard-header">
+    <h4>Revenue Intelligence System</h4>
+    <span class="status-live">● Live</span>
   </div>
-</section>
 
+  <!-- MAIN METRIC -->
+  <div class="dashboard-main">
+    <p>Revenue Recovered</p>
+    <h2 id="revenueCounter">$0</h2>
+  </div>
 
-<!-- SERVICES -->
-<section class="section">
-  <div class="container">
-    <h2 class="section-title">Premium Revenue Cycle Services</h2>
+  <!-- METRICS -->
+  <div class="dashboard-metrics">
+    <div class="metric">
+      <span id="claims">0</span>
+      <p>Claims Analyzed</p>
+    </div>
 
-    <div class="services-grid">
+    <div class="metric">
+      <span id="denials">0</span>
+      <p>Denials Detected</p>
+    </div>
 
-      <div class="service-card reveal">
-        <img src="images/service-billing.jpg" alt="Billing and Coding">
-          <div class="service-content">
-            <h3>Billing & Coding</h3>
-                <button class="service-btn toggle-btn">
-                Read More
-                </button>
-                <div class="service-expand">
-                  <p> Accurate CPT & ICD-10 coding ensuring high clean claim rates and faster reimbursements. </p>
-                </div>
-          </div>
-      </div>
-      
-      <div class="service-card reveal">
-        <img src="images/service-eligibility.jpg" alt="Eligibility & Benefits">
-          <div class="service-content">
-            <h3>Eligibility & Benefits Verification</h3>
-                <button class="service-btn toggle-btn">
-                Read More
-                </button>
-                <div class="service-expand">
-                  <p> Real-time insurance verification to reduce front-end denials. </p>
-                </div>
-          </div>
-      </div>
-      
-      <div class="service-card reveal">
-        <img src="images/service-authorization.jpg" alt="authorization">
-          <div class="service-content">
-            <h3>Authorization</h3>
-                <button class="service-btn toggle-btn">
-                Read More
-                </button>
-                <div class="service-expand">
-                  <p> Efficient prior authorization management for faster approvals. </p>
-                </div>
-          </div>
-      </div>
-      
-      <div class="service-card reveal">
-        <img src="images/service-payment.jpg" alt="payment">
-          <div class="service-content">
-            <h3>Payment Posting</h3>
-                <button class="service-btn toggle-btn">
-                Read More
-                </button>
-                <div class="service-expand">
-                  <p> Accurate ERA & manual posting with full reconciliation. </p>
-                </div>
-          </div>
-      </div>
-      
-      <div class="service-card reveal">
-        <img src="images/service-credentialing.jpg" alt="credentialing">
-          <div class="service-content">
-            <h3>Credentialing & Enrollments</h3>
-                <button class="service-btn toggle-btn">
-                Read More
-                </button>
-                <div class="service-expand">
-                  <p> Seamless payer enrollments and credentialing management. </p>
-                </div>
-          </div>
-      </div>
-
-      <div class="service-card reveal">
-        <img src="images/service-AR.jpg" alt="AR">
-          <div class="service-content">
-            <h3>AR & Denial Management</h3>
-                <button class="service-btn toggle-btn">
-                Read More
-                </button>
-                <div class="service-expand">
-                  <p> Strategic follow-ups and denial resolution to maximize collections. </p>
-                </div>
-          </div>
-      </div>
-
-      <div class="service-card reveal">
-        <img src="images/service-scribe.jpg" alt="scribe">
-          <div class="service-content">
-            <h3>Medical Scribe</h3>
-                <button class="service-btn toggle-btn">
-                Read More
-                </button>
-                <div class="service-expand">
-                  <p> Dedicated virtual medical scribes who assist providers in real-time documentation, EHR charting, and clinical note preparation — allowing physicians to focus fully on patient care. </p>
-                </div>
-          </div>
-      </div>
-
-      <div class="service-card reveal">
-        <img src="images/service-analytics.jpg" alt="Analytics">
-          <div class="service-content">
-            <h3>Practice Analytics</h3>
-                <button class="service-btn toggle-btn">
-                Read More
-                </button>
-                <div class="service-expand">
-                  <p> Advanced financial and operational analytics dashboards that provide insights into revenue trends, denial patterns, provider productivity, and collection performance to help optimize profitability. </p>
-                </div>
-          </div>
-      </div>
-      
+    <div class="metric">
+      <span id="cleanRate">0%</span>
+      <p>Clean Claim Rate</p>
     </div>
   </div>
+
+  <!-- FLOW -->
+  <div class="dashboard-flow">
+    <span>Claim</span>
+    <span class="warning">Denial</span>
+    <span class="success">Paid</span>
+  </div>
+
+</div>
+
+<!-- WHO WE ARE -->
+<section class="home-about">
+
+<div class="container">
+<h2>Who We Are</h2>
+<p class="about-intro">
+PracticeGrid Solutions is a revenue cycle management company built to solve one critical problem in healthcare — revenue leakage.
+</p>
+<p>
+Most billing companies focus on processing claims. We focus on optimizing the entire revenue cycle — identifying inefficiencies, preventing denials, and recovering lost revenue through structured workflows and revenue intelligence.
+</p>
+<div class="about-highlights">
+<div>
+<h4>Our Mission</h4>
+<p>To help healthcare practices maximize revenue by eliminating inefficiencies and reducing preventable losses.</p>
+</div>
+<div>
+<h4>Our Approach</h4>
+<p>We combine experienced RCM specialists, structured processes, and data-driven insights to transform billing performance.</p>
+</div>
+<div>
+<h4>Our Focus</h4>
+<p>Not just billing — but building a scalable, optimized revenue system for long-term financial growth.</p>
+</div>
+
+</div>
+</div>
 </section>
 
 <!-- HIPAA SECTION -->
