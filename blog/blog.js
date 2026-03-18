@@ -188,7 +188,11 @@ const desc = document.getElementById("featuredDescription");
 function updateFeatured() {
 
   const total = cards.length;
-
+  const GAP = 16; // px gap between cards
+  const containerWidth = track.offsetWidth;
+  function px(percent) {
+  return (percent / 100) * containerWidth;
+  }
   cards.forEach((card, i) => {
     let pos = (i - currentFeatured + total) % total;
 
@@ -198,45 +202,30 @@ function updateFeatured() {
     card.style.transition = "all 0.6s cubic-bezier(0.4,0,0.2,1)";
 
     // POSITION SYSTEM (Stripe style)
-    if (pos === 0) {
-      // MAIN CARD (65%)
-      card.style.left = "0%";
-      card.style.width = "65%";
-      card.style.zIndex = "5";
-      card.style.opacity = "1";
-    }
+if (pos === 0) {
+  card.style.left = "0px";
+  card.style.width = px(65) + "px";
+}
 
-    else if (pos === 1) {
-      // SECOND (15%)
-      card.style.left = "68%";
-      card.style.width = "15%";
-      card.style.zIndex = "4";
-      card.style.opacity = "0.9";
-    }
+else if (pos === 1) {
+  card.style.left = px(65) + GAP + "px";
+  card.style.width = px(15) + "px";
+}
 
-    else if (pos === 2) {
-      // THIRD (8%)
-      card.style.left = "85%";
-      card.style.width = "8%";
-      card.style.zIndex = "3";
-      card.style.opacity = "0.7";
-    }
+else if (pos === 2) {
+  card.style.left = px(65) + px(15) + GAP * 2 + "px";
+  card.style.width = px(8) + "px";
+}
 
-    else if (pos === 3) {
-      // FOURTH (4%)
-      card.style.left = "94%";
-      card.style.width = "4%";
-      card.style.zIndex = "2";
-      card.style.opacity = "0.5";
-    }
+else if (pos === 3) {
+  card.style.left = px(65) + px(15) + px(8) + GAP * 3 + "px";
+  card.style.width = px(4) + "px";
+}
 
-    else {
-      // REMAINING STACK (1%)
-      card.style.left = "96%";
-      card.style.width = "2%";
-      card.style.zIndex = "1";
-      card.style.opacity = "0.3";
-    }
+else {
+  card.style.left = px(65) + px(15) + px(8) + px(4) + GAP * 4 + "px";
+  card.style.width = "6px"; // thin stack
+}
 
   });
 
