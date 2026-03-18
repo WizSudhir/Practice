@@ -297,6 +297,7 @@
 /* OVERLAY */
 .featured-overlay {
   width: 100%;
+  min-width: 0;
   position: absolute;
   inset: 0;
   display: flex;
@@ -340,6 +341,7 @@
   max-width: 100%;
   min-height: 46px;
   word-break: break-word;
+  overflow-wrap: break-word;
 }
 /* BOTTOM DESCRIPTION */
 .featured-description {
