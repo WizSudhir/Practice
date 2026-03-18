@@ -221,34 +221,23 @@ if (searchInput) {
   applyFilters();
 });
 }
-searchInput.addEventListener("keypress", (e) => {
+searchInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
-    currentPage = 1; // reset pagination
+    currentPage = 1;
     applyFilters();
   }
 });
 // Filter buttons
 filterButtons.forEach(btn => {
-function applyFilters() {
-  const searchTerm = searchInput.value.toLowerCase();
-  let result = blogs.filter(blog => !blog.featured);
+  btn.addEventListener("click", () => {
+    filterButtons.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
 
-  if (activeFilter !== "all") {
-    result = result.filter(b => b.category === activeFilter);
-  }
+    activeFilter = btn.dataset.filter;
+    currentPage = 1;
 
-  if (searchTerm) {
-    result = result.filter(b =>
-      b.title.toLowerCase().includes(searchTerm) ||
-      b.description.toLowerCase().includes(searchTerm)
-    );
-  }
-
-  const totalPages = Math.ceil(result.length / POSTS_PER_PAGE);
-  if (currentPage > totalPages) currentPage = 1;
-
-  renderBlogs(result);
-}
+    applyFilters();
+  });
 });
 // INITIAL RENDER
 renderBlogs(filteredBlogs);
