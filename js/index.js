@@ -6,10 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const nodes = document.querySelectorAll(".node");
   const core = document.querySelector(".core");
 
-  // ✅ NEW: SVG CONNECTIONS
-  const svg = document.querySelector(".connections");
-  let lines = [];
-
   const NODE_W = 140;
   const NODE_H = 100;
 
@@ -62,53 +58,30 @@ document.addEventListener("DOMContentLoaded", () => {
     n.order = i;
   });
 
-  // ✅ CREATE CONNECTION LINES
-  for (let i = 0; i < nodes.length - 1; i++) {
-
-    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-
-    line.setAttribute("x1", 0);
-    line.setAttribute("y1", 0);
-    line.setAttribute("x2", 0);
-    line.setAttribute("y2", 0);
-
-    svg.appendChild(line);
-
-    lines.push({
-      el: line,
-      a: nodes[i],
-      b: nodes[i + 1]
-    });
-  }
-
   // 🔥 CONTROL TIMELINE
   setTimeout(() => {
     hero.classList.add("controlled");
     core.style.display = "flex";
 
-    // ✅ NODE RESOLVE
+    // ✅ CINEMATIC SEQUENTIAL RESOLVE (organic timing)
     nodes.forEach((n, i) => {
       setTimeout(() => {
 
+        // pulse effect
         n.classList.add("resolved-active");
 
+        // 🔥 CORE → NODE ENERGY HIT
         n.querySelector(".node-inner").style.boxShadow = `
           0 0 25px rgba(59,130,246,0.6),
           0 0 50px rgba(59,130,246,0.3)
         `;
 
+        // remove pulse after animation
         setTimeout(() => {
           n.classList.remove("resolved-active");
         }, 400);
 
-      }, i * 180 + Math.random() * 120);
-    });
-
-    // ✅ ACTIVATE LINES (CINEMATIC SEQUENCE)
-    lines.forEach((l, i) => {
-      setTimeout(() => {
-        l.el.classList.add("active");
-      }, i * 220 + 300);
+      }, i * 180 + Math.random() * 120); // ✅ less robotic
     });
 
   }, 2000);
@@ -122,12 +95,14 @@ document.addEventListener("DOMContentLoaded", () => {
     nodes.forEach(n => {
 
       if (!controlled) {
+        // CHAOS MODE (unchanged)
         n.angle += n.speed;
 
         n.x = n.baseX + Math.cos(n.angle) * n.floatX;
         n.y = n.baseY + Math.sin(n.angle) * n.floatY;
 
       } else {
+        // ✅ FIXED: NO COLLAPSE → ONLY INFLUENCE + STABILIZATION
 
         const coreX = 0;
         const coreY = 0;
@@ -135,9 +110,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const dx = coreX - n.x;
         const dy = coreY - n.y;
 
+        // subtle gravitational influence
         n.x += dx * 0.015;
         n.y += dy * 0.015;
 
+        // smooth stabilization to grid
         n.x += (n.baseX - n.x) * 0.04;
         n.y += (n.baseY - n.y) * 0.04;
       }
@@ -152,6 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
       n.x = Math.max(left, Math.min(right, n.x));
       n.y = Math.max(top, Math.min(bottom, n.y));
 
+      // DEPTH
       if (!controlled) {
         n.z += Math.sin(n.angle) * 0.03;
       }
@@ -160,6 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const scale = 1 + n.z / 300;
 
+      // GLOW
       const glowStrength = n.z / 40;
       const glow = 10 + glowStrength * 30;
       const opacity = controlled ? 1 : (0.7 + glowStrength * 0.3);
@@ -180,28 +159,11 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
     });
 
-    // ✅ UPDATE LINE POSITIONS
-    lines.forEach(l => {
-
-      const rectA = l.a.getBoundingClientRect();
-      const rectB = l.b.getBoundingClientRect();
-      const parentRect = hero.getBoundingClientRect();
-
-      const x1 = rectA.left + rectA.width / 2 - parentRect.left;
-      const y1 = rectA.top + rectA.height / 2 - parentRect.top;
-
-      const x2 = rectB.left + rectB.width / 2 - parentRect.left;
-      const y2 = rectB.top + rectB.height / 2 - parentRect.top;
-
-      l.el.setAttribute("x1", x1);
-      l.el.setAttribute("y1", y1);
-      l.el.setAttribute("x2", x2);
-      l.el.setAttribute("y2", y2);
-    });
-
     requestAnimationFrame(animate);
   }
 
   animate();
 
 });
+
+
