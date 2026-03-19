@@ -9,42 +9,29 @@ document.addEventListener("DOMContentLoaded", () => {
   const NODE_W = 140;
   const NODE_H = 100;
 
-  const SIDE_PADDING = 40;
-  const TOP_PADDING = 60;
-  const BOTTOM_PADDING = 120;
-
   let width, height;
 
   /* ===============================
-     TIMELINE ENGINE
+     SYSTEM STATE
   =============================== */
-  class Timeline {
-    constructor() {
-      this.events = [];
-    }
-
-    add(start, duration, update) {
-      this.events.push({ start, end: start + duration, update });
-    }
-
-    update(time) {
-      this.events.forEach(e => {
-        if (time >= e.start && time <= e.end) {
-          const raw = (time - e.start) / (e.end - e.start);
-          const p = easeOut(raw);
-          e.update(p, time);
-        }
-      });
-    }
-  }
-
-  const easeOut = t => 1 - Math.pow(1 - t, 3);
-
-  const timeline = new Timeline();
+  let controlled = false;
   let startTime = performance.now();
 
   /* ===============================
-     LAYOUT INIT
+     PARALLAX (APPLE LEVEL)
+  =============================== */
+  let mouse = { x: 0, y: 0 };
+  let parallax = { x: 0, y: 0 };
+
+  window.addEventListener("mousemove", (e) => {
+    const rect = hero.getBoundingClientRect();
+
+    mouse.x = (e.clientX - rect.left) / rect.width - 0.5;
+    mouse.y = (e.clientY - rect.top) / rect.height - 0.5;
+  });
+
+  /* ===============================
+     LAYOUT
   =============================== */
   function updateBounds() {
     width = hero.clientWidth;
@@ -54,194 +41,184 @@ document.addEventListener("DOMContentLoaded", () => {
   updateBounds();
   window.addEventListener("resize", updateBounds);
 
-  nodes.forEach((n, i) => {
-
-    const cols = 4;
-    const rows = 2;
-
-    const usableWidth = width - SIDE_PADDING * 2;
-    const usableHeight = height - TOP_PADDING - BOTTOM_PADDING;
-
-    const zoneW = usableWidth / cols;
-    const zoneH = usableHeight / rows;
-
-    const col = i % cols;
-    const row = Math.floor(i / cols);
-
-    n.baseX = -width / 2 + SIDE_PADDING + zoneW * (col + 0.5);
-    n.baseY = -height / 2 + TOP_PADDING + zoneH * (row + 0.5);
-
-    n.angle = Math.random() * Math.PI * 2;
-    n.speed = 0.002 + Math.random() * 0.002;
-
-    n.floatX = Math.max(10, zoneW / 2 - NODE_W / 2 - 6);
-    n.floatY = Math.max(10, zoneH / 2 - NODE_H / 2 - 6);
-
-    n.z = (Math.random() - 0.5) * 40;
-
-    n.x = n.baseX;
-    n.y = n.baseY;
-
-    n.order = i;
-
-    // STATES
-    n.lockProgress = 0;
-    n.purged = false;
-    n.resolved = false;
-    n.stable = false;
-  });
-
   /* ===============================
-     🎬 TIMELINE PHASES
+     ORBITAL BASE POSITIONS
   =============================== */
+  function setupOrbit() {
 
-  // 1. CHAOS (0 → 2s)
-  timeline.add(0, 2000, () => {});
-
-  // 2. CORE IGNITION (2s → 2.6s)
-  timeline.add(2000, 600, (p) => {
-    core.style.display = "flex";
-    core.style.opacity = p;
-    core.style.transform =
-      `translate(-50%, -50%) scale(${0.6 + p * 0.4})`;
-  });
-
-  // 3. SYSTEM LOCK WAVE (2.6s → 3.2s)
-  timeline.add(2600, 600, (p) => {
-
-    core.classList.add("lock");
-
-    nodes.forEach(n => {
-
-      const dx = n.x;
-      const dy = n.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-
-      const delay = dist * 0.25;
-      const local = Math.max(0, Math.min(1, (p * 600 - delay) / 300));
-
-      if (local > 0) {
-        n.lockProgress = local;
-      }
-    });
-  });
-
-  // 4. ERROR PURGE (3.2s → 4.2s)
-  timeline.add(3200, 1000, (p) => {
+    const total = nodes.length;
 
     nodes.forEach((n, i) => {
-      if (!n.purged && p > i * 0.08) {
 
-        n.purged = true;
+      const ring = i < total / 2 ? 0 : 1;
+      const ringCount = total / 2;
+      const index = i % ringCount;
 
-        n.querySelectorAll(".error-label").forEach(el => {
-          el.classList.add("purge");
-        });
+      const angle = (index / ringCount) * Math.PI * 2;
 
-        const leak = n.querySelector(".leak");
-        if (leak) leak.style.opacity = 0;
-      }
+      const radius = ring === 0 ? 160 : 260;
+
+      n.baseRadius = radius;
+      n.baseAngle = angle;
+      n.orbitAngle = angle;
+
+      n.x = Math.cos(angle) * radius;
+      n.y = Math.sin(angle) * radius;
+
+      n.z = ring === 0 ? 25 : 10;
+
+      // chaos motion
+      n.floatX = 40 + Math.random() * 20;
+      n.floatY = 30 + Math.random() * 20;
+      n.angle = Math.random() * Math.PI * 2;
+      n.speed = 0.002 + Math.random() * 0.002;
+
+      n.locked = false;
+      n.resolved = false;
+      n.order = i;
     });
-  });
+  }
 
-  // 5. RESOLVE (4.2s → 5.5s)
-  timeline.add(4200, 1300, (p) => {
-
-    nodes.forEach((n, i) => {
-      if (!n.resolved && p > i * 0.08) {
-
-        n.resolved = true;
-        n.classList.add("resolved-active");
-      }
-    });
-  });
-
-  // 6. STABILIZE (5.5s+)
-  timeline.add(5500, 2000, () => {
-
-    hero.classList.add("controlled");
-
-    nodes.forEach(n => {
-      n.stable = true;
-    });
-  });
+  setupOrbit();
 
   /* ===============================
-     🎥 ANIMATION LOOP
+     TIMELINE
   =============================== */
+  function getTime() {
+    return performance.now() - startTime;
+  }
 
+  /* ===============================
+     ANIMATION LOOP
+  =============================== */
   function animate(now) {
 
-    const t = now - startTime;
-    timeline.update(t);
+    const t = getTime();
 
-    nodes.forEach(n => {
+    /* ===============================
+       PARALLAX SMOOTHING
+    =============================== */
+    parallax.x += (mouse.x - parallax.x) * 0.05;
+    parallax.y += (mouse.y - parallax.y) * 0.05;
 
-      // 🌀 CHAOS
-      if (!n.lockProgress) {
+    hero.style.transform = `
+      rotateX(${parallax.y * 6}deg)
+      rotateY(${parallax.x * 8}deg)
+      scale(1.02)
+    `;
+
+    /* ===============================
+       CORE TIMELINE
+    =============================== */
+
+    // CHAOS → 0–2s
+    if (t < 2000) {
+      nodes.forEach(n => {
 
         n.angle += n.speed;
 
-        n.x = n.baseX + Math.cos(n.angle) * n.floatX;
-        n.y = n.baseY + Math.sin(n.angle) * n.floatY;
-      }
+        n.x = Math.cos(n.angle) * n.floatX + n.baseRadius * 0.2;
+        n.y = Math.sin(n.angle) * n.floatY + n.baseRadius * 0.2;
+      });
+    }
 
-      // ⚡ LOCK-IN SNAP
-      if (n.lockProgress) {
+    // CORE APPEAR → 2s
+    if (t > 2000) {
+      core.style.display = "flex";
+      core.style.opacity = Math.min(1, (t - 2000) / 400);
+      core.style.transform =
+        `translate(-50%, -50%) scale(${0.7 + (t - 2000) / 2000})`;
+    }
 
-        const lp = n.lockProgress;
+    // LOCK-IN → 2.4s–3.5s
+    if (t > 2400 && !controlled) {
 
-        n.x += (n.baseX - n.x) * (0.2 + lp * 0.3);
-        n.y += (n.baseY - n.y) * (0.2 + lp * 0.3);
+      nodes.forEach((n, i) => {
 
-        if (lp < 0.3) {
-          n.z += 2;
+        const delay = i * 120;
+
+        if (t > 2400 + delay) {
+
+          const progress = Math.min(1, (t - 2400 - delay) / 600);
+
+          // magnetic snap
+          const targetX = Math.cos(n.baseAngle) * n.baseRadius;
+          const targetY = Math.sin(n.baseAngle) * n.baseRadius;
+
+          n.x += (targetX - n.x) * (0.08 + progress * 0.12);
+          n.y += (targetY - n.y) * (0.08 + progress * 0.12);
+
+          // depth punch
+          if (progress < 0.3) {
+            n.z += 1.5;
+          }
+
+          if (progress > 0.95) {
+            n.locked = true;
+          }
         }
-      }
+      });
+    }
 
-      // 🧠 STABLE MICRO MOTION
-      if (n.stable) {
+    // CONTROLLED STATE → after 3.5s
+    if (t > 3500) {
+      controlled = true;
+      hero.classList.add("controlled");
+    }
 
-        const tt = now * 0.001;
+    /* ===============================
+       CONTROLLED ORBIT SYSTEM
+    =============================== */
+    if (controlled) {
 
-        n.x += Math.sin(tt + n.order) * 0.05;
-        n.y += Math.cos(tt + n.order) * 0.05;
-      }
+      nodes.forEach(n => {
 
-      // SAFE BOUNDS
-      const left = -width / 2 + SIDE_PADDING + NODE_W / 2;
-      const right = width / 2 - SIDE_PADDING - NODE_W / 2;
+        // smooth orbit motion
+        n.orbitAngle += 0.0012;
 
-      const top = -height / 2 + TOP_PADDING + NODE_H / 2;
-      const bottom = height / 2 - BOTTOM_PADDING - NODE_H / 2;
+        const radius = n.baseRadius;
 
-      n.x = Math.max(left, Math.min(right, n.x));
-      n.y = Math.max(top, Math.min(bottom, n.y));
+        const targetX = Math.cos(n.orbitAngle) * radius;
+        const targetY = Math.sin(n.orbitAngle) * radius;
 
-      // DEPTH
-      n.z = Math.max(0, Math.min(30, n.z));
+        // smooth follow (no jitter)
+        n.x += (targetX - n.x) * 0.08;
+        n.y += (targetY - n.y) * 0.08;
+
+        // subtle breathing from core
+        const pulse = Math.sin(now * 0.002 + n.order) * 2;
+
+        n.x += (n.x / radius) * pulse;
+        n.y += (n.y / radius) * pulse;
+
+        // resolve visual
+        if (!n.resolved) {
+          n.resolved = true;
+          n.classList.add("resolved-active");
+        }
+      });
+    }
+
+    /* ===============================
+       APPLY TRANSFORMS
+    =============================== */
+    nodes.forEach(n => {
+
       const scale = 1 + n.z / 300;
 
-      // GLOW
-      const inner = n.querySelector(".node-inner");
-
-      if (n.resolved) {
-        inner.style.boxShadow =
-          `0 0 20px rgba(34,197,94,0.5),
-           0 0 40px rgba(59,130,246,0.3)`;
-      } else {
-        const glow = 10 + n.z;
-        inner.style.boxShadow =
-          `0 0 ${glow}px rgba(59,130,246,0.25),
-           0 0 ${glow * 2}px rgba(139,92,246,0.15)`;
-      }
-
-      // TRANSFORM
       n.style.transform = `
         translate3d(${n.x}px, ${n.y}px, ${n.z}px)
         translate(-50%, -50%)
         scale(${scale})
       `;
+
+      const inner = n.querySelector(".node-inner");
+
+      if (controlled) {
+        inner.style.boxShadow =
+          `0 0 20px rgba(34,197,94,0.5),
+           0 0 40px rgba(59,130,246,0.3)`;
+      }
     });
 
     requestAnimationFrame(animate);
