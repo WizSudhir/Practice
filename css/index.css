@@ -90,6 +90,11 @@ background:
   width: 8px;
   height: 8px;
 }
+.error-label svg {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+}
 /* MONEY LEAK */
 .leak {
   position: absolute;
