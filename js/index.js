@@ -76,6 +76,17 @@ document.addEventListener("DOMContentLoaded", () => {
 n.z = Math.max(0, Math.min(30, n.z));
 
       const scale = 1 + n.z / 300;
+      const glowStrength = n.z / 40;
+
+const glow = 10 + glowStrength * 30;
+const opacity = 0.7 + glowStrength * 0.3;
+
+n.style.opacity = opacity;
+
+n.querySelector(".node-inner").style.boxShadow = `
+  0 0 ${glow}px rgba(59,130,246,0.25),
+  0 0 ${glow * 2}px rgba(139,92,246,0.15)
+`;
 
       n.style.transform = `
         translate3d(${x}px, ${y}px, ${n.z}px)
