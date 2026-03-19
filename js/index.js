@@ -3,22 +3,25 @@ document.addEventListener("DOMContentLoaded", () => {
   lucide.createIcons();
 
   const hero = document.querySelector(".system-bg");
-  const navbar = document.querySelector(".navbar");
   const nodes = document.querySelectorAll(".node");
 
-  const NODE_WIDTH = 120;
-  const NODE_HEIGHT = 80;
+  const NODE_WIDTH = 160;
+  const NODE_HEIGHT = 110;
   const PADDING = 20;
 
-  let rect = hero.getBoundingClientRect();
-  let navHeight = navbar.offsetHeight;
+  let rect = {
+    width: hero.offsetWidth,
+    height: hero.offsetHeight
+  };
 
   window.addEventListener("resize", () => {
-    rect = hero.getBoundingClientRect();
-    navHeight = navbar.offsetHeight;
+    rect = {
+      width: hero.offsetWidth,
+      height: hero.offsetHeight
+    };
   });
 
-  // INITIAL POSITIONS (FIXED GRID)
+  // INITIAL POSITIONS (BETTER DISTRIBUTION)
   nodes.forEach((n, i) => {
 
     const cols = 3;
@@ -28,13 +31,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const col = i % cols;
     const row = Math.floor(i / cols);
 
-    n.x = (col - 1) * spacingX * 0.5;
-    n.y = (row - 1) * spacingY * 0.4;
+    n.x = (col - 1) * spacingX * 0.7;
+    n.y = (row - 1) * spacingY * 0.6;
     n.z = (Math.random() - 0.5) * 400;
 
-    n.vx = (Math.random() - 0.5) * 0.4;
-    n.vy = (Math.random() - 0.5) * 0.4;
-    n.vz = (Math.random() - 0.5) * 0.4;
+    n.vx = (Math.random() - 0.5) * 0.5;
+    n.vy = (Math.random() - 0.5) * 0.5;
+    n.vz = (Math.random() - 0.5) * 0.5;
   });
 
   function animate() {
@@ -52,18 +55,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const maxX = rect.width / 2 - dynamicWidth - PADDING;
       const maxY = rect.height / 2 - dynamicHeight - PADDING;
-      const topLimit = -rect.height / 2 + navHeight + PADDING;
+      const topLimit = -rect.height / 2 + PADDING;
 
-      // HARD CLAMP
-      if (n.x > maxX) n.x = maxX;
-      if (n.x < -maxX) n.x = -maxX;
-
-      if (n.y > maxY) n.y = maxY;
-      if (n.y < topLimit) n.y = topLimit;
-
-      // BOUNCE
-      if (n.x === maxX || n.x === -maxX) n.vx *= -1;
-      if (n.y === maxY || n.y === topLimit) n.vy *= -1;
+      // BOUNCE ONLY (NO CLAMP)
+      if (n.x > maxX || n.x < -maxX) n.vx *= -1;
+      if (n.y > maxY || n.y < topLimit) n.vy *= -1;
       if (n.z > 400 || n.z < -400) n.vz *= -1;
 
       const opacity = 0.5 + (n.z + 400) / 800;
