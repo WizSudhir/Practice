@@ -15,9 +15,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let width, height;
 
-  // ✅ CONTROL STATE
-  let controlled = false;
+  /* ===============================
+     TIMELINE ENGINE
+  =============================== */
+  class Timeline {
+    constructor() {
+      this.events = [];
+    }
 
+    add(start, duration, update) {
+      this.events.push({ start, end: start + duration, update });
+    }
+
+    update(time) {
+      this.events.forEach(e => {
+        if (time >= e.start && time <= e.end) {
+          const raw = (time - e.start) / (e.end - e.start);
+          const p = easeOut(raw);
+          e.update(p, time);
+        }
+      });
+    }
+  }
+
+  const easeOut = t => 1 - Math.pow(1 - t, 3);
+
+  const timeline = new Timeline();
+  let startTime = performance.now();
+
+  /* ===============================
+     LAYOUT INIT
+  =============================== */
   function updateBounds() {
     width = hero.clientWidth;
     height = hero.clientHeight;
@@ -26,7 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
   updateBounds();
   window.addEventListener("resize", updateBounds);
 
-  // INITIAL SETUP
   nodes.forEach((n, i) => {
 
     const cols = 4;
@@ -56,67 +83,129 @@ document.addEventListener("DOMContentLoaded", () => {
     n.y = n.baseY;
 
     n.order = i;
+
+    // STATES
+    n.lockProgress = 0;
+    n.purged = false;
+    n.resolved = false;
+    n.stable = false;
   });
 
-  // 🔥 CONTROL TIMELINE
-  setTimeout(() => {
-    hero.classList.add("controlled");
+  /* ===============================
+     🎬 TIMELINE PHASES
+  =============================== */
+
+  // 1. CHAOS (0 → 2s)
+  timeline.add(0, 2000, () => {});
+
+  // 2. CORE IGNITION (2s → 2.6s)
+  timeline.add(2000, 600, (p) => {
     core.style.display = "flex";
+    core.style.opacity = p;
+    core.style.transform =
+      `translate(-50%, -50%) scale(${0.6 + p * 0.4})`;
+  });
 
-    // ✅ CINEMATIC SEQUENTIAL RESOLVE (organic timing)
-    nodes.forEach((n, i) => {
-      setTimeout(() => {
+  // 3. SYSTEM LOCK WAVE (2.6s → 3.2s)
+  timeline.add(2600, 600, (p) => {
 
-        // pulse effect
-        n.classList.add("resolved-active");
-
-        // 🔥 CORE → NODE ENERGY HIT
-        n.querySelector(".node-inner").style.boxShadow = `
-          0 0 25px rgba(59,130,246,0.6),
-          0 0 50px rgba(59,130,246,0.3)
-        `;
-
-        // remove pulse after animation
-        setTimeout(() => {
-          n.classList.remove("resolved-active");
-        }, 400);
-
-      }, i * 180 + Math.random() * 120); // ✅ less robotic
-    });
-
-  }, 2000);
-
-  setTimeout(() => {
-    controlled = true;
-  }, 3500);
-
-  function animate() {
+    core.classList.add("lock");
 
     nodes.forEach(n => {
 
-      if (!controlled) {
-        // CHAOS MODE (unchanged)
+      const dx = n.x;
+      const dy = n.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+
+      const delay = dist * 0.25;
+      const local = Math.max(0, Math.min(1, (p * 600 - delay) / 300));
+
+      if (local > 0) {
+        n.lockProgress = local;
+      }
+    });
+  });
+
+  // 4. ERROR PURGE (3.2s → 4.2s)
+  timeline.add(3200, 1000, (p) => {
+
+    nodes.forEach((n, i) => {
+      if (!n.purged && p > i * 0.08) {
+
+        n.purged = true;
+
+        n.querySelectorAll(".error-label").forEach(el => {
+          el.classList.add("purge");
+        });
+
+        const leak = n.querySelector(".leak");
+        if (leak) leak.style.opacity = 0;
+      }
+    });
+  });
+
+  // 5. RESOLVE (4.2s → 5.5s)
+  timeline.add(4200, 1300, (p) => {
+
+    nodes.forEach((n, i) => {
+      if (!n.resolved && p > i * 0.08) {
+
+        n.resolved = true;
+        n.classList.add("resolved-active");
+      }
+    });
+  });
+
+  // 6. STABILIZE (5.5s+)
+  timeline.add(5500, 2000, () => {
+
+    hero.classList.add("controlled");
+
+    nodes.forEach(n => {
+      n.stable = true;
+    });
+  });
+
+  /* ===============================
+     🎥 ANIMATION LOOP
+  =============================== */
+
+  function animate(now) {
+
+    const t = now - startTime;
+    timeline.update(t);
+
+    nodes.forEach(n => {
+
+      // 🌀 CHAOS
+      if (!n.lockProgress) {
+
         n.angle += n.speed;
 
         n.x = n.baseX + Math.cos(n.angle) * n.floatX;
         n.y = n.baseY + Math.sin(n.angle) * n.floatY;
+      }
 
-      } else {
-        // ✅ FIXED: NO COLLAPSE → ONLY INFLUENCE + STABILIZATION
+      // ⚡ LOCK-IN SNAP
+      if (n.lockProgress) {
 
-        const coreX = 0;
-        const coreY = 0;
+        const lp = n.lockProgress;
 
-        const dx = coreX - n.x;
-        const dy = coreY - n.y;
+        n.x += (n.baseX - n.x) * (0.2 + lp * 0.3);
+        n.y += (n.baseY - n.y) * (0.2 + lp * 0.3);
 
-        // subtle gravitational influence
-        n.x += dx * 0.015;
-        n.y += dy * 0.015;
+        if (lp < 0.3) {
+          n.z += 2;
+        }
+      }
 
-        // smooth stabilization to grid
-        n.x += (n.baseX - n.x) * 0.04;
-        n.y += (n.baseY - n.y) * 0.04;
+      // 🧠 STABLE MICRO MOTION
+      if (n.stable) {
+
+        const tt = now * 0.001;
+
+        n.x += Math.sin(tt + n.order) * 0.05;
+        n.y += Math.cos(tt + n.order) * 0.05;
       }
 
       // SAFE BOUNDS
@@ -130,28 +219,24 @@ document.addEventListener("DOMContentLoaded", () => {
       n.y = Math.max(top, Math.min(bottom, n.y));
 
       // DEPTH
-      if (!controlled) {
-        n.z += Math.sin(n.angle) * 0.03;
-      }
-
       n.z = Math.max(0, Math.min(30, n.z));
-
       const scale = 1 + n.z / 300;
 
       // GLOW
-      const glowStrength = n.z / 40;
-      const glow = 10 + glowStrength * 30;
-      const opacity = controlled ? 1 : (0.7 + glowStrength * 0.3);
+      const inner = n.querySelector(".node-inner");
 
-      if (!n.matches(':hover')) {
-        n.style.opacity = opacity;
+      if (n.resolved) {
+        inner.style.boxShadow =
+          `0 0 20px rgba(34,197,94,0.5),
+           0 0 40px rgba(59,130,246,0.3)`;
+      } else {
+        const glow = 10 + n.z;
+        inner.style.boxShadow =
+          `0 0 ${glow}px rgba(59,130,246,0.25),
+           0 0 ${glow * 2}px rgba(139,92,246,0.15)`;
       }
 
-      n.querySelector(".node-inner").style.boxShadow = controlled
-        ? `0 0 20px rgba(34,197,94,0.4), 0 0 40px rgba(59,130,246,0.25)`
-        : `0 0 ${glow}px rgba(59,130,246,0.25),
-           0 0 ${glow * 2}px rgba(139,92,246,0.15)`;
-
+      // TRANSFORM
       n.style.transform = `
         translate3d(${n.x}px, ${n.y}px, ${n.z}px)
         translate(-50%, -50%)
@@ -162,8 +247,6 @@ document.addEventListener("DOMContentLoaded", () => {
     requestAnimationFrame(animate);
   }
 
-  animate();
+  requestAnimationFrame(animate);
 
 });
-
-
