@@ -3,60 +3,56 @@ document.addEventListener("DOMContentLoaded", () => {
   lucide.createIcons();
 
   const hero = document.querySelector(".hero-system");
-  const navbar = document.querySelector(".navbar");
   const nodes = document.querySelectorAll(".node");
 
-  const NODE_WIDTH = 150;
-  const NODE_HEIGHT = 100;
+  const PADDING = 40;
 
-  const PADDING = 30;
-
-  let rect, navHeight;
+  let width, height;
 
   function updateBounds() {
-    rect = {
-      width: hero.offsetWidth,
-      height: hero.offsetHeight
-    };
-    navHeight = navbar.offsetHeight;
+    width = hero.clientWidth;
+    height = hero.clientHeight;
   }
 
   updateBounds();
   window.addEventListener("resize", updateBounds);
 
-  // ✅ SAFE ZONE (THIS IS THE KEY FIX)
-  function getLimits(scale) {
-    const w = NODE_WIDTH * scale;
-    const h = NODE_HEIGHT * scale;
-
+  // ✅ SAFE BOX (TRUE CENTER SYSTEM)
+  function getLimits() {
     return {
-      left: -rect.width / 2 + w / 2 + PADDING,
-      right: rect.width / 2 - w / 2 - PADDING,
-      top: -rect.height / 2 + navHeight + h / 2 + PADDING,
-      bottom: rect.height / 2 - h / 2 - PADDING
+      left: -width / 2 + PADDING,
+      right: width / 2 - PADDING,
+      top: -height / 2 + PADDING,
+      bottom: height / 2 - PADDING
     };
   }
 
-  // ✅ INITIAL POSITIONS (ALL VISIBLE GUARANTEED)
+  // ✅ PERFECT GRID (ALL 8 ALWAYS VISIBLE)
   nodes.forEach((n, i) => {
 
     const cols = 4;
-    const spacingX = rect.width / (cols + 1);
-    const spacingY = rect.height / 3;
+    const rows = 2;
 
     const col = i % cols;
     const row = Math.floor(i / cols);
 
-    n.x = (col - 1.5) * spacingX * 0.6;
-    n.y = (row - 0.5) * spacingY * 0.5;
-    n.z = (Math.random() - 0.5) * 300;
+    const xSpacing = width / (cols + 1);
+    const ySpacing = height / (rows + 1);
 
-    n.vx = (Math.random() - 0.5) * 0.6;
-    n.vy = (Math.random() - 0.5) * 0.6;
-    n.vz = (Math.random() - 0.5) * 0.4;
+    n.x = (col + 1) * xSpacing - width / 2;
+    n.y = (row + 1) * ySpacing - height / 2;
+
+    n.z = (Math.random() - 0.5) * 200;
+
+    // smoother controlled movement
+    n.vx = (Math.random() - 0.5) * 0.5;
+    n.vy = (Math.random() - 0.5) * 0.5;
+    n.vz = (Math.random() - 0.5) * 0.3;
   });
 
   function animate() {
+
+    const limits = getLimits();
 
     nodes.forEach(n => {
 
@@ -65,15 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
       n.y += n.vy;
       n.z += n.vz;
 
-      // ✅ CLAMP DEPTH (PREVENT DISAPPEAR)
-      if (n.z > 300) n.z = 300;
-      if (n.z < -300) n.z = -300;
-
-      const scale = Math.max(0.6, 1 + n.z / 800);
-
-      const limits = getLimits(scale);
-
-      // ✅ HARD POSITION CLAMP (NOT JUST BOUNCE)
+      // ✅ HARD BOUNDS (PREVENT ESCAPE COMPLETELY)
       if (n.x > limits.right) {
         n.x = limits.right;
         n.vx *= -1;
@@ -94,13 +82,14 @@ document.addEventListener("DOMContentLoaded", () => {
         n.vy *= -1;
       }
 
-      // DEPTH BOUNCE
-      if (n.z === 300 || n.z === -300) {
-        n.vz *= -1;
-      }
+      // DEPTH CONTROL (NO DISAPPEAR)
+      if (n.z > 200) n.z = 200;
+      if (n.z < -200) n.z = -200;
 
-      // ✅ SAFE OPACITY
-      const opacity = Math.max(0.4, Math.min(1, 0.6 + (n.z + 300) / 600));
+      const scale = 1 + n.z / 600; // softer depth
+
+      // ALWAYS VISIBLE
+      const opacity = 0.8;
 
       n.style.transform = `
         translate3d(${n.x}px, ${n.y}px, ${n.z}px)
