@@ -89,10 +89,12 @@ const revenue = document.getElementById("revenue");
 
 const center = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
 
-// RANDOM START POSITIONS
-nodes.forEach(n => {
-  n.style.left = Math.random() * 80 + "%";
-  n.style.top = Math.random() * 70 + "%";
+// controlled orbit motion
+nodes.forEach((n, i) => {
+  const angle = (i / nodes.length) * Math.PI * 2;
+  const radius = 250 + Math.random() * 100;
+  n.dataset.angle = angle;
+  n.dataset.radius = radius;
 });
 nodes.forEach(n => {
   const depth = Math.ceil(Math.random() * 3);
@@ -115,6 +117,50 @@ for(let i=0;i<nodes.length-1;i++){
   const b = nodes[i+1].getBoundingClientRect();
 
   drawLine(a.left,a.top,b.left,b.top);
+}
+// continuous 3D motion
+function animate3D() {
+  nodes.forEach(n => {
+    let angle = parseFloat(n.dataset.angle);
+    const radius = parseFloat(n.dataset.radius);
+
+    angle += 0.002; // slow motion
+    n.dataset.angle = angle;
+
+    const x = Math.cos(angle) * radius;
+    const y = Math.sin(angle) * radius;
+    const z = Math.sin(angle) * 200;
+
+    n.style.transform = `
+      translate3d(${x}px, ${y}px, ${z}px)
+    `;
+  });
+
+  requestAnimationFrame(animate3D);
+}
+animate3D();
+
+// CHAOS STATE CONTROL
+const hero = document.querySelector(".hero-system");
+
+function run() {
+
+  // CHAOS MODE ON
+  hero.classList.add("chaos");
+
+  nodes.forEach(n=>{
+    n.style.color = "#fca5a5";
+  });
+
+  // FIX MODE
+  setTimeout(()=>{
+    hero.classList.remove("chaos");
+
+    nodes.forEach(n=>{
+      n.style.color = "#22c55e";
+    });
+
+  },5000);
 }
 // MAIN STORY
 function run(){
