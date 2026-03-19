@@ -319,6 +319,10 @@ z-index: 2;
   opacity: 0;
   transform: translateY(6px);
 }
+.node.resolved-active {
+  transform: scale(1.08);
+  transition: transform 0.4s ease;
+}
 .node.resolved-active .resolved {
   opacity: 1;
   transform: translateY(0);
