@@ -24,7 +24,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   updateBounds();
-  window.addEventListener("resize", updateBounds);
+  window.addEventListener("resize", () => {
+    updateBounds();
+    resetConnections();
+  });
 
   // ===============================
   // POSITION SETUP
@@ -59,13 +62,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ===============================
-  // CONNECTION SYSTEM (FINAL FIX)
+  // CONNECTION SYSTEM (FIXED)
   // ===============================
   function drawConnection(node) {
 
     const coreRect = core.getBoundingClientRect();
-    const nodeInner = node.querySelector(".node-inner");
-    const nodeRect = nodeInner.getBoundingClientRect();
+    const nodeRect = node.getBoundingClientRect(); // ✅ FIXED
     const svgRect = svg.getBoundingClientRect();
 
     const coreCenter = {
@@ -86,43 +88,49 @@ document.addEventListener("DOMContentLoaded", () => {
     const nx = dx / dist;
     const ny = dy / dist;
 
-    // 🔵 CORE EDGE (CIRCLE)
+    // ===== CORE EDGE (circle)
     const coreRadius = coreRect.width / 2;
 
     const coreEdge = {
-      x: coreCenter.x + nx * (coreRadius + 1),
-      y: coreCenter.y + ny * (coreRadius + 1)
+      x: coreCenter.x + nx * coreRadius,
+      y: coreCenter.y + ny * coreRadius
     };
 
-    // 🟩 NODE EDGE (RAY-BOX INTERSECTION)
+    // ===== NODE EDGE (accurate box intersection)
     const halfW = nodeRect.width / 2;
     const halfH = nodeRect.height / 2;
 
-    let tx = Infinity;
-    let ty = Infinity;
+    const absNx = Math.abs(nx);
+    const absNy = Math.abs(ny);
 
-    if (nx !== 0) tx = halfW / Math.abs(nx);
-    if (ny !== 0) ty = halfH / Math.abs(ny);
+    let t;
 
-    const t = Math.min(tx, ty);
+    if (absNx * halfH > absNy * halfW) {
+      t = halfW / absNx;
+    } else {
+      t = halfH / absNy;
+    }
+
+    // small visual offset for perfect edge alignment
+    const EDGE_OFFSET = 1.5;
 
     const nodeEdge = {
-      x: nodeCenter.x - nx * (t + 1),
-      y: nodeCenter.y - ny * (t + 1)
+      x: nodeCenter.x - nx * (t - EDGE_OFFSET),
+      y: nodeCenter.y - ny * (t - EDGE_OFFSET)
     };
 
-    // 🔥 PIXEL SNAP (CRITICAL)
+    // ===== PIXEL PERFECT SNAP
     const start = {
-      x: Math.round(coreEdge.x - svgRect.left),
-      y: Math.round(coreEdge.y - svgRect.top)
+      x: Math.floor(coreEdge.x - svgRect.left) + 0.5,
+      y: Math.floor(coreEdge.y - svgRect.top) + 0.5
     };
 
     const end = {
-      x: Math.round(nodeEdge.x - svgRect.left),
-      y: Math.round(nodeEdge.y - svgRect.top)
+      x: Math.floor(nodeEdge.x - svgRect.left) + 0.5,
+      y: Math.floor(nodeEdge.y - svgRect.top) + 0.5
     };
 
-    const midX = Math.round(start.x + (end.x - start.x) * 0.5);
+    const midX = Math.floor(start.x + (end.x - start.x) * 0.5) + 0.5;
 
     const d = `
       M ${start.x} ${start.y}
@@ -152,8 +160,6 @@ document.addEventListener("DOMContentLoaded", () => {
       </defs>
     `;
   }
-
-  window.addEventListener("resize", resetConnections);
 
   // ===============================
   // STABILITY DETECTION
@@ -203,15 +209,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
     waitForStabilization(() => {
 
-      // 🔒 FREEZE SYSTEM
+      // 🔒 FREEZE SYSTEM (CRITICAL FIX)
       frozen = true;
 
       nodes.forEach(n => {
         n.x = n.baseX;
         n.y = n.baseY;
+
+        // ✅ normalize transform BEFORE measuring
+        n.style.transform = `
+          translate3d(${n.baseX}px, ${n.baseY}px, 0)
+          translate(-50%, -50%)
+          scale(1)
+        `;
       });
 
-      // 🔥 VISUAL BUFFER (CRITICAL)
+      // slight delay to allow layout settle
       setTimeout(() => {
 
         requestAnimationFrame(() => {
@@ -222,7 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
               const path = drawConnection(n);
 
-              path.getBoundingClientRect();
+              path.getBoundingClientRect(); // force paint
               path.classList.add("active");
 
               setTimeout(() => {
@@ -242,7 +255,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         });
 
-      }, 600);
+      }, 300);
 
     });
 
