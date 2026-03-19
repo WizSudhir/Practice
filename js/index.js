@@ -14,24 +14,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const BOTTOM_PADDING = 120;
 
   let width, height;
+
+  // ✅ CONTROL STATE
   let controlled = false;
-  let startTime = performance.now();
 
-  /* ===============================
-     PARALLAX (SMOOTH + PREMIUM)
-  =============================== */
-  let mouse = { x: 0, y: 0 };
-  let parallax = { x: 0, y: 0 };
-
-  window.addEventListener("mousemove", (e) => {
-    const rect = hero.getBoundingClientRect();
-    mouse.x = (e.clientX - rect.left) / rect.width - 0.5;
-    mouse.y = (e.clientY - rect.top) / rect.height - 0.5;
-  });
-
-  /* ===============================
-     LAYOUT
-  =============================== */
   function updateBounds() {
     width = hero.clientWidth;
     height = hero.clientHeight;
@@ -40,15 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
   updateBounds();
   window.addEventListener("resize", updateBounds);
 
-  /* ===============================
-     SETUP (CHAOS + ORBIT)
-  =============================== */
-  const total = nodes.length;
-  const half = Math.ceil(total / 2);
-
+  // INITIAL SETUP
   nodes.forEach((n, i) => {
 
-    /* ---------- CHAOS GRID ---------- */
     const cols = 4;
     const rows = 2;
 
@@ -64,142 +44,113 @@ document.addEventListener("DOMContentLoaded", () => {
     n.baseX = -width / 2 + SIDE_PADDING + zoneW * (col + 0.5);
     n.baseY = -height / 2 + TOP_PADDING + zoneH * (row + 0.5);
 
-    n.floatX = Math.max(10, zoneW / 2 - NODE_W / 2 - 6);
-    n.floatY = Math.max(10, zoneH / 2 - NODE_H / 2 - 6);
-
     n.angle = Math.random() * Math.PI * 2;
     n.speed = 0.002 + Math.random() * 0.002;
 
-    /* ---------- ORBIT (FIXED DISTRIBUTION) ---------- */
-    const ring = i < half ? 0 : 1;
-    const ringCount = ring === 0 ? half : total - half;
-    const index = ring === 0 ? i : i - half;
+    n.floatX = Math.max(10, zoneW / 2 - NODE_W / 2 - 6);
+    n.floatY = Math.max(10, zoneH / 2 - NODE_H / 2 - 6);
 
-    // 🔥 KEY: offset outer ring to prevent stacking
-    const offset = ring === 1 ? (Math.PI / ringCount) : 0;
-
-    n.baseAngle = (index / ringCount) * Math.PI * 2 + offset;
-
-    n.baseRadius = ring === 0 ? 170 : 260;
-
-    n.z = ring === 0 ? 25 : 10;
-
-    n.order = i;
+    n.z = (Math.random() - 0.5) * 40;
 
     n.x = n.baseX;
     n.y = n.baseY;
 
-    n.resolved = false;
+    n.order = i;
   });
 
-  function getTime() {
-    return performance.now() - startTime;
-  }
+  // 🔥 CONTROL TIMELINE
+  setTimeout(() => {
+    hero.classList.add("controlled");
+    core.style.display = "flex";
 
-  /* ===============================
-     ANIMATION LOOP
-  =============================== */
-  function animate(now) {
-
-    const t = getTime();
-
-    /* ===== PARALLAX ===== */
-    parallax.x += (mouse.x - parallax.x) * 0.05;
-    parallax.y += (mouse.y - parallax.y) * 0.05;
-
-    hero.style.transform = `
-      rotateX(${parallax.y * 6}deg)
-      rotateY(${parallax.x * 8}deg)
-      scale(1.02)
-    `;
-
+    // ✅ CINEMATIC SEQUENTIAL RESOLVE (organic timing)
     nodes.forEach((n, i) => {
+      setTimeout(() => {
 
-      /* ===============================
-         🌀 CHAOS
-      =============================== */
-      if (t < 2000) {
+        // pulse effect
+        n.classList.add("resolved-active");
 
+        // 🔥 CORE → NODE ENERGY HIT
+        n.querySelector(".node-inner").style.boxShadow = `
+          0 0 25px rgba(59,130,246,0.6),
+          0 0 50px rgba(59,130,246,0.3)
+        `;
+
+        // remove pulse after animation
+        setTimeout(() => {
+          n.classList.remove("resolved-active");
+        }, 400);
+
+      }, i * 180 + Math.random() * 120); // ✅ less robotic
+    });
+
+  }, 2000);
+
+  setTimeout(() => {
+    controlled = true;
+  }, 3500);
+
+  function animate() {
+
+    nodes.forEach(n => {
+
+      if (!controlled) {
+        // CHAOS MODE (unchanged)
         n.angle += n.speed;
 
         n.x = n.baseX + Math.cos(n.angle) * n.floatX;
         n.y = n.baseY + Math.sin(n.angle) * n.floatY;
+
+      } else {
+        // ✅ FIXED: NO COLLAPSE → ONLY INFLUENCE + STABILIZATION
+
+        const coreX = 0;
+        const coreY = 0;
+
+        const dx = coreX - n.x;
+        const dy = coreY - n.y;
+
+        // subtle gravitational influence
+        n.x += dx * 0.015;
+        n.y += dy * 0.015;
+
+        // smooth stabilization to grid
+        n.x += (n.baseX - n.x) * 0.04;
+        n.y += (n.baseY - n.y) * 0.04;
       }
 
-      /* ===============================
-         ⚡ SNAP TO ORBIT
-      =============================== */
-      else if (t < 3200) {
+      // SAFE BOUNDS
+      const left = -width / 2 + SIDE_PADDING + NODE_W / 2;
+      const right = width / 2 - SIDE_PADDING - NODE_W / 2;
 
-        const progress = Math.min(1, (t - 2000) / 1200);
+      const top = -height / 2 + TOP_PADDING + NODE_H / 2;
+      const bottom = height / 2 - BOTTOM_PADDING - NODE_H / 2;
 
-        const targetX = Math.cos(n.baseAngle) * n.baseRadius;
-        const targetY = Math.sin(n.baseAngle) * n.baseRadius;
+      n.x = Math.max(left, Math.min(right, n.x));
+      n.y = Math.max(top, Math.min(bottom, n.y));
 
-        n.x += (targetX - n.x) * (0.12 + progress * 0.2);
-        n.y += (targetY - n.y) * (0.12 + progress * 0.2);
+      // DEPTH
+      if (!controlled) {
+        n.z += Math.sin(n.angle) * 0.03;
       }
 
-      /* ===============================
-         🧠 PERFECT ORBIT
-      =============================== */
-      else {
+      n.z = Math.max(0, Math.min(30, n.z));
 
-        controlled = true;
-
-        const time = (t - 3200) * 0.0006;
-
-        const speedFactor = n.baseRadius === 170 ? 0.8 : 1.2;
-
-        const angle = n.baseAngle + time * speedFactor;
-
-        n.x = Math.cos(angle) * n.baseRadius;
-        n.y = Math.sin(angle) * n.baseRadius;
-
-        /* ===== RESOLVE STATE ===== */
-        if (!n.resolved) {
-
-          const delay = i * 120;
-
-          if (t > 3400 + delay) {
-
-            n.resolved = true;
-
-            // hide errors
-            n.querySelectorAll(".error-label").forEach(el => {
-              el.style.opacity = "0";
-            });
-
-            // stop leak
-            const leak = n.querySelector(".leak");
-            if (leak) leak.style.opacity = "0";
-
-            // show resolved
-            n.querySelectorAll(".resolved").forEach(el => {
-              el.style.opacity = "1";
-              el.style.transform = "translateY(0)";
-            });
-
-            // glow upgrade
-            n.querySelector(".node-inner").style.boxShadow =
-              `0 0 20px rgba(34,197,94,0.6),
-               0 0 40px rgba(59,130,246,0.3)`;
-          }
-        }
-      }
-
-      /* ===============================
-         CORE APPEAR
-      =============================== */
-      if (t > 2000) {
-        core.style.display = "flex";
-        core.style.opacity = Math.min(1, (t - 2000) / 400);
-      }
-
-      /* ===============================
-         TRANSFORM
-      =============================== */
       const scale = 1 + n.z / 300;
+
+      // GLOW
+      const glowStrength = n.z / 40;
+      const glow = 10 + glowStrength * 30;
+      const opacity = controlled ? 1 : (0.7 + glowStrength * 0.3);
+
+      if (!n.matches(':hover')) {
+        n.style.opacity = opacity;
+      }
+
+      n.querySelector(".node-inner").style.boxShadow = controlled
+        ? `0 0 20px rgba(34,197,94,0.4), 0 0 40px rgba(59,130,246,0.25)`
+        : `0 0 ${glow}px rgba(59,130,246,0.25),
+           0 0 ${glow * 2}px rgba(139,92,246,0.15)`;
 
       n.style.transform = `
         translate3d(${n.x}px, ${n.y}px, ${n.z}px)
@@ -211,6 +162,8 @@ document.addEventListener("DOMContentLoaded", () => {
     requestAnimationFrame(animate);
   }
 
-  requestAnimationFrame(animate);
+  animate();
 
 });
+
+
