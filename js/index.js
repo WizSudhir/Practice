@@ -5,29 +5,27 @@ document.addEventListener("DOMContentLoaded", () => {
   const hero = document.querySelector(".hero-system");
   const nodes = document.querySelectorAll(".node");
 
-  const PADDING = 40;
+  const PADDING = 30;
 
-  let width, height;
+  let rect;
 
   function updateBounds() {
-    width = hero.clientWidth;
-    height = hero.clientHeight;
+    rect = hero.getBoundingClientRect();
   }
 
   updateBounds();
   window.addEventListener("resize", updateBounds);
 
-  // ✅ SAFE BOX (TRUE CENTER SYSTEM)
-  function getLimits() {
+  // ✅ GET REAL NODE SIZE (CRITICAL FIX)
+  function getNodeSize(n, scale) {
+    const r = n.getBoundingClientRect();
     return {
-      left: -width / 2 + PADDING,
-      right: width / 2 - PADDING,
-      top: -height / 2 + PADDING,
-      bottom: height / 2 - PADDING
+      w: r.width * scale,
+      h: r.height * scale
     };
   }
 
-  // ✅ PERFECT GRID (ALL 8 ALWAYS VISIBLE)
+  // ✅ INITIAL GRID (ALWAYS VISIBLE)
   nodes.forEach((n, i) => {
 
     const cols = 4;
@@ -36,23 +34,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const col = i % cols;
     const row = Math.floor(i / cols);
 
-    const xSpacing = width / (cols + 1);
-    const ySpacing = height / (rows + 1);
+    const xSpacing = rect.width / (cols + 1);
+    const ySpacing = rect.height / (rows + 1);
 
-    n.x = (col + 1) * xSpacing - width / 2;
-    n.y = (row + 1) * ySpacing - height / 2;
-
+    n.x = (col + 1) * xSpacing - rect.width / 2;
+    n.y = (row + 1) * ySpacing - rect.height / 2;
     n.z = (Math.random() - 0.5) * 200;
 
-    // smoother controlled movement
-    n.vx = (Math.random() - 0.5) * 0.5;
-    n.vy = (Math.random() - 0.5) * 0.5;
+    n.vx = (Math.random() - 0.5) * 0.6;
+    n.vy = (Math.random() - 0.5) * 0.6;
     n.vz = (Math.random() - 0.5) * 0.3;
   });
 
   function animate() {
-
-    const limits = getLimits();
 
     nodes.forEach(n => {
 
@@ -61,43 +55,51 @@ document.addEventListener("DOMContentLoaded", () => {
       n.y += n.vy;
       n.z += n.vz;
 
-      // ✅ HARD BOUNDS (PREVENT ESCAPE COMPLETELY)
-      if (n.x > limits.right) {
-        n.x = limits.right;
-        n.vx *= -1;
-      }
-
-      if (n.x < limits.left) {
-        n.x = limits.left;
-        n.vx *= -1;
-      }
-
-      if (n.y > limits.bottom) {
-        n.y = limits.bottom;
-        n.vy *= -1;
-      }
-
-      if (n.y < limits.top) {
-        n.y = limits.top;
-        n.vy *= -1;
-      }
-
-      // DEPTH CONTROL (NO DISAPPEAR)
+      // LIMIT DEPTH (NO DISAPPEAR)
       if (n.z > 200) n.z = 200;
-      if (n.z < -200) n.z = -200;
+      if (n.z < -150) n.z = -150;
 
-      const scale = 1 + n.z / 600; // softer depth
+      const scale = Math.max(0.75, 1 + n.z / 600);
+
+      const size = getNodeSize(n, scale);
+
+      // ✅ TRUE SAFE BOUNDS (FIXED)
+      const left = -rect.width / 2 + size.w / 2 + PADDING;
+      const right = rect.width / 2 - size.w / 2 - PADDING;
+      const top = -rect.height / 2 + size.h / 2 + PADDING;
+      const bottom = rect.height / 2 - size.h / 2 - PADDING;
+
+      // HARD CLAMP + BOUNCE
+      if (n.x > right) {
+        n.x = right;
+        n.vx *= -1;
+      }
+      if (n.x < left) {
+        n.x = left;
+        n.vx *= -1;
+      }
+
+      if (n.y > bottom) {
+        n.y = bottom;
+        n.vy *= -1;
+      }
+      if (n.y < top) {
+        n.y = top;
+        n.vy *= -1;
+      }
+
+      if (n.z === 200 || n.z === -150) {
+        n.vz *= -1;
+      }
 
       // ALWAYS VISIBLE
-      const opacity = 0.8;
+      n.style.opacity = 1;
 
       n.style.transform = `
         translate3d(${n.x}px, ${n.y}px, ${n.z}px)
         translate(-50%, -50%)
         scale(${scale})
       `;
-
-      n.style.opacity = opacity;
     });
 
     requestAnimationFrame(animate);
