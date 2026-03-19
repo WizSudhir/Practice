@@ -201,12 +201,11 @@ const issues = {
 };
 
 nodes.forEach(n => {
-  const label = n.querySelector(".error-label");
+  const label = n.querySelector(".error-label").innerText = "Resolved ✓";
   if(label){
     label.innerText = issues[n.dataset.type];
   }
 });
-n.querySelector(".error-label").innerText = "Resolved ✓";
 run();
 setInterval(run,9000);
 
