@@ -66,7 +66,7 @@ background:
   color: #e2e8f0;
   transform-style: preserve-3d;
   will-change: transform;
-  z-index: 2;
+  z-index: 3;
   overflow: hidden;           /* ✅ prevent text overflow */
 }
 .node-inner {
@@ -150,6 +150,7 @@ background:
   inset: 0;
   background:
     linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 35%, transparent 70%);
+   z-index: 1;
 }
 /* CONTENT */
 .hero-content {
