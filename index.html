@@ -59,25 +59,36 @@
 
 
 <!-- HERO -->
-<section class="hero-story">
+<section class="hero-network">
 
-  <!-- BACKGROUND STORY -->
-  <div class="hero-bg">
+  <!-- BACKGROUND SYSTEM -->
+  <div class="network-bg">
 
-    <!-- CHAOS / PROBLEM CARDS -->
-    <div class="cards-layer" id="cardsLayer">
+    <!-- SVG NETWORK -->
+    <svg class="network-svg" viewBox="0 0 1000 600">
 
-      <div class="issue-card">⚠ Eligibility Not Verified</div>
-      <div class="issue-card">⚠ Missing Authorization</div>
-      <div class="issue-card">⚠ Incorrect CPT Code</div>
-      <div class="issue-card">⚠ Claim Denied</div>
-      <div class="issue-card">⚠ No AR Follow-Up</div>
-      <div class="issue-card">⚠ Appeal Pending</div>
+      <!-- CONNECTION LINES -->
+      <line x1="150" y1="200" x2="350" y2="150" class="link"/>
+      <line x1="350" y1="150" x2="550" y2="250" class="link"/>
+      <line x1="550" y1="250" x2="750" y2="200" class="link"/>
+      <line x1="350" y1="150" x2="350" y2="350" class="link"/>
+      <line x1="550" y1="250" x2="550" y2="400" class="link"/>
 
-    </div>
+    </svg>
 
-    <!-- REVENUE STACK -->
-    <div class="revenue-layer" id="revenueLayer"></div>
+    <!-- NODES -->
+    <div class="node" data-label="Eligibility" style="top:200px; left:150px;"></div>
+    <div class="node" data-label="Authorization" style="top:150px; left:350px;"></div>
+    <div class="node" data-label="Coding" style="top:250px; left:550px;"></div>
+    <div class="node" data-label="Claims" style="top:200px; left:750px;"></div>
+    <div class="node" data-label="AR" style="top:350px; left:350px;"></div>
+    <div class="node" data-label="Payment" style="top:400px; left:550px;"></div>
+
+    <!-- REVENUE FLOW -->
+    <div class="flow"></div>
+
+    <!-- STACK -->
+    <div class="revenue-stack" id="revenueStack"></div>
 
   </div>
 
@@ -86,37 +97,14 @@
 
   <!-- CONTENT -->
   <div class="container hero-content">
-
-    <div class="hero-inner">
-
-      <div class="hero-badge">Revenue Cycle Intelligence</div>
-
-      <h1>
-        From Chaos to Control.<br>
-        Capture Every Dollar You Earn.
-      </h1>
-
-      <p>
-        We eliminate billing inefficiencies, resolve denials,
-        and ensure every dollar is collected through a structured system.
-      </p>
-
-      <div class="hero-buttons">
-        <a href="contact.html" class="btn-primary">Free Revenue Audit</a>
-        <a href="services.html" class="btn-outline">Explore Services</a>
-      </div>
-
-    </div>
-
+    <h1>From Chaos to Control.<br>Capture Every Dollar You Earn.</h1>
+    <p>
+      PracticeGrid connects your entire revenue cycle,
+      eliminates inefficiencies, and ensures every dollar is collected.
+    </p>
   </div>
 
 </section>
-  <!-- FLOW LINE -->
-  <div class="flow-line">
-    <div class="flow-dot"></div>
-  </div>
-
-</div>
 
 <!-- WHO WE ARE -->
 <section class="home-about">
