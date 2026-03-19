@@ -2,7 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   lucide.createIcons();
 
-  const hero = document.querySelector(".system-bg");
+  // ✅ FIXED: correct container
+  const hero = document.querySelector(".hero-system");
   const nodes = document.querySelectorAll(".node");
 
   const NODE_WIDTH = 160;
@@ -21,23 +22,24 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   });
 
-  // INITIAL POSITIONS (BETTER DISTRIBUTION)
+  // ✅ BETTER DISTRIBUTION (8 nodes balanced)
   nodes.forEach((n, i) => {
 
-    const cols = 3;
+    const cols = 4;
     const spacingX = rect.width / (cols + 1);
-    const spacingY = rect.height / 4;
+    const spacingY = rect.height / 3;
 
     const col = i % cols;
     const row = Math.floor(i / cols);
 
-    n.x = (col - 1) * spacingX * 0.7;
-    n.y = (row - 1) * spacingY * 0.6;
+    n.x = (col - 1.5) * spacingX * 0.7;
+    n.y = (row - 0.8) * spacingY * 0.6;
     n.z = (Math.random() - 0.5) * 400;
 
-    n.vx = (Math.random() - 0.5) * 0.5;
-    n.vy = (Math.random() - 0.5) * 0.5;
-    n.vz = (Math.random() - 0.5) * 0.5;
+    // ✅ faster, smoother motion
+    n.vx = (Math.random() - 0.5) * 0.8;
+    n.vy = (Math.random() - 0.5) * 0.8;
+    n.vz = (Math.random() - 0.5) * 0.6;
   });
 
   function animate() {
@@ -57,12 +59,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const maxY = rect.height / 2 - dynamicHeight - PADDING;
       const topLimit = -rect.height / 2 + PADDING;
 
-      // BOUNCE ONLY (NO CLAMP)
+      // ✅ bounce (no clamp = smooth motion)
       if (n.x > maxX || n.x < -maxX) n.vx *= -1;
       if (n.y > maxY || n.y < topLimit) n.vy *= -1;
       if (n.z > 400 || n.z < -400) n.vz *= -1;
 
-      const opacity = 0.5 + (n.z + 400) / 800;
+      // ✅ FIX: prevent disappearing
+      const opacityRaw = 0.5 + (n.z + 400) / 800;
+      const opacity = Math.max(0.2, Math.min(1, opacityRaw));
 
       n.style.transform = `
         translate3d(${n.x}px, ${n.y}px, ${n.z}px)
