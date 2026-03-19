@@ -9,7 +9,6 @@
   min-height: 100vh;
   overflow: hidden;
 }
-
 /* BG */
 .system-bg {
 position: absolute;
@@ -39,50 +38,22 @@ background:
     0 0 40px rgba(59,130,246,0.5),
     0 0 80px rgba(139,92,246,0.3);
   animation: corePulse 3s infinite ease-in-out;
+   display: none;
 }
 @keyframes corePulse {
   0% { transform: translate(-50%, -50%) scale(0.9); }
   50% { transform: translate(-50%, -50%) scale(1.05); }
   100% { transform: translate(-50%, -50%) scale(0.9); }
 }
+
 /* NODES */
 .node {
   position: absolute;
-  width: 100px;
+  width: 110px;
   text-align: center;
-  color: white;
-  transform: translateZ(0);
-  animation: float 6s infinite ease-in-out;
-  color: #fca5a5;
-  position: absolute;
+  color: #f87171;
   transform-style: preserve-3d;
-  transition: transform 1.5s ease;
-}
-/* depth layers */
-.node[data-depth="1"] {
-  transform: translateZ(-200px) scale(0.7);
-  opacity: 0.4;
-}
-.node[data-depth="2"] {
-  transform: translateZ(0px) scale(1);
-  opacity: 0.7;
-}
-.node[data-depth="3"] {
-  transform: translateZ(200px) scale(1.2);
-  opacity: 1;
-}
-.node i {
-  display: block;
-  margin-bottom: 6px;
-}
-.node span {
-  font-size: 12px;
-}
-/* FLOAT */
-@keyframes float {
-  0% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-20px) scale(1.05); }
-  100% { transform: translateY(0); }
+  will-change: transform;
 }
 .node-inner {
   display: flex;
@@ -90,14 +61,14 @@ background:
   align-items: center;
   gap: 6px;
 }
+.node-title {
+  font-size: 12px;
+}
+/* ERRORS (ALWAYS VISIBLE IN CHAOS) */
 .errors {
-  display: none;
   margin-top: 6px;
 }
-.hero-system.chaos .errors {
-  display: block;
-}
-.hero-system.chaos .error-label {
+.error-label {
   display: flex;
   align-items: center;
   gap: 4px;
@@ -106,30 +77,18 @@ background:
   animation: blink 1s infinite;
 }
 @keyframes blink {
-  0%, 100% { opacity: 1; }
+  0%,100% { opacity: 1; }
   50% { opacity: 0.2; }
 }
 .error-label i {
   width: 10px;
   height: 10px;
 }
-.node-title {
-  font-size: 12px;
-}
-/* LEAK */
+/* MONEY LEAK */
 .leak {
   position: absolute;
-  width: 6px;
-  height: 6px;
-  background: red;
-  border-radius: 50%;
-  bottom: -5px;
   left: 50%;
-  animation: leak 1s infinite;
-}
-@keyframes leak {
-  0% { opacity: 1; transform: translateY(0); }
-  100% { opacity: 0; transform: translateY(20px); }
+  bottom: -5px;
 }
 .leak::after {
   content: "$";
@@ -140,37 +99,7 @@ background:
 }
 @keyframes moneyFlow {
   0% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(25px); opacity: 0; }
-}
-.hero-system:not(.chaos) .leak {
-  display: none;
-}
-/* CONNECTIONS */
-.connections {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-line {
-  stroke: #22c55e;
-  stroke-width: 1.5;
-  opacity: 0;
-  transition: 1s;
-}
-/* REVENUE */
-.revenue {
-  position: absolute;
-  right: 10%;
-  bottom: 20%;
-}
-.rev {
-  color: #22c55e;
-  margin-top: 5px;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: rise 0.5s forwards;
-}
-@keyframes rise {to {opacity: 1;transform: translateY(0);}
+  100% { transform: translateY(30px); opacity: 0; }
 }
 /* OVERLAY */
 .hero-overlay {
