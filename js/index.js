@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let width, height;
 
-  // ✅ CONTROL STATE
   let controlled = false;
 
   function updateBounds() {
@@ -56,32 +55,61 @@ document.addEventListener("DOMContentLoaded", () => {
     n.y = n.baseY;
 
     n.order = i;
+
+    // initial dim (for focus effect later)
+    n.style.opacity = 0.9;
   });
 
-  // 🔥 CONTROL TIMELINE
+  // 🔥 CONTROL TIMELINE (INTELLIGENT CORRECTION)
   setTimeout(() => {
+
     hero.classList.add("controlled");
     core.style.display = "flex";
 
-    // ✅ CINEMATIC SEQUENTIAL RESOLVE (organic timing)
     nodes.forEach((n, i) => {
+
       setTimeout(() => {
 
-        // pulse effect
-        n.classList.add("resolved-active");
+        // 👉 bring this node into focus
+        nodes.forEach(other => {
+          if (other !== n) {
+            other.style.opacity = 0.25;
+          }
+        });
 
-        // 🔥 CORE → NODE ENERGY HIT
-        n.querySelector(".node-inner").style.boxShadow = `
-          0 0 25px rgba(59,130,246,0.6),
-          0 0 50px rgba(59,130,246,0.3)
-        `;
+        n.style.opacity = 1;
 
-        // remove pulse after animation
+        // subtle focus scale
+        n.classList.add("resolving");
+
+        // simulate "analysis"
         setTimeout(() => {
-          n.classList.remove("resolved-active");
+
+          // resolve
+          n.classList.add("resolved-active");
+
+          // green glow
+          n.querySelector(".node-inner").style.boxShadow = `
+            0 0 20px rgba(34,197,94,0.5),
+            0 0 40px rgba(59,130,246,0.25)
+          `;
+
+          // remove focus animation
+          setTimeout(() => {
+            n.classList.remove("resolving");
+          }, 300);
+
+          // restore others gradually
+          setTimeout(() => {
+            nodes.forEach(other => {
+              other.style.opacity = 0.9;
+            });
+          }, 200);
+
         }, 400);
 
-      }, i * 180 + Math.random() * 120); // ✅ less robotic
+      }, i * 600); // slower = more premium
+
     });
 
   }, 2000);
@@ -95,14 +123,12 @@ document.addEventListener("DOMContentLoaded", () => {
     nodes.forEach(n => {
 
       if (!controlled) {
-        // CHAOS MODE (unchanged)
         n.angle += n.speed;
 
         n.x = n.baseX + Math.cos(n.angle) * n.floatX;
         n.y = n.baseY + Math.sin(n.angle) * n.floatY;
 
       } else {
-        // ✅ FIXED: NO COLLAPSE → ONLY INFLUENCE + STABILIZATION
 
         const coreX = 0;
         const coreY = 0;
@@ -110,13 +136,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const dx = coreX - n.x;
         const dy = coreY - n.y;
 
-        // subtle gravitational influence
-        n.x += dx * 0.015;
-        n.y += dy * 0.015;
+        // subtle influence only
+        n.x += dx * 0.01;
+        n.y += dy * 0.01;
 
-        // smooth stabilization to grid
-        n.x += (n.baseX - n.x) * 0.04;
-        n.y += (n.baseY - n.y) * 0.04;
+        // stabilize
+        n.x += (n.baseX - n.x) * 0.05;
+        n.y += (n.baseY - n.y) * 0.05;
       }
 
       // SAFE BOUNDS
@@ -138,17 +164,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const scale = 1 + n.z / 300;
 
-      // GLOW
       const glowStrength = n.z / 40;
       const glow = 10 + glowStrength * 30;
-      const opacity = controlled ? 1 : (0.7 + glowStrength * 0.3);
+      const opacity = controlled ? n.style.opacity : (0.7 + glowStrength * 0.3);
 
       if (!n.matches(':hover')) {
         n.style.opacity = opacity;
       }
 
       n.querySelector(".node-inner").style.boxShadow = controlled
-        ? `0 0 20px rgba(34,197,94,0.4), 0 0 40px rgba(59,130,246,0.25)`
+        ? n.querySelector(".node-inner").style.boxShadow
         : `0 0 ${glow}px rgba(59,130,246,0.25),
            0 0 ${glow * 2}px rgba(139,92,246,0.15)`;
 
@@ -165,5 +190,3 @@ document.addEventListener("DOMContentLoaded", () => {
   animate();
 
 });
-
-
