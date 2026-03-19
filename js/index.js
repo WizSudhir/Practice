@@ -5,9 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const hero = document.querySelector(".hero-system");
   const nodes = document.querySelectorAll(".node");
 
-  // ✅ FIXED SAFE NODE SIZE (matches your design)
   const NODE_W = 140;
-  const NODE_H = 90;
+  const NODE_H = 100;
 
   const SIDE_PADDING = 40;
   const TOP_SAFE = 110;
@@ -22,7 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
   updateBounds();
   window.addEventListener("resize", updateBounds);
 
-  // ✅ GRID INIT (PERFECTLY VISIBLE)
   nodes.forEach((n, i) => {
 
     const cols = 4;
@@ -37,29 +35,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const col = i % cols;
     const row = Math.floor(i / cols);
 
-    const baseX =
-      -rect.width / 2 +
-      SIDE_PADDING +
-      zoneW * (col + 0.5);
-
-    const baseY =
-      -rect.height / 2 +
-      TOP_SAFE +
-      zoneH * (row + 0.5);
-
-    n.baseX = baseX;
-    n.baseY = baseY;
-
-    n.x = baseX;
-    n.y = baseY;
-    n.z = (Math.random() - 0.5) * 80;
+    n.baseX = -rect.width / 2 + SIDE_PADDING + zoneW * (col + 0.5);
+    n.baseY = -rect.height / 2 + TOP_SAFE + zoneH * (row + 0.5);
 
     n.angle = Math.random() * Math.PI * 2;
-    n.speed = 0.003 + Math.random() * 0.003;
+    n.speed = 0.002 + Math.random() * 0.002;
 
-    // ✅ radius ALWAYS SAFE (based on FIXED size)
-    n.floatX = Math.max(10, zoneW / 2 - NODE_W / 2 - 10);
-    n.floatY = Math.max(10, zoneH / 2 - NODE_H / 2 - 10);
+    n.floatX = zoneW / 2 - NODE_W / 2 - 10;
+    n.floatY = zoneH / 2 - NODE_H / 2 - 10;
+
+    n.z = (Math.random() - 0.5) * 60;
   });
 
   function animate() {
@@ -71,7 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
       let x = n.baseX + Math.cos(n.angle) * n.floatX;
       let y = n.baseY + Math.sin(n.angle) * n.floatY;
 
-      // ✅ FINAL HARD CLAMP (CENTER-BASED CORRECT)
       const left = -rect.width / 2 + SIDE_PADDING + NODE_W / 2;
       const right = rect.width / 2 - SIDE_PADDING - NODE_W / 2;
 
@@ -81,13 +65,10 @@ document.addEventListener("DOMContentLoaded", () => {
       x = Math.max(left, Math.min(right, x));
       y = Math.max(top, Math.min(bottom, y));
 
-      // depth (safe)
-      n.z += Math.sin(n.angle) * 0.15;
-      n.z = Math.max(-50, Math.min(80, n.z));
+      n.z += Math.sin(n.angle) * 0.1;
+      n.z = Math.max(-40, Math.min(60, n.z));
 
       const scale = 1 + n.z / 1000;
-
-      n.style.opacity = 1;
 
       n.style.transform = `
         translate3d(${x}px, ${y}px, ${n.z}px)
