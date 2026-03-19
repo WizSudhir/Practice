@@ -5,9 +5,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const hero = document.querySelector(".hero-system");
   const nodes = document.querySelectorAll(".node");
 
+  // ✅ FIXED SAFE NODE SIZE (matches your design)
+  const NODE_W = 140;
+  const NODE_H = 90;
+
   const SIDE_PADDING = 40;
-  const TOP_SAFE = 100;     // navbar + breathing space
-  const BOTTOM_SAFE = 140;  // hero text area
+  const TOP_SAFE = 110;
+  const BOTTOM_SAFE = 140;
 
   let rect;
 
@@ -18,61 +22,45 @@ document.addEventListener("DOMContentLoaded", () => {
   updateBounds();
   window.addEventListener("resize", updateBounds);
 
-  // ✅ WAIT FOR LAYOUT TO STABILIZE (CRITICAL)
-  requestAnimationFrame(() => {
-    requestAnimationFrame(init);
+  // ✅ GRID INIT (PERFECTLY VISIBLE)
+  nodes.forEach((n, i) => {
+
+    const cols = 4;
+    const rows = 2;
+
+    const usableWidth = rect.width - SIDE_PADDING * 2;
+    const usableHeight = rect.height - TOP_SAFE - BOTTOM_SAFE;
+
+    const zoneW = usableWidth / cols;
+    const zoneH = usableHeight / rows;
+
+    const col = i % cols;
+    const row = Math.floor(i / cols);
+
+    const baseX =
+      -rect.width / 2 +
+      SIDE_PADDING +
+      zoneW * (col + 0.5);
+
+    const baseY =
+      -rect.height / 2 +
+      TOP_SAFE +
+      zoneH * (row + 0.5);
+
+    n.baseX = baseX;
+    n.baseY = baseY;
+
+    n.x = baseX;
+    n.y = baseY;
+    n.z = (Math.random() - 0.5) * 80;
+
+    n.angle = Math.random() * Math.PI * 2;
+    n.speed = 0.003 + Math.random() * 0.003;
+
+    // ✅ radius ALWAYS SAFE (based on FIXED size)
+    n.floatX = Math.max(10, zoneW / 2 - NODE_W / 2 - 10);
+    n.floatY = Math.max(10, zoneH / 2 - NODE_H / 2 - 10);
   });
-
-  function init() {
-
-    nodes.forEach((n, i) => {
-
-      const size = {
-        w: n.offsetWidth,
-        h: n.offsetHeight
-      };
-
-      const cols = 4;
-      const rows = 2;
-
-      const usableWidth = rect.width - SIDE_PADDING * 2;
-      const usableHeight = rect.height - TOP_SAFE - BOTTOM_SAFE;
-
-      const zoneW = usableWidth / cols;
-      const zoneH = usableHeight / rows;
-
-      const col = i % cols;
-      const row = Math.floor(i / cols);
-
-      // ✅ CENTER INSIDE SAFE ZONE
-      const baseX =
-        -rect.width / 2 +
-        SIDE_PADDING +
-        zoneW * (col + 0.5);
-
-      const baseY =
-        -rect.height / 2 +
-        TOP_SAFE +
-        zoneH * (row + 0.5);
-
-      n.baseX = baseX;
-      n.baseY = baseY;
-
-      n.x = baseX;
-      n.y = baseY;
-      n.z = (Math.random() - 0.5) * 100;
-
-      // smooth float
-      n.angle = Math.random() * Math.PI * 2;
-      n.speed = 0.004 + Math.random() * 0.004;
-
-      // ✅ radius LIMITED BY ZONE SIZE (KEY FIX)
-      n.floatRadiusX = Math.max(10, zoneW / 2 - size.w / 2 - 10);
-      n.floatRadiusY = Math.max(10, zoneH / 2 - size.h / 2 - 10);
-    });
-
-    animate();
-  }
 
   function animate() {
 
@@ -80,23 +68,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
       n.angle += n.speed;
 
-      // ✅ ELLIPTICAL FLOAT (BETTER CONTROL)
-      const offsetX = Math.cos(n.angle) * n.floatRadiusX;
-      const offsetY = Math.sin(n.angle) * n.floatRadiusY;
+      let x = n.baseX + Math.cos(n.angle) * n.floatX;
+      let y = n.baseY + Math.sin(n.angle) * n.floatY;
 
-      n.x = n.baseX + offsetX;
-      n.y = n.baseY + offsetY;
+      // ✅ FINAL HARD CLAMP (CENTER-BASED CORRECT)
+      const left = -rect.width / 2 + SIDE_PADDING + NODE_W / 2;
+      const right = rect.width / 2 - SIDE_PADDING - NODE_W / 2;
 
-      // depth
-      n.z += Math.sin(n.angle) * 0.2;
-      n.z = Math.max(-60, Math.min(100, n.z));
+      const top = -rect.height / 2 + TOP_SAFE + NODE_H / 2;
+      const bottom = rect.height / 2 - BOTTOM_SAFE - NODE_H / 2;
+
+      x = Math.max(left, Math.min(right, x));
+      y = Math.max(top, Math.min(bottom, y));
+
+      // depth (safe)
+      n.z += Math.sin(n.angle) * 0.15;
+      n.z = Math.max(-50, Math.min(80, n.z));
 
       const scale = 1 + n.z / 1000;
 
-      n.style.opacity = 0.95;
+      n.style.opacity = 1;
 
       n.style.transform = `
-        translate3d(${n.x}px, ${n.y}px, ${n.z}px)
+        translate3d(${x}px, ${y}px, ${n.z}px)
         translate(-50%, -50%)
         scale(${scale})
       `;
@@ -104,5 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     requestAnimationFrame(animate);
   }
+
+  animate();
 
 });
