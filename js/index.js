@@ -52,24 +52,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
     n.z = (Math.random() - 0.5) * 40;
 
-    // CURRENT POSITIONS (important for smooth snap)
     n.x = n.baseX;
     n.y = n.baseY;
 
-    // ✅ STEP 2: ORDER FOR SEQUENTIAL RESOLVE
     n.order = i;
   });
 
-  // 🔥 CONTROL TIMELINE (UPDATED WITH SEQUENTIAL FIX)
+  // 🔥 CONTROL TIMELINE
   setTimeout(() => {
     hero.classList.add("controlled");
     core.style.display = "flex";
 
-    // ✅ STEP 2: sequential node activation
+    // ✅ CINEMATIC SEQUENTIAL RESOLVE (organic timing)
     nodes.forEach((n, i) => {
       setTimeout(() => {
+
+        // pulse effect
         n.classList.add("resolved-active");
-      }, i * 250);
+
+        // 🔥 CORE → NODE ENERGY HIT
+        n.querySelector(".node-inner").style.boxShadow = `
+          0 0 25px rgba(59,130,246,0.6),
+          0 0 50px rgba(59,130,246,0.3)
+        `;
+
+        // remove pulse after animation
+        setTimeout(() => {
+          n.classList.remove("resolved-active");
+        }, 400);
+
+      }, i * 180 + Math.random() * 120); // ✅ less robotic
     });
 
   }, 2000);
@@ -90,34 +102,21 @@ document.addEventListener("DOMContentLoaded", () => {
         n.y = n.baseY + Math.sin(n.angle) * n.floatY;
 
       } else {
-        // ✅ CONTROL MODE (ENHANCED WITH CINEMATIC GRAVITY)
+        // ✅ FIXED: NO COLLAPSE → ONLY INFLUENCE + STABILIZATION
 
         const coreX = 0;
         const coreY = 0;
 
-        // STEP 3: intelligent pull + slight orbit feel
-        if (controlled && !n.locked) {
+        const dx = coreX - n.x;
+        const dy = coreY - n.y;
 
-          const dx = coreX - n.x;
-          const dy = coreY - n.y;
+        // subtle gravitational influence
+        n.x += dx * 0.015;
+        n.y += dy * 0.015;
 
-          n.x += dx * 0.04;
-          n.y += dy * 0.04;
-
-          // subtle orbit (makes it feel "alive", not robotic)
-          n.x += Math.sin(n.angle) * 0.5;
-          n.y += Math.cos(n.angle) * 0.5;
-
-          if (Math.abs(dx) < 25 && Math.abs(dy) < 25) {
-            n.locked = true;
-          }
-        }
-
-        // PHASE 2: spread into structured grid
-        if (n.locked) {
-          n.x += (n.baseX - n.x) * 0.05;
-          n.y += (n.baseY - n.y) * 0.05;
-        }
+        // smooth stabilization to grid
+        n.x += (n.baseX - n.x) * 0.04;
+        n.y += (n.baseY - n.y) * 0.04;
       }
 
       // SAFE BOUNDS
@@ -153,7 +152,6 @@ document.addEventListener("DOMContentLoaded", () => {
         : `0 0 ${glow}px rgba(59,130,246,0.25),
            0 0 ${glow * 2}px rgba(139,92,246,0.15)`;
 
-      // FINAL TRANSFORM
       n.style.transform = `
         translate3d(${n.x}px, ${n.y}px, ${n.z}px)
         translate(-50%, -50%)
