@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ===============================
-  // CONNECTION SYSTEM (EDGE PERFECT)
+  // CONNECTION SYSTEM (FINAL FIX)
   // ===============================
   function drawConnection(node) {
 
@@ -80,41 +80,49 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const dx = nodeCenter.x - coreCenter.x;
     const dy = nodeCenter.y - coreCenter.y;
-    const angle = Math.atan2(dy, dx);
 
+    const dist = Math.hypot(dx, dy);
+
+    const nx = dx / dist;
+    const ny = dy / dist;
+
+    // 🔵 CORE EDGE (CIRCLE)
     const coreRadius = coreRect.width / 2;
 
-    const nodeHalfW = nodeRect.width / 2;
-    const nodeHalfH = nodeRect.height / 2;
-
-    const tan = Math.abs(dy / dx);
-
-    let nodeEdgeX, nodeEdgeY;
-
-    if (tan < nodeHalfH / nodeHalfW) {
-      nodeEdgeX = nodeCenter.x - Math.sign(dx) * nodeHalfW;
-      nodeEdgeY = nodeCenter.y - Math.sign(dx) * nodeHalfW * (dy / dx);
-    } else {
-      nodeEdgeY = nodeCenter.y - Math.sign(dy) * nodeHalfH;
-      nodeEdgeX = nodeCenter.x - Math.sign(dy) * nodeHalfH * (dx / dy);
-    }
-
     const coreEdge = {
-      x: coreCenter.x + Math.cos(angle) * coreRadius,
-      y: coreCenter.y + Math.sin(angle) * coreRadius
+      x: coreCenter.x + nx * (coreRadius + 1),
+      y: coreCenter.y + ny * (coreRadius + 1)
     };
 
+    // 🟩 NODE EDGE (RAY-BOX INTERSECTION)
+    const halfW = nodeRect.width / 2;
+    const halfH = nodeRect.height / 2;
+
+    let tx = Infinity;
+    let ty = Infinity;
+
+    if (nx !== 0) tx = halfW / Math.abs(nx);
+    if (ny !== 0) ty = halfH / Math.abs(ny);
+
+    const t = Math.min(tx, ty);
+
+    const nodeEdge = {
+      x: nodeCenter.x - nx * (t + 1),
+      y: nodeCenter.y - ny * (t + 1)
+    };
+
+    // 🔥 PIXEL SNAP (CRITICAL)
     const start = {
-      x: coreEdge.x - svgRect.left,
-      y: coreEdge.y - svgRect.top
+      x: Math.round(coreEdge.x - svgRect.left),
+      y: Math.round(coreEdge.y - svgRect.top)
     };
 
     const end = {
-      x: nodeEdgeX - svgRect.left,
-      y: nodeEdgeY - svgRect.top
+      x: Math.round(nodeEdge.x - svgRect.left),
+      y: Math.round(nodeEdge.y - svgRect.top)
     };
 
-    const midX = start.x + (end.x - start.x) * 0.5;
+    const midX = Math.round(start.x + (end.x - start.x) * 0.5);
 
     const d = `
       M ${start.x} ${start.y}
@@ -186,7 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ===============================
-  // CONTROL TIMELINE (FINAL FIX)
+  // CONTROL TIMELINE
   // ===============================
   setTimeout(() => {
 
@@ -203,7 +211,7 @@ document.addEventListener("DOMContentLoaded", () => {
         n.y = n.baseY;
       });
 
-      // 🔥 EXTRA VISUAL SETTLE DELAY (KEY FIX)
+      // 🔥 VISUAL BUFFER (CRITICAL)
       setTimeout(() => {
 
         requestAnimationFrame(() => {
@@ -234,7 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         });
 
-      }, 600); // 🔥 ensures nodes are visually settled
+      }, 600);
 
     });
 
