@@ -12,11 +12,14 @@
 
 /* BG */
 .system-bg {
-  position: absolute;
-  inset: 0;
-  perspective: 800px;
+position: absolute;
+inset: 0;
+perspective: 1200px;
+background:
+radial-gradient(circle at 20% 30%, rgba(59,130,246,0.15), transparent 40%),
+radial-gradient(circle at 80% 70%, rgba(139,92,246,0.12), transparent 50%),
+linear-gradient(135deg, #0b0f1a, #111827 60%, #1e1b4b);
 }
-
 /* CORE */
 .core {
   position: absolute;
@@ -31,7 +34,6 @@
   opacity: 0;
   transition: 1s ease;
 }
-
 /* NODES */
 .node {
   position: absolute;
@@ -40,22 +42,22 @@
   color: white;
   transform: translateZ(0);
   animation: float 6s infinite ease-in-out;
+  color: #fca5a5;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: transform 1.5s ease;
 }
-
+/* depth layers */
+.node[data-depth="1"] { transform: scale(0.8); opacity: 0.5; }
+.node[data-depth="2"] { transform: scale(1); opacity: 0.8; }
+.node[data-depth="3"] { transform: scale(1.2); opacity: 1; }
 .node i {
   display: block;
   margin-bottom: 6px;
 }
-
 .node span {
   font-size: 12px;
 }
-
-/* CHAOS COLOR */
-.node {
-  color: #fca5a5;
-}
-
 /* FLOAT */
 @keyframes float {
   0% { transform: translateY(0) scale(1); }
@@ -74,33 +76,28 @@
   left: 50%;
   animation: leak 1s infinite;
 }
-
 @keyframes leak {
   0% { opacity: 1; transform: translateY(0); }
   100% { opacity: 0; transform: translateY(20px); }
 }
-
 /* CONNECTIONS */
 .connections {
   position: absolute;
   width: 100%;
   height: 100%;
 }
-
 line {
   stroke: #22c55e;
   stroke-width: 1.5;
   opacity: 0;
   transition: 1s;
 }
-
 /* REVENUE */
 .revenue {
   position: absolute;
   right: 10%;
   bottom: 20%;
 }
-
 .rev {
   color: #22c55e;
   margin-top: 5px;
@@ -108,26 +105,23 @@ line {
   transform: translateY(20px);
   animation: rise 0.5s forwards;
 }
-
-@keyframes rise {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@keyframes rise {to {opacity: 1;transform: translateY(0);}
 }
-
 /* OVERLAY */
 .hero-overlay {
   position: absolute;
   inset: 0;
   background: radial-gradient(circle, rgba(0,0,0,0.6), rgba(0,0,0,0.9));
 }
-
 /* CONTENT */
 .hero-content {
-  position: relative;
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  max-width: 800px;
   z-index: 3;
-  padding: 100px;
 }
 /* ===============================
    11. HIPAA SECTION
