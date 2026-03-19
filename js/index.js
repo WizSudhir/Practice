@@ -20,15 +20,21 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // INITIAL POSITIONS (FIXED)
-  nodes.forEach(n => {
-    n.x = (Math.random() - 0.5) * rect.width * 0.5;
-    n.y = (Math.random() - 0.5) * rect.height * 0.4;
-    n.z = (Math.random() - 0.5) * 600;
+nodes.forEach((n, i) => {
+  const cols = 3;
+  const spacingX = rect.width / (cols + 1);
+  const spacingY = rect.height / 4;
+  const col = i % cols;
+  const row = Math.floor(i / cols);
 
-    n.vx = (Math.random() - 0.5) * 0.5;
-    n.vy = (Math.random() - 0.5) * 0.5;
-    n.vz = (Math.random() - 0.5) * 0.5;
-  });
+  n.x = (col - 1) * spacingX * 0.6;
+  n.y = (row - 1.5) * spacingY * 0.5;
+  n.z = (Math.random() - 0.5) * 400;
+
+  n.vx = (Math.random() - 0.5) * 0.4;
+  n.vy = (Math.random() - 0.5) * 0.4;
+  n.vz = (Math.random() - 0.5) * 0.4;
+});
 
   function animate() {
 
@@ -40,7 +46,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const scale = 1 + n.z / 800;
 
-      const dynamicWidth = NODE_WIDTH * scale;
+      const rectNode = n.getBoundingClientRect();
+      const dynamicWidth = rectNode.width * scale;
+      const dynamicHeight = rectNode.height * scale;
       const dynamicHeight = NODE_HEIGHT * scale;
 
       const maxX = rect.width / 2 - dynamicWidth - PADDING;
