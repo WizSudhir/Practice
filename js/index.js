@@ -80,71 +80,57 @@ this.innerText = "Read More →";
 // ===============================
 // NEW HERO
 // ===============================
-const cards = document.querySelectorAll(".issue-card");
-const revenueLayer = document.getElementById("revenueLayer");
+const nodes = document.querySelectorAll(".node");
+const links = document.querySelectorAll(".link");
+const stack = document.getElementById("revenueStack");
 
-// PROBLEM → SOLUTION MAP
-const solutions = [
-  "✓ Eligibility Verified",
-  "✓ Authorization Approved",
-  "✓ Coding Optimized",
-  "✓ Denial Resolved",
-  "✓ AR Follow-Up Completed",
-  "✓ Appeal Submitted"
-];
-
-// REVENUE VALUES
 const revenueValues = ["+$120", "+$340", "+$780", "+$1240", "+$1890"];
 
-// MAIN LOOP
 function runStory() {
 
-  // RESET
-  revenueLayer.innerHTML = "";
-
-  cards.forEach((card, i) => {
-    card.classList.remove("success");
-    card.innerText = [
-      "⚠ Eligibility Not Verified",
-      "⚠ Missing Authorization",
-      "⚠ Incorrect CPT Code",
-      "⚠ Claim Denied",
-      "⚠ No AR Follow-Up",
-      "⚠ Appeal Pending"
-    ][i];
+  // RESET → CHAOS
+  nodes.forEach(n => {
+    n.style.background = "rgba(239,68,68,0.8)";
+    n.style.boxShadow = "0 0 10px rgba(239,68,68,0.7)";
   });
 
-  // STEP 1 → CHAOS (visible already)
+  links.forEach(l => {
+    l.style.stroke = "rgba(239,68,68,0.3)";
+    l.style.opacity = 0.3;
+  });
 
+  stack.innerHTML = "";
+
+  // STEP 2 → CONNECT SYSTEM
   setTimeout(() => {
 
-    // STEP 2 → FIX
-    cards.forEach((card, i) => {
-      card.classList.add("success");
-      card.innerText = solutions[i];
+    nodes.forEach(n => {
+      n.style.background = "#22c55e";
+      n.style.boxShadow = "0 0 12px rgba(34,197,94,0.8)";
+    });
+
+    links.forEach(l => {
+      l.style.stroke = "#22c55e";
+      l.style.opacity = 0.8;
     });
 
   }, 2500);
 
+  // STEP 3 → FLOW + STACK
   setTimeout(() => {
-
-    // STEP 3 → REVENUE STACK
-    revenueLayer.innerHTML = "";
 
     revenueValues.forEach((val, i) => {
       const el = document.createElement("div");
       el.classList.add("revenue-item");
       el.innerText = val;
-      el.style.animationDelay = i * 0.25 + "s";
-      revenueLayer.appendChild(el);
+      el.style.animationDelay = i * 0.2 + "s";
+      stack.appendChild(el);
     });
 
   }, 4500);
-
 }
 
 // LOOP
 runStory();
 setInterval(runStory, 8000);
-
 }); // DOMContentLoaded close
