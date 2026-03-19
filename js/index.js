@@ -101,6 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
 
     path.setAttribute("d", createElbowPath(coreEdge, nodeEdge));
+    path.setAttribute("vector-effect", "non-scaling-stroke");
     path.classList.add("connection-path");
 
     svg.appendChild(path);
@@ -122,49 +123,99 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", resetConnections);
 
   // ===============================
-  // CONTROL TIMELINE (FIXED)
+  // STABILITY DETECTION
+  // ===============================
+  function waitForStabilization(callback) {
+
+    let stableFrames = 0;
+    let lastPositions = new Map();
+
+    function check() {
+
+      let isStable = true;
+
+      nodes.forEach(n => {
+        const prev = lastPositions.get(n) || { x: n.x, y: n.y };
+
+        const dx = Math.abs(n.x - prev.x);
+        const dy = Math.abs(n.y - prev.y);
+
+        if (dx > 0.3 || dy > 0.3) {
+          isStable = false;
+        }
+
+        lastPositions.set(n, { x: n.x, y: n.y });
+      });
+
+      if (isStable) {
+        stableFrames++;
+      } else {
+        stableFrames = 0;
+      }
+
+      if (stableFrames > 10) {
+        callback();
+      } else {
+        requestAnimationFrame(check);
+      }
+    }
+
+    check();
+  }
+
+  // ===============================
+  // CONTROL TIMELINE
   // ===============================
   setTimeout(() => {
 
-    // ONLY activate system visually
     hero.classList.add("controlled");
     core.style.display = "flex";
 
-    // let nodes settle first (IMPORTANT)
-    setTimeout(() => {
+    // wait for nodes to truly settle
+    waitForStabilization(() => {
 
-      nodes.forEach((n, i) => {
+      // 🔒 SNAP to perfect final positions
+      nodes.forEach(n => {
+        n.x = n.baseX;
+        n.y = n.baseY;
+      });
 
-        setTimeout(() => {
+      // ensure DOM updates before drawing
+      requestAnimationFrame(() => {
 
-          // 1. DRAW LINE
-          const path = drawConnection(n);
+        nodes.forEach((n, i) => {
 
-          // trigger animation
-          path.getBoundingClientRect();
-          path.classList.add("active");
-
-          // 2. AFTER LINE → RESOLVE NODE
           setTimeout(() => {
 
-            n.classList.add("resolved-active");
+            // 1. draw connection
+            const path = drawConnection(n);
 
-            n.querySelector(".node-inner").style.boxShadow = `
-              0 0 25px rgba(34,197,94,0.7),
-              0 0 50px rgba(59,130,246,0.4)
-            `;
+            path.getBoundingClientRect();
+            path.classList.add("active");
 
-          }, 700); // sync with line animation
+            // 2. resolve AFTER line completes
+            setTimeout(() => {
 
-        }, i * 400 + Math.random() * 150); // staggered timing
+              n.classList.add("resolved-active");
+
+              n.querySelector(".node-inner").style.boxShadow = `
+                0 0 25px rgba(34,197,94,0.7),
+                0 0 50px rgba(59,130,246,0.4)
+              `;
+
+            }, 700);
+
+          }, i * 400 + Math.random() * 150);
+
+        });
 
       });
 
-    }, 800); // delay after core appears
+    });
 
   }, 2000);
 
-  // enable controlled physics AFTER visuals begin
+  // enable controlled motion physics
   setTimeout(() => {
     controlled = true;
   }, 3500);
