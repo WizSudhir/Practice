@@ -55,12 +55,23 @@ document.addEventListener("DOMContentLoaded", () => {
     // CURRENT POSITIONS (important for smooth snap)
     n.x = n.baseX;
     n.y = n.baseY;
+
+    // ✅ STEP 2: ORDER FOR SEQUENTIAL RESOLVE
+    n.order = i;
   });
 
-  // 🔥 CONTROL TIMELINE
+  // 🔥 CONTROL TIMELINE (UPDATED WITH SEQUENTIAL FIX)
   setTimeout(() => {
     hero.classList.add("controlled");
     core.style.display = "flex";
+
+    // ✅ STEP 2: sequential node activation
+    nodes.forEach((n, i) => {
+      setTimeout(() => {
+        n.classList.add("resolved-active");
+      }, i * 250);
+    });
+
   }, 2000);
 
   setTimeout(() => {
@@ -79,27 +90,34 @@ document.addEventListener("DOMContentLoaded", () => {
         n.y = n.baseY + Math.sin(n.angle) * n.floatY;
 
       } else {
-        // ✅ CONTROL MODE (SMOOTH ALIGN)
-// CORE POSITION (center)
-const coreX = 0;
-const coreY = 0;
+        // ✅ CONTROL MODE (ENHANCED WITH CINEMATIC GRAVITY)
 
-// PHASE 1: pull toward core
-if (controlled && !n.locked) {
-  n.x += (coreX - n.x) * 0.06;
-  n.y += (coreY - n.y) * 0.06;
+        const coreX = 0;
+        const coreY = 0;
 
-  // once close → switch to structured layout
-  if (Math.abs(n.x) < 20 && Math.abs(n.y) < 20) {
-    n.locked = true;
-  }
-}
+        // STEP 3: intelligent pull + slight orbit feel
+        if (controlled && !n.locked) {
 
-// PHASE 2: spread into grid
-if (n.locked) {
-  n.x += (n.baseX - n.x) * 0.05;
-  n.y += (n.baseY - n.y) * 0.05;
-}
+          const dx = coreX - n.x;
+          const dy = coreY - n.y;
+
+          n.x += dx * 0.04;
+          n.y += dy * 0.04;
+
+          // subtle orbit (makes it feel "alive", not robotic)
+          n.x += Math.sin(n.angle) * 0.5;
+          n.y += Math.cos(n.angle) * 0.5;
+
+          if (Math.abs(dx) < 25 && Math.abs(dy) < 25) {
+            n.locked = true;
+          }
+        }
+
+        // PHASE 2: spread into structured grid
+        if (n.locked) {
+          n.x += (n.baseX - n.x) * 0.05;
+          n.y += (n.baseY - n.y) * 0.05;
+        }
       }
 
       // SAFE BOUNDS
