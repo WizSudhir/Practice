@@ -46,11 +46,57 @@ const ySpacing = usableHeight / (rows + 1);
 n.vy = (Math.random() - 0.5) * 0.4;
     n.vz = (Math.random() - 0.5) * 0.3;
   });
+// AVOID COLLISION
+function handleCollisions(nodes) {
 
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+
+      const a = nodes[i];
+      const b = nodes[j];
+
+      const dx = b.x - a.x;
+      const dy = b.y - a.y;
+
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      // approximate radius based on size
+      const sizeA = a.getBoundingClientRect().width / 2;
+      const sizeB = b.getBoundingClientRect().width / 2;
+
+      const minDist = sizeA + sizeB + 10; // spacing buffer
+
+      if (distance < minDist) {
+
+        const angle = Math.atan2(dy, dx);
+
+        const overlap = (minDist - distance) / 2;
+
+        const offsetX = Math.cos(angle) * overlap;
+        const offsetY = Math.sin(angle) * overlap;
+
+        // push apart
+        a.x -= offsetX;
+        a.y -= offsetY;
+
+        b.x += offsetX;
+        b.y += offsetY;
+
+        // slight velocity bounce (natural feel)
+a.vx += offsetX * 0.02;
+a.vy += offsetY * 0.02;
+b.vx -= offsetX * 0.02;
+b.vy -= offsetY * 0.02;
+      }
+    }
+  }
+}
+
+// Animate Function
   function animate() {
 
     nodes.forEach(n => {
-
+handleCollisions(nodes);
       // MOVE
       n.x += n.vx;
       n.y += n.vy;
