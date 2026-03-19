@@ -126,7 +126,7 @@ line {
 /* CONTENT */
 .hero-content {
   position: absolute;
-  bottom: 80px;
+  bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
@@ -140,7 +140,7 @@ line {
 .hero-content h1 {
   font-size: clamp(32px, 4vw, 52px);
   line-height: 1.15;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: -0.02em;
   max-width: 650px;
   margin: 0 auto;
@@ -148,7 +148,6 @@ line {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 .hero-content p {
   color: rgba(255,255,255,0.65);
