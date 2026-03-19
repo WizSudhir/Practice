@@ -94,7 +94,10 @@ nodes.forEach(n => {
   n.style.left = Math.random() * 80 + "%";
   n.style.top = Math.random() * 70 + "%";
 });
-
+nodes.forEach(n => {
+  const depth = Math.ceil(Math.random() * 3);
+  n.setAttribute("data-depth", depth);
+});
 function drawLine(x1,y1,x2,y2){
   const line = document.createElementNS("http://www.w3.org/2000/svg","line");
   line.setAttribute("x1",x1);
