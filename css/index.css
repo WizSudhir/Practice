@@ -333,5 +333,33 @@ z-index: 2;
 .node.resolved-active .leak {
   opacity: 0;
 }
+/* ===============================
+   CONNECTION LINES
+================================= */
+.connections {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
 
+/* Line style */
+.connection-path {
+  fill: none;
+  stroke: url(#lineGradient);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+  opacity: 0.9;
+
+  /* animation base */
+  stroke-dashoffset: 300;
+  transition: stroke-dashoffset 1s ease;
+}
+
+/* when active */
+.connection-path.active {
+  stroke-dashoffset: 0;
+}
 
