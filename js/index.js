@@ -35,14 +35,15 @@ function getNodeSize(n) {
     const row = Math.floor(i / cols);
 
     const xSpacing = rect.width / (cols + 1);
-    const ySpacing = rect.height / (rows + 1);
+    const usableHeight = rect.height - 140; // 🔥 key fix
+const ySpacing = usableHeight / (rows + 1);
 
     n.x = (col + 1) * xSpacing - rect.width / 2;
-    n.y = (row + 1) * ySpacing - rect.height / 2;
+    n.y = (row + 1) * ySpacing - usableHeight / 2;
     n.z = (Math.random() - 0.5) * 200;
 
-    n.vx = (Math.random() - 0.5) * 0.6;
-    n.vy = (Math.random() - 0.5) * 0.6;
+ n.vx = (Math.random() - 0.5) * 0.4;
+n.vy = (Math.random() - 0.5) * 0.4;
     n.vz = (Math.random() - 0.5) * 0.3;
   });
 
@@ -66,8 +67,8 @@ function getNodeSize(n) {
       // ✅ TRUE SAFE BOUNDS (FIXED)
       const left = -rect.width / 2 + size.w / 2 + PADDING;
       const right = rect.width / 2 - size.w / 2 - PADDING;
-      const top = -rect.height / 2 + size.h / 2 + PADDING;
-      const bottom = rect.height / 2 - size.h / 2 - PADDING;
+const top = -rect.height / 2 + 60 + size.h / 2;      // avoid navbar + padding
+const bottom = rect.height / 2 - 100 - size.h / 2;  // avoid hero text
 
       // HARD CLAMP + BOUNCE
       if (n.x > right) {
