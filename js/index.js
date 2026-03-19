@@ -18,10 +18,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ✅ GET REAL NODE SIZE (CRITICAL FIX)
 function getNodeSize(n) {
-  const r = n.getBoundingClientRect();
   return {
-    w: r.width,
-    h: r.height
+    w: n.offsetWidth,
+    h: n.offsetHeight
   };
 }
 
@@ -39,7 +38,7 @@ function getNodeSize(n) {
 const ySpacing = usableHeight / (rows + 1);
 
     n.x = (col + 1) * xSpacing - rect.width / 2;
-    n.y = (row + 1) * ySpacing - usableHeight / 2;
+    n.y = (row + 1) * ySpacing - rect.height / 2 + 70;
     n.z = (Math.random() - 0.5) * 200;
 
  n.vx = (Math.random() - 0.5) * 0.4;
@@ -83,10 +82,20 @@ function handleCollisions(nodes) {
         b.y += offsetY;
 
         // slight velocity bounce (natural feel)
-a.vx += offsetX * 0.02;
-a.vy += offsetY * 0.02;
-b.vx -= offsetX * 0.02;
-b.vy -= offsetY * 0.02;
+const force = 0.01;
+
+a.vx += offsetX * force;
+a.vy += offsetY * force;
+b.vx -= offsetX * force;
+b.vy -= offsetY * force;
+
+// ✅ LIMIT MAX SPEED
+const MAX_SPEED = 1.2;
+
+a.vx = Math.max(-MAX_SPEED, Math.min(MAX_SPEED, a.vx));
+a.vy = Math.max(-MAX_SPEED, Math.min(MAX_SPEED, a.vy));
+b.vx = Math.max(-MAX_SPEED, Math.min(MAX_SPEED, b.vx));
+b.vy = Math.max(-MAX_SPEED, Math.min(MAX_SPEED, b.vy));
       }
     }
   }
@@ -94,9 +103,8 @@ b.vy -= offsetY * 0.02;
 
 // Animate Function
   function animate() {
-
-    nodes.forEach(n => {
 handleCollisions(nodes);
+    nodes.forEach(n => {
       // MOVE
       n.x += n.vx;
       n.y += n.vy;
@@ -106,7 +114,7 @@ handleCollisions(nodes);
       if (n.z > 200) n.z = 200;
       if (n.z < -150) n.z = -150;
 
-      const scale = Math.max(0.9, 1 + n.z / 800);
+      const scale = Math.max(0.95, 1 + n.z / 1000);
 
       const size = getNodeSize(n);
 
