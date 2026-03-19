@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let width, height;
 
-  // ✅ CONTROL STATE
   let controlled = false;
 
   function updateBounds() {
@@ -58,30 +57,47 @@ document.addEventListener("DOMContentLoaded", () => {
     n.order = i;
   });
 
-  // 🔥 CONTROL TIMELINE
+  // 🔥 CONTROL TIMELINE WITH WAVE LOGIC
   setTimeout(() => {
+
     hero.classList.add("controlled");
     core.style.display = "flex";
 
-    // ✅ CINEMATIC SEQUENTIAL RESOLVE (organic timing)
+    // CORE WAVE START
+    core.classList.add("pulse-active");
+
     nodes.forEach((n, i) => {
+
+      // ✅ DISTANCE-BASED DELAY (WAVE EFFECT)
+      const dist = Math.hypot(n.baseX, n.baseY);
+
+      const delay = dist * 0.4 + (Math.random() * 120);
+
       setTimeout(() => {
 
-        // pulse effect
-        n.classList.add("resolved-active");
+        // STEP 1: node enters resolving state
+        n.classList.add("resolving");
 
-        // 🔥 CORE → NODE ENERGY HIT
-        n.querySelector(".node-inner").style.boxShadow = `
-          0 0 25px rgba(59,130,246,0.6),
-          0 0 50px rgba(59,130,246,0.3)
-        `;
-
-        // remove pulse after animation
+        // STEP 2: simulate wave hit moment
         setTimeout(() => {
-          n.classList.remove("resolved-active");
-        }, 400);
 
-      }, i * 180 + Math.random() * 120); // ✅ less robotic
+          n.classList.add("resolved-active");
+
+          // 🔥 CORE ENERGY IMPACT
+          n.querySelector(".node-inner").style.boxShadow = `
+            0 0 25px rgba(59,130,246,0.6),
+            0 0 50px rgba(59,130,246,0.3)
+          `;
+
+          // remove pulse
+          setTimeout(() => {
+            n.classList.remove("resolved-active");
+            n.classList.remove("resolving");
+          }, 400);
+
+        }, 250);
+
+      }, delay);
     });
 
   }, 2000);
@@ -95,14 +111,12 @@ document.addEventListener("DOMContentLoaded", () => {
     nodes.forEach(n => {
 
       if (!controlled) {
-        // CHAOS MODE (unchanged)
         n.angle += n.speed;
 
         n.x = n.baseX + Math.cos(n.angle) * n.floatX;
         n.y = n.baseY + Math.sin(n.angle) * n.floatY;
 
       } else {
-        // ✅ FIXED: NO COLLAPSE → ONLY INFLUENCE + STABILIZATION
 
         const coreX = 0;
         const coreY = 0;
@@ -110,11 +124,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const dx = coreX - n.x;
         const dy = coreY - n.y;
 
-        // subtle gravitational influence
+        // subtle influence (NO COLLAPSE)
         n.x += dx * 0.015;
         n.y += dy * 0.015;
 
-        // smooth stabilization to grid
+        // smooth stabilize
         n.x += (n.baseX - n.x) * 0.04;
         n.y += (n.baseY - n.y) * 0.04;
       }
@@ -138,7 +152,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const scale = 1 + n.z / 300;
 
-      // GLOW
       const glowStrength = n.z / 40;
       const glow = 10 + glowStrength * 30;
       const opacity = controlled ? 1 : (0.7 + glowStrength * 0.3);
@@ -165,5 +178,3 @@ document.addEventListener("DOMContentLoaded", () => {
   animate();
 
 });
-
-
