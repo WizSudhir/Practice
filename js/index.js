@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ===============================
-  // CONNECTION SYSTEM (FINAL FIX)
+  // CONNECTION SYSTEM (EDGE PERFECT)
   // ===============================
   function drawConnection(node) {
 
@@ -175,7 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (isStable) stableFrames++;
       else stableFrames = 0;
 
-      if (stableFrames > 10) {
+      if (stableFrames > 12) {
         callback();
       } else {
         requestAnimationFrame(check);
@@ -186,7 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ===============================
-  // CONTROL TIMELINE
+  // CONTROL TIMELINE (FINAL FIX)
   // ===============================
   setTimeout(() => {
 
@@ -195,7 +195,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     waitForStabilization(() => {
 
-      // 🔒 FULL FREEZE
+      // 🔒 FREEZE SYSTEM
       frozen = true;
 
       nodes.forEach(n => {
@@ -203,34 +203,38 @@ document.addEventListener("DOMContentLoaded", () => {
         n.y = n.baseY;
       });
 
-      // 🔥 WAIT FOR DOM PAINT (CRITICAL FIX)
+      // 🔥 EXTRA VISUAL SETTLE DELAY (KEY FIX)
       setTimeout(() => {
 
-        nodes.forEach((n, i) => {
+        requestAnimationFrame(() => {
 
-          setTimeout(() => {
-
-            const path = drawConnection(n);
-
-            path.getBoundingClientRect();
-            path.classList.add("active");
+          nodes.forEach((n, i) => {
 
             setTimeout(() => {
 
-              n.classList.add("resolved-active");
+              const path = drawConnection(n);
 
-              n.querySelector(".node-inner").style.boxShadow = `
-                0 0 25px rgba(34,197,94,0.7),
-                0 0 50px rgba(59,130,246,0.4)
-              `;
+              path.getBoundingClientRect();
+              path.classList.add("active");
 
-            }, 700);
+              setTimeout(() => {
 
-          }, i * 400 + Math.random() * 150);
+                n.classList.add("resolved-active");
+
+                n.querySelector(".node-inner").style.boxShadow = `
+                  0 0 25px rgba(34,197,94,0.7),
+                  0 0 50px rgba(59,130,246,0.4)
+                `;
+
+              }, 700);
+
+            }, i * 450 + Math.random() * 150);
+
+          });
 
         });
 
-      }, 50); // small delay ensures perfect measurement
+      }, 600); // 🔥 ensures nodes are visually settled
 
     });
 
