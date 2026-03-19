@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const BOTTOM_PADDING = 120;
 
   let width, height;
-
   let controlled = false;
 
   function updateBounds() {
@@ -123,46 +122,49 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", resetConnections);
 
   // ===============================
-  // CONTROL TIMELINE
+  // CONTROL TIMELINE (FIXED)
   // ===============================
   setTimeout(() => {
 
+    // ONLY activate system visually
     hero.classList.add("controlled");
     core.style.display = "flex";
 
-    nodes.forEach((n, i) => {
+    // let nodes settle first (IMPORTANT)
+    setTimeout(() => {
 
-      setTimeout(() => {
+      nodes.forEach((n, i) => {
 
-        // 🔥 draw connection
-        const path = drawConnection(n);
-
-        // trigger animation
-        path.getBoundingClientRect();
-        path.classList.add("active");
-
-        // after line reaches → resolve node
         setTimeout(() => {
 
-          n.classList.add("resolved-active");
+          // 1. DRAW LINE
+          const path = drawConnection(n);
 
-          n.querySelector(".node-inner").style.boxShadow = `
-            0 0 25px rgba(34,197,94,0.7),
-            0 0 50px rgba(59,130,246,0.4)
-          `;
+          // trigger animation
+          path.getBoundingClientRect();
+          path.classList.add("active");
 
+          // 2. AFTER LINE → RESOLVE NODE
           setTimeout(() => {
-            n.classList.remove("resolved-active");
-          }, 400);
 
-        }, 700);
+            n.classList.add("resolved-active");
 
-      }, i * 220 + Math.random() * 120);
+            n.querySelector(".node-inner").style.boxShadow = `
+              0 0 25px rgba(34,197,94,0.7),
+              0 0 50px rgba(59,130,246,0.4)
+            `;
 
-    });
+          }, 700); // sync with line animation
+
+        }, i * 400 + Math.random() * 150); // staggered timing
+
+      });
+
+    }, 800); // delay after core appears
 
   }, 2000);
 
+  // enable controlled physics AFTER visuals begin
   setTimeout(() => {
     controlled = true;
   }, 3500);
