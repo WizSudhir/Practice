@@ -81,7 +81,7 @@ z-index: 2;
   will-change: transform;
    pointer-events: auto;
   z-index: 3;
-  overflow: hidden;           /* ✅ prevent text overflow */
+  overflow: visible;           /* ✅ prevent text overflow */
    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
 }
 .node-inner {
@@ -172,18 +172,24 @@ z-index: 2;
 .leak {
   position: absolute;
   left: 50%;
-  bottom: -5px;
+  bottom: -12px; /* push clearly outside */
+  transform: translateX(-50%);
+  pointer-events: none;
 }
 .leak::after {
   content: "$";
   position: absolute;
-  color: red;
-  font-size: 8px;
+  color: #f87171;
+  font-size: 12px; /* bigger */
+  font-weight: 600;
+  text-shadow:
+    0 0 6px rgba(248,113,113,0.8),
+    0 0 12px rgba(248,113,113,0.4);
   animation: moneyFlow 1s linear infinite;
 }
 @keyframes moneyFlow {
-  0% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(30px); opacity: 0; }
+  0% {transform: translate(-50%, 0);opacity: 1;}
+  100% {transform: translate(-50%, 40px);opacity: 0;}
 }
 /* OVERLAY */
 .hero-overlay {
