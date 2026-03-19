@@ -59,36 +59,58 @@
 
 
 <!-- HERO -->
-<section class="hero-network">
+<section class="hero-system">
 
   <!-- BACKGROUND SYSTEM -->
-  <div class="network-bg">
+  <div class="system-bg" id="system">
 
-    <!-- SVG NETWORK -->
-    <svg class="network-svg" viewBox="0 0 1000 600">
-
-      <!-- CONNECTION LINES -->
-      <line x1="150" y1="200" x2="350" y2="150" class="link"/>
-      <line x1="350" y1="150" x2="550" y2="250" class="link"/>
-      <line x1="550" y1="250" x2="750" y2="200" class="link"/>
-      <line x1="350" y1="150" x2="350" y2="350" class="link"/>
-      <line x1="550" y1="250" x2="550" y2="400" class="link"/>
-
-    </svg>
+    <!-- CENTRAL CORE -->
+    <div class="core" id="core">
+      <span>PracticeGrid</span>
+    </div>
 
     <!-- NODES -->
-    <div class="node" data-label="Eligibility" style="top:200px; left:150px;"></div>
-    <div class="node" data-label="Authorization" style="top:150px; left:350px;"></div>
-    <div class="node" data-label="Coding" style="top:250px; left:550px;"></div>
-    <div class="node" data-label="Claims" style="top:200px; left:750px;"></div>
-    <div class="node" data-label="AR" style="top:350px; left:350px;"></div>
-    <div class="node" data-label="Payment" style="top:400px; left:550px;"></div>
+    <div class="node" data-type="eligibility">
+      <i data-lucide="shield-off"></i>
+      <span>Eligibility</span>
+      <div class="leak"></div>
+    </div>
 
-    <!-- REVENUE FLOW -->
-    <div class="flow"></div>
+    <div class="node" data-type="authorization">
+      <i data-lucide="file-warning"></i>
+      <span>Authorization</span>
+      <div class="leak"></div>
+    </div>
 
-    <!-- STACK -->
-    <div class="revenue-stack" id="revenueStack"></div>
+    <div class="node" data-type="coding">
+      <i data-lucide="code"></i>
+      <span>Coding</span>
+      <div class="leak"></div>
+    </div>
+
+    <div class="node" data-type="claims">
+      <i data-lucide="send"></i>
+      <span>Claims</span>
+      <div class="leak"></div>
+    </div>
+
+    <div class="node" data-type="ar">
+      <i data-lucide="refresh-ccw"></i>
+      <span>AR</span>
+      <div class="leak"></div>
+    </div>
+
+    <div class="node" data-type="payment">
+      <i data-lucide="dollar-sign"></i>
+      <span>Payment</span>
+      <div class="leak"></div>
+    </div>
+
+    <!-- SVG LINES -->
+    <svg class="connections"></svg>
+
+    <!-- REVENUE -->
+    <div class="revenue" id="revenue"></div>
 
   </div>
 
@@ -99,12 +121,14 @@
   <div class="container hero-content">
     <h1>From Chaos to Control.<br>Capture Every Dollar You Earn.</h1>
     <p>
-      PracticeGrid connects your entire revenue cycle,
-      eliminates inefficiencies, and ensures every dollar is collected.
+      We connect your entire revenue cycle, eliminate inefficiencies,
+      and ensure every dollar is collected.
     </p>
   </div>
 
 </section>
+
+<script src="https://unpkg.com/lucide@latest"></script>
 
 <!-- WHO WE ARE -->
 <section class="home-about">
