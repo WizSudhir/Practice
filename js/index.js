@@ -4,7 +4,8 @@ lucide.createIcons();
 // PRACTICEGRID SOLUTIONS - GLOBAL JS ARCHITECTURE
 // Production Optimized
 // ======================================================
-
+const NODE_WIDTH = 110;
+const NODE_HEIGHT = 80;
   const hero = document.querySelector(".hero-system");
   const nodes = document.querySelectorAll(".node");
 
@@ -27,8 +28,8 @@ lucide.createIcons();
 
   function animate() {
 
-    const maxX = rect.width / 2 - 80;
-    const maxY = rect.height / 2 - 120;
+    const maxX = rect.width / 2 - NODE_WIDTH;
+    const maxY = rect.height / 2 - NODE_HEIGHT;
     const NAV_HEIGHT = 80;
 
     nodes.forEach(n => {
