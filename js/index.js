@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (n.z > 200) n.z = 200;
       if (n.z < -150) n.z = -150;
 
-      const scale = Math.max(0.75, 1 + n.z / 600);
+      const scale = Math.max(0.9, 1 + n.z / 800);
 
       const size = getNodeSize(n, scale);
 
@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       // ALWAYS VISIBLE
-      n.style.opacity = 1;
+      n.style.opacity = 0.95;
 
       n.style.transform = `
         translate3d(${n.x}px, ${n.y}px, ${n.z}px)
