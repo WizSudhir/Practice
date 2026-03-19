@@ -18,14 +18,13 @@ document.addEventListener("DOMContentLoaded", () => {
   let startTime = performance.now();
 
   /* ===============================
-     PARALLAX (APPLE-LIKE)
+     PARALLAX (SMOOTH + PREMIUM)
   =============================== */
   let mouse = { x: 0, y: 0 };
   let parallax = { x: 0, y: 0 };
 
   window.addEventListener("mousemove", (e) => {
     const rect = hero.getBoundingClientRect();
-
     mouse.x = (e.clientX - rect.left) / rect.width - 0.5;
     mouse.y = (e.clientY - rect.top) / rect.height - 0.5;
   });
@@ -42,10 +41,14 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", updateBounds);
 
   /* ===============================
-     CHAOS GRID + ORBIT SETUP
+     SETUP (CHAOS + ORBIT)
   =============================== */
+  const total = nodes.length;
+  const half = Math.ceil(total / 2);
+
   nodes.forEach((n, i) => {
 
+    /* ---------- CHAOS GRID ---------- */
     const cols = 4;
     const rows = 2;
 
@@ -58,7 +61,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const col = i % cols;
     const row = Math.floor(i / cols);
 
-    // CHAOS BASE
     n.baseX = -width / 2 + SIDE_PADDING + zoneW * (col + 0.5);
     n.baseY = -height / 2 + TOP_PADDING + zoneH * (row + 0.5);
 
@@ -68,13 +70,16 @@ document.addEventListener("DOMContentLoaded", () => {
     n.angle = Math.random() * Math.PI * 2;
     n.speed = 0.002 + Math.random() * 0.002;
 
-    // ORBIT SETUP
-    const total = nodes.length;
-    const ring = i < total / 2 ? 0 : 1;
-    const ringCount = total / 2;
-    const index = i % ringCount;
+    /* ---------- ORBIT (FIXED DISTRIBUTION) ---------- */
+    const ring = i < half ? 0 : 1;
+    const ringCount = ring === 0 ? half : total - half;
+    const index = ring === 0 ? i : i - half;
 
-    n.baseAngle = (index / ringCount) * Math.PI * 2;
+    // 🔥 KEY: offset outer ring to prevent stacking
+    const offset = ring === 1 ? (Math.PI / ringCount) : 0;
+
+    n.baseAngle = (index / ringCount) * Math.PI * 2 + offset;
+
     n.baseRadius = ring === 0 ? 170 : 260;
 
     n.z = ring === 0 ? 25 : 10;
@@ -83,6 +88,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     n.x = n.baseX;
     n.y = n.baseY;
+
+    n.resolved = false;
   });
 
   function getTime() {
@@ -106,10 +113,10 @@ document.addEventListener("DOMContentLoaded", () => {
       scale(1.02)
     `;
 
-    nodes.forEach(n => {
+    nodes.forEach((n, i) => {
 
       /* ===============================
-         🌀 CHAOS (0–2s) — RESTORED
+         🌀 CHAOS
       =============================== */
       if (t < 2000) {
 
@@ -120,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       /* ===============================
-         ⚡ SNAP TO ORBIT (2s–3.2s)
+         ⚡ SNAP TO ORBIT
       =============================== */
       else if (t < 3200) {
 
@@ -129,13 +136,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const targetX = Math.cos(n.baseAngle) * n.baseRadius;
         const targetY = Math.sin(n.baseAngle) * n.baseRadius;
 
-        // STRONG SNAP (no softness)
         n.x += (targetX - n.x) * (0.12 + progress * 0.2);
         n.y += (targetY - n.y) * (0.12 + progress * 0.2);
       }
 
       /* ===============================
-         🧠 PERFECT ORBIT (3.2s+)
+         🧠 PERFECT ORBIT
       =============================== */
       else {
 
@@ -143,11 +149,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const time = (t - 3200) * 0.0006;
 
-        // PERFECT CIRCLE (no drift)
-        const angle = n.baseAngle + time;
+        const speedFactor = n.baseRadius === 170 ? 0.8 : 1.2;
+
+        const angle = n.baseAngle + time * speedFactor;
 
         n.x = Math.cos(angle) * n.baseRadius;
         n.y = Math.sin(angle) * n.baseRadius;
+
+        /* ===== RESOLVE STATE ===== */
+        if (!n.resolved) {
+
+          const delay = i * 120;
+
+          if (t > 3400 + delay) {
+
+            n.resolved = true;
+
+            // hide errors
+            n.querySelectorAll(".error-label").forEach(el => {
+              el.style.opacity = "0";
+            });
+
+            // stop leak
+            const leak = n.querySelector(".leak");
+            if (leak) leak.style.opacity = "0";
+
+            // show resolved
+            n.querySelectorAll(".resolved").forEach(el => {
+              el.style.opacity = "1";
+              el.style.transform = "translateY(0)";
+            });
+
+            // glow upgrade
+            n.querySelector(".node-inner").style.boxShadow =
+              `0 0 20px rgba(34,197,94,0.6),
+               0 0 40px rgba(59,130,246,0.3)`;
+          }
+        }
       }
 
       /* ===============================
@@ -168,14 +206,6 @@ document.addEventListener("DOMContentLoaded", () => {
         translate(-50%, -50%)
         scale(${scale})
       `;
-
-      const inner = n.querySelector(".node-inner");
-
-      if (controlled) {
-        inner.style.boxShadow =
-          `0 0 20px rgba(34,197,94,0.5),
-           0 0 40px rgba(59,130,246,0.3)`;
-      }
     });
 
     requestAnimationFrame(animate);
