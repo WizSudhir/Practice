@@ -63,7 +63,18 @@ z-index: 2;
   50% { transform: translate(-50%, -50%) scale(1.05); }
   100% { transform: translate(-50%, -50%) scale(0.9); }
 }
-
+.core::after {
+  content: "";
+  position: absolute;
+  inset: -40px;
+  border-radius: 50%;
+  border: 2px solid rgba(59,130,246,0.3);
+  animation: coreWave 1.5s ease-out forwards;
+}
+@keyframes coreWave {
+  0% {transform: scale(0.5);opacity: 0.8;}
+  100% {transform: scale(2.5);opacity: 0;}
+}
 /* NODES */
 .node {
   position: absolute;
@@ -302,5 +313,19 @@ z-index: 2;
 }
 /* Hide errors */
 .system-bg.controlled .error-label {
+  opacity: 0;
+}
+.node .resolved {
+  opacity: 0;
+  transform: translateY(6px);
+}
+.node.resolved-active .resolved {
+  opacity: 1;
+  transform: translateY(0);
+}
+.node.resolved-active .error-label {
+  opacity: 0;
+}
+.node.resolved-active .leak {
   opacity: 0;
 }
