@@ -24,6 +24,7 @@ background:
   radial-gradient(circle at 10% 20%, rgba(59,130,246,0.15), transparent 35%),
   radial-gradient(circle at 90% 80%, rgba(139,92,246,0.12), transparent 40%),
   linear-gradient(180deg, var(--bg-primary), var(--bg-secondary));
+z-index: 2;
 }
 /* Dim all nodes when hovering */
 .system-bg:hover .node {
@@ -33,6 +34,9 @@ background:
 .system-bg .node:hover {
   opacity: 1 !important;
   z-index: 5;
+}
+.system-bg:hover .node:hover {
+  opacity: 1 !important;
 }
 /* CORE */
 .core {
@@ -75,6 +79,7 @@ background:
   color: #e2e8f0;
   transform-style: preserve-3d;
   will-change: transform;
+   pointer-events: auto;
   z-index: 3;
   overflow: hidden;           /* ✅ prevent text overflow */
    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
