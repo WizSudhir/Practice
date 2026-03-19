@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let width, height;
   let controlled = false;
+  let frozen = false;
 
   function updateBounds() {
     width = hero.clientWidth;
@@ -171,29 +172,28 @@ document.addEventListener("DOMContentLoaded", () => {
     hero.classList.add("controlled");
     core.style.display = "flex";
 
-    // wait for nodes to truly settle
     waitForStabilization(() => {
 
-      // 🔒 SNAP to perfect final positions
+      // 🔒 FULL FREEZE
+      frozen = true;
+
       nodes.forEach(n => {
         n.x = n.baseX;
         n.y = n.baseY;
       });
 
-      // ensure DOM updates before drawing
+      // wait for DOM to reflect final transform
       requestAnimationFrame(() => {
 
         nodes.forEach((n, i) => {
 
           setTimeout(() => {
 
-            // 1. draw connection
             const path = drawConnection(n);
 
             path.getBoundingClientRect();
             path.classList.add("active");
 
-            // 2. resolve AFTER line completes
             setTimeout(() => {
 
               n.classList.add("resolved-active");
@@ -215,7 +215,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   }, 2000);
 
-  // enable controlled motion physics
   setTimeout(() => {
     controlled = true;
   }, 3500);
@@ -234,7 +233,7 @@ document.addEventListener("DOMContentLoaded", () => {
         n.x = n.baseX + Math.cos(n.angle) * n.floatX;
         n.y = n.baseY + Math.sin(n.angle) * n.floatY;
 
-      } else {
+      } else if (!frozen) {
 
         const dx = 0 - n.x;
         const dy = 0 - n.y;
@@ -244,9 +243,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         n.x += (n.baseX - n.x) * 0.04;
         n.y += (n.baseY - n.y) * 0.04;
+
+      } else {
+
+        // 🔒 HARD LOCK
+        n.x = n.baseX;
+        n.y = n.baseY;
       }
 
-      // bounds
       const left = -width / 2 + SIDE_PADDING + NODE_W / 2;
       const right = width / 2 - SIDE_PADDING - NODE_W / 2;
 
@@ -256,7 +260,6 @@ document.addEventListener("DOMContentLoaded", () => {
       n.x = Math.max(left, Math.min(right, n.x));
       n.y = Math.max(top, Math.min(bottom, n.y));
 
-      // depth
       if (!controlled) {
         n.z += Math.sin(n.angle) * 0.03;
       }
