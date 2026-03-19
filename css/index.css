@@ -8,6 +8,7 @@
   position: relative;
   min-height: 100vh;
   overflow: hidden;
+ z-index: 1;
 }
 /* BG */
 .system-bg {
@@ -57,6 +58,7 @@ background:
   color: #e2e8f0;
   transform-style: preserve-3d;
   will-change: transform;
+   z-index: 2;
 }
 .node-inner {
   display: flex;
