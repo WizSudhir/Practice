@@ -2,27 +2,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
   lucide.createIcons();
 
-  // ✅ FIXED: correct container
   const hero = document.querySelector(".hero-system");
+  const navbar = document.querySelector(".navbar");
   const nodes = document.querySelectorAll(".node");
 
-  const NODE_WIDTH = 160;
-  const NODE_HEIGHT = 110;
-  const PADDING = 20;
+  const NODE_WIDTH = 150;
+  const NODE_HEIGHT = 100;
 
-  let rect = {
-    width: hero.offsetWidth,
-    height: hero.offsetHeight
-  };
+  const PADDING = 30;
 
-  window.addEventListener("resize", () => {
+  let rect, navHeight;
+
+  function updateBounds() {
     rect = {
       width: hero.offsetWidth,
       height: hero.offsetHeight
     };
-  });
+    navHeight = navbar.offsetHeight;
+  }
 
-  // ✅ BETTER DISTRIBUTION (8 nodes balanced)
+  updateBounds();
+  window.addEventListener("resize", updateBounds);
+
+  // ✅ SAFE ZONE (THIS IS THE KEY FIX)
+  function getLimits(scale) {
+    const w = NODE_WIDTH * scale;
+    const h = NODE_HEIGHT * scale;
+
+    return {
+      left: -rect.width / 2 + w / 2 + PADDING,
+      right: rect.width / 2 - w / 2 - PADDING,
+      top: -rect.height / 2 + navHeight + h / 2 + PADDING,
+      bottom: rect.height / 2 - h / 2 - PADDING
+    };
+  }
+
+  // ✅ INITIAL POSITIONS (ALL VISIBLE GUARANTEED)
   nodes.forEach((n, i) => {
 
     const cols = 4;
@@ -32,41 +47,60 @@ document.addEventListener("DOMContentLoaded", () => {
     const col = i % cols;
     const row = Math.floor(i / cols);
 
-    n.x = (col - 1.5) * spacingX * 0.7;
-    n.y = (row - 0.8) * spacingY * 0.6;
-    n.z = (Math.random() - 0.5) * 400;
+    n.x = (col - 1.5) * spacingX * 0.6;
+    n.y = (row - 0.5) * spacingY * 0.5;
+    n.z = (Math.random() - 0.5) * 300;
 
-    // ✅ faster, smoother motion
-    n.vx = (Math.random() - 0.5) * 0.8;
-    n.vy = (Math.random() - 0.5) * 0.8;
-    n.vz = (Math.random() - 0.5) * 0.6;
+    n.vx = (Math.random() - 0.5) * 0.6;
+    n.vy = (Math.random() - 0.5) * 0.6;
+    n.vz = (Math.random() - 0.5) * 0.4;
   });
 
   function animate() {
 
     nodes.forEach(n => {
 
+      // MOVE
       n.x += n.vx;
       n.y += n.vy;
       n.z += n.vz;
 
-      const scale = 1 + n.z / 800;
+      // ✅ CLAMP DEPTH (PREVENT DISAPPEAR)
+      if (n.z > 300) n.z = 300;
+      if (n.z < -300) n.z = -300;
 
-      const dynamicWidth = NODE_WIDTH * scale;
-      const dynamicHeight = NODE_HEIGHT * scale;
+      const scale = Math.max(0.6, 1 + n.z / 800);
 
-      const maxX = rect.width / 2 - dynamicWidth - PADDING;
-      const maxY = rect.height / 2 - dynamicHeight - PADDING;
-      const topLimit = -rect.height / 2 + PADDING;
+      const limits = getLimits(scale);
 
-      // ✅ bounce (no clamp = smooth motion)
-      if (n.x > maxX || n.x < -maxX) n.vx *= -1;
-      if (n.y > maxY || n.y < topLimit) n.vy *= -1;
-      if (n.z > 400 || n.z < -400) n.vz *= -1;
+      // ✅ HARD POSITION CLAMP (NOT JUST BOUNCE)
+      if (n.x > limits.right) {
+        n.x = limits.right;
+        n.vx *= -1;
+      }
 
-      // ✅ FIX: prevent disappearing
-      const opacityRaw = 0.5 + (n.z + 400) / 800;
-      const opacity = Math.max(0.2, Math.min(1, opacityRaw));
+      if (n.x < limits.left) {
+        n.x = limits.left;
+        n.vx *= -1;
+      }
+
+      if (n.y > limits.bottom) {
+        n.y = limits.bottom;
+        n.vy *= -1;
+      }
+
+      if (n.y < limits.top) {
+        n.y = limits.top;
+        n.vy *= -1;
+      }
+
+      // DEPTH BOUNCE
+      if (n.z === 300 || n.z === -300) {
+        n.vz *= -1;
+      }
+
+      // ✅ SAFE OPACITY
+      const opacity = Math.max(0.4, Math.min(1, 0.6 + (n.z + 300) / 600));
 
       n.style.transform = `
         translate3d(${n.x}px, ${n.y}px, ${n.z}px)
