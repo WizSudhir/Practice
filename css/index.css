@@ -14,6 +14,7 @@
 position: absolute;
 inset: 0;
 perspective: 1200px;
+perspective-origin: 50% 50%;
 transform-style: preserve-3d;
 background:
   radial-gradient(circle at 10% 20%, rgba(59,130,246,0.15), transparent 35%),
