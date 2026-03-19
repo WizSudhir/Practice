@@ -2,24 +2,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
   lucide.createIcons();
 
-  const hero = document.querySelector(".hero-system");
+  const hero = document.querySelector(".system-bg"); // FIXED
+  const navbar = document.querySelector(".navbar");
+
   const nodes = document.querySelectorAll(".node");
 
-  const NODE_WIDTH = 110;
+  const NODE_WIDTH = 120;
   const NODE_HEIGHT = 80;
-  const NAV_HEIGHT = 80;
   const PADDING = 20;
 
   let rect = hero.getBoundingClientRect();
+  let navHeight = navbar.offsetHeight;
 
   window.addEventListener("resize", () => {
     rect = hero.getBoundingClientRect();
+    navHeight = navbar.offsetHeight;
   });
 
-  // INITIAL POSITIONS
+  // INITIAL POSITIONS (FIXED)
   nodes.forEach(n => {
-    n.x = (Math.random() - 0.5) * rect.width * 0.7;
-    n.y = (Math.random() - 0.5) * rect.height * 0.5;
+    n.x = (Math.random() - 0.5) * rect.width * 0.5;
+    n.y = (Math.random() - 0.5) * rect.height * 0.4;
     n.z = (Math.random() - 0.5) * 600;
 
     n.vx = (Math.random() - 0.5) * 0.5;
@@ -31,22 +34,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     nodes.forEach(n => {
 
-      // MOVE
       n.x += n.vx;
       n.y += n.vy;
       n.z += n.vz;
 
-      // DEPTH SCALE
       const scale = 1 + n.z / 800;
 
-      // DYNAMIC SIZE (important)
       const dynamicWidth = NODE_WIDTH * scale;
       const dynamicHeight = NODE_HEIGHT * scale;
 
-      // BOUNDS
       const maxX = rect.width / 2 - dynamicWidth - PADDING;
       const maxY = rect.height / 2 - dynamicHeight - PADDING;
-      const topLimit = -rect.height / 2 + NAV_HEIGHT + PADDING;
+
+      const topLimit = -rect.height / 2 + navHeight + PADDING;
 
       // HARD CLAMP
       if (n.x > maxX) n.x = maxX;
@@ -60,10 +60,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (n.y === maxY || n.y === topLimit) n.vy *= -1;
       if (n.z > 400 || n.z < -400) n.vz *= -1;
 
-      // DEPTH OPACITY
       const opacity = 0.5 + (n.z + 400) / 800;
 
-      // APPLY TRANSFORM
       n.style.transform = `
         translate3d(${n.x}px, ${n.y}px, ${n.z}px)
         translate(-50%, -50%)
