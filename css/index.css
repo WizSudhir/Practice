@@ -154,6 +154,7 @@ z-index: 2;
   align-items: center;
   gap: 2px;
    overflow: hidden;
+   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 .error-label {
   display: flex;
@@ -302,16 +303,10 @@ z-index: 2;
   opacity: 1;
   transform: translateY(0);
 }
-.node.resolved-active .error-label {
-  opacity: 0;
-}
 .node.resolved-active .leak {
   opacity: 0;
 }
 /* Hide errors */
-.system-bg.controlled .error-label {
-  opacity: 0;
-}
 .node .resolved {
   opacity: 0;
   transform: translateY(6px);
@@ -326,9 +321,18 @@ z-index: 2;
 }
 .node.resolved-active .error-label {
   opacity: 0;
+   animation: none;
+}
+.system-bg.controlled .errors {
+  opacity: 0;
 }
 .node.resolved-active .leak {
   opacity: 0;
+}
+.node.resolved-active .errors {
+  opacity: 0;
+  transform: scale(0.9);
+  pointer-events: none;
 }
 /* ===============================
    CONNECTION LINES
