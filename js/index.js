@@ -80,57 +80,86 @@ this.innerText = "Read More →";
 // ===============================
 // NEW HERO
 // ===============================
+lucide.createIcons();
+
 const nodes = document.querySelectorAll(".node");
-const links = document.querySelectorAll(".link");
-const stack = document.getElementById("revenueStack");
+const core = document.getElementById("core");
+const svg = document.querySelector(".connections");
+const revenue = document.getElementById("revenue");
 
-const revenueValues = ["+$120", "+$340", "+$780", "+$1240", "+$1890"];
+const center = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
 
-function runStory() {
+// RANDOM START POSITIONS
+nodes.forEach(n => {
+  n.style.left = Math.random() * 80 + "%";
+  n.style.top = Math.random() * 70 + "%";
+});
 
-  // RESET → CHAOS
-  nodes.forEach(n => {
-    n.style.background = "rgba(239,68,68,0.8)";
-    n.style.boxShadow = "0 0 10px rgba(239,68,68,0.7)";
-  });
+function drawLine(x1,y1,x2,y2){
+  const line = document.createElementNS("http://www.w3.org/2000/svg","line");
+  line.setAttribute("x1",x1);
+  line.setAttribute("y1",y1);
+  line.setAttribute("x2",x2);
+  line.setAttribute("y2",y2);
+  svg.appendChild(line);
 
-  links.forEach(l => {
-    l.style.stroke = "rgba(239,68,68,0.3)";
-    l.style.opacity = 0.3;
-  });
-
-  stack.innerHTML = "";
-
-  // STEP 2 → CONNECT SYSTEM
-  setTimeout(() => {
-
-    nodes.forEach(n => {
-      n.style.background = "#22c55e";
-      n.style.boxShadow = "0 0 12px rgba(34,197,94,0.8)";
-    });
-
-    links.forEach(l => {
-      l.style.stroke = "#22c55e";
-      l.style.opacity = 0.8;
-    });
-
-  }, 2500);
-
-  // STEP 3 → FLOW + STACK
-  setTimeout(() => {
-
-    revenueValues.forEach((val, i) => {
-      const el = document.createElement("div");
-      el.classList.add("revenue-item");
-      el.innerText = val;
-      el.style.animationDelay = i * 0.2 + "s";
-      stack.appendChild(el);
-    });
-
-  }, 4500);
+  setTimeout(()=> line.style.opacity = 1,100);
 }
 
-// LOOP
-runStory();
-setInterval(runStory, 8000);
+// MAIN STORY
+function run(){
+
+  // RESET
+  revenue.innerHTML = "";
+  svg.innerHTML = "";
+  core.style.opacity = 0;
+
+  nodes.forEach(n=>{
+    n.style.color = "#fca5a5";
+    n.querySelector(".leak").style.display = "block";
+  });
+
+  // PHASE 2 → CORE APPEARS
+  setTimeout(()=>{
+    core.style.opacity = 1;
+  },2000);
+
+  // PHASE 3 → ATTRACT + CONNECT
+  setTimeout(()=>{
+    nodes.forEach(n=>{
+      const rect = n.getBoundingClientRect();
+
+      n.style.left = "50%";
+      n.style.top = "50%";
+      n.style.transform = "translate(-50%,-50%)";
+
+      drawLine(rect.left, rect.top, center.x, center.y);
+    });
+  },3500);
+
+  // PHASE 4 → FIX
+  setTimeout(()=>{
+    nodes.forEach(n=>{
+      n.style.color = "#22c55e";
+      n.querySelector(".leak").style.display = "none";
+    });
+  },5000);
+
+  // PHASE 5 → REVENUE
+  setTimeout(()=>{
+    ["+$120","+ $340","+ $780","+ $1240"].forEach((v,i)=>{
+      const el = document.createElement("div");
+      el.className = "rev";
+      el.innerText = v;
+      el.style.animationDelay = i*0.2+"s";
+      revenue.appendChild(el);
+    });
+  },6500);
+
+}
+
+run();
+setInterval(run,9000);
+
+  
 }); // DOMContentLoaded close
