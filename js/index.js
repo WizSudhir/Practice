@@ -2,9 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   lucide.createIcons();
 
-  const hero = document.querySelector(".system-bg"); // FIXED
+  const hero = document.querySelector(".system-bg");
   const navbar = document.querySelector(".navbar");
-
   const nodes = document.querySelectorAll(".node");
 
   const NODE_WIDTH = 120;
@@ -19,22 +18,24 @@ document.addEventListener("DOMContentLoaded", () => {
     navHeight = navbar.offsetHeight;
   });
 
-  // INITIAL POSITIONS (FIXED)
-nodes.forEach((n, i) => {
-  const cols = 3;
-  const spacingX = rect.width / (cols + 1);
-  const spacingY = rect.height / 4;
-  const col = i % cols;
-  const row = Math.floor(i / cols);
+  // INITIAL POSITIONS (FIXED GRID)
+  nodes.forEach((n, i) => {
 
-  n.x = (col - 1) * spacingX * 0.6;
-  n.y = (row - 1.5) * spacingY * 0.5;
-  n.z = (Math.random() - 0.5) * 400;
+    const cols = 3;
+    const spacingX = rect.width / (cols + 1);
+    const spacingY = rect.height / 4;
 
-  n.vx = (Math.random() - 0.5) * 0.4;
-  n.vy = (Math.random() - 0.5) * 0.4;
-  n.vz = (Math.random() - 0.5) * 0.4;
-});
+    const col = i % cols;
+    const row = Math.floor(i / cols);
+
+    n.x = (col - 1) * spacingX * 0.5;
+    n.y = (row - 1) * spacingY * 0.4;
+    n.z = (Math.random() - 0.5) * 400;
+
+    n.vx = (Math.random() - 0.5) * 0.4;
+    n.vy = (Math.random() - 0.5) * 0.4;
+    n.vz = (Math.random() - 0.5) * 0.4;
+  });
 
   function animate() {
 
@@ -46,14 +47,11 @@ nodes.forEach((n, i) => {
 
       const scale = 1 + n.z / 800;
 
-      const rectNode = n.getBoundingClientRect();
-      const dynamicWidth = rectNode.width * scale;
-      const dynamicHeight = rectNode.height * scale;
+      const dynamicWidth = NODE_WIDTH * scale;
       const dynamicHeight = NODE_HEIGHT * scale;
 
       const maxX = rect.width / 2 - dynamicWidth - PADDING;
       const maxY = rect.height / 2 - dynamicHeight - PADDING;
-
       const topLimit = -rect.height / 2 + navHeight + PADDING;
 
       // HARD CLAMP
