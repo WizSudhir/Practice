@@ -333,29 +333,5 @@ z-index: 2;
 .node.resolved-active .leak {
   opacity: 0;
 }
-.connections {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 2;
-}
 
-.connections line {
-  stroke: url(#lineGradient);
-  stroke-width: 1.5;
-  opacity: 0;
-  stroke-dasharray: 6 6;
-  transition: opacity 0.6s ease;
-}
 
-.system-bg.controlled .connections line.active {
-  opacity: 0.6;
-  animation: flowLine 2s linear infinite;
-}
-
-@keyframes flowLine {
-  from { stroke-dashoffset: 0; }
-  to { stroke-dashoffset: -20; }
-}
