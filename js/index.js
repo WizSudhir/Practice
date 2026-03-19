@@ -10,15 +10,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const NODE_H = 100;
 
   const SIDE_PADDING = 40;
-  const TOP_SAFE = 60;
-  const BOTTOM_SAFE = 120;
+const TOP_SAFE = 0;
+const BOTTOM_SAFE = 0;
 
   let width, height;
 
-  function updateBounds() {
-    width = hero.clientWidth;
-    height = hero.clientHeight;
-  }
+function updateBounds() {
+  width = hero.clientWidth;
+  height = hero.clientHeight;
+}
 
   updateBounds();
   window.addEventListener("resize", updateBounds);
