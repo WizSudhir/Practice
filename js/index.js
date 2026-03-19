@@ -81,7 +81,9 @@ n.z = Math.max(0, Math.min(30, n.z));
 const glow = 10 + glowStrength * 30;
 const opacity = 0.7 + glowStrength * 0.3;
 
-n.style.opacity = opacity;
+if (!n.matches(':hover')) {
+  n.style.opacity = opacity;
+}
 
 n.querySelector(".node-inner").style.boxShadow = `
   0 0 ${glow}px rgba(59,130,246,0.25),
