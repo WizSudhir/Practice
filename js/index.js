@@ -62,12 +62,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ===============================
-  // CONNECTION SYSTEM (FIXED)
+  // CONNECTION SYSTEM
   // ===============================
   function drawConnection(node) {
 
     const coreRect = core.getBoundingClientRect();
-    const nodeRect = node.getBoundingClientRect(); // ✅ FIXED
+    const nodeRect = node.getBoundingClientRect();
     const svgRect = svg.getBoundingClientRect();
 
     const coreCenter = {
@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const nx = dx / dist;
     const ny = dy / dist;
 
-    // ===== CORE EDGE (circle)
+    // CORE EDGE
     const coreRadius = coreRect.width / 2;
 
     const coreEdge = {
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
       y: coreCenter.y + ny * coreRadius
     };
 
-    // ===== NODE EDGE (accurate box intersection)
+    // NODE EDGE (accurate box intersection)
     const halfW = nodeRect.width / 2;
     const halfH = nodeRect.height / 2;
 
@@ -111,7 +111,6 @@ document.addEventListener("DOMContentLoaded", () => {
       t = halfH / absNy;
     }
 
-    // small visual offset for perfect edge alignment
     const EDGE_OFFSET = 1.5;
 
     const nodeEdge = {
@@ -119,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
       y: nodeCenter.y - ny * (t - EDGE_OFFSET)
     };
 
-    // ===== PIXEL PERFECT SNAP
+    // PIXEL SNAP
     const start = {
       x: Math.floor(coreEdge.x - svgRect.left) + 0.5,
       y: Math.floor(coreEdge.y - svgRect.top) + 0.5
@@ -162,101 +161,64 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ===============================
-  // STABILITY DETECTION
-  // ===============================
-  function waitForStabilization(callback) {
-
-    let stableFrames = 0;
-    let lastPositions = new Map();
-
-    function check() {
-
-      let isStable = true;
-
-      nodes.forEach(n => {
-        const prev = lastPositions.get(n) || { x: n.x, y: n.y };
-
-        const dx = Math.abs(n.x - prev.x);
-        const dy = Math.abs(n.y - prev.y);
-
-        if (dx > 0.3 || dy > 0.3) {
-          isStable = false;
-        }
-
-        lastPositions.set(n, { x: n.x, y: n.y });
-      });
-
-      if (isStable) stableFrames++;
-      else stableFrames = 0;
-
-      if (stableFrames > 12) {
-        callback();
-      } else {
-        requestAnimationFrame(check);
-      }
-    }
-
-    check();
-  }
-
-  // ===============================
   // CONTROL TIMELINE
   // ===============================
   setTimeout(() => {
 
     hero.classList.add("controlled");
-    core.style.display = "flex";
 
-    waitForStabilization(() => {
+    // show core WITHOUT layout shift
+    core.style.visibility = "visible";
 
-      // 🔒 FREEZE SYSTEM (CRITICAL FIX)
-      frozen = true;
+    // 🔒 FREEZE SYSTEM
+    frozen = true;
 
-      nodes.forEach(n => {
-        n.x = n.baseX;
-        n.y = n.baseY;
+    // disable transitions (CRITICAL)
+    nodes.forEach(n => {
+      n.style.transition = "none";
+    });
 
-        // ✅ normalize transform BEFORE measuring
-        n.style.transform = `
-          translate3d(${n.baseX}px, ${n.baseY}px, 0)
-          translate(-50%, -50%)
-          scale(1)
-        `;
-      });
+    // set FINAL positions
+    nodes.forEach(n => {
+      n.x = n.baseX;
+      n.y = n.baseY;
 
-      // slight delay to allow layout settle
-      setTimeout(() => {
+      n.style.transform = `
+        translate3d(${n.baseX}px, ${n.baseY}px, 0)
+        translate(-50%, -50%)
+        scale(1)
+      `;
+    });
 
-        requestAnimationFrame(() => {
+    // 🔥 FORCE LAYOUT COMMIT
+    document.body.offsetHeight;
 
-          nodes.forEach((n, i) => {
+    // ✅ DOUBLE RAF (guaranteed paint)
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+
+        nodes.forEach((n, i) => {
+
+          setTimeout(() => {
+
+            const path = drawConnection(n);
+
+            path.getBoundingClientRect();
+            path.classList.add("active");
 
             setTimeout(() => {
+              n.classList.add("resolved-active");
 
-              const path = drawConnection(n);
+              n.querySelector(".node-inner").style.boxShadow = `
+                0 0 25px rgba(34,197,94,0.7),
+                0 0 50px rgba(59,130,246,0.4)
+              `;
+            }, 700);
 
-              path.getBoundingClientRect(); // force paint
-              path.classList.add("active");
-
-              setTimeout(() => {
-
-                n.classList.add("resolved-active");
-
-                n.querySelector(".node-inner").style.boxShadow = `
-                  0 0 25px rgba(34,197,94,0.7),
-                  0 0 50px rgba(59,130,246,0.4)
-                `;
-
-              }, 700);
-
-            }, i * 450 + Math.random() * 150);
-
-          });
-
+          }, i * 450);
         });
 
-      }, 300);
-
+      });
     });
 
   }, 2000);
@@ -270,6 +232,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // ===============================
   function animate() {
 
+    if (frozen) return; // ✅ HARD STOP (CRITICAL)
+
     nodes.forEach(n => {
 
       if (!controlled) {
@@ -279,7 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
         n.x = n.baseX + Math.cos(n.angle) * n.floatX;
         n.y = n.baseY + Math.sin(n.angle) * n.floatY;
 
-      } else if (!frozen) {
+      } else {
 
         const dx = -n.x;
         const dy = -n.y;
@@ -289,47 +253,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         n.x += (n.baseX - n.x) * 0.04;
         n.y += (n.baseY - n.y) * 0.04;
-
-      } else {
-
-        n.x = n.baseX;
-        n.y = n.baseY;
       }
-
-      const left = -width / 2 + SIDE_PADDING + NODE_W / 2;
-      const right = width / 2 - SIDE_PADDING - NODE_W / 2;
-
-      const top = -height / 2 + TOP_PADDING + NODE_H / 2;
-      const bottom = height / 2 - BOTTOM_PADDING - NODE_H / 2;
-
-      n.x = Math.max(left, Math.min(right, n.x));
-      n.y = Math.max(top, Math.min(bottom, n.y));
-
-      if (!controlled) {
-        n.z += Math.sin(n.angle) * 0.03;
-      }
-
-      n.z = Math.max(0, Math.min(30, n.z));
-
-      const scale = 1 + n.z / 300;
-
-      const glowStrength = n.z / 40;
-      const glow = 10 + glowStrength * 30;
-      const opacity = controlled ? 1 : (0.7 + glowStrength * 0.3);
-
-      if (!n.matches(':hover')) {
-        n.style.opacity = opacity;
-      }
-
-      n.querySelector(".node-inner").style.boxShadow = controlled
-        ? `0 0 20px rgba(34,197,94,0.4), 0 0 40px rgba(59,130,246,0.25)`
-        : `0 0 ${glow}px rgba(59,130,246,0.25),
-           0 0 ${glow * 2}px rgba(139,92,246,0.15)`;
 
       n.style.transform = `
         translate3d(${n.x}px, ${n.y}px, ${n.z}px)
         translate(-50%, -50%)
-        scale(${scale})
       `;
     });
 
