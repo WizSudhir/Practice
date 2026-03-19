@@ -50,6 +50,8 @@ background:
 /* NODES */
 .node {
   position: absolute;
+  top: 50%;
+  left: 50%;
   width: 110px;
   text-align: center;
   color: #f87171;
