@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const nodes = document.querySelectorAll(".node");
 
   const PADDING = 30;
+  const MAX_SPEED = 0.8;
 
   let rect;
 
@@ -16,13 +17,12 @@ document.addEventListener("DOMContentLoaded", () => {
   updateBounds();
   window.addEventListener("resize", updateBounds);
 
-  // ✅ GET REAL NODE SIZE (CRITICAL FIX)
-function getNodeSize(n) {
-  return {
-    w: n.offsetWidth,
-    h: n.offsetHeight
-  };
-}
+  function getNodeSize(n) {
+    return {
+      w: n.offsetWidth,
+      h: n.offsetHeight
+    };
+  }
 
   // ✅ INITIAL GRID (ALWAYS VISIBLE)
   nodes.forEach((n, i) => {
@@ -34,120 +34,103 @@ function getNodeSize(n) {
     const row = Math.floor(i / cols);
 
     const xSpacing = rect.width / (cols + 1);
-    const usableHeight = rect.height - 140; // 🔥 key fix
-const ySpacing = usableHeight / (rows + 1);
+    const usableHeight = rect.height - 140;
+    const ySpacing = usableHeight / (rows + 1);
 
     n.x = (col + 1) * xSpacing - rect.width / 2;
     n.y = (row + 1) * ySpacing - rect.height / 2 + 70;
-    n.z = (Math.random() - 0.5) * 200;
+    n.z = (Math.random() - 0.5) * 150;
 
- n.vx = (Math.random() - 0.5) * 0.4;
-n.vy = (Math.random() - 0.5) * 0.4;
-    n.vz = (Math.random() - 0.5) * 0.3;
+    n.vx = (Math.random() - 0.5) * 0.3;
+    n.vy = (Math.random() - 0.5) * 0.3;
+    n.vz = (Math.random() - 0.5) * 0.2;
   });
-// AVOID COLLISION
-function handleCollisions(nodes) {
 
-  for (let i = 0; i < nodes.length; i++) {
-    for (let j = i + 1; j < nodes.length; j++) {
+  // ✅ SOFT COLLISION (NO EXPLOSION)
+  function handleCollisions(nodes) {
 
-      const a = nodes[i];
-      const b = nodes[j];
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
 
-      const dx = b.x - a.x;
-      const dy = b.y - a.y;
+        const a = nodes[i];
+        const b = nodes[j];
 
-      const distance = Math.sqrt(dx * dx + dy * dy);
+        const dx = b.x - a.x;
+        const dy = b.y - a.y;
 
-      // approximate radius based on size
-      const sizeA = a.getBoundingClientRect().width / 2;
-      const sizeB = b.getBoundingClientRect().width / 2;
+        const distance = Math.sqrt(dx * dx + dy * dy) || 0.01;
 
-      const minDist = sizeA + sizeB + 10; // spacing buffer
+        const sizeA = a.offsetWidth / 2;
+        const sizeB = b.offsetWidth / 2;
 
-      if (distance < minDist) {
+        const minDist = sizeA + sizeB + 12;
 
-        const angle = Math.atan2(dy, dx);
+        if (distance < minDist) {
 
-        const overlap = (minDist - distance) / 2;
+          const overlap = (minDist - distance);
 
-        const offsetX = Math.cos(angle) * overlap;
-        const offsetY = Math.sin(angle) * overlap;
+          const nx = dx / distance;
+          const ny = dy / distance;
 
-        // push apart
-        a.x -= offsetX;
-        a.y -= offsetY;
+          // ✅ SOFT PUSH (no spikes)
+          const push = overlap * 0.02;
 
-        b.x += offsetX;
-        b.y += offsetY;
-
-        // slight velocity bounce (natural feel)
-const force = 0.01;
-
-a.vx += offsetX * force;
-a.vy += offsetY * force;
-b.vx -= offsetX * force;
-b.vy -= offsetY * force;
-
-// ✅ LIMIT MAX SPEED
-const MAX_SPEED = 1.2;
-
-a.vx = Math.max(-MAX_SPEED, Math.min(MAX_SPEED, a.vx));
-a.vy = Math.max(-MAX_SPEED, Math.min(MAX_SPEED, a.vy));
-b.vx = Math.max(-MAX_SPEED, Math.min(MAX_SPEED, b.vx));
-b.vy = Math.max(-MAX_SPEED, Math.min(MAX_SPEED, b.vy));
+          a.vx -= nx * push;
+          a.vy -= ny * push;
+          b.vx += nx * push;
+          b.vy += ny * push;
+        }
       }
     }
   }
-}
 
-// Animate Function
   function animate() {
-handleCollisions(nodes);
+
+    handleCollisions(nodes);
+
     nodes.forEach(n => {
+
+      // ✅ CENTER GRAVITY (keeps nodes visible)
+      n.vx += (-n.x) * 0.0008;
+      n.vy += (-n.y) * 0.0008;
+
       // MOVE
       n.x += n.vx;
       n.y += n.vy;
       n.z += n.vz;
 
-      // LIMIT DEPTH (NO DISAPPEAR)
-      if (n.z > 200) n.z = 200;
-      if (n.z < -150) n.z = -150;
+      // ✅ VELOCITY DAMPING (SMOOTH)
+      n.vx *= 0.96;
+      n.vy *= 0.96;
+      n.vz *= 0.98;
+
+      // ✅ LIMIT SPEED (prevents chaos)
+      n.vx = Math.max(-MAX_SPEED, Math.min(MAX_SPEED, n.vx));
+      n.vy = Math.max(-MAX_SPEED, Math.min(MAX_SPEED, n.vy));
+
+      // DEPTH
+      if (n.z > 150) n.z = 150;
+      if (n.z < -100) n.z = -100;
 
       const scale = Math.max(0.95, 1 + n.z / 1000);
 
       const size = getNodeSize(n);
 
-      // ✅ TRUE SAFE BOUNDS (FIXED)
       const left = -rect.width / 2 + size.w / 2 + PADDING;
       const right = rect.width / 2 - size.w / 2 - PADDING;
-const top = -rect.height / 2 + 60 + size.h / 2;      // avoid navbar + padding
-const bottom = rect.height / 2 - 100 - size.h / 2;  // avoid hero text
 
-      // HARD CLAMP + BOUNCE
-      if (n.x > right) {
-        n.x = right;
-        n.vx *= -1;
-      }
-      if (n.x < left) {
-        n.x = left;
-        n.vx *= -1;
-      }
+      const top = -rect.height / 2 + 60 + size.h / 2;
+      const bottom = rect.height / 2 - 100 - size.h / 2;
 
-      if (n.y > bottom) {
-        n.y = bottom;
-        n.vy *= -1;
-      }
-      if (n.y < top) {
-        n.y = top;
-        n.vy *= -1;
-      }
+      // ✅ HARD CLAMP AFTER ALL FORCES
+      n.x = Math.max(left, Math.min(right, n.x));
+      n.y = Math.max(top, Math.min(bottom, n.y));
 
-      if (n.z === 200 || n.z === -150) {
-        n.vz *= -1;
-      }
+      // slight bounce feel
+      if (n.x === left || n.x === right) n.vx *= -0.5;
+      if (n.y === top || n.y === bottom) n.vy *= -0.5;
 
-      // ALWAYS VISIBLE
+      // VISUALS
       n.style.opacity = 0.95;
 
       n.style.transform = `
