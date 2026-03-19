@@ -17,13 +17,13 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", updateBounds);
 
   // ✅ GET REAL NODE SIZE (CRITICAL FIX)
-  function getNodeSize(n, scale) {
-    const r = n.getBoundingClientRect();
-    return {
-      w: r.width * scale,
-      h: r.height * scale
-    };
-  }
+function getNodeSize(n) {
+  const r = n.getBoundingClientRect();
+  return {
+    w: r.width,
+    h: r.height
+  };
+}
 
   // ✅ INITIAL GRID (ALWAYS VISIBLE)
   nodes.forEach((n, i) => {
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const scale = Math.max(0.9, 1 + n.z / 800);
 
-      const size = getNodeSize(n, scale);
+      const size = getNodeSize(n);
 
       // ✅ TRUE SAFE BOUNDS (FIXED)
       const left = -rect.width / 2 + size.w / 2 + PADDING;
