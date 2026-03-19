@@ -80,8 +80,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
       } else {
         // ✅ CONTROL MODE (SMOOTH ALIGN)
-        n.x += (n.baseX - n.x) * 0.05;
-        n.y += (n.baseY - n.y) * 0.05;
+// CORE POSITION (center)
+const coreX = 0;
+const coreY = 0;
+
+// PHASE 1: pull toward core
+if (controlled && !n.locked) {
+  n.x += (coreX - n.x) * 0.06;
+  n.y += (coreY - n.y) * 0.06;
+
+  // once close → switch to structured layout
+  if (Math.abs(n.x) < 20 && Math.abs(n.y) < 20) {
+    n.locked = true;
+  }
+}
+
+// PHASE 2: spread into grid
+if (n.locked) {
+  n.x += (n.baseX - n.x) * 0.05;
+  n.y += (n.baseY - n.y) * 0.05;
+}
       }
 
       // SAFE BOUNDS
