@@ -72,10 +72,10 @@ document.addEventListener("DOMContentLoaded", () => {
       x = Math.max(left, Math.min(right, x));
       y = Math.max(top, Math.min(bottom, y));
 
-      n.z += Math.sin(n.angle) * 0.05;
-      n.z = Math.max(-30, Math.min(40, n.z));
+      n.z += Math.sin(n.angle) * 0.03;
+n.z = Math.max(0, Math.min(30, n.z));
 
-      const scale = 1 + n.z / 1000;
+      const scale = 1 + n.z / 300;
 
       n.style.transform = `
         translate3d(${x}px, ${y}px, ${n.z}px)
