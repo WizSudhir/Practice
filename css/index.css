@@ -54,7 +54,7 @@ background:
   left: 50%;
   width: 110px;
   text-align: center;
-  color: #f87171;
+  color: #e2e8f0;
   transform-style: preserve-3d;
   will-change: transform;
 }
@@ -65,7 +65,9 @@ background:
   gap: 6px;
 }
 .node-title {
-  font-size: 12px;
+  font-size: 13px;
+  color: #ffffff;
+  font-weight: 500;
 }
 /* ERRORS (ALWAYS VISIBLE IN CHAOS) */
 .errors {
@@ -75,7 +77,8 @@ background:
   display: flex;
   align-items: center;
   gap: 4px;
-  font-size: 10px;
+  font-size: 9px;
+   opacity: 0.9;
   color: #f87171;
   animation: blink 1s infinite;
 }
