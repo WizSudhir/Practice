@@ -5,9 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const hero = document.querySelector(".hero-system");
   const nodes = document.querySelectorAll(".node");
 
-  const PADDING = 30;
-  const MAX_SPEED = 0.6;
-  const MIN_SPEED = 0.15;
+  const PADDING = 40;
 
   let rect;
 
@@ -25,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 
-  // ✅ PERFECT GRID START (ALL 8 VISIBLE GUARANTEED)
+  // ✅ CREATE FIXED ZONES (NO OVERLAP GUARANTEED)
   nodes.forEach((n, i) => {
 
     const cols = 4;
@@ -34,90 +32,42 @@ document.addEventListener("DOMContentLoaded", () => {
     const col = i % cols;
     const row = Math.floor(i / cols);
 
-    const xSpacing = rect.width / (cols + 1);
-    const ySpacing = (rect.height - 140) / (rows + 1);
+    const zoneWidth = rect.width / cols;
+    const zoneHeight = (rect.height - 140) / rows;
 
-    n.x = (col + 1) * xSpacing - rect.width / 2;
-    n.y = (row + 1) * ySpacing - rect.height / 2 + 70;
+    const centerX = (col + 0.5) * zoneWidth - rect.width / 2;
+    const centerY = (row + 0.5) * zoneHeight - rect.height / 2 + 70;
+
+    n.baseX = centerX;
+    n.baseY = centerY;
+
+    n.x = centerX;
+    n.y = centerY;
     n.z = (Math.random() - 0.5) * 120;
 
-    // ✅ consistent initial speed
-    const angle = Math.random() * Math.PI * 2;
-    n.vx = Math.cos(angle) * MIN_SPEED;
-    n.vy = Math.sin(angle) * MIN_SPEED;
-    n.vz = (Math.random() - 0.5) * 0.2;
+    // smooth floating offsets
+    n.angle = Math.random() * Math.PI * 2;
+    n.speed = 0.005 + Math.random() * 0.005;
+
+    n.floatRadius = 20 + Math.random() * 20;
   });
-
-  // ✅ COLLISION = POSITION SEPARATION ONLY (NO VELOCITY CHAOS)
-  function handleCollisions(nodes) {
-
-    for (let i = 0; i < nodes.length; i++) {
-      for (let j = i + 1; j < nodes.length; j++) {
-
-        const a = nodes[i];
-        const b = nodes[j];
-
-        const dx = b.x - a.x;
-        const dy = b.y - a.y;
-
-        const dist = Math.sqrt(dx * dx + dy * dy) || 0.01;
-
-        const sizeA = a.offsetWidth / 2;
-        const sizeB = b.offsetWidth / 2;
-
-        const minDist = sizeA + sizeB + 10;
-
-        if (dist < minDist) {
-
-          const overlap = (minDist - dist) / 2;
-
-          const nx = dx / dist;
-          const ny = dy / dist;
-
-          // ✅ ONLY separate position (NO velocity explosion)
-          a.x -= nx * overlap;
-          a.y -= ny * overlap;
-
-          b.x += nx * overlap;
-          b.y += ny * overlap;
-        }
-      }
-    }
-  }
 
   function animate() {
 
-    handleCollisions(nodes);
-
     nodes.forEach(n => {
 
-      // MOVE
-      n.x += n.vx;
-      n.y += n.vy;
-      n.z += n.vz;
+      // ✅ SMOOTH FLOATING MOTION (NO CHAOS)
+      n.angle += n.speed;
 
-      // ✅ VERY LIGHT CENTER BIAS (NOT GRAVITY)
-      n.vx += (-n.x) * 0.0002;
-      n.vy += (-n.y) * 0.0002;
+      const offsetX = Math.cos(n.angle) * n.floatRadius;
+      const offsetY = Math.sin(n.angle) * n.floatRadius;
 
-      // ✅ DAMPING (smooth)
-      n.vx *= 0.985;
-      n.vy *= 0.985;
+      n.x = n.baseX + offsetX;
+      n.y = n.baseY + offsetY;
 
-      // ✅ KEEP MINIMUM MOTION (prevents freezing)
-      const speed = Math.sqrt(n.vx * n.vx + n.vy * n.vy);
+      // DEPTH (visual only)
+      n.z += (Math.sin(n.angle) * 0.3);
 
-      if (speed < MIN_SPEED) {
-        const angle = Math.random() * Math.PI * 2;
-        n.vx = Math.cos(angle) * MIN_SPEED;
-        n.vy = Math.sin(angle) * MIN_SPEED;
-      }
-
-      // LIMIT SPEED
-      n.vx = Math.max(-MAX_SPEED, Math.min(MAX_SPEED, n.vx));
-      n.vy = Math.max(-MAX_SPEED, Math.min(MAX_SPEED, n.vy));
-
-      // DEPTH
       if (n.z > 120) n.z = 120;
       if (n.z < -80) n.z = -80;
 
@@ -125,20 +75,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const size = getNodeSize(n);
 
+      // SAFE BOUNDS (never break layout)
       const left = -rect.width / 2 + size.w / 2 + PADDING;
       const right = rect.width / 2 - size.w / 2 - PADDING;
 
       const top = -rect.height / 2 + 60 + size.h / 2;
       const bottom = rect.height / 2 - 100 - size.h / 2;
 
-      // HARD CLAMP
-      if (n.x < left) { n.x = left; n.vx *= -0.6; }
-      if (n.x > right) { n.x = right; n.vx *= -0.6; }
+      // clamp (safety)
+      n.x = Math.max(left, Math.min(right, n.x));
+      n.y = Math.max(top, Math.min(bottom, n.y));
 
-      if (n.y < top) { n.y = top; n.vy *= -0.6; }
-      if (n.y > bottom) { n.y = bottom; n.vy *= -0.6; }
-
-      // RENDER
       n.style.opacity = 0.95;
 
       n.style.transform = `
