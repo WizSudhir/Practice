@@ -143,7 +143,7 @@ line {
   line-height: 1.15;
   font-weight: 500;
   letter-spacing: -0.02em;
-  max-width: 620px;
+  max-width: 780px;
   margin: 0 auto;
  color: rgba(255,255,255,0.9);
   display: -webkit-box;
@@ -152,7 +152,7 @@ line {
    overflow: hidden;
 }
 .hero-content p {
-  max-width: 520px;
+  max-width: 750px;
   margin: 10px auto 0;
   color: rgba(255,255,255,0.65);
 }
