@@ -266,14 +266,6 @@ z-index: 2;
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
 }
-/* Errors fade out */
-.system-bg.controlled .errors {
-  opacity: 0;
-}
-/* Leak stops */
-.system-bg.controlled .leak {
-  opacity: 0;
-}
 /* Clean system glow */
 .system-bg.controlled .node-inner {
   box-shadow:
@@ -306,10 +298,15 @@ z-index: 2;
   flex-shrink: 0;
    transform: translateY(1px);
 }
-/* Show in control */
-.system-bg.controlled .resolved {
+.node.resolved-active .resolved {
   opacity: 1;
   transform: translateY(0);
+}
+.node.resolved-active .error-label {
+  opacity: 0;
+}
+.node.resolved-active .leak {
+  opacity: 0;
 }
 /* Hide errors */
 .system-bg.controlled .error-label {
