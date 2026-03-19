@@ -87,7 +87,12 @@ const core = document.getElementById("core");
 const svg = document.querySelector(".connections");
 const revenue = document.getElementById("revenue");
 
-const center = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+function getCenter(){
+  return {
+    x: window.innerWidth / 2,
+    y: window.innerHeight / 2
+  };
+}
 
 // controlled orbit motion
 nodes.forEach((n, i) => {
@@ -140,17 +145,26 @@ function animate3D() {
 }
 animate3D();
 
-// CHAOS STATE CONTROL
-const hero = document.querySelector(".hero-system");
+// MAIN STORY
+function run(){
 
-function run() {
+  const hero = document.querySelector(".hero-system");
 
-  // CHAOS MODE ON
+  // CHAOS START
   hero.classList.add("chaos");
+
+  revenue.innerHTML = "";
+  svg.querySelectorAll("line").forEach(l => l.remove());
+  core.style.opacity = 0;
 
   nodes.forEach(n=>{
     n.style.color = "#fca5a5";
   });
+
+  // CORE APPEARS
+  setTimeout(()=>{
+    core.style.opacity = 1;
+  },2000);
 
   // FIX MODE
   setTimeout(()=>{
@@ -161,71 +175,8 @@ function run() {
     });
 
   },5000);
-}
-// MAIN STORY
-function run(){
 
-  // RESET
-  revenue.innerHTML = "";
-svg.querySelectorAll("line").forEach(l => l.remove());
-  core.style.opacity = 0;
-
-  nodes.forEach(n=>{
-    n.style.color = "#fca5a5";
-    n.querySelector(".leak").style.display = "block";
-  });
-
-  // PHASE 2 → CORE APPEARS
-  setTimeout(()=>{
-    core.style.opacity = 1;
-  },2000);
-
-  // PHASE 3 → ATTRACT + CONNECT
-  setTimeout(()=>{
-    nodes.forEach(n=>{
-      const rect = n.getBoundingClientRect();
-      n.style.transition = "all 1.5s ease";
-const currentLeft = n.offsetLeft;
-const currentTop = n.offsetTop;
-
-const dx = (center.x - currentLeft) * 0.2;
-const dy = (center.y - currentTop) * 0.2;
-
-n.style.transform = `translate(${dx}px, ${dy}px)`;
-
-const parentRect = svg.getBoundingClientRect();
-
-const x1 = rect.left - parentRect.left + rect.width / 2;
-const y1 = rect.top - parentRect.top + rect.height / 2;
-
-drawLine(x1, y1, center.x, center.y);
-    });
-  },3500);
-// CONNECT NODES TO EACH OTHER
-for(let i=0;i<nodes.length;i++){
-  for(let j=i+1;j<nodes.length;j++){
-    const a = nodes[i].getBoundingClientRect();
-    const b = nodes[j].getBoundingClientRect();
-
-    const parentRect = svg.getBoundingClientRect();
-
-    const x1 = a.left - parentRect.left + a.width/2;
-    const y1 = a.top - parentRect.top + a.height/2;
-    const x2 = b.left - parentRect.left + b.width/2;
-    const y2 = b.top - parentRect.top + b.height/2;
-
-    drawLine(x1,y1,x2,y2);
-  }
-}
-  // PHASE 4 → FIX
-  setTimeout(()=>{
-    nodes.forEach(n=>{
-      n.style.color = "#22c55e";
-      n.querySelector(".leak").style.display = "none";
-    });
-  },5000);
-
-  // PHASE 5 → REVENUE
+  // REVENUE
   setTimeout(()=>{
     ["+$120","+ $340","+ $780","+ $1240"].forEach((v,i)=>{
       const el = document.createElement("div");
@@ -235,7 +186,6 @@ for(let i=0;i<nodes.length;i++){
       revenue.appendChild(el);
     });
   },6500);
-
 }
 const issues = {
   eligibility: "Not Verified",
@@ -247,10 +197,11 @@ const issues = {
 };
 
 nodes.forEach(n => {
-  const label = n.querySelector(".error-label").innerText = "Resolved ✓";
-  if(label){
-    label.innerText = issues[n.dataset.type];
-  }
+  const labels = n.querySelectorAll(".error-label");
+
+  labels.forEach(label => {
+    label.innerText = issues[n.dataset.type] || "Error";
+  });
 });
 run();
 setInterval(run,9000);
