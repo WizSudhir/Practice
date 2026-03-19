@@ -104,11 +104,18 @@ function drawLine(x1,y1,x2,y2){
   line.setAttribute("y1",y1);
   line.setAttribute("x2",x2);
   line.setAttribute("y2",y2);
+  line.setAttribute("stroke","url(#lineGradient)");
+  line.setAttribute("stroke-width","1.5");
+  line.style.opacity = 0;
   svg.appendChild(line);
-
   setTimeout(()=> line.style.opacity = 1,100);
 }
+for(let i=0;i<nodes.length-1;i++){
+  const a = nodes[i].getBoundingClientRect();
+  const b = nodes[i+1].getBoundingClientRect();
 
+  drawLine(a.left,a.top,b.left,b.top);
+}
 // MAIN STORY
 function run(){
 
@@ -131,7 +138,7 @@ function run(){
   setTimeout(()=>{
     nodes.forEach(n=>{
       const rect = n.getBoundingClientRect();
-
+      n.style.transition = "all 1.5s ease";
       n.style.left = "50%";
       n.style.top = "50%";
       n.style.transform = "translate(-50%,-50%)";
