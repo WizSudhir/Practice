@@ -6,17 +6,17 @@
 ================================= */
 .hero-system {
   position: relative;
-  min-height: calc(100vh - 80px);
-   margin-top: 80px;
-  padding-top: 40px;     /* ✅ NEW */
-  padding-bottom: 80px;  /* ✅ NEW (space for text) */
+  height: calc(100vh - 80px);   /* ✅ FIXED HEIGHT (NOT MIN) */
+  margin-top: 80px;
   overflow: hidden;
- z-index: 1;
+  z-index: 1;
 }
 /* BG */
 .system-bg {
 position: absolute;
 inset: 0;
+padding-top: 60px;     /* instead of hero */
+padding-bottom: 120px;
 perspective: 1200px;
 perspective-origin: 50% 50%;
 transform-style: preserve-3d;
