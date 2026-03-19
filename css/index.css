@@ -285,6 +285,16 @@ z-index: 2;
   transform: translateY(5px);
   transition: all 0.5s ease;
 }
+.resolved i {
+  width: 10px;
+  height: 10px;
+}
+.resolved svg {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+   transform: translateY(1px);
+}
 /* Show in control */
 .system-bg.controlled .resolved {
   opacity: 1;
