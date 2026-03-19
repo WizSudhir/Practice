@@ -369,3 +369,13 @@ z-index: 2;
   height: 0;
   pointer-events: none;
 }
+.line-path {
+  fill: none;
+  stroke: #4ade80;
+  stroke-width: 2;
+
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+
+  transition: stroke-dashoffset 0.6s ease;
+}
