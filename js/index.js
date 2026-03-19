@@ -121,7 +121,7 @@ function run(){
 
   // RESET
   revenue.innerHTML = "";
-  svg.innerHTML = "";
+svg.querySelectorAll("line").forEach(l => l.remove());
   core.style.opacity = 0;
 
   nodes.forEach(n=>{
@@ -139,14 +139,38 @@ function run(){
     nodes.forEach(n=>{
       const rect = n.getBoundingClientRect();
       n.style.transition = "all 1.5s ease";
-      n.style.left = "50%";
-      n.style.top = "50%";
-      n.style.transform = "translate(-50%,-50%)";
+const currentLeft = n.offsetLeft;
+const currentTop = n.offsetTop;
 
-      drawLine(rect.left, rect.top, center.x, center.y);
+const dx = (center.x - currentLeft) * 0.2;
+const dy = (center.y - currentTop) * 0.2;
+
+n.style.transform = `translate(${dx}px, ${dy}px)`;
+
+const parentRect = svg.getBoundingClientRect();
+
+const x1 = rect.left - parentRect.left + rect.width / 2;
+const y1 = rect.top - parentRect.top + rect.height / 2;
+
+drawLine(x1, y1, center.x, center.y);
     });
   },3500);
+// CONNECT NODES TO EACH OTHER
+for(let i=0;i<nodes.length;i++){
+  for(let j=i+1;j<nodes.length;j++){
+    const a = nodes[i].getBoundingClientRect();
+    const b = nodes[j].getBoundingClientRect();
 
+    const parentRect = svg.getBoundingClientRect();
+
+    const x1 = a.left - parentRect.left + a.width/2;
+    const y1 = a.top - parentRect.top + a.height/2;
+    const x2 = b.left - parentRect.left + b.width/2;
+    const y2 = b.top - parentRect.top + b.height/2;
+
+    drawLine(x1,y1,x2,y2);
+  }
+}
   // PHASE 4 → FIX
   setTimeout(()=>{
     nodes.forEach(n=>{
@@ -167,7 +191,22 @@ function run(){
   },6500);
 
 }
+const issues = {
+  eligibility: "Not Verified",
+  authorization: "Auth Missing",
+  coding: "Incorrect CPT",
+  claims: "Rejected",
+  ar: "No Follow-Up",
+  payment: "Underpaid"
+};
 
+nodes.forEach(n => {
+  const label = n.querySelector(".error-label");
+  if(label){
+    label.innerText = issues[n.dataset.type];
+  }
+});
+n.querySelector(".error-label").innerText = "Resolved ✓";
 run();
 setInterval(run,9000);
 
