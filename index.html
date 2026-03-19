@@ -70,61 +70,131 @@
     </div>
 
     <!-- NODES -->
-    <div class="node" data-type="eligibility">
-      <i data-lucide="shield-off"></i>
-      <span>Eligibility</span>
-      <div class="error-label">Missing Co-Pay</div>
-      <div class="error-label">Non-Covered Services</div>
-      <div class="leak"></div>
+<div class="node" data-type="eligibility">
+  <div class="node-inner">
+    <i data-lucide="shield-off"></i>
+    <span class="node-title">Eligibility</span>
+  </div>
+  <div class="errors">
+    <div class="error-label">
+      <i data-lucide="alert-triangle"></i>
+      Missing Co-Pay
     </div>
-
-    <div class="node" data-type="authorization">
-      <i data-lucide="file-warning"></i>
-      <span>Authorization</span>
-      <div class="error-label">Delayed Auth</div>
-      <div class="error-label">Auth Mismatch</div>
-      <div class="leak"></div>
+    <div class="error-label">
+      <i data-lucide="alert-triangle"></i>
+      Non-Covered Services
     </div>
+  </div>
+  <div class="leak"></div>
+</div>
 
-    <div class="node" data-type="coding">
-      <i data-lucide="code"></i>
-      <span>Coding</span>
-      <div class="error-label">ICD-CPT Mismatch</div>
-      <div class="error-label">Missing Modifier</div>
-      <div class="leak"></div>
+<div class="node" data-type="authorization">
+  <div class="node-inner">
+    <i data-lucide="file-warning"></i>
+    <span class="node-title">Authorization</span>
+  </div>
+  <div class="errors">
+    <div class="error-label">
+      <i data-lucide="alert-triangle"></i>
+      Delayed Auth
     </div>
-
-    <div class="node" data-type="claims">
-      <i data-lucide="send"></i>
-      <span>Claims</span>
-      <div class="error-label">TFL Expired</div>
-      <div class="error-label">Appeal Pending</div>
-      <div class="leak"></div>
+    <div class="error-label">
+      <i data-lucide="alert-triangle"></i>
+      Auth Mismatch
     </div>
+  </div>
+  <div class="leak"></div>
+</div>    
 
-    <div class="node" data-type="ar">
-      <i data-lucide="refresh-ccw"></i>
-      <span>AR</span>
-      <div class="error-label">Denial</div>
-      <div class="error-label">Medical Records request</div>
-      <div class="leak"></div>
+<div class="node" data-type="coding">
+  <div class="node-inner">
+    <i data-lucide="code"></i>
+    <span class="node-title">Coding</span>
+  </div>
+  <div class="errors">
+    <div class="error-label">
+      <i data-lucide="alert-triangle"></i>
+     ICD-CPT Mismatch
     </div>
-
-    <div class="node" data-type="payment">
-      <i data-lucide="dollar-sign"></i>
-      <span>Payment</span>
-      <div class="error-label">Underpayments</div>
-      <div class="error-label">Posting Error</div>
-      <div class="leak"></div>
+    <div class="error-label">
+      <i data-lucide="alert-triangle"></i>
+      Missing Modifier
     </div>
+  </div>
+  <div class="leak"></div>
+</div>
 
-    <div class="node" data-type="credentialing">
-      <i data-lucide="badge-check"></i>
-      <span>Credentialing</span>
-      <div class="error-label">Out-Of-Network</div>
-      <div class="error-label">Pending W-9</div>
-      <div class="leak"></div>
-    </div>    
+<div class="node" data-type="claims">
+  <div class="node-inner">
+    <i data-lucide="send"></i>
+    <span class="node-title">Claims</span>
+  </div>
+  <div class="errors">
+    <div class="error-label">
+      <i data-lucide="alert-triangle"></i>
+     TFL Expired
+    </div>
+    <div class="error-label">
+      <i data-lucide="alert-triangle"></i>
+      Appeal Pending
+    </div>
+  </div>
+  <div class="leak"></div>
+</div>    
+
+<div class="node" data-type="ar">
+  <div class="node-inner">
+    <i data-lucide="refresh-ccw"></i>
+    <span class="node-title">AR</span>
+  </div>
+  <div class="errors">
+    <div class="error-label">
+      <i data-lucide="alert-triangle"></i>
+     Insurance Denial
+    </div>
+    <div class="error-label">
+      <i data-lucide="alert-triangle"></i>
+      Medical Records request
+    </div>
+  </div>
+  <div class="leak"></div>
+</div>
+
+<div class="node" data-type="payment">
+  <div class="node-inner">
+    <i data-lucide="dollar-sign"></i>
+    <span class="node-title">Payment</span>
+  </div>
+  <div class="errors">
+    <div class="error-label">
+      <i data-lucide="alert-triangle"></i>
+     Underpayments
+    </div>
+    <div class="error-label">
+      <i data-lucide="alert-triangle"></i>
+      Posting Error
+    </div>
+  </div>
+  <div class="leak"></div>
+</div>
+
+<div class="node" data-type="credentialing">
+  <div class="node-inner">
+    <i data-lucide="badge-check"></i>
+    <span class="node-title">Credentialing</span>
+  </div>
+  <div class="errors">
+    <div class="error-label">
+      <i data-lucide="alert-triangle"></i>
+     Out-Of-Network
+    </div>
+    <div class="error-label">
+      <i data-lucide="alert-triangle"></i>
+      Pending W-9
+    </div>
+  </div>
+  <div class="leak"></div>
+</div>  
     
     <!-- SVG LINES -->
 <svg class="connections">
