@@ -59,49 +59,73 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ===============================
-  // CONNECTION SYSTEM
+  // CONNECTION SYSTEM (FINAL FIX)
   // ===============================
-  function getCenter(el) {
-    const rect = el.getBoundingClientRect();
-    const parentRect = svg.getBoundingClientRect();
+  function drawConnection(node) {
 
-    return {
-      x: rect.left + rect.width / 2 - parentRect.left,
-      y: rect.top + rect.height / 2 - parentRect.top
+    const coreRect = core.getBoundingClientRect();
+    const nodeInner = node.querySelector(".node-inner");
+    const nodeRect = nodeInner.getBoundingClientRect();
+    const svgRect = svg.getBoundingClientRect();
+
+    const coreCenter = {
+      x: coreRect.left + coreRect.width / 2,
+      y: coreRect.top + coreRect.height / 2
     };
-  }
 
-  function createElbowPath(start, end) {
+    const nodeCenter = {
+      x: nodeRect.left + nodeRect.width / 2,
+      y: nodeRect.top + nodeRect.height / 2
+    };
+
+    const dx = nodeCenter.x - coreCenter.x;
+    const dy = nodeCenter.y - coreCenter.y;
+    const angle = Math.atan2(dy, dx);
+
+    const coreRadius = coreRect.width / 2;
+
+    const nodeHalfW = nodeRect.width / 2;
+    const nodeHalfH = nodeRect.height / 2;
+
+    const tan = Math.abs(dy / dx);
+
+    let nodeEdgeX, nodeEdgeY;
+
+    if (tan < nodeHalfH / nodeHalfW) {
+      nodeEdgeX = nodeCenter.x - Math.sign(dx) * nodeHalfW;
+      nodeEdgeY = nodeCenter.y - Math.sign(dx) * nodeHalfW * (dy / dx);
+    } else {
+      nodeEdgeY = nodeCenter.y - Math.sign(dy) * nodeHalfH;
+      nodeEdgeX = nodeCenter.x - Math.sign(dy) * nodeHalfH * (dx / dy);
+    }
+
+    const coreEdge = {
+      x: coreCenter.x + Math.cos(angle) * coreRadius,
+      y: coreCenter.y + Math.sin(angle) * coreRadius
+    };
+
+    const start = {
+      x: coreEdge.x - svgRect.left,
+      y: coreEdge.y - svgRect.top
+    };
+
+    const end = {
+      x: nodeEdgeX - svgRect.left,
+      y: nodeEdgeY - svgRect.top
+    };
+
     const midX = start.x + (end.x - start.x) * 0.5;
 
-    return `
+    const d = `
       M ${start.x} ${start.y}
       L ${midX} ${start.y}
       L ${midX} ${end.y}
       L ${end.x} ${end.y}
     `;
-  }
-
-  function drawConnection(node) {
-
-    const corePos = getCenter(core);
-    const nodePos = getCenter(node);
-
-    const angle = Math.atan2(nodePos.y - corePos.y, nodePos.x - corePos.x);
-
-    const coreEdge = {
-      x: corePos.x + Math.cos(angle) * 70,
-      y: corePos.y + Math.sin(angle) * 70
-    };
-
-    const nodeEdge = {
-      x: nodePos.x - Math.cos(angle) * 70,
-      y: nodePos.y - Math.sin(angle) * 50
-    };
 
     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
 
-    path.setAttribute("d", createElbowPath(coreEdge, nodeEdge));
+    path.setAttribute("d", d);
     path.setAttribute("vector-effect", "non-scaling-stroke");
     path.classList.add("connection-path");
 
@@ -148,11 +172,8 @@ document.addEventListener("DOMContentLoaded", () => {
         lastPositions.set(n, { x: n.x, y: n.y });
       });
 
-      if (isStable) {
-        stableFrames++;
-      } else {
-        stableFrames = 0;
-      }
+      if (isStable) stableFrames++;
+      else stableFrames = 0;
 
       if (stableFrames > 10) {
         callback();
@@ -182,8 +203,8 @@ document.addEventListener("DOMContentLoaded", () => {
         n.y = n.baseY;
       });
 
-      // wait for DOM to reflect final transform
-      requestAnimationFrame(() => {
+      // 🔥 WAIT FOR DOM PAINT (CRITICAL FIX)
+      setTimeout(() => {
 
         nodes.forEach((n, i) => {
 
@@ -209,7 +230,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         });
 
-      });
+      }, 50); // small delay ensures perfect measurement
 
     });
 
@@ -235,8 +256,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       } else if (!frozen) {
 
-        const dx = 0 - n.x;
-        const dy = 0 - n.y;
+        const dx = -n.x;
+        const dy = -n.y;
 
         n.x += dx * 0.015;
         n.y += dy * 0.015;
@@ -246,7 +267,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       } else {
 
-        // 🔒 HARD LOCK
         n.x = n.baseX;
         n.y = n.baseY;
       }
