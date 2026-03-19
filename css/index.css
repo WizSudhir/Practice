@@ -359,4 +359,9 @@ z-index: 2;
 .connection-path.active {
   stroke-dashoffset: 0;
 }
-
+.anchor {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
