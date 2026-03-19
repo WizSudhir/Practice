@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const hero = document.querySelector(".system-bg");
   const nodes = document.querySelectorAll(".node");
   const core = document.querySelector(".core");
+  const svg = document.getElementById("connections");
 
   const NODE_W = 140;
   const NODE_H = 100;
@@ -15,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let width, height;
 
-  // ✅ CONTROL STATE
   let controlled = false;
 
   function updateBounds() {
@@ -26,7 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
   updateBounds();
   window.addEventListener("resize", updateBounds);
 
-  // INITIAL SETUP
+  // ===============================
+  // POSITION SETUP
+  // ===============================
   nodes.forEach((n, i) => {
 
     const cols = 4;
@@ -54,34 +56,109 @@ document.addEventListener("DOMContentLoaded", () => {
 
     n.x = n.baseX;
     n.y = n.baseY;
-
-    n.order = i;
   });
 
-  // 🔥 CONTROL TIMELINE
+  // ===============================
+  // CONNECTION SYSTEM
+  // ===============================
+  function getCenter(el) {
+    const rect = el.getBoundingClientRect();
+    const parentRect = svg.getBoundingClientRect();
+
+    return {
+      x: rect.left + rect.width / 2 - parentRect.left,
+      y: rect.top + rect.height / 2 - parentRect.top
+    };
+  }
+
+  function createElbowPath(start, end) {
+    const midX = start.x + (end.x - start.x) * 0.5;
+
+    return `
+      M ${start.x} ${start.y}
+      L ${midX} ${start.y}
+      L ${midX} ${end.y}
+      L ${end.x} ${end.y}
+    `;
+  }
+
+  function drawConnection(node) {
+
+    const corePos = getCenter(core);
+    const nodePos = getCenter(node);
+
+    const angle = Math.atan2(nodePos.y - corePos.y, nodePos.x - corePos.x);
+
+    const coreEdge = {
+      x: corePos.x + Math.cos(angle) * 70,
+      y: corePos.y + Math.sin(angle) * 70
+    };
+
+    const nodeEdge = {
+      x: nodePos.x - Math.cos(angle) * 70,
+      y: nodePos.y - Math.sin(angle) * 50
+    };
+
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+
+    path.setAttribute("d", createElbowPath(coreEdge, nodeEdge));
+    path.classList.add("connection-path");
+
+    svg.appendChild(path);
+
+    return path;
+  }
+
+  function resetConnections() {
+    svg.innerHTML = `
+      <defs>
+        <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#22c55e"/>
+          <stop offset="100%" stop-color="#3b82f6"/>
+        </linearGradient>
+      </defs>
+    `;
+  }
+
+  window.addEventListener("resize", resetConnections);
+
+  // ===============================
+  // CONTROL TIMELINE
+  // ===============================
   setTimeout(() => {
+
     hero.classList.add("controlled");
     core.style.display = "flex";
 
-    // ✅ CINEMATIC SEQUENTIAL RESOLVE (organic timing)
     nodes.forEach((n, i) => {
+
       setTimeout(() => {
 
-        // pulse effect
-        n.classList.add("resolved-active");
+        // 🔥 draw connection
+        const path = drawConnection(n);
 
-        // 🔥 CORE → NODE ENERGY HIT
-        n.querySelector(".node-inner").style.boxShadow = `
-          0 0 25px rgba(59,130,246,0.6),
-          0 0 50px rgba(59,130,246,0.3)
-        `;
+        // trigger animation
+        path.getBoundingClientRect();
+        path.classList.add("active");
 
-        // remove pulse after animation
+        // after line reaches → resolve node
         setTimeout(() => {
-          n.classList.remove("resolved-active");
-        }, 400);
 
-      }, i * 180 + Math.random() * 120); // ✅ less robotic
+          n.classList.add("resolved-active");
+
+          n.querySelector(".node-inner").style.boxShadow = `
+            0 0 25px rgba(34,197,94,0.7),
+            0 0 50px rgba(59,130,246,0.4)
+          `;
+
+          setTimeout(() => {
+            n.classList.remove("resolved-active");
+          }, 400);
+
+        }, 700);
+
+      }, i * 220 + Math.random() * 120);
+
     });
 
   }, 2000);
@@ -90,36 +167,33 @@ document.addEventListener("DOMContentLoaded", () => {
     controlled = true;
   }, 3500);
 
+  // ===============================
+  // ANIMATION LOOP
+  // ===============================
   function animate() {
 
     nodes.forEach(n => {
 
       if (!controlled) {
-        // CHAOS MODE (unchanged)
+
         n.angle += n.speed;
 
         n.x = n.baseX + Math.cos(n.angle) * n.floatX;
         n.y = n.baseY + Math.sin(n.angle) * n.floatY;
 
       } else {
-        // ✅ FIXED: NO COLLAPSE → ONLY INFLUENCE + STABILIZATION
 
-        const coreX = 0;
-        const coreY = 0;
+        const dx = 0 - n.x;
+        const dy = 0 - n.y;
 
-        const dx = coreX - n.x;
-        const dy = coreY - n.y;
-
-        // subtle gravitational influence
         n.x += dx * 0.015;
         n.y += dy * 0.015;
 
-        // smooth stabilization to grid
         n.x += (n.baseX - n.x) * 0.04;
         n.y += (n.baseY - n.y) * 0.04;
       }
 
-      // SAFE BOUNDS
+      // bounds
       const left = -width / 2 + SIDE_PADDING + NODE_W / 2;
       const right = width / 2 - SIDE_PADDING - NODE_W / 2;
 
@@ -129,7 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
       n.x = Math.max(left, Math.min(right, n.x));
       n.y = Math.max(top, Math.min(bottom, n.y));
 
-      // DEPTH
+      // depth
       if (!controlled) {
         n.z += Math.sin(n.angle) * 0.03;
       }
@@ -138,7 +212,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const scale = 1 + n.z / 300;
 
-      // GLOW
       const glowStrength = n.z / 40;
       const glow = 10 + glowStrength * 30;
       const opacity = controlled ? 1 : (0.7 + glowStrength * 0.3);
@@ -165,5 +238,3 @@ document.addEventListener("DOMContentLoaded", () => {
   animate();
 
 });
-
-
