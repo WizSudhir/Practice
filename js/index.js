@@ -9,16 +9,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const NODE_W = 140;
   const NODE_H = 100;
 
-  let width, height;
+  const SIDE_PADDING = 40;
+  const TOP_PADDING = 60;
+  const BOTTOM_PADDING = 120;
 
-  /* ===============================
-     SYSTEM STATE
-  =============================== */
+  let width, height;
   let controlled = false;
   let startTime = performance.now();
 
   /* ===============================
-     PARALLAX (APPLE LEVEL)
+     PARALLAX (APPLE-LIKE)
   =============================== */
   let mouse = { x: 0, y: 0 };
   let parallax = { x: 0, y: 0 };
@@ -42,48 +42,49 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", updateBounds);
 
   /* ===============================
-     ORBITAL BASE POSITIONS
+     CHAOS GRID + ORBIT SETUP
   =============================== */
-  function setupOrbit() {
+  nodes.forEach((n, i) => {
 
+    const cols = 4;
+    const rows = 2;
+
+    const usableWidth = width - SIDE_PADDING * 2;
+    const usableHeight = height - TOP_PADDING - BOTTOM_PADDING;
+
+    const zoneW = usableWidth / cols;
+    const zoneH = usableHeight / rows;
+
+    const col = i % cols;
+    const row = Math.floor(i / cols);
+
+    // CHAOS BASE
+    n.baseX = -width / 2 + SIDE_PADDING + zoneW * (col + 0.5);
+    n.baseY = -height / 2 + TOP_PADDING + zoneH * (row + 0.5);
+
+    n.floatX = Math.max(10, zoneW / 2 - NODE_W / 2 - 6);
+    n.floatY = Math.max(10, zoneH / 2 - NODE_H / 2 - 6);
+
+    n.angle = Math.random() * Math.PI * 2;
+    n.speed = 0.002 + Math.random() * 0.002;
+
+    // ORBIT SETUP
     const total = nodes.length;
+    const ring = i < total / 2 ? 0 : 1;
+    const ringCount = total / 2;
+    const index = i % ringCount;
 
-    nodes.forEach((n, i) => {
+    n.baseAngle = (index / ringCount) * Math.PI * 2;
+    n.baseRadius = ring === 0 ? 170 : 260;
 
-      const ring = i < total / 2 ? 0 : 1;
-      const ringCount = total / 2;
-      const index = i % ringCount;
+    n.z = ring === 0 ? 25 : 10;
 
-      const angle = (index / ringCount) * Math.PI * 2;
+    n.order = i;
 
-      const radius = ring === 0 ? 160 : 260;
+    n.x = n.baseX;
+    n.y = n.baseY;
+  });
 
-      n.baseRadius = radius;
-      n.baseAngle = angle;
-      n.orbitAngle = angle;
-
-      n.x = Math.cos(angle) * radius;
-      n.y = Math.sin(angle) * radius;
-
-      n.z = ring === 0 ? 25 : 10;
-
-      // chaos motion
-      n.floatX = 40 + Math.random() * 20;
-      n.floatY = 30 + Math.random() * 20;
-      n.angle = Math.random() * Math.PI * 2;
-      n.speed = 0.002 + Math.random() * 0.002;
-
-      n.locked = false;
-      n.resolved = false;
-      n.order = i;
-    });
-  }
-
-  setupOrbit();
-
-  /* ===============================
-     TIMELINE
-  =============================== */
   function getTime() {
     return performance.now() - startTime;
   }
@@ -95,9 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const t = getTime();
 
-    /* ===============================
-       PARALLAX SMOOTHING
-    =============================== */
+    /* ===== PARALLAX ===== */
     parallax.x += (mouse.x - parallax.x) * 0.05;
     parallax.y += (mouse.y - parallax.y) * 0.05;
 
@@ -107,103 +106,61 @@ document.addEventListener("DOMContentLoaded", () => {
       scale(1.02)
     `;
 
-    /* ===============================
-       CORE TIMELINE
-    =============================== */
+    nodes.forEach(n => {
 
-    // CHAOS → 0–2s
-    if (t < 2000) {
-      nodes.forEach(n => {
+      /* ===============================
+         🌀 CHAOS (0–2s) — RESTORED
+      =============================== */
+      if (t < 2000) {
 
         n.angle += n.speed;
 
-        n.x = Math.cos(n.angle) * n.floatX + n.baseRadius * 0.2;
-        n.y = Math.sin(n.angle) * n.floatY + n.baseRadius * 0.2;
-      });
-    }
+        n.x = n.baseX + Math.cos(n.angle) * n.floatX;
+        n.y = n.baseY + Math.sin(n.angle) * n.floatY;
+      }
 
-    // CORE APPEAR → 2s
-    if (t > 2000) {
-      core.style.display = "flex";
-      core.style.opacity = Math.min(1, (t - 2000) / 400);
-      core.style.transform =
-        `translate(-50%, -50%) scale(${0.7 + (t - 2000) / 2000})`;
-    }
+      /* ===============================
+         ⚡ SNAP TO ORBIT (2s–3.2s)
+      =============================== */
+      else if (t < 3200) {
 
-    // LOCK-IN → 2.4s–3.5s
-    if (t > 2400 && !controlled) {
+        const progress = Math.min(1, (t - 2000) / 1200);
 
-      nodes.forEach((n, i) => {
+        const targetX = Math.cos(n.baseAngle) * n.baseRadius;
+        const targetY = Math.sin(n.baseAngle) * n.baseRadius;
 
-        const delay = i * 120;
+        // STRONG SNAP (no softness)
+        n.x += (targetX - n.x) * (0.12 + progress * 0.2);
+        n.y += (targetY - n.y) * (0.12 + progress * 0.2);
+      }
 
-        if (t > 2400 + delay) {
+      /* ===============================
+         🧠 PERFECT ORBIT (3.2s+)
+      =============================== */
+      else {
 
-          const progress = Math.min(1, (t - 2400 - delay) / 600);
+        controlled = true;
 
-          // magnetic snap
-          const targetX = Math.cos(n.baseAngle) * n.baseRadius;
-          const targetY = Math.sin(n.baseAngle) * n.baseRadius;
+        const time = (t - 3200) * 0.0006;
 
-          n.x += (targetX - n.x) * (0.08 + progress * 0.12);
-          n.y += (targetY - n.y) * (0.08 + progress * 0.12);
+        // PERFECT CIRCLE (no drift)
+        const angle = n.baseAngle + time;
 
-          // depth punch
-          if (progress < 0.3) {
-            n.z += 1.5;
-          }
+        n.x = Math.cos(angle) * n.baseRadius;
+        n.y = Math.sin(angle) * n.baseRadius;
+      }
 
-          if (progress > 0.95) {
-            n.locked = true;
-          }
-        }
-      });
-    }
+      /* ===============================
+         CORE APPEAR
+      =============================== */
+      if (t > 2000) {
+        core.style.display = "flex";
+        core.style.opacity = Math.min(1, (t - 2000) / 400);
+      }
 
-    // CONTROLLED STATE → after 3.5s
-    if (t > 3500) {
-      controlled = true;
-      hero.classList.add("controlled");
-    }
-
-    /* ===============================
-       CONTROLLED ORBIT SYSTEM
-    =============================== */
-    if (controlled) {
-
-      nodes.forEach(n => {
-
-        // smooth orbit motion
-        n.orbitAngle += 0.0012;
-
-        const radius = n.baseRadius;
-
-        const targetX = Math.cos(n.orbitAngle) * radius;
-        const targetY = Math.sin(n.orbitAngle) * radius;
-
-        // smooth follow (no jitter)
-        n.x += (targetX - n.x) * 0.08;
-        n.y += (targetY - n.y) * 0.08;
-
-        // subtle breathing from core
-        const pulse = Math.sin(now * 0.002 + n.order) * 2;
-
-        n.x += (n.x / radius) * pulse;
-        n.y += (n.y / radius) * pulse;
-
-        // resolve visual
-        if (!n.resolved) {
-          n.resolved = true;
-          n.classList.add("resolved-active");
-        }
-      });
-    }
-
-    /* ===============================
-       APPLY TRANSFORMS
-    =============================== */
-    nodes.forEach(n => {
-
+      /* ===============================
+         TRANSFORM
+      =============================== */
       const scale = 1 + n.z / 300;
 
       n.style.transform = `
