@@ -15,6 +15,7 @@
 position: absolute;
 inset: 0;
 perspective: 1200px;
+transform-style: preserve-3d;
 background:
   radial-gradient(circle at 10% 20%, rgba(59,130,246,0.15), transparent 35%),
   radial-gradient(circle at 90% 80%, rgba(139,92,246,0.12), transparent 40%),
@@ -58,9 +59,18 @@ background:
   transition: transform 1.5s ease;
 }
 /* depth layers */
-.node[data-depth="1"] { transform: scale(0.8); opacity: 0.5; }
-.node[data-depth="2"] { transform: scale(1); opacity: 0.8; }
-.node[data-depth="3"] { transform: scale(1.2); opacity: 1; }
+.node[data-depth="1"] {
+  transform: translateZ(-200px) scale(0.7);
+  opacity: 0.4;
+}
+.node[data-depth="2"] {
+  transform: translateZ(0px) scale(1);
+  opacity: 0.7;
+}
+.node[data-depth="3"] {
+  transform: translateZ(200px) scale(1.2);
+  opacity: 1;
+}
 .node i {
   display: block;
   margin-bottom: 6px;
@@ -74,7 +84,38 @@ background:
   50% { transform: translateY(-20px) scale(1.05); }
   100% { transform: translateY(0); }
 }
-
+.node-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.errors {
+  display: none;
+  margin-top: 6px;
+}
+.hero-system.chaos .errors {
+  display: block;
+}
+.hero-system.chaos .error-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  color: #f87171;
+  animation: blink 1s infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+.error-label i {
+  width: 10px;
+  height: 10px;
+}
+.node-title {
+  font-size: 12px;
+}
 /* LEAK */
 .leak {
   position: absolute;
@@ -89,6 +130,20 @@ background:
 @keyframes leak {
   0% { opacity: 1; transform: translateY(0); }
   100% { opacity: 0; transform: translateY(20px); }
+}
+.leak::after {
+  content: "$";
+  position: absolute;
+  color: red;
+  font-size: 12px;
+  animation: moneyFlow 1s linear infinite;
+}
+@keyframes moneyFlow {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(25px); opacity: 0; }
+}
+.hero-system:not(.chaos) .leak {
+  display: none;
 }
 /* CONNECTIONS */
 .connections {
