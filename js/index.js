@@ -5,7 +5,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const hero = document.querySelector(".hero-system");
   const nodes = document.querySelectorAll(".node");
 
-  const PADDING = 40;
+  const SIDE_PADDING = 40;
+  const TOP_SAFE = 100;     // navbar + breathing space
+  const BOTTOM_SAFE = 140;  // hero text area
 
   let rect;
 
@@ -16,75 +18,80 @@ document.addEventListener("DOMContentLoaded", () => {
   updateBounds();
   window.addEventListener("resize", updateBounds);
 
-  function getNodeSize(n) {
-    return {
-      w: n.offsetWidth,
-      h: n.offsetHeight
-    };
-  }
-
-  // ✅ CREATE FIXED ZONES (NO OVERLAP GUARANTEED)
-  nodes.forEach((n, i) => {
-
-    const cols = 4;
-    const rows = 2;
-
-    const col = i % cols;
-    const row = Math.floor(i / cols);
-
-    const zoneWidth = rect.width / cols;
-    const zoneHeight = (rect.height - 140) / rows;
-
-    const centerX = (col + 0.5) * zoneWidth - rect.width / 2;
-    const centerY = (row + 0.5) * zoneHeight - rect.height / 2 + 70;
-
-    n.baseX = centerX;
-    n.baseY = centerY;
-
-    n.x = centerX;
-    n.y = centerY;
-    n.z = (Math.random() - 0.5) * 120;
-
-    // smooth floating offsets
-    n.angle = Math.random() * Math.PI * 2;
-    n.speed = 0.005 + Math.random() * 0.005;
-
-    n.floatRadius = 20 + Math.random() * 20;
+  // ✅ WAIT FOR LAYOUT TO STABILIZE (CRITICAL)
+  requestAnimationFrame(() => {
+    requestAnimationFrame(init);
   });
+
+  function init() {
+
+    nodes.forEach((n, i) => {
+
+      const size = {
+        w: n.offsetWidth,
+        h: n.offsetHeight
+      };
+
+      const cols = 4;
+      const rows = 2;
+
+      const usableWidth = rect.width - SIDE_PADDING * 2;
+      const usableHeight = rect.height - TOP_SAFE - BOTTOM_SAFE;
+
+      const zoneW = usableWidth / cols;
+      const zoneH = usableHeight / rows;
+
+      const col = i % cols;
+      const row = Math.floor(i / cols);
+
+      // ✅ CENTER INSIDE SAFE ZONE
+      const baseX =
+        -rect.width / 2 +
+        SIDE_PADDING +
+        zoneW * (col + 0.5);
+
+      const baseY =
+        -rect.height / 2 +
+        TOP_SAFE +
+        zoneH * (row + 0.5);
+
+      n.baseX = baseX;
+      n.baseY = baseY;
+
+      n.x = baseX;
+      n.y = baseY;
+      n.z = (Math.random() - 0.5) * 100;
+
+      // smooth float
+      n.angle = Math.random() * Math.PI * 2;
+      n.speed = 0.004 + Math.random() * 0.004;
+
+      // ✅ radius LIMITED BY ZONE SIZE (KEY FIX)
+      n.floatRadiusX = Math.max(10, zoneW / 2 - size.w / 2 - 10);
+      n.floatRadiusY = Math.max(10, zoneH / 2 - size.h / 2 - 10);
+    });
+
+    animate();
+  }
 
   function animate() {
 
     nodes.forEach(n => {
 
-      // ✅ SMOOTH FLOATING MOTION (NO CHAOS)
       n.angle += n.speed;
 
-      const offsetX = Math.cos(n.angle) * n.floatRadius;
-      const offsetY = Math.sin(n.angle) * n.floatRadius;
+      // ✅ ELLIPTICAL FLOAT (BETTER CONTROL)
+      const offsetX = Math.cos(n.angle) * n.floatRadiusX;
+      const offsetY = Math.sin(n.angle) * n.floatRadiusY;
 
       n.x = n.baseX + offsetX;
       n.y = n.baseY + offsetY;
 
-      // DEPTH (visual only)
-      n.z += (Math.sin(n.angle) * 0.3);
+      // depth
+      n.z += Math.sin(n.angle) * 0.2;
+      n.z = Math.max(-60, Math.min(100, n.z));
 
-      if (n.z > 120) n.z = 120;
-      if (n.z < -80) n.z = -80;
-
-      const scale = Math.max(0.95, 1 + n.z / 1000);
-
-      const size = getNodeSize(n);
-
-      // SAFE BOUNDS (never break layout)
-      const left = -rect.width / 2 + size.w / 2 + PADDING;
-      const right = rect.width / 2 - size.w / 2 - PADDING;
-
-      const top = -rect.height / 2 + 60 + size.h / 2;
-      const bottom = rect.height / 2 - 100 - size.h / 2;
-
-      // clamp (safety)
-      n.x = Math.max(left, Math.min(right, n.x));
-      n.y = Math.max(top, Math.min(bottom, n.y));
+      const scale = 1 + n.z / 1000;
 
       n.style.opacity = 0.95;
 
@@ -97,7 +104,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
     requestAnimationFrame(animate);
   }
-
-  animate();
 
 });
