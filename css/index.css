@@ -7,7 +7,8 @@
 .hero-system {
   position: relative;
   min-height: calc(100vh - 80px);
-   margin-top: 80px;
+  padding-top: 40px;     /* ✅ NEW */
+  padding-bottom: 80px;  /* ✅ NEW (space for text) */
   overflow: hidden;
  z-index: 1;
 }
@@ -54,7 +55,8 @@ background:
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 120px;
+  width: max-content;          /* ✅ dynamic width */
+  max-width: 140px;            /* ✅ prevent overflow */
   text-align: center;
   color: #e2e8f0;
   transform-style: preserve-3d;
@@ -74,13 +76,16 @@ background:
 }
 .node-title {
   font-size: 12px;
-  color: #ffffff;
   font-weight: 500;
-   line-height: 1.2;
-   text-align: center;
+  line-height: 1.2;
+  text-align: center;
+  color: #ffffff;
+  white-space: normal;         /* ✅ allow wrap */
+  word-break: break-word;      /* ✅ prevent overflow */
 }
 /* ERRORS (ALWAYS VISIBLE IN CHAOS) */
 .errors {
+  max-width: 140px;
   margin-top: 4px;
   display: flex;
   flex-direction: column;
