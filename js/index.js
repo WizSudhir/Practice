@@ -41,10 +41,13 @@ lucide.createIcons();
       if (n.y > maxY || n.y < -maxY) n.vy *= -1;
       if (n.z > 400 || n.z < -400) n.vz *= -1;
 
-      // prevent navbar overlap
-      if (n.y < -maxY + NAV_HEIGHT) {
-        n.vy = Math.abs(n.vy);
-      }
+// prevent navbar overlap
+const topLimit = -rect.height / 2 + NAV_HEIGHT;
+
+if (n.y < topLimit) {
+  n.y = topLimit;
+  n.vy *= -1;
+}
 
       const scale = 1 + n.z / 800;
       const opacity = 0.5 + (n.z + 400) / 800;
