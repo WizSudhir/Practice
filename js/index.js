@@ -626,6 +626,21 @@ if (ehrSection) {
 
   ehrObserver.observe(ehrSection);
 }  
+
+// ===============================
+// 6. EDITORIAL INSIGHTS
+// ===============================  
+  const insights = document.querySelector('.insights-editorial');
+
+if (insights) {
+  const observer = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      insights.classList.add('active');
+    }
+  }, { threshold: 0.3 });
+
+  observer.observe(insights);
+}
 }); // DOM Close
 
 
