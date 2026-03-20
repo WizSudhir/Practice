@@ -328,7 +328,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 }, 840);
 
-              }, i * 450 + Math.random() * 300);
+              }, i * 450 + Math.random() * 500);
 
             });
 
