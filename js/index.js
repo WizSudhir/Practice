@@ -579,35 +579,39 @@ function reset() {
   if (target) observer.observe(target);
 }
 
-  // ===============================
-  // 3. ABOUT
-  // ===============================
-// Scroll activation
+// ===============================
+// 3. ABOUT
+// ===============================
 const aboutSection = document.querySelector('.about-system');
 
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      aboutSection.classList.add('active');
-    }
-  });
-}, { threshold: 0.4 });
+if (aboutSection) {
+  const aboutObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        aboutSection.classList.add('active');
+      }
+    });
+  }, { threshold: 0.4 });
 
-observer.observe(aboutSection);
-  // ===============================
-  // 4. SERVICES
-  // ===============================
+  aboutObserver.observe(aboutSection);
+}
+
+// ===============================
+// 4. SERVICES
+// ===============================
 const gateway = document.querySelector('.services-gateway');
 
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      gateway.classList.add('active');
-    }
-  });
-}, { threshold: 0.3 });
+if (gateway) {
+  const gatewayObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        gateway.classList.add('active');
+      }
+    });
+  }, { threshold: 0.3 });
 
-observer.observe(gateway);
+  gatewayObserver.observe(gateway);
+}
 
 // ===============================
 // 6. CONTACT STRIP REVEAL
