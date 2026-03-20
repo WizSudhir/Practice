@@ -385,8 +385,8 @@ z-index: 2;
 
 .revenue {
   position: absolute;
-  right: 40px;
-  bottom: 60px;
+  right: 20px;
+  bottom: 20px;
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.8s ease;
