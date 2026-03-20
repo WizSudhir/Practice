@@ -236,7 +236,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (revenueProgress === bars.length) {
       setTimeout(() => {
         resetSystem();
-      }, 2000);
+      }, 4000);
     }
   }
 
