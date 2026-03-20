@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (hero) {
       observer.observe(hero);
     }
-  resetSystem();
+  
   const nodes = document.querySelectorAll(".node");
   const core = document.querySelector(".core");
   const svg = document.getElementById("connections");
@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
       n.y = n.baseY;
       n.angle = 0;
     });
-
+    resetSystem();
     // restart timeline
     startTimeline();
   }
