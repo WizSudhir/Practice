@@ -269,7 +269,7 @@ document.addEventListener("DOMContentLoaded", () => {
               // 🔥 REVENUE INCREMENT PER CONNECTION
               setTimeout(() => {
                 incrementRevenue();
-              }, 300 + PHASE_DELAY);
+              }, 300);
 
               setTimeout(() => {
 
@@ -280,15 +280,15 @@ document.addEventListener("DOMContentLoaded", () => {
                   0 0 50px rgba(59,130,246,0.4)
                 `;
 
-              }, 700 + PHASE_DELAY);
+              }, 700);
 
-            }, i * 450 + Math.random() * 150 + PHASE_DELAY);
+            }, i * 450 + Math.random() * 150);
 
           });
 
         });
 
-      }, 600 + PHASE_DELAY);
+      }, 600);
 
     });
 
