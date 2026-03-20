@@ -1,18 +1,22 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   lucide.createIcons();
-  
-  let isVisible = true;
 
+  
+  const hero = document.querySelector(".system-bg");
+  let isVisible = true;
   const observer = new IntersectionObserver(
-  ([entry]) => {
-    isVisible = entry.isIntersecting;
-  },
-  { threshold: 0.2 }
+    ([entry]) => {
+      isVisible = entry.isIntersecting;
+  
+      if (isVisible) {
+        animate(); // 🔥 restart loop
+      }
+     },
+    { threshold: 0.2 }
   );
 
 observer.observe(hero);
-  const hero = document.querySelector(".system-bg");
   const nodes = document.querySelectorAll(".node");
   const core = document.querySelector(".core");
   const svg = document.getElementById("connections");
