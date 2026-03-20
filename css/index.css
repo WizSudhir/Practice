@@ -10,6 +10,9 @@
 .hero-system {
   position: relative;
   min-height: calc(100vh - var(--nav-height));   /* ✅ FIXED HEIGHT (NOT MIN) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 80px;
   overflow: hidden;
   z-index: 1;
