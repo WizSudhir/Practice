@@ -240,7 +240,7 @@ z-index: 2;
   letter-spacing: -0.02em;
   max-width: 780px;
   margin: 0 auto;
- background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
+ title:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
