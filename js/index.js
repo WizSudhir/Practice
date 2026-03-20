@@ -218,7 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ===============================
   function incrementRevenue() {
 
-    const bars = document.querySelectorAll(".bar");
+    const bars = document.querySelectorAll(".revenue .bar");
     const line = document.querySelector(".line-path");
 
     if (revenueProgress >= bars.length) return;
@@ -417,7 +417,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const glowStrength = n.z / 40;
       const glow = 10 + glowStrength * 30;
       const opacity = controlled ? 1 : (0.7 + glowStrength * 0.3);
-
+      const mobileBars = document.querySelectorAll(".mobile-chart .bar");
       if (!n.matches(':hover')) {
         n.style.opacity = opacity;
       }
