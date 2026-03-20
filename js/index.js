@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const nodes = document.querySelectorAll(".node");
   const core = document.querySelector(".core");
   const svg = document.getElementById("connections");
+  const revenue = document.getElementById("revenue");
 
   const NODE_W = 140;
   const NODE_H = 100;
@@ -17,6 +18,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let width, height;
   let controlled = false;
   let frozen = false;
+
+  // 🔥 REVENUE STATE
+  let revenueProgress = 0;
 
   function updateBounds() {
     width = hero.clientWidth;
@@ -59,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ===============================
-  // CONNECTION SYSTEM (FINAL FIX)
+  // CONNECTION SYSTEM
   // ===============================
   function drawConnection(node) {
 
@@ -86,7 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const nx = dx / dist;
     const ny = dy / dist;
 
-    // 🔵 CORE EDGE (CIRCLE)
     const coreRadius = coreRect.width / 2;
 
     const coreEdge = {
@@ -94,7 +97,6 @@ document.addEventListener("DOMContentLoaded", () => {
       y: coreCenter.y + ny * (coreRadius + 1)
     };
 
-    // 🟩 NODE EDGE (RAY-BOX INTERSECTION)
     const halfW = nodeRect.width / 2;
     const halfH = nodeRect.height / 2;
 
@@ -111,7 +113,6 @@ document.addEventListener("DOMContentLoaded", () => {
       y: nodeCenter.y - ny * (t + 1)
     };
 
-    // 🔥 PIXEL SNAP (CRITICAL)
     const start = {
       x: Math.round(coreEdge.x - svgRect.left),
       y: Math.round(coreEdge.y - svgRect.top)
@@ -154,6 +155,45 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   window.addEventListener("resize", resetConnections);
+
+  // ===============================
+  // REVENUE INCREMENT LOGIC
+  // ===============================
+  function incrementRevenue() {
+
+    const bars = document.querySelectorAll(".bar");
+    const line = document.querySelector(".line-path");
+
+    if (revenueProgress >= bars.length) return;
+
+    const bar = bars[revenueProgress];
+
+    // grow bar
+    bar.style.height = bar.dataset.height;
+
+    // micro interaction
+    bar.style.transform = "scaleY(1.1)";
+    setTimeout(() => {
+      bar.style.transform = "scaleY(1)";
+    }, 200);
+
+    // animate line progressively
+    if (line) {
+      const totalLength = line.getTotalLength();
+      const progressRatio = (revenueProgress + 1) / bars.length;
+
+      line.style.strokeDasharray = totalLength;
+      line.style.strokeDashoffset = totalLength * (1 - progressRatio);
+    }
+
+    // core glow intensifies
+    core.style.boxShadow = `
+      0 0 ${40 + revenueProgress * 12}px rgba(34,197,94,0.7),
+      0 0 ${80 + revenueProgress * 20}px rgba(59,130,246,0.5)
+    `;
+
+    revenueProgress++;
+  }
 
   // ===============================
   // STABILITY DETECTION
@@ -201,9 +241,11 @@ document.addEventListener("DOMContentLoaded", () => {
     hero.classList.add("controlled");
     core.style.display = "flex";
 
+    // 🔥 SHOW REVENUE DASHBOARD EARLY
+    revenue.classList.add("active");
+
     waitForStabilization(() => {
 
-      // 🔒 FREEZE SYSTEM
       frozen = true;
 
       nodes.forEach(n => {
@@ -211,7 +253,6 @@ document.addEventListener("DOMContentLoaded", () => {
         n.y = n.baseY;
       });
 
-      // 🔥 VISUAL BUFFER (CRITICAL)
       setTimeout(() => {
 
         requestAnimationFrame(() => {
@@ -224,6 +265,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
               path.getBoundingClientRect();
               path.classList.add("active");
+
+              // 🔥 REVENUE INCREMENT PER CONNECTION
+              setTimeout(() => {
+                incrementRevenue();
+              }, 300);
 
               setTimeout(() => {
 
@@ -326,6 +372,3 @@ document.addEventListener("DOMContentLoaded", () => {
   animate();
 
 });
-
-
-
