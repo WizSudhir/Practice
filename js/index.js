@@ -450,7 +450,8 @@ function runMobileHero() {
   const core = document.getElementById("mobileCore");
   const revenue = document.querySelector(".mobile-revenue");
   const bars = document.querySelectorAll(".mobile-chart .bar");
-
+  const metrics = document.querySelectorAll(".mobile-metrics .metric");
+  
   let timeouts = [];
   let observer;
 
@@ -461,6 +462,10 @@ function runMobileHero() {
 
   function reset() {
     clearAllTimers();
+    metrics.forEach(m => {
+    m.style.opacity = 0;
+    m.style.transform = "translateY(10px)";
+    });
 
     // Hide everything
     node.style.opacity = 0;
@@ -474,18 +479,18 @@ function runMobileHero() {
 
   function runSequence() {
 
-    reset();
+    clearAllTimers();
 
     // STEP 0 — Show chaos card
     timeouts.push(setTimeout(() => {
       node.style.opacity = 1;
     }, 500));
 
-    // STEP 1 — Show errors one by one
+    // STEP 1 — Show errors AFTER card appears
     errors.forEach((e, i) => {
-      timeouts.push(setTimeout(() => {
-        e.style.opacity = 1;
-      }, 1000 + i * 700));
+    timeouts.push(setTimeout(() => {
+    e.style.opacity = 1;
+      }, 1200 + i * 700));   // 🔥 shifted from 1000 → 1200
     });
 
     // STEP 2 — Show core
@@ -507,6 +512,8 @@ function runMobileHero() {
         resolved[i].style.opacity = 1;
 
         bars[i].style.height = bars[i].dataset.height;
+        metrics[i].style.opacity = 1;
+        metrics[i].style.transform = "translateY(0)";
 
       }, 1000 + errors.length * 700 + 1500 + i * 900));
 
