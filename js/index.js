@@ -8,9 +8,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const svg = document.getElementById("connections");
   const revenue = document.getElementById("revenue");
   const PHASE_DELAY = 3000;
-  const NODE_W = 140;
-  const NODE_H = 100;
-
+  const isMobile = window.innerWidth < 768;
+  if (isMobile) return;
+  function getNodeSize() {
+  const w = window.innerWidth;
+  if (w < 768) return { w: 0, h: 0 }; // disabled
+  if (w < 1200) return { w: 110, h: 80 };
+  return { w: 140, h: 100 };
+  }
+  let { w: NODE_W, h: NODE_H } = getNodeSize();
+  window.addEventListener("resize", () => {
+  const size = getNodeSize();
+  NODE_W = size.w;
+  NODE_H = size.h;
+  });
   const SIDE_PADDING = 40;
   const TOP_PADDING = 60;
   const BOTTOM_PADDING = 120;
