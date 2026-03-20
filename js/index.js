@@ -442,77 +442,83 @@ document.addEventListener("DOMContentLoaded", () => {
   // ===============================
   // MOBILE HERO
   // ===============================
-  function runMobileHero() {
+function runMobileHero() {
 
   const node = document.getElementById("mobileNode");
   const errors = node.querySelectorAll(".error");
   const resolved = node.querySelectorAll(".resolved");
   const core = document.getElementById("mobileCore");
+  const revenue = document.querySelector(".mobile-revenue");
   const bars = document.querySelectorAll(".mobile-chart .bar");
 
-  let index = 0;
+  let timeouts = [];
   let observer;
 
+  function clearAllTimers() {
+    timeouts.forEach(t => clearTimeout(t));
+    timeouts = [];
+  }
+
   function reset() {
-    index = 0;
+    clearAllTimers();
 
-    errors.forEach(e => {
-      e.style.opacity = 0;
-    });
-
-    resolved.forEach(r => {
-      r.style.opacity = 0;
-    });
-
-    bars.forEach(bar => {
-      bar.style.height = "10%";
-    });
-
+    // Hide everything
+    node.style.opacity = 0;
     core.classList.remove("active");
+    revenue.style.opacity = 0;
+
+    errors.forEach(e => e.style.opacity = 0);
+    resolved.forEach(r => r.style.opacity = 0);
+    bars.forEach(bar => bar.style.height = "5%");
   }
 
   function runSequence() {
 
     reset();
 
-    // STEP 1 — SHOW ERRORS ONE BY ONE
+    // STEP 0 — Show chaos card
+    timeouts.push(setTimeout(() => {
+      node.style.opacity = 1;
+    }, 500));
+
+    // STEP 1 — Show errors one by one
     errors.forEach((e, i) => {
-      setTimeout(() => {
+      timeouts.push(setTimeout(() => {
         e.style.opacity = 1;
-      }, i * 800);
+      }, 1000 + i * 700));
     });
 
-    // STEP 2 — SHOW CORE
-    setTimeout(() => {
+    // STEP 2 — Show core
+    timeouts.push(setTimeout(() => {
       core.classList.add("active");
-    }, errors.length * 800 + 500);
+    }, 1000 + errors.length * 700 + 500));
 
-    // STEP 3 — RESOLVE + GRAPH
-    setTimeout(() => {
+    // STEP 3 — Show revenue card
+    timeouts.push(setTimeout(() => {
+      revenue.style.opacity = 1;
+    }, 1000 + errors.length * 700 + 1000));
 
-      errors.forEach((e, i) => {
+    // STEP 4 — Resolve errors + grow bars
+    errors.forEach((e, i) => {
 
-        setTimeout(() => {
+      timeouts.push(setTimeout(() => {
 
-          e.style.opacity = 0;
-          resolved[i].style.opacity = 1;
+        e.style.opacity = 0;
+        resolved[i].style.opacity = 1;
 
-          // grow bar
-          bars[i].style.height = bars[i].dataset.height;
+        bars[i].style.height = bars[i].dataset.height;
 
-        }, i * 900);
+      }, 1000 + errors.length * 700 + 1500 + i * 900));
 
-      });
-
-    }, errors.length * 800 + 1500);
+    });
 
     // LOOP
-    setTimeout(() => {
+    timeouts.push(setTimeout(() => {
       runSequence();
-    }, 9000);
+    }, 1000 + errors.length * 700 + 1500 + errors.length * 900 + 2000));
   }
 
-  // 👀 INTERSECTION OBSERVER (RESET ON VIEW)
+  // INTERSECTION OBSERVER
   observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
