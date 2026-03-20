@@ -287,9 +287,9 @@ z-index: 2;
 }
 /* CONTENT */
 .hero-content {
-  position: relative;
+  position: absolute;
   left: auto;
-  bottom: auto;
+  bottom: 80px;
   transform: none;
   text-align: center;
   max-width: 800px;
