@@ -30,22 +30,21 @@ background:
   #020617;
 z-index: 2;
 }
-.hero-overlay::before {
+.system-bg::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    120deg,
-    transparent 40%,
-    rgba(255,255,255,0.08),
-    transparent 60%
-  );
-  animation: sweep 6s infinite;
+  background-image:
+    linear-gradient(rgba(59,130,246,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.08) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridMove 20s linear infinite;
+  opacity: 0.6;
   pointer-events: none;
 }
-@keyframes sweep {
-  0% { transform: translateX(-120%); }
-  100% { transform: translateX(120%); }
+@keyframes gridMove {
+  from { transform: translateY(0); }
+  to { transform: translateY(60px); }
 }
 .system-bg::after {
   content: "";
