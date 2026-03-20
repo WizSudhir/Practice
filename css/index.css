@@ -644,6 +644,7 @@ z-index: 2;
     text-align: center;
   }
 .item {
+  height: 20px;
   position: relative;
   width: 100%;
 }
