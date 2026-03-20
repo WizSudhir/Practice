@@ -515,10 +515,10 @@ function runMobileHero() {
       timeouts.push(setTimeout(() => {
         error.style.opacity = 1;
         error.classList.add("active");
-      }, 1200 + i * 700));
+      }, 1200 + i * 1000));
     });
 
-    const baseTime = 1200 + items.length * 700;
+    const baseTime = 1200 + items.length * 1000;
 
     // STEP 1.5 — Draw connection
     timeouts.push(setTimeout(() => {
@@ -528,12 +528,12 @@ function runMobileHero() {
     // STEP 2 — Core
     timeouts.push(setTimeout(() => {
       core.classList.add("active");
-    }, baseTime + 500));
+    }, baseTime + 1200));
 
     // STEP 3 — Revenue
     timeouts.push(setTimeout(() => {
       revenue.style.opacity = 1;
-    }, baseTime + 900));
+    }, baseTime + 2000));
 
     // STEP 4 — Replace + animate
     items.forEach((item, i) => {
@@ -557,7 +557,7 @@ function runMobileHero() {
           metrics[i].style.transform = "translateY(0)";
         }
 
-      }, baseTime + 1400 + i * 900));
+      }, baseTime + 2600 + i * 1200));
 
     });
 
@@ -565,7 +565,7 @@ function runMobileHero() {
     timeouts.push(setTimeout(() => {
       reset();
       runSequence();
-    }, baseTime + 1400 + items.length * 900 + 2000));
+    }, baseTime + 2600 + items.length * 1200 + 4000));
   }
 
   // ✅ OBSERVER WITH STATE CONTROL
