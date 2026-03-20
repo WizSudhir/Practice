@@ -478,7 +478,6 @@ function reset() {
   // 🔥 FIX: reset connection
   if (connection) {
     connection.classList.remove("active");
-    connection.style.height = "0px";
     void connection.offsetHeight; // force reflow
   }
 
