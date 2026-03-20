@@ -9,7 +9,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const revenue = document.getElementById("revenue");
   const PHASE_DELAY = 3000;
   const isMobile = window.innerWidth < 768;
-  if (isMobile) return;
+  if (isMobile) {
+  runMobileHero();
+  return;
+  }
   function getNodeSize() {
   const w = window.innerWidth;
   if (w < 768) return { w: 0, h: 0 }; // disabled
