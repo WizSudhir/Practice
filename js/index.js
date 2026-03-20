@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let width, height;
   let controlled = false;
   let frozen = false;
-  let isVisible = true;
 
   // 🔥 REVENUE STATE
   let revenueProgress = 0;
@@ -30,17 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   updateBounds();
   window.addEventListener("resize", updateBounds);
-
-  // ===============================
-  // VISIBILITY CONTROL
-  // ===============================
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      isVisible = entry.isIntersecting;
-    });
-  }, { threshold: 0.2 });
-
-  observer.observe(hero);
 
   // ===============================
   // POSITION SETUP
@@ -180,13 +168,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const bar = bars[revenueProgress];
 
+    // grow bar
     bar.style.height = bar.dataset.height;
 
+    // micro interaction
     bar.style.transform = "scaleY(1.1)";
     setTimeout(() => {
       bar.style.transform = "scaleY(1)";
     }, 200);
 
+    // animate line progressively
     if (line) {
       const totalLength = line.getTotalLength();
       const progressRatio = (revenueProgress + 1) / bars.length;
@@ -195,6 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
       line.style.strokeDashoffset = totalLength * (1 - progressRatio);
     }
 
+    // core glow intensifies
     core.style.boxShadow = `
       0 0 ${40 + revenueProgress * 12}px rgba(34,197,94,0.7),
       0 0 ${80 + revenueProgress * 20}px rgba(59,130,246,0.5)
@@ -242,103 +234,74 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ===============================
-  // 🔁 FULL LOOP CONTROLLER
+  // CONTROL TIMELINE
   // ===============================
-  function startCycle() {
+  setTimeout(() => {
 
-    controlled = false;
-    frozen = false;
-    revenueProgress = 0;
+    hero.classList.add("controlled");
+    core.style.display = "flex";
 
-    resetConnections();
+    // 🔥 SHOW REVENUE DASHBOARD EARLY
+    revenue.classList.add("active");
 
-    nodes.forEach(n => {
-      n.classList.remove("resolved-active");
-      n.querySelector(".node-inner").style.boxShadow = "";
-    });
+    waitForStabilization(() => {
 
-    revenue.classList.remove("active");
-    core.style.display = "none";
+      frozen = true;
 
-    setTimeout(() => {
+      nodes.forEach(n => {
+        n.x = n.baseX;
+        n.y = n.baseY;
+      });
 
-      hero.classList.add("controlled");
-      core.style.display = "flex";
+      setTimeout(() => {
 
-      waitForStabilization(() => {
+        requestAnimationFrame(() => {
 
-        frozen = true;
+          nodes.forEach((n, i) => {
 
-        nodes.forEach(n => {
-          n.x = n.baseX;
-          n.y = n.baseY;
-        });
+            setTimeout(() => {
 
-        setTimeout(() => {
+              const path = drawConnection(n);
 
-          requestAnimationFrame(() => {
+              path.getBoundingClientRect();
+              path.classList.add("active");
 
-            nodes.forEach((n, i) => {
+              // 🔥 REVENUE INCREMENT PER CONNECTION
+              setTimeout(() => {
+                incrementRevenue();
+              }, 300);
 
               setTimeout(() => {
 
-                // ✅ Activate revenue ONLY when first line starts
-                if (revenueProgress === 0) {
-                  revenue.classList.add("active");
-                }
+                n.classList.add("resolved-active");
 
-                const path = drawConnection(n);
+                n.querySelector(".node-inner").style.boxShadow = `
+                  0 0 25px rgba(34,197,94,0.7),
+                  0 0 50px rgba(59,130,246,0.4)
+                `;
 
-                path.getBoundingClientRect();
-                path.classList.add("active");
+              }, 700);
 
-                setTimeout(() => {
-                  incrementRevenue();
-                }, 300);
-
-                setTimeout(() => {
-
-                  n.classList.add("resolved-active");
-
-                  n.querySelector(".node-inner").style.boxShadow = `
-                    0 0 25px rgba(34,197,94,0.7),
-                    0 0 50px rgba(59,130,246,0.4)
-                  `;
-
-                }, 700);
-
-              }, i * 450 + Math.random() * 150);
-
-            });
+            }, i * 450 + Math.random() * 150);
 
           });
 
-        }, 600);
+        });
 
-        setTimeout(() => {
-          startCycle();
-        }, nodes.length * 500 + 2500);
+      }, 600);
 
-      });
+    });
 
-    }, 2000 + PHASE_DELAY);
+  }, 2000 + PHASE_DELAY);
 
-    setTimeout(() => {
-      controlled = true;
-    }, 3500 + PHASE_DELAY);
-  }
-
-  startCycle();
+  setTimeout(() => {
+    controlled = true;
+  }, 3500 + PHASE_DELAY);
 
   // ===============================
   // ANIMATION LOOP
   // ===============================
   function animate() {
-
-    if (!isVisible) {
-      requestAnimationFrame(animate);
-      return;
-    }
 
     nodes.forEach(n => {
 
@@ -409,3 +372,6 @@ document.addEventListener("DOMContentLoaded", () => {
   animate();
 
 });
+
+
+
