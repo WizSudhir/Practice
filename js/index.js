@@ -442,7 +442,89 @@ document.addEventListener("DOMContentLoaded", () => {
   // ===============================
   // MOBILE HERO
   // ===============================
+  function runMobileHero() {
 
+  const node = document.getElementById("mobileNode");
+  const errors = node.querySelectorAll(".error");
+  const resolved = node.querySelectorAll(".resolved");
+  const core = document.getElementById("mobileCore");
+  const bars = document.querySelectorAll(".mobile-chart .bar");
+
+  let index = 0;
+  let observer;
+
+  function reset() {
+    index = 0;
+
+    errors.forEach(e => {
+      e.style.opacity = 0;
+    });
+
+    resolved.forEach(r => {
+      r.style.opacity = 0;
+    });
+
+    bars.forEach(bar => {
+      bar.style.height = "10%";
+    });
+
+    core.classList.remove("active");
+  }
+
+  function runSequence() {
+
+    reset();
+
+    // STEP 1 — SHOW ERRORS ONE BY ONE
+    errors.forEach((e, i) => {
+      setTimeout(() => {
+        e.style.opacity = 1;
+      }, i * 800);
+    });
+
+    // STEP 2 — SHOW CORE
+    setTimeout(() => {
+      core.classList.add("active");
+    }, errors.length * 800 + 500);
+
+    // STEP 3 — RESOLVE + GRAPH
+    setTimeout(() => {
+
+      errors.forEach((e, i) => {
+
+        setTimeout(() => {
+
+          e.style.opacity = 0;
+          resolved[i].style.opacity = 1;
+
+          // grow bar
+          bars[i].style.height = bars[i].dataset.height;
+
+        }, i * 900);
+
+      });
+
+    }, errors.length * 800 + 1500);
+
+    // LOOP
+    setTimeout(() => {
+      runSequence();
+    }, 9000);
+  }
+
+  // 👀 INTERSECTION OBSERVER (RESET ON VIEW)
+  observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        runSequence();
+      } else {
+        reset();
+      }
+    });
+  }, { threshold: 0.4 });
+
+  observer.observe(document.querySelector(".mobile-system"));
+}
   
 }); // DOM Close
 
