@@ -490,6 +490,7 @@ function runMobileHero() {
     errors.forEach((e, i) => {
     timeouts.push(setTimeout(() => {
     e.style.opacity = 1;
+    e.classList.add("active");
       }, 1200 + i * 700));   // 🔥 shifted from 1000 → 1200
     });
 
