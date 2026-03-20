@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
       n.y = n.baseY;
       n.angle = 0;
     });
-    resetSystem();
+
     // restart timeline
     startTimeline();
   }
