@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const core = document.querySelector(".core");
   const svg = document.getElementById("connections");
   const revenue = document.getElementById("revenue");
-  const PHASE_DELAY = 2000;
+  const PHASE_DELAY = 3000;
   const NODE_W = 140;
   const NODE_H = 100;
 
@@ -236,7 +236,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (revenueProgress === bars.length) {
       setTimeout(() => {
         resetSystem();
-      }, 4000);
+      }, 5000);
     }
   }
 
@@ -314,7 +314,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 setTimeout(() => {
                   incrementRevenue();
-                }, 300);
+                }, 420);
 
                 setTimeout(() => {
 
@@ -325,7 +325,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     0 0 50px rgba(59,130,246,0.4)
                   `;
 
-                }, 700);
+                }, 840);
 
               }, i * 450 + Math.random() * 150);
 
@@ -333,7 +333,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
           });
 
-        }, 600);
+        }, 720);
 
       });
 
