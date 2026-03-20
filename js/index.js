@@ -13,22 +13,20 @@ document.addEventListener("DOMContentLoaded", () => {
       isVisible = entry.isIntersecting;
   
       if (isVisible) {
-        activeTimeouts.forEach(clearTimeout);
-        activeTimeouts = [];
-        resetSystem(); // 🔥 clean restart (best UX)
-        if (!animationRunning) {
+      // 🔥 ONLY restart if timeline not running
+      if (!timelineStarted) {
+        resetSystem();
+      }
+      if (!animationRunning) {
         animate();
-        }
-        } else {
-        activeTimeouts.forEach(clearTimeout);
-        activeTimeouts = [];
-        }
+      }
+      } else {
+      activeTimeouts.forEach(clearTimeout);
+      activeTimeouts = [];
+      }
      },
     { threshold: 0.2 }
   );
-  if (hero && isVisible) {
-  animate();
-  }
 if (hero) {
   observer.observe(hero);
 }
