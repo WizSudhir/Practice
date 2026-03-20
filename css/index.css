@@ -510,4 +510,119 @@ z-index: 2;
   font-size: 11px;
   color: #94a3b8;
 }
+/* ===============================
+   RESPONSIVE HERO SYSTEM
+================================= */
 
+/* NAV HEIGHT TOKEN */
+:root {
+  --nav-height: 80px;
+}
+
+/* FIX HERO HEIGHT */
+.hero-system {
+  min-height: calc(100vh - var(--nav-height));
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CONTENT CENTERING (DESKTOP FIX) */
+.hero-content {
+  position: relative;
+  bottom: auto;
+  transform: none;
+  margin-top: auto;
+  margin-bottom: 60px;
+  padding: 0 20px;
+}
+
+/* ===============================
+   LARGE DESKTOP (1200px+)
+================================= */
+@media (min-width: 1200px) {
+  .system-bg {
+    display: block;
+  }
+}
+
+/* ===============================
+   TABLET MODE (768px–1199px)
+================================= */
+@media (max-width: 1199px) {
+
+  .system-bg {
+    transform: scale(0.75);
+    transform-origin: center;
+  }
+
+  .node {
+    width: 110px;
+    height: 80px;
+  }
+
+  .node-title {
+    font-size: 10px;
+  }
+
+  .error-label {
+    font-size: 8px;
+  }
+
+  .revenue-card {
+    width: 220px;
+  }
+}
+
+/* ===============================
+   MOBILE MODE (CRITICAL)
+================================= */
+@media (max-width: 768px) {
+
+  /* 🔥 KILL COMPLEX SYSTEM */
+  .system-bg,
+  .connections,
+  .revenue {
+    display: none !important;
+  }
+
+  /* CLEAN MOBILE HERO */
+  .hero-system {
+    background:
+      radial-gradient(circle at 20% 20%, rgba(59,130,246,0.2), transparent 40%),
+      radial-gradient(circle at 80% 80%, rgba(34,197,94,0.15), transparent 40%),
+      #020617;
+  }
+
+  .hero-content {
+    text-align: center;
+    margin: auto;
+    padding: 0 20px;
+  }
+
+  .hero-content h1 {
+    font-size: 28px;
+    line-height: 1.25;
+  }
+
+  .hero-content p {
+    font-size: 14px;
+  }
+
+}
+
+/* ===============================
+   SMALL MOBILE (480px)
+================================= */
+@media (max-width: 480px) {
+
+  .hero-content h1 {
+    font-size: 24px;
+  }
+
+  .hero-content p {
+    font-size: 13px;
+  }
+
+}
