@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const core = document.querySelector(".core");
   const svg = document.getElementById("connections");
   const revenue = document.getElementById("revenue");
-
+  const PHASE_DELAY = 2000;
   const NODE_W = 140;
   const NODE_H = 100;
 
@@ -269,7 +269,7 @@ document.addEventListener("DOMContentLoaded", () => {
               // 🔥 REVENUE INCREMENT PER CONNECTION
               setTimeout(() => {
                 incrementRevenue();
-              }, 300);
+              }, 300 + PHASE_DELAY);
 
               setTimeout(() => {
 
@@ -280,23 +280,23 @@ document.addEventListener("DOMContentLoaded", () => {
                   0 0 50px rgba(59,130,246,0.4)
                 `;
 
-              }, 700);
+              }, 700 + PHASE_DELAY);
 
-            }, i * 450 + Math.random() * 150);
+            }, i * 450 + Math.random() * 150 + PHASE_DELAY);
 
           });
 
         });
 
-      }, 600);
+      }, 600 + PHASE_DELAY);
 
     });
 
-  }, 2000);
+  }, 2000 + PHASE_DELAY);
 
   setTimeout(() => {
     controlled = true;
-  }, 3500);
+  }, 3500 + PHASE_DELAY);
 
   // ===============================
   // ANIMATION LOOP
