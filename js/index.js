@@ -612,8 +612,20 @@ if (gateway) {
 
   gatewayObserver.observe(gateway);
 }
+// ===============================
+// 5. EHR
+// ===============================
+const ehrSection = document.querySelector('.ehr-premium');
 
-  
+if (ehrSection) {
+  const ehrObserver = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      ehrSection.classList.add('active');
+    }
+  }, { threshold: 0.3 });
+
+  ehrObserver.observe(ehrSection);
+}  
 }); // DOM Close
 
 
