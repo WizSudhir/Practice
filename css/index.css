@@ -724,7 +724,12 @@ z-index: 2;
   .mobile-core.active {
     text-shadow: 0 0 10px #22c55e;
     opacity: 1;
+    animation: pulseCore 2s infinite ease-in-out;
   }
+ @keyframes pulseCore {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
   .mobile-revenue {
     width: 90%;
     max-width: 320px;
