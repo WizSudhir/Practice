@@ -1,13 +1,22 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  lucide.createIcons();
+  // ===============================
+  // ICON INIT (FIXED)
+  // ===============================
+  function initIcons() {
+    if (window.lucide) {
+      lucide.createIcons();
+    }
+  }
+
+  initIcons();
 
   const hero = document.querySelector(".system-bg");
   const nodes = document.querySelectorAll(".node");
   const core = document.querySelector(".core");
   const svg = document.getElementById("connections");
   const revenue = document.getElementById("revenue");
-  const PHASE_DELAY = 2000;
+
   const NODE_W = 140;
   const NODE_H = 100;
 
@@ -18,10 +27,28 @@ document.addEventListener("DOMContentLoaded", () => {
   let width, height;
   let controlled = false;
   let frozen = false;
-
-  // 🔥 REVENUE STATE
   let revenueProgress = 0;
+  let isVisible = true;
 
+  // ===============================
+  // VIEWPORT OBSERVER (STOP/START)
+  // ===============================
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        isVisible = true;
+        requestAnimationFrame(animate);
+      } else {
+        isVisible = false;
+      }
+    });
+  }, { threshold: 0.2 });
+
+  observer.observe(hero);
+
+  // ===============================
+  // BOUNDS
+  // ===============================
   function updateBounds() {
     width = hero.clientWidth;
     height = hero.clientHeight;
@@ -31,118 +58,45 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", updateBounds);
 
   // ===============================
-  // POSITION SETUP
+  // INITIAL NODE SETUP
   // ===============================
-  nodes.forEach((n, i) => {
+  function setupNodes() {
 
-    const cols = 4;
-    const rows = 2;
+    nodes.forEach((n, i) => {
 
-    const usableWidth = width - SIDE_PADDING * 2;
-    const usableHeight = height - TOP_PADDING - BOTTOM_PADDING;
+      const cols = 4;
+      const rows = 2;
 
-    const zoneW = usableWidth / cols;
-    const zoneH = usableHeight / rows;
+      const usableWidth = width - SIDE_PADDING * 2;
+      const usableHeight = height - TOP_PADDING - BOTTOM_PADDING;
 
-    const col = i % cols;
-    const row = Math.floor(i / cols);
+      const zoneW = usableWidth / cols;
+      const zoneH = usableHeight / rows;
 
-    n.baseX = -width / 2 + SIDE_PADDING + zoneW * (col + 0.5);
-    n.baseY = -height / 2 + TOP_PADDING + zoneH * (row + 0.5);
+      const col = i % cols;
+      const row = Math.floor(i / cols);
 
-    n.angle = Math.random() * Math.PI * 2;
-    n.speed = 0.002 + Math.random() * 0.002;
+      n.baseX = -width / 2 + SIDE_PADDING + zoneW * (col + 0.5);
+      n.baseY = -height / 2 + TOP_PADDING + zoneH * (row + 0.5);
 
-    n.floatX = Math.max(10, zoneW / 2 - NODE_W / 2 - 6);
-    n.floatY = Math.max(10, zoneH / 2 - NODE_H / 2 - 6);
+      n.angle = Math.random() * Math.PI * 2;
+      n.speed = 0.002 + Math.random() * 0.002;
 
-    n.z = (Math.random() - 0.5) * 40;
+      n.floatX = Math.max(10, zoneW / 2 - NODE_W / 2 - 6);
+      n.floatY = Math.max(10, zoneH / 2 - NODE_H / 2 - 6);
 
-    n.x = n.baseX;
-    n.y = n.baseY;
-  });
+      n.z = (Math.random() - 0.5) * 40;
 
-  // ===============================
-  // CONNECTION SYSTEM
-  // ===============================
-  function drawConnection(node) {
-
-    const coreRect = core.getBoundingClientRect();
-    const nodeInner = node.querySelector(".node-inner");
-    const nodeRect = nodeInner.getBoundingClientRect();
-    const svgRect = svg.getBoundingClientRect();
-
-    const coreCenter = {
-      x: coreRect.left + coreRect.width / 2,
-      y: coreRect.top + coreRect.height / 2
-    };
-
-    const nodeCenter = {
-      x: nodeRect.left + nodeRect.width / 2,
-      y: nodeRect.top + nodeRect.height / 2
-    };
-
-    const dx = nodeCenter.x - coreCenter.x;
-    const dy = nodeCenter.y - coreCenter.y;
-
-    const dist = Math.hypot(dx, dy);
-
-    const nx = dx / dist;
-    const ny = dy / dist;
-
-    const coreRadius = coreRect.width / 2;
-
-    const coreEdge = {
-      x: coreCenter.x + nx * (coreRadius + 1),
-      y: coreCenter.y + ny * (coreRadius + 1)
-    };
-
-    const halfW = nodeRect.width / 2;
-    const halfH = nodeRect.height / 2;
-
-    let tx = Infinity;
-    let ty = Infinity;
-
-    if (nx !== 0) tx = halfW / Math.abs(nx);
-    if (ny !== 0) ty = halfH / Math.abs(ny);
-
-    const t = Math.min(tx, ty);
-
-    const nodeEdge = {
-      x: nodeCenter.x - nx * (t + 1),
-      y: nodeCenter.y - ny * (t + 1)
-    };
-
-    const start = {
-      x: Math.round(coreEdge.x - svgRect.left),
-      y: Math.round(coreEdge.y - svgRect.top)
-    };
-
-    const end = {
-      x: Math.round(nodeEdge.x - svgRect.left),
-      y: Math.round(nodeEdge.y - svgRect.top)
-    };
-
-    const midX = Math.round(start.x + (end.x - start.x) * 0.5);
-
-    const d = `
-      M ${start.x} ${start.y}
-      L ${midX} ${start.y}
-      L ${midX} ${end.y}
-      L ${end.x} ${end.y}
-    `;
-
-    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-
-    path.setAttribute("d", d);
-    path.setAttribute("vector-effect", "non-scaling-stroke");
-    path.classList.add("connection-path");
-
-    svg.appendChild(path);
-
-    return path;
+      n.x = n.baseX;
+      n.y = n.baseY;
+    });
   }
 
+  setupNodes();
+
+  // ===============================
+  // CONNECTIONS
+  // ===============================
   function resetConnections() {
     svg.innerHTML = `
       <defs>
@@ -154,10 +108,44 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   }
 
-  window.addEventListener("resize", resetConnections);
+  function drawConnection(node) {
+
+    const coreRect = core.getBoundingClientRect();
+    const nodeRect = node.querySelector(".node-inner").getBoundingClientRect();
+    const svgRect = svg.getBoundingClientRect();
+
+    const cx = coreRect.left + coreRect.width / 2;
+    const cy = coreRect.top + coreRect.height / 2;
+
+    const nx = nodeRect.left + nodeRect.width / 2;
+    const ny = nodeRect.top + nodeRect.height / 2;
+
+    const startX = cx - svgRect.left;
+    const startY = cy - svgRect.top;
+    const endX = nx - svgRect.left;
+    const endY = ny - svgRect.top;
+
+    const midX = startX + (endX - startX) * 0.5;
+
+    const d = `
+      M ${startX} ${startY}
+      L ${midX} ${startY}
+      L ${midX} ${endY}
+      L ${endX} ${endY}
+    `;
+
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+
+    path.setAttribute("d", d);
+    path.classList.add("connection-path");
+
+    svg.appendChild(path);
+
+    return path;
+  }
 
   // ===============================
-  // REVENUE INCREMENT LOGIC
+  // REVENUE LOGIC
   // ===============================
   function incrementRevenue() {
 
@@ -168,25 +156,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const bar = bars[revenueProgress];
 
-    // grow bar
     bar.style.height = bar.dataset.height;
 
-    // micro interaction
-    bar.style.transform = "scaleY(1.1)";
-    setTimeout(() => {
-      bar.style.transform = "scaleY(1)";
-    }, 200);
-
-    // animate line progressively
     if (line) {
       const totalLength = line.getTotalLength();
-      const progressRatio = (revenueProgress + 1) / bars.length;
+      const ratio = (revenueProgress + 1) / bars.length;
 
+      line.style.opacity = 1;
       line.style.strokeDasharray = totalLength;
-      line.style.strokeDashoffset = totalLength * (1 - progressRatio);
+      line.style.strokeDashoffset = totalLength * (1 - ratio);
     }
 
-    // core glow intensifies
     core.style.boxShadow = `
       0 0 ${40 + revenueProgress * 12}px rgba(34,197,94,0.7),
       0 0 ${80 + revenueProgress * 20}px rgba(59,130,246,0.5)
@@ -196,112 +176,141 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ===============================
-  // STABILITY DETECTION
+  // RESET SYSTEM
+  // ===============================
+  function resetSystem() {
+
+    controlled = false;
+    frozen = false;
+    revenueProgress = 0;
+
+    hero.classList.remove("controlled");
+    revenue.classList.remove("active");
+
+    nodes.forEach(n => {
+      n.classList.remove("resolved-active");
+    });
+
+    resetConnections();
+
+    document.querySelectorAll(".bar").forEach(bar => {
+      bar.style.height = "0";
+    });
+
+    const line = document.querySelector(".line-path");
+    if (line) {
+      line.style.strokeDashoffset = 300;
+      line.style.opacity = 0;
+    }
+
+    core.style.boxShadow = `
+      0 0 40px rgba(59,130,246,0.5),
+      0 0 80px rgba(139,92,246,0.3)
+    `;
+  }
+
+  // ===============================
+  // STABILITY CHECK
   // ===============================
   function waitForStabilization(callback) {
 
     let stableFrames = 0;
-    let lastPositions = new Map();
+    let last = new Map();
 
     function check() {
 
-      let isStable = true;
+      let stable = true;
 
       nodes.forEach(n => {
-        const prev = lastPositions.get(n) || { x: n.x, y: n.y };
+        const prev = last.get(n) || { x: n.x, y: n.y };
 
-        const dx = Math.abs(n.x - prev.x);
-        const dy = Math.abs(n.y - prev.y);
-
-        if (dx > 0.3 || dy > 0.3) {
-          isStable = false;
+        if (Math.abs(n.x - prev.x) > 0.3 || Math.abs(n.y - prev.y) > 0.3) {
+          stable = false;
         }
 
-        lastPositions.set(n, { x: n.x, y: n.y });
+        last.set(n, { x: n.x, y: n.y });
       });
 
-      if (isStable) stableFrames++;
+      if (stable) stableFrames++;
       else stableFrames = 0;
 
-      if (stableFrames > 12) {
-        callback();
-      } else {
-        requestAnimationFrame(check);
-      }
+      if (stableFrames > 12) callback();
+      else requestAnimationFrame(check);
     }
 
     check();
   }
 
   // ===============================
-  // CONTROL TIMELINE
+  // MAIN CYCLE
   // ===============================
-  setTimeout(() => {
+  function startCycle() {
 
-    hero.classList.add("controlled");
-    core.style.display = "flex";
+    setTimeout(() => {
 
-    // 🔥 SHOW REVENUE DASHBOARD EARLY
-    revenue.classList.add("active");
+      hero.classList.add("controlled");
+      core.style.display = "flex";
+      initIcons();
 
-    waitForStabilization(() => {
+      revenue.classList.add("active");
 
-      frozen = true;
+      waitForStabilization(() => {
 
-      nodes.forEach(n => {
-        n.x = n.baseX;
-        n.y = n.baseY;
-      });
+        frozen = true;
 
-      setTimeout(() => {
+        nodes.forEach(n => {
+          n.x = n.baseX;
+          n.y = n.baseY;
+        });
 
-        requestAnimationFrame(() => {
+        setTimeout(() => {
 
           nodes.forEach((n, i) => {
 
             setTimeout(() => {
 
               const path = drawConnection(n);
-
               path.getBoundingClientRect();
               path.classList.add("active");
 
-              // 🔥 REVENUE INCREMENT PER CONNECTION
-              setTimeout(() => {
-                incrementRevenue();
-              }, 300);
+              setTimeout(incrementRevenue, 300);
 
               setTimeout(() => {
-
                 n.classList.add("resolved-active");
-
-                n.querySelector(".node-inner").style.boxShadow = `
-                  0 0 25px rgba(34,197,94,0.7),
-                  0 0 50px rgba(59,130,246,0.4)
-                `;
-
               }, 700);
 
-            }, i * 450 + Math.random() * 150);
+            }, i * 450);
 
           });
 
-        });
+        }, 600);
 
-      }, 600);
+      });
 
-    });
+    }, 2000);
+  }
 
-  }, 2000 + PHASE_DELAY);
+  function loopCycle() {
 
-  setTimeout(() => {
-    controlled = true;
-  }, 3500 + PHASE_DELAY);
+    startCycle();
+
+    setTimeout(() => {
+
+      resetSystem();
+
+      setTimeout(loopCycle, 1000);
+
+    }, 12000);
+  }
+
+  loopCycle();
 
   // ===============================
   // ANIMATION LOOP
   // ===============================
   function animate() {
+
+    if (!isVisible) return;
 
     nodes.forEach(n => {
 
@@ -314,61 +323,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
       } else if (!frozen) {
 
-        const dx = -n.x;
-        const dy = -n.y;
-
-        n.x += dx * 0.015;
-        n.y += dy * 0.015;
+        n.x += (-n.x) * 0.015;
+        n.y += (-n.y) * 0.015;
 
         n.x += (n.baseX - n.x) * 0.04;
         n.y += (n.baseY - n.y) * 0.04;
 
       } else {
-
         n.x = n.baseX;
         n.y = n.baseY;
       }
 
-      const left = -width / 2 + SIDE_PADDING + NODE_W / 2;
-      const right = width / 2 - SIDE_PADDING - NODE_W / 2;
-
-      const top = -height / 2 + TOP_PADDING + NODE_H / 2;
-      const bottom = height / 2 - BOTTOM_PADDING - NODE_H / 2;
-
-      n.x = Math.max(left, Math.min(right, n.x));
-      n.y = Math.max(top, Math.min(bottom, n.y));
-
-      if (!controlled) {
-        n.z += Math.sin(n.angle) * 0.03;
-      }
-
-      n.z = Math.max(0, Math.min(30, n.z));
-
-      const scale = 1 + n.z / 300;
-
-      const glowStrength = n.z / 40;
-      const glow = 10 + glowStrength * 30;
-      const opacity = controlled ? 1 : (0.7 + glowStrength * 0.3);
-
-      if (!n.matches(':hover')) {
-        n.style.opacity = opacity;
-      }
-
-      n.querySelector(".node-inner").style.boxShadow = controlled
-        ? `0 0 20px rgba(34,197,94,0.4), 0 0 40px rgba(59,130,246,0.25)`
-        : `0 0 ${glow}px rgba(59,130,246,0.25),
-           0 0 ${glow * 2}px rgba(139,92,246,0.15)`;
-
       n.style.transform = `
         translate3d(${n.x}px, ${n.y}px, ${n.z}px)
         translate(-50%, -50%)
-        scale(${scale})
       `;
     });
 
     requestAnimationFrame(animate);
   }
 
-  animate();
+  requestAnimationFrame(animate);
 
 });
