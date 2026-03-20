@@ -454,6 +454,7 @@ function runMobileHero() {
   const revenue = document.querySelector(".mobile-revenue");
   const bars = document.querySelectorAll(".mobile-chart .bar");
   const metrics = document.querySelectorAll(".mobile-metrics .metric");
+  const connection = document.querySelector(".mobile-connection");
 
   if (!node || !core || !revenue) return;
 
@@ -518,6 +519,11 @@ function runMobileHero() {
     });
 
     const baseTime = 1200 + items.length * 700;
+
+    // STEP 1.5 — Draw connection
+    timeouts.push(setTimeout(() => {
+      if (connection) connection.classList.add("active");
+    }, baseTime - 200));
 
     // STEP 2 — Core
     timeouts.push(setTimeout(() => {
