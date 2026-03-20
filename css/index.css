@@ -1,8 +1,8 @@
 /* =========================================================
-   PRACTICEGRID SOLUTIONS — ENTERPRISE SAAS CSS SYSTEM
+   PRACTICEGRID SOLUTIONS — CSS SYSTEM
 ========================================================= */
 /* ===============================
-   9. HERO SECTION
+   1. HERO SECTION
 ================================= */
 .hero-system {
   position: relative;
@@ -109,10 +109,10 @@ z-index: 2;
   color: #e2e8f0;
   transform-style: preserve-3d;
   will-change: transform;
-   pointer-events: auto;
+  pointer-events: auto;
   z-index: 3;
   overflow: visible;           /* ✅ prevent text overflow */
-   transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+  transition: transform 0.2s ease-out, opacity 0.2s ease-out;
 }
 .node-inner {
   display: flex;
@@ -122,9 +122,9 @@ z-index: 2;
   background: rgba(255,255,255,0.03);
   padding: 6px 8px;
   border-radius: 8px;
-   position: relative;
+  position: relative;
   z-index: 1;
-   box-shadow:
+  box-shadow:
     0 0 0px rgba(59,130,246,0),
     0 0 0px rgba(139,92,246,0);
   transition: all 0.3s ease;
@@ -142,7 +142,6 @@ z-index: 2;
 .node:hover::before {
   opacity: 1;
 }
-
 .node:hover .node-inner {
   box-shadow:
     0 0 20px rgba(59,130,246,0.4),
@@ -165,24 +164,24 @@ z-index: 2;
 }
 /* ERRORS (ALWAYS VISIBLE IN CHAOS) */
 .errors {
-     max-height: 32px;          /* ✅ prevent height growth */
+  max-height: 32px;          /* ✅ prevent height growth */
   max-width: 140px;
   margin-top: 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2px;
-   overflow: hidden;
-   transition: opacity 0.5s ease, transform 0.5s ease;
+  overflow: hidden;
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 .error-label {
   display: flex;
   align-items: center;
   gap: 4px;
   font-size: 9px;
-   opacity: 0.9;
+  opacity: 0.9;
   color: #f87171;
-   line-height: 1;
+  line-height: 1;
   animation: blink 1s infinite;
 }
 @keyframes blink {
@@ -197,7 +196,7 @@ z-index: 2;
   width: 10px;
   height: 10px;
   flex-shrink: 0;
-   transform: translateY(1px);
+  transform: translateY(1px);
 }
 /* MONEY LEAK */
 .leak {
@@ -265,16 +264,14 @@ z-index: 2;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-   overflow: hidden;
+  overflow: hidden;
 }
 .hero-content p {
   max-width: 750px;
   margin: 10px auto 0;
   color: rgba(255,255,255,0.65);
 }
-/* ===============================
-   CONTROL PHASE (PracticeGrid)
-================================= */
+/* CONTROL PHASE (PracticeGrid) */
 /* System activation */
 .system-bg.controlled {
   filter: brightness(0.85);
@@ -318,7 +315,7 @@ z-index: 2;
   width: 10px;
   height: 10px;
   flex-shrink: 0;
-   transform: translateY(1px);
+  transform: translateY(1px);
 }
 .node.resolved-active .resolved {
   opacity: 1;
@@ -355,9 +352,7 @@ z-index: 2;
   transform: scale(0.9);
   pointer-events: none;
 }
-/* ===============================
-   CONNECTION LINES
-================================= */
+/* CONNECTION LINES */
 .connections {
   position: absolute;
   inset: 0;
@@ -366,7 +361,6 @@ z-index: 2;
   z-index: 2;
   pointer-events: none;
 }
-
 /* Line style */
 .connection-path {
   fill: none;
@@ -374,8 +368,6 @@ z-index: 2;
   stroke-width: 1.5;
   stroke-dasharray: 4 4;
   opacity: 0.9;
-
-  /* animation base */
   stroke-dashoffset: 300;
   transition: stroke-dashoffset 1s ease;
 }
@@ -399,10 +391,7 @@ z-index: 2;
   stroke-dashoffset: 300;
   transition: stroke-dashoffset 0.6s ease;
 }
-/* ===============================
-   REVENUE PHASE
-================================= */
-
+/* REVENUE PHASE */
 .revenue {
   position: absolute;
   right: 10px;
@@ -412,12 +401,10 @@ z-index: 2;
   transition: all 0.8s ease;
   z-index: 5;
 }
-
 .revenue.active {
   opacity: 1;
   transform: translateY(0);
 }
-
 .revenue-card {
   width: 260px;
   padding: 16px;
@@ -429,7 +416,6 @@ z-index: 2;
     0 0 30px rgba(34,197,94,0.2),
     0 0 60px rgba(59,130,246,0.15);
 }
-
 /* HEADER */
 .rev-header {
   font-size: 13px;
@@ -437,7 +423,6 @@ z-index: 2;
   margin-bottom: 10px;
   color: #e2e8f0;
 }
-
 /* CHART */
 .rev-chart {
   position: relative;
@@ -446,7 +431,6 @@ z-index: 2;
   align-items: flex-end;
   gap: 6px;
 }
-
 /* BARS */
 .bar {
   flex: 1;
@@ -455,12 +439,10 @@ z-index: 2;
   border-radius: 4px;
   transition: height 0.8s ease;
 }
-
 .bar.highlight {
   background: linear-gradient(180deg, #4ade80, #2563eb);
   box-shadow: 0 0 10px rgba(34,197,94,0.6);
 }
-
 /* LINE */
 .line-graph {
   position: absolute;
@@ -468,7 +450,6 @@ z-index: 2;
   width: 100%;
   height: 100%;
 }
-
 .line-path {
   fill: none;
   stroke: #4ade80;
@@ -477,7 +458,6 @@ z-index: 2;
   stroke-dashoffset: 300;
   transition: stroke-dashoffset 0.6s ease;
 }
-
 /* METRICS */
 .rev-metrics {
   display: flex;
