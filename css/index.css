@@ -78,6 +78,12 @@ overflow: hidden;
   0% { transform: translateX(-120%); }
   100% { transform: translateX(120%); }
 }
+.system-bg,
+.system-bg::before,
+.system-bg::after,
+.hero-overlay::before {
+  will-change: transform, opacity;
+}
 /* Dim all nodes when hovering */
 .system-bg:hover .node {
   opacity: 0.3;
