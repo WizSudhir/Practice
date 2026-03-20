@@ -19,6 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let width, height;
   let controlled = false;
   let frozen = false;
+  let isVisible = true;
+
   let revenueProgress = 0;
 
   function updateBounds() {
@@ -30,36 +32,55 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", updateBounds);
 
   // ===============================
+  // VISIBILITY CONTROL (🔥 NEW)
+  // ===============================
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      isVisible = entry.isIntersecting;
+    });
+  }, { threshold: 0.2 });
+
+  observer.observe(hero);
+
+  // ===============================
   // POSITION SETUP
   // ===============================
-  nodes.forEach((n, i) => {
+  function setupNodes() {
 
-    const cols = 4;
-    const rows = 2;
+    nodes.forEach((n, i) => {
 
-    const usableWidth = width - SIDE_PADDING * 2;
-    const usableHeight = height - TOP_PADDING - BOTTOM_PADDING;
+      const cols = 4;
+      const rows = 2;
 
-    const zoneW = usableWidth / cols;
-    const zoneH = usableHeight / rows;
+      const usableWidth = width - SIDE_PADDING * 2;
+      const usableHeight = height - TOP_PADDING - BOTTOM_PADDING;
 
-    const col = i % cols;
-    const row = Math.floor(i / cols);
+      const zoneW = usableWidth / cols;
+      const zoneH = usableHeight / rows;
 
-    n.baseX = -width / 2 + SIDE_PADDING + zoneW * (col + 0.5);
-    n.baseY = -height / 2 + TOP_PADDING + zoneH * (row + 0.5);
+      const col = i % cols;
+      const row = Math.floor(i / cols);
 
-    n.angle = Math.random() * Math.PI * 2;
-    n.speed = 0.002 + Math.random() * 0.002;
+      n.baseX = -width / 2 + SIDE_PADDING + zoneW * (col + 0.5);
+      n.baseY = -height / 2 + TOP_PADDING + zoneH * (row + 0.5);
 
-    n.floatX = Math.max(10, zoneW / 2 - NODE_W / 2 - 6);
-    n.floatY = Math.max(10, zoneH / 2 - NODE_H / 2 - 6);
+      n.angle = Math.random() * Math.PI * 2;
+      n.speed = 0.002 + Math.random() * 0.002;
 
-    n.z = (Math.random() - 0.5) * 40;
+      n.floatX = Math.max(10, zoneW / 2 - NODE_W / 2 - 6);
+      n.floatY = Math.max(10, zoneH / 2 - NODE_H / 2 - 6);
 
-    n.x = n.baseX;
-    n.y = n.baseY;
-  });
+      n.z = (Math.random() - 0.5) * 40;
+
+      n.x = n.baseX;
+      n.y = n.baseY;
+
+      n.classList.remove("resolved-active");
+      n.querySelector(".node-inner").style.boxShadow = "";
+    });
+  }
+
+  setupNodes();
 
   // ===============================
   // CONNECTION SYSTEM
@@ -134,6 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
 
     path.setAttribute("d", d);
+    path.setAttribute("vector-effect", "non-scaling-stroke");
     path.classList.add("connection-path");
 
     svg.appendChild(path);
@@ -152,38 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   }
 
-  // ===============================
-  // RESET EVERYTHING (KEY PART)
-  // ===============================
-  function resetAnimation() {
-
-    controlled = false;
-    frozen = false;
-    revenueProgress = 0;
-
-    hero.classList.remove("controlled");
-    revenue.classList.remove("active");
-
-    core.style.boxShadow = "";
-    core.style.display = "none";
-
-    resetConnections();
-
-    document.querySelectorAll(".bar").forEach(bar => {
-      bar.style.height = "0";
-      bar.style.transform = "";
-    });
-
-    const line = document.querySelector(".line-path");
-    if (line) {
-      line.style.strokeDashoffset = "";
-    }
-
-    nodes.forEach(n => {
-      n.classList.remove("resolved-active");
-      n.querySelector(".node-inner").style.boxShadow = "";
-    });
-  }
+  window.addEventListener("resize", resetConnections);
 
   // ===============================
   // REVENUE
@@ -196,7 +187,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (revenueProgress >= bars.length) return;
 
     const bar = bars[revenueProgress];
+
     bar.style.height = bar.dataset.height;
+
+    bar.style.transform = "scaleY(1.1)";
+    setTimeout(() => {
+      bar.style.transform = "scaleY(1)";
+    }, 200);
 
     if (line) {
       const totalLength = line.getTotalLength();
@@ -214,14 +211,33 @@ document.addEventListener("DOMContentLoaded", () => {
     revenueProgress++;
   }
 
-  // ===============================
-  // MAIN TIMELINE (LOOPABLE)
-  // ===============================
-  function runAnimation() {
+  function resetRevenue() {
+    revenueProgress = 0;
+    document.querySelectorAll(".bar").forEach(b => {
+      b.style.height = "0px";
+    });
+  }
 
-    resetAnimation();
+  // ===============================
+  // LOOP TIMELINE (🔥 NEW)
+  // ===============================
+  function runSequence() {
+
+    if (!isVisible) return;
+
+    controlled = false;
+    frozen = false;
+
+    resetConnections();
+    resetRevenue();
+    setupNodes();
+
+    core.style.display = "none";
+    revenue.classList.remove("active");
 
     setTimeout(() => {
+
+      if (!isVisible) return;
 
       hero.classList.add("controlled");
       core.style.display = "flex";
@@ -234,57 +250,125 @@ document.addEventListener("DOMContentLoaded", () => {
         n.y = n.baseY;
       });
 
-      nodes.forEach((n, i) => {
+      setTimeout(() => {
 
-        setTimeout(() => {
+        requestAnimationFrame(() => {
 
-          const path = drawConnection(n);
-          path.getBoundingClientRect();
-          path.classList.add("active");
+          nodes.forEach((n, i) => {
 
-          setTimeout(incrementRevenue, 300);
+            setTimeout(() => {
 
-          setTimeout(() => {
-            n.classList.add("resolved-active");
-          }, 700);
+              if (!isVisible) return;
 
-        }, i * 450);
-      });
+              const path = drawConnection(n);
+              path.getBoundingClientRect();
+              path.classList.add("active");
 
-      // 🔁 RESTART AFTER FULL ANIMATION
-      const totalDuration = nodes.length * 450 + 3000;
+              setTimeout(() => {
+                incrementRevenue();
+              }, 300);
 
-      setTimeout(runAnimation, totalDuration);
+              setTimeout(() => {
+
+                n.classList.add("resolved-active");
+
+                n.querySelector(".node-inner").style.boxShadow = `
+                  0 0 25px rgba(34,197,94,0.7),
+                  0 0 50px rgba(59,130,246,0.4)
+                `;
+
+              }, 700);
+
+            }, i * 450);
+
+          });
+
+        });
+
+      }, 600);
+
+      setTimeout(() => {
+        controlled = true;
+      }, 1500);
+
+      // 🔁 LOOP AGAIN
+      setTimeout(runSequence, 9000);
 
     }, 2000 + PHASE_DELAY);
-
-    setTimeout(() => {
-      controlled = true;
-    }, 3500 + PHASE_DELAY);
   }
+
+  runSequence();
 
   // ===============================
   // ANIMATION LOOP
   // ===============================
   function animate() {
 
+    if (!isVisible) {
+      requestAnimationFrame(animate);
+      return;
+    }
+
     nodes.forEach(n => {
 
       if (!controlled) {
+
         n.angle += n.speed;
+
         n.x = n.baseX + Math.cos(n.angle) * n.floatX;
         n.y = n.baseY + Math.sin(n.angle) * n.floatY;
+
       } else if (!frozen) {
-        n.x += (-n.x) * 0.015;
-        n.y += (-n.y) * 0.015;
+
+        const dx = -n.x;
+        const dy = -n.y;
+
+        n.x += dx * 0.015;
+        n.y += dy * 0.015;
+
+        n.x += (n.baseX - n.x) * 0.04;
+        n.y += (n.baseY - n.y) * 0.04;
+
       } else {
+
         n.x = n.baseX;
         n.y = n.baseY;
       }
 
+      const left = -width / 2 + SIDE_PADDING + NODE_W / 2;
+      const right = width / 2 - SIDE_PADDING - NODE_W / 2;
+
+      const top = -height / 2 + TOP_PADDING + NODE_H / 2;
+      const bottom = height / 2 - BOTTOM_PADDING - NODE_H / 2;
+
+      n.x = Math.max(left, Math.min(right, n.x));
+      n.y = Math.max(top, Math.min(bottom, n.y));
+
+      if (!controlled) {
+        n.z += Math.sin(n.angle) * 0.03;
+      }
+
+      n.z = Math.max(0, Math.min(30, n.z));
+
+      const scale = 1 + n.z / 300;
+
+      const glowStrength = n.z / 40;
+      const glow = 10 + glowStrength * 30;
+      const opacity = controlled ? 1 : (0.7 + glowStrength * 0.3);
+
+      if (!n.matches(':hover')) {
+        n.style.opacity = opacity;
+      }
+
+      n.querySelector(".node-inner").style.boxShadow = controlled
+        ? `0 0 20px rgba(34,197,94,0.4), 0 0 40px rgba(59,130,246,0.25)`
+        : `0 0 ${glow}px rgba(59,130,246,0.25),
+           0 0 ${glow * 2}px rgba(139,92,246,0.15)`;
+
       n.style.transform = `
         translate3d(${n.x}px, ${n.y}px, ${n.z}px)
         translate(-50%, -50%)
+        scale(${scale})
       `;
     });
 
@@ -292,6 +376,5 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   animate();
-  runAnimation(); // 🔥 START LOOP
 
 });
