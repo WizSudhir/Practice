@@ -445,41 +445,33 @@ document.addEventListener("DOMContentLoaded", () => {
 function runMobileHero() {
 
   const node = document.getElementById("mobileNode");
-  const core = document.getElementById("mobileCore");
-  const bar = document.getElementById("mobileBar");
+  const solution = document.getElementById("mobileSolution");
+  const bars = document.querySelectorAll(".mobile-chart .bar");
 
-  const steps = 4;
+  const errors = node.querySelectorAll(".error");
+
   let current = 0;
 
   setTimeout(() => {
-    core.classList.add("active");
-  }, 1000);
+    solution.classList.add("active");
+  }, 1200);
 
   function resolveStep() {
 
-    if (current >= steps) return;
+    if (current >= errors.length) return;
 
-    const errors = node.querySelectorAll(".error");
-    const resolved = node.querySelectorAll(".resolved");
-    function resolveStep() {
-      if (current >= steps) return;
-      // hide ONE error
-      errors[current].style.opacity = "0";
-      errors[current].style.transform = "translateY(-5px)";
-      // show ONE resolved
-      resolved[current].style.opacity = "1";
-      resolved[current].style.transform = "translateY(0)";
-      // grow revenue
-      bar.style.width = `${(current + 1) * (100 / steps)}%`;
-      current++;
-      setTimeout(resolveStep, 1800); // slower = visible
-    }
-    
-    bar.style.width = `${(current + 1) * (100 / steps)}%`;
+    // hide error
+    errors[current].style.opacity = "0";
+
+    // grow chart
+    bars[current].style.height = `${30 + current * 20}%`;
+
     current++;
-    setTimeout(resolveStep, 1200);
+
+    setTimeout(resolveStep, 1500);
   }
-  setTimeout(resolveStep, 1200);
+
+  setTimeout(resolveStep, 2000);
 }
   
 }); // DOM Close
