@@ -455,11 +455,11 @@ function runMobileHero() {
   const bars = document.querySelectorAll(".mobile-chart .bar");
   const metrics = document.querySelectorAll(".mobile-metrics .metric");
 
-  // ✅ SAFETY CHECK (prevents crashes)
   if (!node || !core || !revenue) return;
 
   let timeouts = [];
   let observer;
+  let isRunning = false;   // 🔥 NEW
 
   function clearAllTimers() {
     timeouts.forEach(t => clearTimeout(t));
@@ -468,12 +468,12 @@ function runMobileHero() {
 
   function reset() {
     clearAllTimers();
+    isRunning = false;   // 🔥 IMPORTANT
 
     node.style.opacity = 0;
     core.classList.remove("active");
     revenue.style.opacity = 0;
 
-    // reset items
     const items = document.querySelectorAll(".mobile-node .item");
     items.forEach(item => {
       const error = item.querySelector(".error");
@@ -495,6 +495,9 @@ function runMobileHero() {
 
   function runSequence() {
 
+    if (isRunning) return;   // 🔥 PREVENT DUPLICATE RUNS
+    isRunning = true;
+
     clearAllTimers();
 
     const items = document.querySelectorAll(".mobile-node .item");
@@ -504,7 +507,7 @@ function runMobileHero() {
       node.style.opacity = 1;
     }, 500));
 
-    // STEP 1 — SHOW ERRORS ONE BY ONE
+    // STEP 1 — Errors appear
     items.forEach((item, i) => {
       const error = item.querySelector(".error");
 
@@ -516,17 +519,17 @@ function runMobileHero() {
 
     const baseTime = 1200 + items.length * 700;
 
-    // STEP 2 — SHOW CORE
+    // STEP 2 — Core
     timeouts.push(setTimeout(() => {
       core.classList.add("active");
     }, baseTime + 500));
 
-    // STEP 3 — SHOW REVENUE
+    // STEP 3 — Revenue
     timeouts.push(setTimeout(() => {
       revenue.style.opacity = 1;
     }, baseTime + 900));
 
-    // STEP 4 — REPLACE ERRORS → SOLUTIONS
+    // STEP 4 — Replace + animate
     items.forEach((item, i) => {
 
       const error = item.querySelector(".error");
@@ -539,12 +542,10 @@ function runMobileHero() {
 
         resolved.style.opacity = 1;
 
-        // Bars grow
         if (bars[i]) {
           bars[i].style.height = bars[i].dataset.height;
         }
 
-        // Metrics animate
         if (metrics[i]) {
           metrics[i].style.opacity = 1;
           metrics[i].style.transform = "translateY(0)";
@@ -554,19 +555,23 @@ function runMobileHero() {
 
     });
 
-    // LOOP
+    // 🔥 FIXED LOOP (RESET + RESTART CLEANLY)
     timeouts.push(setTimeout(() => {
+      reset();
       runSequence();
     }, baseTime + 1400 + items.length * 900 + 2000));
   }
 
-  // ✅ INTERSECTION OBSERVER (ONLY trigger)
+  // ✅ OBSERVER WITH STATE CONTROL
   observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        runSequence();
+        if (!isRunning) {
+          reset();        // 🔥 ensure clean start
+          runSequence();
+        }
       } else {
-        reset();
+        reset();          // 🔥 FULL RESET ON EXIT
       }
     });
   }, { threshold: 0.4 });
