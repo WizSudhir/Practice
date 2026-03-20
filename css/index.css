@@ -532,16 +532,6 @@ z-index: 2;
   justify-content: center;
 }
 
-/* CONTENT CENTERING (DESKTOP FIX) */
-.hero-content {
-  position: relative;
-  bottom: auto;
-  transform: none;
-  margin-top: auto;
-  margin-bottom: 60px;
-  padding: 0 20px;
-}
-
 /* ===============================
    LARGE DESKTOP (1200px+)
 ================================= */
