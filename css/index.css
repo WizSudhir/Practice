@@ -214,14 +214,14 @@ z-index: 2;
 }
 /* ERRORS (ALWAYS VISIBLE IN CHAOS) */
 .errors {
-  max-height: 32px;          /* ✅ prevent height growth */
+  max-height: none;          /* ✅ prevent height growth */
   max-width: 140px;
   margin-top: 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2px;
-  overflow: hidden;
+  overflow: visible;
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 .error-label {
