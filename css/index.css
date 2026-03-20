@@ -67,6 +67,11 @@ overflow: hidden;
   opacity: 0.45;              /* 🔥 increased */
   mix-blend-mode: normal;     /* 🔥 key fix */
   pointer-events: none;
+  animation: orbFloat 12s ease-in-out infinite alternate;
+}
+@keyframes orbFloat {
+  from { transform: translateY(0px); }
+  to { transform: translateY(-20px); }
 }
 .system-bg .vignette {
   position: absolute;
