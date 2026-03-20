@@ -591,11 +591,15 @@ z-index: 2;
 ================================= */
 @media (max-width: 768px) {
      /* 🔥 KILL COMPLEX SYSTEM */
-  .system-bg,
   .connections,
   .revenue {
     display: none !important;
   }
+ .system-bg {
+  display: block !important;
+  transform: none !important;
+  perspective: none;
+   }
   /* CLEAN MOBILE HERO */
   .hero-system {
     align-items: flex-start;
