@@ -442,37 +442,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ===============================
   // MOBILE HERO
   // ===============================
-function runMobileHero() {
 
-  const node = document.getElementById("mobileNode");
-  const solution = document.getElementById("mobileSolution");
-  const bars = document.querySelectorAll(".mobile-chart .bar");
-
-  const errors = node.querySelectorAll(".error");
-
-  let current = 0;
-
-  setTimeout(() => {
-    solution.classList.add("active");
-  }, 1200);
-
-  function resolveStep() {
-
-    if (current >= errors.length) return;
-
-    // hide error
-    errors[current].style.opacity = "0";
-
-    // grow chart
-    bars[current].style.height = `${30 + current * 20}%`;
-
-    current++;
-
-    setTimeout(resolveStep, 1500);
-  }
-
-  setTimeout(resolveStep, 2000);
-}
   
 }); // DOM Close
 
