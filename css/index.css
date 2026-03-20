@@ -641,12 +641,13 @@ z-index: 2;
     padding: 18px;
     border-radius: 12px;
     background: rgba(255,255,255,0.03);
-    text-align: center;
+    text-align: left;
   }
 .item {
   height: 20px;
   position: relative;
   width: 100%;
+  text-align: left;
 }
 .item .error,
 .item .resolved {
