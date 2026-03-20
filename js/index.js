@@ -442,7 +442,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ===============================
   // MOBILE HERO
   // ===============================
-if (window.innerWidth < 768) {
+function runMobileHero() {
 
   const node = document.getElementById("mobileNode");
   const core = document.getElementById("mobileCore");
@@ -461,7 +461,6 @@ if (window.innerWidth < 768) {
 
     node.classList.add("resolved");
 
-    // increase revenue
     bar.style.width = `${(current + 1) * (100 / steps)}%`;
 
     current++;
