@@ -613,19 +613,6 @@ if (gateway) {
   gatewayObserver.observe(gateway);
 }
 
-// ===============================
-// 6. CONTACT STRIP REVEAL
-// ===============================
-const contactStrip = document.querySelector(".contact-strip");
-if (contactStrip) {
-  const contactObserver = new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting) {
-      contactStrip.classList.add("visible");
-    }
-  }, { threshold: 0.3 });
-  contactObserver.observe(contactStrip);
-}
-
   
 }); // DOM Close
 
