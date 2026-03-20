@@ -1,15 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  // ===============================
-  // ICON INIT (FIXED)
-  // ===============================
-  function initIcons() {
-    if (window.lucide) {
-      lucide.createIcons();
-    }
-  }
-
-  initIcons();
+  lucide.createIcons();
 
   const hero = document.querySelector(".system-bg");
   const nodes = document.querySelectorAll(".node");
@@ -17,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const svg = document.getElementById("connections");
   const revenue = document.getElementById("revenue");
 
+  const PHASE_DELAY = 2000;
   const NODE_W = 140;
   const NODE_H = 100;
 
@@ -28,27 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let controlled = false;
   let frozen = false;
   let revenueProgress = 0;
-  let isVisible = true;
 
-  // ===============================
-  // VIEWPORT OBSERVER (STOP/START)
-  // ===============================
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        isVisible = true;
-        requestAnimationFrame(animate);
-      } else {
-        isVisible = false;
-      }
-    });
-  }, { threshold: 0.2 });
-
-  observer.observe(hero);
-
-  // ===============================
-  // BOUNDS
-  // ===============================
   function updateBounds() {
     width = hero.clientWidth;
     height = hero.clientHeight;
@@ -58,80 +30,105 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", updateBounds);
 
   // ===============================
-  // INITIAL NODE SETUP
+  // POSITION SETUP
   // ===============================
-  function setupNodes() {
+  nodes.forEach((n, i) => {
 
-    nodes.forEach((n, i) => {
+    const cols = 4;
+    const rows = 2;
 
-      const cols = 4;
-      const rows = 2;
+    const usableWidth = width - SIDE_PADDING * 2;
+    const usableHeight = height - TOP_PADDING - BOTTOM_PADDING;
 
-      const usableWidth = width - SIDE_PADDING * 2;
-      const usableHeight = height - TOP_PADDING - BOTTOM_PADDING;
+    const zoneW = usableWidth / cols;
+    const zoneH = usableHeight / rows;
 
-      const zoneW = usableWidth / cols;
-      const zoneH = usableHeight / rows;
+    const col = i % cols;
+    const row = Math.floor(i / cols);
 
-      const col = i % cols;
-      const row = Math.floor(i / cols);
+    n.baseX = -width / 2 + SIDE_PADDING + zoneW * (col + 0.5);
+    n.baseY = -height / 2 + TOP_PADDING + zoneH * (row + 0.5);
 
-      n.baseX = -width / 2 + SIDE_PADDING + zoneW * (col + 0.5);
-      n.baseY = -height / 2 + TOP_PADDING + zoneH * (row + 0.5);
+    n.angle = Math.random() * Math.PI * 2;
+    n.speed = 0.002 + Math.random() * 0.002;
 
-      n.angle = Math.random() * Math.PI * 2;
-      n.speed = 0.002 + Math.random() * 0.002;
+    n.floatX = Math.max(10, zoneW / 2 - NODE_W / 2 - 6);
+    n.floatY = Math.max(10, zoneH / 2 - NODE_H / 2 - 6);
 
-      n.floatX = Math.max(10, zoneW / 2 - NODE_W / 2 - 6);
-      n.floatY = Math.max(10, zoneH / 2 - NODE_H / 2 - 6);
+    n.z = (Math.random() - 0.5) * 40;
 
-      n.z = (Math.random() - 0.5) * 40;
-
-      n.x = n.baseX;
-      n.y = n.baseY;
-    });
-  }
-
-  setupNodes();
+    n.x = n.baseX;
+    n.y = n.baseY;
+  });
 
   // ===============================
-  // CONNECTIONS
+  // CONNECTION SYSTEM
   // ===============================
-  function resetConnections() {
-    svg.innerHTML = `
-      <defs>
-        <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#22c55e"/>
-          <stop offset="100%" stop-color="#3b82f6"/>
-        </linearGradient>
-      </defs>
-    `;
-  }
-
   function drawConnection(node) {
 
     const coreRect = core.getBoundingClientRect();
-    const nodeRect = node.querySelector(".node-inner").getBoundingClientRect();
+    const nodeInner = node.querySelector(".node-inner");
+    const nodeRect = nodeInner.getBoundingClientRect();
     const svgRect = svg.getBoundingClientRect();
 
-    const cx = coreRect.left + coreRect.width / 2;
-    const cy = coreRect.top + coreRect.height / 2;
+    const coreCenter = {
+      x: coreRect.left + coreRect.width / 2,
+      y: coreRect.top + coreRect.height / 2
+    };
 
-    const nx = nodeRect.left + nodeRect.width / 2;
-    const ny = nodeRect.top + nodeRect.height / 2;
+    const nodeCenter = {
+      x: nodeRect.left + nodeRect.width / 2,
+      y: nodeRect.top + nodeRect.height / 2
+    };
 
-    const startX = cx - svgRect.left;
-    const startY = cy - svgRect.top;
-    const endX = nx - svgRect.left;
-    const endY = ny - svgRect.top;
+    const dx = nodeCenter.x - coreCenter.x;
+    const dy = nodeCenter.y - coreCenter.y;
 
-    const midX = startX + (endX - startX) * 0.5;
+    const dist = Math.hypot(dx, dy);
+
+    const nx = dx / dist;
+    const ny = dy / dist;
+
+    const coreRadius = coreRect.width / 2;
+
+    const coreEdge = {
+      x: coreCenter.x + nx * (coreRadius + 1),
+      y: coreCenter.y + ny * (coreRadius + 1)
+    };
+
+    const halfW = nodeRect.width / 2;
+    const halfH = nodeRect.height / 2;
+
+    let tx = Infinity;
+    let ty = Infinity;
+
+    if (nx !== 0) tx = halfW / Math.abs(nx);
+    if (ny !== 0) ty = halfH / Math.abs(ny);
+
+    const t = Math.min(tx, ty);
+
+    const nodeEdge = {
+      x: nodeCenter.x - nx * (t + 1),
+      y: nodeCenter.y - ny * (t + 1)
+    };
+
+    const start = {
+      x: Math.round(coreEdge.x - svgRect.left),
+      y: Math.round(coreEdge.y - svgRect.top)
+    };
+
+    const end = {
+      x: Math.round(nodeEdge.x - svgRect.left),
+      y: Math.round(nodeEdge.y - svgRect.top)
+    };
+
+    const midX = Math.round(start.x + (end.x - start.x) * 0.5);
 
     const d = `
-      M ${startX} ${startY}
-      L ${midX} ${startY}
-      L ${midX} ${endY}
-      L ${endX} ${endY}
+      M ${start.x} ${start.y}
+      L ${midX} ${start.y}
+      L ${midX} ${end.y}
+      L ${end.x} ${end.y}
     `;
 
     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -144,8 +141,52 @@ document.addEventListener("DOMContentLoaded", () => {
     return path;
   }
 
+  function resetConnections() {
+    svg.innerHTML = `
+      <defs>
+        <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#22c55e"/>
+          <stop offset="100%" stop-color="#3b82f6"/>
+        </linearGradient>
+      </defs>
+    `;
+  }
+
   // ===============================
-  // REVENUE LOGIC
+  // RESET EVERYTHING (KEY PART)
+  // ===============================
+  function resetAnimation() {
+
+    controlled = false;
+    frozen = false;
+    revenueProgress = 0;
+
+    hero.classList.remove("controlled");
+    revenue.classList.remove("active");
+
+    core.style.boxShadow = "";
+    core.style.display = "none";
+
+    resetConnections();
+
+    document.querySelectorAll(".bar").forEach(bar => {
+      bar.style.height = "0";
+      bar.style.transform = "";
+    });
+
+    const line = document.querySelector(".line-path");
+    if (line) {
+      line.style.strokeDashoffset = "";
+    }
+
+    nodes.forEach(n => {
+      n.classList.remove("resolved-active");
+      n.querySelector(".node-inner").style.boxShadow = "";
+    });
+  }
+
+  // ===============================
+  // REVENUE
   // ===============================
   function incrementRevenue() {
 
@@ -155,16 +196,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (revenueProgress >= bars.length) return;
 
     const bar = bars[revenueProgress];
-
     bar.style.height = bar.dataset.height;
 
     if (line) {
       const totalLength = line.getTotalLength();
-      const ratio = (revenueProgress + 1) / bars.length;
+      const progressRatio = (revenueProgress + 1) / bars.length;
 
-      line.style.opacity = 1;
       line.style.strokeDasharray = totalLength;
-      line.style.strokeDashoffset = totalLength * (1 - ratio);
+      line.style.strokeDashoffset = totalLength * (1 - progressRatio);
     }
 
     core.style.boxShadow = `
@@ -176,159 +215,68 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ===============================
-  // RESET SYSTEM
+  // MAIN TIMELINE (LOOPABLE)
   // ===============================
-  function resetSystem() {
+  function runAnimation() {
 
-    controlled = false;
-    frozen = false;
-    revenueProgress = 0;
-
-    hero.classList.remove("controlled");
-    revenue.classList.remove("active");
-
-    nodes.forEach(n => {
-      n.classList.remove("resolved-active");
-    });
-
-    resetConnections();
-
-    document.querySelectorAll(".bar").forEach(bar => {
-      bar.style.height = "0";
-    });
-
-    const line = document.querySelector(".line-path");
-    if (line) {
-      line.style.strokeDashoffset = 300;
-      line.style.opacity = 0;
-    }
-
-    core.style.boxShadow = `
-      0 0 40px rgba(59,130,246,0.5),
-      0 0 80px rgba(139,92,246,0.3)
-    `;
-  }
-
-  // ===============================
-  // STABILITY CHECK
-  // ===============================
-  function waitForStabilization(callback) {
-
-    let stableFrames = 0;
-    let last = new Map();
-
-    function check() {
-
-      let stable = true;
-
-      nodes.forEach(n => {
-        const prev = last.get(n) || { x: n.x, y: n.y };
-
-        if (Math.abs(n.x - prev.x) > 0.3 || Math.abs(n.y - prev.y) > 0.3) {
-          stable = false;
-        }
-
-        last.set(n, { x: n.x, y: n.y });
-      });
-
-      if (stable) stableFrames++;
-      else stableFrames = 0;
-
-      if (stableFrames > 12) callback();
-      else requestAnimationFrame(check);
-    }
-
-    check();
-  }
-
-  // ===============================
-  // MAIN CYCLE
-  // ===============================
-  function startCycle() {
+    resetAnimation();
 
     setTimeout(() => {
 
       hero.classList.add("controlled");
       core.style.display = "flex";
-      initIcons();
-
       revenue.classList.add("active");
 
-      waitForStabilization(() => {
+      frozen = true;
 
-        frozen = true;
+      nodes.forEach(n => {
+        n.x = n.baseX;
+        n.y = n.baseY;
+      });
 
-        nodes.forEach(n => {
-          n.x = n.baseX;
-          n.y = n.baseY;
-        });
+      nodes.forEach((n, i) => {
 
         setTimeout(() => {
 
-          nodes.forEach((n, i) => {
+          const path = drawConnection(n);
+          path.getBoundingClientRect();
+          path.classList.add("active");
 
-            setTimeout(() => {
+          setTimeout(incrementRevenue, 300);
 
-              const path = drawConnection(n);
-              path.getBoundingClientRect();
-              path.classList.add("active");
+          setTimeout(() => {
+            n.classList.add("resolved-active");
+          }, 700);
 
-              setTimeout(incrementRevenue, 300);
-
-              setTimeout(() => {
-                n.classList.add("resolved-active");
-              }, 700);
-
-            }, i * 450);
-
-          });
-
-        }, 600);
-
+        }, i * 450);
       });
 
-    }, 2000);
-  }
+      // 🔁 RESTART AFTER FULL ANIMATION
+      const totalDuration = nodes.length * 450 + 3000;
 
-  function loopCycle() {
+      setTimeout(runAnimation, totalDuration);
 
-    startCycle();
+    }, 2000 + PHASE_DELAY);
 
     setTimeout(() => {
-
-      resetSystem();
-
-      setTimeout(loopCycle, 1000);
-
-    }, 12000);
+      controlled = true;
+    }, 3500 + PHASE_DELAY);
   }
-
-  loopCycle();
 
   // ===============================
   // ANIMATION LOOP
   // ===============================
   function animate() {
 
-    if (!isVisible) return;
-
     nodes.forEach(n => {
 
       if (!controlled) {
-
         n.angle += n.speed;
-
         n.x = n.baseX + Math.cos(n.angle) * n.floatX;
         n.y = n.baseY + Math.sin(n.angle) * n.floatY;
-
       } else if (!frozen) {
-
         n.x += (-n.x) * 0.015;
         n.y += (-n.y) * 0.015;
-
-        n.x += (n.baseX - n.x) * 0.04;
-        n.y += (n.baseY - n.y) * 0.04;
-
       } else {
         n.x = n.baseX;
         n.y = n.baseY;
@@ -343,6 +291,7 @@ document.addEventListener("DOMContentLoaded", () => {
     requestAnimationFrame(animate);
   }
 
-  requestAnimationFrame(animate);
+  animate();
+  runAnimation(); // 🔥 START LOOP
 
 });
