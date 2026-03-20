@@ -467,32 +467,39 @@ function runMobileHero() {
     timeouts = [];
   }
 
-  function reset() {
-    clearAllTimers();
-    isRunning = false;   // 🔥 IMPORTANT
+function reset() {
+  clearAllTimers();
+  isRunning = false;
 
-    node.style.opacity = 0;
-    core.classList.remove("active");
-    revenue.style.opacity = 0;
+  node.style.opacity = 0;
+  core.classList.remove("active");
+  revenue.style.opacity = 0;
 
-    const items = document.querySelectorAll(".mobile-node .item");
-    items.forEach(item => {
-      const error = item.querySelector(".error");
-      const resolved = item.querySelector(".resolved");
-
-      error.style.opacity = 0;
-      error.classList.remove("active");
-
-      resolved.style.opacity = 0;
-    });
-
-    bars.forEach(bar => bar.style.height = "5%");
-
-    metrics.forEach(m => {
-      m.style.opacity = 0;
-      m.style.transform = "translateY(10px)";
-    });
+  // 🔥 FIX: reset connection
+  if (connection) {
+    connection.classList.remove("active");
+    connection.style.height = "0px";
+    void connection.offsetHeight; // force reflow
   }
+
+  const items = document.querySelectorAll(".mobile-node .item");
+  items.forEach(item => {
+    const error = item.querySelector(".error");
+    const resolved = item.querySelector(".resolved");
+
+    error.style.opacity = 0;
+    error.classList.remove("active");
+
+    resolved.style.opacity = 0;
+  });
+
+  bars.forEach(bar => bar.style.height = "5%");
+
+  metrics.forEach(m => {
+    m.style.opacity = 0;
+    m.style.transform = "translateY(10px)";
+  });
+}
 
   function runSequence() {
 
@@ -523,7 +530,7 @@ function runMobileHero() {
     // STEP 1.5 — Draw connection
     timeouts.push(setTimeout(() => {
       if (connection) connection.classList.add("active");
-    }, baseTime - 200));
+    }, baseTime + 200));
 
     // STEP 2 — Core
     timeouts.push(setTimeout(() => {
