@@ -21,9 +21,10 @@ perspective: 1200px;
 perspective-origin: 50% 50%;
 transform-style: preserve-3d;
 background:
-  radial-gradient(circle at 10% 20%, rgba(59,130,246,0.15), transparent 35%),
-  radial-gradient(circle at 90% 80%, rgba(139,92,246,0.12), transparent 40%),
-  linear-gradient(180deg, var(--bg-primary), var(--bg-secondary));
+  radial-gradient(circle at 10% 20%, rgba(59,130,246,0.08), transparent 40%),
+  radial-gradient(circle at 90% 80%, rgba(139,92,246,0.06), transparent 40%),
+  radial-gradient(circle at 50% 50%, rgba(34,197,94,0.05), transparent 50%),
+  #020617;
 z-index: 2;
 }
 /* Dim all nodes when hovering */
