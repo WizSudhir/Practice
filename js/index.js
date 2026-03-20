@@ -487,12 +487,30 @@ function runMobileHero() {
     }, 500));
 
     // STEP 1 — Show errors AFTER card appears
-    errors.forEach((e, i) => {
-    timeouts.push(setTimeout(() => {
-    e.style.opacity = 1;
-    e.classList.add("active");
-      }, 1200 + i * 700));   // 🔥 shifted from 1000 → 1200
-    });
+const items = document.querySelectorAll(".mobile-node .item");
+
+items.forEach((item, i) => {
+
+  const error = item.querySelector(".error");
+  const resolved = item.querySelector(".resolved");
+
+  timeouts.push(setTimeout(() => {
+
+    error.style.opacity = 0;
+    error.classList.remove("active");
+
+    resolved.style.opacity = 1;
+
+    bars[i].style.height = bars[i].dataset.height;
+
+    if (metrics[i]) {
+      metrics[i].style.opacity = 1;
+      metrics[i].style.transform = "translateY(0)";
+    }
+
+  }, baseTime + i * 900));
+
+});
 
     // STEP 2 — Show core
     timeouts.push(setTimeout(() => {
