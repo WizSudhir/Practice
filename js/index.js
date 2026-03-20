@@ -29,7 +29,9 @@ document.addEventListener("DOMContentLoaded", () => {
   if (hero && isVisible) {
   animate();
   }
-observer.observe(hero);
+if (hero) {
+  observer.observe(hero);
+}
   const nodes = document.querySelectorAll(".node");
   const core = document.querySelector(".core");
   const svg = document.getElementById("connections");
