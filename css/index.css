@@ -684,6 +684,18 @@ z-index: 2;
     opacity: 1;
     transform: translateY(0);
   }
+  .mobile-connection {
+  width: 2px;
+  height: 0;
+  background: linear-gradient(to bottom, #f87171, #22c55e);
+  position: relative;
+  transition: height 0.8s ease;
+  opacity: 0;
+   }
+ .mobile-connection.active {
+  height: 60px;
+  opacity: 1;
+   }
   .mobile-core {
     position: relative;
     width: 90%;
