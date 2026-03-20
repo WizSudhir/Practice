@@ -2,35 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   lucide.createIcons();
 
-  
   const hero = document.querySelector(".system-bg");
-  let animationRunning = false;
-  let activeTimeouts = [];
-  let timelineStarted = false;
-  let isVisible = true;
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      isVisible = entry.isIntersecting;
-  
-      if (isVisible) {
-      // 🔥 ALWAYS restart clean when entering view
-      activeTimeouts.forEach(clearTimeout);
-      activeTimeouts = [];
-      resetSystem();
-      if (!animationRunning) {
-        animate();
-      }
-      } else {
-      activeTimeouts.forEach(clearTimeout);
-      activeTimeouts = [];
-      }
-     },
-    { threshold: 0.5 }
-  );
-    if (hero) {
-      observer.observe(hero);
-    }
-  
   const nodes = document.querySelectorAll(".node");
   const core = document.querySelector(".core");
   const svg = document.getElementById("connections");
@@ -51,7 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let revenueProgress = 0;
 
   function updateBounds() {
-    if (!hero) return;
     width = hero.clientWidth;
     height = hero.clientHeight;
   }
@@ -67,7 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
     controlled = false;
     frozen = false;
     revenueProgress = 0;
-    timelineStarted = false;
 
     hero.classList.remove("controlled");
     core.style.display = "none";
@@ -244,7 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
     bar.style.height = bar.dataset.height;
 
     bar.style.transform = "scaleY(1.1)";
-    activeTimeouts.push(setTimeout(() => {
+    setTimeout(() => {
       bar.style.transform = "scaleY(1)";
     }, 200);
 
@@ -265,8 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 🔁 TRIGGER LOOP AFTER LAST BAR + 2s
     if (revenueProgress === bars.length) {
-      activeTimeouts.push(setTimeout(() => {
-        if (!isVisible) return;
+      setTimeout(() => {
         resetSystem();
       }, 5000);
     }
@@ -303,9 +272,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (stableFrames > 12) {
         callback();
       } else {
-        if (isVisible) {
-          requestAnimationFrame(check);
-        }
+        requestAnimationFrame(check);
       }
     }
 
@@ -316,9 +283,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // CONTROL TIMELINE (EXTRACTED)
   // ===============================
   function startTimeline() {
-    if (!isVisible || timelineStarted) return;
-    timelineStarted = true;
-    activeTimeouts.push(setTimeout(() => {
+
+    setTimeout(() => {
 
       hero.classList.add("controlled");
       core.style.display = "flex";
@@ -334,24 +300,24 @@ document.addEventListener("DOMContentLoaded", () => {
           n.y = n.baseY;
         });
 
-        activeTimeouts.push(setTimeout(() => {
+        setTimeout(() => {
 
           requestAnimationFrame(() => {
 
             nodes.forEach((n, i) => {
 
-              activeTimeouts.push(setTimeout(() => {
+              setTimeout(() => {
 
                 const path = drawConnection(n);
 
                 path.getBoundingClientRect();
                 path.classList.add("active");
 
-                activeTimeouts.push(setTimeout(() => {
+                setTimeout(() => {
                   incrementRevenue();
                 }, 420);
 
-                activeTimeouts.push(setTimeout(() => {
+                setTimeout(() => {
 
                   n.classList.add("resolved-active");
 
@@ -374,88 +340,87 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }, 2000 + PHASE_DELAY);
 
-    activeTimeouts.push(setTimeout(() => {
+    setTimeout(() => {
       controlled = true;
     }, 3500 + PHASE_DELAY);
   }
 
+  // ▶️ INITIAL START
+  startTimeline();
+
   // ===============================
   // ANIMATION LOOP
   // ===============================
-function animate() {
+  function animate() {
 
-  if (!isVisible) {
-    animationRunning = false;
-    return;
+    nodes.forEach(n => {
+
+      if (!controlled) {
+
+        n.angle += n.speed;
+
+        n.x = n.baseX + Math.cos(n.angle) * n.floatX;
+        n.y = n.baseY + Math.sin(n.angle) * n.floatY;
+
+      } else if (!frozen) {
+
+        const dx = -n.x;
+        const dy = -n.y;
+
+        n.x += dx * 0.015;
+        n.y += dy * 0.015;
+
+        n.x += (n.baseX - n.x) * 0.04;
+        n.y += (n.baseY - n.y) * 0.04;
+
+      } else {
+
+        n.x = n.baseX;
+        n.y = n.baseY;
+      }
+
+      const left = -width / 2 + SIDE_PADDING + NODE_W / 2;
+      const right = width / 2 - SIDE_PADDING - NODE_W / 2;
+
+      const top = -height / 2 + TOP_PADDING + NODE_H / 2;
+      const bottom = height / 2 - BOTTOM_PADDING - NODE_H / 2;
+
+      n.x = Math.max(left, Math.min(right, n.x));
+      n.y = Math.max(top, Math.min(bottom, n.y));
+
+      if (!controlled) {
+        n.z += Math.sin(n.angle) * 0.03;
+      }
+
+      n.z = Math.max(0, Math.min(30, n.z));
+
+      const scale = 1 + n.z / 300;
+
+      const glowStrength = n.z / 40;
+      const glow = 10 + glowStrength * 30;
+      const opacity = controlled ? 1 : (0.7 + glowStrength * 0.3);
+
+      if (!n.matches(':hover')) {
+        n.style.opacity = opacity;
+      }
+
+      n.querySelector(".node-inner").style.boxShadow = controlled
+        ? `0 0 20px rgba(34,197,94,0.4), 0 0 40px rgba(59,130,246,0.25)`
+        : `0 0 ${glow}px rgba(59,130,246,0.25),
+           0 0 ${glow * 2}px rgba(139,92,246,0.15)`;
+
+      n.style.transform = `
+        translate3d(${n.x}px, ${n.y}px, ${n.z}px)
+        translate(-50%, -50%)
+        scale(${scale})
+      `;
+    });
+
+    requestAnimationFrame(animate);
   }
 
-  animationRunning = true;
-
-  nodes.forEach(n => {
-
-    if (!controlled) {
-
-      n.angle += n.speed;
-
-      n.x = n.baseX + Math.cos(n.angle) * n.floatX;
-      n.y = n.baseY + Math.sin(n.angle) * n.floatY;
-
-    } else if (!frozen) {
-
-      const dx = -n.x;
-      const dy = -n.y;
-
-      n.x += dx * 0.015;
-      n.y += dy * 0.015;
-
-      n.x += (n.baseX - n.x) * 0.04;
-      n.y += (n.baseY - n.y) * 0.04;
-
-    } else {
-
-      n.x = n.baseX;
-      n.y = n.baseY;
-    }
-
-    const left = -width / 2 + SIDE_PADDING + NODE_W / 2;
-    const right = width / 2 - SIDE_PADDING - NODE_W / 2;
-
-    const top = -height / 2 + TOP_PADDING + NODE_H / 2;
-    const bottom = height / 2 - BOTTOM_PADDING - NODE_H / 2;
-
-    n.x = Math.max(left, Math.min(right, n.x));
-    n.y = Math.max(top, Math.min(bottom, n.y));
-
-    if (!controlled) {
-      n.z += Math.sin(n.angle) * 0.03;
-    }
-
-    n.z = Math.max(0, Math.min(30, n.z));
-
-    const scale = 1 + n.z / 300;
-
-    const glowStrength = n.z / 40;
-    const glow = 10 + glowStrength * 30;
-    const opacity = controlled ? 1 : (0.7 + glowStrength * 0.3);
-
-    if (!n.matches(':hover')) {
-      n.style.opacity = opacity;
-    }
-
-    n.querySelector(".node-inner").style.boxShadow = controlled
-      ? `0 0 20px rgba(34,197,94,0.4), 0 0 40px rgba(59,130,246,0.25)`
-      : `0 0 ${glow}px rgba(59,130,246,0.25),
-         0 0 ${glow * 2}px rgba(139,92,246,0.15)`;
-
-    n.style.transform = `
-      translate3d(${n.x}px, ${n.y}px, ${n.z}px)
-      translate(-50%, -50%)
-      scale(${scale})
-    `;
-  });
-
-  requestAnimationFrame(animate);
-  }
   animate();
 
-}); //DOM Close
+});
+
+
