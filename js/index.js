@@ -450,13 +450,14 @@ document.addEventListener("DOMContentLoaded", () => {
 function runMobileHero() {
 
   const node = document.getElementById("mobileNode");
-  const errors = node.querySelectorAll(".error");
-  const resolved = node.querySelectorAll(".resolved");
   const core = document.getElementById("mobileCore");
   const revenue = document.querySelector(".mobile-revenue");
   const bars = document.querySelectorAll(".mobile-chart .bar");
   const metrics = document.querySelectorAll(".mobile-metrics .metric");
-  
+
+  // ✅ SAFETY CHECK (prevents crashes)
+  if (!node || !core || !revenue) return;
+
   let timeouts = [];
   let observer;
 
@@ -467,101 +468,112 @@ function runMobileHero() {
 
   function reset() {
     clearAllTimers();
-    metrics.forEach(m => {
-    m.style.opacity = 0;
-    m.style.transform = "translateY(10px)";
-    });
 
-    // Hide everything
     node.style.opacity = 0;
     core.classList.remove("active");
     revenue.style.opacity = 0;
 
-    errors.forEach(e => e.style.opacity = 0);
-    resolved.forEach(r => r.style.opacity = 0);
-    bars.forEach(bar => bar.style.height = "5%");
-  }
-observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      runSequence();
-    } else {
-      reset();
-    }
-  });
-}, { threshold: 0.4 });
-
-observer.observe(document.querySelector(".mobile-system"));
-function runSequence() {
-
-  clearAllTimers();
-
-  const items = document.querySelectorAll(".mobile-node .item");
-
-  // STEP 0 — Show chaos card
-  timeouts.push(setTimeout(() => {
-    node.style.opacity = 1;
-  }, 500));
-
-  // STEP 1 — SHOW ERRORS ONE BY ONE
-  items.forEach((item, i) => {
-
-    const error = item.querySelector(".error");
-
-    timeouts.push(setTimeout(() => {
-      error.style.opacity = 1;
-      error.classList.add("active");
-    }, 1200 + i * 700));
-
-  });
-
-  const baseTime = 1200 + items.length * 700;
-
-  // STEP 2 — SHOW CORE
-  timeouts.push(setTimeout(() => {
-    core.classList.add("active");
-  }, baseTime + 500));
-
-  // STEP 3 — SHOW REVENUE
-  timeouts.push(setTimeout(() => {
-    revenue.style.opacity = 1;
-  }, baseTime + 900));
-
-  // STEP 4 — REPLACE ERRORS → SOLUTIONS
-  items.forEach((item, i) => {
-
-    const error = item.querySelector(".error");
-    const resolved = item.querySelector(".resolved");
-
-    timeouts.push(setTimeout(() => {
+    // reset items
+    const items = document.querySelectorAll(".mobile-node .item");
+    items.forEach(item => {
+      const error = item.querySelector(".error");
+      const resolved = item.querySelector(".resolved");
 
       error.style.opacity = 0;
       error.classList.remove("active");
 
-      resolved.style.opacity = 1;
+      resolved.style.opacity = 0;
+    });
 
-      // Bars grow
-      if (bars[i]) {
-        bars[i].style.height = bars[i].dataset.height;
+    bars.forEach(bar => bar.style.height = "5%");
+
+    metrics.forEach(m => {
+      m.style.opacity = 0;
+      m.style.transform = "translateY(10px)";
+    });
+  }
+
+  function runSequence() {
+
+    clearAllTimers();
+
+    const items = document.querySelectorAll(".mobile-node .item");
+
+    // STEP 0 — Show chaos card
+    timeouts.push(setTimeout(() => {
+      node.style.opacity = 1;
+    }, 500));
+
+    // STEP 1 — SHOW ERRORS ONE BY ONE
+    items.forEach((item, i) => {
+      const error = item.querySelector(".error");
+
+      timeouts.push(setTimeout(() => {
+        error.style.opacity = 1;
+        error.classList.add("active");
+      }, 1200 + i * 700));
+    });
+
+    const baseTime = 1200 + items.length * 700;
+
+    // STEP 2 — SHOW CORE
+    timeouts.push(setTimeout(() => {
+      core.classList.add("active");
+    }, baseTime + 500));
+
+    // STEP 3 — SHOW REVENUE
+    timeouts.push(setTimeout(() => {
+      revenue.style.opacity = 1;
+    }, baseTime + 900));
+
+    // STEP 4 — REPLACE ERRORS → SOLUTIONS
+    items.forEach((item, i) => {
+
+      const error = item.querySelector(".error");
+      const resolved = item.querySelector(".resolved");
+
+      timeouts.push(setTimeout(() => {
+
+        error.style.opacity = 0;
+        error.classList.remove("active");
+
+        resolved.style.opacity = 1;
+
+        // Bars grow
+        if (bars[i]) {
+          bars[i].style.height = bars[i].dataset.height;
+        }
+
+        // Metrics animate
+        if (metrics[i]) {
+          metrics[i].style.opacity = 1;
+          metrics[i].style.transform = "translateY(0)";
+        }
+
+      }, baseTime + 1400 + i * 900));
+
+    });
+
+    // LOOP
+    timeouts.push(setTimeout(() => {
+      runSequence();
+    }, baseTime + 1400 + items.length * 900 + 2000));
+  }
+
+  // ✅ INTERSECTION OBSERVER (ONLY trigger)
+  observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        runSequence();
+      } else {
+        reset();
       }
+    });
+  }, { threshold: 0.4 });
 
-      // Metrics animate
-      if (metrics[i]) {
-        metrics[i].style.opacity = 1;
-        metrics[i].style.transform = "translateY(0)";
-      }
-
-    }, baseTime + 1400 + i * 900));
-
-  });
-
-  // LOOP
-  timeouts.push(setTimeout(() => {
-    runSequence();
-  }, baseTime + 1400 + items.length * 900 + 2000));
+  const target = document.querySelector(".mobile-system");
+  if (target) observer.observe(target);
 }
-runSequence();  
-
   
 }); // DOM Close
 
