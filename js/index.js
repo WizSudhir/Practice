@@ -579,7 +579,21 @@ function reset() {
   if (target) observer.observe(target);
 }
 
+  // ===============================
+  // 3. ABOUT
+  // ===============================
+// Scroll activation
+const aboutSection = document.querySelector('.about-system');
 
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      aboutSection.classList.add('active');
+    }
+  });
+}, { threshold: 0.4 });
+
+observer.observe(aboutSection);
 // ===============================
 // 2. REVEAL ANIMATION
 // ===============================
