@@ -66,6 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       n.x = n.baseX;
       n.y = n.baseY;
+      n.angle = 0;
     });
 
     // restart timeline
