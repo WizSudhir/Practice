@@ -31,6 +31,48 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", updateBounds);
 
   // ===============================
+  // 🔁 FULL RESET FOR LOOP
+  // ===============================
+  function resetSystem() {
+
+    controlled = false;
+    frozen = false;
+    revenueProgress = 0;
+
+    hero.classList.remove("controlled");
+    core.style.display = "none";
+    revenue.classList.remove("active");
+
+    resetConnections();
+
+    // reset bars
+    document.querySelectorAll(".bar").forEach(bar => {
+      bar.style.height = "0px";
+      bar.style.transform = "scaleY(1)";
+    });
+
+    // reset line
+    const line = document.querySelector(".line-path");
+    if (line) {
+      line.style.strokeDasharray = "0";
+      line.style.strokeDashoffset = "0";
+    }
+
+    // reset nodes
+    nodes.forEach(n => {
+      n.classList.remove("resolved-active");
+      n.style.opacity = "";
+      n.querySelector(".node-inner").style.boxShadow = "";
+
+      n.x = n.baseX;
+      n.y = n.baseY;
+    });
+
+    // restart timeline
+    startTimeline();
+  }
+
+  // ===============================
   // POSITION SETUP
   // ===============================
   nodes.forEach((n, i) => {
@@ -168,16 +210,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const bar = bars[revenueProgress];
 
-    // grow bar
     bar.style.height = bar.dataset.height;
 
-    // micro interaction
     bar.style.transform = "scaleY(1.1)";
     setTimeout(() => {
       bar.style.transform = "scaleY(1)";
     }, 200);
 
-    // animate line progressively
     if (line) {
       const totalLength = line.getTotalLength();
       const progressRatio = (revenueProgress + 1) / bars.length;
@@ -186,13 +225,19 @@ document.addEventListener("DOMContentLoaded", () => {
       line.style.strokeDashoffset = totalLength * (1 - progressRatio);
     }
 
-    // core glow intensifies
     core.style.boxShadow = `
       0 0 ${40 + revenueProgress * 12}px rgba(34,197,94,0.7),
       0 0 ${80 + revenueProgress * 20}px rgba(59,130,246,0.5)
     `;
 
     revenueProgress++;
+
+    // 🔁 TRIGGER LOOP AFTER LAST BAR + 2s
+    if (revenueProgress === bars.length) {
+      setTimeout(() => {
+        resetSystem();
+      }, 2000);
+    }
   }
 
   // ===============================
@@ -234,69 +279,73 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ===============================
-  // CONTROL TIMELINE
+  // CONTROL TIMELINE (EXTRACTED)
   // ===============================
-  setTimeout(() => {
+  function startTimeline() {
 
-    hero.classList.add("controlled");
-    core.style.display = "flex";
+    setTimeout(() => {
 
-    // 🔥 SHOW REVENUE DASHBOARD EARLY
-    revenue.classList.add("active");
+      hero.classList.add("controlled");
+      core.style.display = "flex";
 
-    waitForStabilization(() => {
+      revenue.classList.add("active");
 
-      frozen = true;
+      waitForStabilization(() => {
 
-      nodes.forEach(n => {
-        n.x = n.baseX;
-        n.y = n.baseY;
-      });
+        frozen = true;
 
-      setTimeout(() => {
+        nodes.forEach(n => {
+          n.x = n.baseX;
+          n.y = n.baseY;
+        });
 
-        requestAnimationFrame(() => {
+        setTimeout(() => {
 
-          nodes.forEach((n, i) => {
+          requestAnimationFrame(() => {
 
-            setTimeout(() => {
-
-              const path = drawConnection(n);
-
-              path.getBoundingClientRect();
-              path.classList.add("active");
-
-              // 🔥 REVENUE INCREMENT PER CONNECTION
-              setTimeout(() => {
-                incrementRevenue();
-              }, 300);
+            nodes.forEach((n, i) => {
 
               setTimeout(() => {
 
-                n.classList.add("resolved-active");
+                const path = drawConnection(n);
 
-                n.querySelector(".node-inner").style.boxShadow = `
-                  0 0 25px rgba(34,197,94,0.7),
-                  0 0 50px rgba(59,130,246,0.4)
-                `;
+                path.getBoundingClientRect();
+                path.classList.add("active");
 
-              }, 700);
+                setTimeout(() => {
+                  incrementRevenue();
+                }, 300);
 
-            }, i * 450 + Math.random() * 150);
+                setTimeout(() => {
+
+                  n.classList.add("resolved-active");
+
+                  n.querySelector(".node-inner").style.boxShadow = `
+                    0 0 25px rgba(34,197,94,0.7),
+                    0 0 50px rgba(59,130,246,0.4)
+                  `;
+
+                }, 700);
+
+              }, i * 450 + Math.random() * 150);
+
+            });
 
           });
 
-        });
+        }, 600);
 
-      }, 600);
+      });
 
-    });
+    }, 2000 + PHASE_DELAY);
 
-  }, 2000 + PHASE_DELAY);
+    setTimeout(() => {
+      controlled = true;
+    }, 3500 + PHASE_DELAY);
+  }
 
-  setTimeout(() => {
-    controlled = true;
-  }, 3500 + PHASE_DELAY);
+  // ▶️ INITIAL START
+  startTimeline();
 
   // ===============================
   // ANIMATION LOOP
@@ -372,6 +421,3 @@ document.addEventListener("DOMContentLoaded", () => {
   animate();
 
 });
-
-
-
