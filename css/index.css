@@ -1,11 +1,8 @@
 /* =========================================================
    PRACTICEGRID SOLUTIONS — CSS SYSTEM
 ========================================================= */
-:root {
-  --rev-glow: 0;
-}
 /* ===============================
-   1. HERO SECTION
+   1. DESKTOP HERO SECTION
 ================================= */
 .hero-system {
   position: relative;
@@ -420,16 +417,9 @@ z-index: 2;
   stroke-dashoffset: 300;
   transition: stroke-dashoffset 1s ease;
 }
-
 /* when active */
 .connection-path.active {
   stroke-dashoffset: 0;
-}
-.anchor {
-  position: absolute;
-  width: 0;
-  height: 0;
-  pointer-events: none;
 }
 .line-path {
   fill: none;
@@ -499,14 +489,6 @@ z-index: 2;
   width: 100%;
   height: 100%;
 }
-.line-path {
-  fill: none;
-  stroke: #4ade80;
-  stroke-width: 2;
-  stroke-dasharray: 300;
-  stroke-dashoffset: 300;
-  transition: stroke-dashoffset 0.6s ease;
-}
 /* METRICS */
 .rev-metrics {
   display: flex;
@@ -515,15 +497,11 @@ z-index: 2;
   font-size: 11px;
   color: #94a3b8;
 }
-/* ===============================
-   RESPONSIVE HERO SYSTEM
-================================= */
-
+/* RESPONSIVE HERO SYSTEM */
 /* NAV HEIGHT TOKEN */
 :root {
   --nav-height: 80px;
 }
-
 /* FIX HERO HEIGHT */
 .hero-system {
   min-height: calc(100vh - var(--nav-height));
@@ -532,62 +510,44 @@ z-index: 2;
   align-items: center;
   justify-content: center;
 }
-
-/* ===============================
-   LARGE DESKTOP (1200px+)
-================================= */
+/* LARGE DESKTOP (1200px+) */
 @media (min-width: 1200px) {
   .system-bg {
     display: block;
   }
 }
-
-/* ===============================
-   TABLET MODE (768px–1199px)
-================================= */
+/* TABLET MODE (768px–1199px) */
 @media (max-width: 1199px) {
-
   .system-bg {
     transform: scale(0.75);
     transform-origin: center;
   }
-
   .node {
     width: 110px;
     height: 80px;
   }
-
   .node-title {
     font-size: 10px;
   }
-
   .error-label {
     font-size: 8px;
   }
-
   .revenue-card {
     width: 220px;
   }
 }
-
-/* ===============================
-   SMALL MOBILE (480px)
-================================= */
+/* SMALL MOBILE (480px) */
 @media (max-width: 480px) {
-
   .hero-content h1 {
     font-size: 24px;
   }
-
   .hero-content p {
     font-size: 13px;
   }
-
 }
 
-
 /* ===============================
-   MOBILE HERO
+   2. MOBILE HERO SECTION
 ================================= */
 .hero-grid {
   position: absolute;
