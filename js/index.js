@@ -436,6 +436,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
   animate();
 
-});
+  // ===============================
+  // MOBILE HERO
+  // ===============================
+if (window.innerWidth < 768) {
+
+  const node = document.getElementById("mobileNode");
+  const core = document.getElementById("mobileCore");
+  const bar = document.getElementById("mobileBar");
+
+  const steps = 4;
+  let current = 0;
+
+  setTimeout(() => {
+    core.classList.add("active");
+  }, 1000);
+
+  function resolveStep() {
+
+    if (current >= steps) return;
+
+    node.classList.add("resolved");
+
+    // increase revenue
+    bar.style.width = `${(current + 1) * (100 / steps)}%`;
+
+    current++;
+
+    setTimeout(resolveStep, 1200);
+  }
+
+  setTimeout(resolveStep, 2000);
+}
+  
+}); // DOM Close
 
 
