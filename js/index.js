@@ -4,14 +4,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
   
   const hero = document.querySelector(".system-bg");
+  let animationRunning = false;
+  let activeTimeouts = [];
+  let timelineStarted = false;
   let isVisible = true;
   const observer = new IntersectionObserver(
     ([entry]) => {
       isVisible = entry.isIntersecting;
   
       if (isVisible) {
-        animate(); // 🔥 restart loop
-      }
+        activeTimeouts.forEach(clearTimeout);
+        activeTimeouts = [];
+        resetSystem(); // 🔥 clean restart (best UX)
+        if (!animationRunning) {
+        animate();
+        }
+        } else {
+        activeTimeouts.forEach(clearTimeout);
+        activeTimeouts = [];
+        }
      },
     { threshold: 0.2 }
   );
@@ -52,6 +63,7 @@ observer.observe(hero);
     controlled = false;
     frozen = false;
     revenueProgress = 0;
+    timelineStarted = false;
 
     hero.classList.remove("controlled");
     core.style.display = "none";
@@ -228,7 +240,7 @@ observer.observe(hero);
     bar.style.height = bar.dataset.height;
 
     bar.style.transform = "scaleY(1.1)";
-    setTimeout(() => {
+    activeTimeouts.push(setTimeout(() => {
       bar.style.transform = "scaleY(1)";
     }, 200);
 
@@ -249,7 +261,7 @@ observer.observe(hero);
 
     // 🔁 TRIGGER LOOP AFTER LAST BAR + 2s
     if (revenueProgress === bars.length) {
-      setTimeout(() => {
+      activeTimeouts.push(setTimeout(() => {
         if (!isVisible) return;
         resetSystem();
       }, 5000);
@@ -287,7 +299,9 @@ observer.observe(hero);
       if (stableFrames > 12) {
         callback();
       } else {
-        requestAnimationFrame(check);
+        if (isVisible) {
+          requestAnimationFrame(check);
+        }
       }
     }
 
@@ -298,8 +312,9 @@ observer.observe(hero);
   // CONTROL TIMELINE (EXTRACTED)
   // ===============================
   function startTimeline() {
-    if (!isVisible) return;
-    setTimeout(() => {
+    if (!isVisible || timelineStarted) return;
+    timelineStarted = true;
+    activeTimeouts.push(setTimeout(() => {
 
       hero.classList.add("controlled");
       core.style.display = "flex";
@@ -315,24 +330,24 @@ observer.observe(hero);
           n.y = n.baseY;
         });
 
-        setTimeout(() => {
+        activeTimeouts.push(setTimeout(() => {
 
           requestAnimationFrame(() => {
 
             nodes.forEach((n, i) => {
 
-              setTimeout(() => {
+              activeTimeouts.push(setTimeout(() => {
 
                 const path = drawConnection(n);
 
                 path.getBoundingClientRect();
                 path.classList.add("active");
 
-                setTimeout(() => {
+                activeTimeouts.push(setTimeout(() => {
                   incrementRevenue();
                 }, 420);
 
-                setTimeout(() => {
+                activeTimeouts.push(setTimeout(() => {
 
                   n.classList.add("resolved-active");
 
@@ -355,7 +370,7 @@ observer.observe(hero);
 
     }, 2000 + PHASE_DELAY);
 
-    setTimeout(() => {
+    activeTimeouts.push(setTimeout(() => {
       controlled = true;
     }, 3500 + PHASE_DELAY);
   }
@@ -367,7 +382,13 @@ observer.observe(hero);
   // ANIMATION LOOP
   // ===============================
   function animate() {
-    if (!isVisible) return;
+    if (!isVisible) {
+    animationRunning = false;
+    return;
+    }
+    if (animationRunning) return;
+    animationRunning = true;
+    
     nodes.forEach(n => {
 
       if (!controlled) {
@@ -433,6 +454,8 @@ observer.observe(hero);
 
     if (isVisible) {
       requestAnimationFrame(animate);
+    } else {
+      animationRunning = false; // 🔥 allow restart later
     }
   }
 
