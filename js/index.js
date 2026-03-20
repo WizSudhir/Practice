@@ -454,6 +454,7 @@ function animate() {
   });
 
   requestAnimationFrame(animate);
-}
+  }
+  animate();
 
 }); //DOM Close
