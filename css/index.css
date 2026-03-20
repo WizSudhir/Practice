@@ -936,37 +936,111 @@ z-index: 2;
 }
 
 /* ===============================
-   5. EHR SLIDER
+  5. EHR SECTION
 ================================= */
-.ehr-section {
+
+.ehr-premium {
   padding: 100px 0;
-  overflow: hidden;
   background: var(--bg-secondary);
   text-align: center;
-}
-.slider {
-  overflow: hidden;
   position: relative;
-  width: 100%;
-  margin-top: 40px;
+  overflow: hidden;
 }
-.slide-track {
+
+/* HEADLINE */
+.ehr-headline {
+  font-size: clamp(26px, 3vw, 38px);
+  font-weight: 600;
+  margin-bottom: 14px;
+  letter-spacing: -0.02em;
+}
+
+/* SUBTEXT */
+.ehr-subtext {
+  max-width: 650px;
+  margin: 0 auto 50px;
+  color: var(--text-secondary);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* SLIDER */
+.ehr-slider {
+  position: relative;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+/* TRACK */
+.ehr-track {
   display: flex;
-  gap: 40px;
-  animation: scroll 60s linear infinite;
-  width:max-content;
+  gap: 50px;
+  width: max-content;
+  animation: scroll 80s linear infinite;
 }
-@keyframes scroll{
-0%{transform:translateX(0)}
-100%{transform:translateX(-50%)}
-}
-.slide-track img {
+
+/* LOGOS */
+.ehr-track img {
   height: 45px;
-  max-width:120px;
-  width:auto;
-  object-fit:contain;
-  opacity:.85;
+  max-width: 120px;
+  object-fit: contain;
+  opacity: 0.7;
   transition: 0.3s ease;
+}
+
+.ehr-track img:hover {
+  opacity: 1;
+  transform: scale(1.08);
+}
+
+/* EDGE FADE */
+.ehr-slider::before,
+.ehr-slider::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 80px;
+  height: 100%;
+  z-index: 2;
+}
+
+.ehr-slider::before {
+  left: 0;
+  background: linear-gradient(to right, var(--bg-secondary), transparent);
+}
+
+.ehr-slider::after {
+  right: 0;
+  background: linear-gradient(to left, var(--bg-secondary), transparent);
+}
+
+/* TRUST BAR */
+.ehr-trust {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+/* TRUST ITEMS */
+.trust-item {
+  font-size: 14px;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.trust-item span {
+  color: #4ade80;
+  font-weight: bold;
+}
+
+/* SCROLL ANIMATION */
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 /* ===============================
    17. SCROLLBAR
