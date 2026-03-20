@@ -26,7 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
      },
     { threshold: 0.2 }
   );
-
+  if (hero && isVisible) {
+  animate();
+  }
 observer.observe(hero);
   const nodes = document.querySelectorAll(".node");
   const core = document.querySelector(".core");
