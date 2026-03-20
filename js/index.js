@@ -1,7 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   lucide.createIcons();
-
+  // ===============================
+  // 1. DESKTOP HERO
+  // ===============================
   const hero = document.querySelector(".system-bg");
   const nodes = document.querySelectorAll(".node");
   const core = document.querySelector(".core");
@@ -49,9 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
   updateBounds();
   window.addEventListener("resize", updateBounds);
 
-  // ===============================
-  // 🔁 FULL RESET FOR LOOP
-  // ===============================
+  // 🔁 FULL RESET FOR LOOP //
   function resetSystem() {
 
     controlled = false;
@@ -92,9 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
     startTimeline();
   }
 
-  // ===============================
-  // POSITION SETUP
-  // ===============================
+  // POSITION SETUP //
   nodes.forEach((n, i) => {
 
     const cols = 4;
@@ -124,9 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
     n.y = n.baseY;
   });
 
-  // ===============================
-  // CONNECTION SYSTEM
-  // ===============================
+  // CONNECTION SYSTEM //
   function drawConnection(node) {
 
     const coreRect = core.getBoundingClientRect();
@@ -218,9 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.addEventListener("resize", resetConnections);
 
-  // ===============================
-  // REVENUE INCREMENT LOGIC
-  // ===============================
+  // REVENUE INCREMENT LOGIC //
   function incrementRevenue() {
 
     const bars = document.querySelectorAll(".revenue .bar");
@@ -264,9 +258,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // ===============================
-  // STABILITY DETECTION
-  // ===============================
+  // STABILITY DETECTION //
   function waitForStabilization(callback) {
 
     let stableFrames = 0;
@@ -302,9 +294,7 @@ document.addEventListener("DOMContentLoaded", () => {
     check();
   }
 
-  // ===============================
-  // CONTROL TIMELINE (EXTRACTED)
-  // ===============================
+  // CONTROL TIMELINE (EXTRACTED) //
   function startTimeline() {
 
     setTimeout(() => {
@@ -371,9 +361,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ▶️ INITIAL START
   startTimeline();
 
-  // ===============================
-  // ANIMATION LOOP
-  // ===============================
+  // ANIMATION LOOP //
   function animate() {
 
     nodes.forEach(n => {
@@ -444,7 +432,7 @@ document.addEventListener("DOMContentLoaded", () => {
   animate();
 
   // ===============================
-  // MOBILE HERO
+  // 2. MOBILE HERO
   // ===============================
 function runMobileHero() {
 
@@ -590,6 +578,65 @@ function reset() {
   const target = document.querySelector(".mobile-system");
   if (target) observer.observe(target);
 }
+
+
+// ===============================
+// 2. REVEAL ANIMATION
+// ===============================
+const reveals = document.querySelectorAll(".reveal");
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("active");
+    }
+  });
+}, { threshold: 0.15 });
+reveals.forEach(el => revealObserver.observe(el));
+
+// ===============================
+// 3. COUNTER ANIMATION
+// ===============================
+const counters = document.querySelectorAll(".counter");
+function runCounters() {
+  counters.forEach(counter => {
+    const target = +counter.getAttribute("data-target");
+    const duration = 1500;
+    const startTime = performance.now();
+    function updateCounter(currentTime) {
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+      counter.innerText = Math.floor(progress * target);
+      if (progress < 1) {
+        requestAnimationFrame(updateCounter);
+      } else {
+        counter.innerText = target;
+      }
+    }
+    requestAnimationFrame(updateCounter);
+  });
+}
+if (counters.length > 0) {
+  const counterObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      runCounters();
+      counterObserver.disconnect();
+    }
+  }, { threshold: 0.5 });
+  counterObserver.observe(document.querySelector(".stats"));
+}
+
+// ===============================
+// 6. CONTACT STRIP REVEAL
+// ===============================
+const contactStrip = document.querySelector(".contact-strip");
+if (contactStrip) {
+  const contactObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      contactStrip.classList.add("visible");
+    }
+  }, { threshold: 0.3 });
+  contactObserver.observe(contactStrip);
+}
+
   
 }); // DOM Close
 
