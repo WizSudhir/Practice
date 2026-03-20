@@ -264,7 +264,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       hero.classList.add("controlled");
       core.style.display = "flex";
-      revenue.classList.add("active");
 
       waitForStabilization(() => {
 
@@ -282,6 +281,11 @@ document.addEventListener("DOMContentLoaded", () => {
             nodes.forEach((n, i) => {
 
               setTimeout(() => {
+
+                // ✅ Activate revenue ONLY when first line starts
+                if (revenueProgress === 0) {
+                  revenue.classList.add("active");
+                }
 
                 const path = drawConnection(n);
 
@@ -311,7 +315,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }, 600);
 
-        // 🔁 RESTART LOOP AFTER FULL COMPLETION
         setTimeout(() => {
           startCycle();
         }, nodes.length * 500 + 2500);
