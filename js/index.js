@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const core = document.querySelector(".core");
   const svg = document.getElementById("connections");
   const revenue = document.getElementById("revenue");
-
   const PHASE_DELAY = 2000;
   const NODE_W = 140;
   const NODE_H = 100;
@@ -21,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let frozen = false;
   let isVisible = true;
 
+  // 🔥 REVENUE STATE
   let revenueProgress = 0;
 
   function updateBounds() {
@@ -45,81 +45,34 @@ document.addEventListener("DOMContentLoaded", () => {
   // ===============================
   // POSITION SETUP
   // ===============================
-  function setupNodes() {
+  nodes.forEach((n, i) => {
 
-    nodes.forEach((n, i) => {
+    const cols = 4;
+    const rows = 2;
 
-      const cols = 4;
-      const rows = 2;
+    const usableWidth = width - SIDE_PADDING * 2;
+    const usableHeight = height - TOP_PADDING - BOTTOM_PADDING;
 
-      const usableWidth = width - SIDE_PADDING * 2;
-      const usableHeight = height - TOP_PADDING - BOTTOM_PADDING;
+    const zoneW = usableWidth / cols;
+    const zoneH = usableHeight / rows;
 
-      const zoneW = usableWidth / cols;
-      const zoneH = usableHeight / rows;
+    const col = i % cols;
+    const row = Math.floor(i / cols);
 
-      const col = i % cols;
-      const row = Math.floor(i / cols);
+    n.baseX = -width / 2 + SIDE_PADDING + zoneW * (col + 0.5);
+    n.baseY = -height / 2 + TOP_PADDING + zoneH * (row + 0.5);
 
-      n.baseX = -width / 2 + SIDE_PADDING + zoneW * (col + 0.5);
-      n.baseY = -height / 2 + TOP_PADDING + zoneH * (row + 0.5);
+    n.angle = Math.random() * Math.PI * 2;
+    n.speed = 0.002 + Math.random() * 0.002;
 
-      n.angle = Math.random() * Math.PI * 2;
-      n.speed = 0.002 + Math.random() * 0.002;
+    n.floatX = Math.max(10, zoneW / 2 - NODE_W / 2 - 6);
+    n.floatY = Math.max(10, zoneH / 2 - NODE_H / 2 - 6);
 
-      n.floatX = Math.max(10, zoneW / 2 - NODE_W / 2 - 6);
-      n.floatY = Math.max(10, zoneH / 2 - NODE_H / 2 - 6);
+    n.z = (Math.random() - 0.5) * 40;
 
-      n.z = (Math.random() - 0.5) * 40;
-
-      n.x = n.baseX;
-      n.y = n.baseY;
-
-      n.classList.remove("resolved-active");
-      n.querySelector(".node-inner").style.boxShadow = "";
-    });
-  }
-
-  setupNodes();
-
-  // ===============================
-  // STABILIZATION (🔥 FIX)
-  // ===============================
-  function waitForStabilization(callback) {
-
-    let stableFrames = 0;
-    let lastPositions = new Map();
-
-    function check() {
-
-      let isStable = true;
-
-      nodes.forEach(n => {
-
-        const prev = lastPositions.get(n) || { x: n.x, y: n.y };
-
-        const dx = Math.abs(n.x - prev.x);
-        const dy = Math.abs(n.y - prev.y);
-
-        if (dx > 0.3 || dy > 0.3) {
-          isStable = false;
-        }
-
-        lastPositions.set(n, { x: n.x, y: n.y });
-      });
-
-      if (isStable) stableFrames++;
-      else stableFrames = 0;
-
-      if (stableFrames > 12) {
-        callback();
-      } else {
-        requestAnimationFrame(check);
-      }
-    }
-
-    check();
-  }
+    n.x = n.baseX;
+    n.y = n.baseY;
+  });
 
   // ===============================
   // CONNECTION SYSTEM
@@ -194,6 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
 
     path.setAttribute("d", d);
+    path.setAttribute("vector-effect", "non-scaling-stroke");
     path.classList.add("connection-path");
 
     svg.appendChild(path);
@@ -212,8 +166,10 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   }
 
+  window.addEventListener("resize", resetConnections);
+
   // ===============================
-  // REVENUE
+  // REVENUE INCREMENT LOGIC
   // ===============================
   function incrementRevenue() {
 
@@ -226,40 +182,90 @@ document.addEventListener("DOMContentLoaded", () => {
 
     bar.style.height = bar.dataset.height;
 
+    bar.style.transform = "scaleY(1.1)";
+    setTimeout(() => {
+      bar.style.transform = "scaleY(1)";
+    }, 200);
+
+    if (line) {
+      const totalLength = line.getTotalLength();
+      const progressRatio = (revenueProgress + 1) / bars.length;
+
+      line.style.strokeDasharray = totalLength;
+      line.style.strokeDashoffset = totalLength * (1 - progressRatio);
+    }
+
+    core.style.boxShadow = `
+      0 0 ${40 + revenueProgress * 12}px rgba(34,197,94,0.7),
+      0 0 ${80 + revenueProgress * 20}px rgba(59,130,246,0.5)
+    `;
+
     revenueProgress++;
   }
 
-  function resetRevenue() {
-    revenueProgress = 0;
-    document.querySelectorAll(".bar").forEach(b => b.style.height = "0px");
+  // ===============================
+  // STABILITY DETECTION
+  // ===============================
+  function waitForStabilization(callback) {
+
+    let stableFrames = 0;
+    let lastPositions = new Map();
+
+    function check() {
+
+      let isStable = true;
+
+      nodes.forEach(n => {
+        const prev = lastPositions.get(n) || { x: n.x, y: n.y };
+
+        const dx = Math.abs(n.x - prev.x);
+        const dy = Math.abs(n.y - prev.y);
+
+        if (dx > 0.3 || dy > 0.3) {
+          isStable = false;
+        }
+
+        lastPositions.set(n, { x: n.x, y: n.y });
+      });
+
+      if (isStable) stableFrames++;
+      else stableFrames = 0;
+
+      if (stableFrames > 12) {
+        callback();
+      } else {
+        requestAnimationFrame(check);
+      }
+    }
+
+    check();
   }
 
   // ===============================
-  // LOOP TIMELINE (🔥 FIXED)
+  // 🔁 FULL LOOP CONTROLLER
   // ===============================
-  function runSequence() {
-
-    if (!isVisible) return;
+  function startCycle() {
 
     controlled = false;
     frozen = false;
+    revenueProgress = 0;
 
     resetConnections();
-    resetRevenue();
-    setupNodes();
 
-    core.style.display = "none";
+    nodes.forEach(n => {
+      n.classList.remove("resolved-active");
+      n.querySelector(".node-inner").style.boxShadow = "";
+    });
+
     revenue.classList.remove("active");
+    core.style.display = "none";
 
     setTimeout(() => {
-
-      if (!isVisible) return;
 
       hero.classList.add("controlled");
       core.style.display = "flex";
       revenue.classList.add("active");
 
-      // 🔥 WAIT FOR TRUE STABILIZATION BEFORE DRAWING
       waitForStabilization(() => {
 
         frozen = true;
@@ -271,40 +277,55 @@ document.addEventListener("DOMContentLoaded", () => {
 
         setTimeout(() => {
 
-          nodes.forEach((n, i) => {
+          requestAnimationFrame(() => {
 
-            setTimeout(() => {
-
-              if (!isVisible) return;
-
-              const path = drawConnection(n);
-              path.getBoundingClientRect();
-              path.classList.add("active");
-
-              setTimeout(() => incrementRevenue(), 300);
+            nodes.forEach((n, i) => {
 
               setTimeout(() => {
-                n.classList.add("resolved-active");
-              }, 700);
 
-            }, i * 450);
+                const path = drawConnection(n);
+
+                path.getBoundingClientRect();
+                path.classList.add("active");
+
+                setTimeout(() => {
+                  incrementRevenue();
+                }, 300);
+
+                setTimeout(() => {
+
+                  n.classList.add("resolved-active");
+
+                  n.querySelector(".node-inner").style.boxShadow = `
+                    0 0 25px rgba(34,197,94,0.7),
+                    0 0 50px rgba(59,130,246,0.4)
+                  `;
+
+                }, 700);
+
+              }, i * 450 + Math.random() * 150);
+
+            });
 
           });
 
-        }, 400);
+        }, 600);
+
+        // 🔁 RESTART LOOP AFTER FULL COMPLETION
+        setTimeout(() => {
+          startCycle();
+        }, nodes.length * 500 + 2500);
 
       });
 
-      setTimeout(() => {
-        controlled = true;
-      }, 1500);
-
-      setTimeout(runSequence, 9000);
-
     }, 2000 + PHASE_DELAY);
+
+    setTimeout(() => {
+      controlled = true;
+    }, 3500 + PHASE_DELAY);
   }
 
-  runSequence();
+  startCycle();
 
   // ===============================
   // ANIMATION LOOP
@@ -342,9 +363,40 @@ document.addEventListener("DOMContentLoaded", () => {
         n.y = n.baseY;
       }
 
+      const left = -width / 2 + SIDE_PADDING + NODE_W / 2;
+      const right = width / 2 - SIDE_PADDING - NODE_W / 2;
+
+      const top = -height / 2 + TOP_PADDING + NODE_H / 2;
+      const bottom = height / 2 - BOTTOM_PADDING - NODE_H / 2;
+
+      n.x = Math.max(left, Math.min(right, n.x));
+      n.y = Math.max(top, Math.min(bottom, n.y));
+
+      if (!controlled) {
+        n.z += Math.sin(n.angle) * 0.03;
+      }
+
+      n.z = Math.max(0, Math.min(30, n.z));
+
+      const scale = 1 + n.z / 300;
+
+      const glowStrength = n.z / 40;
+      const glow = 10 + glowStrength * 30;
+      const opacity = controlled ? 1 : (0.7 + glowStrength * 0.3);
+
+      if (!n.matches(':hover')) {
+        n.style.opacity = opacity;
+      }
+
+      n.querySelector(".node-inner").style.boxShadow = controlled
+        ? `0 0 20px rgba(34,197,94,0.4), 0 0 40px rgba(59,130,246,0.25)`
+        : `0 0 ${glow}px rgba(59,130,246,0.25),
+           0 0 ${glow * 2}px rgba(139,92,246,0.15)`;
+
       n.style.transform = `
         translate3d(${n.x}px, ${n.y}px, ${n.z}px)
         translate(-50%, -50%)
+        scale(${scale})
       `;
     });
 
