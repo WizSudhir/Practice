@@ -232,7 +232,11 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
 
     revenueProgress++;
-
+    // 🔥 BACKGROUND GLOW SYNC
+    document.documentElement.style.setProperty(
+      "--rev-glow",
+      revenueProgress
+    );
     // 🔁 TRIGGER LOOP AFTER LAST BAR + 2s
     if (revenueProgress === bars.length) {
       setTimeout(() => {
