@@ -594,49 +594,20 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.4 });
 
 observer.observe(aboutSection);
-// ===============================
-// 2. REVEAL ANIMATION
-// ===============================
-const reveals = document.querySelectorAll(".reveal");
-const revealObserver = new IntersectionObserver((entries) => {
+  // ===============================
+  // 4. SERVICES
+  // ===============================
+const gateway = document.querySelector('.services-gateway');
+
+const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      entry.target.classList.add("active");
+      gateway.classList.add('active');
     }
   });
-}, { threshold: 0.15 });
-reveals.forEach(el => revealObserver.observe(el));
+}, { threshold: 0.3 });
 
-// ===============================
-// 3. COUNTER ANIMATION
-// ===============================
-const counters = document.querySelectorAll(".counter");
-function runCounters() {
-  counters.forEach(counter => {
-    const target = +counter.getAttribute("data-target");
-    const duration = 1500;
-    const startTime = performance.now();
-    function updateCounter(currentTime) {
-      const progress = Math.min((currentTime - startTime) / duration, 1);
-      counter.innerText = Math.floor(progress * target);
-      if (progress < 1) {
-        requestAnimationFrame(updateCounter);
-      } else {
-        counter.innerText = target;
-      }
-    }
-    requestAnimationFrame(updateCounter);
-  });
-}
-if (counters.length > 0) {
-  const counterObserver = new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting) {
-      runCounters();
-      counterObserver.disconnect();
-    }
-  }, { threshold: 0.5 });
-  counterObserver.observe(document.querySelector(".stats"));
-}
+observer.observe(gateway);
 
 // ===============================
 // 6. CONTACT STRIP REVEAL
