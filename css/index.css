@@ -643,6 +643,7 @@ z-index: 2;
     margin: 4px 0;
     transition: 0.4s ease;
     animation: blink 1s infinite;
+    opacity: 0;
   }
   .resolved {
     color: #22c55e;
@@ -668,6 +669,7 @@ z-index: 2;
     color: #4ade80;
   }
   .mobile-core.active {
+    text-shadow: 0 0 10px #22c55e;
     opacity: 1;
   }
   .mobile-revenue {
@@ -690,6 +692,6 @@ z-index: 2;
   height: 10%;
   background: linear-gradient(180deg, #22c55e, #3b82f6);
   border-radius: 4px;
-  transition: height 0.6s ease;
+  transition: height 0.8s ease;
 }
 }
