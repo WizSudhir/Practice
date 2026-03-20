@@ -477,85 +477,73 @@ function runMobileHero() {
     bars.forEach(bar => bar.style.height = "5%");
   }
 
-  function runSequence() {
+function runSequence() {
 
-    clearAllTimers();
+  clearAllTimers();
 
-    // STEP 0 — Show chaos card
-    timeouts.push(setTimeout(() => {
-      node.style.opacity = 1;
-    }, 500));
+  const items = document.querySelectorAll(".mobile-node .item");
 
-    // STEP 1 — Show errors AFTER card appears
-const items = document.querySelectorAll(".mobile-node .item");
-
-items.forEach((item, i) => {
-
-  const error = item.querySelector(".error");
-  const resolved = item.querySelector(".resolved");
-
+  // STEP 0 — Show chaos card
   timeouts.push(setTimeout(() => {
+    node.style.opacity = 1;
+  }, 500));
 
-    error.style.opacity = 0;
-    error.classList.remove("active");
+  // STEP 1 — SHOW ERRORS ONE BY ONE
+  items.forEach((item, i) => {
 
-    resolved.style.opacity = 1;
+    const error = item.querySelector(".error");
 
-    bars[i].style.height = bars[i].dataset.height;
-
-    if (metrics[i]) {
-      metrics[i].style.opacity = 1;
-      metrics[i].style.transform = "translateY(0)";
-    }
-
-  }, baseTime + i * 900));
-
-});
-
-    // STEP 2 — Show core
     timeouts.push(setTimeout(() => {
-      core.classList.add("active");
-    }, 1000 + errors.length * 700 + 500));
+      error.style.opacity = 1;
+      error.classList.add("active");
+    }, 1200 + i * 700));
 
-    // STEP 3 — Show revenue card
+  });
+
+  const baseTime = 1200 + items.length * 700;
+
+  // STEP 2 — SHOW CORE
+  timeouts.push(setTimeout(() => {
+    core.classList.add("active");
+  }, baseTime + 500));
+
+  // STEP 3 — SHOW REVENUE
+  timeouts.push(setTimeout(() => {
+    revenue.style.opacity = 1;
+  }, baseTime + 900));
+
+  // STEP 4 — REPLACE ERRORS → SOLUTIONS
+  items.forEach((item, i) => {
+
+    const error = item.querySelector(".error");
+    const resolved = item.querySelector(".resolved");
+
     timeouts.push(setTimeout(() => {
-      revenue.style.opacity = 1;
-    }, 1000 + errors.length * 700 + 1000));
 
-    // STEP 4 — Resolve errors + grow bars
-    errors.forEach((e, i) => {
+      error.style.opacity = 0;
+      error.classList.remove("active");
 
-      timeouts.push(setTimeout(() => {
+      resolved.style.opacity = 1;
 
-        e.style.opacity = 0;
-        resolved[i].style.opacity = 1;
-
+      // Bars grow
+      if (bars[i]) {
         bars[i].style.height = bars[i].dataset.height;
+      }
+
+      // Metrics animate
+      if (metrics[i]) {
         metrics[i].style.opacity = 1;
         metrics[i].style.transform = "translateY(0)";
-
-      }, 1000 + errors.length * 700 + 1500 + i * 900));
-
-    });
-
-    // LOOP
-    timeouts.push(setTimeout(() => {
-      runSequence();
-    }, 1000 + errors.length * 700 + 1500 + errors.length * 900 + 2000));
-  }
-
-  // INTERSECTION OBSERVER
-  observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        runSequence();
-      } else {
-        reset();
       }
-    });
-  }, { threshold: 0.4 });
 
-  observer.observe(document.querySelector(".mobile-system"));
+    }, baseTime + 1400 + i * 900));
+
+  });
+
+  // LOOP
+  timeouts.push(setTimeout(() => {
+    runSequence();
+  }, baseTime + 1400 + items.length * 900 + 2000));
 }
   
 }); // DOM Close
