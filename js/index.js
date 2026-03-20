@@ -1,7 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   lucide.createIcons();
+  
+  let isVisible = true;
 
+  const observer = new IntersectionObserver(
+  ([entry]) => {
+    isVisible = entry.isIntersecting;
+  },
+  { threshold: 0.2 }
+  );
+
+observer.observe(hero);
   const hero = document.querySelector(".system-bg");
   const nodes = document.querySelectorAll(".node");
   const core = document.querySelector(".core");
@@ -236,6 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 🔁 TRIGGER LOOP AFTER LAST BAR + 2s
     if (revenueProgress === bars.length) {
       setTimeout(() => {
+        if (!isVisible) return;
         resetSystem();
       }, 5000);
     }
@@ -283,7 +294,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // CONTROL TIMELINE (EXTRACTED)
   // ===============================
   function startTimeline() {
-
+    if (!isVisible) return;
     setTimeout(() => {
 
       hero.classList.add("controlled");
@@ -352,7 +363,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ANIMATION LOOP
   // ===============================
   function animate() {
-
+    if (!isVisible) return;
     nodes.forEach(n => {
 
       if (!controlled) {
@@ -416,7 +427,9 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
     });
 
-    requestAnimationFrame(animate);
+    if (isVisible) {
+      requestAnimationFrame(animate);
+    }
   }
 
   animate();
