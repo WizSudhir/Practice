@@ -633,7 +633,7 @@ z-index: 2;
   }
   .mobile-node {
     width: 90%;
-    max-width: 350px;
+    max-width: 320px;
     margin: 0 auto;
     padding: 16px;
     border-radius: 12px;
@@ -688,7 +688,7 @@ z-index: 2;
   }
   .mobile-revenue {
     width: 90%;
-    max-width: 350px;
+    max-width: 320px;
     margin: 0 auto;
     background: rgba(255,255,255,0.1);
     border-radius: 6px;
