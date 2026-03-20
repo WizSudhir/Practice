@@ -459,16 +459,27 @@ function runMobileHero() {
 
     if (current >= steps) return;
 
-    node.classList.add("resolved");
-
+    const errors = node.querySelectorAll(".error");
+    const resolved = node.querySelectorAll(".resolved");
+    function resolveStep() {
+      if (current >= steps) return;
+      // hide ONE error
+      errors[current].style.opacity = "0";
+      errors[current].style.transform = "translateY(-5px)";
+      // show ONE resolved
+      resolved[current].style.opacity = "1";
+      resolved[current].style.transform = "translateY(0)";
+      // grow revenue
+      bar.style.width = `${(current + 1) * (100 / steps)}%`;
+      current++;
+      setTimeout(resolveStep, 1800); // slower = visible
+    }
+    
     bar.style.width = `${(current + 1) * (100 / steps)}%`;
-
     current++;
-
     setTimeout(resolveStep, 1200);
   }
-
-  setTimeout(resolveStep, 2000);
+  setTimeout(resolveStep, 1200);
 }
   
 }); // DOM Close
