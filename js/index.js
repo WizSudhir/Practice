@@ -10,9 +10,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const PHASE_DELAY = 3000;
   const isMobile = window.innerWidth < 768;
   if (isMobile) {
-  runMobileHero();
-  return;
+    try {
+      runMobileHero();
+    } catch (e) {
+    console.error("Mobile hero error:", e);
+    }
+      return;
   }
+  if (!node || !core || !revenue) return;
   function getNodeSize() {
   const w = window.innerWidth;
   if (w < 768) return { w: 0, h: 0 }; // disabled
@@ -476,7 +481,17 @@ function runMobileHero() {
     resolved.forEach(r => r.style.opacity = 0);
     bars.forEach(bar => bar.style.height = "5%");
   }
+observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      runSequence();
+    } else {
+      reset();
+    }
+  });
+}, { threshold: 0.4 });
 
+observer.observe(document.querySelector(".mobile-system"));
 function runSequence() {
 
   clearAllTimers();
@@ -545,6 +560,8 @@ function runSequence() {
     runSequence();
   }, baseTime + 1400 + items.length * 900 + 2000));
 }
+runSequence();  
+
   
 }); // DOM Close
 
