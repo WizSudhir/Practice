@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", updateBounds);
 
   // ===============================
-  // VISIBILITY CONTROL (🔥 NEW)
+  // VISIBILITY CONTROL
   // ===============================
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -81,6 +81,45 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   setupNodes();
+
+  // ===============================
+  // STABILIZATION (🔥 FIX)
+  // ===============================
+  function waitForStabilization(callback) {
+
+    let stableFrames = 0;
+    let lastPositions = new Map();
+
+    function check() {
+
+      let isStable = true;
+
+      nodes.forEach(n => {
+
+        const prev = lastPositions.get(n) || { x: n.x, y: n.y };
+
+        const dx = Math.abs(n.x - prev.x);
+        const dy = Math.abs(n.y - prev.y);
+
+        if (dx > 0.3 || dy > 0.3) {
+          isStable = false;
+        }
+
+        lastPositions.set(n, { x: n.x, y: n.y });
+      });
+
+      if (isStable) stableFrames++;
+      else stableFrames = 0;
+
+      if (stableFrames > 12) {
+        callback();
+      } else {
+        requestAnimationFrame(check);
+      }
+    }
+
+    check();
+  }
 
   // ===============================
   // CONNECTION SYSTEM
@@ -155,7 +194,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
 
     path.setAttribute("d", d);
-    path.setAttribute("vector-effect", "non-scaling-stroke");
     path.classList.add("connection-path");
 
     svg.appendChild(path);
@@ -174,8 +212,6 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   }
 
-  window.addEventListener("resize", resetConnections);
-
   // ===============================
   // REVENUE
   // ===============================
@@ -190,36 +226,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     bar.style.height = bar.dataset.height;
 
-    bar.style.transform = "scaleY(1.1)";
-    setTimeout(() => {
-      bar.style.transform = "scaleY(1)";
-    }, 200);
-
-    if (line) {
-      const totalLength = line.getTotalLength();
-      const progressRatio = (revenueProgress + 1) / bars.length;
-
-      line.style.strokeDasharray = totalLength;
-      line.style.strokeDashoffset = totalLength * (1 - progressRatio);
-    }
-
-    core.style.boxShadow = `
-      0 0 ${40 + revenueProgress * 12}px rgba(34,197,94,0.7),
-      0 0 ${80 + revenueProgress * 20}px rgba(59,130,246,0.5)
-    `;
-
     revenueProgress++;
   }
 
   function resetRevenue() {
     revenueProgress = 0;
-    document.querySelectorAll(".bar").forEach(b => {
-      b.style.height = "0px";
-    });
+    document.querySelectorAll(".bar").forEach(b => b.style.height = "0px");
   }
 
   // ===============================
-  // LOOP TIMELINE (🔥 NEW)
+  // LOOP TIMELINE (🔥 FIXED)
   // ===============================
   function runSequence() {
 
@@ -243,16 +259,17 @@ document.addEventListener("DOMContentLoaded", () => {
       core.style.display = "flex";
       revenue.classList.add("active");
 
-      frozen = true;
+      // 🔥 WAIT FOR TRUE STABILIZATION BEFORE DRAWING
+      waitForStabilization(() => {
 
-      nodes.forEach(n => {
-        n.x = n.baseX;
-        n.y = n.baseY;
-      });
+        frozen = true;
 
-      setTimeout(() => {
+        nodes.forEach(n => {
+          n.x = n.baseX;
+          n.y = n.baseY;
+        });
 
-        requestAnimationFrame(() => {
+        setTimeout(() => {
 
           nodes.forEach((n, i) => {
 
@@ -264,34 +281,24 @@ document.addEventListener("DOMContentLoaded", () => {
               path.getBoundingClientRect();
               path.classList.add("active");
 
-              setTimeout(() => {
-                incrementRevenue();
-              }, 300);
+              setTimeout(() => incrementRevenue(), 300);
 
               setTimeout(() => {
-
                 n.classList.add("resolved-active");
-
-                n.querySelector(".node-inner").style.boxShadow = `
-                  0 0 25px rgba(34,197,94,0.7),
-                  0 0 50px rgba(59,130,246,0.4)
-                `;
-
               }, 700);
 
             }, i * 450);
 
           });
 
-        });
+        }, 400);
 
-      }, 600);
+      });
 
       setTimeout(() => {
         controlled = true;
       }, 1500);
 
-      // 🔁 LOOP AGAIN
       setTimeout(runSequence, 9000);
 
     }, 2000 + PHASE_DELAY);
@@ -335,40 +342,9 @@ document.addEventListener("DOMContentLoaded", () => {
         n.y = n.baseY;
       }
 
-      const left = -width / 2 + SIDE_PADDING + NODE_W / 2;
-      const right = width / 2 - SIDE_PADDING - NODE_W / 2;
-
-      const top = -height / 2 + TOP_PADDING + NODE_H / 2;
-      const bottom = height / 2 - BOTTOM_PADDING - NODE_H / 2;
-
-      n.x = Math.max(left, Math.min(right, n.x));
-      n.y = Math.max(top, Math.min(bottom, n.y));
-
-      if (!controlled) {
-        n.z += Math.sin(n.angle) * 0.03;
-      }
-
-      n.z = Math.max(0, Math.min(30, n.z));
-
-      const scale = 1 + n.z / 300;
-
-      const glowStrength = n.z / 40;
-      const glow = 10 + glowStrength * 30;
-      const opacity = controlled ? 1 : (0.7 + glowStrength * 0.3);
-
-      if (!n.matches(':hover')) {
-        n.style.opacity = opacity;
-      }
-
-      n.querySelector(".node-inner").style.boxShadow = controlled
-        ? `0 0 20px rgba(34,197,94,0.4), 0 0 40px rgba(59,130,246,0.25)`
-        : `0 0 ${glow}px rgba(59,130,246,0.25),
-           0 0 ${glow * 2}px rgba(139,92,246,0.15)`;
-
       n.style.transform = `
         translate3d(${n.x}px, ${n.y}px, ${n.z}px)
         translate(-50%, -50%)
-        scale(${scale})
       `;
     });
 
