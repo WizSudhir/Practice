@@ -43,7 +43,7 @@ overflow: hidden;
     linear-gradient(90deg, rgba(59,130,246,0.08) 1px, transparent 1px);
   background-size: 60px 60px;
   animation: gridMove 20s linear infinite;
-  opacity: 0.6;
+  opacity: 0.25;
   pointer-events: none;
 }
 @keyframes gridMove {
@@ -85,6 +85,7 @@ overflow: hidden;
     rgba(255,255,255,0.08),
     transparent 60%
   );
+  opacity: 0.6;
   animation: sweep 6s infinite;
   pointer-events: none;
 }
@@ -307,7 +308,7 @@ overflow: hidden;
   inset: 0;
   background:
     linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 35%, transparent 70%);
-   z-index: 1;
+   z-index: 4;
 }
 /* CONTENT */
 .hero-content {
