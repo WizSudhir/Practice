@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
       return;
   }
-  if (!node || !core || !revenue) return;
+  if (!hero || !core || !revenue) return;
   function getNodeSize() {
   const w = window.innerWidth;
   if (w < 768) return { w: 0, h: 0 }; // disabled
