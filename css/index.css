@@ -15,6 +15,7 @@
   justify-content: center;
   margin-top: 80px;
   padding-top: 40px;
+ padding-bottom: 120px;
   overflow: hidden;
   z-index: 1;
 }
@@ -601,7 +602,7 @@ z-index: 2;
 
   .hero-content {
     position: absolute;
-    bottom: 20px;
+    bottom: 30px;
     left: 0;
     right: 0;
     text-align: center;
@@ -648,6 +649,7 @@ z-index: 2;
   }
 
   .mobile-system {
+    margin-top: 60px;
     display: flex;
     flex-direction: column;
     align-items: center;
