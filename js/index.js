@@ -25,11 +25,12 @@ document.addEventListener("DOMContentLoaded", () => {
       activeTimeouts = [];
       }
      },
-    { threshold: 0.2 }
+    { threshold: 0.5 }
   );
-if (hero) {
-  observer.observe(hero);
-}
+    if (hero) {
+      observer.observe(hero);
+    }
+  resetSystem();
   const nodes = document.querySelectorAll(".node");
   const core = document.querySelector(".core");
   const svg = document.getElementById("connections");
@@ -50,6 +51,7 @@ if (hero) {
   let revenueProgress = 0;
 
   function updateBounds() {
+    if (!hero) return;
     width = hero.clientWidth;
     height = hero.clientHeight;
   }
