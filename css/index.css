@@ -9,7 +9,7 @@
 ================================= */
 .hero-system {
   position: relative;
-  height: calc(100vh - 80px);   /* ✅ FIXED HEIGHT (NOT MIN) */
+  min-height: calc(100vh - var(--nav-height));   /* ✅ FIXED HEIGHT (NOT MIN) */
   margin-top: 80px;
   overflow: hidden;
   z-index: 1;
