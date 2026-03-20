@@ -13,10 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
       isVisible = entry.isIntersecting;
   
       if (isVisible) {
-      // 🔥 ONLY restart if timeline not running
-      if (!timelineStarted) {
-        resetSystem();
-      }
+      // 🔥 ALWAYS restart clean when entering view
+      activeTimeouts.forEach(clearTimeout);
+      activeTimeouts = [];
+      resetSystem();
       if (!animationRunning) {
         animate();
       }
@@ -376,9 +376,6 @@ if (hero) {
       controlled = true;
     }, 3500 + PHASE_DELAY);
   }
-
-  // ▶️ INITIAL START
-  startTimeline();
 
   // ===============================
   // ANIMATION LOOP
