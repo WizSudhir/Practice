@@ -58,6 +58,11 @@ overlay.addEventListener("click", closeMenu);
 window.addEventListener("resize", () => {
   if (window.innerWidth > 992) closeMenu();
 });
-
+// 🔥 Close on ESC key
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    closeMenu();
+  }
+});
 
 }); // DOMContentLoaded close
