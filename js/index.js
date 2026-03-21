@@ -595,7 +595,13 @@ if (aboutSection) {
 
   aboutObserver.observe(aboutSection);
 }
+const systemCard = document.getElementById("systemCard");
 
+if (systemCard) {
+  systemCard.addEventListener("click", () => {
+    systemCard.classList.toggle("active");
+  });
+}
 // ===============================
 // 4. SERVICES
 // ===============================
