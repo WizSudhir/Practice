@@ -423,61 +423,48 @@ p {
    Non-destructive override layer
 ========================================================= */
 
-/* ===============================
-   STRUCTURE + SPACING
-================================= */
+/* STRUCTURE + SPACING */
 .footer {
   padding: var(--space-xl) 0 var(--space-md);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
-
 .footer-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr 1.2fr 0.8fr;
   gap: var(--space-xl);
   align-items: flex-start;
 }
-
-/* ===============================
-   BRAND COLUMN (LOGO + TRUST)
-================================= */
+/* BRAND COLUMN (LOGO + TRUST) */
 .footer-brand {
   max-width: 280px;
 }
-
 .footer-brand img {
   height: 44px;
   width: auto;
   object-fit: contain;
   margin-bottom: var(--space-sm);
 }
-
 .footer-brand p {
   font-size: var(--text-sm);
   color: var(--text-secondary);
 }
 
-/* ===============================
-   SOCIAL ICONS (CLEAN + PREMIUM)
-================================= */
+/* SOCIAL ICONS (CLEAN + PREMIUM) */
 .footer-social {
   margin-top: var(--space-sm);
 }
-
 .footer-social img {
   width: 26px;
   height: 26px;
   opacity: 0.85;
   transition: var(--transition-fast);
 }
-
 .footer-social img:hover {
   opacity: 1;
   transform: translateY(-2px);
 }
-
-/* ===============================
-   COLUMN HEADINGS (HIERARCHY FIX)
-================================= */
+/* COLUMN HEADINGS (HIERARCHY FIX) */
 .footer h4 {
   font-size: var(--text-xs);
   font-weight: var(--font-semibold);
@@ -486,10 +473,16 @@ p {
   color: var(--text-muted);
   margin-bottom: var(--space-sm);
 }
-
-/* ===============================
-   LINKS (CONVERSION FOCUSED)
-================================= */
+/* LINKS (CONVERSION FOCUSED) */
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.footer-links a {
+  display: block;
+  width: fit-content;
+}
 .footer-links a,
 .footer-contact a {
   font-size: var(--text-sm);
@@ -497,12 +490,10 @@ p {
   transition: var(--transition-fast);
   position: relative;
 }
-
 .footer-links a:hover,
 .footer-contact a:hover {
   color: var(--text-heading);
 }
-
 /* subtle SaaS underline */
 .footer-links a::after {
   content: "";
@@ -514,125 +505,112 @@ p {
   background: var(--gradient-primary);
   transition: width var(--transition-fast);
 }
-
 .footer-links a:hover::after {
   width: 100%;
 }
-
-/* ===============================
-   CONTACT CARDS (HIGH IMPACT)
-================================= */
+/* CONTACT CARDS (HIGH IMPACT) */
 .footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  max-width: 340px;
   align-items: flex-start;
 }
-
 .footer-contact-item {
   width: 100%;
   display: flex;
   align-items: center;
   gap: var(--space-sm);
   padding: 12px 14px;
-
   background: var(--bg-glass);
   border: 1px solid var(--border-primary);
   border-radius: var(--radius-md);
-
   transition: var(--transition-medium);
 }
-
 .footer-contact-item:hover {
   background: rgba(79,70,229,0.12);
   border-color: var(--border-accent);
   box-shadow: var(--shadow-soft);
   transform: translateY(-2px);
 }
-
-/* ===============================
-   ICON SYSTEM FIX
-================================= */
+/* ICON SYSTEM FIX */
 .footer-contact-icon {
   width: 26px;
   height: 26px;
 }
-
 .footer-contact-item svg {
   width: 18px;
   height: 18px;
   stroke: var(--brand-accent);
 }
-
-/* ===============================
-   HIPAA / TRUST BADGE
-================================= */
+/* HIPAA / TRUST BADGE */
+.footer-hipaa {
+  align-items: flex-start;
+}
+.footer-brand {
+  max-width: 260px;
+}
+.footer-social {
+  justify-content: flex-start;
+}
 .footer-hipaa img {
   height: 60px;
   width: auto;
   object-fit: contain;
 }
-
 .hipaa-title {
   color: var(--brand-primary);
 }
-
 .hipaa-sub {
   color: var(--brand-primary);
   opacity: 0.7;
 }
-
-/* ===============================
-   DIVIDER (PREMIUM TOUCH)
-================================= */
+/* DIVIDER (PREMIUM TOUCH) */
 .footer::after {
   height: 1px;
   opacity: 0.6;
 }
-
-/* ===============================
-   FOOTER BOTTOM
-================================= */
+/* FOOTER BOTTOM */
 .footer-bottom {
   margin-top: var(--space-md);
   padding-top: var(--space-md);
   border-top: 1px solid var(--border-primary);
   font-size: var(--text-sm);
 }
-
-/* ===============================
-   RESPONSIVE (CRITICAL)
-================================= */
+/* RESPONSIVE (CRITICAL) */
 @media (max-width: 1024px) {
   .footer-grid {
     grid-template-columns: 1fr 1fr;
     gap: var(--space-lg);
   }
+  .footer-contact {
+    max-width: 100%;
+  }
 }
-
 @media (max-width: 768px) {
-
   .footer {
     padding: var(--space-lg) 0;
   }
-
   .footer-grid {
     grid-template-columns: 1fr;
     gap: var(--space-lg);
     text-align: center;
   }
-
   .footer-brand,
-  .footer-contact {
+  .footer-contact,
+  .footer-hipaa {
     align-items: center;
   }
-
   .footer-contact-item {
     justify-content: center;
   }
-
   .footer-social {
     justify-content: center;
   }
-
   .footer .container {
     padding: 0 var(--space-sm);
+  }
+  .footer-links a {
+    width: 100%;
   }
 }
