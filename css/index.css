@@ -320,6 +320,11 @@ z-index: 2;
   margin: 10px auto 0;
   color: rgba(255,255,255,0.65);
 }
+.hero-trust {
+  margin-top: 10px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+}
 /* CONTROL PHASE (PracticeGrid) */
 /* System activation */
 .system-bg.controlled {
