@@ -7,213 +7,248 @@
 <title>PracticeGrid Design System</title>
 
 <link rel="stylesheet" href="css/root.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+/* ONLY FOR DEMO LAYOUT */
+.demo-section {
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+.demo-box {
+  padding: 20px;
+}
+</style>
 
 </head>
 <body>
 
-<!-- ===============================
-     HERO / INTRO
-================================= -->
-<section class="section">
-  <div class="container text-center">
-    <h1>PracticeGrid Design System</h1>
-    <p class="mt-3">Stripe-level dark SaaS UI — Components, Layout, Typography & Utilities</p>
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="container navbar-inner">
+    <div class="logo">PracticeGrid</div>
+    <nav class="nav-menu">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#" class="btn-primary">Get Started</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
-    <div class="mt-4 flex-center" style="gap: 16px;">
-      <button class="btn-primary">Primary Action</button>
-      <button class="btn-secondary">Secondary Action</button>
+<!-- HERO -->
+<section style="padding-top:120px" class="center">
+  <div class="container">
+    
+    <h1 class="gradient">Revenue Intelligence Platform</h1>
+    
+    <p class="mt-md">
+      This page demonstrates every component of your SaaS design system.
+    </p>
+
+    <div class="mt-lg">
+      <a href="#" class="btn-primary">Primary Button</a>
+      <a href="#" class="btn-outline">Outline Button</a>
     </div>
+
   </div>
 </section>
 
 
-<!-- ===============================
-     TYPOGRAPHY
-================================= -->
-<section class="section">
+<!-- TYPOGRAPHY -->
+<section class="demo-section">
   <div class="container">
-    <h2>Typography</h2>
 
-    <div class="mt-4">
-      <h1>Heading 1 — Hero Title</h1>
-      <h2 class="mt-3">Heading 2 — Section Title</h2>
-      <h3 class="mt-3">Heading 3 — Subsection</h3>
-      <h4 class="mt-3">Heading 4 — Small Title</h4>
+    <h2 class="gradient-title">Typography System</h2>
 
-      <p class="mt-3">
-        This is a standard paragraph used for SaaS product explanations, services, and blog content.
-      </p>
-
-      <p class="text-muted mt-2">
-        This is muted text used for metadata, disclaimers, or supporting UI content.
-      </p>
-    </div>
-  </div>
-</section>
-
-
-<!-- ===============================
-     BUTTONS
-================================= -->
-<section class="section">
-  <div class="container">
-    <h2>Buttons</h2>
-
-    <div class="mt-4 flex" style="gap: 20px;">
-      <button class="btn-primary">Primary Button</button>
-      <button class="btn-secondary">Secondary Button</button>
-    </div>
-  </div>
-</section>
-
-
-<!-- ===============================
-     CARDS / SURFACES
-================================= -->
-<section class="section">
-  <div class="container">
-    <h2>Cards & Surfaces</h2>
-
-    <div class="grid grid-3 mt-4">
-
-      <div class="card">
-        <h4>Revenue Cycle Optimization</h4>
-        <p class="mt-2">Improve claim acceptance and reduce denials with intelligent workflows.</p>
+    <div class="demo-grid">
+      <div class="card demo-box">
+        <h1>Heading 1</h1>
+        <p>Used for hero sections.</p>
       </div>
 
-      <div class="card">
-        <h4>Denial Management</h4>
-        <p class="mt-2">Track, analyze, and resolve denials faster with structured processes.</p>
+      <div class="card demo-box">
+        <h2>Heading 2</h2>
+        <p>Used for section titles.</p>
       </div>
 
-      <div class="card">
-        <h4>Analytics & Reporting</h4>
-        <p class="mt-2">Gain insights into financial performance with real-time dashboards.</p>
+      <div class="card demo-box">
+        <h3>Heading 3</h3>
+        <p>Used for cards and sub sections.</p>
       </div>
 
-    </div>
-  </div>
-</section>
-
-
-<!-- ===============================
-     GRID SYSTEM
-================================= -->
-<section class="section">
-  <div class="container">
-    <h2>Grid System</h2>
-
-    <div class="grid grid-2 mt-4">
-      <div class="card">Grid 2 Column</div>
-      <div class="card">Grid 2 Column</div>
-    </div>
-
-    <div class="grid grid-3 mt-4">
-      <div class="card">Grid 3</div>
-      <div class="card">Grid 3</div>
-      <div class="card">Grid 3</div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ===============================
-     INPUTS
-================================= -->
-<section class="section">
-  <div class="container">
-    <h2>Inputs</h2>
-
-    <div class="mt-4" style="max-width: 400px;">
-      <input class="input mb-3" type="text" placeholder="Full Name">
-      <input class="input mb-3" type="email" placeholder="Email Address">
-      <input class="input mb-3" type="text" placeholder="Organization">
-    </div>
-  </div>
-</section>
-
-
-<!-- ===============================
-     GLASS EFFECT
-================================= -->
-<section class="section">
-  <div class="container">
-    <h2>Glass Effect</h2>
-
-    <div class="glass p-lg mt-4">
-      <h4>Glass Card</h4>
-      <p class="mt-2">Subtle blur and transparency for premium UI layering.</p>
-    </div>
-  </div>
-</section>
-
-
-<!-- ===============================
-     UTILITIES DEMO
-================================= -->
-<section class="section">
-  <div class="container">
-    <h2>Utilities</h2>
-
-    <div class="flex mt-4" style="gap: 20px;">
-      <div class="card p-sm">Small Padding</div>
-      <div class="card p-md">Medium Padding</div>
-      <div class="card p-lg">Large Padding</div>
-    </div>
-
-    <div class="mt-4">
-      <div class="card mt-2">Margin Top Small</div>
-      <div class="card mt-3">Margin Top Medium</div>
-      <div class="card mt-4">Margin Top Large</div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ===============================
-     COMPOSITION EXAMPLE
-================================= -->
-<section class="section">
-  <div class="container">
-    <h2>Real SaaS Section Example</h2>
-
-    <div class="grid grid-2 mt-4">
-
-      <div>
-        <h3>Transform Your Revenue Cycle</h3>
-        <p class="mt-3">
-          PracticeGrid Solutions helps healthcare organizations reduce claim denials, accelerate reimbursements,
-          and improve operational efficiency using data-driven strategies.
+      <div class="card demo-box">
+        <p>
+          This is body text. Clean, readable, and optimized for SaaS UI.
         </p>
-
-        <div class="mt-4 flex" style="gap: 16px;">
-          <button class="btn-primary">Get Started</button>
-          <button class="btn-secondary">Learn More</button>
-        </div>
       </div>
-
-      <div class="card">
-        <h4>Performance Snapshot</h4>
-        <p class="mt-2">Claim Acceptance Rate: 96%</p>
-        <p class="mt-2">Denial Reduction: 38%</p>
-        <p class="mt-2">Revenue Growth: +22%</p>
-      </div>
-
     </div>
+
   </div>
 </section>
 
 
-<!-- ===============================
-     FOOTER
-================================= -->
-<footer class="section">
-  <div class="container text-center">
-    <p class="text-muted">© 2026 PracticeGrid Solutions — Design System Showcase</p>
-  </div>
-</footer>
+<!-- BUTTON SYSTEM -->
+<section class="demo-section">
+  <div class="container">
 
+    <h2 class="gradient-title">Button System</h2>
+
+    <div class="demo-grid">
+      <div class="card demo-box center">
+        <a href="#" class="btn-primary">Primary</a>
+      </div>
+
+      <div class="card demo-box center">
+        <a href="#" class="btn-outline">Outline</a>
+      </div>
+
+      <div class="card demo-box center">
+        <a href="#" class="btn-primary">Hover Me</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- GLASS BORDER SYSTEM -->
+<section class="demo-section">
+  <div class="container">
+
+    <h2 class="gradient-title">Glass Border System</h2>
+
+    <div class="demo-grid">
+
+      <div class="card demo-box">
+        <h3>Card Component</h3>
+        <p>No background, only border + glow on hover.</p>
+      </div>
+
+      <div class="glass demo-box">
+        <h3>Glass Container</h3>
+        <p>Used for sections, pricing tables, dashboards.</p>
+      </div>
+
+      <div class="section-box demo-box">
+        <h3>Section Box</h3>
+        <p>Reusable system container.</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- FORM SYSTEM -->
+<section class="demo-section">
+  <div class="container">
+
+    <h2 class="gradient-title">Form System</h2>
+
+    <div class="card demo-box" style="max-width:500px; margin:auto">
+
+      <input type="text" placeholder="Full Name" class="mb-md">
+      <input type="email" placeholder="Email Address" class="mb-md">
+      <textarea placeholder="Message" rows="4" class="mb-md"></textarea>
+
+      <button class="btn-primary" style="width:100%">
+        Submit Form
+      </button>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ICON SYSTEM -->
+<section class="demo-section">
+  <div class="container">
+
+    <h2 class="gradient-title">Icon System</h2>
+
+    <div class="demo-grid center">
+
+      <div class="card demo-box">
+        <i data-lucide="activity" class="icon"></i>
+        <p>Activity</p>
+      </div>
+
+      <div class="card demo-box">
+        <i data-lucide="shield" class="icon"></i>
+        <p>Security</p>
+      </div>
+
+      <div class="card demo-box">
+        <i data-lucide="bar-chart" class="icon"></i>
+        <p>Analytics</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- IMAGE SYSTEM -->
+<section class="demo-section">
+  <div class="container">
+
+    <h2 class="gradient-title">Image System</h2>
+
+    <div class="demo-grid">
+
+      <div class="img-glow">
+        <img src="https://picsum.photos/400/250" alt="">
+      </div>
+
+      <div class="img-glow">
+        <img src="https://picsum.photos/401/250" alt="">
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- SPACING UTILITIES -->
+<section class="demo-section">
+  <div class="container">
+
+    <h2 class="gradient-title">Spacing System</h2>
+
+    <div class="card demo-box">
+      <p class="mb-sm">Small margin bottom</p>
+      <p class="mb-md">Medium margin bottom</p>
+      <p class="mb-lg">Large margin bottom</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<section class="center">
+  <div class="container">
+    <p>PracticeGrid SaaS Design System • Production Ready</p>
+  </div>
+</section>
+
+<script>
+lucide.createIcons();
+</script>
 
 </body>
 </html>
