@@ -420,37 +420,82 @@
 <script src="https://unpkg.com/lucide@latest"></script>
 
 <!-- WHO WE ARE/BELIEF -->
-<section class="section about-belief">
-  <div class="container">
+<div class="grid grid-2 belief-layout">
 
-    <h2 class="section-title gradient">
-      Revenue Isn’t a Billing Problem.<br>
-      It’s a System Problem.
-    </h2>
+  <!-- LEFT: INTERACTIVE SYSTEM CARD -->
+  <div class="belief-visual">
 
-    <div class="grid grid-2">
+    <div class="system-card" id="systemCard">
 
-      <!-- LEFT -->
-      <div class="belief-content">
+      <!-- HEADER -->
+      <div class="system-header">
+        Revenue System Status
+      </div>
 
-        <div class="belief-stack">
-          <p><span>01</span> Most practices lose revenue before claims are even submitted.</p>
-          <p><span>02</span> Denials are not random — they are predictable system failures.</p>
-          <p><span>03</span> Billing doesn’t fix revenue. Systems do.</p>
-          <p><span>04</span> If your workflows are broken, your revenue will be too.</p>
+      <!-- ERRORS -->
+      <div class="system-errors">
+        <div class="system-item error">
+          <span>Eligibility Not Verified</span>
         </div>
+        <div class="system-item error">
+          <span>Authorizations Missing</span>
+        </div>
+        <div class="system-item error">
+          <span>ICD-CPT Mismatch</span>
+        </div>
+        <div class="system-item error">
+          <span>Claim Denials</span>
+        </div>
+      </div>
 
-        <p class="belief-bridge mt-md">
-          We identify where your revenue is breaking, rebuild workflows,
-          and turn billing into a predictable revenue system.
-        </p>
+      <!-- RESOLVED -->
+      <div class="system-resolved">
+        <div class="system-item success">
+          <span>Eligibility Verified</span>
+        </div>
+        <div class="system-item success">
+          <span>Authorization Approved</span>
+        </div>
+        <div class="system-item success">
+          <span>Codes Validated</span>
+        </div>
+        <div class="system-item success">
+          <span>Claims Paid</span>
+        </div>
+      </div>
 
+      <!-- FOOTER -->
+      <div class="system-footer">
+        Click to fix system →
+      </div>
+
+      <!-- RESULT METRIC -->
+      <div class="system-metric">
+        +32% Revenue Recovery
       </div>
 
     </div>
 
   </div>
-</section>
+
+  <!-- RIGHT -->
+  <div class="belief-content">
+
+    <div class="belief-stack">
+      <div class="belief-card"><span>01</span> Most practices lose revenue before claims are even submitted.</div>
+      <div class="belief-card"><span>02</span> Denials are not random — they are predictable system failures.</div>
+      <div class="belief-card"><span>03</span> Billing doesn’t fix revenue. Systems do.</div>
+      <div class="belief-card"><span>04</span> If your workflows are broken, your revenue will be too.</div>
+    </div>
+
+    <p class="belief-bridge mt-md">
+      We identify where your revenue is breaking, rebuild workflows,
+      and turn billing into a predictable revenue system.
+    </p>
+
+  </div>
+
+</div>
 
 
 <!-- PROOF SNAPSHOT -->
