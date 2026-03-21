@@ -419,15 +419,187 @@ p {
   transform: translateY(-7px) rotate(-45deg);
 }
 /* =========================================================
-   13. FOOTER
+   FOOTER — PREMIUM + CONVERSION OPTIMIZED (FINAL)
+   Non-destructive override layer
 ========================================================= */
 
-/* Use design tokens for spacing */
+/* ===============================
+   STRUCTURE + SPACING
+================================= */
 .footer {
   padding: var(--space-xl) 0 var(--space-md);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
-/* Grid responsiveness */
+.footer-grid {
+  gap: var(--space-xl);
+  align-items: flex-start;
+}
+
+/* ===============================
+   BRAND COLUMN (LOGO + TRUST)
+================================= */
+.footer-brand {
+  max-width: 280px;
+}
+
+.footer-brand img {
+  height: 44px;
+  width: auto;
+  object-fit: contain;
+  margin-bottom: var(--space-sm);
+}
+
+.footer-brand p {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+/* ===============================
+   SOCIAL ICONS (CLEAN + PREMIUM)
+================================= */
+.footer-social {
+  margin-top: var(--space-sm);
+}
+
+.footer-social img {
+  width: 26px;
+  height: 26px;
+  opacity: 0.85;
+  transition: var(--transition-fast);
+}
+
+.footer-social img:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+/* ===============================
+   COLUMN HEADINGS (HIERARCHY FIX)
+================================= */
+.footer h4 {
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-sm);
+}
+
+/* ===============================
+   LINKS (CONVERSION FOCUSED)
+================================= */
+.footer-links a,
+.footer-contact a {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  transition: var(--transition-fast);
+  position: relative;
+}
+
+.footer-links a:hover,
+.footer-contact a:hover {
+  color: var(--text-heading);
+}
+
+/* subtle SaaS underline */
+.footer-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0%;
+  height: 1px;
+  background: var(--gradient-primary);
+  transition: width var(--transition-fast);
+}
+
+.footer-links a:hover::after {
+  width: 100%;
+}
+
+/* ===============================
+   CONTACT CARDS (HIGH IMPACT)
+================================= */
+.footer-contact {
+  align-items: flex-start;
+}
+
+.footer-contact-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 12px 14px;
+
+  background: var(--bg-glass);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+
+  transition: var(--transition-medium);
+}
+
+.footer-contact-item:hover {
+  background: rgba(79,70,229,0.12);
+  border-color: var(--border-accent);
+  box-shadow: var(--shadow-soft);
+  transform: translateY(-2px);
+}
+
+/* ===============================
+   ICON SYSTEM FIX
+================================= */
+.footer-contact-icon {
+  width: 26px;
+  height: 26px;
+}
+
+.footer-contact-item svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--brand-accent);
+}
+
+/* ===============================
+   HIPAA / TRUST BADGE
+================================= */
+.footer-hipaa img {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+}
+
+.hipaa-title {
+  color: var(--brand-primary);
+}
+
+.hipaa-sub {
+  color: var(--brand-primary);
+  opacity: 0.7;
+}
+
+/* ===============================
+   DIVIDER (PREMIUM TOUCH)
+================================= */
+.footer::after {
+  height: 1px;
+  opacity: 0.6;
+}
+
+/* ===============================
+   FOOTER BOTTOM
+================================= */
+.footer-bottom {
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border-primary);
+  font-size: var(--text-sm);
+}
+
+/* ===============================
+   RESPONSIVE (CRITICAL)
+================================= */
 @media (max-width: 1024px) {
   .footer-grid {
     grid-template-columns: 1fr 1fr;
@@ -435,10 +607,15 @@ p {
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+
+  .footer {
+    padding: var(--space-lg) 0;
+  }
+
   .footer-grid {
     grid-template-columns: 1fr;
-    gap: var(--space-md);
+    gap: var(--space-lg);
     text-align: center;
   }
 
@@ -446,61 +623,15 @@ p {
   .footer-contact {
     align-items: center;
   }
-}
 
-/* Fix undefined color tokens */
-.footer-links a:hover,
-.footer-contact a:hover,
-.footer-contact-item svg,
-.footer-contact-icon {
-  color: var(--brand-accent);
-  stroke: var(--brand-accent);
-}
+  .footer-contact-item {
+    justify-content: center;
+  }
 
-/* Fix HIPAA colors (fallback to system) */
-.hipaa-title,
-.hipaa-sub {
-  color: var(--brand-primary);
-}
+  .footer-social {
+    justify-content: center;
+  }
 
-/* Improve spacing consistency */
-.footer-grid {
-  gap: var(--space-xl);
-}
-
-/* Improve card consistency using system */
-.footer-contact-item {
-  background: var(--bg-glass);
-  border: 1px solid var(--border-primary);
-  border-radius: var(--radius-md);
-  transition: var(--transition-medium);
-}
-
-/* Better hover using system */
-.footer-contact-item:hover {
-  background: rgba(79,70,229,0.12);
-  box-shadow: var(--shadow-soft);
-}
-
-/* Social icons polish */
-.footer-social img {
-  transition: var(--transition-fast);
-}
-
-.footer-social img:hover {
-  transform: translateY(-2px);
-  opacity: 0.9;
-}
-
-/* Footer bottom alignment */
-.footer-bottom {
-  margin-top: var(--space-md);
-  padding-top: var(--space-md);
-  border-top: 1px solid var(--border-primary);
-}
-
-/* Fix container alignment on small screens */
-@media (max-width: 768px) {
   .footer .container {
     padding: 0 var(--space-sm);
   }
