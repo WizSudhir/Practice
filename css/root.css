@@ -290,7 +290,8 @@ p {
   width: 100%;
   z-index: var(--z-overlay);
   background: rgba(11,17,32,0.6);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border-primary);
   transition: all var(--transition-medium);
 }
@@ -357,14 +358,20 @@ p {
 }
 /* MOBILE NAV (STRIPE DRAWER) */
 @media (max-width: 992px) {
+  .navbar .container {
+    padding: 0 16px;
+   }
   .nav-toggle {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    padding: 10px;
+    margin-right: -6px;
+    cursor: pointer;
     z-index: 1100;
   }
   .nav-toggle span {
-    width: 24px;
+    width: 22px;
     height: 2px;
     background: var(--text-heading);
     transition: var(--transition-medium);
@@ -377,9 +384,10 @@ p {
     width: 85%;
     height: 100vh;
     background: linear-gradient(180deg,#0b1120 0%,#050816 100%);
+    box-shadow: -20px 0 60px rgba(0,0,0,0.6);
     backdrop-filter: blur(30px);
     border-left: 1px solid var(--border-primary);
-    padding: 120px 40px;
+    padding: 100px 32px;
     transition: all 0.4s var(--ease-smooth);
     display: flex;
     flex-direction: column;
