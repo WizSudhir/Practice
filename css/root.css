@@ -419,8 +419,7 @@ p {
   transform: translateY(-7px) rotate(-45deg);
 }
 /* =========================================================
-   FOOTER — PREMIUM + CONVERSION OPTIMIZED (FINAL)
-   Non-destructive override layer
+ 13. FOOTER
 ========================================================= */
 
 /* STRUCTURE + SPACING */
@@ -428,6 +427,9 @@ p {
   padding: var(--space-xl) 0 var(--space-md);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+}
+.footer a {
+  text-decoration: none;
 }
 .footer-grid {
   display: grid;
@@ -504,6 +506,7 @@ p {
   height: 1px;
   background: var(--gradient-primary);
   transition: width var(--transition-fast);
+  display: none;
 }
 .footer-links a:hover::after {
   width: 100%;
@@ -545,7 +548,12 @@ p {
 }
 /* HIPAA / TRUST BADGE */
 .footer-hipaa {
-  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 8px;
 }
 .footer-brand {
   max-width: 260px;
@@ -557,6 +565,7 @@ p {
   height: 60px;
   width: auto;
   object-fit: contain;
+  margin-bottom: 6px;
 }
 .hipaa-title {
   color: var(--brand-primary);
@@ -576,6 +585,9 @@ p {
   padding-top: var(--space-md);
   border-top: 1px solid var(--border-primary);
   font-size: var(--text-sm);
+  text-align: center;
+  width: 100%;
+  display: block;
 }
 /* RESPONSIVE (CRITICAL) */
 @media (max-width: 1024px) {
