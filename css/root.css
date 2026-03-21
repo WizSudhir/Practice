@@ -1,109 +1,173 @@
 /* =========================================================
-   PRACTICEGRID — STRIPE-LEVEL DARK DESIGN SYSTEM
-   Version: Enterprise SaaS Production System
+   PRACTICEGRID — STRIPE-LEVEL DARK SAAS ROOT SYSTEM
+   Deep Dark + Violet/Indigo Brand System
 ========================================================= */
 
 /* ===============================
-   1. PRIMITIVE TOKENS (RAW VALUES)
+   1. PRIMITIVE BRAND TOKENS
+   (EXTRACTED FROM YOUR LOGO)
 ================================= */
 :root {
 
-  /* BRAND CORE */
-  --pg-purple-500: #7B3FE4;
-  --pg-purple-600: #6A35C9;
-  --pg-indigo-500: #4A5BD4;
-  --pg-indigo-600: #3C4BC0;
+  /* Brand Gradient Core (from logo) */
+  --brand-violet: #8A3FFC;
+  --brand-purple: #6D4AFF;
+  --brand-indigo: #4F6BFF;
+  --brand-blue: #3C82F6;
 
-  /* NEUTRALS (Stripe-style deep grayscale) */
-  --gray-0: #ffffff;
-  --gray-50: #f9fafb;
-  --gray-100: #f3f4f6;
-  --gray-200: #e5e7eb;
-  --gray-300: #d1d5db;
-  --gray-400: #9ca3af;
-  --gray-500: #6b7280;
-  --gray-600: #4b5563;
-  --gray-700: #374151;
-  --gray-800: #1f2937;
-  --gray-900: #0B0D12;
+  /* Gradient */
+  --gradient-brand: linear-gradient(
+    135deg,
+    #8A3FFC 0%,
+    #6D4AFF 35%,
+    #4F6BFF 70%,
+    #3C82F6 100%
+  );
 
-  /* SURFACE BASE */
-  --surface-0: #07080B;
-  --surface-1: #0B0D12;
-  --surface-2: #11131A;
+  /* Glow Layers */
+  --glow-violet: rgba(138, 63, 252, 0.35);
+  --glow-indigo: rgba(79, 107, 255, 0.25);
 
-  /* GRADIENTS */
-  --gradient-brand: linear-gradient(135deg, #7B3FE4 0%, #4A5BD4 100%);
-  --gradient-glow: radial-gradient(circle at 20% 30%, rgba(123,63,228,0.25), transparent 60%);
+}
 
-  /* TYPOGRAPHY SCALE */
-  --fs-xs: 12px;
-  --fs-sm: 14px;
-  --fs-md: 16px;
-  --fs-lg: 18px;
-  --fs-xl: 20px;
-  --fs-2xl: 28px;
-  --fs-3xl: 36px;
-  --fs-4xl: 48px;
-  --fs-5xl: 64px;
+/* ===============================
+   2. TRUE DARK SAAS SURFACES
+   (NOT FLAT BLACK — STRIPE STYLE)
+================================= */
+:root {
 
-  /* SPACING SCALE (Stripe uses tight scale) */
+  /* Core Background Stack */
+  --bg-0: #05060A;
+  --bg-1: #0A0B12;
+  --bg-2: #0F111A;
+  --bg-3: #151826;
+
+  /* Elevated Surfaces */
+  --surface-1: rgba(255, 255, 255, 0.03);
+  --surface-2: rgba(255, 255, 255, 0.05);
+  --surface-3: rgba(255, 255, 255, 0.08);
+
+  /* Subtle Tint (brand infused darkness) */
+  --bg-tint: radial-gradient(
+    circle at 20% 20%,
+    rgba(138,63,252,0.15),
+    transparent 40%
+  );
+
+}
+
+/* ===============================
+   3. TEXT SYSTEM (STRIPE STYLE)
+================================= */
+:root {
+
+  --text-primary: #F9FAFB;
+  --text-secondary: #A1A8C3;
+  --text-tertiary: #6B7280;
+  --text-inverse: #0A0B12;
+
+}
+
+/* ===============================
+   4. BORDER SYSTEM
+================================= */
+:root {
+
+  --border-subtle: rgba(255,255,255,0.06);
+  --border-default: rgba(255,255,255,0.10);
+  --border-strong: rgba(255,255,255,0.16);
+
+}
+
+/* ===============================
+   5. TYPOGRAPHY TOKENS (STRIPE MATCH)
+================================= */
+:root {
+
+  --font-sans: Inter, ui-sans-serif, -apple-system, system-ui;
+
+  /* Stripe-like scale */
+  --fs-1: 12px;
+  --fs-2: 14px;
+  --fs-3: 16px;
+  --fs-4: 18px;
+  --fs-5: 20px;
+  --fs-6: 24px;
+  --fs-7: 32px;
+  --fs-8: 42px;
+  --fs-9: 56px;
+
+  --lh-tight: 1.1;
+  --lh-normal: 1.5;
+
+  --tracking-tight: -0.02em;
+  --tracking-normal: -0.01em;
+
+}
+
+/* ===============================
+   6. SPACING SYSTEM
+================================= */
+:root {
+
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
   --space-4: 16px;
-  --space-5: 24px;
-  --space-6: 32px;
-  --space-7: 48px;
-  --space-8: 64px;
-  --space-9: 96px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 40px;
+  --space-9: 56px;
+  --space-10: 72px;
+  --space-11: 96px;
 
-  /* RADIUS */
-  --radius-xs: 6px;
-  --radius-sm: 10px;
-  --radius-md: 14px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
-  --radius-pill: 999px;
-
-  /* SHADOWS (Stripe soft layering) */
-  --shadow-1: 0 2px 10px rgba(0,0,0,0.2);
-  --shadow-2: 0 10px 30px rgba(0,0,0,0.35);
-  --shadow-3: 0 20px 60px rgba(0,0,0,0.5);
-
-  /* MOTION */
-  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-emphasis: cubic-bezier(0.2, 0.8, 0.2, 1);
-  --duration-fast: 150ms;
-  --duration-base: 300ms;
-  --duration-slow: 600ms;
-
-  /* LAYOUT */
-  --container: 1200px;
 }
 
 /* ===============================
-   2. SEMANTIC TOKENS
+   7. RADIUS SYSTEM
 ================================= */
 :root {
 
-  --bg-primary: var(--surface-0);
-  --bg-secondary: var(--surface-1);
-  --bg-elevated: rgba(255,255,255,0.04);
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
 
-  --text-primary: var(--gray-0);
-  --text-secondary: var(--gray-400);
-  --text-muted: var(--gray-500);
-
-  --border-subtle: rgba(255,255,255,0.06);
-  --border-strong: rgba(255,255,255,0.12);
-
-  --brand: var(--pg-purple-500);
-  --brand-gradient: var(--gradient-brand);
 }
 
 /* ===============================
-   3. RESET (MODERN)
+   8. SHADOW SYSTEM (STRIPE DEPTH)
+================================= */
+:root {
+
+  --shadow-1: 0 4px 20px rgba(0,0,0,0.25);
+  --shadow-2: 0 12px 40px rgba(0,0,0,0.45);
+  --shadow-3: 0 30px 80px rgba(0,0,0,0.6);
+
+  /* Glow Shadow */
+  --shadow-glow: 0 0 40px rgba(138,63,252,0.35);
+
+}
+
+/* ===============================
+   9. MOTION SYSTEM (STRIPE PHYSICS)
+================================= */
+:root {
+
+  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --duration-fast: 120ms;
+  --duration-base: 280ms;
+  --duration-slow: 600ms;
+
+}
+
+/* ===============================
+   10. BASE RESET
 ================================= */
 *,
 *::before,
@@ -113,84 +177,47 @@
 
 body {
   margin: 0;
-  font-family: Inter, -apple-system, system-ui;
-  background: var(--bg-primary);
+  font-family: var(--font-sans);
+  background: var(--bg-0);
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
+  position: relative;
 }
 
-/* ===============================
-   4. BACKGROUND SYSTEM (STRIPE STYLE)
-================================= */
+/* STRIPE-LIKE GLOW BACKGROUND */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: var(--gradient-glow);
+  background: var(--bg-tint);
   z-index: -1;
-  pointer-events: none;
 }
 
 /* ===============================
-   5. TYPOGRAPHY
+   11. TYPOGRAPHY IMPLEMENTATION
 ================================= */
+
 h1 {
-  font-size: var(--fs-5xl);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  font-size: var(--fs-9);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
 }
 
 h2 {
-  font-size: var(--fs-3xl);
+  font-size: var(--fs-8);
+}
+
+h3 {
+  font-size: var(--fs-6);
 }
 
 p {
+  font-size: var(--fs-3);
   color: var(--text-secondary);
-  font-size: var(--fs-md);
 }
 
 /* ===============================
-   6. LAYOUT PRIMITIVES (STRIPE STYLE)
-================================= */
-
-.container {
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: 0 var(--space-5);
-}
-
-/* STACK (vertical rhythm) */
-.stack > * + * {
-  margin-top: var(--space-4);
-}
-
-/* CLUSTER (horizontal grouping) */
-.cluster {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-  align-items: center;
-}
-
-/* GRID */
-.grid {
-  display: grid;
-  gap: var(--space-6);
-}
-
-/* ===============================
-   7. SURFACES (GLASS / STRIPE)
-================================= */
-
-.surface {
-  background: var(--bg-elevated);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  backdrop-filter: blur(20px);
-}
-
-/* ===============================
-   8. BUTTONS (REAL STRIPE STYLE)
+   12. BUTTON SYSTEM (TRUE STRIPE)
 ================================= */
 
 .btn {
@@ -198,105 +225,118 @@ p {
   align-items: center;
   justify-content: center;
   padding: 12px 20px;
-  font-size: var(--fs-sm);
+  font-size: var(--fs-2);
   border-radius: var(--radius-pill);
   transition: all var(--duration-base) var(--ease-standard);
+  position: relative;
 }
 
 /* PRIMARY */
 .btn-primary {
-  background: var(--brand-gradient);
+  background: var(--gradient-brand);
   color: white;
-  box-shadow: 0 6px 20px rgba(123,63,228,0.4);
+  box-shadow: var(--shadow-glow);
 }
 
 .btn-primary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 10px 30px rgba(123,63,228,0.6);
+  filter: brightness(1.08);
 }
 
 /* SECONDARY */
 .btn-secondary {
-  background: transparent;
-  border: 1px solid var(--border-strong);
+  background: var(--surface-1);
+  border: 1px solid var(--border-default);
 }
 
 .btn-secondary:hover {
-  background: rgba(255,255,255,0.05);
+  background: var(--surface-2);
 }
 
 /* ===============================
-   9. INPUTS (STRIPE-LIKE)
+   13. INPUT SYSTEM (STRIPE STYLE)
 ================================= */
 
 .input {
   width: 100%;
-  padding: 14px;
+  padding: 14px 16px;
   border-radius: var(--radius-md);
-  background: var(--surface-2);
+  background: var(--bg-2);
   border: 1px solid var(--border-subtle);
   color: var(--text-primary);
-  transition: all var(--duration-fast);
 }
 
 .input:focus {
-  border-color: var(--brand);
-  box-shadow: 0 0 0 3px rgba(123,63,228,0.2);
+  border-color: var(--brand-indigo);
+  box-shadow: 0 0 0 3px rgba(79,107,255,0.25);
 }
 
 /* ===============================
-   10. ICON SYSTEM
+   14. ICON SYSTEM (STRIPE STYLE)
 ================================= */
 
 .icon {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: var(--radius-md);
   display: grid;
   place-items: center;
-  background: var(--brand-gradient);
-  color: white;
+  background: linear-gradient(
+    145deg,
+    rgba(138,63,252,0.25),
+    rgba(79,107,255,0.15)
+  );
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-1);
 }
 
 /* ===============================
-   11. UTILITIES (ADVANCED)
+   15. SURFACE SYSTEM
+================================= */
+
+.surface {
+  background: var(--surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(24px);
+}
+
+/* ===============================
+   16. UTILITIES
 ================================= */
 
 .text-gradient {
-  background: var(--brand-gradient);
+  background: var(--gradient-brand);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.elevate-1 { box-shadow: var(--shadow-1); }
-.elevate-2 { box-shadow: var(--shadow-2); }
+.elevate-2 {
+  box-shadow: var(--shadow-2);
+}
 
-.rounded-lg { border-radius: var(--radius-lg); }
-.center { text-align: center; }
+.center {
+  text-align: center;
+}
 
 /* ===============================
-   12. MOTION
+   17. LAYOUT
 ================================= */
 
-.fade-up {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp var(--duration-slow) var(--ease-emphasis) forwards;
-}
-
-@keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
 }
 
 /* ===============================
-   13. RESPONSIVE
+   18. RESPONSIVE
 ================================= */
 
 @media (max-width: 768px) {
-  h1 { font-size: var(--fs-3xl); }
+  h1 {
+    font-size: var(--fs-7);
+  }
 }
 /* ===============================
    10. NAVBAR
