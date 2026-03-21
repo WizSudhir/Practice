@@ -4,90 +4,248 @@
 ========================================================= */
 
 /* ===============================
-   1. DESIGN TOKENS
+   1. PRIMITIVE TOKENS
 ================================= */
 :root {
 
-  /* ===== BRAND (REFINED) ===== */
-  --brand-primary: #635BFF;        /* Stripe-style indigo */
-  --brand-accent: #7C3AED;         /* Soft purple */
-  --brand-muted: #4F46E5;
+  /* BRAND (ALIGNED TO LOGO) */
+  --indigo-500: #4F46E5;
+  --indigo-600: #4338CA;
 
-  /* Subtle gradient (NOT loud) */
-  --gradient-accent: linear-gradient(135deg, #635BFF, #7C3AED);
+  --purple-500: #7C3AED;
+  --purple-600: #6D28D9;
 
-  /* ===== BACKGROUND SYSTEM ===== */
-  --bg-main: #0A0F1C;
-  --bg-surface: #0F172A;
-  --bg-elevated: #111827;
-  --bg-hover: #1A2236;
+  --magenta-500: #A855F7;
 
-  /* Ambient overlays */
-  --bg-glass: rgba(255,255,255,0.03);
-  --bg-noise: url("https://www.transparenttextures.com/patterns/noise.png");
+  /* NEUTRALS */
+  --gray-950: #05070F;
+  --gray-900: #0A0F1C;
+  --gray-850: #0E1424;
+  --gray-800: #111827;
+  --gray-700: #1F2937;
+  --gray-600: #374151;
+  --gray-500: #6B7280;
+  --gray-400: #9CA3AF;
+  --gray-300: #D1D5DB;
+  --gray-100: #F3F4F6;
 
-  /* ===== BORDERS ===== */
-  --border-subtle: rgba(255,255,255,0.06);
-  --border-strong: rgba(255,255,255,0.12);
-
-  /* ===== TEXT ===== */
-  --text-primary: #F9FAFB;
-  --text-secondary: #9CA3AF;
-  --text-muted: #6B7280;
-  --text-inverse: #0A0F1C;
-
-  /* ===== STATUS ===== */
-  --success: #22C55E;
-  --error: #EF4444;
-  --warning: #F59E0B;
-  --info: #3B82F6;
-
-  /* ===== TYPOGRAPHY ===== */
-  --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
-
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.125rem;
-  --text-xl: 1.35rem;
-  --text-2xl: 1.8rem;
-  --text-3xl: 2.4rem;
-  --text-4xl: 3.2rem;
-
-  --line-tight: 1.15;
-  --line-normal: 1.6;
-
-  /* ===== SPACING ===== */
-  --space-1: 6px;
-  --space-2: 12px;
-  --space-3: 20px;
-  --space-4: 32px;
-  --space-5: 56px;
-  --space-6: 96px;
-
-  /* ===== LAYOUT ===== */
-  --container: 1200px;
-  --section-space: 120px;
-
-  /* ===== RADIUS ===== */
-  --radius-sm: 6px;
-  --radius-md: 12px;
-  --radius-lg: 18px;
-  --radius-xl: 24px;
-
-  /* ===== SHADOWS (SUBTLE) ===== */
-  --shadow-xs: 0 1px 2px rgba(0,0,0,0.3);
-  --shadow-sm: 0 4px 16px rgba(0,0,0,0.35);
-  --shadow-md: 0 10px 40px rgba(0,0,0,0.45);
-
-  /* ===== TRANSITIONS ===== */
-  --transition-fast: 0.18s ease;
-  --transition-smooth: 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+  /* STATUS */
+  --green-500: #22C55E;
+  --red-500: #EF4444;
+  --yellow-500: #F59E0B;
+  --blue-500: #3B82F6;
 }
 
 
 /* ===============================
-   2. RESET
+   2. SEMANTIC TOKENS
+================================= */
+:root {
+
+  /* BACKGROUND */
+  --color-bg-default: var(--gray-900);
+  --color-bg-subtle: var(--gray-850);
+  --color-bg-surface: var(--gray-800);
+  --color-bg-elevated: #131A2B;
+
+  /* TEXT */
+  --color-text-heading: #FFFFFF;
+  --color-text-body: var(--gray-300);
+  --color-text-muted: var(--gray-500);
+  --color-text-inverse: var(--gray-900);
+
+  /* BORDER */
+  --color-border-default: rgba(255,255,255,0.06);
+  --color-border-strong: rgba(255,255,255,0.14);
+
+  /* BRAND */
+  --color-brand-primary: var(--indigo-500);
+  --color-brand-secondary: var(--purple-500);
+  --color-brand-accent: var(--magenta-500);
+
+  --gradient-brand:
+    linear-gradient(135deg,
+      var(--indigo-500),
+      var(--purple-500),
+      var(--magenta-500)
+    );
+
+  /* STATES */
+  --color-success: var(--green-500);
+  --color-error: var(--red-500);
+  --color-warning: var(--yellow-500);
+  --color-info: var(--blue-500);
+}
+
+
+/* ===============================
+   3. TYPOGRAPHY SYSTEM
+================================= */
+:root {
+
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Sizes */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.875rem;
+  --text-3xl: 2.5rem;
+  --text-4xl: 3.25rem;
+  --text-5xl: 4rem;
+
+  /* Weights */
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  /* Line heights */
+  --leading-tight: 1.1;
+  --leading-normal: 1.6;
+  --leading-loose: 1.8;
+
+  /* Letter spacing */
+  --tracking-tight: -0.02em;
+}
+
+
+/* ===============================
+   4. SPACING (8PT GRID)
+================================= */
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 40px;
+  --space-6: 64px;
+  --space-7: 96px;
+  --space-8: 140px;
+}
+
+
+/* ===============================
+   5. LAYOUT TOKENS
+================================= */
+:root {
+  --container-sm: 768px;
+  --container-md: 1024px;
+  --container-lg: 1280px;
+  --container-xl: 1440px;
+
+  --reading-width: 680px;
+
+  --stack-gap: var(--space-4);
+  --inline-gap: var(--space-3);
+}
+
+
+/* ===============================
+   6. RADIUS
+================================= */
+:root {
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius-2xl: 28px;
+}
+
+
+/* ===============================
+   7. ELEVATION SYSTEM
+================================= */
+:root {
+  --elevation-1: 0 1px 2px rgba(0,0,0,0.25);
+  --elevation-2: 0 10px 30px rgba(0,0,0,0.35);
+  --elevation-3: 0 25px 60px rgba(0,0,0,0.45);
+}
+
+
+/* ===============================
+   8. GLASS SYSTEM
+================================= */
+:root {
+  --glass-subtle: rgba(255,255,255,0.02);
+  --glass-strong: rgba(255,255,255,0.05);
+  --glass-blur: blur(14px);
+}
+
+
+/* ===============================
+   9. MOTION SYSTEM
+================================= */
+:root {
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-emphasis: cubic-bezier(0.2, 0, 0, 1);
+
+  --duration-fast: 120ms;
+  --duration-medium: 240ms;
+  --duration-slow: 400ms;
+
+  --motion-hover: var(--duration-fast) var(--ease-standard);
+  --motion-press: 100ms ease;
+  --motion-enter: var(--duration-medium) var(--ease-emphasis);
+}
+
+
+/* ===============================
+   10. Z-INDEX
+================================= */
+:root {
+  --z-base: 1;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-overlay: 1000;
+  --z-modal: 2000;
+  --z-toast: 3000;
+}
+
+
+/* ===============================
+   11. INTERACTION TOKENS
+================================= */
+:root {
+  --focus-ring: 0 0 0 2px rgba(124,58,237,0.5);
+  --hover-overlay: rgba(255,255,255,0.04);
+  --active-overlay: rgba(255,255,255,0.08);
+}
+
+
+/* ===============================
+   12. COMPONENT TOKENS
+================================= */
+:root {
+
+  /* BUTTON */
+  --btn-primary-bg: var(--gradient-brand);
+  --btn-primary-color: #fff;
+
+  --btn-secondary-border: var(--color-border-strong);
+
+  /* INPUT */
+  --input-bg: var(--color-bg-surface);
+  --input-border: var(--color-border-default);
+  --input-focus: var(--color-brand-secondary);
+
+  /* CARD */
+  --card-bg: var(--color-bg-surface);
+  --card-border: var(--color-border-default);
+
+  /* NAV */
+  --nav-bg: rgba(10,15,28,0.7);
+  --nav-border: var(--color-border-default);
+
+  /* MODAL */
+  --modal-bg: var(--color-bg-elevated);
+}
+
+
+/* ===============================
+   13. BASE RESET
 ================================= */
 *,
 *::before,
@@ -97,208 +255,121 @@
   padding: 0;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
-  font-family: var(--font-primary);
+  font-family: var(--font-sans);
   background:
-    radial-gradient(circle at 20% 20%, rgba(99,91,255,0.12), transparent 40%),
-    radial-gradient(circle at 80% 0%, rgba(124,58,237,0.10), transparent 40%),
-    var(--bg-main);
-  color: var(--text-primary);
-  line-height: var(--line-normal);
-  -webkit-font-smoothing: antialiased;
-  background-image: var(--bg-noise);
-}
-
-img {
-  max-width: 100%;
-  display: block;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button {
-  font-family: inherit;
-  cursor: pointer;
-  border: none;
+    radial-gradient(circle at 20% 20%, rgba(79,70,229,0.12), transparent 40%),
+    radial-gradient(circle at 80% 0%, rgba(168,85,247,0.10), transparent 40%),
+    var(--color-bg-default);
+  color: var(--color-text-body);
+  line-height: var(--leading-normal);
 }
 
 
 /* ===============================
-   3. LAYOUT SYSTEM
+   14. TYPOGRAPHY
+================================= */
+h1,h2,h3,h4 {
+  font-weight: var(--font-semibold);
+  color: var(--color-text-heading);
+}
+
+p {
+  font-size: var(--text-md);
+}
+
+
+/* ===============================
+   15. LAYOUT
 ================================= */
 .container {
-  max-width: var(--container);
+  max-width: var(--container-lg);
   margin: 0 auto;
   padding: 0 var(--space-3);
 }
 
-.section {
-  padding: var(--section-space) 0;
+.stack > * + * {
+  margin-top: var(--stack-gap);
+}
+
+.inline {
+  display: flex;
+  gap: var(--inline-gap);
 }
 
 
 /* ===============================
-   4. SURFACES (STRIPE STYLE)
+   16. SURFACES
 ================================= */
-.surface {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-}
-
 .card {
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-  border: 1px solid var(--border-subtle);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   border-radius: var(--radius-lg);
+  box-shadow: var(--elevation-2);
   padding: var(--space-4);
-  transition: var(--transition-smooth);
-}
-
-.card:hover {
-  background: var(--bg-hover);
-  transform: translateY(-4px);
+  transition: var(--motion-hover);
 }
 
 
 /* ===============================
-   5. TYPOGRAPHY
+   17. GLASS
 ================================= */
-h1, h2, h3, h4 {
-  font-weight: 600;
-  line-height: var(--line-tight);
-  letter-spacing: -0.02em;
-}
-
-h1 { font-size: var(--text-4xl); }
-h2 { font-size: var(--text-3xl); }
-h3 { font-size: var(--text-2xl); }
-h4 { font-size: var(--text-xl); }
-
-p {
-  color: var(--text-secondary);
-  font-size: var(--text-base);
-}
-
-.text-muted {
-  color: var(--text-muted);
+.glass {
+  background: var(--glass-subtle);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--color-border-default);
 }
 
 
 /* ===============================
-   6. BUTTONS (STRIPE STYLE)
+   18. BUTTONS
 ================================= */
-
-/* PRIMARY */
 .btn-primary {
-  background: var(--brand-primary);
-  color: white;
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-color);
   padding: 12px 22px;
   border-radius: var(--radius-md);
-  font-size: var(--text-sm);
-  font-weight: 500;
-  transition: var(--transition-fast);
 }
 
-.btn-primary:hover {
-  background: #5851DB;
-}
-
-/* SECONDARY */
 .btn-secondary {
-  background: transparent;
-  border: 1px solid var(--border-strong);
-  color: var(--text-primary);
+  border: 1px solid var(--btn-secondary-border);
   padding: 12px 22px;
-  border-radius: var(--radius-md);
-  transition: var(--transition-fast);
-}
-
-.btn-secondary:hover {
-  background: var(--bg-hover);
 }
 
 
 /* ===============================
-   7. INPUTS
+   19. INPUTS
 ================================= */
 .input {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  padding: 12px 16px;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  padding: 12px;
   border-radius: var(--radius-md);
-  color: var(--text-primary);
 }
 
 .input:focus {
-  outline: none;
-  border-color: var(--brand-primary);
+  border-color: var(--input-focus);
+  box-shadow: var(--focus-ring);
 }
 
 
 /* ===============================
-   8. UTILITIES
+   20. UTILITIES
 ================================= */
 .flex { display: flex; }
-.flex-center { display: flex; align-items: center; justify-content: center; }
-
-.grid {
-  display: grid;
-  gap: var(--space-4);
-}
-
-.grid-2 { grid-template-columns: repeat(2, 1fr); }
-.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid { display: grid; }
 
 .text-center { text-align: center; }
 
 .mt-2 { margin-top: var(--space-2); }
-.mt-3 { margin-top: var(--space-3); }
 .mt-4 { margin-top: var(--space-4); }
 
-.mb-2 { margin-bottom: var(--space-2); }
-.mb-3 { margin-bottom: var(--space-3); }
-.mb-4 { margin-bottom: var(--space-4); }
-
 
 /* ===============================
-   9. GLASS (VERY SUBTLE)
+   21. RESPONSIVE
 ================================= */
-.glass {
-  background: rgba(255,255,255,0.02);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--border-subtle);
-}
-
-
-/* ===============================
-   10. RESPONSIVE
-================================= */
-@media (max-width: 1024px) {
-  .grid-3 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 @media (max-width: 768px) {
-  .grid-2,
-  .grid-3 {
-    grid-template-columns: 1fr;
-  }
-
-  h1 {
-    font-size: 2.4rem;
-  }
-
-  .section {
-    padding: 80px 0;
-  }
+  .container { padding: 0 var(--space-2); }
 }
 /* ===============================
    10. NAVBAR
