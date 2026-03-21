@@ -793,7 +793,17 @@ z-index: 2;
   text-align: center;
   background: var(--bg-primary);
 }
-
+.belief-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.belief-visual img {
+  width: 100%;
+  border-radius: 12px;
+  opacity: 0.9;
+}
 /* HEADLINE */
 .belief-headline {
   font-size: clamp(28px, 3vw, 44px);
