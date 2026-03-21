@@ -4,143 +4,232 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PracticeGrid Design System Preview</title>
+<title>Design System Audit — PracticeGrid</title>
 
-<link rel="stylesheet" href="css/root.css">
+<!-- FONT -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+<!-- ROOT CSS -->
+<link rel="stylesheet" href="root.css">
+
+<style>
+/* DEMO ONLY STYLES (DO NOT PUT IN ROOT.CSS) */
+.demo-box {
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-primary);
+  background: var(--bg-elevated);
+}
+.demo-inline {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+.color-swatch {
+  width: 120px;
+  height: 80px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: flex-end;
+  padding: 8px;
+  font-size: 12px;
+  color: #fff;
+}
+</style>
 </head>
 
 <body>
 
-<!-- HERO -->
+<!-- ===============================
+     HERO / INTRO
+================================= -->
 <section class="section section-glow">
-  <div class="container" style="text-align:center;">
-    <h1 class="text-gradient">PracticeGrid SaaS System</h1>
-    <p style="max-width:600px;margin:20px auto;">
-      This preview demonstrates your final design system — consistent backgrounds,
-      typography, spacing, and reusable components.
-    </p>
+  <div class="container">
+    <h1 class="text-gradient">Design System Audit</h1>
+    <p>Full visualization of root.css — tokens, layout, components & utilities.</p>
 
-    <div style="margin-top:30px;">
-      <a href="#" class="btn-primary">Primary Button</a>
-      <a href="#" class="btn-outline" style="margin-left:10px;">Secondary</a>
+    <div style="margin-top: var(--space-md);">
+      <button class="btn-primary">Primary Button</button>
+      <button class="btn-outline">Outline Button</button>
     </div>
   </div>
 </section>
 
-
-<!-- TYPOGRAPHY -->
+<!-- ===============================
+     COLORS / TOKENS
+================================= -->
 <section class="section">
+  <div class="container">
+    <h2 class="section-title">Color Tokens</h2>
+
+    <div class="grid grid-3" style="margin-top: var(--space-lg);">
+      
+      <div class="demo-box">
+        <h3>Brand</h3>
+        <div class="demo-inline">
+          <div class="color-swatch" style="background:#4f46e5;">Primary</div>
+          <div class="color-swatch" style="background:#7c3aed;">Secondary</div>
+          <div class="color-swatch" style="background:#a855f7;">Accent</div>
+        </div>
+      </div>
+
+      <div class="demo-box">
+        <h3>Background</h3>
+        <div class="demo-inline">
+          <div class="color-swatch" style="background:#050816;">Primary</div>
+          <div class="color-swatch" style="background:#0b1120;">Secondary</div>
+          <div class="color-swatch" style="background:#0f172a;">Tertiary</div>
+        </div>
+      </div>
+
+      <div class="demo-box">
+        <h3>Semantic</h3>
+        <div class="demo-inline">
+          <div class="color-swatch" style="background:#22c55e;">Success</div>
+          <div class="color-swatch" style="background:#ef4444;">Error</div>
+          <div class="color-swatch" style="background:#f59e0b;">Warning</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===============================
+     TYPOGRAPHY
+================================= -->
+<section class="section section-subtle">
   <div class="container">
     <h2 class="section-title">Typography System</h2>
 
-    <div style="margin-top:40px;">
-      <h1>Heading 1 Example</h1>
-      <h2>Heading 2 Example</h2>
-      <h3>Heading 3 Example</h3>
-
-      <p style="margin-top:20px;">
-        This is body text. Your typography system should feel consistent,
-        readable, and premium — similar to Stripe or Vercel level SaaS products.
-      </p>
+    <div style="margin-top: var(--space-lg);">
+      <h1>Heading H1</h1>
+      <h2>Heading H2</h2>
+      <h3>Heading H3</h3>
+      <p>This is body text demonstrating line height, readability, and color hierarchy.</p>
     </div>
   </div>
 </section>
 
-
-<!-- GRID + CARDS -->
-<section class="section section-subtle">
-  <div class="container">
-    <h2 class="section-title">Card & Grid System</h2>
-
-    <div class="grid grid-3" style="margin-top:40px;">
-
-      <div class="card" style="padding:24px;">
-        <h3>Revenue Growth</h3>
-        <p>Improve collections with structured workflows.</p>
-      </div>
-
-      <div class="card" style="padding:24px;">
-        <h3>Denial Reduction</h3>
-        <p>Prevent claim errors before submission.</p>
-      </div>
-
-      <div class="card" style="padding:24px;">
-        <h3>Cash Flow Optimization</h3>
-        <p>Accelerate reimbursements and AR cycles.</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- BUTTONS -->
+<!-- ===============================
+     GRID SYSTEM
+================================= -->
 <section class="section">
-  <div class="container" style="text-align:center;">
-    <h2 class="section-title">Buttons</h2>
+  <div class="container">
+    <h2 class="section-title">Grid System</h2>
 
-    <div style="margin-top:40px;">
-      <a class="btn-primary">Get Started</a>
-      <a class="btn-outline" style="margin-left:12px;">Learn More</a>
+    <div class="grid grid-2" style="margin-top: var(--space-lg);">
+      <div class="demo-box">Grid 2 - Item 1</div>
+      <div class="demo-box">Grid 2 - Item 2</div>
+    </div>
+
+    <div class="grid grid-3" style="margin-top: var(--space-lg);">
+      <div class="demo-box">Grid 3 - Item</div>
+      <div class="demo-box">Grid 3 - Item</div>
+      <div class="demo-box">Grid 3 - Item</div>
     </div>
   </div>
 </section>
 
-
-<!-- MIXED UI -->
+<!-- ===============================
+     CARDS
+================================= -->
 <section class="section section-glow">
   <div class="container">
-    <h2 class="section-title">Mixed UI Section</h2>
+    <h2 class="section-title">Card System</h2>
 
-    <div class="grid grid-2" style="margin-top:40px; align-items:center;">
-
-      <div>
-        <h3>System-Based Design</h3>
-        <p>
-          Every element — spacing, typography, color, and layout —
-          follows a unified design system for consistency across all pages.
-        </p>
-
-        <a href="#" class="btn-primary" style="margin-top:20px; display:inline-block;">
-          Explore System
-        </a>
+    <div class="grid grid-3" style="margin-top: var(--space-lg);">
+      <div class="card demo-box">
+        <h3>Card Title</h3>
+        <p>Hover to see elevation + glow.</p>
       </div>
-
-      <div class="card" style="padding:30px;">
-        <h3>Reusable Components</h3>
-        <p>
-          Cards, buttons, and layouts are reusable across homepage,
-          services pages, and blog system.
-        </p>
+      <div class="card demo-box">
+        <h3>Glass Card</h3>
+        <p>Backdrop blur + border system.</p>
       </div>
-
+      <div class="card demo-box">
+        <h3>Interactive Card</h3>
+        <p>Transitions + motion tokens.</p>
+      </div>
     </div>
   </div>
 </section>
 
-
-<!-- BACKGROUND TEST -->
+<!-- ===============================
+     BUTTONS
+================================= -->
 <section class="section">
   <div class="container">
-    <h2 class="section-title">Background Consistency</h2>
+    <h2 class="section-title">Buttons</h2>
 
-    <p style="text-align:center; max-width:600px; margin:20px auto;">
-      All sections should feel like one continuous surface — no harsh color breaks.
-      Only subtle variations are used.
-    </p>
+    <div class="demo-inline" style="margin-top: var(--space-lg);">
+      <a href="#" class="btn-primary">Primary</a>
+      <a href="#" class="btn-outline">Outline</a>
+    </div>
   </div>
 </section>
 
-
-<!-- FOOTER PREVIEW -->
-<section class="section section-subtle" style="text-align:center;">
+<!-- ===============================
+     UTILITIES
+================================= -->
+<section class="section section-subtle">
   <div class="container">
-    <p>© PracticeGrid Design System Preview</p>
+    <h2 class="section-title">Utilities</h2>
+
+    <div style="margin-top: var(--space-lg);">
+      <h2 class="text-gradient">Gradient Text Utility</h2>
+
+      <div class="demo-box glow-border" style="margin-top: var(--space-md);">
+        Glow Border Utility
+      </div>
+    </div>
   </div>
 </section>
 
+<!-- ===============================
+     SPACING SYSTEM
+================================= -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Spacing System</h2>
+
+    <div class="demo-inline" style="margin-top: var(--space-lg);">
+      <div class="demo-box" style="padding: var(--space-xs)">XS</div>
+      <div class="demo-box" style="padding: var(--space-sm)">SM</div>
+      <div class="demo-box" style="padding: var(--space-md)">MD</div>
+      <div class="demo-box" style="padding: var(--space-lg)">LG</div>
+      <div class="demo-box" style="padding: var(--space-xl)">XL</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===============================
+     ACCESSIBILITY
+================================= -->
+<section class="section section-glow">
+  <div class="container">
+    <h2 class="section-title">Accessibility</h2>
+
+    <p>Click the button and tab to see focus ring:</p>
+
+    <button class="btn-primary" style="margin-top: var(--space-md);">
+      Focus Test
+    </button>
+  </div>
+</section>
+
+<!-- ===============================
+     LIGHT MODE TEST
+================================= -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Light Mode Toggle</h2>
+
+    <button class="btn-outline" onclick="document.body.classList.toggle('light-mode')">
+      Toggle Light Mode
+    </button>
+  </div>
+</section>
 
 </body>
 </html>
