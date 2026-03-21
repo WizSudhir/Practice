@@ -282,7 +282,7 @@ p {
   box-shadow: var(--focus-ring);
 }
 /* ===============================
-   STRIPE-STYLE NAVBAR
+   12. NAVBAR
 ================================= */
 .navbar {
   position: fixed;
@@ -294,6 +294,10 @@ p {
   border-bottom: 1px solid var(--border-primary);
   transition: all var(--transition-medium);
 }
+.navbar .container {
+  max-width: 1200px;
+  padding: 0 20px; /* tighter like Stripe */
+}
 /* SCROLL STATE (Stripe style solid glass) */
 .navbar.scrolled {
   background: rgba(11,17,32,0.85);
@@ -301,14 +305,20 @@ p {
   box-shadow: var(--shadow-soft);
 }
 .navbar-inner {
+  height: 72px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 18px 0;
 }
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
 /* LOGO */
 .logo img {
-  height: 52px;
+  height: 44px;
 }
 /* NAV LINKS */
 .nav-menu ul {
@@ -345,9 +355,7 @@ p {
 .nav-menu .btn-primary {
   margin-left: 12px;
 }
-/* ===============================
-   MOBILE NAV (STRIPE DRAWER)
-================================= */
+/* MOBILE NAV (STRIPE DRAWER) */
 @media (max-width: 992px) {
   .nav-toggle {
     display: flex;
@@ -368,11 +376,7 @@ p {
     right: -100%;
     width: 85%;
     height: 100vh;
-    background: linear-gradient(
-      180deg,
-      #0b1120 0%,
-      #050816 100%
-    );
+    background: linear-gradient(180deg,#0b1120 0%,#050816 100%);
     backdrop-filter: blur(30px);
     border-left: 1px solid var(--border-primary);
     padding: 120px 40px;
@@ -404,7 +408,7 @@ p {
   transform: translateY(-7px) rotate(-45deg);
 }
 /* ===============================
-   16. FOOTER
+   13. FOOTER
 ================================= */
 .footer {
 position: relative;
