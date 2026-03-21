@@ -30,30 +30,49 @@
 <header class="navbar">
   <div class="container navbar-inner">
 
+    <!-- LOGO -->
     <div class="logo">
-      <a href="index.html">
+      <a href="index.html" aria-label="PracticeGrid Home">
         <img src="images/logo.png" alt="PracticeGrid Solutions Logo">
       </a>
     </div>
 
-      <nav class="nav-menu">
+    <!-- RIGHT SIDE -->
+    <div class="nav-right">
+
+      <!-- NAV MENU -->
+      <nav 
+        class="nav-menu" 
+        id="primary-navigation"
+        aria-hidden="true"
+      >
         <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="who-we-serve.html">Who We Serve</a></li>
-        <li><a href="why-us.html">Why Us</a></li>
-        <li><a href="blog/">Blog</a></li>
-        <li><a href="contact.html" class="btn-primary">Connect With Us</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="who-we-serve.html">Who We Serve</a></li>
+          <li><a href="why-us.html">Why Us</a></li>
+          <li><a href="blog/">Blog</a></li>
+          <li>
+            <a href="contact.html" class="btn-primary">
+              Connect With Us
+            </a>
+          </li>
         </ul>
       </nav>
 
-    <!-- MOBILE TOGGLE -->
-          <button class="nav-toggle" aria-label="Toggle Menu">
-          <span></span>
-          <span></span>
-          <span></span>
-          </button>
+      <!-- MOBILE TOGGLE -->
+      <button 
+        class="nav-toggle"
+        aria-label="Toggle navigation menu"
+        aria-controls="primary-navigation"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
 
+    </div>
   </div>
 </header>
 
