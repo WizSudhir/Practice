@@ -1,6 +1,5 @@
 /* =========================================================
    PRACTICEGRID — ROOT DESIGN SYSTEM (SAAS DARK)
-   Version: Production Ready
 ========================================================= */
 
 /* ===============================
@@ -12,63 +11,50 @@
   --bg-primary: #050a19;          /* Main dark (no gradient) */
   --bg-secondary: #0b1224;
   --bg-elevated: #0f172a;
-
   /* BRAND (FROM LOGO) */
   --primary: #6366f1;             /* Indigo */
   --secondary: #3b82f6;           /* Blue */
   --accent: #8b5cf6;              /* Violet */
-
   /* TEXT */
   --text-primary: #ffffff;
   --text-secondary: #cbd5f5;
   --text-muted: #94a3b8;
-
   /* BORDERS */
   --border-subtle: rgba(255,255,255,0.06);
   --border-default: rgba(255,255,255,0.10);
   --border-strong: rgba(99,102,241,0.35);
-
   /* GRADIENTS (ONLY FOR TEXT / CTA) */
   --gradient-primary: linear-gradient(90deg, #ffffff, #c4b5fd, #93c5fd);
   --gradient-accent: linear-gradient(90deg, #6366f1, #3b82f6);
-
   /* GLOW */
   --glow-primary: 0 0 25px rgba(99,102,241,0.35);
   --glow-soft: 0 0 40px rgba(59,130,246,0.25);
-
   /* RADIUS */
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 18px;
   --radius-xl: 24px;
-
   /* SPACING SYSTEM */
   --space-xs: 6px;
   --space-sm: 12px;
   --space-md: 20px;
   --space-lg: 40px;
   --space-xl: 80px;
-
   /* TYPOGRAPHY */
   --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-
   /* SHADOW */
   --shadow-soft:
     0 10px 30px rgba(0,0,0,0.4);
-
   --shadow-elevated:
     0 30px 80px rgba(0,0,0,0.6),
     0 0 40px rgba(99,102,241,0.12);
-
   /* TRANSITIONS */
   --transition-fast: 0.2s ease;
   --transition-base: 0.35s ease;
-
   /* LAYOUT */
   --container: 1200px;
   --nav-height: 80px;
 }
-
 
 /* ===============================
    2. GLOBAL RESET
@@ -78,11 +64,9 @@
 *::after {
   box-sizing: border-box;
 }
-
 html {
   scroll-behavior: smooth;
 }
-
 body {
   margin: 0;
   font-family: var(--font-primary);
@@ -90,7 +74,6 @@ body {
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
 }
-
 
 /* ===============================
    3. TYPOGRAPHY (STRIPE STYLE)
@@ -125,49 +108,42 @@ h2.gradient {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
 /* ===============================
    4. LAYOUT SYSTEM
 ================================= */
-
 .container {
   max-width: var(--container);
   margin: auto;
   padding: 0 20px;
 }
-
 section {
   padding: var(--space-xl) 0;
   position: relative;
 }
 
-
 /* ===============================
    5. LINKS (NO UNDERLINE, NO COLOR CHANGE)
 ================================= */
-
 a {
   color: inherit;
   text-decoration: none;
 }
-
 a:hover {
   color: inherit;
 }
 
-
 /* ===============================
   6. BUTTON SYSTEM
 ================================= */
-
 .btn-primary,
 .btn-outline {
-  height: 44px;                 /* ↓ reduced from 52px */
-  padding: 0 18px;              /* tighter horizontal spacing */
-  font-size: 14px;              /* Stripe uses tighter text */
-  border-radius: 10px;          /* slightly sharper */
+  height: 40px;            
+  padding: 0 16px;     
+  font-size: 12px;   
+  border-radius: 8px; 
   font-weight: 600;
 }
-
 /* PRIMARY */
 .btn-primary {
   background: var(--gradient-accent);
@@ -180,7 +156,6 @@ a:hover {
   position: relative;
   overflow: hidden;
 }
-
 /* glow */
 .btn-primary::after {
   content: "";
@@ -190,16 +165,13 @@ a:hover {
   background: radial-gradient(circle, rgba(255,255,255,0.25), transparent 60%);
   transition: var(--transition-base);
 }
-
 .btn-primary:hover {
-  transform: translateY(-1px);   /* ↓ more subtle */
+  transform: translateY(-1px);
   box-shadow: var(--glow-primary);
 }
-
 .btn-primary:hover::after {
   opacity: 1;
 }
-
 /* OUTLINE */
 .btn-outline {
   border: 1px solid var(--border-default);
@@ -207,16 +179,15 @@ a:hover {
   color: var(--text-primary);
   transition: var(--transition-base);
 }
-
 .btn-outline:hover {
   border-color: var(--border-strong);
   box-shadow: var(--glow-soft);
   transform: translateY(-1px);
 }
+
 /* ===============================
    7. GLASS BORDER SYSTEM (NO BG)
 ================================= */
-
 .card,
 .glass,
 .section-box {
@@ -225,7 +196,6 @@ a:hover {
   border-radius: var(--radius-lg);
   transition: var(--transition-base);
 }
-
 /* hover glow */
 .card:hover,
 .glass:hover {
@@ -234,11 +204,9 @@ a:hover {
   transform: translateY(-4px);
 }
 
-
 /* ===============================
    8. INPUT SYSTEM
 ================================= */
-
 input,
 textarea {
   width: 100%;
@@ -250,7 +218,6 @@ textarea {
   outline: none;
   transition: var(--transition-base);
 }
-
 input:focus,
 textarea:focus {
   border-color: var(--primary);
@@ -258,9 +225,8 @@ textarea:focus {
 }
 
 /* ===============================
-   10. ICON SYSTEM
+   9. ICON SYSTEM
 ================================= */
-
 .icon {
   width: 22px;
   height: 22px;
@@ -274,11 +240,9 @@ textarea:focus {
   filter: drop-shadow(0 0 6px rgba(99,102,241,0.6));
 }
 
-
 /* ===============================
-   11. IMAGE SYSTEM
+   10. IMAGE SYSTEM
 ================================= */
-
 img {
   max-width: 100%;
   height: auto;
@@ -290,44 +254,38 @@ img {
   transition: var(--transition-base);
   overflow: hidden;
 }
-
 .img-glow:hover {
   transform: translateY(-6px) scale(1.02);
   box-shadow: var(--glow-soft);
 }
-
 .img-glow img {
   transition: var(--transition-base);
 }
-
 .img-glow:hover img {
   transform: scale(1.05);
 }
+
 /* ===============================
-   12. UTILITIES
+   11. UTILITIES
 ================================= */
 
 .center {
   text-align: center;
 }
-
 .mt-sm { margin-top: var(--space-sm); }
 .mt-md { margin-top: var(--space-md); }
 .mt-lg { margin-top: var(--space-lg); }
-
 .mb-sm { margin-bottom: var(--space-sm); }
 .mb-md { margin-bottom: var(--space-md); }
 .mb-lg { margin-bottom: var(--space-lg); }
 
-
 /* ===============================
-   13. SCROLLBAR (PREMIUM)
+   12. SCROLLBAR (PREMIUM)
 ================================= */
 
 ::-webkit-scrollbar {
   width: 8px;
 }
-
 ::-webkit-scrollbar-track {
   background: #020617;
 }
@@ -336,12 +294,12 @@ img {
   background: #1e293b;
   border-radius: 10px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
   background: #334155;
 }
+
 /* ===============================
-   10. NAVBAR
+   13. NAVBAR
 ================================= */
 .navbar {
   position: fixed;
@@ -478,7 +436,7 @@ img {
   transform: translateY(-7px) rotate(-45deg);
 }
 /* =========================================================
- 11. FOOTER
+ 14. FOOTER
 ========================================================= */
 
 /* STRUCTURE + SPACING */
