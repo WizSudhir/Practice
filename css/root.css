@@ -190,36 +190,7 @@ p {
 }
 
 /* ===============================
-   7. GRID SYSTEM
-================================= */
-.grid {
-  display: grid;
-  gap: var(--space-lg);
-}
-.grid-2 {
-  grid-template-columns: repeat(2, 1fr);
-}
-.grid-3 {
-  grid-template-columns: repeat(3, 1fr);
-}
-
-/* ===============================
-   8. CARD SYSTEM
-================================= */
-.card {
-  background: var(--bg-elevated);
-  border: 1px solid var(--border-primary);
-  border-radius: var(--radius-md);
-  backdrop-filter: blur(10px);
-  transition: var(--transition-medium);
-}
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-glow);
-}
-
-/* ===============================
-   9. BUTTONS
+   7. BUTTONS
 ================================= */
 .btn-primary {
   display: inline-block;
@@ -254,7 +225,7 @@ p {
 }
 
 /* ===============================
-   10. UTILITIES
+   8. UTILITIES
 ================================= */
 .text-gradient {
   background: var(--text-gradient);
@@ -275,14 +246,14 @@ p {
 }
 
 /* ===============================
-   11. ACCESSIBILITY
+   9. ACCESSIBILITY
 ================================= */
 :focus-visible {
   outline: none;
   box-shadow: var(--focus-ring);
 }
 /* ===============================
-   12. NAVBAR
+   10. NAVBAR
 ================================= */
 .navbar {
   position: fixed;
@@ -419,7 +390,7 @@ p {
   transform: translateY(-7px) rotate(-45deg);
 }
 /* =========================================================
- 13. FOOTER
+ 11. FOOTER
 ========================================================= */
 
 /* STRUCTURE + SPACING */
