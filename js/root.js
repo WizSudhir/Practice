@@ -64,5 +64,20 @@ document.addEventListener("keydown", (e) => {
     closeMenu();
   }
 });
+const toggle = document.querySelector(".nav-toggle");
+const menu = document.querySelector(".nav-menu");
 
+toggle.addEventListener("click", () => {
+  toggle.classList.toggle("active");
+  menu.classList.toggle("active");
+
+  const isOpen = menu.classList.contains("active");
+  toggle.setAttribute("aria-expanded", isOpen);
+});
+document.querySelectorAll(".nav-menu a").forEach(link => {
+  link.addEventListener("click", () => {
+    toggle.classList.remove("active");
+    menu.classList.remove("active");
+  });
+});
 }); // DOMContentLoaded close
