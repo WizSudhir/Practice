@@ -2,250 +2,64 @@
 /* =========================================================
    PRACTICEGRID SOLUTIONS ROOT CSS
 ========================================================= */
+/* =========================================================
+   PRACTICEGRID SOLUTIONS — STRIPE-INSPIRED DARK SAAS CSS
+   Version: Production Ready
+========================================================= */
 
 /* ===============================
-   1. PRIMITIVE TOKENS
+   1. ROOT DESIGN TOKENS
 ================================= */
 :root {
 
-  /* BRAND (ALIGNED TO LOGO) */
-  --indigo-500: #4F46E5;
-  --indigo-600: #4338CA;
+  /* Brand Colors (From Logo) */
+  --primary: #7B3FE4;
+  --primary-dark: #5B2DB3;
+  --secondary: #4A5BD4;
+  --accent: #9F5AF0;
 
-  --purple-500: #7C3AED;
-  --purple-600: #6D28D9;
+  /* Gradient */
+  --gradient-primary: linear-gradient(135deg, #7B3FE4, #4A5BD4);
 
-  --magenta-500: #A855F7;
+  /* Background */
+  --bg-dark: #0A0B0F;
+  --bg-card: rgba(255, 255, 255, 0.04);
+  --bg-glass: rgba(255, 255, 255, 0.06);
 
-  /* NEUTRALS */
-  --gray-950: #05070F;
-  --gray-900: #0A0F1C;
-  --gray-850: #0E1424;
-  --gray-800: #111827;
-  --gray-700: #1F2937;
-  --gray-600: #374151;
-  --gray-500: #6B7280;
-  --gray-400: #9CA3AF;
-  --gray-300: #D1D5DB;
-  --gray-100: #F3F4F6;
+  /* Text */
+  --text-primary: #FFFFFF;
+  --text-secondary: #A1A1AA;
+  --text-muted: #6B7280;
 
-  /* STATUS */
-  --green-500: #22C55E;
-  --red-500: #EF4444;
-  --yellow-500: #F59E0B;
-  --blue-500: #3B82F6;
+  /* Borders */
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.15);
+
+  /* Shadows (Stripe-style soft depth) */
+  --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 10px 40px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 20px 80px rgba(0, 0, 0, 0.45);
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  /* Layout */
+  --container: 1200px;
+  --section-space: 120px;
+
+  /* Typography */
+  --font-primary: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+
+  /* Transition */
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
 }
 
-
 /* ===============================
-   2. SEMANTIC TOKENS
-================================= */
-:root {
-
-  /* BACKGROUND */
-  --color-bg-default: var(--gray-900);
-  --color-bg-subtle: var(--gray-850);
-  --color-bg-surface: var(--gray-800);
-  --color-bg-elevated: #131A2B;
-
-  /* TEXT */
-  --color-text-heading: #FFFFFF;
-  --color-text-body: var(--gray-300);
-  --color-text-muted: var(--gray-500);
-  --color-text-inverse: var(--gray-900);
-
-  /* BORDER */
-  --color-border-default: rgba(255,255,255,0.06);
-  --color-border-strong: rgba(255,255,255,0.14);
-
-  /* BRAND */
-  --color-brand-primary: var(--indigo-500);
-  --color-brand-secondary: var(--purple-500);
-  --color-brand-accent: var(--magenta-500);
-
-  --gradient-brand:
-    linear-gradient(135deg,
-      var(--indigo-500),
-      var(--purple-500),
-      var(--magenta-500)
-    );
-
-  /* STATES */
-  --color-success: var(--green-500);
-  --color-error: var(--red-500);
-  --color-warning: var(--yellow-500);
-  --color-info: var(--blue-500);
-}
-
-
-/* ===============================
-   3. TYPOGRAPHY SYSTEM
-================================= */
-:root {
-
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-
-  /* Sizes */
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-md: 1rem;
-  --text-lg: 1.125rem;
-  --text-xl: 1.375rem;
-  --text-2xl: 1.875rem;
-  --text-3xl: 2.5rem;
-  --text-4xl: 3.25rem;
-  --text-5xl: 4rem;
-
-  /* Weights */
-  --font-regular: 400;
-  --font-medium: 500;
-  --font-semibold: 600;
-  --font-bold: 700;
-
-  /* Line heights */
-  --leading-tight: 1.1;
-  --leading-normal: 1.6;
-  --leading-loose: 1.8;
-
-  /* Letter spacing */
-  --tracking-tight: -0.02em;
-}
-
-
-/* ===============================
-   4. SPACING (8PT GRID)
-================================= */
-:root {
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 16px;
-  --space-4: 24px;
-  --space-5: 40px;
-  --space-6: 64px;
-  --space-7: 96px;
-  --space-8: 140px;
-}
-
-
-/* ===============================
-   5. LAYOUT TOKENS
-================================= */
-:root {
-  --container-sm: 768px;
-  --container-md: 1024px;
-  --container-lg: 1280px;
-  --container-xl: 1440px;
-
-  --reading-width: 680px;
-
-  --stack-gap: var(--space-4);
-  --inline-gap: var(--space-3);
-}
-
-
-/* ===============================
-   6. RADIUS
-================================= */
-:root {
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-  --radius-xl: 22px;
-  --radius-2xl: 28px;
-}
-
-
-/* ===============================
-   7. ELEVATION SYSTEM
-================================= */
-:root {
-  --elevation-1: 0 1px 2px rgba(0,0,0,0.25);
-  --elevation-2: 0 10px 30px rgba(0,0,0,0.35);
-  --elevation-3: 0 25px 60px rgba(0,0,0,0.45);
-}
-
-
-/* ===============================
-   8. GLASS SYSTEM
-================================= */
-:root {
-  --glass-subtle: rgba(255,255,255,0.02);
-  --glass-strong: rgba(255,255,255,0.05);
-  --glass-blur: blur(14px);
-}
-
-
-/* ===============================
-   9. MOTION SYSTEM
-================================= */
-:root {
-  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-emphasis: cubic-bezier(0.2, 0, 0, 1);
-
-  --duration-fast: 120ms;
-  --duration-medium: 240ms;
-  --duration-slow: 400ms;
-
-  --motion-hover: var(--duration-fast) var(--ease-standard);
-  --motion-press: 100ms ease;
-  --motion-enter: var(--duration-medium) var(--ease-emphasis);
-}
-
-
-/* ===============================
-   10. Z-INDEX
-================================= */
-:root {
-  --z-base: 1;
-  --z-dropdown: 100;
-  --z-sticky: 200;
-  --z-overlay: 1000;
-  --z-modal: 2000;
-  --z-toast: 3000;
-}
-
-
-/* ===============================
-   11. INTERACTION TOKENS
-================================= */
-:root {
-  --focus-ring: 0 0 0 2px rgba(124,58,237,0.5);
-  --hover-overlay: rgba(255,255,255,0.04);
-  --active-overlay: rgba(255,255,255,0.08);
-}
-
-
-/* ===============================
-   12. COMPONENT TOKENS
-================================= */
-:root {
-
-  /* BUTTON */
-  --btn-primary-bg: var(--gradient-brand);
-  --btn-primary-color: #fff;
-
-  --btn-secondary-border: var(--color-border-strong);
-
-  /* INPUT */
-  --input-bg: var(--color-bg-surface);
-  --input-border: var(--color-border-default);
-  --input-focus: var(--color-brand-secondary);
-
-  /* CARD */
-  --card-bg: var(--color-bg-surface);
-  --card-border: var(--color-border-default);
-
-  /* NAV */
-  --nav-bg: rgba(10,15,28,0.7);
-  --nav-border: var(--color-border-default);
-
-  /* MODAL */
-  --modal-bg: var(--color-bg-elevated);
-}
-
-
-/* ===============================
-   13. BASE RESET
+   2. BASE RESET (CLEAN + MODERN)
 ================================= */
 *,
 *::before,
@@ -255,122 +69,243 @@
   padding: 0;
 }
 
-body {
-  font-family: var(--font-sans);
-  background:
-    radial-gradient(circle at 20% 20%, rgba(79,70,229,0.12), transparent 40%),
-    radial-gradient(circle at 80% 0%, rgba(168,85,247,0.10), transparent 40%),
-    var(--color-bg-default);
-  color: var(--color-text-body);
-  line-height: var(--leading-normal);
+html {
+  scroll-behavior: smooth;
 }
 
+body {
+  font-family: var(--font-primary);
+  background: var(--bg-dark);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Remove default styles */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button,
+input {
+  font-family: inherit;
+  border: none;
+  outline: none;
+}
 
 /* ===============================
-   14. TYPOGRAPHY
+   3. TYPOGRAPHY SYSTEM
 ================================= */
-h1,h2,h3,h4 {
-  font-weight: var(--font-semibold);
-  color: var(--color-text-heading);
+
+h1, h2, h3, h4 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: 56px;
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: 42px;
+}
+
+h3 {
+  font-size: 28px;
 }
 
 p {
-  font-size: var(--text-md);
+  color: var(--text-secondary);
+  font-size: 16px;
 }
 
+.text-gradient {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 /* ===============================
-   15. LAYOUT
+   4. LAYOUT SYSTEM
 ================================= */
+
 .container {
-  max-width: var(--container-lg);
-  margin: 0 auto;
-  padding: 0 var(--space-3);
+  max-width: var(--container);
+  margin: auto;
+  padding: 0 24px;
 }
 
-.stack > * + * {
-  margin-top: var(--stack-gap);
+.section {
+  padding: var(--section-space) 0;
 }
 
-.inline {
+.grid {
+  display: grid;
+  gap: 32px;
+}
+
+.flex {
   display: flex;
-  gap: var(--inline-gap);
+  align-items: center;
+  gap: 16px;
 }
 
-
 /* ===============================
-   16. SURFACES
+   5. GLASS / CARD SYSTEM
 ================================= */
+
 .card {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  box-shadow: var(--elevation-2);
-  padding: var(--space-4);
-  transition: var(--motion-hover);
+  padding: 28px;
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(20px);
+  transition: var(--transition);
 }
 
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
 
-/* ===============================
-   17. GLASS
-================================= */
 .glass {
-  background: var(--glass-subtle);
-  backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--color-border-default);
+  background: var(--bg-glass);
+  backdrop-filter: blur(25px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
 }
 
-
 /* ===============================
-   18. BUTTONS
+   6. BUTTON SYSTEM (STRIPE STYLE)
 ================================= */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 22px;
+  border-radius: var(--radius-pill);
+  font-weight: 500;
+  font-size: 15px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+/* Primary Button */
 .btn-primary {
-  background: var(--btn-primary-bg);
-  color: var(--btn-primary-color);
-  padding: 12px 22px;
-  border-radius: var(--radius-md);
+  background: var(--gradient-primary);
+  color: #fff;
+  box-shadow: 0 8px 30px rgba(123, 63, 228, 0.4);
 }
 
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(123, 63, 228, 0.6);
+}
+
+/* Secondary Button */
 .btn-secondary {
-  border: 1px solid var(--btn-secondary-border);
-  padding: 12px 22px;
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  color: var(--text-primary);
 }
 
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
 
 /* ===============================
-   19. INPUTS
+   7. INPUT SYSTEM
 ================================= */
+
 .input {
-  background: var(--input-bg);
-  border: 1px solid var(--input-border);
-  padding: 12px;
+  width: 100%;
+  padding: 14px 16px;
   border-radius: var(--radius-md);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  transition: var(--transition);
+}
+
+.input::placeholder {
+  color: var(--text-muted);
 }
 
 .input:focus {
-  border-color: var(--input-focus);
-  box-shadow: var(--focus-ring);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(123, 63, 228, 0.2);
 }
 
+/* ===============================
+   8. ICON SYSTEM
+================================= */
+
+.icon {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-primary);
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(123, 63, 228, 0.4);
+}
 
 /* ===============================
-   20. UTILITIES
+   10. UTILITIES
 ================================= */
-.flex { display: flex; }
-.grid { display: grid; }
+
+.mt-1 { margin-top: 8px; }
+.mt-2 { margin-top: 16px; }
+.mt-3 { margin-top: 24px; }
 
 .text-center { text-align: center; }
+.text-muted { color: var(--text-muted); }
 
-.mt-2 { margin-top: var(--space-2); }
-.mt-4 { margin-top: var(--space-4); }
+.rounded { border-radius: var(--radius-md); }
+.shadow { box-shadow: var(--shadow-md); }
 
+.hidden { display: none; }
 
 /* ===============================
-   21. RESPONSIVE
+   11. ANIMATIONS
 ================================= */
-@media (max-width: 768px) {
-  .container { padding: 0 var(--space-2); }
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 0.8s ease forwards;
 }
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===============================
+   12. RESPONSIVE SYSTEM
+================================= */
+
+@media (max-width: 1024px) {
+  h1 { font-size: 42px; }
+  h2 { font-size: 32px; }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 80px 0;
+  }
+
+  h1 { font-size: 34px; }
+}
+
 /* ===============================
    10. NAVBAR
 ================================= */
