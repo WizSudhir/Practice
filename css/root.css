@@ -95,35 +95,29 @@ body {
 /* ===============================
    3. TYPOGRAPHY (STRIPE STYLE)
 ================================= */
-
 h1, h2, h3, h4 {
   margin: 0;
   letter-spacing: -0.02em;
   line-height: 1.1;
+  text-wrap: balance;
 }
-
 h1 {
-  font-size: clamp(40px, 5vw, 64px);
+  font-size: clamp(34px, 4vw, 48px);
   font-weight: 800;
+  letter-spacing: -0.02em;
 }
-
 h2 {
-  font-size: clamp(32px, 4vw, 48px);
+  font-size: clamp(26px, 3vw, 34px);
   font-weight: 700;
 }
-
 h3 {
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 600;
 }
-
 p {
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.7;
-  color: var(--text-secondary);
 }
-
-/* GRADIENT TITLES */
 .gradient-title,
 h1.gradient,
 h2.gradient {
@@ -131,8 +125,6 @@ h2.gradient {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
-
 /* ===============================
    4. LAYOUT SYSTEM
 ================================= */
@@ -164,20 +156,26 @@ a:hover {
 
 
 /* ===============================
-   6. BUTTON SYSTEM (STRIPE STYLE)
+  6. BUTTON SYSTEM
 ================================= */
 
-.btn-primary {
-  height: 52px;
-  padding: 0 22px;
-  border-radius: var(--radius-md);
+.btn-primary,
+.btn-outline {
+  height: 44px;                 /* ↓ reduced from 52px */
+  padding: 0 18px;              /* tighter horizontal spacing */
+  font-size: 14px;              /* Stripe uses tighter text */
+  border-radius: 10px;          /* slightly sharper */
   font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+}
+
+/* PRIMARY */
+.btn-primary {
   background: var(--gradient-accent);
   color: #fff;
   border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   transition: var(--transition-base);
   position: relative;
   overflow: hidden;
@@ -194,7 +192,7 @@ a:hover {
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1px);   /* ↓ more subtle */
   box-shadow: var(--glow-primary);
 }
 
@@ -202,11 +200,8 @@ a:hover {
   opacity: 1;
 }
 
-/* OUTLINE BUTTON */
+/* OUTLINE */
 .btn-outline {
-  height: 52px;
-  padding: 0 22px;
-  border-radius: var(--radius-md);
   border: 1px solid var(--border-default);
   background: transparent;
   color: var(--text-primary);
@@ -216,10 +211,8 @@ a:hover {
 .btn-outline:hover {
   border-color: var(--border-strong);
   box-shadow: var(--glow-soft);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
-
-
 /* ===============================
    7. GLASS BORDER SYSTEM (NO BG)
 ================================= */
@@ -291,19 +284,25 @@ img {
   height: auto;
   display: block;
 }
-
 .img-glow {
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-default);
   transition: var(--transition-base);
+  overflow: hidden;
 }
 
 .img-glow:hover {
+  transform: translateY(-6px) scale(1.02);
   box-shadow: var(--glow-soft);
-  transform: scale(1.02);
 }
 
+.img-glow img {
+  transition: var(--transition-base);
+}
 
+.img-glow:hover img {
+  transform: scale(1.05);
+}
 /* ===============================
    12. UTILITIES
 ================================= */
