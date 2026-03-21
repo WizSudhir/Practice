@@ -787,9 +787,6 @@ z-index: 2;
 /* ===============================
   3. ABOUT / BELIEF
 ================================= */
-.about-belief {
-  padding: var(--section-padding) 0;
-}
 .belief-stack p {
   display: flex;
   gap: var(--space-sm);
@@ -808,9 +805,6 @@ z-index: 2;
 /* ===============================
   4. PROOF SNAPSHOT
 ================================= */
-.proof-snapshot {
-  padding: var(--section-padding) 0;
-}
 .proof-card {
   text-align: center;
   padding: var(--space-md);
@@ -830,9 +824,6 @@ z-index: 2;
 /* ===============================
   5. HOW IT WORKS
 ================================= */
-.how-it-works {
-  padding: var(--section-padding) 0;
-}
 .how-step span {
   font-size: var(--text-sm);
   color: var(--brand-accent);
@@ -844,10 +835,6 @@ z-index: 2;
 /* ===============================
   6. SERVICES GATEWAY
 ================================= */
-.services-gateway {
-  padding: var(--section-padding) 0;
-  text-align: center;
-}
 .gateway-subtext {
   margin-top: var(--space-sm);
   color: var(--text-secondary);
@@ -867,9 +854,6 @@ z-index: 2;
 /* ===============================
   7. OUTCOMES
 ================================= */
-.outcomes-preview {
-  padding: var(--section-padding) 0;
-}
 .outcome-card {
   background: var(--bg-elevated);
   border-radius: var(--radius-md);
@@ -889,14 +873,6 @@ z-index: 2;
 /* ===============================
   8. EHR SECTION
 ================================= */
-
-.ehr-premium {
-  padding: 100px 0;
-  background: var(--bg-secondary);
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
 /* SUBTEXT */
 .ehr-subtext {
   max-width: 650px;
