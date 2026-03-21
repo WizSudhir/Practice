@@ -865,6 +865,40 @@ z-index: 2;
   opacity: 0.6;
 }
 /* ===============================
+   3. PROOF SECTION
+================================= */
+.proof-card {
+  padding: 24px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(59,130,246,0.2);
+  backdrop-filter: blur(8px);
+  transition: 0.3s ease;
+}
+.proof-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 40px rgba(59,130,246,0.2);
+}
+.proof-icon {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+/* ===============================
+   3. HOW IT WORKS SECTION
+================================= */
+.how-flow {
+  position: relative;
+}
+.flow-line {
+  position: absolute;
+  top: 40px;
+  left: 10%;
+  width: 80%;
+  height: 2px;
+  background: linear-gradient(90deg, #4ade80, #3b82f6);
+  opacity: 0.3;
+}
+/* ===============================
   4. SERVICES GATEWAY
 ================================= */
 .services-gateway {
@@ -920,9 +954,13 @@ z-index: 2;
   color: #94a3b8;
   text-decoration: none;
   position: relative;
-  padding: 6px 0;
   transition: 0.3s ease;
   white-space: nowrap;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(59,130,246,0.2);
+  padding: 10px 14px;
+  border-radius: 8px;
+  transition: 0.3s ease;
 }
 /* NUMBER */
 .flow-step span {
@@ -944,6 +982,8 @@ z-index: 2;
 /* HOVER */
 .flow-step:hover {
   color: #e2e8f0;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(59,130,246,0.2);
 }
 .flow-step:hover::after {
   width: 100%;
