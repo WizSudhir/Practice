@@ -956,14 +956,11 @@ z-index: 2;
 .belief-card {
   display: flex;
   gap: 12px;
-  padding: 18px;
-  border-radius: 12px;
-  background: linear-gradient(
-    180deg,
-    rgba(255,255,255,0.02),
-    rgba(255,255,255,0.01)
-  );
-  border: 1px solid var(--border-default);
+  padding: 6px 0;
+  border: none;
+  background: transparent;
+  font-size: 15px;
+  color: var(--text-secondary);
   transition: all 0.3s ease;
 }
 .belief-card:hover {
