@@ -602,9 +602,6 @@ if (systemCard) {
     systemCard.classList.toggle("active");
   });
 }
-setTimeout(() => {
-  systemCard.classList.add("active");
-}, 2000);
 // ===============================
 // 4. SERVICES
 // ===============================
