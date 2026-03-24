@@ -797,16 +797,26 @@ z-index: 2;
   flex-direction: column;
   gap: 18px;
 }
-.belief-stack span {
-  font-weight: var(--font-semibold);
-}
 .belief-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
   align-items: center;
 }
-
+.belief-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.belief-row span {
+  min-width: 32px;
+  font-weight: 600;
+  color: #6366f1;
+}
+.belief-row p {
+  margin: 0;
+  line-height: 1.6;
+}
 /* CARD BASE */
 .system-card {
   position: relative;
