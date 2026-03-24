@@ -1066,14 +1066,30 @@ z-index: 2;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  opacity: 0.4;
+  cursor: pointer;
   position: relative;
   transition: var(--transition-base);
+}
+.flow-step.active {
+  opacity: 1;
+  transform: translateY(-6px);
+}
+.flow-step.completed {
+  opacity: 0.7;
 }
 /* NUMBER */
 .flow-number {
   font-size: 12px;
   color: var(--text-muted);
   letter-spacing: 0.08em;
+}
+.flow-step.active .flow-content h3 {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(99,102,241,0.6);
+}
+.flow-step.completed .flow-content h3 {
+  color: #4ade80;
 }
 /* CONTENT */
 .flow-content h3 {
@@ -1091,6 +1107,15 @@ z-index: 2;
   margin-top: 6px;
   color: #f87171;
   opacity: 0.8;
+}
+.flow-metric.positive {
+  color: #4ade80;
+}
+.flow-metric.negative {
+  color: #f87171;
+}
+.flow-metric.neutral {
+  color: #facc15;
 }
 .flow-metric.positive {
   color: #4ade80;
@@ -1125,6 +1150,17 @@ z-index: 2;
   90% { opacity: 1; }
   100% { left: 100%; opacity: 0; }
 }
+.flow-connector.active {
+  background: linear-gradient(
+    to right,
+    rgba(74,222,128,0.2),
+    rgba(74,222,128,0.6),
+    rgba(74,222,128,0.2)
+  );
+}
+.flow-connector.active::after {
+  background: #4ade80;
+}
 /* HOVER EFFECT */
 .flow-step:hover {
   transform: translateY(-4px);
@@ -1137,26 +1173,6 @@ z-index: 2;
   background: linear-gradient(90deg, #4ade80, #3b82f6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-}
-/* RESPONSIVE */
-@media (max-width: 992px) {
-  .flow-wrapper {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .flow-connector {
-    width: 2px;
-    height: 30px;
-  }
-  .flow-connector::after {
-    animation: flowMoveVertical 2.5s linear infinite;
-  }
-  @keyframes flowMoveVertical {
-    0% { top: 0%; opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { top: 100%; opacity: 0; }
-  }
 }
 /* ===============================
   6. SERVICES GATEWAY
