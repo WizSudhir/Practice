@@ -626,12 +626,18 @@ function startCounter(counter) {
   update();
 }
 
-// Intersection Observer (clean)
+function resetCounter(counter) {
+  counter.innerText = "0%";
+}
+
 const metricObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
+    const el = entry.target;
+
     if (entry.isIntersecting) {
-      startCounter(entry.target);
-      metricObserver.unobserve(entry.target);
+      startCounter(el);   // 🔥 restart every time visible
+    } else {
+      resetCounter(el);   // 🔥 reset when leaving
     }
   });
 }, { threshold: 0.4 });
