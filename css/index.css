@@ -1134,13 +1134,62 @@ z-index: 2;
 .state.strong {
   text-shadow: 0 0 20px rgba(74,222,128,0.6);
 }
+/* MINI SYSTEM */
+.system-mini {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
 
-/* RESPONSIVE */
-@media (max-width: 992px) {
-  .narrative {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
+.mini-node {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  transition: all 0.5s ease;
+}
+
+.mini-node.error {
+  background: #f87171;
+  box-shadow: 0 0 10px rgba(248,113,113,0.6);
+}
+
+.mini-node.fixed {
+  background: #4ade80;
+  box-shadow: 0 0 12px rgba(74,222,128,0.7);
+}
+
+/* METRIC */
+.metric-display {
+  text-align: center;
+  margin-top: 10px;
+}
+
+#metricValue {
+  font-size: 28px;
+  font-weight: 700;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#metricLabel {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* PROGRESS */
+.progress-bar {
+  height: 2px;
+  background: rgba(255,255,255,0.1);
+  margin: 20px 0;
+  width: 100%;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #6366f1, #4ade80);
+  transition: width 0.4s ease;
 }
 /* ===============================
   6. SERVICES GATEWAY
