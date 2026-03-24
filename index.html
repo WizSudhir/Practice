@@ -597,41 +597,50 @@
     </div>
 
 <!-- RIGHT: VISUAL STATE -->
-<div class="narrative-visual" id="narrativeVisual">
+<div class="narrative-visual">
 
-  <!-- MINI SYSTEM -->
-  <div class="system-mini">
-    <div class="mini-node error"></div>
-    <div class="mini-node error"></div>
-    <div class="mini-node error"></div>
-  </div>
+  <div class="control-panel">
 
-  <!-- METRIC -->
-  <div class="metric-display">
-    <span id="metricValue">0%</span>
-    <p id="metricLabel">Revenue Leakage</p>
-  </div>
+    <!-- HEADER -->
+    <div class="panel-header">
+      Revenue Control Center
+    </div>
 
-  <!-- PROGRESS BAR -->
-  <div class="progress-bar">
-    <div class="progress-fill" id="progressFill"></div>
-  </div>
+    <!-- CONTROLS -->
+    <div class="panel-controls">
 
-  <!-- ORIGINAL STATES (KEEPING YOURS) -->
-  <div class="visual-state active" data-step="0">
-    <span class="state negative">Revenue Leakage Detected</span>
-  </div>
+      <div class="control-item" id="control1">
+        <span>Eligibility Checks</span>
+        <div class="toggle"></div>
+      </div>
 
-  <div class="visual-state" data-step="1">
-    <span class="state neutral">Denials Reduced</span>
-  </div>
+      <div class="control-item" id="control2">
+        <span>Denial Prevention</span>
+        <div class="toggle"></div>
+      </div>
 
-  <div class="visual-state" data-step="2">
-    <span class="state positive">Revenue Recovered</span>
-  </div>
+      <div class="control-item" id="control3">
+        <span>AR Recovery</span>
+        <div class="toggle"></div>
+      </div>
 
-  <div class="visual-state" data-step="3">
-    <span class="state positive strong">Predictable Growth</span>
+    </div>
+
+    <!-- LIVE METRICS -->
+    <div class="panel-metrics">
+
+      <div class="metric">
+        <span id="revMetric">0%</span>
+        <p>Collections</p>
+      </div>
+
+      <div class="metric">
+        <span id="denialMetric">0%</span>
+        <p>Denials</p>
+      </div>
+
+    </div>
+
   </div>
 
 </div>
