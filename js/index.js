@@ -605,179 +605,65 @@ if (systemCard) {
 // ===============================
 // 4. METRIC
 // ===============================
-const metricCounters = document.querySelectorAll(".metric h3");
-
-function startCounter(counter) {
-  const target = +counter.getAttribute("data-target");
-  let count = 0;
-
-  const update = () => {
-    const increment = target / 60;
-
-    if (Math.abs(count) < Math.abs(target)) {
-      count += increment;
-      counter.innerText = Math.round(count) + "%";
-      requestAnimationFrame(update);
-    } else {
-      counter.innerText = target + "%";
-    }
-  };
-
-  update();
-}
-
-function resetCounter(counter) {
-  counter.innerText = "0%";
-}
-
-const metricObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    const el = entry.target;
-
-    if (entry.isIntersecting) {
-      startCounter(el);   // 🔥 restart every time visible
-    } else {
-      resetCounter(el);   // 🔥 reset when leaving
-    }
-  });
-}, { threshold: 0.4 });
-
-metricCounters.forEach(el => {
-  metricObserver.observe(el);
-});
-// ===============================
-// 5. HOW IT WORKS
-// ===============================
 const steps = document.querySelectorAll(".narrative-step");
-const visuals = document.querySelectorAll(".visual-state");
+const toggles = document.querySelectorAll(".toggle");
 
 let current = 0;
 let autoPlay;
-let metricInterval; // prevent stacking intervals
 
-// METRICS DATA //
-const metrics = [
-  { value: 40, label: "Revenue Leakage" },
-  { value: 20, label: "Denial Rate" },
-  { value: 75, label: "Collections" },
-  { value: 95, label: "Revenue Stability" }
-];
-// CONTROL PANEL DATA //
-const revValues = [20, 45, 70, 95];
-const denialValues = [40, 25, 15, 5];
+const revValues = [20,45,70,95];
+const denialValues = [40,25,15,5];
 
-// METRIC ANIMATION (FIXED) //
-function animateMetric(target) {
-  const el = document.getElementById("metricValue");
-  if (!el) return;
+function update(index){
 
-  clearInterval(metricInterval);
+  steps.forEach(s=>s.classList.remove("active"));
+  steps[index].classList.add("active");
 
-  let currentVal = 0;
-
-  metricInterval = setInterval(() => {
-    currentVal++;
-    el.textContent = currentVal + "%";
-
-    if (currentVal >= target) {
-      clearInterval(metricInterval);
-    }
-  }, 15);
-}
-
-// MAIN UPDATE FUNCTION //
-function updateNarrative(index) {
-  // TEXT + VISUAL SWITCH  //
-  steps.forEach(s => s.classList.remove("active"));
-  visuals.forEach(v => v.classList.remove("active"));
-  if (steps[index]) steps[index].classList.add("active");
-  if (visuals[index]) visuals[index].classList.add("active");
-  // MINI SYSTEM (OPTIONAL) //
-  const nodes = document.querySelectorAll(".mini-node");
-  nodes.forEach((n, i) => {
-    if (index > i) {
-      n.classList.remove("error");
-      n.classList.add("fixed");
-    } else {
-      n.classList.remove("fixed");
-      n.classList.add("error");
-    }
+  toggles.forEach((t,i)=>{
+    t.classList.toggle("active", index>i);
   });
 
-  // METRICS //
-  const labelEl = document.getElementById("metricLabel");
-  if (labelEl) labelEl.textContent = metrics[index].label;
-  animateMetric(metrics[index].value);
-  // PROGRESS BAR //
-  const progress = document.getElementById("progressFill");
-  if (progress) {
-    progress.style.width = ((index + 1) / steps.length) * 100 + "%";
-  }
-  // CONTROL PANEL (NEW) //
-  // TOGGLES
-  const toggles = document.querySelectorAll(".toggle");
-  toggles.forEach((toggle, i) => {
-    if (index > i) {
-      toggle.classList.add("active");
-    } else {
-      toggle.classList.remove("active");
-    }
-  });
-  // CONTROL PANEL METRICS
-  const revEl = document.getElementById("revMetric");
-  const denialEl = document.getElementById("denialMetric");
+  document.getElementById("revMetric").textContent = revValues[index]+"%";
+  document.getElementById("denialMetric").textContent = "-"+denialValues[index]+"%";
 
-  if (revEl) revEl.textContent = revValues[index] + "%";
-  if (denialEl) denialEl.textContent = "-" + denialValues[index] + "%";
+  document.getElementById("progressFill").style.width =
+    ((index+1)/steps.length)*100+"%";
 
-  // HERO SYNC (LEVEL 5) //
-  const system = document.querySelector(".system-bg");
-  const nodesHero = document.querySelectorAll(".node");
-  const revenue = document.querySelector(".revenue");
-  if (system) system.classList.add("controlled");
-  nodesHero.forEach((node, i) => {
-    if (i <= index) {
-      node.classList.add("resolved-active");
-    }
+  const heights=["20%","40%","70%","100%"];
+  document.getElementById("activeBar").style.height = heights[index];
+
+  // HERO SYNC
+  const system=document.querySelector(".system-bg");
+  const nodes=document.querySelectorAll(".node");
+  const revenue=document.querySelector(".revenue");
+
+  if(system) system.classList.add("controlled");
+
+  nodes.forEach((n,i)=>{
+    if(i<=index) n.classList.add("resolved-active");
   });
 
-  if (index === steps.length - 1 && revenue) {
+  if(index===3 && revenue){
     revenue.classList.add("active");
   }
 }
 
-// NAVIGATION CONTROLS //
-const nextBtn = document.getElementById("nextStep");
-const prevBtn = document.getElementById("prevStep");
+document.getElementById("nextStep").onclick=()=>{
+  clearInterval(autoPlay);
+  current=(current+1)%steps.length;
+  update(current);
+};
 
-if (nextBtn) {
-  nextBtn.addEventListener("click", () => {
-    clearInterval(autoPlay);
-    current = (current + 1) % steps.length;
-    updateNarrative(current);
-  });
-}
+document.getElementById("prevStep").onclick=()=>{
+  clearInterval(autoPlay);
+  current=(current-1+steps.length)%steps.length;
+  update(current);
+};
 
-if (prevBtn) {
-  prevBtn.addEventListener("click", () => {
-    clearInterval(autoPlay);
-    current = (current - 1 + steps.length) % steps.length;
-    updateNarrative(current);
-  });
-}
-
-// AUTOPLAY (SMART) //
-function startAutoPlay() {
-  autoPlay = setInterval(() => {
-    current = (current + 1) % steps.length;
-    updateNarrative(current);
-  }, 4000);
-}
-
-// Start autoplay only if steps exist
-if (steps.length > 0) {
-  startAutoPlay();
-}
+autoPlay=setInterval(()=>{
+  current=(current+1)%steps.length;
+  update(current);
+},4000);
 // ===============================
 // 6. SERVICES
 // ===============================
