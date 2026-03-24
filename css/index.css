@@ -1045,134 +1045,102 @@ z-index: 2;
 /* ===============================
   5. HOW IT WORKS
 ================================= */
-.how-subtext {
-  max-width: 600px;
-  margin: 10px auto 0;
-  color: var(--text-secondary);
-  font-size: 15px;
+
+.narrative {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
 }
-/* WRAPPER */
-.flow-wrapper {
+
+/* LEFT SIDE */
+.narrative-content {
+  max-width: 480px;
+}
+
+.narrative-step {
+  opacity: 0;
+  transform: translateY(10px);
+  position: absolute;
+  transition: all 0.5s ease;
+  pointer-events: none;
+}
+
+.narrative-step.active {
+  opacity: 1;
+  transform: translateY(0);
+  position: relative;
+  pointer-events: auto;
+}
+
+.narrative-step h2 {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+.narrative-step p {
+  color: var(--text-secondary);
+}
+
+/* CONTROLS */
+.narrative-controls {
+  margin-top: 30px;
+  display: flex;
+  gap: 10px;
+}
+
+/* RIGHT SIDE */
+.narrative-visual {
+  height: 220px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  flex-wrap: wrap;
+  justify-content: center;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
 }
-/* STEP */
-.flow-step {
-  flex: 1;
-  min-width: 220px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  opacity: 0.4;
-  cursor: pointer;
-  position: relative;
-  transition: var(--transition-base);
+
+/* VISUAL STATES */
+.visual-state {
+  opacity: 0;
+  transform: scale(0.95);
+  position: absolute;
+  transition: all 0.5s ease;
 }
-.flow-step.active {
+
+.visual-state.active {
   opacity: 1;
-  transform: translateY(-6px);
+  transform: scale(1);
+  position: relative;
 }
-.flow-step.completed {
-  opacity: 0.7;
+
+.state {
+  font-size: 18px;
+  padding: 12px 20px;
+  border-radius: 10px;
 }
-/* NUMBER */
-.flow-number {
-  font-size: 12px;
-  color: var(--text-muted);
-  letter-spacing: 0.08em;
-}
-.flow-step.active .flow-content h3 {
-  color: #fff;
-  text-shadow: 0 0 10px rgba(99,102,241,0.6);
-}
-.flow-step.completed .flow-content h3 {
-  color: #4ade80;
-}
-/* CONTENT */
-.flow-content h3 {
-  font-size: 16px;
-  font-weight: 600;
-}
-.flow-content p {
-  font-size: 14px;
-  color: var(--text-secondary);
-  max-width: 240px;
-}
-/* METRIC */
-.flow-metric {
-  font-size: 12px;
-  margin-top: 6px;
-  color: #f87171;
-  opacity: 0.8;
-}
-.flow-metric.positive {
-  color: #4ade80;
-}
-.flow-metric.negative {
+
+.state.negative {
   color: #f87171;
 }
-.flow-metric.neutral {
+
+.state.neutral {
   color: #facc15;
 }
-.flow-metric.positive {
+
+.state.positive {
   color: #4ade80;
 }
-/* CONNECTOR LINE */
-.flow-connector {
-  flex: 0.5;
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    rgba(99,102,241,0.4),
-    transparent
-  );
-  position: relative;
+
+.state.strong {
+  text-shadow: 0 0 20px rgba(74,222,128,0.6);
 }
-/* ANIMATION DOT */
-.flow-connector::after {
-  content: "";
-  position: absolute;
-  top: -2px;
-  left: 0;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #6366f1;
-  animation: flowMove 2.5s linear infinite;
-}
-@keyframes flowMove {
-  0% { left: 0%; opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { left: 100%; opacity: 0; }
-}
-.flow-connector.active {
-  background: linear-gradient(
-    to right,
-    rgba(74,222,128,0.2),
-    rgba(74,222,128,0.6),
-    rgba(74,222,128,0.2)
-  );
-}
-.flow-connector.active::after {
-  background: #4ade80;
-}
-/* HOVER EFFECT */
-.flow-step:hover {
-  transform: translateY(-4px);
-}
-.flow-step:hover h3 {
-  color: #fff;
-}
-/* FINAL STEP (RESULT STATE) */
-.flow-step.highlight h3 {
-  background: linear-gradient(90deg, #4ade80, #3b82f6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+  .narrative {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
 }
 /* ===============================
   6. SERVICES GATEWAY
