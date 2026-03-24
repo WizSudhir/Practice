@@ -796,12 +796,12 @@ z-index: 2;
   display: flex;
   flex-direction: column;
   gap: 18px;
-  max-width: 420px;
+  max-width: 480px;
 }
 .belief-layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 60px;
   align-items: start;
 }
 .belief-row {
@@ -816,7 +816,8 @@ z-index: 2;
 }
 .belief-row p {
   margin: 0;
-  line-height: 1.6;
+  line-height: 1.7;
+  max-width: 420px;
 }
 /* CARD BASE */
 .system-card {
@@ -985,6 +986,7 @@ z-index: 2;
 .belief-content {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
 }
 /* ===============================
   4. PROOF SNAPSHOT
@@ -1008,7 +1010,7 @@ z-index: 2;
 .belief-bridge {
   grid-column: 1 / -1;
   text-align: center;
-  max-width: 720px;
+  max-width: 700px;
   margin: 60px auto 0;
   font-size: 16px;
   color: var(--text-secondary);
