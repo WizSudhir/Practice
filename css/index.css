@@ -1045,201 +1045,64 @@ z-index: 2;
 /* ===============================
   5. HOW IT WORKS
 ================================= */
-
 .narrative {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
-  align-items: center;
-}
-
-/* LEFT SIDE */
-.narrative-content {
-  max-width: 480px;
 }
 
 .narrative-step {
-  opacity: 0;
-  transform: translateY(10px);
-  position: absolute;
-  transition: all 0.5s ease;
-  pointer-events: none;
+  display: none;
 }
 
 .narrative-step.active {
-  opacity: 1;
-  transform: translateY(0);
-  position: relative;
-  pointer-events: auto;
+  display: block;
 }
 
-.narrative-step h2 {
-  font-size: 28px;
-  margin-bottom: 12px;
-}
-
-.narrative-step p {
-  color: var(--text-secondary);
-}
-
-/* CONTROLS */
-.narrative-controls {
-  margin-top: 30px;
-  display: flex;
-  gap: 10px;
-}
-
-/* RIGHT SIDE */
 .narrative-visual {
-  height: 220px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-lg);
-}
-
-/* VISUAL STATES */
-.visual-state {
-  opacity: 0;
-  transform: scale(0.95);
-  position: absolute;
-  transition: all 0.5s ease;
-}
-
-.visual-state.active {
-  opacity: 1;
-  transform: scale(1);
-  position: relative;
-}
-
-.state {
-  font-size: 18px;
-  padding: 12px 20px;
-  border-radius: 10px;
-}
-
-.state.negative {
-  color: #f87171;
-}
-
-.state.neutral {
-  color: #facc15;
-}
-
-.state.positive {
-  color: #4ade80;
-}
-
-.state.strong {
-  text-shadow: 0 0 20px rgba(74,222,128,0.6);
-}
-/* MINI SYSTEM */
-.system-mini {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 20px;
-}
-
-.mini-node {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  transition: all 0.5s ease;
-}
-
-.mini-node.error {
-  background: #f87171;
-  box-shadow: 0 0 10px rgba(248,113,113,0.6);
-}
-
-.mini-node.fixed {
-  background: #4ade80;
-  box-shadow: 0 0 12px rgba(74,222,128,0.7);
-}
-
-/* METRIC */
-.metric-display {
-  text-align: center;
-  margin-top: 10px;
-}
-
-#metricValue {
-  font-size: 28px;
-  font-weight: 700;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-#metricLabel {
-  font-size: 13px;
-  color: var(--text-secondary);
-}
-
-/* PROGRESS */
-.progress-bar {
-  height: 2px;
-  background: rgba(255,255,255,0.1);
-  margin: 20px 0;
-  width: 100%;
-}
-
-.progress-fill {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, #6366f1, #4ade80);
-  transition: width 0.4s ease;
-}
-.control-panel {
-  width: 100%;
-  max-width: 320px;
-  padding: 16px;
-  border-radius: 14px;
-  background: rgba(15,23,42,0.8);
-  border: 1px solid var(--border-default);
-}
-
-.panel-header {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-bottom: 14px;
-}
-
-/* CONTROLS */
-.panel-controls {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 14px;
 }
 
+/* PANELS */
+.panel {
+  padding: 16px;
+  border-radius: 14px;
+  background: rgba(15,23,42,0.85);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.panel-title {
+  font-size: 12px;
+  color: #94a3b8;
+  margin-bottom: 10px;
+}
+
+/* TOGGLES */
 .control-item {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  font-size: 13px;
+  margin-bottom: 8px;
 }
 
-/* TOGGLE */
 .toggle {
   width: 32px;
   height: 16px;
-  border-radius: 20px;
   background: rgba(255,255,255,0.2);
+  border-radius: 20px;
   position: relative;
-  transition: 0.3s;
 }
 
 .toggle::after {
   content: "";
   width: 12px;
   height: 12px;
-  background: #fff;
-  border-radius: 50%;
+  background: white;
   position: absolute;
   top: 2px;
   left: 2px;
-  transition: 0.3s;
+  border-radius: 50%;
 }
 
 .toggle.active {
@@ -1254,12 +1117,70 @@ z-index: 2;
 .panel-metrics {
   display: flex;
   justify-content: space-between;
-  margin-top: 16px;
+  margin-top: 10px;
 }
 
-.panel-metrics .metric span {
+.panel-metrics span {
   font-size: 18px;
-  font-weight: 600;
+}
+
+/* TOOLTIP */
+.tooltip-trigger {
+  position: relative;
+  cursor: pointer;
+}
+
+.tooltip-box {
+  position: absolute;
+  bottom: 130%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #020617;
+  padding: 6px;
+  font-size: 10px;
+  opacity: 0;
+  transition: 0.2s;
+}
+
+.tooltip-trigger:hover .tooltip-box {
+  opacity: 1;
+}
+
+/* AI */
+.ai-item {
+  font-size: 13px;
+  margin-bottom: 6px;
+  color: #93c5fd;
+}
+
+/* CHART */
+.mini-chart {
+  display: flex;
+  height: 60px;
+  gap: 6px;
+}
+
+.bar {
+  flex: 1;
+  background: linear-gradient(#22c55e, #3b82f6);
+  height: 20%;
+  transition: 0.5s;
+}
+
+.highlight {
+  background: linear-gradient(#4ade80, #2563eb);
+}
+
+/* PROGRESS */
+.progress-bar {
+  height: 2px;
+  background: rgba(255,255,255,0.1);
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg,#6366f1,#4ade80);
 }
 /* ===============================
   6. SERVICES GATEWAY
