@@ -648,33 +648,27 @@ metricCounters.forEach(el => {
 // ===============================
 // 5. HOW IT WORKS
 // ===============================
-const steps = document.querySelectorAll(".flow-step");
-const connectors = document.querySelectorAll(".flow-connector");
+const steps = document.querySelectorAll(".narrative-step");
+const visuals = document.querySelectorAll(".visual-state");
 
-steps.forEach((step, index) => {
-  step.addEventListener("click", () => {
+let current = 0;
 
-    // RESET
-    steps.forEach(s => s.classList.remove("active", "completed"));
-    connectors.forEach(c => c.classList.remove("active"));
+function updateNarrative(index) {
+  steps.forEach(s => s.classList.remove("active"));
+  visuals.forEach(v => v.classList.remove("active"));
 
-    // APPLY STATES
-    steps.forEach((s, i) => {
-      if (i < index) {
-        s.classList.add("completed");
-      } else if (i === index) {
-        s.classList.add("active");
-      }
-    });
+  steps[index].classList.add("active");
+  visuals[index].classList.add("active");
+}
 
-    // CONNECTOR STATE
-    connectors.forEach((c, i) => {
-      if (i < index) {
-        c.classList.add("active");
-      }
-    });
+document.getElementById("nextStep").addEventListener("click", () => {
+  current = (current + 1) % steps.length;
+  updateNarrative(current);
+});
 
-  });
+document.getElementById("prevStep").addEventListener("click", () => {
+  current = (current - 1 + steps.length) % steps.length;
+  updateNarrative(current);
 });
 // ===============================
 // 6. SERVICES
