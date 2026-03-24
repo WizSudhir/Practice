@@ -652,24 +652,95 @@ const steps = document.querySelectorAll(".narrative-step");
 const visuals = document.querySelectorAll(".visual-state");
 
 let current = 0;
+let autoPlay;
 
+// METRICS DATA
+const metrics = [
+  { value: 40, label: "Revenue Leakage" },
+  { value: 20, label: "Denial Rate" },
+  { value: 75, label: "Collections" },
+  { value: 95, label: "Revenue Stability" }
+];
+
+// ANIMATE METRIC
+function animateMetric(target) {
+  let currentVal = 0;
+  const el = document.getElementById("metricValue");
+
+  const interval = setInterval(() => {
+    currentVal++;
+    el.textContent = currentVal + "%";
+    if (currentVal >= target) clearInterval(interval);
+  }, 15);
+}
+
+// MAIN UPDATE
 function updateNarrative(index) {
+
+  // TEXT + VISUAL
   steps.forEach(s => s.classList.remove("active"));
   visuals.forEach(v => v.classList.remove("active"));
 
   steps[index].classList.add("active");
   visuals[index].classList.add("active");
+
+  // MINI SYSTEM (RED → GREEN)
+  const nodes = document.querySelectorAll(".mini-node");
+  nodes.forEach((n, i) => {
+    if (index > i) {
+      n.classList.remove("error");
+      n.classList.add("fixed");
+    } else {
+      n.classList.remove("fixed");
+      n.classList.add("error");
+    }
+  });
+
+  // METRIC UPDATE
+  document.getElementById("metricLabel").textContent = metrics[index].label;
+  animateMetric(metrics[index].value);
+
+  // PROGRESS BAR
+  document.getElementById("progressFill").style.width =
+    ((index + 1) / steps.length) * 100 + "%";
+
+  // 🔥 HERO SYNC (LEVEL 5)
+  const system = document.querySelector(".system-bg");
+  const nodesHero = document.querySelectorAll(".node");
+  const revenue = document.querySelector(".revenue");
+
+  if (system) system.classList.add("controlled");
+
+  nodesHero.forEach((node, i) => {
+    if (i <= index) {
+      node.classList.add("resolved-active");
+    }
+  });
+
+  if (index === 3 && revenue) {
+    revenue.classList.add("active");
+  }
 }
 
+// NEXT
 document.getElementById("nextStep").addEventListener("click", () => {
+  clearInterval(autoPlay);
   current = (current + 1) % steps.length;
   updateNarrative(current);
 });
 
+// PREV
 document.getElementById("prevStep").addEventListener("click", () => {
+  clearInterval(autoPlay);
   current = (current - 1 + steps.length) % steps.length;
   updateNarrative(current);
 });
+
+// AUTOPLAY
+autoPlay = setInterval(() => {
+  current = (current + 1) % steps.length;
+  updateNarrative(current);
+}, 4000);
 // ===============================
 // 6. SERVICES
 // ===============================
