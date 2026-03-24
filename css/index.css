@@ -1045,14 +1045,119 @@ z-index: 2;
 /* ===============================
   5. HOW IT WORKS
 ================================= */
-.how-step span {
-  font-size: var(--text-sm);
-  color: var(--brand-accent);
+.how-subtext {
+  max-width: 600px;
+  margin: 10px auto 0;
+  color: var(--text-secondary);
+  font-size: 15px;
 }
-.how-step h3 {
-  margin: var(--space-sm) 0;
+/* WRAPPER */
+.flow-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
 }
-
+/* STEP */
+.flow-step {
+  flex: 1;
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  transition: var(--transition-base);
+}
+/* NUMBER */
+.flow-number {
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+}
+/* CONTENT */
+.flow-content h3 {
+  font-size: 16px;
+  font-weight: 600;
+}
+.flow-content p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  max-width: 240px;
+}
+/* METRIC */
+.flow-metric {
+  font-size: 12px;
+  margin-top: 6px;
+  color: #f87171;
+  opacity: 0.8;
+}
+.flow-metric.positive {
+  color: #4ade80;
+}
+/* CONNECTOR LINE */
+.flow-connector {
+  flex: 0.5;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(99,102,241,0.4),
+    transparent
+  );
+  position: relative;
+}
+/* ANIMATION DOT */
+.flow-connector::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #6366f1;
+  animation: flowMove 2.5s linear infinite;
+}
+@keyframes flowMove {
+  0% { left: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+/* HOVER EFFECT */
+.flow-step:hover {
+  transform: translateY(-4px);
+}
+.flow-step:hover h3 {
+  color: #fff;
+}
+/* FINAL STEP (RESULT STATE) */
+.flow-step.highlight h3 {
+  background: linear-gradient(90deg, #4ade80, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+/* RESPONSIVE */
+@media (max-width: 992px) {
+  .flow-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .flow-connector {
+    width: 2px;
+    height: 30px;
+  }
+  .flow-connector::after {
+    animation: flowMoveVertical 2.5s linear infinite;
+  }
+  @keyframes flowMoveVertical {
+    0% { top: 0%; opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+  }
+}
 /* ===============================
   6. SERVICES GATEWAY
 ================================= */
