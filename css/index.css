@@ -991,9 +991,6 @@ z-index: 2;
   align-items: center;
   justify-content: flex-start;
 }
-/* ===============================
-  4. PROOF SNAPSHOT
-================================= */
 .proof-card {
   text-align: center;
   padding: var(--space-md);
@@ -1017,6 +1014,33 @@ z-index: 2;
   margin: 20px auto 0;
   font-size: 16px;
   color: var(--text-secondary);
+}
+/* ===============================
+  4. METRIC
+================================= */
+.metrics-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.metric {
+  flex: 1;
+  min-width: 180px;
+  text-align: center;
+}
+.metric h3 {
+  font-size: 36px;
+  font-weight: 700;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.metric p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-top: 6px;
 }
 /* ===============================
   5. HOW IT WORKS
