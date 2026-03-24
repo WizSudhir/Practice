@@ -551,62 +551,68 @@
 
 <!-- HOW IT WORKS -->
 <section class="section how-it-works">
-  <div class="container">
+  <div class="container narrative">
 
-    <h2 class="section-title gradient center">
-      From Revenue Leakage → Predictable Growth
-    </h2>
+    <!-- LEFT: TEXT -->
+    <div class="narrative-content">
 
-    <p class="center mt-sm how-subtext">
-      Click through to see how we transform your revenue system step by step.
-    </p>
-
-    <div class="flow-wrapper mt-lg" id="flowSystem">
-
-      <!-- STEP 1 -->
-      <div class="flow-step active" data-step="1">
-        <div class="flow-number">01</div>
-        <div class="flow-content">
-          <h3>Find Where You're Losing Money</h3>
-          <p>We uncover hidden leakage across workflows, coding, and payer behavior.</p>
-          <span class="flow-metric negative">Revenue Leakage</span>
-        </div>
+      <div class="narrative-step active" data-step="0">
+        <h2>Revenue is leaking silently</h2>
+        <p>
+          Most practices lose revenue before claims are even submitted —
+          through broken workflows, missing data, and preventable errors.
+        </p>
       </div>
 
-      <div class="flow-connector"></div>
-
-      <!-- STEP 2 -->
-      <div class="flow-step" data-step="2">
-        <div class="flow-number">02</div>
-        <div class="flow-content">
-          <h3>Stop Denials Before They Happen</h3>
-          <p>We fix upstream issues so clean claims go out the first time.</p>
-          <span class="flow-metric negative">High Denials</span>
-        </div>
+      <div class="narrative-step" data-step="1">
+        <h2>Denials are predictable</h2>
+        <p>
+          We fix upstream issues so claims go out clean —
+          eliminating avoidable denials before they happen.
+        </p>
       </div>
 
-      <div class="flow-connector"></div>
-
-      <!-- STEP 3 -->
-      <div class="flow-step" data-step="3">
-        <div class="flow-number">03</div>
-        <div class="flow-content">
-          <h3>Turn Unpaid Claims Into Cash</h3>
-          <p>We aggressively recover denied and aging AR.</p>
-          <span class="flow-metric neutral">Recovering AR</span>
-        </div>
+      <div class="narrative-step" data-step="2">
+        <h2>Unpaid claims become cash</h2>
+        <p>
+          We recover aging AR and denied claims —
+          turning lost revenue into collected revenue.
+        </p>
       </div>
 
-      <div class="flow-connector"></div>
+      <div class="narrative-step" data-step="3">
+        <h2>Revenue becomes predictable</h2>
+        <p>
+          With a fully optimized system, your revenue becomes consistent,
+          scalable, and measurable.
+        </p>
+      </div>
 
-      <!-- STEP 4 -->
-      <div class="flow-step" data-step="4">
-        <div class="flow-number">04</div>
-        <div class="flow-content">
-          <h3>Build Predictable Revenue Growth</h3>
-          <p>We continuously optimize performance and maximize long-term revenue.</p>
-          <span class="flow-metric positive">Revenue Growth</span>
-        </div>
+      <!-- CONTROLS -->
+      <div class="narrative-controls">
+        <button id="prevStep" class="btn-outline">←</button>
+        <button id="nextStep" class="btn-primary">Next →</button>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: VISUAL STATE -->
+    <div class="narrative-visual" id="narrativeVisual">
+
+      <div class="visual-state active" data-step="0">
+        <span class="state negative">Revenue Leakage Detected</span>
+      </div>
+
+      <div class="visual-state" data-step="1">
+        <span class="state neutral">Denials Reduced</span>
+      </div>
+
+      <div class="visual-state" data-step="2">
+        <span class="state positive">Revenue Recovered</span>
+      </div>
+
+      <div class="visual-state" data-step="3">
+        <span class="state positive strong">Predictable Growth</span>
       </div>
 
     </div>
