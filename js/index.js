@@ -653,38 +653,46 @@ const visuals = document.querySelectorAll(".visual-state");
 
 let current = 0;
 let autoPlay;
+let metricInterval; // prevent stacking intervals
 
-// METRICS DATA
+// METRICS DATA //
 const metrics = [
   { value: 40, label: "Revenue Leakage" },
   { value: 20, label: "Denial Rate" },
   { value: 75, label: "Collections" },
   { value: 95, label: "Revenue Stability" }
 ];
+// CONTROL PANEL DATA //
+const revValues = [20, 45, 70, 95];
+const denialValues = [40, 25, 15, 5];
 
-// ANIMATE METRIC
+// METRIC ANIMATION (FIXED) //
 function animateMetric(target) {
-  let currentVal = 0;
   const el = document.getElementById("metricValue");
+  if (!el) return;
 
-  const interval = setInterval(() => {
+  clearInterval(metricInterval);
+
+  let currentVal = 0;
+
+  metricInterval = setInterval(() => {
     currentVal++;
     el.textContent = currentVal + "%";
-    if (currentVal >= target) clearInterval(interval);
+
+    if (currentVal >= target) {
+      clearInterval(metricInterval);
+    }
   }, 15);
 }
 
-// MAIN UPDATE
+// MAIN UPDATE FUNCTION //
 function updateNarrative(index) {
-
-  // TEXT + VISUAL
+  // TEXT + VISUAL SWITCH  //
   steps.forEach(s => s.classList.remove("active"));
   visuals.forEach(v => v.classList.remove("active"));
-
-  steps[index].classList.add("active");
-  visuals[index].classList.add("active");
-
-  // MINI SYSTEM (RED → GREEN)
+  if (steps[index]) steps[index].classList.add("active");
+  if (visuals[index]) visuals[index].classList.add("active");
+  // MINI SYSTEM (OPTIONAL) //
   const nodes = document.querySelectorAll(".mini-node");
   nodes.forEach((n, i) => {
     if (index > i) {
@@ -696,51 +704,80 @@ function updateNarrative(index) {
     }
   });
 
-  // METRIC UPDATE
-  document.getElementById("metricLabel").textContent = metrics[index].label;
+  // METRICS //
+  const labelEl = document.getElementById("metricLabel");
+  if (labelEl) labelEl.textContent = metrics[index].label;
   animateMetric(metrics[index].value);
+  // PROGRESS BAR //
+  const progress = document.getElementById("progressFill");
+  if (progress) {
+    progress.style.width = ((index + 1) / steps.length) * 100 + "%";
+  }
+  // CONTROL PANEL (NEW) //
+  // TOGGLES
+  const toggles = document.querySelectorAll(".toggle");
+  toggles.forEach((toggle, i) => {
+    if (index > i) {
+      toggle.classList.add("active");
+    } else {
+      toggle.classList.remove("active");
+    }
+  });
+  // CONTROL PANEL METRICS
+  const revEl = document.getElementById("revMetric");
+  const denialEl = document.getElementById("denialMetric");
 
-  // PROGRESS BAR
-  document.getElementById("progressFill").style.width =
-    ((index + 1) / steps.length) * 100 + "%";
+  if (revEl) revEl.textContent = revValues[index] + "%";
+  if (denialEl) denialEl.textContent = "-" + denialValues[index] + "%";
 
-  // 🔥 HERO SYNC (LEVEL 5)
+  // HERO SYNC (LEVEL 5) //
   const system = document.querySelector(".system-bg");
   const nodesHero = document.querySelectorAll(".node");
   const revenue = document.querySelector(".revenue");
-
   if (system) system.classList.add("controlled");
-
   nodesHero.forEach((node, i) => {
     if (i <= index) {
       node.classList.add("resolved-active");
     }
   });
 
-  if (index === 3 && revenue) {
+  if (index === steps.length - 1 && revenue) {
     revenue.classList.add("active");
   }
 }
 
-// NEXT
-document.getElementById("nextStep").addEventListener("click", () => {
-  clearInterval(autoPlay);
-  current = (current + 1) % steps.length;
-  updateNarrative(current);
-});
+// NAVIGATION CONTROLS //
+const nextBtn = document.getElementById("nextStep");
+const prevBtn = document.getElementById("prevStep");
 
-// PREV
-document.getElementById("prevStep").addEventListener("click", () => {
-  clearInterval(autoPlay);
-  current = (current - 1 + steps.length) % steps.length;
-  updateNarrative(current);
-});
+if (nextBtn) {
+  nextBtn.addEventListener("click", () => {
+    clearInterval(autoPlay);
+    current = (current + 1) % steps.length;
+    updateNarrative(current);
+  });
+}
 
-// AUTOPLAY
-autoPlay = setInterval(() => {
-  current = (current + 1) % steps.length;
-  updateNarrative(current);
-}, 4000);
+if (prevBtn) {
+  prevBtn.addEventListener("click", () => {
+    clearInterval(autoPlay);
+    current = (current - 1 + steps.length) % steps.length;
+    updateNarrative(current);
+  });
+}
+
+// AUTOPLAY (SMART) //
+function startAutoPlay() {
+  autoPlay = setInterval(() => {
+    current = (current + 1) % steps.length;
+    updateNarrative(current);
+  }, 4000);
+}
+
+// Start autoplay only if steps exist
+if (steps.length > 0) {
+  startAutoPlay();
+}
 // ===============================
 // 6. SERVICES
 // ===============================
