@@ -1191,6 +1191,76 @@ z-index: 2;
   background: linear-gradient(90deg, #6366f1, #4ade80);
   transition: width 0.4s ease;
 }
+.control-panel {
+  width: 100%;
+  max-width: 320px;
+  padding: 16px;
+  border-radius: 14px;
+  background: rgba(15,23,42,0.8);
+  border: 1px solid var(--border-default);
+}
+
+.panel-header {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+/* CONTROLS */
+.panel-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.control-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+
+/* TOGGLE */
+.toggle {
+  width: 32px;
+  height: 16px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.2);
+  position: relative;
+  transition: 0.3s;
+}
+
+.toggle::after {
+  content: "";
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: 0.3s;
+}
+
+.toggle.active {
+  background: #4ade80;
+}
+
+.toggle.active::after {
+  left: 18px;
+}
+
+/* METRICS */
+.panel-metrics {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.panel-metrics .metric span {
+  font-size: 18px;
+  font-weight: 600;
+}
 /* ===============================
   6. SERVICES GATEWAY
 ================================= */
