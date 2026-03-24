@@ -796,12 +796,13 @@ z-index: 2;
   display: flex;
   flex-direction: column;
   gap: 18px;
+  max-width: 420px;
 }
 .belief-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
-  align-items: center;
+  align-items: start;
 }
 .belief-row {
   display: flex;
@@ -981,6 +982,10 @@ z-index: 2;
   color: #6366f1;
   min-width: 28px;
 }
+.belief-content {
+  display: flex;
+  align-items: center;
+}
 /* ===============================
   4. PROOF SNAPSHOT
 ================================= */
@@ -1001,10 +1006,11 @@ z-index: 2;
   margin: var(--space-sm) 0;
 }
 .belief-bridge {
-  max-width: 720px;
-  margin-left: auto;
-  margin-right: auto;
+  grid-column: 1 / -1;
   text-align: center;
+  max-width: 720px;
+  margin: 60px auto 0;
+  font-size: 16px;
   color: var(--text-secondary);
 }
 /* ===============================
