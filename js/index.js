@@ -648,42 +648,34 @@ metricCounters.forEach(el => {
 // ===============================
 // 5. HOW IT WORKS
 // ===============================
-// INTERACTIVE FLOW SYSTEM
-document.addEventListener("DOMContentLoaded", () => {
-  const steps = document.querySelectorAll(".flow-step");
-  const connectors = document.querySelectorAll(".flow-connector");
+const steps = document.querySelectorAll(".flow-step");
+const connectors = document.querySelectorAll(".flow-connector");
 
-  steps.forEach((step, index) => {
-    step.addEventListener("click", () => {
+steps.forEach((step, index) => {
+  step.addEventListener("click", () => {
 
-      // RESET ALL
-      steps.forEach(s => {
-        s.classList.remove("active", "completed");
-      });
+    // RESET
+    steps.forEach(s => s.classList.remove("active", "completed"));
+    connectors.forEach(c => c.classList.remove("active"));
 
-      connectors.forEach(c => {
-        c.classList.remove("active");
-      });
-
-      // ACTIVATE UP TO CLICKED STEP
-      steps.forEach((s, i) => {
-        if (i < index) {
-          s.classList.add("completed");
-        } else if (i === index) {
-          s.classList.add("active");
-        }
-      });
-
-      // ACTIVATE CONNECTORS
-      connectors.forEach((c, i) => {
-        if (i < index) {
-          c.classList.add("active");
-        }
-      });
-
+    // APPLY STATES
+    steps.forEach((s, i) => {
+      if (i < index) {
+        s.classList.add("completed");
+      } else if (i === index) {
+        s.classList.add("active");
+      }
     });
+
+    // CONNECTOR STATE
+    connectors.forEach((c, i) => {
+      if (i < index) {
+        c.classList.add("active");
+      }
+    });
+
   });
-});  
+});
 // ===============================
 // 6. SERVICES
 // ===============================
