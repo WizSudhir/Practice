@@ -967,7 +967,7 @@ z-index: 2;
   border-color: var(--border-strong);
   box-shadow: var(--glow-soft);
 }
-.belief-card span {
+.belief-stack span {
   color: #6366f1;
   min-width: 28px;
 }
@@ -989,6 +989,13 @@ z-index: 2;
 .proof-card h3 {
   font-size: var(--text-2xl);
   margin: var(--space-sm) 0;
+}
+.belief-bridge {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  color: var(--text-secondary);
 }
 /* ===============================
   5. HOW IT WORKS
