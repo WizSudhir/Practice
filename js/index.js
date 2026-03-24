@@ -603,7 +603,44 @@ if (systemCard) {
   });
 }
 // ===============================
-// 4. SERVICES
+// 4. METRIC
+// ===============================
+const metricCounters = document.querySelectorAll(".metric h3");
+
+function startCounter(counter) {
+  const target = +counter.getAttribute("data-target");
+  let count = 0;
+
+  const update = () => {
+    const increment = target / 60;
+
+    if (Math.abs(count) < Math.abs(target)) {
+      count += increment;
+      counter.innerText = Math.round(count) + "%";
+      requestAnimationFrame(update);
+    } else {
+      counter.innerText = target + "%";
+    }
+  };
+
+  update();
+}
+
+// Intersection Observer (clean)
+const metricObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      startCounter(entry.target);
+      metricObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.4 });
+
+metricCounters.forEach(el => {
+  metricObserver.observe(el);
+});
+// ===============================
+// 5. SERVICES
 // ===============================
 const gateway = document.querySelector('.services-gateway');
 
@@ -619,7 +656,7 @@ if (gateway) {
   gatewayObserver.observe(gateway);
 }
 // ===============================
-// 5. EHR
+// 6. EHR
 // ===============================
 const ehrSection = document.querySelector('.ehr-premium');
 
