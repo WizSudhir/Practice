@@ -451,9 +451,9 @@ if (systemCard) {
     systemCard.classList.toggle("active");
   });
 }
-// ===============================
+// ============================================================================================================================
 // 4. PROOF SNAPSHOT
-// ===============================
+// ============================================================================================================================
 const proofSection = document.querySelector(".proof-snapshot");
 if (proofSection) {
   const metrics = proofSection.querySelectorAll("h3");
@@ -502,6 +502,117 @@ if (proofSection) {
 // 5. STRIPE-LEVEL HOW IT WORKS
 // ============================================================================================================================
 
+const section = document.querySelector(".how-it-works");
+const steps = document.querySelectorAll(".narrative-step");
+const progress = document.getElementById("storyProgress");
+
+const toggles = document.querySelectorAll(".toggle");
+
+const revLine = document.getElementById("revLine");
+const denialLine = document.getElementById("denialLine");
+
+const aiText = document.getElementById("aiDynamic");
+
+/* STEP CONFIG */
+const insights = [
+  "Revenue leakage detected across workflows...",
+  "Eligibility verification improving clean claim rate...",
+  "Coding accuracy increasing first-pass acceptance...",
+  "Denials identified and reduced systematically...",
+  "AR recovery boosting cash flow...",
+  "Revenue stabilized and predictable."
+];
+
+/* LINE DATA */
+const revenuePoints = [
+  "0,80",
+  "20,75",
+  "40,60",
+  "60,45",
+  "80,25",
+  "100,10"
+];
+
+const denialPoints = [
+  "0,20",
+  "20,30",
+  "40,45",
+  "60,60",
+  "80,75",
+  "100,90"
+];
+
+/* SCROLL ENGINE */
+function handleScroll() {
+  const rect = section.getBoundingClientRect();
+  const total = window.innerHeight * 2;
+
+  if (rect.top <= 0 && Math.abs(rect.top) <= total) {
+    section.classList.add("pinned");
+
+    let progressRatio = Math.abs(rect.top) / total;
+    let stepIndex = Math.min(
+      steps.length - 1,
+      Math.floor(progressRatio * steps.length)
+    );
+
+    updateStep(stepIndex);
+    updateProgress(progressRatio);
+  } else {
+    section.classList.remove("pinned");
+  }
+}
+
+/* UPDATE STEP */
+function updateStep(index) {
+  steps.forEach((step, i) => {
+    step.classList.toggle("active", i === index);
+  });
+
+  /* Toggle activation */
+  toggles.forEach((t, i) => {
+    if (i <= index) {
+      t.classList.add("active");
+    } else {
+      t.classList.remove("active");
+    }
+  });
+
+  /* Update AI text */
+  aiText.innerText = insights[index];
+
+  /* Update chart */
+  drawChart(index);
+}
+
+/* PROGRESS BAR */
+function updateProgress(ratio) {
+  progress.style.width = `${ratio * 100}%`;
+}
+
+/* CHART DRAWING */
+function drawChart(step) {
+  const rev = revenuePoints.slice(0, step + 1).join(" ");
+  const den = denialPoints.slice(0, step + 1).join(" ");
+
+  revLine.setAttribute("points", rev);
+  denialLine.setAttribute("points", den);
+
+  setTimeout(() => {
+    revLine.style.strokeDashoffset = "0";
+    denialLine.style.strokeDashoffset = "0";
+  }, 50);
+}
+
+/* MICRO INTERACTION (CLICK TOGGLE) */
+toggles.forEach((toggle, i) => {
+  toggle.addEventListener("click", () => {
+    toggle.classList.toggle("active");
+  });
+});
+
+/* INIT */
+window.addEventListener("scroll", handleScroll);
 // ============================================================================================================================
 // 6. SERVICES
 // ============================================================================================================================
