@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   lucide.createIcons();
-  // ===============================
+  // ============================================================================================================================
   // 1. DESKTOP HERO
-  // ===============================
+  // ============================================================================================================================
   const hero = document.querySelector(".system-bg");
   const nodes = document.querySelectorAll(".node");
   const core = document.querySelector(".core");
@@ -35,11 +35,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const SIDE_PADDING = 40;
   const TOP_PADDING = 60;
   const BOTTOM_PADDING = 120;
-
   let width, height;
   let controlled = false;
   let frozen = false;
-
   // 🔥 REVENUE STATE
   let revenueProgress = 0;
 
@@ -47,36 +45,28 @@ document.addEventListener("DOMContentLoaded", () => {
     width = hero.clientWidth;
     height = hero.clientHeight;
   }
-
   updateBounds();
   window.addEventListener("resize", updateBounds);
-
   // 🔁 FULL RESET FOR LOOP //
   function resetSystem() {
-
     controlled = false;
     frozen = false;
     revenueProgress = 0;
-
     hero.classList.remove("controlled");
     core.style.display = "none";
     revenue.classList.remove("active");
-
     resetConnections();
-
     // reset bars
     document.querySelectorAll(".bar").forEach(bar => {
       bar.style.height = "0px";
       bar.style.transform = "scaleY(1)";
     });
-
     // reset line
     const line = document.querySelector(".line-path");
     if (line) {
       line.style.strokeDasharray = "0";
       line.style.strokeDashoffset = "0";
     }
-
     // reset nodes
     nodes.forEach(n => {
       n.classList.remove("resolved-active");
@@ -87,120 +77,86 @@ document.addEventListener("DOMContentLoaded", () => {
       n.y = n.baseY;
       n.angle = 0;
     });
-
     // restart timeline
     startTimeline();
   }
-
   // POSITION SETUP //
   nodes.forEach((n, i) => {
-
     const cols = 4;
     const rows = 2;
-
     const usableWidth = width - SIDE_PADDING * 2;
     const usableHeight = height - TOP_PADDING - BOTTOM_PADDING;
-
     const zoneW = usableWidth / cols;
     const zoneH = usableHeight / rows;
-
     const col = i % cols;
     const row = Math.floor(i / cols);
-
     n.baseX = -width / 2 + SIDE_PADDING + zoneW * (col + 0.5);
     n.baseY = -height / 2 + TOP_PADDING + zoneH * (row + 0.5);
-
     n.angle = Math.random() * Math.PI * 2;
     n.speed = 0.002 + Math.random() * 0.002;
-
     n.floatX = Math.max(10, zoneW / 2 - NODE_W / 2 - 6);
     n.floatY = Math.max(10, zoneH / 2 - NODE_H / 2 - 6);
-
     n.z = (Math.random() - 0.5) * 40;
-
     n.x = n.baseX;
     n.y = n.baseY;
   });
-
   // CONNECTION SYSTEM //
   function drawConnection(node) {
-
     const coreRect = core.getBoundingClientRect();
     const nodeInner = node.querySelector(".node-inner");
     const nodeRect = nodeInner.getBoundingClientRect();
     const svgRect = svg.getBoundingClientRect();
-
     const coreCenter = {
       x: coreRect.left + coreRect.width / 2,
       y: coreRect.top + coreRect.height / 2
     };
-
     const nodeCenter = {
       x: nodeRect.left + nodeRect.width / 2,
       y: nodeRect.top + nodeRect.height / 2
     };
-
     const dx = nodeCenter.x - coreCenter.x;
     const dy = nodeCenter.y - coreCenter.y;
-
     const dist = Math.hypot(dx, dy);
-
     const nx = dx / dist;
     const ny = dy / dist;
-
     const coreRadius = coreRect.width / 2;
-
     const coreEdge = {
       x: coreCenter.x + nx * (coreRadius + 1),
       y: coreCenter.y + ny * (coreRadius + 1)
     };
-
     const halfW = nodeRect.width / 2;
     const halfH = nodeRect.height / 2;
-
     let tx = Infinity;
     let ty = Infinity;
-
     if (nx !== 0) tx = halfW / Math.abs(nx);
     if (ny !== 0) ty = halfH / Math.abs(ny);
-
     const t = Math.min(tx, ty);
-
     const nodeEdge = {
       x: nodeCenter.x - nx * (t + 1),
       y: nodeCenter.y - ny * (t + 1)
     };
-
     const start = {
       x: Math.round(coreEdge.x - svgRect.left),
       y: Math.round(coreEdge.y - svgRect.top)
     };
-
     const end = {
       x: Math.round(nodeEdge.x - svgRect.left),
       y: Math.round(nodeEdge.y - svgRect.top)
     };
-
     const midX = Math.round(start.x + (end.x - start.x) * 0.5);
-
     const d = `
       M ${start.x} ${start.y}
       L ${midX} ${start.y}
       L ${midX} ${end.y}
       L ${end.x} ${end.y}
     `;
-
     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-
     path.setAttribute("d", d);
     path.setAttribute("vector-effect", "non-scaling-stroke");
     path.classList.add("connection-path");
-
     svg.appendChild(path);
-
     return path;
   }
-
   function resetConnections() {
     svg.innerHTML = `
       <defs>
@@ -211,39 +167,28 @@ document.addEventListener("DOMContentLoaded", () => {
       </defs>
     `;
   }
-
   window.addEventListener("resize", resetConnections);
-
   // REVENUE INCREMENT LOGIC //
   function incrementRevenue() {
-
     const bars = document.querySelectorAll(".revenue .bar");
     const line = document.querySelector(".line-path");
-
     if (revenueProgress >= bars.length) return;
-
     const bar = bars[revenueProgress];
-
     bar.style.height = bar.dataset.height;
-
     bar.style.transform = "scaleY(1.1)";
     setTimeout(() => {
       bar.style.transform = "scaleY(1)";
     }, 200);
-
     if (line) {
       const totalLength = line.getTotalLength();
       const progressRatio = (revenueProgress + 1) / bars.length;
-
       line.style.strokeDasharray = totalLength;
       line.style.strokeDashoffset = totalLength * (1 - progressRatio);
     }
-
     core.style.boxShadow = `
       0 0 ${40 + revenueProgress * 12}px rgba(34,197,94,0.7),
       0 0 ${80 + revenueProgress * 20}px rgba(59,130,246,0.5)
     `;
-
     revenueProgress++;
     // 🔥 BACKGROUND GLOW SYNC
     document.documentElement.style.setProperty(
@@ -257,310 +202,217 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 5000);
     }
   }
-
   // STABILITY DETECTION //
   function waitForStabilization(callback) {
-
     let stableFrames = 0;
     let lastPositions = new Map();
-
     function check() {
-
       let isStable = true;
-
       nodes.forEach(n => {
         const prev = lastPositions.get(n) || { x: n.x, y: n.y };
-
         const dx = Math.abs(n.x - prev.x);
         const dy = Math.abs(n.y - prev.y);
-
         if (dx > 0.3 || dy > 0.3) {
           isStable = false;
         }
-
         lastPositions.set(n, { x: n.x, y: n.y });
       });
-
       if (isStable) stableFrames++;
       else stableFrames = 0;
-
       if (stableFrames > 12) {
         callback();
       } else {
         requestAnimationFrame(check);
       }
     }
-
     check();
   }
-
   // CONTROL TIMELINE (EXTRACTED) //
   function startTimeline() {
-
     setTimeout(() => {
-
       hero.classList.add("controlled");
       core.style.display = "flex";
-
       revenue.classList.add("active");
-
       waitForStabilization(() => {
-
         frozen = true;
-
         nodes.forEach(n => {
           n.x = n.baseX;
           n.y = n.baseY;
         });
-
         setTimeout(() => {
-
           requestAnimationFrame(() => {
-
             nodes.forEach((n, i) => {
-
               setTimeout(() => {
-
                 const path = drawConnection(n);
-
                 path.getBoundingClientRect();
                 path.classList.add("active");
-
                 setTimeout(() => {
                   incrementRevenue();
                 }, 420);
-
                 setTimeout(() => {
-
                   n.classList.add("resolved-active");
-
                   n.querySelector(".node-inner").style.boxShadow = `
                     0 0 25px rgba(34,197,94,0.7),
                     0 0 50px rgba(59,130,246,0.4)
                   `;
-
                 }, 840);
-
               }, i * 600 + Math.random() * 500);
-
             });
-
           });
-
         }, 720);
-
       });
-
     }, 2000 + PHASE_DELAY);
-
     setTimeout(() => {
       controlled = true;
     }, 3500 + PHASE_DELAY);
   }
-
   // ▶️ INITIAL START
   startTimeline();
-
   // ANIMATION LOOP //
   function animate() {
-
     nodes.forEach(n => {
-
       if (!controlled) {
-
         n.angle += n.speed;
-
         n.x = n.baseX + Math.cos(n.angle) * n.floatX;
         n.y = n.baseY + Math.sin(n.angle) * n.floatY;
-
       } else if (!frozen) {
-
         const dx = -n.x;
         const dy = -n.y;
-
         n.x += dx * 0.015;
         n.y += dy * 0.015;
-
         n.x += (n.baseX - n.x) * 0.04;
         n.y += (n.baseY - n.y) * 0.04;
-
       } else {
-
         n.x = n.baseX;
         n.y = n.baseY;
       }
-
       const left = -width / 2 + SIDE_PADDING + NODE_W / 2;
       const right = width / 2 - SIDE_PADDING - NODE_W / 2;
-
       const top = -height / 2 + TOP_PADDING + NODE_H / 2;
       const bottom = height / 2 - BOTTOM_PADDING - NODE_H / 2;
-
       n.x = Math.max(left, Math.min(right, n.x));
       n.y = Math.max(top, Math.min(bottom, n.y));
-
       if (!controlled) {
         n.z += Math.sin(n.angle) * 0.03;
       }
-
       n.z = Math.max(0, Math.min(30, n.z));
-
       const scale = 1 + n.z / 300;
-
       const glowStrength = n.z / 40;
       const glow = 10 + glowStrength * 30;
       const opacity = controlled ? 1 : (0.7 + glowStrength * 0.3);
       if (!n.matches(':hover')) {
         n.style.opacity = opacity;
       }
-
       n.querySelector(".node-inner").style.boxShadow = controlled
         ? `0 0 20px rgba(34,197,94,0.4), 0 0 40px rgba(59,130,246,0.25)`
         : `0 0 ${glow}px rgba(59,130,246,0.25),
            0 0 ${glow * 2}px rgba(139,92,246,0.15)`;
-
       n.style.transform = `
         translate3d(${n.x}px, ${n.y}px, ${n.z}px)
         translate(-50%, -50%)
         scale(${scale})
       `;
     });
-
     requestAnimationFrame(animate);
   }
-
   animate();
 
-  // ===============================
+  // ============================================================================================================================
   // 2. MOBILE HERO
-  // ===============================
-function runMobileHero() {
-
+  // ============================================================================================================================
+  function runMobileHero() {
   const node = document.getElementById("mobileNode");
   const core = document.getElementById("mobileCore");
   const revenue = document.querySelector(".mobile-revenue");
   const bars = document.querySelectorAll(".mobile-chart .bar");
   const metrics = document.querySelectorAll(".mobile-metrics .metric");
   const connection = document.querySelector(".mobile-connection");
-
   if (!node || !core || !revenue) return;
-
   let timeouts = [];
   let observer;
   let isRunning = false;   // 🔥 NEW
-
   function clearAllTimers() {
     timeouts.forEach(t => clearTimeout(t));
     timeouts = [];
   }
-
-function reset() {
+  function reset() {
   clearAllTimers();
   isRunning = false;
-
   node.style.opacity = 0;
   core.classList.remove("active");
   revenue.style.opacity = 0;
-
   // 🔥 FIX: reset connection
   if (connection) {
     connection.classList.remove("active");
     void connection.offsetHeight; // force reflow
   }
-
   const items = document.querySelectorAll(".mobile-node .item");
   items.forEach(item => {
     const error = item.querySelector(".error");
     const resolved = item.querySelector(".resolved");
-
     error.style.opacity = 0;
     error.classList.remove("active");
-
     resolved.style.opacity = 0;
   });
-
   bars.forEach(bar => bar.style.height = "5%");
-
   metrics.forEach(m => {
     m.style.opacity = 0;
     m.style.transform = "translateY(10px)";
   });
-}
-
+  }
   function runSequence() {
-
     if (isRunning) return;   // 🔥 PREVENT DUPLICATE RUNS
     isRunning = true;
-
     clearAllTimers();
-
     const items = document.querySelectorAll(".mobile-node .item");
-
     // STEP 0 — Show chaos card
     timeouts.push(setTimeout(() => {
       node.style.opacity = 1;
     }, 500));
-
     // STEP 1 — Errors appear
     items.forEach((item, i) => {
       const error = item.querySelector(".error");
-
       timeouts.push(setTimeout(() => {
         error.style.opacity = 1;
         error.classList.add("active");
       }, 1200 + i * 1000));
     });
-
     const baseTime = 1200 + items.length * 1000;
-
     // STEP 1.5 — Draw connection
     timeouts.push(setTimeout(() => {
       if (connection) connection.classList.add("active");
     }, baseTime + 200));
-
     // STEP 2 — Core
     timeouts.push(setTimeout(() => {
       core.classList.add("active");
     }, baseTime + 1200));
-
     // STEP 3 — Revenue
     timeouts.push(setTimeout(() => {
       revenue.style.opacity = 1;
     }, baseTime + 2000));
-
     // STEP 4 — Replace + animate
     items.forEach((item, i) => {
-
       const error = item.querySelector(".error");
       const resolved = item.querySelector(".resolved");
-
       timeouts.push(setTimeout(() => {
-
         error.style.opacity = 0;
         error.classList.remove("active");
-
         resolved.style.opacity = 1;
-
         if (bars[i]) {
           bars[i].style.height = bars[i].dataset.height;
         }
-
         if (metrics[i]) {
           metrics[i].style.opacity = 1;
           metrics[i].style.transform = "translateY(0)";
         }
-
       }, baseTime + 2600 + i * 1200));
-
     });
-
     // 🔥 FIXED LOOP (RESET + RESTART CLEANLY)
     timeouts.push(setTimeout(() => {
       reset();
       runSequence();
     }, baseTime + 2600 + items.length * 1200 + 4000));
   }
-
   // ✅ OBSERVER WITH STATE CONTROL
   observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -574,14 +426,13 @@ function reset() {
       }
     });
   }, { threshold: 0.4 });
-
   const target = document.querySelector(".mobile-system");
   if (target) observer.observe(target);
 }
-
-// ===============================
+  
+// ============================================================================================================================
 // 3. ABOUT
-// ===============================
+// ============================================================================================================================
 const aboutSection = document.querySelector('.about-system');
 
 if (aboutSection) {
@@ -592,11 +443,9 @@ if (aboutSection) {
       }
     });
   }, { threshold: 0.4 });
-
   aboutObserver.observe(aboutSection);
 }
 const systemCard = document.getElementById("systemCard");
-
 if (systemCard) {
   systemCard.addEventListener("click", () => {
     systemCard.classList.toggle("active");
@@ -606,25 +455,16 @@ if (systemCard) {
 // 4. PROOF SNAPSHOT
 // ===============================
 const proofSection = document.querySelector(".proof-snapshot");
-
 if (proofSection) {
-
   const metrics = proofSection.querySelectorAll("h3");
-
   let hasAnimated = false;
-
   function animateMetrics() {
-
     metrics.forEach(metric => {
-
       const target = parseInt(metric.dataset.target);
       let current = 0;
-
       const increment = target / 40;
-
       function update() {
         current += increment;
-
         if (
           (target > 0 && current >= target) ||
           (target < 0 && current <= target)
@@ -632,259 +472,39 @@ if (proofSection) {
           metric.textContent = target + "%";
           return;
         }
-
         metric.textContent = Math.round(current) + "%";
         requestAnimationFrame(update);
       }
-
       update();
     });
   }
-
   function resetMetrics() {
     metrics.forEach(metric => {
       metric.textContent = "0%";
     });
     hasAnimated = false;
   }
-
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-
       if (entry.isIntersecting && !hasAnimated) {
         animateMetrics();
         hasAnimated = true;
       }
-
       if (!entry.isIntersecting) {
         resetMetrics(); // 🔥 THIS WAS MISSING
       }
-
     });
   }, { threshold: 0.4 });
-
   observer.observe(proofSection);
 }
-// ===============================
-// 5. STRIPE-LEVEL HOW IT WORKS (FIXED)
-// ===============================
-const steps = document.querySelectorAll(".narrative-step");
-const toggles = document.querySelectorAll(".toggle");
+  
+// ============================================================================================================================
+// 5. STRIPE-LEVEL HOW IT WORKS
+// ============================================================================================================================
 
-let currentStep = -1;
-let smoothProgress = 0;
-
-// DATA
-const revValues = [20,30,40,55,75,95];
-const denialValues = [45,50,55,40,20,5];
-
-const aiInsights = [
-  "Revenue leakage detected at intake stage.",
-  "Eligibility verification failure rate is high.",
-  "Coding inconsistencies impacting claim approval.",
-  "Denial patterns identified across payers.",
-  "Recoverable revenue detected in AR backlog.",
-  "System stabilized — predictable revenue achieved."
-];
-
-// ===============================
-// LERP
-// ===============================
-function lerp(start, end, t) {
-  return start + (end - start) * t;
-}
-
-// ===============================
-// MAIN UPDATE ENGINE
-// ===============================
-function updateSmooth(progress){
-
-  const totalSteps = steps.length - 1;
-
-  const exactIndex = progress * totalSteps;
-  const baseIndex = Math.floor(exactIndex);
-  const nextIndex = Math.min(baseIndex + 1, totalSteps);
-  const localProgress = exactIndex - baseIndex;
-
-  const stepIndex = Math.round(exactIndex);
-
-  // ===============================
-  // STEP ACTIVATION
-  // ===============================
-  if (stepIndex !== currentStep) {
-    currentStep = stepIndex;
-
-    steps.forEach(s => s.classList.remove("active"));
-    if (steps[stepIndex]) {
-      steps[stepIndex].classList.add("active");
-    }
-
-    toggles.forEach((t,i)=>{
-      t.classList.toggle("active", stepIndex >= i);
-    });
-
-    const aiDynamic = document.getElementById("aiDynamic");
-    if (aiDynamic) {
-      aiDynamic.textContent = aiInsights[stepIndex];
-    }
-  }
-
-  // ===============================
-  // 🔥 FIX 1: REVENUE BARS (ADDED)
-  // ===============================
-  const bars = document.querySelectorAll(".revenue .bar");
-
-  bars.forEach((bar, i) => {
-    if (i <= stepIndex) {
-      bar.style.height = bar.dataset.height;
-      bar.style.opacity = "1";
-    } else {
-      bar.style.height = "10%";
-      bar.style.opacity = "0.3";
-    }
-  });
-
-  // ===============================
-  // 🔥 FIX 2: LINE GRAPH (FORCED VISIBLE)
-  // ===============================
-  const line = document.querySelector(".line-path");
-
-  if (line) {
-    const totalLength = line.getTotalLength();
-
-    line.style.opacity = 1; // 🔥 CRITICAL FIX
-    line.style.strokeDasharray = totalLength;
-    line.style.strokeDashoffset = totalLength * (1 - progress);
-  }
-
-  // ===============================
-  // 🔥 FIX 3: METRICS SMOOTH
-  // ===============================
-  const revMetric = document.getElementById("revMetric");
-  const denialMetric = document.getElementById("denialMetric");
-
-  if (revMetric && denialMetric) {
-    const rev = lerp(revValues[baseIndex], revValues[nextIndex], localProgress);
-    const denial = lerp(denialValues[baseIndex], denialValues[nextIndex], localProgress);
-
-    revMetric.textContent = Math.round(rev) + "%";
-    denialMetric.textContent = "-" + Math.round(denial) + "%";
-  }
-
-  // ===============================
-  // 🔥 FIX 4: PROGRESS BAR
-  // ===============================
-  const storyProgress = document.getElementById("storyProgress");
-  if (storyProgress) {
-    storyProgress.style.width = (progress * 100) + "%";
-  }
-
-  // ===============================
-  // 🔥 FIX 5: FORCE REVENUE VISIBLE EARLY
-  // ===============================
-  const revenue = document.querySelector(".revenue");
-  if (revenue && progress > 0.05) {
-    revenue.classList.add("active");
-  }
-
-  // ===============================
-  // 🔥 FIX 6: HERO SYNC (OPTIONAL)
-  // ===============================
-  const nodes = document.querySelectorAll(".node");
-  const system = document.querySelector(".system-bg");
-
-  if (system) system.classList.add("controlled");
-
-  nodes.forEach((n,i)=>{
-    if(i <= stepIndex) n.classList.add("resolved-active");
-  });
-
-  // ===============================
-  // PARALLAX
-  // ===============================
-  applyParallax(progress);
-}
-
-// ===============================
-// PARALLAX
-// ===============================
-function applyParallax(progress) {
-
-  const visual = document.querySelector(".narrative-visual");
-  const content = document.querySelector(".narrative-content");
-  const panel = document.querySelector(".control-panel");
-
-  if (visual) {
-    visual.style.transform = `
-      translateY(${progress * -60}px)
-      scale(${1 + progress * 0.05})
-    `;
-  }
-
-  if (content) {
-    content.style.transform = `
-      translateY(${progress * 30}px)
-    `;
-  }
-
-  if (panel) {
-    panel.style.transform = `
-      translateY(${progress * -20}px)
-      scale(${1 + progress * 0.02})
-    `;
-  }
-}
-
-// ===============================
-// 🔥 FIX 7: PROPER SCROLL LOCK
-// ===============================
-const howSection = document.querySelector(".how-it-works");
-
-if (howSection) {
-
-  // 🔥 INCREASE SCROLL LENGTH (CRITICAL)
-  howSection.style.position = "relative";
-  howSection.style.height = (steps.length * 120) + "vh"; // was 80 → now 120
-
-  const container = howSection.querySelector(".narrative");
-
-  if (container) {
-    container.style.position = "sticky";
-    container.style.top = "0";
-    container.style.height = "100vh";
-  }
-
-  let targetProgress = 0;
-
-  function calculateProgress() {
-    const rect = howSection.getBoundingClientRect();
-    const scrollTop = -rect.top;
-    const totalHeight = howSection.offsetHeight - window.innerHeight;
-
-    targetProgress = Math.max(0, Math.min(1, scrollTop / totalHeight));
-  }
-
-  window.addEventListener("scroll", calculateProgress);
-
-  // ===============================
-  // 🔥 SMOOTH RAF LOOP
-  // ===============================
-  function animate() {
-    smoothProgress += (targetProgress - smoothProgress) * 0.12;
-    updateSmooth(smoothProgress);
-    requestAnimationFrame(animate);
-  }
-
-  animate();
-}
-
-// ===============================
-// INITIAL STATE
-// ===============================
-updateSmooth(0);
-// ===============================
+// ============================================================================================================================
 // 6. SERVICES
-// ===============================
+// ============================================================================================================================
 const gateway = document.querySelector('.services-gateway');
 
 if (gateway) {
@@ -898,9 +518,9 @@ if (gateway) {
 
   gatewayObserver.observe(gateway);
 }
-// ===============================
+// ============================================================================================================================
 // 7. EHR
-// ===============================
+// ============================================================================================================================
 const ehrSection = document.querySelector('.ehr-premium');
 
 if (ehrSection) {
@@ -913,9 +533,9 @@ if (ehrSection) {
   ehrObserver.observe(ehrSection);
 }  
 
-// ===============================
+// ============================================================================================================================
 // 8. EDITORIAL INSIGHTS
-// ===============================  
+// ============================================================================================================================
   const insights = document.querySelector('.insights-editorial');
 
 if (insights) {
