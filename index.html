@@ -562,79 +562,80 @@
     <p class="section-subtitle center">
       A step-by-step transformation from revenue leakage to predictable growth
     </p>
+
     <div class="narrative">
       
     <!-- LEFT SIDE -->
-      <div class="narrative-content">
+    <div class="narrative-content">
 
       <div class="narrative-step active">
         <h2>Revenue is leaking silently</h2>
-        <p>
-          Hidden inefficiencies cause <strong>revenue loss</strong> before claims are even submitted —
-          across workflows, data capture, and front-desk operations.
-        </p>
+        <p>Hidden inefficiencies cause <strong>revenue loss</strong> before claims are even submitted.</p>
       </div>
 
       <div class="narrative-step">
         <h2>Eligibility errors go unnoticed</h2>
-        <p>
-          Missing or incorrect <strong>insurance verification</strong> leads to claim rejections
-          before they even reach the payer.
-        </p>
+        <p>Incorrect <strong>insurance verification</strong> leads to claim rejections.</p>
       </div>
 
       <div class="narrative-step">
         <h2>Claims are submitted with errors</h2>
-        <p>
-          Coding inconsistencies and <strong>incomplete documentation</strong> create preventable
-          errors that reduce first-pass acceptance rates.
-        </p>
+        <p><strong>Incomplete documentation</strong> reduces first-pass acceptance.</p>
       </div>
 
       <div class="narrative-step">
         <h2>Denials start increasing</h2>
-        <p>
-          Payers reject claims due to <strong>avoidable issues</strong> — increasing rework,
-          delays, and administrative burden.
-        </p>
+        <p>Payers reject claims due to <strong>avoidable issues</strong>.</p>
       </div>
 
       <div class="narrative-step">
         <h2>Revenue gets recovered</h2>
-        <p>
-          Denied and aging claims are identified, corrected, and resubmitted —
-          converting lost revenue into collected cash.
-        </p>
+        <p>Denied claims are corrected and resubmitted.</p>
       </div>
 
       <div class="narrative-step">
         <h2>Revenue becomes predictable</h2>
-        <p>
-          With a fully <strong>optimized system,</strong> your revenue becomes consistent,
-          measurable, and scalable.
-        </p>
+        <p>Optimized system = scalable revenue.</p>
       </div>
 
       <div class="story-progress">
         <div class="story-progress-fill" id="storyProgress"></div>
       </div>
-      
     </div>
 
     <!-- RIGHT SIDE -->
     <div class="narrative-visual">
+      
+      <div id="lottieScene" class="lottie-scene"></div>
 
-      <!-- CONTROL PANEL -->
       <div class="panel control-panel">
 
         <div class="panel-title">Revenue Control Center</div>
 
-          <div class="control-item"><span>Eligibility Checks</span><div class="toggle"></div></div>
-          <div class="control-item"><span>Coding Accuracy</span><div class="toggle"></div></div>
-          <div class="control-item"><span>Claim Scrubbing</span><div class="toggle"></div></div>
-          <div class="control-item"><span>Denial Prevention</span><div class="toggle"></div></div>
-          <div class="control-item"><span>AR Recovery</span><div class="toggle"></div></div>
-          <div class="control-item"><span>Revenue Optimization</span><div class="toggle"></div></div>
+        <div class="control-item" data-info="Prevents eligibility denials by 30%">
+          <span>Eligibility Checks</span>
+          <div class="toggle"></div>
+        </div>
+        <div class="control-item" data-info="Improves clean claim rate significantly">
+          <span>Coding Accuracy</span>
+          <div class="toggle"></div>
+        </div>
+        <div class="control-item" data-info="Catches errors before submission">
+          <span>Claim Scrubbing</span>
+          <div class="toggle"></div>
+        </div>
+        <div class="control-item" data-info="Reduces rejection rates from payers">
+          <span>Denial Prevention</span>
+          <div class="toggle"></div>
+        </div>
+        <div class="control-item" data-info="Recovers aging AR and lost revenue">
+          <span>AR Recovery</span>
+          <div class="toggle"></div>
+        </div>
+        <div class="control-item" data-info="Optimizes full revenue cycle performance">
+          <span>Revenue Optimization</span>
+          <div class="toggle"></div>
+        </div>
 
         <div class="line-chart">
           <svg viewBox="0 0 100 80" class="chart-svg">
@@ -645,40 +646,45 @@
         
         <div class="simulator">
 
-        <div class="sim-row">
-          <label>Denial Rate</label>
-          <input type="range" id="denialSlider" min="5" max="40" value="25">
-          <span id="denialValue">25%</span>
-        </div>
-        <div class="sim-row">
-          <label>Eligibility Checks</label>
-          <div class="toggle" data-feature="eligibility"></div>
-        </div>
-        <div class="sim-row">
-          <label>Medical Coding</label>
-          <div class="toggle" data-feature="coding"></div>
-        </div>
-        <div class="sim-row">
-          <label>AR Recovery</label>
-          <div class="toggle" data-feature="ar"></div>
-        </div>
-        <div class="sim-result">
-          <div>Revenue Impact</div>
-          <h2 id="revenueValue">+0%</h2>
-        </div>
-
-      </div>
-      </div>
-
-      <!-- AI INSIGHTS -->
-        <div class="ai-insights" id="aiInsights">
-          <div class="ai-title">AI Insights</div>
-          <div class="ai-content" id="aiDynamic">
-            Detecting revenue inefficiencies...
+          <div class="sim-row">
+            <label>Denial Rate</label>
+            <input type="range" id="denialSlider" min="5" max="40" value="25">
+            <span id="denialValue">25%</span>
           </div>
+
+          <div class="sim-row">
+            <label>Eligibility Checks</label>
+            <div class="toggle" data-feature="eligibility"></div>
+          </div>
+
+          <div class="sim-row">
+            <label>Medical Coding</label>
+            <div class="toggle" data-feature="coding"></div>
+          </div>
+
+          <div class="sim-row">
+            <label>AR Recovery</label>
+            <div class="toggle" data-feature="ar"></div>
+          </div>
+
+          <div class="sim-result">
+            <div>Estimated Monthly Revenue</div>
+            <h2 id="revenueValue">₹0</h2>
+          </div>
+
         </div>
-      
       </div>
+
+      <div class="ai-insights" id="aiInsights">
+        <div class="ai-title">AI Insights</div>
+        <div class="ai-content" id="aiDynamic">
+          Detecting revenue inefficiencies...
+        </div>
+      </div>
+      
+    <div id="tooltip" class="tooltip"></div>
+      
+    </div>
     </div>
   </div>
 </section>
