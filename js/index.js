@@ -512,7 +512,7 @@ const section = document.querySelector(".how-it-works");
 if (section) {
 
   const steps = section.querySelectorAll(".narrative-step");
-  const toggles = section.querySelectorAll(".toggle");
+  const visualToggles = section.querySelectorAll(".control-panel .toggle");
   const progressBar = document.getElementById("storyProgress");
 
   const revPath = document.getElementById("revLine");
@@ -726,13 +726,16 @@ updateSimulation();
     state.denial = 1 - state.revenue;
 
     /* STEP SYSTEM */
-    const stepIndex = Math.floor(state.revenue * steps.length);
+    const stepIndex = Math.min(
+      steps.length - 1,
+      Math.floor(state.revenue * steps.length)
+    );
 
     steps.forEach((step, i) => {
       step.classList.toggle("active", i === stepIndex);
     });
 
-    toggles.forEach((t, i) => {
+    visualToggles.forEach((t, i) => {
       t.classList.toggle("active", i <= stepIndex);
     });
 
