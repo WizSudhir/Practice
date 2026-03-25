@@ -629,9 +629,17 @@
           <div class="toggle"></div>
         </div>
 
-        <div class="panel-metrics">
-          <div><span id="revMetric">0%</span><p>Collections</p></div>
-          <div><span id="denialMetric">0%</span><p>Denials</p></div>
+        <div class="line-chart">
+          <svg viewBox="0 0 300 100" class="chart-svg">
+            <!-- REVENUE LINE -->
+            <polyline id="revLine"
+              points="0,80 60,70 120,60 180,45 240,25 300,10"
+              class="line revenue-line"/>
+            <!-- DENIAL LINE -->
+            <polyline id="denialLine"
+              points="0,20 60,30 120,40 180,55 240,75 300,90"
+              class="line denial-line"/>
+          </svg>
         </div>
 
       </div>
