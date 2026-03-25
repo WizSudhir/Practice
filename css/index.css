@@ -1039,6 +1039,155 @@ z-index: 2;
   5. HOW IT WORKS
 ============================================================================================================================== */
 
+.how-it-works {
+  position: relative;
+}
+
+/* SCROLL PIN CONTAINER */
+.how-it-works .container {
+  position: relative;
+}
+
+.how-it-works.pinned {
+  position: relative;
+  height: 300vh; /* controls scroll duration */
+}
+
+/* STICKY GRID */
+.narrative {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+
+  position: sticky;
+  top: 120px;
+
+  height: 80vh;
+}
+
+/* LEFT CONTENT */
+.narrative-content {
+  position: relative;
+}
+
+.narrative-step {
+  position: absolute;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.6s ease;
+  max-width: 480px;
+}
+
+.narrative-step.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* PROGRESS BAR */
+.story-progress {
+  position: absolute;
+  bottom: -40px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.story-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg,#6366f1,#3b82f6);
+  transition: width 0.4s ease;
+}
+
+/* RIGHT VISUAL */
+.narrative-visual {
+  position: relative;
+}
+
+/* CONTROL PANEL */
+.control-panel {
+  padding: 20px;
+  border-radius: 16px;
+  background: rgba(15,23,42,0.7);
+  border: 1px solid rgba(59,130,246,0.2);
+}
+
+/* TOGGLES */
+.control-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.toggle {
+  width: 36px;
+  height: 18px;
+  background: #1e293b;
+  border-radius: 20px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.toggle::after {
+  content: "";
+  width: 14px;
+  height: 14px;
+  background: #64748b;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: all 0.3s ease;
+}
+
+/* ACTIVE TOGGLE */
+.toggle.active {
+  background: linear-gradient(90deg,#22c55e,#3b82f6);
+  box-shadow: 0 0 10px rgba(34,197,94,0.5);
+}
+
+.toggle.active::after {
+  left: 20px;
+  background: #fff;
+}
+
+/* SVG CHART */
+.chart-svg {
+  margin-top: 20px;
+}
+
+.line {
+  fill: none;
+  stroke-width: 2;
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  transition: stroke-dashoffset 1s ease;
+}
+
+.revenue-line {
+  stroke: #22c55e;
+}
+
+.denial-line {
+  stroke: #f87171;
+}
+
+/* AI INSIGHTS */
+.ai-insights {
+  margin-top: 20px;
+  padding: 16px;
+  border-radius: 12px;
+  background: rgba(2,6,23,0.7);
+  border: 1px solid rgba(99,102,241,0.2);
+  font-size: 13px;
+  min-height: 80px;
+  transition: all 0.4s ease;
+}
 /* ============================================================================================================================
   6. SERVICES GATEWAY
 ============================================================================================================================== */
