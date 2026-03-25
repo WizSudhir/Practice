@@ -634,26 +634,21 @@ function update(index){
       ((index+1)/steps.length)*100 + "%";
   }
 
-  const revLine = document.getElementById("revLine");
-  const denialLine = document.getElementById("denialLine");
+ const revLine = document.getElementById("revLine");
+const denialLine = document.getElementById("denialLine");
 
-  const revProgress = [
-    "0,80",
-    "0,80 60,70",
-    "0,80 60,70 120,60",
-    "0,80 60,70 120,60 180,45",
-    "0,80 60,70 120,60 180,45 240,25",
-    "0,80 60,70 120,60 180,45 240,25 300,10"
-  ];
+function animateGraph(progress) {
 
-  const denialProgress = [
-    "0,90",
-    "0,90 60,75",
-    "0,90 60,75 120,60",
-    "0,90 60,75 120,60 180,45",
-    "0,90 60,75 120,60 180,45 240,30",
-    "0,90 60,75 120,60 180,45 240,30 300,10"
-  ];
+  if (!revLine || !denialLine) return;
+
+  const totalLength = 300; // approx svg length
+
+  revLine.style.strokeDasharray = totalLength;
+  revLine.style.strokeDashoffset = totalLength * (1 - progress);
+
+  denialLine.style.strokeDasharray = totalLength;
+  denialLine.style.strokeDashoffset = totalLength * (1 - progress);
+}
   // AI Insights
   if (revLine && revProgress[index]) {
   revLine.setAttribute("points", revProgress[index]);
@@ -708,28 +703,44 @@ if (howSection) {
   container.style.position = "sticky";
   container.style.top = "0";
   container.style.height = "100vh";
+  
+function applyParallax(progress) {
 
-  function handleScroll() {
+  const visual = document.querySelector(".narrative-visual");
+  const content = document.querySelector(".narrative-content");
 
-    const rect = howSection.getBoundingClientRect();
-    const scrollTop = -rect.top;
-    const totalHeight = howSection.offsetHeight - window.innerHeight;
-
-    const progress = Math.max(0, Math.min(1, scrollTop / totalHeight));
-
-    const stepIndex = Math.min(
-      steps.length - 1,
-      Math.floor(progress * steps.length)
-    );
-
-    if (stepIndex !== current) {
-      current = stepIndex;
-      update(current);
-    }
+  if (visual) {
+    visual.style.transform = `translateY(${progress * -40}px)`;
   }
+
+  if (content) {
+    content.style.transform = `translateY(${progress * 20}px)`;
+  }
+
+}
+function handleScroll() {
+
+  const rect = howSection.getBoundingClientRect();
+  const scrollTop = -rect.top;
+  const totalHeight = howSection.offsetHeight - window.innerHeight;
+
+  const progress = Math.max(0, Math.min(1, scrollTop / totalHeight));
+
+  const rawIndex = progress * (steps.length - 1);
+  const stepIndex = Math.round(rawIndex);
+
+  if (stepIndex !== current) {
+    current = stepIndex;
+    update(current);
+  }
+  // 🔥 PARALLAX (we’ll use this next)
+  applyParallax(progress);
+}
+
 
   window.addEventListener("scroll", handleScroll);
 }
+animateGraph(progress);
 update(0);
 // ===============================
 // 6. SERVICES
