@@ -729,7 +729,17 @@ function updateSmooth(progress){
       aiDynamic.textContent = aiInsights[stepIndex];
     }
   }
+  // 🔥 LINE GRAPH PROGRESSION
+  const line = document.querySelector(".line-path");
 
+  if (line) {
+   const totalLength = line.getTotalLength();
+
+  line.style.opacity = 1; // 🔥 make visible
+
+  line.style.strokeDasharray = totalLength;
+  line.style.strokeDashoffset = totalLength * (1 - progress);
+  }
   // 🔥 SMOOTH METRICS (LERP)
   const revMetric = document.getElementById("revMetric");
   const denialMetric = document.getElementById("denialMetric");
