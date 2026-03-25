@@ -1050,7 +1050,6 @@ z-index: 2;
 
 .how-it-works.pinned {
   position: relative;
-  height: 300vh; /* controls scroll duration */
 }
 
 /* STICKY GRID */
@@ -1058,10 +1057,8 @@ z-index: 2;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
-
-  position: sticky;
+  position: relative;
   top: 120px;
-
   height: 80vh;
 }
 
