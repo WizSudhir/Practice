@@ -501,10 +501,6 @@ if (proofSection) {
 // ============================================================================================================================
 // 5. STRIPE-LEVEL HOW IT WORKS
 // ============================================================================================================================
-/* =========================================
-   FAANG-LEVEL SYSTEM ENGINE
-========================================= */
-
 if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
@@ -521,10 +517,7 @@ if (section) {
   const denialPath = document.getElementById("denialLine");
   const aiText = document.getElementById("aiDynamic");
 
-  /* =========================================
-     SYSTEM STATE
-  ========================================= */
-
+  /* STATE */
   const state = {
     progress: 0,
     velocity: 0,
@@ -532,10 +525,7 @@ if (section) {
     denial: 100
   };
 
-  /* =========================================
-     SPRING PHYSICS (APPLE-LIKE MOTION)
-  ========================================= */
-
+  /* SPRING */
   function spring(current, target, velocity, stiffness = 0.08, damping = 0.8) {
     const force = (target - current) * stiffness;
     velocity = (velocity + force) * damping;
@@ -543,10 +533,7 @@ if (section) {
     return { current, velocity };
   }
 
-  /* =========================================
-     AI INTELLIGENCE LAYER
-  ========================================= */
-
+  /* AI */
   const insights = [
     "Analyzing revenue leakage patterns...",
     "Cross-referencing payer eligibility...",
@@ -562,23 +549,24 @@ if (section) {
     if (step === lastStep) return;
     lastStep = step;
 
-    gsap.fromTo(aiText,
-      { opacity: 0, y: 10 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.4,
-        onStart: () => {
-          aiText.textContent = insights[step];
+    if (typeof gsap !== "undefined") {
+      gsap.fromTo(aiText,
+        { opacity: 0, y: 10 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.4,
+          onStart: () => {
+            aiText.textContent = insights[step];
+          }
         }
-      }
-    );
+      );
+    } else {
+      aiText.textContent = insights[step];
+    }
   }
 
-  /* =========================================
-     CURVE ENGINE (LINEAR STYLE)
-  ========================================= */
-
+  /* CURVE */
   function generateCurve(p) {
     return `
       M0,80
@@ -589,121 +577,107 @@ if (section) {
        100,${5 + p * 5}
     `;
   }
-  /* =========================================
-   INTERACTIVE REVENUE SIMULATOR
-========================================= */
 
-const denialSlider = document.getElementById("denialSlider");
-const denialValue = document.getElementById("denialValue");
-const revenueValue = document.getElementById("revenueValue");
+  /* =========================
+     REAL RCM MODEL
+  ========================= */
 
-const featureToggles = document.querySelectorAll(".toggle[data-feature]");
+  const denialSlider = document.getElementById("denialSlider");
+  const denialValue = document.getElementById("denialValue");
+  const revenueValue = document.getElementById("revenueValue");
+  const featureToggles = document.querySelectorAll(".toggle[data-feature]");
 
-const simState = {
-  denial: 25,
-  eligibility: false,
-  coding: false,
-  ar: false
-};
+  const simState = {
+    denial: 25,
+    eligibility: false,
+    coding: false,
+    ar: false
+  };
 
-/* =========================================
-   UPDATE SIMULATION
-========================================= */
+  const BASE_REVENUE = 100000; // ₹1L baseline
 
-function calculateRevenue() {
-  let impact = 0;
+  function calculateRevenue() {
+    const denialRate = simState.denial / 100;
 
-  // Base denial impact
-  impact -= simState.denial * 0.8;
+    const cleanClaimRate =
+      1 - denialRate +
+      (simState.eligibility ? 0.08 : 0) +
+      (simState.coding ? 0.12 : 0);
 
-  // Feature boosts
-  if (simState.eligibility) impact += 15;
-  if (simState.coding) impact += 20;
-  if (simState.ar) impact += 25;
+    const netCollectionRate =
+      0.85 +
+      (simState.ar ? 0.1 : 0);
 
-  return Math.max(0, Math.round(impact));
-}
+    const revenue =
+      BASE_REVENUE *
+      cleanClaimRate *
+      netCollectionRate;
 
-/* =========================================
-   APPLY TO UI + SYSTEM
-========================================= */
-
-function updateSimulation() {
-
-  const revenue = calculateRevenue();
-
-  // UI update
-  revenueValue.innerText = `+${revenue}%`;
-
-  // 🔥 Connect to FAANG system
-  state.revenue = revenue / 100;
-
-  // Glow boost
-  document.documentElement.style.setProperty(
-    "--rev-glow",
-    revenue / 5
-  );
-
-  // AI feedback
-  if (aiText) {
-    aiText.textContent =
-      revenue > 40
-        ? "Revenue optimized. System performing at peak."
-        : revenue > 20
-        ? "Improvements detected. Continue optimizing workflows."
-        : "Revenue leakage detected. Intervention required.";
+    return Math.max(0, Math.round(revenue));
   }
 
-}
+  function updateSimulation() {
 
-/* =========================================
-   EVENTS
-========================================= */
+    const revenue = calculateRevenue();
 
-if (denialSlider) {
-  denialSlider.addEventListener("input", e => {
-    simState.denial = parseInt(e.target.value);
-    denialValue.innerText = `${simState.denial}%`;
-    updateSimulation();
-  });
-}
+    revenueValue.innerText = `₹${revenue.toLocaleString()}`;
 
-featureToggles.forEach(toggle => {
-  toggle.addEventListener("click", () => {
-    const key = toggle.dataset.feature;
+    state.revenue = revenue / (BASE_REVENUE * 1.5);
 
-    simState[key] = !simState[key];
-    toggle.classList.toggle("active");
+    document.documentElement.style.setProperty(
+      "--rev-glow",
+      state.revenue * 10
+    );
 
-    updateSimulation();
-  });
-});
-
-/* INIT */
-updateSimulation();
-  /* =========================================
-     SCROLL DRIVER
-  ========================================= */
-
-  if (window.innerWidth > 768) {
-  ScrollTrigger.create({
-    trigger: section,
-    start: "top top",
-    end: "+=3000",
-    scrub: true,
-    pin: true,
-    anticipatePin: 1,
-
-    onUpdate: self => {
-      state.progress = self.progress;
+    if (aiText) {
+      aiText.textContent =
+        revenue > 130000
+          ? "Revenue optimized. System performing at peak."
+          : revenue > 100000
+          ? "Improvements detected. Continue optimizing workflows."
+          : "Revenue leakage detected. Intervention required.";
     }
-  });
   }
 
-  /* =========================================
-     MOUSE INTERACTION (INSANE DETAIL)
-  ========================================= */
+  if (denialSlider) {
+    denialSlider.addEventListener("input", e => {
+      simState.denial = parseInt(e.target.value);
+      denialValue.innerText = `${simState.denial}%`;
+      updateSimulation();
+    });
+  }
 
+  featureToggles.forEach(toggle => {
+    toggle.addEventListener("click", () => {
+      const key = toggle.dataset.feature;
+      simState[key] = !simState[key];
+      toggle.classList.toggle("active");
+      updateSimulation();
+    });
+  });
+
+  updateSimulation();
+
+  /* SCROLL */
+  if (window.innerWidth > 768 && typeof ScrollTrigger !== "undefined") {
+    ScrollTrigger.create({
+      trigger: section,
+      start: "top top",
+      end: "+=3000",
+      scrub: true,
+      pin: true,
+      onUpdate: self => {
+        state.progress = self.progress;
+
+        if (lottieInstance) {
+          const totalFrames = lottieInstance.totalFrames || 300;
+          lottieInstance.goToAndStop(self.progress * totalFrames, true);
+        }
+      }
+    });
+  }
+
+  /* MOUSE */
   let mouseBoost = 0;
 
   document.addEventListener("mousemove", (e) => {
@@ -711,13 +685,9 @@ updateSimulation();
     mouseBoost = (x - 0.5) * 0.2;
   });
 
-  /* =========================================
-     MAIN ENGINE LOOP (RAF)
-  ========================================= */
-
+  /* LOOP */
   function animate() {
 
-    /* SPRING SMOOTHING */
     const springResult = spring(
       state.revenue,
       state.progress + mouseBoost,
@@ -726,10 +696,8 @@ updateSimulation();
 
     state.revenue = springResult.current;
     state.velocity = springResult.velocity;
-
     state.denial = 1 - state.revenue;
 
-    /* STEP SYSTEM */
     const stepIndex = Math.min(
       steps.length - 1,
       Math.floor(state.revenue * steps.length)
@@ -745,27 +713,62 @@ updateSimulation();
 
     updateAI(stepIndex);
 
-    /* CHART MORPH */
     if (revPath && denialPath) {
       revPath.setAttribute("d", generateCurve(state.revenue));
       denialPath.setAttribute("d", generateCurve(state.denial));
     }
 
-    /* PROGRESS BAR */
     if (progressBar) {
       progressBar.style.width = `${state.revenue * 100}%`;
     }
-
-    /* GLOBAL GLOW */
-    document.documentElement.style.setProperty(
-      "--rev-glow",
-      state.revenue * 12
-    );
 
     requestAnimationFrame(animate);
   }
 
   animate();
+}
+/* =========================================
+   TOOLTIP SYSTEM
+========================================= */
+
+const tooltip = document.getElementById("tooltip");
+const controlItems = document.querySelectorAll(".control-item");
+
+controlItems.forEach(item => {
+
+  item.addEventListener("mouseenter", (e) => {
+    const text = item.dataset.info;
+    if (!text) return;
+
+    tooltip.innerText = text;
+    tooltip.style.opacity = "1";
+  });
+
+  item.addEventListener("mousemove", (e) => {
+    tooltip.style.left = e.pageX + 15 + "px";
+    tooltip.style.top = e.pageY + 15 + "px";
+  });
+
+  item.addEventListener("mouseleave", () => {
+    tooltip.style.opacity = "0";
+  });
+
+});
+/* =========================================
+   LOTTIE INTEGRATION
+========================================= */
+
+let lottieInstance;
+
+if (typeof lottie !== "undefined") {
+
+  lottieInstance = lottie.loadAnimation({
+    container: document.getElementById('lottieScene'),
+    renderer: 'svg',
+    loop: false,
+    autoplay: false,
+    path: '/animations/rcm-flow.json' // replace with your file
+  });
 
 }
 // ============================================================================================================================
