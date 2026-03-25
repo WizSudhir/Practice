@@ -649,10 +649,28 @@ function update(index){
     "0,20 60,30 120,40 180,55 240,75",
     "0,20 60,30 120,40 180,55 240,75 300,90"
   ];
-
+  // AI Insights
   if (revLine) revLine.setAttribute("points", revProgress[index]);
   if (denialLine) denialLine.setAttribute("points", denialProgress[index]);
+  const aiInsights = [
+    "Detecting revenue leakage patterns...",
+    "Eligibility errors identified",
+    "Claim error probability ↑ 28%",
+    "Denials predicted ↓ 32%",
+    "Recovery opportunities detected",
+    "Revenue stabilized with AI optimization"
+  ];
 
+  const aiBox = document.querySelector(".ai-panel");
+
+  if (aiBox) {
+    aiBox.querySelectorAll(".ai-item").forEach((el, i) => {
+      el.style.opacity = i <= index ? 1 : 0.3;
+    });
+
+    const dynamic = document.getElementById("aiDynamic");
+    if (dynamic) dynamic.textContent = aiInsights[index];
+  }
   // HERO SYNC
   const system=document.querySelector(".system-bg");
   const nodes=document.querySelectorAll(".node");
