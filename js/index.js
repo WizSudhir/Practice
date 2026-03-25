@@ -587,7 +587,98 @@ if (section) {
        100,${5 + p * 5}
     `;
   }
+  /* =========================================
+   INTERACTIVE REVENUE SIMULATOR
+========================================= */
 
+const denialSlider = document.getElementById("denialSlider");
+const denialValue = document.getElementById("denialValue");
+const revenueValue = document.getElementById("revenueValue");
+
+const featureToggles = document.querySelectorAll(".toggle[data-feature]");
+
+const simState = {
+  denial: 25,
+  eligibility: false,
+  coding: false,
+  ar: false
+};
+
+/* =========================================
+   UPDATE SIMULATION
+========================================= */
+
+function calculateRevenue() {
+  let impact = 0;
+
+  // Base denial impact
+  impact -= simState.denial * 0.8;
+
+  // Feature boosts
+  if (simState.eligibility) impact += 15;
+  if (simState.coding) impact += 20;
+  if (simState.ar) impact += 25;
+
+  return Math.max(0, Math.round(impact));
+}
+
+/* =========================================
+   APPLY TO UI + SYSTEM
+========================================= */
+
+function updateSimulation() {
+
+  const revenue = calculateRevenue();
+
+  // UI update
+  revenueValue.innerText = `+${revenue}%`;
+
+  // 🔥 Connect to FAANG system
+  state.revenue = revenue / 100;
+
+  // Glow boost
+  document.documentElement.style.setProperty(
+    "--rev-glow",
+    revenue / 5
+  );
+
+  // AI feedback
+  if (aiText) {
+    aiText.textContent =
+      revenue > 40
+        ? "Revenue optimized. System performing at peak."
+        : revenue > 20
+        ? "Improvements detected. Continue optimizing workflows."
+        : "Revenue leakage detected. Intervention required.";
+  }
+
+}
+
+/* =========================================
+   EVENTS
+========================================= */
+
+if (denialSlider) {
+  denialSlider.addEventListener("input", e => {
+    simState.denial = parseInt(e.target.value);
+    denialValue.innerText = `${simState.denial}%`;
+    updateSimulation();
+  });
+}
+
+featureToggles.forEach(toggle => {
+  toggle.addEventListener("click", () => {
+    const key = toggle.dataset.feature;
+
+    simState[key] = !simState[key];
+    toggle.classList.toggle("active");
+
+    updateSimulation();
+  });
+});
+
+/* INIT */
+updateSimulation();
   /* =========================================
      SCROLL DRIVER
   ========================================= */
