@@ -611,8 +611,8 @@ const toggles = document.querySelectorAll(".toggle");
 let current = 0;
 let autoPlay;
 
-const revValues = [20,45,70,95];
-const denialValues = [40,25,15,5];
+const revValues = [20,30,40,55,75,95];
+const denialValues = [45,50,55,40,20,5];
 
 function update(index){
 
