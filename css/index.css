@@ -4,9 +4,9 @@
 body {
   box-shadow: inset 0 0 calc(var(--rev-glow) * 40px) rgba(34,197,94,0.05);
 }
-/* ===============================
+/* ============================================================================================================================
    1. DESKTOP HERO SECTION
-================================= */
+============================================================================================================================== */
 .hero-system {
   position: relative;
   min-height: calc(100svh - var(--nav-height));
@@ -557,9 +557,9 @@ z-index: 2;
   }
 }
 
-/* ===============================
+/* ============================================================================================================================
    2. MOBILE HERO SECTION
-================================= */
+============================================================================================================================== */
 .hero-grid {
   position: absolute;
   inset: 0;
@@ -787,9 +787,9 @@ z-index: 2;
 }
 }
 
-/* ===============================
+/* ============================================================================================================================
   3. ABOUT / BELIEF
-================================= */
+============================================================================================================================== */
 .about-belief .section-title {
   margin-bottom: 56px;
 }
@@ -906,7 +906,6 @@ z-index: 2;
   background: rgba(248,113,113,0.08);
   animation: blink 1.2s infinite;
 }
-
 /* SUCCESS STATE */
 .system-resolved {
   position: relative;
@@ -918,12 +917,10 @@ z-index: 2;
   transform: translateY(10px);
   transition: all 0.5s ease;
 }
-
 .system-item.success {
   color: #4ade80;
   background: rgba(34,197,94,0.08);
 }
-
 /* FOOTER */
 .system-footer {
   margin-top: 12px;
@@ -931,7 +928,6 @@ z-index: 2;
   color: #94a3b8;
   opacity: 0.8;
 }
-
 /* METRIC */
 .system-metric {
   margin-top: 12px;
@@ -942,33 +938,27 @@ z-index: 2;
   transform: translateY(10px);
   transition: all 0.6s ease;
 }
-
 /* ACTIVE STATE (TRANSFORMATION) */
-
 /* HIDE ERRORS */
 .system-card.active .system-errors {
   opacity: 0;
   transform: translateY(-10px);
 }
-
 /* SHOW RESOLVED */
 .system-card.active .system-resolved {
   opacity: 1;
   max-height: 300px;
   transform: translateY(0);
 }
-
 /* SHOW METRIC */
 .system-card.active .system-metric {
   opacity: 1;
   transform: translateY(0);
 }
-
 /* STOP BLINK */
 .system-card.active .error {
   animation: none;
 }
-
 /* BELIEF CARDS (UPGRADE) */
 .belief-card {
   display: flex;
@@ -1018,9 +1008,9 @@ z-index: 2;
   font-size: 16px;
   color: var(--text-secondary);
 }
-/* ===============================
+/* ============================================================================================================================
   4. METRIC
-================================= */
+============================================================================================================================== */
 .metrics-row {
   display: flex;
   justify-content: space-between;
@@ -1045,204 +1035,13 @@ z-index: 2;
   color: var(--text-secondary);
   margin-top: 6px;
 }
-/* ===============================
+/* ============================================================================================================================
   5. HOW IT WORKS
-================================= */
-.section-subtitle {
-  max-width: 700px;
-  margin: 10px auto 40px;
-  color: var(--text-muted);
-  font-size: 15px;
-}
-.how-it-works {
-  overflow: hidden;
-  scroll-snap-type: y mandatory;
-}
-.narrative {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: 60px;
-  scroll-snap-align: start;
-  position: relative;
-}
-.narrative-content {
-  position: sticky;
-  top: 120px;
-  height: fit-content;
-}
-.narrative-step {
-  opacity: 0.3;
-  transform: translateY(20px);
-  transition: all 0.6s ease;
-  position: absolute;
-}
-.narrative-step.active {
-  opacity: 1;
-  transform: translateY(0);
-  position: relative;
-}
-.narrative-visual {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-.story-progress {
-  height: 3px;
-  background: rgba(255,255,255,0.1);
-  margin-top: 20px;
-  width: 100%;
-}
-.story-progress-fill {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg,#6366f1,#4ade80);
-  transition: width 0.4s ease;
-}
-/* PANELS */
-.panel {
-  padding: 16px;
-  border-radius: 14px;
-  background: rgba(15,23,42,0.85);
-  border: 1px solid rgba(255,255,255,0.1);
-  transition: all 0.4s ease;
-}
-.panel:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-}
-.panel-title {
-  font-size: 12px;
-  color: #94a3b8;
-  margin-bottom: 10px;
-}
-/* TOGGLES */
-.control-item {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
-}
-.control-item .toggle.active {
-  background: #22c55e;
-  box-shadow: 0 0 10px rgba(34,197,94,0.6);
-}
-.toggle {
-  width: 32px;
-  height: 16px;
-  background: rgba(255,255,255,0.2);
-  border-radius: 20px;
-  position: relative;
-}
-.toggle::after {
-  content: "";
-  width: 12px;
-  height: 12px;
-  background: white;
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  border-radius: 50%;
-}
-.toggle.active {
-  background: #4ade80;
-}
-.toggle.active::after {
-  left: 18px;
-}
-/* METRICS */
-.chart-svg {
-  width: 100%;
-  height: 80px;
-}
-.line {
-  fill: none;
-  stroke-width: 2;
-}
-.revenue-line {
-  stroke: #4ade80;
-}
-.denial-line {
-  stroke: #f87171;
-  opacity: 0.6;
-}
-/* TOOLTIP */
-.tooltip-trigger {
-  position: relative;
-  cursor: pointer;
-}
+============================================================================================================================== */
 
-.tooltip-box {
-  position: absolute;
-  bottom: 130%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #020617;
-  padding: 6px;
-  font-size: 10px;
-  opacity: 0;
-  transition: 0.2s;
-}
-.revenue-control {
-  position: sticky;
-  top: 120px;
-}
-.tooltip-trigger:hover .tooltip-box {
-  opacity: 1;
-}
-
-/* AI */
-.ai-item {
-  font-size: 13px;
-  margin-bottom: 6px;
-  color: #93c5fd;
-}
-
-/* CHART */
-.mini-chart {
-  display: flex;
-  height: 60px;
-  gap: 6px;
-}
-
-.bar {
-  flex: 1;
-  background: linear-gradient(#22c55e, #3b82f6);
-  height: 20%;
-  transition: 0.5s;
-}
-
-.highlight {
-  background: linear-gradient(#4ade80, #2563eb);
-}
-.ai-insights {
-  margin-top: 16px;
-  padding: 12px;
-  border-radius: 10px;
-  background: rgba(59,130,246,0.08);
-  border: 1px solid rgba(59,130,246,0.2);
-  font-size: 12px;
-  color: #cbd5f5;
-}
-
-.ai-title {
-  font-weight: 600;
-  margin-bottom: 6px;
-  color: #93c5fd;
-}
-/* PROGRESS */
-.progress-bar {
-  height: 2px;
-  background: rgba(255,255,255,0.1);
-}
-
-.progress-fill {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg,#6366f1,#4ade80);
-}
-/* ===============================
+/* ============================================================================================================================
   6. SERVICES GATEWAY
-================================= */
+============================================================================================================================== */
 .gateway-subtext {
   margin-top: var(--space-sm);
   color: var(--text-secondary);
@@ -1259,9 +1058,9 @@ z-index: 2;
   border-color: var(--border-accent);
 }
 
-/* ===============================
+/* ============================================================================================================================
   7. OUTCOMES
-================================= */
+============================================================================================================================== */
 .outcome-card {
   background: var(--bg-elevated);
   border-radius: var(--radius-md);
@@ -1278,9 +1077,9 @@ z-index: 2;
   box-shadow: var(--shadow-glow);
 }
 
-/* ===============================
+/* ============================================================================================================================
   8. EHR SECTION
-================================= */
+============================================================================================================================== */
 /* SUBTEXT */
 .ehr-subtext {
   max-width: 650px;
@@ -1357,12 +1156,12 @@ z-index: 2;
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-/* ===============================
+/* ============================================================================================================================
   9. ENGAGEMENT MODEL
-================================= */
-/* ===============================
+============================================================================================================================== */
+/* ============================================================================================================================
   10. EDITORIAL INSIGHTS
-================================= */
+============================================================================================================================== */
 .insight-item img {
   width: 100%;
   border-radius: 8px;
@@ -1410,17 +1209,17 @@ z-index: 2;
   color: #4ade80;
   transform: translateX(6px);
 }
-/* ===============================
+/* ============================================================================================================================
   11. FINAL CTA
-================================= */
+============================================================================================================================== */
 .cta-urgency {
   font-size: 13px;
   color: rgba(255,255,255,0.6);
   margin-top: 10px;
 }
-/* ===============================
+/* ============================================================================================================================
    12. SCROLLBAR
-================================= */
+============================================================================================================================== */
 ::-webkit-scrollbar { width:8px; }
 ::-webkit-scrollbar-track { background: var(--bg-primary); }
 ::-webkit-scrollbar-thumb {
