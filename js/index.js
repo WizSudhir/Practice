@@ -502,7 +502,7 @@ if (proofSection) {
 // 5. STRIPE-LEVEL HOW IT WORKS
 // ============================================================================================================================
 /* =========================================
-   ULTRA-PREMIUM HOW IT WORKS
+   FAANG-LEVEL SYSTEM ENGINE
 ========================================= */
 
 gsap.registerPlugin(ScrollTrigger);
@@ -515,85 +515,81 @@ if (section) {
   const toggles = section.querySelectorAll(".toggle");
   const progressBar = document.getElementById("storyProgress");
 
-  const revPath = document.querySelector("#revLine");
-  const denialPath = document.querySelector("#denialLine");
+  const revPath = document.getElementById("revLine");
+  const denialPath = document.getElementById("denialLine");
   const aiText = document.getElementById("aiDynamic");
 
-  const insights = [
-    "Scanning workflows for revenue leakage...",
-    "Validating eligibility & payer rules...",
-    "Improving coding accuracy in real-time...",
-    "Detecting denial patterns...",
-    "Recovering aging receivables...",
-    "Revenue stabilized. System optimized."
-  ];
-
   /* =========================================
-     BEZIER CURVE GENERATOR (LINEAR STYLE)
+     SYSTEM STATE
   ========================================= */
 
-  function generateCurve(progress) {
-    const height = 80 - progress * 60;
+  const state = {
+    progress: 0,
+    velocity: 0,
+    revenue: 0,
+    denial: 100
+  };
 
+  /* =========================================
+     SPRING PHYSICS (APPLE-LIKE MOTION)
+  ========================================= */
+
+  function spring(current, target, velocity, stiffness = 0.08, damping = 0.8) {
+    const force = (target - current) * stiffness;
+    velocity = (velocity + force) * damping;
+    current += velocity;
+    return { current, velocity };
+  }
+
+  /* =========================================
+     AI INTELLIGENCE LAYER
+  ========================================= */
+
+  const insights = [
+    "Analyzing revenue leakage patterns...",
+    "Cross-referencing payer eligibility...",
+    "Optimizing coding accuracy...",
+    "Detecting denial clusters...",
+    "Recovering lost revenue streams...",
+    "System stabilized. Revenue optimized."
+  ];
+
+  let lastStep = -1;
+
+  function updateAI(step) {
+    if (step === lastStep) return;
+    lastStep = step;
+
+    gsap.fromTo(aiText,
+      { opacity: 0, y: 10 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.4,
+        onStart: () => {
+          aiText.textContent = insights[step];
+        }
+      }
+    );
+  }
+
+  /* =========================================
+     CURVE ENGINE (LINEAR STYLE)
+  ========================================= */
+
+  function generateCurve(p) {
     return `
       M0,80
-      C20,${80 - progress * 20}
-       40,${60 - progress * 30}
-       60,${height}
-      S100,${10 + progress * 10}
-       100,${5 + progress * 5}
+      C20,${80 - p * 20}
+       40,${60 - p * 30}
+       60,${40 - p * 30}
+      S100,${10 + p * 10}
+       100,${5 + p * 5}
     `;
   }
 
   /* =========================================
-     AI TYPEWRITER
-  ========================================= */
-
-  let typingTween;
-
-  function typeText(text) {
-    if (!aiText) return;
-
-    if (typingTween) typingTween.kill();
-
-    aiText.textContent = "";
-
-    let obj = { i: 0 };
-
-    typingTween = gsap.to(obj, {
-      i: text.length,
-      duration: 1,
-      ease: "none",
-      onUpdate: () => {
-        aiText.textContent = text.substring(0, obj.i);
-      }
-    });
-  }
-
-  /* =========================================
-     PARALLAX DEPTH SYSTEM
-  ========================================= */
-
-  const panel = document.querySelector(".control-panel");
-
-  document.addEventListener("mousemove", (e) => {
-    if (!panel) return;
-
-    const x = (e.clientX / window.innerWidth - 0.5) * 20;
-    const y = (e.clientY / window.innerHeight - 0.5) * 20;
-
-    gsap.to(panel, {
-      rotateY: x,
-      rotateX: -y,
-      transformPerspective: 1000,
-      transformOrigin: "center",
-      duration: 0.5,
-      ease: "power3.out"
-    });
-  });
-
-  /* =========================================
-     SCROLL ENGINE
+     SCROLL DRIVER
   ========================================= */
 
   ScrollTrigger.create({
@@ -605,60 +601,73 @@ if (section) {
     anticipatePin: 1,
 
     onUpdate: self => {
-
-      const progress = self.progress;
-
-      /* ==============================
-         STEP SYSTEM
-      ============================== */
-
-      const stepIndex = Math.floor(progress * steps.length);
-
-      steps.forEach((step, i) => {
-        step.classList.toggle("active", i === stepIndex);
-      });
-
-      toggles.forEach((t, i) => {
-        t.classList.toggle("active", i <= stepIndex);
-      });
-
-      /* ==============================
-         AI TEXT
-      ============================== */
-
-      if (!self.prevStep || self.prevStep !== stepIndex) {
-        typeText(insights[stepIndex] || insights[insights.length - 1]);
-        self.prevStep = stepIndex;
-      }
-
-      /* ==============================
-         BEZIER CHART MORPH
-      ============================== */
-
-      if (revPath && denialPath) {
-        revPath.setAttribute("d", generateCurve(progress));
-        denialPath.setAttribute("d", generateCurve(1 - progress));
-      }
-
-      /* ==============================
-         PROGRESS BAR
-      ============================== */
-
-      if (progressBar) {
-        progressBar.style.width = `${progress * 100}%`;
-      }
-
-      /* ==============================
-         GLOW SYSTEM
-      ============================== */
-
-      document.documentElement.style.setProperty(
-        "--rev-glow",
-        progress * 10
-      );
-
+      state.progress = self.progress;
     }
   });
+
+  /* =========================================
+     MOUSE INTERACTION (INSANE DETAIL)
+  ========================================= */
+
+  let mouseBoost = 0;
+
+  document.addEventListener("mousemove", (e) => {
+    const x = e.clientX / window.innerWidth;
+    mouseBoost = (x - 0.5) * 0.2;
+  });
+
+  /* =========================================
+     MAIN ENGINE LOOP (RAF)
+  ========================================= */
+
+  function animate() {
+
+    /* SPRING SMOOTHING */
+    const springResult = spring(
+      state.revenue,
+      state.progress + mouseBoost,
+      state.velocity
+    );
+
+    state.revenue = springResult.current;
+    state.velocity = springResult.velocity;
+
+    state.denial = 1 - state.revenue;
+
+    /* STEP SYSTEM */
+    const stepIndex = Math.floor(state.revenue * steps.length);
+
+    steps.forEach((step, i) => {
+      step.classList.toggle("active", i === stepIndex);
+    });
+
+    toggles.forEach((t, i) => {
+      t.classList.toggle("active", i <= stepIndex);
+    });
+
+    updateAI(stepIndex);
+
+    /* CHART MORPH */
+    if (revPath && denialPath) {
+      revPath.setAttribute("d", generateCurve(state.revenue));
+      denialPath.setAttribute("d", generateCurve(state.denial));
+    }
+
+    /* PROGRESS BAR */
+    if (progressBar) {
+      progressBar.style.width = `${state.revenue * 100}%`;
+    }
+
+    /* GLOBAL GLOW */
+    document.documentElement.style.setProperty(
+      "--rev-glow",
+      state.revenue * 12
+    );
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
 
 }
 // ============================================================================================================================
