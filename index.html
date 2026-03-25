@@ -623,16 +623,17 @@
           <div class="control-item"><span>Claim Scrubbing</span><div class="toggle"></div></div>
           <div class="control-item"><span>Denial Prevention</span><div class="toggle"></div></div>
           <div class="control-item"><span>AR Recovery</span><div class="toggle"></div></div>
+          <div class="control-item"><span>Revenue Optimization</span><div class="toggle"></div></div>
 
         <div class="line-chart">
           <svg viewBox="0 0 300 100" class="chart-svg">
             <!-- REVENUE LINE -->
             <polyline id="revLine"
-              points="0,80 60,70 120,60 180,45 240,25 300,10"
+              points="0,80"
               class="line revenue-line"/>
             <!-- DENIAL LINE -->
             <polyline id="denialLine"
-              points="0,20 60,30 120,40 180,55 240,75 300,90"
+              points="0,20"
               class="line denial-line"/>
           </svg>
         </div>
@@ -650,14 +651,13 @@
           </span>
         </div>
 
-        <div class="ai-item">
-          Denials predicted ↓ 32%
+        <div class="ai-item" id="aiDenials">
           <span class="tooltip-trigger">ⓘ
             <span class="tooltip-box">Based on payer trends</span>
           </span>
         </div>
 
-        <div class="ai-item">
+        <div class="ai-item" id="aiClaims">
           Clean claims ↑ 45%
           <span class="tooltip-trigger">ⓘ
             <span class="tooltip-box">Higher first-pass acceptance</span>
@@ -665,26 +665,6 @@
         </div>
 
       </div>
-
-      <!-- REVENUE DASHBOARD -->
-      <div class="panel revenue-panel">
-
-        <div class="panel-title">Revenue Trend</div>
-
-        <div class="mini-chart">
-          <div class="bar"></div>
-          <div class="bar"></div>
-          <div class="bar"></div>
-          <div class="bar highlight" id="activeBar"></div>
-        </div>
-
-        <div class="chart-labels">
-          <span>W1</span><span>W2</span><span>W3</span><span>Now</span>
-        </div>
-
-      </div>
-
-    </div>
 
   </div>
 </section>
