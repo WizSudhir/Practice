@@ -502,7 +502,7 @@ if (proofSection) {
 // 5. STRIPE-LEVEL HOW IT WORKS
 // ============================================================================================================================
 /* =========================================
-   STRIPE++ HOW IT WORKS (NEXT LEVEL)
+   ULTRA-PREMIUM HOW IT WORKS
 ========================================= */
 
 gsap.registerPlugin(ScrollTrigger);
@@ -515,9 +515,8 @@ if (section) {
   const toggles = section.querySelectorAll(".toggle");
   const progressBar = document.getElementById("storyProgress");
 
-  const revLine = document.getElementById("revLine");
-  const denialLine = document.getElementById("denialLine");
-
+  const revPath = document.querySelector("#revLine");
+  const denialPath = document.querySelector("#denialLine");
   const aiText = document.getElementById("aiDynamic");
 
   const insights = [
@@ -530,29 +529,26 @@ if (section) {
   ];
 
   /* =========================================
-     SVG PATH INIT
+     BEZIER CURVE GENERATOR (LINEAR STYLE)
   ========================================= */
-  let revLength = 0;
-  let denLength = 0;
 
-  if (revLine && denialLine) {
-    revLength = revLine.getTotalLength();
-    denLength = denialLine.getTotalLength();
+  function generateCurve(progress) {
+    const height = 80 - progress * 60;
 
-    gsap.set(revLine, {
-      strokeDasharray: revLength,
-      strokeDashoffset: revLength
-    });
-
-    gsap.set(denialLine, {
-      strokeDasharray: denLength,
-      strokeDashoffset: 0
-    });
+    return `
+      M0,80
+      C20,${80 - progress * 20}
+       40,${60 - progress * 30}
+       60,${height}
+      S100,${10 + progress * 10}
+       100,${5 + progress * 5}
+    `;
   }
 
   /* =========================================
-     AI TYPING ENGINE
+     AI TYPEWRITER
   ========================================= */
+
   let typingTween;
 
   function typeText(text) {
@@ -569,52 +565,54 @@ if (section) {
       duration: 1,
       ease: "none",
       onUpdate: () => {
-        aiText.textContent = text.substring(0, Math.floor(obj.i));
+        aiText.textContent = text.substring(0, obj.i);
       }
     });
   }
 
   /* =========================================
-     LIVE METRICS
+     PARALLAX DEPTH SYSTEM
   ========================================= */
 
-  const metrics = {
-    revenue: { value: 0 },
-    denial: { value: 100 }
-  };
+  const panel = document.querySelector(".control-panel");
 
-  function updateMetrics(progress) {
-    metrics.revenue.value = Math.round(progress * 100);
-    metrics.denial.value = Math.round(100 - progress * 80);
+  document.addEventListener("mousemove", (e) => {
+    if (!panel) return;
 
-    // Optional: hook into UI if you add numbers
-    // document.getElementById("revValue").innerText = metrics.revenue.value + "%";
-  }
+    const x = (e.clientX / window.innerWidth - 0.5) * 20;
+    const y = (e.clientY / window.innerHeight - 0.5) * 20;
+
+    gsap.to(panel, {
+      rotateY: x,
+      rotateX: -y,
+      transformPerspective: 1000,
+      transformOrigin: "center",
+      duration: 0.5,
+      ease: "power3.out"
+    });
+  });
 
   /* =========================================
-     MAIN SCROLL ENGINE
+     SCROLL ENGINE
   ========================================= */
 
   ScrollTrigger.create({
     trigger: section,
     start: "top top",
-    end: "+=2500",
+    end: "+=3000",
     scrub: true,
     pin: true,
     anticipatePin: 1,
 
     onUpdate: self => {
 
-      const progress = self.progress; // 0 → 1
+      const progress = self.progress;
 
       /* ==============================
-         STEP INTERPOLATION
+         STEP SYSTEM
       ============================== */
 
-      const stepIndex = Math.min(
-        steps.length - 1,
-        Math.floor(progress * steps.length)
-      );
+      const stepIndex = Math.floor(progress * steps.length);
 
       steps.forEach((step, i) => {
         step.classList.toggle("active", i === stepIndex);
@@ -625,26 +623,21 @@ if (section) {
       });
 
       /* ==============================
-         AI TEXT (only when step changes)
+         AI TEXT
       ============================== */
 
       if (!self.prevStep || self.prevStep !== stepIndex) {
-        typeText(insights[stepIndex]);
+        typeText(insights[stepIndex] || insights[insights.length - 1]);
         self.prevStep = stepIndex;
       }
 
       /* ==============================
-         SMOOTH CHART INTERPOLATION
+         BEZIER CHART MORPH
       ============================== */
 
-      if (revLine && denialLine) {
-        gsap.set(revLine, {
-          strokeDashoffset: revLength * (1 - progress)
-        });
-
-        gsap.set(denialLine, {
-          strokeDashoffset: denLength * progress
-        });
+      if (revPath && denialPath) {
+        revPath.setAttribute("d", generateCurve(progress));
+        denialPath.setAttribute("d", generateCurve(1 - progress));
       }
 
       /* ==============================
@@ -656,10 +649,13 @@ if (section) {
       }
 
       /* ==============================
-         LIVE METRICS
+         GLOW SYSTEM
       ============================== */
 
-      updateMetrics(progress);
+      document.documentElement.style.setProperty(
+        "--rev-glow",
+        progress * 10
+      );
 
     }
   });
