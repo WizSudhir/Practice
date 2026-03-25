@@ -1061,6 +1061,18 @@ z-index: 2;
   flex-direction: column;
   gap: 14px;
 }
+.story-progress {
+  height: 3px;
+  background: rgba(255,255,255,0.1);
+  margin-top: 20px;
+  width: 100%;
+}
+.story-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg,#6366f1,#4ade80);
+  transition: width 0.4s ease;
+}
 /* PANELS */
 .panel {
   padding: 16px;
