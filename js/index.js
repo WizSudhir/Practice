@@ -617,7 +617,9 @@ const denialValues = [45,50,55,40,20,5];
 function update(index){
 
   steps.forEach(s=>s.classList.remove("active"));
+  if (steps[index]) {
   steps[index].classList.add("active");
+  }
 
   toggles.forEach((t,i)=>{
     t.classList.toggle("active", index>=i);
@@ -653,8 +655,12 @@ function update(index){
     "0,90 60,75 120,60 180,45 240,30 300,10"
   ];
   // AI Insights
-  if (revLine) revLine.setAttribute("points", revProgress[index]);
-  if (denialLine) denialLine.setAttribute("points", denialProgress[index]);
+  if (revLine && revProgress[index]) {
+  revLine.setAttribute("points", revProgress[index]);
+  }
+  if (denialLine && denialProgress[index]) {
+  denialLine.setAttribute("points", denialProgress[index]);
+  }
   const aiInsights = [
     "Detecting revenue leakage patterns...",
     "Eligibility errors identified",
@@ -703,10 +709,20 @@ document.getElementById("prevStep").onclick=()=>{
   update(current);
 };
 
-autoPlay=setInterval(()=>{
-  current=(current+1)%steps.length;
-  update(current);
-},4000);
+const section = document.querySelector(".how-it-works");
+if (section) {
+  const observer = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      autoPlay = setInterval(() => {
+        current = (current + 1) % steps.length;
+        update(current);
+      }, 4000);
+    } else {
+      clearInterval(autoPlay);
+    }
+  }, { threshold: 0.5 });
+  observer.observe(section);
+}
 update(0);
 // ===============================
 // 6. SERVICES
