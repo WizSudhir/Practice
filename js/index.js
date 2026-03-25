@@ -501,132 +501,115 @@ if (proofSection) {
 // ============================================================================================================================
 // 5. STRIPE-LEVEL HOW IT WORKS
 // ============================================================================================================================
+/* =========================================
+   GSAP STRIPE-LEVEL HOW IT WORKS
+========================================= */
+
+gsap.registerPlugin(ScrollTrigger);
 
 const section = document.querySelector(".how-it-works");
+
 if (section) {
 
-const steps = document.querySelectorAll(".narrative-step");
-const progress = document.getElementById("storyProgress");
+  const steps = section.querySelectorAll(".narrative-step");
+  const toggles = section.querySelectorAll(".toggle");
+  const progress = document.getElementById("storyProgress");
 
-const toggles = document.querySelectorAll(".toggle");
+  const revLine = document.getElementById("revLine");
+  const denialLine = document.getElementById("denialLine");
+  const aiText = document.getElementById("aiDynamic");
 
-const revLine = document.getElementById("revLine");
-const denialLine = document.getElementById("denialLine");
+  const insights = [
+    "Revenue leakage detected across workflows...",
+    "Eligibility verification improving clean claim rate...",
+    "Coding accuracy increasing first-pass acceptance...",
+    "Denials identified and reduced systematically...",
+    "AR recovery boosting cash flow...",
+    "Revenue stabilized and predictable."
+  ];
 
-const aiText = document.getElementById("aiDynamic");
-if (revLine && denialLine) {
-  const revLength = revLine.getTotalLength();
-  const denLength = denialLine.getTotalLength();
+  /* =========================================
+     INIT SVG PATHS
+  ========================================= */
+  if (revLine && denialLine) {
+    const revLength = revLine.getTotalLength();
+    const denLength = denialLine.getTotalLength();
 
-  revLine.style.strokeDasharray = revLength;
-  revLine.style.strokeDashoffset = revLength;
+    gsap.set(revLine, {
+      strokeDasharray: revLength,
+      strokeDashoffset: revLength
+    });
 
-  denialLine.style.strokeDasharray = denLength;
-  denialLine.style.strokeDashoffset = denLength;
-}
-/* STEP CONFIG */
-const insights = [
-  "Revenue leakage detected across workflows...",
-  "Eligibility verification improving clean claim rate...",
-  "Coding accuracy increasing first-pass acceptance...",
-  "Denials identified and reduced systematically...",
-  "AR recovery boosting cash flow...",
-  "Revenue stabilized and predictable."
-];
-
-/* LINE DATA */
-const revenuePoints = [
-  "0,80",
-  "20,75",
-  "40,60",
-  "60,45",
-  "80,25",
-  "100,10"
-];
-
-const denialPoints = [
-  "0,20",
-  "20,30",
-  "40,45",
-  "60,60",
-  "80,75",
-  "100,90"
-];
-
-/* SCROLL ENGINE */
-function handleScroll() {
-  const sectionTop = section.offsetTop;
-  const sectionHeight = section.offsetHeight;
-
-  const scrollY = window.scrollY;
-  const windowH = window.innerHeight;
-
-  const start = sectionTop - windowH / 2;
-  const end = sectionTop + sectionHeight - windowH;
-
-  if (scrollY >= start && scrollY <= end) {
-    const progressRatio = (scrollY - start) / (end - start);
-
-    const stepIndex = Math.min(
-      steps.length - 1,
-      Math.floor(progressRatio * steps.length)
-    );
-
-    updateStep(stepIndex);
-    updateProgress(progressRatio);
+    gsap.set(denialLine, {
+      strokeDasharray: denLength,
+      strokeDashoffset: denLength
+    });
   }
-}
 
-/* UPDATE STEP */
-function updateStep(index) {
-  steps.forEach((step, i) => {
-    step.classList.toggle("active", i === index);
-  });
+  /* =========================================
+     MASTER TIMELINE
+  ========================================= */
 
-  /* Toggle activation */
-  toggles.forEach((t, i) => {
-    if (i <= index) {
-      t.classList.add("active");
-    } else {
-      t.classList.remove("active");
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: section,
+      start: "top top",
+      end: "+=2000", // scroll length
+      scrub: true,
+      pin: true,
+      anticipatePin: 1
     }
   });
 
-  /* Update AI text */
-  aiText.innerText = insights[index];
+  /* =========================================
+     STEP ANIMATION FUNCTION
+  ========================================= */
 
-  /* Update chart */
-  drawChart(index);
-}
+  function activateStep(index) {
+    steps.forEach((step, i) => {
+      step.classList.toggle("active", i === index);
+    });
 
-/* PROGRESS BAR */
-function updateProgress(ratio) {
-  progress.style.width = `${ratio * 100}%`;
-}
+    toggles.forEach((t, i) => {
+      t.classList.toggle("active", i <= index);
+    });
 
-/* CHART DRAWING */
-function drawChart(step) {
-  const rev = revenuePoints.slice(0, step + 1).join(" ");
-  const den = denialPoints.slice(0, step + 1).join(" ");
+    if (aiText) {
+      aiText.innerText = insights[index];
+    }
+  }
 
-  revLine.setAttribute("points", rev);
-  denialLine.setAttribute("points", den);
+  /* =========================================
+     BUILD TIMELINE
+  ========================================= */
 
-  setTimeout(() => {
-    revLine.style.strokeDashoffset = "0";
-    denialLine.style.strokeDashoffset = "0";
-  }, 50);
-}
+  steps.forEach((_, i) => {
 
-/* MICRO INTERACTION (CLICK TOGGLE) */
-toggles.forEach((toggle, i) => {
-  toggle.addEventListener("click", () => {
-    toggle.classList.toggle("active");
+    tl.add(() => activateStep(i), i)
+
+      // Revenue line grows
+      .to(revLine, {
+        strokeDashoffset: (i === 0) ? "+=0" : 0,
+        duration: 0.4,
+        ease: "power2.out"
+      }, i)
+
+      // Denial line shrinks
+      .to(denialLine, {
+        strokeDashoffset: (i === 0) ? "+=0" : 200,
+        duration: 0.4,
+        ease: "power2.out"
+      }, i)
+
+      // Progress bar
+      .to(progress, {
+        width: `${((i + 1) / steps.length) * 100}%`,
+        duration: 0.3,
+        ease: "none"
+      }, i);
+
   });
-});
 
-/* INIT */
-window.addEventListener("scroll", handleScroll);
 }
 // ============================================================================================================================
 // 6. SERVICES
