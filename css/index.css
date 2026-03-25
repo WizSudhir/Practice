@@ -1050,21 +1050,17 @@ z-index: 2;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
 }
-
 .narrative-step {
   display: none;
 }
-
 .narrative-step.active {
   display: block;
 }
-
 .narrative-visual {
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
-
 /* PANELS */
 .panel {
   padding: 16px;
@@ -1072,20 +1068,17 @@ z-index: 2;
   background: rgba(15,23,42,0.85);
   border: 1px solid rgba(255,255,255,0.1);
 }
-
 .panel-title {
   font-size: 12px;
   color: #94a3b8;
   margin-bottom: 10px;
 }
-
 /* TOGGLES */
 .control-item {
   display: flex;
   justify-content: space-between;
   margin-bottom: 8px;
 }
-
 .toggle {
   width: 32px;
   height: 16px;
@@ -1093,7 +1086,6 @@ z-index: 2;
   border-radius: 20px;
   position: relative;
 }
-
 .toggle::after {
   content: "";
   width: 12px;
@@ -1104,26 +1096,28 @@ z-index: 2;
   left: 2px;
   border-radius: 50%;
 }
-
 .toggle.active {
   background: #4ade80;
 }
-
 .toggle.active::after {
   left: 18px;
 }
-
 /* METRICS */
-.panel-metrics {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
+.chart-svg {
+  width: 100%;
+  height: 80px;
 }
-
-.panel-metrics span {
-  font-size: 18px;
+.line {
+  fill: none;
+  stroke-width: 2;
 }
-
+.revenue-line {
+  stroke: #4ade80;
+}
+.denial-line {
+  stroke: #f87171;
+  opacity: 0.6;
+}
 /* TOOLTIP */
 .tooltip-trigger {
   position: relative;
