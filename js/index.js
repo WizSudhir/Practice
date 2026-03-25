@@ -629,8 +629,29 @@ function update(index){
   document.getElementById("progressFill").style.width =
     ((index+1)/steps.length)*100+"%";
 
-  const heights=["20%","40%","70%","100%"];
-  document.getElementById("activeBar").style.height = heights[index];
+  const revLine = document.getElementById("revLine");
+  const denialLine = document.getElementById("denialLine");
+
+  const revProgress = [
+    "0,80",
+    "0,80 60,70",
+    "0,80 60,70 120,60",
+    "0,80 60,70 120,60 180,45",
+    "0,80 60,70 120,60 180,45 240,25",
+    "0,80 60,70 120,60 180,45 240,25 300,10"
+  ];
+
+  const denialProgress = [
+    "0,20",
+    "0,20 60,30",
+    "0,20 60,30 120,40",
+    "0,20 60,30 120,40 180,55",
+    "0,20 60,30 120,40 180,55 240,75",
+    "0,20 60,30 120,40 180,55 240,75 300,90"
+  ];
+
+  if (revLine) revLine.setAttribute("points", revProgress[index]);
+  if (denialLine) denialLine.setAttribute("points", denialProgress[index]);
 
   // HERO SYNC
   const system=document.querySelector(".system-bg");
