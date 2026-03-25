@@ -505,7 +505,9 @@ if (proofSection) {
    FAANG-LEVEL SYSTEM ENGINE
 ========================================= */
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const section = document.querySelector(".how-it-works");
 
@@ -683,6 +685,7 @@ updateSimulation();
      SCROLL DRIVER
   ========================================= */
 
+  if (window.innerWidth > 768) {
   ScrollTrigger.create({
     trigger: section,
     start: "top top",
@@ -695,6 +698,7 @@ updateSimulation();
       state.progress = self.progress;
     }
   });
+  }
 
   /* =========================================
      MOUSE INTERACTION (INSANE DETAIL)
