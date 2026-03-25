@@ -603,7 +603,70 @@ if (systemCard) {
   });
 }
 // ===============================
-// 4. STRIPE-LEVEL HOW IT WORKS
+// 4. PROOF SNAPSHOT
+// ===============================
+const proofSection = document.querySelector(".proof-snapshot");
+
+if (proofSection) {
+
+  const metrics = proofSection.querySelectorAll("h3");
+
+  let hasAnimated = false;
+
+  function animateMetrics() {
+
+    metrics.forEach(metric => {
+
+      const target = parseInt(metric.dataset.target);
+      let current = 0;
+
+      const increment = target / 40;
+
+      function update() {
+        current += increment;
+
+        if (
+          (target > 0 && current >= target) ||
+          (target < 0 && current <= target)
+        ) {
+          metric.textContent = target + "%";
+          return;
+        }
+
+        metric.textContent = Math.round(current) + "%";
+        requestAnimationFrame(update);
+      }
+
+      update();
+    });
+  }
+
+  function resetMetrics() {
+    metrics.forEach(metric => {
+      metric.textContent = "0%";
+    });
+    hasAnimated = false;
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+
+      if (entry.isIntersecting && !hasAnimated) {
+        animateMetrics();
+        hasAnimated = true;
+      }
+
+      if (!entry.isIntersecting) {
+        resetMetrics(); // 🔥 THIS WAS MISSING
+      }
+
+    });
+  }, { threshold: 0.4 });
+
+  observer.observe(proofSection);
+}
+// ===============================
+// 5. STRIPE-LEVEL HOW IT WORKS
 // ===============================
 const steps = document.querySelectorAll(".narrative-step");
 const toggles = document.querySelectorAll(".toggle");
@@ -742,7 +805,7 @@ const howSection = document.querySelector(".how-it-works");
 if (howSection) {
 
   howSection.style.position = "relative";
-  howSection.style.height = (steps.length * 120) + "vh";
+  howSection.style.height = (steps.length * 80) + "vh";
 
   const container = howSection.querySelector(".narrative");
 
@@ -768,7 +831,7 @@ if (howSection) {
   function animate() {
 
     // easing (this is what makes it premium)
-    smoothProgress += (targetProgress - smoothProgress) * 0.08;
+    smoothProgress += (targetProgress - smoothProgress) * 0.18;
 
     updateSmooth(smoothProgress);
 
