@@ -484,7 +484,7 @@ if (proofSection) {
     });
     hasAnimated = false;
   }
-  const observer = new IntersectionObserver(entries => {
+  const proofObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting && !hasAnimated) {
         animateMetrics();
@@ -503,6 +503,7 @@ if (proofSection) {
 // ============================================================================================================================
 
 const section = document.querySelector(".how-it-works");
+if (section) {
 const steps = document.querySelectorAll(".narrative-step");
 const progress = document.getElementById("storyProgress");
 
@@ -544,22 +545,25 @@ const denialPoints = [
 
 /* SCROLL ENGINE */
 function handleScroll() {
-  const rect = section.getBoundingClientRect();
-  const total = window.innerHeight * 2;
+  const sectionTop = section.offsetTop;
+  const sectionHeight = section.offsetHeight;
 
-  if (rect.top <= 0 && Math.abs(rect.top) <= total) {
-    section.classList.add("pinned");
+  const scrollY = window.scrollY;
+  const windowH = window.innerHeight;
 
-    let progressRatio = Math.abs(rect.top) / total;
-    let stepIndex = Math.min(
+  const start = sectionTop - windowH / 2;
+  const end = sectionTop + sectionHeight - windowH;
+
+  if (scrollY >= start && scrollY <= end) {
+    const progressRatio = (scrollY - start) / (end - start);
+
+    const stepIndex = Math.min(
       steps.length - 1,
       Math.floor(progressRatio * steps.length)
     );
 
     updateStep(stepIndex);
     updateProgress(progressRatio);
-  } else {
-    section.classList.remove("pinned");
   }
 }
 
@@ -613,6 +617,7 @@ toggles.forEach((toggle, i) => {
 
 /* INIT */
 window.addEventListener("scroll", handleScroll);
+}
 // ============================================================================================================================
 // 6. SERVICES
 // ============================================================================================================================
@@ -647,10 +652,10 @@ if (ehrSection) {
 // ============================================================================================================================
 // 8. EDITORIAL INSIGHTS
 // ============================================================================================================================
-  const insights = document.querySelector('.insights-editorial');
+  const insightsSection = document.querySelector('.insights-editorial');
 
 if (insights) {
-  const observer = new IntersectionObserver(entries => {
+  const insightsObserver = new IntersectionObserver(entries => {
     if (entries[0].isIntersecting) {
       insights.classList.add('active');
     }
