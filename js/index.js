@@ -620,7 +620,7 @@ function update(index){
   steps[index].classList.add("active");
 
   toggles.forEach((t,i)=>{
-    t.classList.toggle("active", index>i);
+    t.classList.toggle("active", index>=i);
   });
 
   document.getElementById("revMetric").textContent = revValues[index]+"%";
@@ -645,12 +645,12 @@ function update(index){
   ];
 
   const denialProgress = [
-    "0,20",
-    "0,20 60,30",
-    "0,20 60,30 120,40",
-    "0,20 60,30 120,40 180,55",
-    "0,20 60,30 120,40 180,55 240,75",
-    "0,20 60,30 120,40 180,55 240,75 300,90"
+    "0,90",
+    "0,90 60,75",
+    "0,90 60,75 120,60",
+    "0,90 60,75 120,60 180,45",
+    "0,90 60,75 120,60 180,45 240,30",
+    "0,90 60,75 120,60 180,45 240,30 300,10"
   ];
   // AI Insights
   if (revLine) revLine.setAttribute("points", revProgress[index]);
@@ -664,16 +664,17 @@ function update(index){
     "Revenue stabilized with AI optimization"
   ];
 
-  const aiBox = document.querySelector(".ai-panel");
+const aiData = [
+  { text: "Detecting revenue leakage..." },
+  { text: "Eligibility errors identified" },
+  { text: "Claim error probability ↑ 28%" },
+  { text: "Denials predicted ↓ 32%" },
+  { text: "Recovery opportunities detected" },
+  { text: "Revenue stabilized with AI optimization" }
+];
 
-  if (aiBox) {
-    aiBox.querySelectorAll(".ai-item").forEach((el, i) => {
-      el.style.opacity = i <= index ? 1 : 0.3;
-    });
-
-    const dynamic = document.getElementById("aiDynamic");
-    if (dynamic) dynamic.textContent = aiInsights[index];
-  }
+const dynamic = document.getElementById("aiDynamic");
+if (dynamic) dynamic.textContent = aiData[index].text;
   // HERO SYNC
   const system=document.querySelector(".system-bg");
   const nodes=document.querySelectorAll(".node");
@@ -685,7 +686,7 @@ function update(index){
     if(i<=index) n.classList.add("resolved-active");
   });
 
-  if(index===3 && revenue){
+  if(index === steps.length - 1 && revenue){
     revenue.classList.add("active");
   }
 }
@@ -706,6 +707,7 @@ autoPlay=setInterval(()=>{
   current=(current+1)%steps.length;
   update(current);
 },4000);
+update(0);
 // ===============================
 // 6. SERVICES
 // ===============================
