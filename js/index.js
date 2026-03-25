@@ -696,32 +696,39 @@ if (dynamic) dynamic.textContent = aiData[index].text;
     revenue.classList.add("active");
   }
 }
+// SCROLL DRIVEN NARRATIVE (STRIPE STYLE)
+const howSection = document.querySelector(".how-it-works");
 
-document.getElementById("nextStep").onclick=()=>{
-  clearInterval(autoPlay);
-  current=(current+1)%steps.length;
-  update(current);
-};
+if (howSection) {
+  // Create scroll space
+  howSection.style.position = "relative";
+  howSection.style.height = (steps.length * 100) + "vh";
 
-document.getElementById("prevStep").onclick=()=>{
-  clearInterval(autoPlay);
-  current=(current-1+steps.length)%steps.length;
-  update(current);
-};
+  const container = howSection.querySelector(".narrative");
+  container.style.position = "sticky";
+  container.style.top = "0";
+  container.style.height = "100vh";
 
-const section = document.querySelector(".how-it-works");
-if (section) {
-  const observer = new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting) {
-      autoPlay = setInterval(() => {
-        current = (current + 1) % steps.length;
-        update(current);
-      }, 4000);
-    } else {
-      clearInterval(autoPlay);
+  function handleScroll() {
+
+    const rect = howSection.getBoundingClientRect();
+    const scrollTop = -rect.top;
+    const totalHeight = howSection.offsetHeight - window.innerHeight;
+
+    const progress = Math.max(0, Math.min(1, scrollTop / totalHeight));
+
+    const stepIndex = Math.min(
+      steps.length - 1,
+      Math.floor(progress * steps.length)
+    );
+
+    if (stepIndex !== current) {
+      current = stepIndex;
+      update(current);
     }
-  }, { threshold: 0.5 });
-  observer.observe(section);
+  }
+
+  window.addEventListener("scroll", handleScroll);
 }
 update(0);
 // ===============================
