@@ -1073,7 +1073,7 @@ z-index: 2;
   gap: 60px;
   position: relative;
   top: 120px;
-  height: 80vh;
+  min-height: 80vh;
 }
 
 /* LEFT CONTENT */
