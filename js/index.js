@@ -495,7 +495,7 @@ if (proofSection) {
       }
     });
   }, { threshold: 0.4 });
-  observer.observe(proofSection);
+  proofObserver.observe(proofSection);
 }
   
 // ============================================================================================================================
@@ -504,6 +504,7 @@ if (proofSection) {
 
 const section = document.querySelector(".how-it-works");
 if (section) {
+
 const steps = document.querySelectorAll(".narrative-step");
 const progress = document.getElementById("storyProgress");
 
@@ -513,7 +514,16 @@ const revLine = document.getElementById("revLine");
 const denialLine = document.getElementById("denialLine");
 
 const aiText = document.getElementById("aiDynamic");
+if (revLine && denialLine) {
+  const revLength = revLine.getTotalLength();
+  const denLength = denialLine.getTotalLength();
 
+  revLine.style.strokeDasharray = revLength;
+  revLine.style.strokeDashoffset = revLength;
+
+  denialLine.style.strokeDasharray = denLength;
+  denialLine.style.strokeDashoffset = denLength;
+}
 /* STEP CONFIG */
 const insights = [
   "Revenue leakage detected across workflows...",
@@ -652,16 +662,16 @@ if (ehrSection) {
 // ============================================================================================================================
 // 8. EDITORIAL INSIGHTS
 // ============================================================================================================================
-  const insightsSection = document.querySelector('.insights-editorial');
+const insightsSection = document.querySelector('.insights-editorial');
 
-if (insights) {
+if (insightsSection) {
   const insightsObserver = new IntersectionObserver(entries => {
     if (entries[0].isIntersecting) {
-      insights.classList.add('active');
+      insightsSection.classList.add('active');
     }
   }, { threshold: 0.3 });
 
-  observer.observe(insights);
+  insightsObserver.observe(insightsSection);
 }
 }); // DOM Close
 
