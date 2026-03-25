@@ -602,19 +602,19 @@ if (systemCard) {
     systemCard.classList.toggle("active");
   });
 }
-// ==============================
-// 4. HOW IT WORKS
+// ===============================
+// 4. STRIPE-LEVEL HOW IT WORKS
 // ===============================
 const steps = document.querySelectorAll(".narrative-step");
 const toggles = document.querySelectorAll(".toggle");
 
-let current = 0;
+let currentStep = 0;
+let smoothProgress = 0;
 
-// ✅ METRIC DATA
+// DATA
 const revValues = [20,30,40,55,75,95];
 const denialValues = [45,50,55,40,20,5];
 
-// ✅ AI INSIGHTS (CLEAN)
 const aiInsights = [
   "Revenue leakage detected at intake stage.",
   "Eligibility verification failure rate is high.",
@@ -623,112 +623,165 @@ const aiInsights = [
   "Recoverable revenue detected in AR backlog.",
   "System stabilized — predictable revenue achieved."
 ];
-// UPDATE FUNCTION (CORE ENGINE)
-function update(index){
 
-  // STEP ACTIVATION
-  steps.forEach(s => s.classList.remove("active"));
-  if (steps[index]) {
-    steps[index].classList.add("active");
+// ===============================
+// SMOOTH INTERPOLATION ENGINE
+// ===============================
+function lerp(start, end, t) {
+  return start + (end - start) * t;
+}
+
+// ===============================
+// MAIN UPDATE (CONTINUOUS)
+// ===============================
+function updateSmooth(progress){
+
+  const totalSteps = steps.length - 1;
+
+  // FLOAT INDEX (NOT ROUNDED)
+  const exactIndex = progress * totalSteps;
+  const baseIndex = Math.floor(exactIndex);
+  const nextIndex = Math.min(baseIndex + 1, totalSteps);
+
+  const localProgress = exactIndex - baseIndex;
+
+  // 🔥 STEP VISUAL ACTIVATION (still discrete)
+  const stepIndex = Math.round(exactIndex);
+
+  if (stepIndex !== currentStep) {
+    currentStep = stepIndex;
+
+    steps.forEach(s => s.classList.remove("active"));
+    if (steps[stepIndex]) {
+      steps[stepIndex].classList.add("active");
+    }
+
+    toggles.forEach((t,i)=>{
+      t.classList.toggle("active", stepIndex >= i);
+    });
+
+    // AI TEXT (snap, not lerp)
+    const aiDynamic = document.getElementById("aiDynamic");
+    if (aiDynamic) {
+      aiDynamic.textContent = aiInsights[stepIndex];
+    }
   }
 
-  // TOGGLES (RIGHT PANEL)
-  toggles.forEach((t,i)=>{
-    t.classList.toggle("active", index >= i);
-  });
-
-  // METRICS UPDATE
+  // 🔥 SMOOTH METRICS (LERP)
   const revMetric = document.getElementById("revMetric");
   const denialMetric = document.getElementById("denialMetric");
 
-  if (revMetric) revMetric.textContent = revValues[index] + "%";
-  if (denialMetric) denialMetric.textContent = "-" + denialValues[index] + "%";
+  if (revMetric && denialMetric) {
+    const rev = lerp(revValues[baseIndex], revValues[nextIndex], localProgress);
+    const denial = lerp(denialValues[baseIndex], denialValues[nextIndex], localProgress);
 
-  // PROGRESS BAR
+    revMetric.textContent = Math.round(rev) + "%";
+    denialMetric.textContent = "-" + Math.round(denial) + "%";
+  }
+
+  // 🔥 PROGRESS BAR (SMOOTH)
   const storyProgress = document.getElementById("storyProgress");
   if (storyProgress) {
-    storyProgress.style.width =
-      ((index + 1) / steps.length) * 100 + "%";
+    storyProgress.style.width = (progress * 100) + "%";
   }
 
-  // ✅ AI INSIGHTS (FIXED)
-  const aiDynamic = document.getElementById("aiDynamic");
-  if (aiDynamic) {
-    aiDynamic.textContent = aiInsights[index];
-  }
-
-  // HERO SYNC (YOUR ORIGINAL SYSTEM)
-  const system = document.querySelector(".system-bg");
+  // 🔥 HERO SYNC (GRADUAL)
   const nodes = document.querySelectorAll(".node");
   const revenue = document.querySelector(".revenue");
+  const system = document.querySelector(".system-bg");
 
   if (system) system.classList.add("controlled");
 
   nodes.forEach((n,i)=>{
-    if(i <= index) n.classList.add("resolved-active");
+    if(i <= stepIndex) n.classList.add("resolved-active");
   });
 
-  if(index === steps.length - 1 && revenue){
+  if (progress > 0.9 && revenue) {
     revenue.classList.add("active");
+  }
+
+  // 🔥 PARALLAX DEPTH (MULTI-LAYER)
+  applyParallax(progress);
+}
+
+// ===============================
+// PREMIUM PARALLAX
+// ===============================
+function applyParallax(progress) {
+
+  const visual = document.querySelector(".narrative-visual");
+  const content = document.querySelector(".narrative-content");
+  const panel = document.querySelector(".control-panel");
+
+  if (visual) {
+    visual.style.transform = `
+      translateY(${progress * -60}px)
+      scale(${1 + progress * 0.05})
+    `;
+  }
+
+  if (content) {
+    content.style.transform = `
+      translateY(${progress * 30}px)
+    `;
+  }
+
+  if (panel) {
+    panel.style.transform = `
+      translateY(${progress * -20}px)
+      scale(${1 + progress * 0.02})
+    `;
   }
 }
 
-// SCROLL DRIVEN STORY (STRIPE STYLE)
+// ===============================
+// SCROLL ENGINE (SMOOTH RAF)
+// ===============================
 const howSection = document.querySelector(".how-it-works");
 
 if (howSection) {
 
-  // CREATE SCROLL SPACE
   howSection.style.position = "relative";
-  howSection.style.height = (steps.length * 100) + "vh";
+  howSection.style.height = (steps.length * 120) + "vh";
 
   const container = howSection.querySelector(".narrative");
+
   if (container) {
     container.style.position = "sticky";
     container.style.top = "0";
     container.style.height = "100vh";
   }
 
-  // PARALLAX EFFECT
-  function applyParallax(progress) {
+  let targetProgress = 0;
 
-    const visual = document.querySelector(".narrative-visual");
-    const content = document.querySelector(".narrative-content");
-
-    if (visual) {
-      visual.style.transform = `translateY(${progress * -40}px)`;
-    }
-
-    if (content) {
-      content.style.transform = `translateY(${progress * 20}px)`;
-    }
-  }
-
-  // MAIN SCROLL HANDLER
-  function handleScroll() {
-
+  function calculateProgress() {
     const rect = howSection.getBoundingClientRect();
     const scrollTop = -rect.top;
     const totalHeight = howSection.offsetHeight - window.innerHeight;
 
-    const progress = Math.max(0, Math.min(1, scrollTop / totalHeight));
-
-    const rawIndex = progress * (steps.length - 1);
-    const stepIndex = Math.round(rawIndex);
-
-    if (stepIndex !== current) {
-      current = stepIndex;
-      update(current);
-    }
-
-    applyParallax(progress);
+    targetProgress = Math.max(0, Math.min(1, scrollTop / totalHeight));
   }
 
-  window.addEventListener("scroll", handleScroll);
+  window.addEventListener("scroll", calculateProgress);
+
+  // 🔥 SMOOTH LOOP (KEY DIFFERENCE)
+  function animate() {
+
+    // easing (this is what makes it premium)
+    smoothProgress += (targetProgress - smoothProgress) * 0.08;
+
+    updateSmooth(smoothProgress);
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
 }
 
+// ===============================
 // INITIAL STATE
-update(0);
+// ===============================
+updateSmooth(0);
 // ===============================
 // 6. SERVICES
 // ===============================
