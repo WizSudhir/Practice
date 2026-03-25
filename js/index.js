@@ -626,8 +626,11 @@ function update(index){
   document.getElementById("revMetric").textContent = revValues[index]+"%";
   document.getElementById("denialMetric").textContent = "-"+denialValues[index]+"%";
 
-  document.getElementById("progressFill").style.width =
-    ((index+1)/steps.length)*100+"%";
+  const storyProgress = document.getElementById("storyProgress");
+  if (storyProgress) {
+    storyProgress.style.width =
+      ((index+1)/steps.length)*100 + "%";
+  }
 
   const revLine = document.getElementById("revLine");
   const denialLine = document.getElementById("denialLine");
