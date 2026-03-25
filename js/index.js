@@ -666,12 +666,12 @@ if (proofSection) {
   observer.observe(proofSection);
 }
 // ===============================
-// 5. STRIPE-LEVEL HOW IT WORKS
+// 5. STRIPE-LEVEL HOW IT WORKS (FIXED)
 // ===============================
 const steps = document.querySelectorAll(".narrative-step");
 const toggles = document.querySelectorAll(".toggle");
 
-let currentStep = 0;
+let currentStep = -1;
 let smoothProgress = 0;
 
 // DATA
@@ -688,29 +688,29 @@ const aiInsights = [
 ];
 
 // ===============================
-// SMOOTH INTERPOLATION ENGINE
+// LERP
 // ===============================
 function lerp(start, end, t) {
   return start + (end - start) * t;
 }
 
 // ===============================
-// MAIN UPDATE (CONTINUOUS)
+// MAIN UPDATE ENGINE
 // ===============================
 function updateSmooth(progress){
 
   const totalSteps = steps.length - 1;
 
-  // FLOAT INDEX (NOT ROUNDED)
   const exactIndex = progress * totalSteps;
   const baseIndex = Math.floor(exactIndex);
   const nextIndex = Math.min(baseIndex + 1, totalSteps);
-
   const localProgress = exactIndex - baseIndex;
 
-  // 🔥 STEP VISUAL ACTIVATION (still discrete)
   const stepIndex = Math.round(exactIndex);
 
+  // ===============================
+  // STEP ACTIVATION
+  // ===============================
   if (stepIndex !== currentStep) {
     currentStep = stepIndex;
 
@@ -723,24 +723,43 @@ function updateSmooth(progress){
       t.classList.toggle("active", stepIndex >= i);
     });
 
-    // AI TEXT (snap, not lerp)
     const aiDynamic = document.getElementById("aiDynamic");
     if (aiDynamic) {
       aiDynamic.textContent = aiInsights[stepIndex];
     }
   }
-  // 🔥 LINE GRAPH PROGRESSION
+
+  // ===============================
+  // 🔥 FIX 1: REVENUE BARS (ADDED)
+  // ===============================
+  const bars = document.querySelectorAll(".revenue .bar");
+
+  bars.forEach((bar, i) => {
+    if (i <= stepIndex) {
+      bar.style.height = bar.dataset.height;
+      bar.style.opacity = "1";
+    } else {
+      bar.style.height = "10%";
+      bar.style.opacity = "0.3";
+    }
+  });
+
+  // ===============================
+  // 🔥 FIX 2: LINE GRAPH (FORCED VISIBLE)
+  // ===============================
   const line = document.querySelector(".line-path");
 
   if (line) {
-   const totalLength = line.getTotalLength();
+    const totalLength = line.getTotalLength();
 
-  line.style.opacity = 1; // 🔥 make visible
-
-  line.style.strokeDasharray = totalLength;
-  line.style.strokeDashoffset = totalLength * (1 - progress);
+    line.style.opacity = 1; // 🔥 CRITICAL FIX
+    line.style.strokeDasharray = totalLength;
+    line.style.strokeDashoffset = totalLength * (1 - progress);
   }
-  // 🔥 SMOOTH METRICS (LERP)
+
+  // ===============================
+  // 🔥 FIX 3: METRICS SMOOTH
+  // ===============================
   const revMetric = document.getElementById("revMetric");
   const denialMetric = document.getElementById("denialMetric");
 
@@ -752,15 +771,26 @@ function updateSmooth(progress){
     denialMetric.textContent = "-" + Math.round(denial) + "%";
   }
 
-  // 🔥 PROGRESS BAR (SMOOTH)
+  // ===============================
+  // 🔥 FIX 4: PROGRESS BAR
+  // ===============================
   const storyProgress = document.getElementById("storyProgress");
   if (storyProgress) {
     storyProgress.style.width = (progress * 100) + "%";
   }
 
-  // 🔥 HERO SYNC (GRADUAL)
-  const nodes = document.querySelectorAll(".node");
+  // ===============================
+  // 🔥 FIX 5: FORCE REVENUE VISIBLE EARLY
+  // ===============================
   const revenue = document.querySelector(".revenue");
+  if (revenue && progress > 0.05) {
+    revenue.classList.add("active");
+  }
+
+  // ===============================
+  // 🔥 FIX 6: HERO SYNC (OPTIONAL)
+  // ===============================
+  const nodes = document.querySelectorAll(".node");
   const system = document.querySelector(".system-bg");
 
   if (system) system.classList.add("controlled");
@@ -769,16 +799,14 @@ function updateSmooth(progress){
     if(i <= stepIndex) n.classList.add("resolved-active");
   });
 
-  if (progress > 0.9 && revenue) {
-    revenue.classList.add("active");
-  }
-
-  // 🔥 PARALLAX DEPTH (MULTI-LAYER)
+  // ===============================
+  // PARALLAX
+  // ===============================
   applyParallax(progress);
 }
 
 // ===============================
-// PREMIUM PARALLAX
+// PARALLAX
 // ===============================
 function applyParallax(progress) {
 
@@ -808,14 +836,15 @@ function applyParallax(progress) {
 }
 
 // ===============================
-// SCROLL ENGINE (SMOOTH RAF)
+// 🔥 FIX 7: PROPER SCROLL LOCK
 // ===============================
 const howSection = document.querySelector(".how-it-works");
 
 if (howSection) {
 
+  // 🔥 INCREASE SCROLL LENGTH (CRITICAL)
   howSection.style.position = "relative";
-  howSection.style.height = (steps.length * 80) + "vh";
+  howSection.style.height = (steps.length * 120) + "vh"; // was 80 → now 120
 
   const container = howSection.querySelector(".narrative");
 
@@ -837,14 +866,12 @@ if (howSection) {
 
   window.addEventListener("scroll", calculateProgress);
 
-  // 🔥 SMOOTH LOOP (KEY DIFFERENCE)
+  // ===============================
+  // 🔥 SMOOTH RAF LOOP
+  // ===============================
   function animate() {
-
-    // easing (this is what makes it premium)
-    smoothProgress += (targetProgress - smoothProgress) * 0.18;
-
+    smoothProgress += (targetProgress - smoothProgress) * 0.12;
     updateSmooth(smoothProgress);
-
     requestAnimationFrame(animate);
   }
 
