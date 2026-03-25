@@ -502,7 +502,7 @@ if (proofSection) {
 // 5. STRIPE-LEVEL HOW IT WORKS
 // ============================================================================================================================
 /* =========================================
-   GSAP STRIPE-LEVEL HOW IT WORKS
+   STRIPE++ HOW IT WORKS (NEXT LEVEL)
 ========================================= */
 
 gsap.registerPlugin(ScrollTrigger);
@@ -513,27 +513,31 @@ if (section) {
 
   const steps = section.querySelectorAll(".narrative-step");
   const toggles = section.querySelectorAll(".toggle");
-  const progress = document.getElementById("storyProgress");
+  const progressBar = document.getElementById("storyProgress");
 
   const revLine = document.getElementById("revLine");
   const denialLine = document.getElementById("denialLine");
+
   const aiText = document.getElementById("aiDynamic");
 
   const insights = [
-    "Revenue leakage detected across workflows...",
-    "Eligibility verification improving clean claim rate...",
-    "Coding accuracy increasing first-pass acceptance...",
-    "Denials identified and reduced systematically...",
-    "AR recovery boosting cash flow...",
-    "Revenue stabilized and predictable."
+    "Scanning workflows for revenue leakage...",
+    "Validating eligibility & payer rules...",
+    "Improving coding accuracy in real-time...",
+    "Detecting denial patterns...",
+    "Recovering aging receivables...",
+    "Revenue stabilized. System optimized."
   ];
 
   /* =========================================
-     INIT SVG PATHS
+     SVG PATH INIT
   ========================================= */
+  let revLength = 0;
+  let denLength = 0;
+
   if (revLine && denialLine) {
-    const revLength = revLine.getTotalLength();
-    const denLength = denialLine.getTotalLength();
+    revLength = revLine.getTotalLength();
+    denLength = denialLine.getTotalLength();
 
     gsap.set(revLine, {
       strokeDasharray: revLength,
@@ -542,72 +546,122 @@ if (section) {
 
     gsap.set(denialLine, {
       strokeDasharray: denLength,
-      strokeDashoffset: denLength
+      strokeDashoffset: 0
     });
   }
 
   /* =========================================
-     MASTER TIMELINE
+     AI TYPING ENGINE
   ========================================= */
+  let typingTween;
 
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: section,
-      start: "top top",
-      end: "+=2000", // scroll length
-      scrub: true,
-      pin: true,
-      anticipatePin: 1
-    }
-  });
+  function typeText(text) {
+    if (!aiText) return;
 
-  /* =========================================
-     STEP ANIMATION FUNCTION
-  ========================================= */
+    if (typingTween) typingTween.kill();
 
-  function activateStep(index) {
-    steps.forEach((step, i) => {
-      step.classList.toggle("active", i === index);
+    aiText.textContent = "";
+
+    let obj = { i: 0 };
+
+    typingTween = gsap.to(obj, {
+      i: text.length,
+      duration: 1,
+      ease: "none",
+      onUpdate: () => {
+        aiText.textContent = text.substring(0, Math.floor(obj.i));
+      }
     });
-
-    toggles.forEach((t, i) => {
-      t.classList.toggle("active", i <= index);
-    });
-
-    if (aiText) {
-      aiText.innerText = insights[index];
-    }
   }
 
   /* =========================================
-     BUILD TIMELINE
+     LIVE METRICS
   ========================================= */
 
-  steps.forEach((_, i) => {
+  const metrics = {
+    revenue: { value: 0 },
+    denial: { value: 100 }
+  };
 
-    tl.add(() => activateStep(i), i)
+  function updateMetrics(progress) {
+    metrics.revenue.value = Math.round(progress * 100);
+    metrics.denial.value = Math.round(100 - progress * 80);
 
-      // Revenue line grows
-      .to(revLine, {
-        strokeDashoffset: (i === 0) ? "+=0" : 0,
-        duration: 0.4,
-        ease: "power2.out"
-      }, i)
+    // Optional: hook into UI if you add numbers
+    // document.getElementById("revValue").innerText = metrics.revenue.value + "%";
+  }
 
-      // Denial line shrinks
-      .to(denialLine, {
-        strokeDashoffset: (i === 0) ? "+=0" : 200,
-        duration: 0.4,
-        ease: "power2.out"
-      }, i)
+  /* =========================================
+     MAIN SCROLL ENGINE
+  ========================================= */
 
-      // Progress bar
-      .to(progress, {
-        width: `${((i + 1) / steps.length) * 100}%`,
-        duration: 0.3,
-        ease: "none"
-      }, i);
+  ScrollTrigger.create({
+    trigger: section,
+    start: "top top",
+    end: "+=2500",
+    scrub: true,
+    pin: true,
+    anticipatePin: 1,
 
+    onUpdate: self => {
+
+      const progress = self.progress; // 0 → 1
+
+      /* ==============================
+         STEP INTERPOLATION
+      ============================== */
+
+      const stepIndex = Math.min(
+        steps.length - 1,
+        Math.floor(progress * steps.length)
+      );
+
+      steps.forEach((step, i) => {
+        step.classList.toggle("active", i === stepIndex);
+      });
+
+      toggles.forEach((t, i) => {
+        t.classList.toggle("active", i <= stepIndex);
+      });
+
+      /* ==============================
+         AI TEXT (only when step changes)
+      ============================== */
+
+      if (!self.prevStep || self.prevStep !== stepIndex) {
+        typeText(insights[stepIndex]);
+        self.prevStep = stepIndex;
+      }
+
+      /* ==============================
+         SMOOTH CHART INTERPOLATION
+      ============================== */
+
+      if (revLine && denialLine) {
+        gsap.set(revLine, {
+          strokeDashoffset: revLength * (1 - progress)
+        });
+
+        gsap.set(denialLine, {
+          strokeDashoffset: denLength * progress
+        });
+      }
+
+      /* ==============================
+         PROGRESS BAR
+      ============================== */
+
+      if (progressBar) {
+        progressBar.style.width = `${progress * 100}%`;
+      }
+
+      /* ==============================
+         LIVE METRICS
+      ============================== */
+
+      updateMetrics(progress);
+
+    }
   });
 
 }
