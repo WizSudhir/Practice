@@ -433,7 +433,7 @@ z-index: 2;
   fill: none;
   stroke: #4ade80;
   stroke-width: 2;
-   opacity: 0;
+  opacity: 1;
   stroke-dasharray: 300;
   stroke-dashoffset: 300;
   transition: stroke-dashoffset 0.6s ease;
@@ -447,6 +447,9 @@ z-index: 2;
   transform: translateY(20px);
   transition: all 0.8s ease;
   z-index: 5;
+}
+.how-it-works .revenue {
+  opacity: 1;
 }
 .revenue.active {
   opacity: 1;
@@ -1061,16 +1064,22 @@ z-index: 2;
   align-items: center;
   gap: 60px;
   scroll-snap-align: start;
+  position: relative;
+}
+.narrative-content {
+  position: sticky;
+  top: 120px;
+  height: fit-content;
 }
 .narrative-step {
-  opacity: 0;
-  transform: translateY(30px) scale(0.98);
+  opacity: 0.3;
+  transform: translateY(20px);
   transition: all 0.6s ease;
   position: absolute;
 }
 .narrative-step.active {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translateY(0);
   position: relative;
 }
 .narrative-visual {
@@ -1173,7 +1182,10 @@ z-index: 2;
   opacity: 0;
   transition: 0.2s;
 }
-
+.revenue-control {
+  position: sticky;
+  top: 120px;
+}
 .tooltip-trigger:hover .tooltip-box {
   opacity: 1;
 }
