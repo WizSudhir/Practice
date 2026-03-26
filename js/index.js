@@ -55,7 +55,9 @@ document.addEventListener("DOMContentLoaded", () => {
     revenueProgress = 0;
     hero.classList.remove("controlled");
     core.style.display = "none";
+    if (revenue) {
     revenue.classList.remove("active");
+    }
     resetConnections();
     // reset bars
     document.querySelectorAll(".bar").forEach(bar => {
@@ -72,7 +74,8 @@ document.addEventListener("DOMContentLoaded", () => {
     nodes.forEach(n => {
       n.classList.remove("resolved-active");
       n.style.opacity = "";
-      n.querySelector(".node-inner").style.boxShadow = "";
+      const inner = n.querySelector(".node-inner");
+      if (inner) inner.style.boxShadow = "";
 
       n.x = n.baseX;
       n.y = n.baseY;
