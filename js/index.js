@@ -502,10 +502,10 @@ if (proofSection) {
 // ============================================================================================================================
 // HOW IT WORKS
 // ============================================================================================================================
-<script>
-/* =========================
-   LIB INIT
-========================= */
+(function(){
+const hiwSection = document.querySelector(".how-it-works");
+if (!hiwSection || typeof gsap === "undefined" || typeof Chart === "undefined") return;
+
 gsap.registerPlugin(ScrollTrigger);
 
 /* =========================
@@ -559,7 +559,6 @@ const steps = [
    CHART INIT (STRIPE STYLE)
 ========================= */
 const ctx = document.getElementById("revChart");
-
 const chart = new Chart(ctx, {
   type: "line",
   data: {
@@ -601,7 +600,6 @@ const chart = new Chart(ctx, {
     }
   }
 });
-
 /* =========================
    GLOWING DATA POINT PLUGIN
 ========================= */
@@ -642,7 +640,9 @@ const glowPlugin = {
   }
 };
 
-Chart.register(glowPlugin);
+if (typeof Chart !== "undefined") {
+  Chart.register(glowPlugin);
+}
 
 /* =========================
    HELPERS
@@ -769,8 +769,7 @@ setInterval(() => {
   revEl.innerText = "$" + newRev.toLocaleString();
 
 }, 3000);
-
-</script>
+})();
 // ============================================================================================================================
 // 6. SERVICES
 // ============================================================================================================================
