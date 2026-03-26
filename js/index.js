@@ -685,19 +685,6 @@ function updateStepUI(index) {
     }
   });
   transformEl.innerText = step.transform;
-  /* CTA ACTIVATION LOGIC */
-  if (cta) {
-    if (index === steps.length - 1) {
-      // FINAL STEP → ACTIVATE CTA
-      cta.classList.add("active");
-      gsap.fromTo(cta,
-        { scale: 0.95, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.6, ease: "power3.out" }
-      );
-    } else {
-      cta.classList.remove("active");
-    }
-  }
 }
 
 /* =========================
@@ -719,7 +706,18 @@ gsap.timeline({
   onUpdate: () => {
 
     const p = state.progress;
-
+    // 🔥 CTA GRAPH PEAK SYNC (FINAL VERSION)
+    if (cta) {
+      if (p > 0.9 && !cta.classList.contains("active")) {
+        cta.classList.add("active");
+        gsap.fromTo(cta,
+          { y: 30, opacity: 0, scale: 0.96 },
+          { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: "power3.out" }
+        );
+      } else if (p <= 0.9 && cta.classList.contains("active")) {
+        cta.classList.remove("active");
+      }
+    }
     // smooth curve
     const smoothP = p * p * (3 - 2 * p);
 
