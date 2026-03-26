@@ -649,7 +649,8 @@ if (section) {
 const tooltip = document.getElementById("tooltip");
 const controlItems = document.querySelectorAll(".control-item");
 
-controlItems.forEach(item => {
+if (tooltip) {
+  controlItems.forEach(item => {
 
   item.addEventListener("mouseenter", (e) => {
     const text = item.dataset.info;
@@ -669,7 +670,7 @@ controlItems.forEach(item => {
   });
 
 });
-
+}
 }
 // ============================================================================================================================
 // 6. SERVICES
