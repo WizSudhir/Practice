@@ -502,163 +502,181 @@ if (proofSection) {
 // ============================================================================================================================
 // HOW IT WORKS
 // ============================================================================================================================
+gsap.registerPlugin(ScrollTrigger);
 
-  // GSAP INIT
-  if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
-    gsap.registerPlugin(ScrollTrigger);
-  }
+/* =========================
+   INITIAL STATE
+========================= */
 
-  const section = document.querySelector(".how-it-works");
-  if (!section) {
-  console.warn("How-it-works missing");
-  } else {
+let revenue = 128450;
+let denials = 32;
 
-  console.log("HOW IT WORKS INIT");
+const revEl = document.getElementById("revCounter");
+const denEl = document.getElementById("denialCounter");
+const aiEl = document.getElementById("aiText");
+const transformEl = document.getElementById("transformBox");
 
-  const steps = section.querySelectorAll(".narrative-step");
-  if (!steps.length) return;
+/* =========================
+   CHART INIT
+========================= */
 
-  const visualToggles = section.querySelectorAll(".control-panel .toggle");
-  const progressBar = document.getElementById("storyProgress");
-  const aiText = document.getElementById("aiDynamic");
+const ctx = document.getElementById('revChart');
 
-  // STATE
-  const state = {
-    progress: 0,
-    velocity: 0,
-    revenue: 0,
-    denial: 1
-  };
-
-  // SPRING PHYSICS
-  function spring(current, target, velocity, stiffness = 0.08, damping = 0.8) {
-    const force = (target - current) * stiffness;
-    velocity = (velocity + force) * damping;
-    current += velocity;
-    return { current, velocity };
-  }
-
-  // AI INSIGHTS
-  const insights = [
-    "Analyzing revenue leakage patterns...",
-    "Cross-referencing payer eligibility...",
-    "Optimizing coding accuracy...",
-    "Detecting denial clusters...",
-    "Recovering lost revenue streams...",
-    "System stabilized. Revenue optimized."
-  ];
-
-  let lastStep = -1;
-
-  function updateAI(step) {
-    if (step === lastStep) return;
-    lastStep = step;
-
-    if (!aiText) return;
-
-    if (typeof gsap !== "undefined") {
-      gsap.fromTo(aiText,
-        { opacity: 0, y: 10 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.4,
-          onStart: () => {
-            aiText.textContent = insights[step];
-          }
-        }
-      );
-    } else {
-      aiText.textContent = insights[step];
+const chart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: ["Start","1","2","3","4"],
+    datasets: [
+      {
+        label: "Revenue",
+        data: [50,60,70,85,100],
+        borderColor: "#22c55e",
+        borderWidth: 2,
+        tension: 0.4,
+        pointRadius: 0
+      },
+      {
+        label: "Denials",
+        data: [40,35,30,20,12],
+        borderColor: "#ef4444",
+        borderWidth: 2,
+        tension: 0.4,
+        pointRadius: 0
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    animation: false,
+    plugins: { legend: { display: false }},
+    scales: {
+      x: { display: false },
+      y: { display: false }
     }
   }
-  // SCROLL TRIGGER
-  if (window.innerWidth > 768 && typeof ScrollTrigger !== "undefined") {
-    ScrollTrigger.create({
-      trigger: section,
-      start: "top top",
-      end: "+=3000",
-      scrub: true,
-      pin: true,
-      onUpdate: self => {
-        state.progress = self.progress;
-      }
-    });
+});
+
+/* =========================
+   STEP DATA SYSTEM
+========================= */
+
+const steps = [
+  {
+    revenue: 135000,
+    denials: 30,
+    ai: "42% intake errors eliminated before claim creation",
+    transform: "Intake Errors → Clean Data"
+  },
+  {
+    revenue: 150000,
+    denials: 24,
+    ai: "Eligibility verification reduced denials by 28%",
+    transform: "Eligibility Issues → Verified Coverage"
+  },
+  {
+    revenue: 175000,
+    denials: 16,
+    ai: "Claim validation increased acceptance to 96%",
+    transform: "Coding Errors → Validated Claims"
+  },
+  {
+    revenue: 210000,
+    denials: 9,
+    ai: "Denial recovery increased collections by 30%",
+    transform: "Denials → Payments Collected"
+  },
+  {
+    revenue: 260000,
+    denials: 5,
+    ai: "Fully optimized revenue cycle delivering predictable growth",
+    transform: "System Optimized → Predictable Revenue"
   }
-  // MOUSE INTERACTION
-  let mouseBoost = 0;
+];
 
-  document.addEventListener("mousemove", (e) => {
-    const x = e.clientX / window.innerWidth;
-    mouseBoost = (x - 0.5) * 0.2;
+/* =========================
+   COUNTER ANIMATION
+========================= */
+
+function animateValue(el, start, end, duration, prefix="", suffix="") {
+  let obj = { val: start };
+
+  gsap.to(obj, {
+    val: end,
+    duration: duration,
+    ease: "power2.out",
+    onUpdate: () => {
+      el.innerText = prefix + Math.floor(obj.val).toLocaleString() + suffix;
+    }
+  });
+}
+
+/* =========================
+   STEP ACTIVATION SYSTEM
+========================= */
+
+function activateStep(index) {
+
+  const step = steps[index];
+
+  // LEFT ACTIVE
+  document.querySelectorAll(".narrative-step").forEach((el, i) => {
+    el.classList.toggle("active", i === index);
   });
 
-  // MAIN ANIMATION LOOP
+  // COUNTERS
+  animateValue(revEl, revenue, step.revenue, 1, "$");
+  animateValue(denEl, denials, step.denials, 1, "", "%");
 
-function animate() {
-
-  const result = spring(
-    state.revenue,
-    state.progress + mouseBoost,
-    state.velocity
-  );
-
-  state.revenue = result.current;
-  state.velocity = result.velocity;
-  state.denial = 1 - state.revenue;
-
-  const stepIndex = Math.min(
-    steps.length - 1,
-    Math.floor(state.revenue * steps.length)
-  );
-
-  // LEFT TEXT
-  steps.forEach((step, i) => {
-    step.classList.toggle("active", i === stepIndex);
-  });
-  // RIGHT TOGGLES
-  visualToggles.forEach((t, i) => {
-    t.classList.toggle("active", i <= stepIndex);
-  });
+  revenue = step.revenue;
+  denials = step.denials;
 
   // AI TEXT
-  updateAI(stepIndex);
-
-  // PROGRESS BAR
-  if (progressBar) {
-    progressBar.style.width = `${state.revenue * 100}%`;
-  }
-
-  requestAnimationFrame(animate);
-}
-
-animate();
-
-// TOOLTIP SYSTEM (FIXED FOR PROBLEM + SOLUTION)
-const tooltip = document.getElementById("tooltip");
-
-if (tooltip) {
-  const tooltipItems = section.querySelectorAll("[data-tooltip]");
-
-  tooltipItems.forEach(item => {
-
-    item.addEventListener("mouseenter", () => {
-      tooltip.innerText = item.dataset.tooltip;
-      tooltip.style.opacity = "1";
-    });
-
-    item.addEventListener("mousemove", (e) => {
-      tooltip.style.left = e.pageX + 15 + "px";
-      tooltip.style.top = e.pageY + 15 + "px";
-    });
-
-    item.addEventListener("mouseleave", () => {
-      tooltip.style.opacity = "0";
-    });
-
+  gsap.to(aiEl, {
+    opacity: 0,
+    y: 10,
+    duration: 0.2,
+    onComplete: () => {
+      aiEl.innerText = step.ai;
+      gsap.to(aiEl, { opacity: 1, y: 0, duration: 0.4 });
+    }
   });
+
+  // TRANSFORM TEXT
+  transformEl.innerText = step.transform;
+
+  // GRAPH UPDATE
+  chart.data.datasets[0].data[index+1] = step.revenue / 2000;
+  chart.data.datasets[1].data[index+1] = step.denials;
+  chart.update();
 }
-  }
+
+/* =========================
+   SCROLL TRIGGERS (CORE)
+========================= */
+
+document.querySelectorAll(".narrative-step").forEach((step, index) => {
+
+  ScrollTrigger.create({
+    trigger: step,
+    start: "top center",
+    end: "bottom center",
+    onEnter: () => activateStep(index),
+    onEnterBack: () => activateStep(index)
+  });
+
+});
+
+/* =========================
+   LIVE MICRO UPDATES
+========================= */
+
+setInterval(() => {
+  revenue += Math.floor(Math.random() * 120);
+  denials -= Math.random() * 0.05;
+
+  revEl.innerText = "$" + revenue.toLocaleString();
+  denEl.innerText = denials.toFixed(1) + "%";
+}, 3000);
 // ============================================================================================================================
 // 6. SERVICES
 // ============================================================================================================================
