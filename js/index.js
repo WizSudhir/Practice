@@ -612,49 +612,51 @@ if (proofSection) {
 
   // MAIN ANIMATION LOOP
 
-    const result = spring(
-      state.revenue,
-      state.progress + mouseBoost,
-      state.velocity
-    );
+function animate() {
 
-    state.revenue = result.current;
-    state.velocity = result.velocity;
-    state.denial = 1 - state.revenue;
+  const result = spring(
+    state.revenue,
+    state.progress + mouseBoost,
+    state.velocity
+  );
 
-    const stepIndex = Math.min(
-      steps.length - 1,
-      Math.floor(state.revenue * steps.length)
-    );
+  state.revenue = result.current;
+  state.velocity = result.velocity;
+  state.denial = 1 - state.revenue;
 
-    // LEFT TEXT
-    steps.forEach((step, i) => {
-      step.classList.toggle("active", i === stepIndex);
-    });
+  const stepIndex = Math.min(
+    steps.length - 1,
+    Math.floor(state.revenue * steps.length)
+  );
 
-    // RIGHT TOGGLES
-    visualToggles.forEach((t, i) => {
-      t.classList.toggle("active", i <= stepIndex);
-    });
+  // LEFT TEXT
+  steps.forEach((step, i) => {
+    step.classList.toggle("active", i === stepIndex);
+  });
 
-    // AI TEXT
-    updateAI(stepIndex);
+  // RIGHT TOGGLES
+  visualToggles.forEach((t, i) => {
+    t.classList.toggle("active", i <= stepIndex);
+  });
 
-    // GRAPH
-    if (revPath && denialPath) {
-      revPath.setAttribute("d", generateCurve(state.revenue));
-      denialPath.setAttribute("d", generateCurve(state.denial));
-    }
+  // AI TEXT
+  updateAI(stepIndex);
 
-    // PROGRESS BAR
-    if (progressBar) {
-      progressBar.style.width = `${state.revenue * 100}%`;
-    }
-
-    requestAnimationFrame(animate);
+  // GRAPH
+  if (revPath && denialPath) {
+    revPath.setAttribute("d", generateCurve(state.revenue));
+    denialPath.setAttribute("d", generateCurve(state.denial));
   }
 
-  animate();
+  // PROGRESS BAR
+  if (progressBar) {
+    progressBar.style.width = `${state.revenue * 100}%`;
+  }
+
+  requestAnimationFrame(animate);
+}
+
+animate();
 
   // TOOLTIP SYSTEM
   const tooltip = document.getElementById("tooltip");
