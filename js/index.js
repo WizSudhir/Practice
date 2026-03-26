@@ -503,45 +503,89 @@ if (proofSection) {
 // HOW IT WORKS
 // ============================================================================================================================
 <script>
+/* =========================
+   LIB INIT
+========================= */
 gsap.registerPlugin(ScrollTrigger);
 
 /* =========================
-   INITIAL STATE
+   ELEMENTS
 ========================= */
-
-let revenue = 128450;
-let denials = 32;
+const section = document.querySelector(".how-it-works");
 
 const revEl = document.getElementById("revCounter");
 const denEl = document.getElementById("denialCounter");
 const aiEl = document.getElementById("aiText");
 const transformEl = document.getElementById("transformBox");
 
-/* =========================
-   CHART INIT
-========================= */
+const stepsEls = document.querySelectorAll(".narrative-step");
 
-const ctx = document.getElementById('revChart');
+/* =========================
+   INITIAL VALUES
+========================= */
+const START_REVENUE = 128450;
+const END_REVENUE = 260000;
+
+const START_DENIAL = 32;
+const END_DENIAL = 5;
+
+/* =========================
+   STEP DATA
+========================= */
+const steps = [
+  {
+    ai: "42% intake errors eliminated before claim creation",
+    transform: "Intake Errors → Clean Data"
+  },
+  {
+    ai: "Eligibility verification reduced denials by 28%",
+    transform: "Eligibility Issues → Verified Coverage"
+  },
+  {
+    ai: "Claim validation increased acceptance to 96%",
+    transform: "Coding Errors → Validated Claims"
+  },
+  {
+    ai: "Denial recovery increased collections by 30%",
+    transform: "Denials → Payments Collected"
+  },
+  {
+    ai: "Fully optimized revenue cycle delivering predictable growth",
+    transform: "System Optimized → Predictable Revenue"
+  }
+];
+
+/* =========================
+   CHART INIT (STRIPE STYLE)
+========================= */
+const ctx = document.getElementById("revChart");
 
 const chart = new Chart(ctx, {
-  type: 'line',
+  type: "line",
   data: {
-    labels: ["Start","1","2","3","4"],
+    labels: ["","","","",""],
     datasets: [
       {
         label: "Revenue",
-        data: [50,60,70,85,100],
+        data: [50, 55, 60, 70, 80],
         borderColor: "#22c55e",
-        borderWidth: 2,
-        tension: 0.4,
-        pointRadius: 0
+        borderWidth: 3,
+        tension: 0.45,
+        pointRadius: 0,
+        fill: true,
+        backgroundColor: (ctx) => {
+          const gradient = ctx.chart.ctx.createLinearGradient(0, 0, 0, 200);
+          gradient.addColorStop(0, "rgba(34,197,94,0.25)");
+          gradient.addColorStop(1, "rgba(34,197,94,0)");
+          return gradient;
+        }
       },
       {
         label: "Denials",
-        data: [40,35,30,20,12],
+        data: [40, 38, 35, 30, 25],
         borderColor: "#ef4444",
         borderWidth: 2,
-        tension: 0.4,
+        tension: 0.45,
         pointRadius: 0
       }
     ]
@@ -550,6 +594,7 @@ const chart = new Chart(ctx, {
     responsive: true,
     animation: false,
     plugins: { legend: { display: false }},
+    interaction: { intersect: false },
     scales: {
       x: { display: false },
       y: { display: false }
@@ -558,80 +603,80 @@ const chart = new Chart(ctx, {
 });
 
 /* =========================
-   STEP DATA SYSTEM
+   GLOWING DATA POINT PLUGIN
 ========================= */
+const glowPlugin = {
+  id: "glowDot",
+  afterDatasetsDraw(chart) {
+    const { ctx } = chart;
+    const meta = chart.getDatasetMeta(0);
+    const point = meta.data[meta.data.length - 1];
+    if (!point) return;
 
-const steps = [
-  {
-    revenue: 135000,
-    denials: 30,
-    ai: "42% intake errors eliminated before claim creation",
-    transform: "Intake Errors → Clean Data"
-  },
-  {
-    revenue: 150000,
-    denials: 24,
-    ai: "Eligibility verification reduced denials by 28%",
-    transform: "Eligibility Issues → Verified Coverage"
-  },
-  {
-    revenue: 175000,
-    denials: 16,
-    ai: "Claim validation increased acceptance to 96%",
-    transform: "Coding Errors → Validated Claims"
-  },
-  {
-    revenue: 210000,
-    denials: 9,
-    ai: "Denial recovery increased collections by 30%",
-    transform: "Denials → Payments Collected"
-  },
-  {
-    revenue: 260000,
-    denials: 5,
-    ai: "Fully optimized revenue cycle delivering predictable growth",
-    transform: "System Optimized → Predictable Revenue"
+    const x = point.x;
+    const y = point.y;
+
+    ctx.save();
+
+    // glow trail
+    ctx.shadowColor = "rgba(34,197,94,0.6)";
+    ctx.shadowBlur = 20;
+
+    // outer glow
+    const gradient = ctx.createRadialGradient(x, y, 2, x, y, 20);
+    gradient.addColorStop(0, "rgba(34,197,94,0.9)");
+    gradient.addColorStop(1, "rgba(34,197,94,0)");
+
+    ctx.fillStyle = gradient;
+    ctx.beginPath();
+    ctx.arc(x, y, 20, 0, Math.PI * 2);
+    ctx.fill();
+
+    // core dot
+    ctx.fillStyle = "#22c55e";
+    ctx.beginPath();
+    ctx.arc(x, y, 4, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.restore();
   }
-];
+};
+
+Chart.register(glowPlugin);
 
 /* =========================
-   COUNTER ANIMATION
+   HELPERS
 ========================= */
+function lerp(a, b, t) {
+  return a + (b - a) * t;
+}
 
-function animateValue(el, start, end, duration, prefix="", suffix="") {
-  let obj = { val: start };
+let state = { progress: 0 };
+let currentStep = -1;
 
-  gsap.to(obj, {
-    val: end,
-    duration: duration,
-    ease: "power2.out",
-    onUpdate: () => {
-      el.innerText = prefix + Math.floor(obj.val).toLocaleString() + suffix;
-    }
-  });
+function getStepIndex(p) {
+  if (p < 0.2) return 0;
+  if (p < 0.4) return 1;
+  if (p < 0.6) return 2;
+  if (p < 0.8) return 3;
+  return 4;
 }
 
 /* =========================
-   STEP ACTIVATION SYSTEM
+   STEP UI UPDATE
 ========================= */
-
-function activateStep(index) {
+function updateStepUI(index) {
+  if (currentStep === index) return;
+  currentStep = index;
 
   const step = steps[index];
 
-  // LEFT ACTIVE
-  document.querySelectorAll(".narrative-step").forEach((el, i) => {
+  // LEFT SIDE ACTIVE
+  stepsEls.forEach((el, i) => {
     el.classList.toggle("active", i === index);
   });
 
-  // COUNTERS
-  animateValue(revEl, revenue, step.revenue, 1, "$");
-  animateValue(denEl, denials, step.denials, 1, "", "%");
-
-  revenue = step.revenue;
-  denials = step.denials;
-
-  // AI TEXT
+  // AI TEXT (NO FLICKER)
   gsap.to(aiEl, {
     opacity: 0,
     y: 10,
@@ -644,40 +689,87 @@ function activateStep(index) {
 
   // TRANSFORM TEXT
   transformEl.innerText = step.transform;
-
-  // GRAPH UPDATE
-  chart.data.datasets[0].data[index+1] = step.revenue / 2000;
-  chart.data.datasets[1].data[index+1] = step.denials;
-  chart.update();
 }
 
 /* =========================
-   SCROLL TRIGGERS (CORE)
+   SCROLL-DRIVEN SYSTEM
 ========================= */
+gsap.timeline({
+  scrollTrigger: {
+    trigger: section,
+    start: "top top",
+    end: "+=2200",
+    scrub: true,
+    pin: true,
+    anticipatePin: 1
+  }
+})
+.to(state, {
+  progress: 1,
+  ease: "none",
+  onUpdate: () => {
 
-document.querySelectorAll(".narrative-step").forEach((step, index) => {
+    const p = state.progress;
 
-  ScrollTrigger.create({
-    trigger: step,
-    start: "top center",
-    end: "bottom center",
-    onEnter: () => activateStep(index),
-    onEnterBack: () => activateStep(index)
-  });
+    // smooth curve
+    const smoothP = p * p * (3 - 2 * p);
 
+    /* ===== COUNTERS ===== */
+    const revenue = lerp(START_REVENUE, END_REVENUE, smoothP);
+    const denials = lerp(START_DENIAL, END_DENIAL, smoothP);
+
+    revEl.innerText = "$" + Math.floor(revenue).toLocaleString();
+    denEl.innerText = denials.toFixed(1) + "%";
+
+    /* ===== GRAPH ===== */
+    chart.data.datasets[0].data = [
+      lerp(50, 90, smoothP),
+      lerp(55, 120, smoothP),
+      lerp(60, 150, smoothP),
+      lerp(70, 190, smoothP),
+      lerp(80, 240, smoothP)
+    ];
+
+    chart.data.datasets[1].data = [
+      lerp(40, 25, smoothP),
+      lerp(38, 20, smoothP),
+      lerp(35, 15, smoothP),
+      lerp(30, 10, smoothP),
+      lerp(25, 6, smoothP)
+    ];
+
+    chart.update("none");
+
+    /* ===== STEP SYNC ===== */
+    const stepIndex = getStepIndex(p);
+    updateStepUI(stepIndex);
+  }
 });
 
 /* =========================
-   LIVE MICRO UPDATES
+   FLOATING DASHBOARD
 ========================= */
+gsap.to(".hiw-dashboard", {
+  y: -8,
+  duration: 3,
+  ease: "sine.inOut",
+  repeat: -1,
+  yoyo: true
+});
 
+/* =========================
+   MICRO LIVE DRIFT
+========================= */
 setInterval(() => {
-  revenue += Math.floor(Math.random() * 120);
-  denials -= Math.random() * 0.05;
+  if (state.progress < 0.95) return;
 
-  revEl.innerText = "$" + revenue.toLocaleString();
-  denEl.innerText = denials.toFixed(1) + "%";
+  const currentRev = parseFloat(revEl.innerText.replace(/[^0-9]/g, ""));
+  const newRev = currentRev + Math.floor(Math.random() * 50);
+
+  revEl.innerText = "$" + newRev.toLocaleString();
+
 }, 3000);
+
 </script>
 // ============================================================================================================================
 // 6. SERVICES
