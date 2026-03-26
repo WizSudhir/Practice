@@ -19,7 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
       return;
   }
-  if (!hero || !core || !revenue) return;
+  if (!hero || !core || !revenue) {
+  console.warn("Hero not found — skipping hero section");
+  } else {
   function getNodeSize() {
   const w = window.innerWidth;
   if (w < 768) return { w: 0, h: 0 }; // disabled
@@ -316,7 +318,7 @@ document.addEventListener("DOMContentLoaded", () => {
     requestAnimationFrame(animate);
   }
   animate();
-
+  }
   // ============================================================================================================================
   // 2. MOBILE HERO
   // ============================================================================================================================
