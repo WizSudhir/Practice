@@ -498,17 +498,22 @@ if (proofSection) {
 }
   
 // ============================================================================================================================
-// 5. STRIPE-LEVEL HOW IT WORKS
+// HOW IT WORKS
 // ============================================================================================================================
-if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
-const section = document.querySelector(".how-it-works");
+  // GSAP INIT
+  if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger);
+  }
 
-if (section) {
+  const section = document.querySelector(".how-it-works");
+  if (!section) return;
+
+  console.log("HOW IT WORKS INIT");
 
   const steps = section.querySelectorAll(".narrative-step");
+  if (!steps.length) return;
+
   const visualToggles = section.querySelectorAll(".control-panel .toggle");
   const progressBar = document.getElementById("storyProgress");
 
@@ -516,15 +521,15 @@ if (section) {
   const denialPath = document.getElementById("denialLine");
   const aiText = document.getElementById("aiDynamic");
 
-  /* STATE */
+  // STATE
   const state = {
     progress: 0,
     velocity: 0,
     revenue: 0,
-    denial: 100
+    denial: 1
   };
 
-  /* SPRING */
+  // SPRING PHYSICS
   function spring(current, target, velocity, stiffness = 0.08, damping = 0.8) {
     const force = (target - current) * stiffness;
     velocity = (velocity + force) * damping;
@@ -532,7 +537,7 @@ if (section) {
     return { current, velocity };
   }
 
-  /* AI */
+  // AI INSIGHTS
   const insights = [
     "Analyzing revenue leakage patterns...",
     "Cross-referencing payer eligibility...",
@@ -547,6 +552,8 @@ if (section) {
   function updateAI(step) {
     if (step === lastStep) return;
     lastStep = step;
+
+    if (!aiText) return;
 
     if (typeof gsap !== "undefined") {
       gsap.fromTo(aiText,
@@ -565,7 +572,7 @@ if (section) {
     }
   }
 
-  /* CURVE */
+  // SVG CURVE
   function generateCurve(p) {
     return `
       M0,80
@@ -576,7 +583,8 @@ if (section) {
        100,${5 + p * 5}
     `;
   }
-  /* SCROLL */
+
+  // SCROLL TRIGGER
   if (window.innerWidth > 768 && typeof ScrollTrigger !== "undefined") {
     ScrollTrigger.create({
       trigger: section,
@@ -586,12 +594,11 @@ if (section) {
       pin: true,
       onUpdate: self => {
         state.progress = self.progress;
-
       }
     });
   }
 
-  /* MOUSE */
+  // MOUSE INTERACTION
   let mouseBoost = 0;
 
   document.addEventListener("mousemove", (e) => {
@@ -599,17 +606,16 @@ if (section) {
     mouseBoost = (x - 0.5) * 0.2;
   });
 
-  /* LOOP */
-  function animate() {
+  // MAIN ANIMATION LOOP
 
-    const springResult = spring(
+    const result = spring(
       state.revenue,
       state.progress + mouseBoost,
       state.velocity
     );
 
-    state.revenue = springResult.current;
-    state.velocity = springResult.velocity;
+    state.revenue = result.current;
+    state.velocity = result.velocity;
     state.denial = 1 - state.revenue;
 
     const stepIndex = Math.min(
@@ -617,21 +623,26 @@ if (section) {
       Math.floor(state.revenue * steps.length)
     );
 
+    // LEFT TEXT
     steps.forEach((step, i) => {
       step.classList.toggle("active", i === stepIndex);
     });
 
+    // RIGHT TOGGLES
     visualToggles.forEach((t, i) => {
       t.classList.toggle("active", i <= stepIndex);
     });
 
+    // AI TEXT
     updateAI(stepIndex);
 
+    // GRAPH
     if (revPath && denialPath) {
       revPath.setAttribute("d", generateCurve(state.revenue));
       denialPath.setAttribute("d", generateCurve(state.denial));
     }
 
+    // PROGRESS BAR
     if (progressBar) {
       progressBar.style.width = `${state.revenue * 100}%`;
     }
@@ -640,37 +651,33 @@ if (section) {
   }
 
   animate();
-}
-/* =========================================
-   TOOLTIP SYSTEM
-========================================= */
 
-const tooltip = document.getElementById("tooltip");
-const controlItems = document.querySelectorAll(".control-item");
+  // TOOLTIP SYSTEM
+  const tooltip = document.getElementById("tooltip");
+  const controlItems = document.querySelectorAll(".control-item");
 
-if (tooltip) {
-  controlItems.forEach(item => {
+  if (tooltip) {
+    controlItems.forEach(item => {
 
-  item.addEventListener("mouseenter", (e) => {
-    const text = item.dataset.info;
-    if (!text) return;
+      item.addEventListener("mouseenter", () => {
+        const text = item.dataset.info;
+        if (!text) return;
 
-    tooltip.innerText = text;
-    tooltip.style.opacity = "1";
-  });
+        tooltip.innerText = text;
+        tooltip.style.opacity = "1";
+      });
 
-  item.addEventListener("mousemove", (e) => {
-    tooltip.style.left = e.pageX + 15 + "px";
-    tooltip.style.top = e.pageY + 15 + "px";
-  });
+      item.addEventListener("mousemove", (e) => {
+        tooltip.style.left = e.pageX + 15 + "px";
+        tooltip.style.top = e.pageY + 15 + "px";
+      });
 
-  item.addEventListener("mouseleave", () => {
-    tooltip.style.opacity = "0";
-  });
+      item.addEventListener("mouseleave", () => {
+        tooltip.style.opacity = "0";
+      });
 
-});
-}
-}
+    });
+  }
 // ============================================================================================================================
 // 6. SERVICES
 // ============================================================================================================================
