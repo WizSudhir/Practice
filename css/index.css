@@ -1182,15 +1182,19 @@ z-index: 2;
   stroke-dashoffset: 400;
   transition: all 0.2s ease;
 }
-
-.revenue-line {
-  stroke: #22c55e;
-  filter: drop-shadow(0 0 6px rgba(34,197,94,0.6));
-}
-
 .denial-line {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.denial-line path {
   stroke: #f87171;
-  opacity: 0.6;
+  stroke-width: 2;
+  fill: none;
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  transition: 0.6s ease;
 }
 /* AI INSIGHTS */
 .ai-insights {
