@@ -22,6 +22,7 @@
   
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script defer src="js/root.js"></script>
 <script defer src="js/index.js"></script>
 </head>
@@ -664,48 +665,41 @@
     </div>
 
       <!-- RIGHT: VISUAL SYSTEM -->
-      <div class="hiw-visual">
+        <div class="hiw-visual">
+          <div class="hiw-dashboard">
 
-        <div class="hiw-card" id="hiwSystem">
-
-          <div class="hiw-row">
-            <span class="error">❌ Intake Errors</span>
-            <span class="success">✅ Clean Data</span>
-          </div>
-
-          <div class="hiw-row">
-            <span class="error">❌ Eligibility Issues</span>
-            <span class="success">✅ Verified Coverage</span>
-          </div>
-
-          <div class="hiw-row">
-            <span class="error">❌ Coding Errors</span>
-            <span class="success">✅ Validated Claims</span>
-          </div>
-
-          <div class="hiw-row">
-            <span class="error">❌ Denials</span>
-            <span class="success">✅ Payments Collected</span>
-          </div>
-
-          <!-- REVENUE GRAPH -->
-          <div class="hiw-revenue">
-            <div class="bar" data-height="30%"></div>
-            <div class="bar" data-height="50%"></div>
-            <div class="bar" data-height="70%"></div>
-            <div class="bar" data-height="90%"></div>
-          </div>
-
-          <div class="ai-insights" id="aiInsights">
-            <div class="ai-title">AI Insights</div>
-            <div class="ai-content" id="aiDynamic">
-              Detecting revenue inefficiencies...
+            <!-- LIVE METRICS -->
+              <div class="metrics-row">
+              <div class="metric">
+                <div class="metric-label">Revenue</div>
+                <div class="metric-value" id="revCounter">$128,450</div>
+              </div>
+              <div class="metric">
+                <div class="metric-label">Denials</div>
+                <div class="metric-value red" id="denialCounter">32%</div>
+              </div>
             </div>
+
+            <!-- DUAL GRAPH -->
+            <div class="graph-container">
+              <canvas id="revChart"></canvas>
+            </div>
+
+            <!-- TRANSFORMATION BADGES -->
+            <div class="transforms" id="transformBox">
+              <div class="transform">Fixing Intake Errors → Clean Data</div>
+            </div>
+
+            <!-- AI INSIGHTS -->
+            <div class="ai-box">
+              <div class="ai-title">AI Insights</div>
+              <div class="ai-text" id="aiText">
+                Initializing system...
+              </div>
+            </div>
+
           </div>
-          
         </div>
-      </div>
-      
       
     </div>
   </div>
