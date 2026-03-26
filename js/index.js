@@ -577,87 +577,6 @@ if (section) {
        100,${5 + p * 5}
     `;
   }
-
-  /* =========================
-     REAL RCM MODEL
-  ========================= */
-
-  const denialSlider = document.getElementById("denialSlider");
-  const denialValue = document.getElementById("denialValue");
-  const revenueValue = document.getElementById("revenueValue");
-  const featureToggles = document.querySelectorAll(".toggle[data-feature]");
-
-  const simState = {
-    denial: 25,
-    eligibility: false,
-    coding: false,
-    ar: false
-  };
-
-  const BASE_REVENUE = 100000; // ₹1L baseline
-
-  function calculateRevenue() {
-    const denialRate = simState.denial / 100;
-
-    const cleanClaimRate =
-      1 - denialRate +
-      (simState.eligibility ? 0.08 : 0) +
-      (simState.coding ? 0.12 : 0);
-
-    const netCollectionRate =
-      0.85 +
-      (simState.ar ? 0.1 : 0);
-
-    const revenue =
-      BASE_REVENUE *
-      cleanClaimRate *
-      netCollectionRate;
-
-    return Math.max(0, Math.round(revenue));
-  }
-
-  function updateSimulation() {
-
-    const revenue = calculateRevenue();
-
-    revenueValue.innerText = `₹${revenue.toLocaleString()}`;
-
-    state.revenue = revenue / (BASE_REVENUE * 1.5);
-
-    document.documentElement.style.setProperty(
-      "--rev-glow",
-      state.revenue * 10
-    );
-
-    if (aiText) {
-      aiText.textContent =
-        revenue > 130000
-          ? "Revenue optimized. System performing at peak."
-          : revenue > 100000
-          ? "Improvements detected. Continue optimizing workflows."
-          : "Revenue leakage detected. Intervention required.";
-    }
-  }
-
-  if (denialSlider) {
-    denialSlider.addEventListener("input", e => {
-      simState.denial = parseInt(e.target.value);
-      denialValue.innerText = `${simState.denial}%`;
-      updateSimulation();
-    });
-  }
-
-  featureToggles.forEach(toggle => {
-    toggle.addEventListener("click", () => {
-      const key = toggle.dataset.feature;
-      simState[key] = !simState[key];
-      toggle.classList.toggle("active");
-      updateSimulation();
-    });
-  });
-
-  updateSimulation();
-
   /* SCROLL */
   if (window.innerWidth > 768 && typeof ScrollTrigger !== "undefined") {
     ScrollTrigger.create({
@@ -754,21 +673,6 @@ controlItems.forEach(item => {
   });
 
 });
-/* =========================================
-   LOTTIE INTEGRATION
-========================================= */
-
-let lottieInstance;
-
-if (typeof lottie !== "undefined") {
-
-  lottieInstance = lottie.loadAnimation({
-    container: document.getElementById('lottieScene'),
-    renderer: 'svg',
-    loop: false,
-    autoplay: false,
-    path: '/animations/rcm-flow.json' // replace with your file
-  });
 
 }
 // ============================================================================================================================
