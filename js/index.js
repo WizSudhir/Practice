@@ -520,9 +520,6 @@ if (proofSection) {
 
   const visualToggles = section.querySelectorAll(".control-panel .toggle");
   const progressBar = document.getElementById("storyProgress");
-
-  const revPath = document.getElementById("revLine");
-  const denialPath = document.getElementById("denialLine");
   const aiText = document.getElementById("aiDynamic");
 
   // STATE
@@ -575,19 +572,6 @@ if (proofSection) {
       aiText.textContent = insights[step];
     }
   }
-
-  // SVG CURVE
-  function generateCurve(p) {
-    return `
-      M0,80
-      C20,${80 - p * 20}
-       40,${60 - p * 30}
-       60,${40 - p * 30}
-      S100,${10 + p * 10}
-       100,${5 + p * 5}
-    `;
-  }
-
   // SCROLL TRIGGER
   if (window.innerWidth > 768 && typeof ScrollTrigger !== "undefined") {
     ScrollTrigger.create({
@@ -601,25 +585,6 @@ if (proofSection) {
       }
     });
   }
-  // REVENUE CHART
-  const revenueBars = document.querySelectorAll(".revenue-bar");
-  const denialChartPath = document.getElementById("denialPath");
-
-function updateControlCenter(step) {
-
-  revenueBars.forEach((bar, i) => {
-    if (i <= step) {
-      bar.style.height = bar.dataset.height;
-    }
-  });
-
-  if (denialChartPath) {
-    const length = denialChartPath.getTotalLength();
-    denialChartPath.style.strokeDasharray = length;
-    denialChartPath.style.strokeDashoffset =
-      length * (1 - (step + 1) / revenueBars.length);
-  }
-}
   // MOUSE INTERACTION
   let mouseBoost = 0;
 
@@ -651,7 +616,6 @@ function animate() {
   steps.forEach((step, i) => {
     step.classList.toggle("active", i === stepIndex);
   });
-  updateControlCenter(stepIndex);
   // RIGHT TOGGLES
   visualToggles.forEach((t, i) => {
     t.classList.toggle("active", i <= stepIndex);
