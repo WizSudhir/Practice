@@ -603,25 +603,23 @@ if (proofSection) {
   }
   // REVENUE CHART
   const revenueBars = document.querySelectorAll(".revenue-bar");
-  const denialPath = document.getElementById("denialPath");
+  const denialChartPath = document.getElementById("denialPath");
 
-  function updateControlCenter(step) {
+function updateControlCenter(step) {
 
-    // GROW REVENUE
-    revenueBars.forEach((bar, i) => {
-      if (i <= step) {
-        bar.style.height = bar.dataset.height;
-        }
+  revenueBars.forEach((bar, i) => {
+    if (i <= step) {
+      bar.style.height = bar.dataset.height;
+    }
   });
 
-  // DENIAL ↓ (line animation)
-    if (denialPath) {
-    const length = denialPath.getTotalLength();
-    denialPath.style.strokeDasharray = length;
-    denialPath.style.strokeDashoffset =
+  if (denialChartPath) {
+    const length = denialChartPath.getTotalLength();
+    denialChartPath.style.strokeDasharray = length;
+    denialChartPath.style.strokeDashoffset =
       length * (1 - (step + 1) / revenueBars.length);
-    }
   }
+}
   // MOUSE INTERACTION
   let mouseBoost = 0;
 
@@ -653,7 +651,7 @@ function animate() {
   steps.forEach((step, i) => {
     step.classList.toggle("active", i === stepIndex);
   });
-
+  updateControlCenter(stepIndex);
   // RIGHT TOGGLES
   visualToggles.forEach((t, i) => {
     t.classList.toggle("active", i <= stepIndex);
@@ -661,12 +659,6 @@ function animate() {
 
   // AI TEXT
   updateAI(stepIndex);
-
-  // GRAPH
-  if (revPath && denialPath) {
-    revPath.setAttribute("d", generateCurve(state.revenue));
-    denialPath.setAttribute("d", generateCurve(state.denial));
-  }
 
   // PROGRESS BAR
   if (progressBar) {
@@ -678,32 +670,30 @@ function animate() {
 
 animate();
 
-  // TOOLTIP SYSTEM
-  const tooltip = document.getElementById("tooltip");
-  const controlItems = document.querySelectorAll(".control-item");
+// TOOLTIP SYSTEM (FIXED FOR PROBLEM + SOLUTION)
+const tooltip = document.getElementById("tooltip");
 
-  if (tooltip) {
-    controlItems.forEach(item => {
+if (tooltip) {
+  const tooltipItems = section.querySelectorAll("[data-tooltip]");
 
-      item.addEventListener("mouseenter", () => {
-        const text = item.dataset.info;
-        if (!text) return;
+  tooltipItems.forEach(item => {
 
-        tooltip.innerText = text;
-        tooltip.style.opacity = "1";
-      });
-
-      item.addEventListener("mousemove", (e) => {
-        tooltip.style.left = e.pageX + 15 + "px";
-        tooltip.style.top = e.pageY + 15 + "px";
-      });
-
-      item.addEventListener("mouseleave", () => {
-        tooltip.style.opacity = "0";
-      });
-
+    item.addEventListener("mouseenter", () => {
+      tooltip.innerText = item.dataset.tooltip;
+      tooltip.style.opacity = "1";
     });
-  }
+
+    item.addEventListener("mousemove", (e) => {
+      tooltip.style.left = e.pageX + 15 + "px";
+      tooltip.style.top = e.pageY + 15 + "px";
+    });
+
+    item.addEventListener("mouseleave", () => {
+      tooltip.style.opacity = "0";
+    });
+
+  });
+}
   }
 // ============================================================================================================================
 // 6. SERVICES
