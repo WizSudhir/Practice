@@ -1085,10 +1085,16 @@ z-index: 2;
   transition: 0.2s ease;
   white-space: nowrap;
 }
-
 [data-tooltip]:hover::after {
   opacity: 1;
   transform: translateY(0);
+}
+.info-icon {
+  font-size: 12px;
+  margin-left: 6px;
+  opacity: 0.6;
+  cursor: pointer;
+  border-bottom: 1px dotted rgba(255,255,255,0.4);
 }
 .problem {
   border-left: 3px solid #ef4444;
