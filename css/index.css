@@ -1192,34 +1192,6 @@ z-index: 2;
   stroke: #f87171;
   opacity: 0.6;
 }
-.simulator {
-  margin-top: 20px;
-}
-
-.sim-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
-
-.sim-row input[type="range"] {
-  flex: 1;
-  margin: 0 10px;
-}
-
-.sim-result {
-  margin-top: 20px;
-  padding: 12px;
-  border-radius: 12px;
-  background: rgba(2,6,23,0.6);
-  text-align: center;
-}
-
-.sim-result h2 {
-  font-size: 28px;
-  color: #22c55e;
-}
 /* AI INSIGHTS */
 .ai-insights {
   margin-top: 20px;
