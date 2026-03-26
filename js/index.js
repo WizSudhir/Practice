@@ -17,9 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (e) {
     console.error("Mobile hero error:", e);
     }
-      return;
   }
-  if (!hero || !core || !revenue) return;
+  if (!hero || !core || !revenue) {
+  console.warn("Hero not found — skipping hero only");
+  } else {
   function getNodeSize() {
   const w = window.innerWidth;
   if (w < 768) return { w: 0, h: 0 }; // disabled
@@ -429,6 +430,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const target = document.querySelector(".mobile-system");
   if (target) observer.observe(target);
 }
+}
 // ============================================================================================================================
 // 3. ABOUT
 // ============================================================================================================================
@@ -507,7 +509,9 @@ if (proofSection) {
   }
 
   const section = document.querySelector(".how-it-works");
-  if (!section) return;
+  if (!section) {
+  console.warn("How-it-works missing");
+  } else {
 
   console.log("HOW IT WORKS INIT");
 
@@ -677,6 +681,7 @@ if (proofSection) {
       });
 
     });
+  }
   }
 // ============================================================================================================================
 // 6. SERVICES
