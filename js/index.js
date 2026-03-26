@@ -592,8 +592,7 @@ function reset() {
   const target = document.querySelector(".mobile-system");
   if (target) observer.observe(target);
 }
-  
-}); // DOM Close
+
 
 
 
