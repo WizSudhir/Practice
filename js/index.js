@@ -665,18 +665,16 @@ function getStepIndex(p) {
 /* =========================
    STEP UI UPDATE
 ========================= */
+const cta = document.getElementById("howCta");
 function updateStepUI(index) {
   if (currentStep === index) return;
   currentStep = index;
-
   const step = steps[index];
-
-  // LEFT SIDE ACTIVE
+  // LEFT ACTIVE
   stepsEls.forEach((el, i) => {
     el.classList.toggle("active", i === index);
   });
-
-  // AI TEXT (NO FLICKER)
+  // AI TEXT
   gsap.to(aiEl, {
     opacity: 0,
     y: 10,
@@ -686,9 +684,20 @@ function updateStepUI(index) {
       gsap.to(aiEl, { opacity: 1, y: 0, duration: 0.4 });
     }
   });
-
-  // TRANSFORM TEXT
   transformEl.innerText = step.transform;
+  /* CTA ACTIVATION LOGIC */
+  if (cta) {
+    if (index === steps.length - 1) {
+      // FINAL STEP → ACTIVATE CTA
+      cta.classList.add("active");
+      gsap.fromTo(cta,
+        { scale: 0.95, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.6, ease: "power3.out" }
+      );
+    } else {
+      cta.classList.remove("active");
+    }
+  }
 }
 
 /* =========================
