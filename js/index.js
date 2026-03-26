@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (e) {
     console.error("Mobile hero error:", e);
     }
-      return;
   }
   if (!hero || !core || !revenue) {
   console.warn("Hero not found — skipping hero section");
