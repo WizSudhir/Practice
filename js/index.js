@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.error("Mobile hero error:", e);
     }
   }
-  if (!hero || !core || !revenue) {
+  if (!hero || !core) {
   console.warn("Hero not found — skipping hero section");
   } else {
   function getNodeSize() {
