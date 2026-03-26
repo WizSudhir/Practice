@@ -1038,93 +1038,247 @@ z-index: 2;
 /* ============================================================================================================================
   5. HOW IT WORKS
 ============================================================================================================================== */
-/* ===== HOW IT WORKS - SAAS DASHBOARD ===== */
+/* =========================================================
+   HOW IT WORKS — STRIPE LEVEL SAAS SYSTEM
+========================================================= */
+
+/* ===== LAYOUT ===== */
+
+.how-it-works {
+  overflow: hidden;
+}
+
+.narrative {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 80px;
+  align-items: start;
+}
+
+/* ===== LEFT SIDE ===== */
+
+.narrative-content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* STEP BASE */
+.narrative-step {
+  opacity: 0.35;
+  transform: translateY(40px);
+  transition: all 0.6s cubic-bezier(0.22,1,0.36,1);
+  position: relative;
+}
+
+/* ACTIVE STEP */
+.narrative-step.active {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+/* subtle glow on active */
+.narrative-step.active::before {
+  content: "";
+  position: absolute;
+  left: -20px;
+  top: 10px;
+  width: 4px;
+  height: 80%;
+  background: linear-gradient(to bottom, #6366f1, #3b82f6);
+  border-radius: 10px;
+  opacity: 0.6;
+}
+
+/* STEP HEADER */
+.step-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.step-number {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* TEXT STYLING */
+.step-problem {
+  color: var(--text-muted);
+}
+
+.step-solution {
+  margin-top: 8px;
+  color: var(--text-secondary);
+}
+
+.step-impact {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #22c55e;
+}
+
+/* CTA */
+.how-cta {
+  margin-top: 40px;
+}
+
+/* ===== RIGHT SIDE (VISUAL) ===== */
 
 .hiw-visual {
   position: sticky;
   top: 120px;
 }
 
+/* DASHBOARD CORE */
 .hiw-dashboard {
-  background: rgba(255,255,255,0.03);
-  backdrop-filter: blur(20px);
-  border-radius: 20px;
-  padding: 30px;
-  border: 1px solid rgba(255,255,255,0.08);
-  box-shadow: 0 30px 80px rgba(0,0,0,0.5);
-  transition: all 0.4s ease;
+  position: relative;
+  background: rgba(255,255,255,0.02);
+  backdrop-filter: blur(24px);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  border: 1px solid var(--border-default);
+  box-shadow: var(--shadow-elevated);
+  overflow: hidden;
 }
 
-/* METRICS */
+/* GLOW BACKGROUND */
+.hiw-dashboard::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: radial-gradient(circle at 60% 40%, rgba(99,102,241,0.25), transparent 70%);
+  opacity: 0.4;
+  z-index: -1;
+  animation: hiwPulse 4s ease-in-out infinite;
+}
+
+@keyframes hiwPulse {
+  0%,100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+/* ===== METRICS ===== */
+
 .metrics-row {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
 }
 
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 .metric-label {
-  font-size: 12px;
-  opacity: 0.6;
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
 }
 
+/* REVENUE */
 .metric-value {
-  font-size: 28px;
+  font-size: 30px;
   font-weight: 700;
-  color: #4ade80;
-  transition: all 0.3s ease;
+  background: linear-gradient(90deg,#4ade80,#22c55e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
+/* DENIAL */
 .metric-value.red {
-  color: #ef4444;
+  background: linear-gradient(90deg,#f87171,#ef4444);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-/* GRAPH */
+/* ===== GRAPH ===== */
+
 .graph-container {
-  height: 200px;
+  height: 220px;
   margin: 20px 0;
+  position: relative;
 }
 
-/* TRANSFORM */
+/* canvas glow */
+.graph-container canvas {
+  filter: drop-shadow(0 0 14px rgba(34,197,94,0.25));
+}
+
+/* subtle grid effect */
+.graph-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 100% 40px;
+  pointer-events: none;
+  opacity: 0.2;
+}
+
+/* ===== TRANSFORM TEXT ===== */
+
 .transforms {
   font-size: 13px;
-  margin-bottom: 20px;
   color: #22c55e;
   opacity: 0.9;
+  margin-bottom: 18px;
   min-height: 20px;
-  transition: all 0.3s ease;
+  letter-spacing: 0.02em;
 }
 
-/* AI BOX */
+/* ===== AI BOX ===== */
+
 .ai-box {
   padding: 16px;
-  border-radius: 12px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-md);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-subtle);
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle animated shine */
+.ai-box::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.08), transparent);
+  transform: translateX(-100%);
+  animation: aiShimmer 4s infinite;
+}
+
+@keyframes aiShimmer {
+  0% { transform: translateX(-100%); }
+  60% { transform: translateX(100%); }
+  100% { transform: translateX(100%); }
 }
 
 .ai-title {
-  font-size: 12px;
-  opacity: 0.6;
+  font-size: 11px;
+  color: var(--text-muted);
   margin-bottom: 6px;
+  letter-spacing: 0.05em;
 }
 
 .ai-text {
   font-size: 14px;
   color: #4ade80;
+  line-height: 1.5;
   transition: all 0.4s ease;
 }
 
-/* ACTIVE STEP LEFT */
-.narrative-step {
-  opacity: 0.4;
-  transform: translateY(30px);
-  transition: all 0.5s ease;
+/* ===== FLOAT DEPTH ===== */
+
+.hiw-dashboard {
+  transform: translateZ(0);
+  will-change: transform;
 }
 
-.narrative-step.active {
-  opacity: 1;
-  transform: translateY(0px);
-}
 /* ============================================================================================================================
   6. SERVICES GATEWAY
 ============================================================================================================================== */
