@@ -588,10 +588,6 @@ if (section) {
       onUpdate: self => {
         state.progress = self.progress;
 
-        if (lottieInstance) {
-          const totalFrames = lottieInstance.totalFrames || 300;
-          lottieInstance.goToAndStop(self.progress * totalFrames, true);
-        }
       }
     });
   }
