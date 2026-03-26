@@ -601,7 +601,27 @@ if (proofSection) {
       }
     });
   }
+  // REVENUE CHART
+  const revenueBars = document.querySelectorAll(".revenue-bar");
+  const denialPath = document.getElementById("denialPath");
 
+  function updateControlCenter(step) {
+
+    // GROW REVENUE
+    revenueBars.forEach((bar, i) => {
+      if (i <= step) {
+        bar.style.height = bar.dataset.height;
+        }
+  });
+
+  // DENIAL ↓ (line animation)
+    if (denialPath) {
+    const length = denialPath.getTotalLength();
+    denialPath.style.strokeDasharray = length;
+    denialPath.style.strokeDashoffset =
+      length * (1 - (step + 1) / revenueBars.length);
+    }
+  }
   // MOUSE INTERACTION
   let mouseBoost = 0;
 
