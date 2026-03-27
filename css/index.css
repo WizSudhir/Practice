@@ -1582,15 +1582,41 @@ z-index: 2;
   transform: translateY(-6px);
   box-shadow: var(--glow-soft);
 }
-
+.pg-card i {
+  transition: all 0.3s ease;
+}
+.pg-card:hover i {
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 8px rgba(99,102,241,0.8));
+}
 .pg-card h4 {
   margin-top: 10px;
 }
 
 .pg-card canvas {
   height: 60px !important;
+  transform: perspective(600px) rotateX(20deg);
+  opacity: 0.9;
+}
+.pg-toggle {
+  background: rgba(255,255,255,0.04);
+  padding: 4px;
+  border-radius: 999px;
+  display: inline-flex;
 }
 
+.toggle-btn {
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.toggle-btn.active {
+  background: var(--gradient-accent);
+  color: white;
+  box-shadow: var(--glow-primary);
+}
 /* CAROUSEL */
 .pg-slide {
   text-align: center;
