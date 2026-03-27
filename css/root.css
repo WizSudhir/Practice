@@ -74,7 +74,31 @@ body {
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
 }
-
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.12),
+    rgba(255,255,255,0.04),
+    rgba(255,255,255,0.12)
+  );
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.06),
+    0 0 12px rgba(99,102,241,0.15);
+  pointer-events: none;
+  z-index: 0;
+}
+body::before {
+  left: calc((100vw - var(--container)) / 2);
+}
+body::after {
+  right: calc((100vw - var(--container)) / 2);
+}
 /* ===============================
    3. TYPOGRAPHY (STRIPE STYLE)
 ================================= */
@@ -115,7 +139,7 @@ h2.gradient {
 .container {
   max-width: var(--container);
   margin: auto;
-  padding: 0 20px;
+  padding: 0;
 }
 .divider {
   height: 1px;
@@ -124,34 +148,6 @@ h2.gradient {
 }
 .section-grid {
   position: relative;
-}
-.section-grid::before,
-.section-grid::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: linear-gradient(
-  to bottom,
-  rgba(255,255,255,0.12),
-  rgba(255,255,255,0.04),
-  rgba(255,255,255,0.12)
-   );
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,0.06),
-    0 0 12px rgba(99,102,241,0.15);
-  pointer-events: none;
-  opacity: 0.8;
-  z-index: 0;
-}
-/* LEFT LINE */
-.section-grid::before {
-  left: calc((100vw - var(--container)) / 2);
-}
-/* RIGHT LINE */
-.section-grid::after {
-  right: calc((100vw - var(--container)) / 2);
 }
 .section {
   opacity: 0;
@@ -178,13 +174,12 @@ h2.gradient {
   background: linear-gradient(
     to right,
     transparent,
-    rgba(255,255,255,0.18),
-    rgba(99,102,241,0.25),
-    rgba(255,255,255,0.18),
+    rgba(255,255,255,0.2),
+    rgba(99,102,241,0.3),
+    rgba(255,255,255,0.2),
     transparent
   );
-  box-shadow: 0 0 10px rgba(99,102,241,0.15);
-  z-index: 5;
+  box-shadow: 0 0 12px rgba(99,102,241,0.2);
 }
 .section-tight {
   padding: var(--space-lg) 0;
