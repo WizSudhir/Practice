@@ -801,9 +801,6 @@ setInterval(() => {
 // ============================================================================================================================
 // 6. SERVICES
 // ============================================================================================================================
-// ============================================================================================================================
-// 6. SERVICES (ISOLATED MODULE)
-// ============================================================================================================================
 (function(){
 
   const flow = document.getElementById("rcmFlow");
@@ -926,6 +923,54 @@ setInterval(() => {
     });
 
   });
+
+})();
+
+// ============================================================================================================================
+// 7. OUTCOMES
+// ============================================================================================================================
+
+(function(){
+
+  const section = document.querySelector(".pg-outcomes-lite");
+  if (!section) return;
+
+  const metrics = section.querySelectorAll(".pg-metric");
+  let hasAnimated = false;
+
+  function animateCounters() {
+    metrics.forEach(metric => {
+
+      const target = parseInt(metric.dataset.target);
+      let current = 0;
+      const increment = target / 40;
+
+      function update() {
+        current += increment;
+
+        if (current >= target) {
+          metric.textContent = target + "%";
+          return;
+        }
+
+        metric.textContent = Math.round(current) + "%";
+        requestAnimationFrame(update);
+      }
+
+      update();
+    });
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !hasAnimated) {
+        animateCounters();
+        hasAnimated = true;
+      }
+    });
+  }, { threshold: 0.4 });
+
+  observer.observe(section);
 
 })();
 // ============================================================================================================================
