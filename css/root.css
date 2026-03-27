@@ -117,14 +117,32 @@ h2.gradient {
   margin: auto;
   padding: 0 20px;
 }
-.container-bordered {
-  border-left: 1px solid var(--border-subtle);
-  border-right: 1px solid var(--border-subtle);
-}
 .divider {
   height: 1px;
   background: var(--border-subtle);
   margin: var(--space-lg) 0;
+}
+.section-grid {
+  position: relative;
+}
+.section-grid::before,
+.section-grid::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--border-subtle);
+  pointer-events: none;
+  opacity: 0.6;
+}
+/* LEFT LINE */
+.section-grid::before {
+  left: calc(50% - var(--container)/2);
+}
+/* RIGHT LINE */
+.section-grid::after {
+  right: calc(50% - var(--container)/2);
 }
 section {
   padding: var(--space-xl) 0;
@@ -152,7 +170,9 @@ section {
 }
 .section-frame {
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-xl);
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
   padding: clamp(32px, 4vw, 64px);
 }
 .section-glow {
@@ -167,8 +187,8 @@ section {
   padding: 1px;
   background: linear-gradient(
     120deg,
-    rgba(99,102,241,0.12)
-    rgba(59,130,246,0.12)
+    rgba(99,102,241,0.12),
+    rgba(59,130,246,0.12),
     transparent,
     rgba(59,130,246,0.2)
   );
