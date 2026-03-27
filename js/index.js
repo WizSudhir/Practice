@@ -995,14 +995,18 @@ function renderGrid(){
     const card = document.createElement("div");
     card.className = "pg-card";
 
-    card.innerHTML = `
-      <div class="pg-icon"><i data-lucide="${d.icon}"></i></div>
-      <h3 class="pg-metric" data-target="${d.metric}">0%</h3>
-      <h4>${d.label}</h4>
-      <p>${d.title}</p>
-      <span>${d.sub}</span>
-      <canvas class="chart"></canvas>
-    `;
+      card.innerHTML = `
+        <div class="pg-top">
+          <div class="pg-icon"><i data-lucide="${d.icon}"></i></div>
+          <div>
+            <h3 class="pg-metric" data-target="${d.metric}">0%</h3>
+            <p class="pg-title">${d.title}</p>
+          </div>
+        </div>
+        <h4>${d.label}</h4>
+        <span>${d.sub}</span>
+        <canvas class="chart"></canvas>
+      `;
 
     container.appendChild(card);
 
