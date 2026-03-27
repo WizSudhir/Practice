@@ -1423,6 +1423,12 @@ z-index: 2;
 }
 
 /* NODE */
+.flow-node i {
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
 .flow-node {
   padding: 10px 14px;
   border-radius: 999px;
