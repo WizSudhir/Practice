@@ -600,6 +600,28 @@ const chart = new Chart(ctx, {
     }
   }
 });
+// =========================
+// GRAPH DOT TRACKING
+// =========================
+const graphDot = document.getElementById("graphDot");
+
+function updateGraphDot() {
+  if (!chart || !graphDot) return;
+
+  const meta = chart.getDatasetMeta(0);
+  const point = meta.data[meta.data.length - 1];
+  if (!point) return;
+
+  const canvasRect = chart.canvas.getBoundingClientRect();
+  const parentRect = chart.canvas.parentElement.getBoundingClientRect();
+
+  const x = canvasRect.left - parentRect.left + point.x;
+  const y = canvasRect.top - parentRect.top + point.y;
+
+  graphDot.style.left = x + "px";
+  graphDot.style.top = y + "px";
+  graphDot.style.opacity = 1;
+}
 /* =========================
    GLOWING DATA POINT PLUGIN
 ========================= */
@@ -706,16 +728,42 @@ gsap.timeline({
   onUpdate: () => {
 
     const p = state.progress;
-    // 🔥 CTA GRAPH PEAK SYNC (FINAL VERSION)
-    if (cta) {
-      if (p > 0.9 && !cta.classList.contains("active")) {
+    // 🔥 CTA EMERGE FROM GRAPH DOT
+    if (cta && graphDot) {
+      if (p > 0.92 && !cta.classList.contains("active")) {
         cta.classList.add("active");
+        const dotRect = graphDot.getBoundingClientRect();
+        const ctaRect = cta.getBoundingClientRect();
+        const dx = dotRect.left - ctaRect.left;
+        const dy = dotRect.top - ctaRect.top;
         gsap.fromTo(cta,
-          { y: 30, opacity: 0, scale: 0.96 },
-          { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: "power3.out" }
+          {
+            opacity: 0,
+            scale: 0.2,
+            x: dx,
+            y: dy
+          },
+          {
+            opacity: 1,
+            scale: 1,
+            x: 0,
+            y: 0,
+            duration: 0.9,
+            ease: "power4.out"
+          }
         );
-      } else if (p <= 0.9 && cta.classList.contains("active")) {
+        // DOT BURST
+        gsap.to(graphDot, {
+          scale: 6,
+          opacity: 0,
+          duration: 0.6,
+          ease: "power2.out"
+        });
+      }
+      if (p <= 0.92 && cta.classList.contains("active")) {
         cta.classList.remove("active");
+        graphDot.style.opacity = 1;
+        graphDot.style.transform = "translate(-50%, -50%) scale(1)";
       }
     }
     // smooth curve
@@ -746,6 +794,7 @@ gsap.timeline({
     ];
 
     chart.update("none");
+    updateGraphDot();
 
     /* ===== STEP SYNC ===== */
     const stepIndex = getStepIndex(p);
