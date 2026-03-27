@@ -158,10 +158,6 @@ section {
 .section-alt {
   background: rgba(255,255,255,0.02);
 }
-.section-bordered {
-  border-top: 1px solid var(--border-subtle);
-  border-bottom: 1px solid var(--border-subtle);
-}
 .section-top-border {
   border-top: 1px solid var(--border-subtle);
 }
