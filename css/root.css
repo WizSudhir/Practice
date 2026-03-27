@@ -20,8 +20,8 @@
   --text-secondary: #cbd5f5;
   --text-muted: #94a3b8;
   /* BORDERS */
-  --border-subtle: rgba(255,255,255,0.06);
-  --border-default: rgba(255,255,255,0.10);
+  --border-subtle: rgba(255,255,255,0.04);
+  --border-default: rgba(255,255,255,0.08);
   --border-strong: rgba(99,102,241,0.35);
   /* GRADIENTS (ONLY FOR TEXT / CTA) */
   --gradient-primary: linear-gradient(90deg, #ffffff, #c4b5fd, #93c5fd);
@@ -121,10 +121,21 @@ h2.gradient {
   border-left: 1px solid var(--border-subtle);
   border-right: 1px solid var(--border-subtle);
 }
+.divider {
+  height: 1px;
+  background: var(--border-subtle);
+  margin: var(--space-lg) 0;
+}
 section {
   padding: var(--space-xl) 0;
   position: relative;
   z-index: 1;
+}
+.section-tight {
+  padding: var(--space-lg) 0;
+}
+.section-loose {
+  padding: calc(var(--space-xl) * 1.3) 0;
 }
 .section-alt {
   background: rgba(255,255,255,0.02);
@@ -142,10 +153,11 @@ section {
 .section-frame {
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xl);
-  padding: var(--space-xl);
+  padding: clamp(32px, 4vw, 64px);
 }
 .section-glow {
   position: relative;
+  z-index: 1;
 }
 .section-glow::before {
   content: "";
@@ -155,7 +167,8 @@ section {
   padding: 1px;
   background: linear-gradient(
     120deg,
-    rgba(99,102,241,0.2),
+    rgba(99,102,241,0.12)
+    rgba(59,130,246,0.12)
     transparent,
     rgba(59,130,246,0.2)
   );
@@ -165,6 +178,7 @@ section {
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
+  z-index: -1;
 }
 /* ===============================
    5. LINKS (NO UNDERLINE, NO COLOR CHANGE)
