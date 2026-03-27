@@ -858,32 +858,35 @@ nodes.forEach((node, index) => {
 
 // AUTO FLOW (IDLE ANIMATION)
 let current = 0;
+let isUserInteracted = false;
 
-const interval = setInterval(() => {
+function runAutoFlow() {
 
-  if (!document.hidden) {
+  if (isUserInteracted) return;
 
-    const index = current % nodes.length;
-    const node = nodes[index];
-    activateUpTo(index);
-    moveGlow(node);
-    context.innerText = node.dataset.info;
+  const index = current % nodes.length;
+  const node = nodes[index];
 
-    if (index === nodes.length - 1) {
-      document.querySelector(".rcm-system").classList.add("complete");
-    } else {
-      document.querySelector(".rcm-system").classList.remove("complete");
-    }
-    current++;
-  }
+  activateUpTo(index);
+  moveGlow(node);
+  context.innerText = node.dataset.info;
 
-}, 2200);
+  current++;
+
+  setTimeout(runAutoFlow, 1800);
+}
+
+// START AFTER SHORT DELAY
+setTimeout(runAutoFlow, 800);
 
 // STOP ON USER INTERACTION
-nodes.forEach(node => {
-  node.addEventListener("mouseenter", () => {
-    clearInterval(interval);
-  });
+node.addEventListener("mouseenter", () => {
+  isUserInteracted = true;
+
+  activateUpTo(index);
+  moveGlow(node);
+  context.innerText = node.dataset.info;
+});
 });
 
 })();
