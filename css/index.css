@@ -1406,7 +1406,12 @@ z-index: 2;
 .rcm-system {
   margin-top: var(--space-lg);
 }
-
+.rcm-system.complete {
+  box-shadow: 0 0 60px rgba(34,197,94,0.15);
+}
+.rcm-system.complete .flow-node {
+  opacity: 1;
+}
 /* FLOW CONTAINER */
 .rcm-flow {
   position: relative;
@@ -1426,16 +1431,20 @@ z-index: 2;
   font-size: 13px;
   color: var(--text-secondary);
   transition: all 0.3s ease;
+  opacity: 0.5;
+  transform: scale(0.95);
   position: relative;
   z-index: 2;
   text-decoration: none;
+  backdrop-filter: blur(10px);
+}
 }
 
 .flow-node:hover {
   color: #fff;
   border-color: var(--border-strong);
   box-shadow: 0 0 20px rgba(99,102,241,0.25);
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.05);
 }
 
 .flow-node.active {
@@ -1443,8 +1452,12 @@ z-index: 2;
   border-color: var(--primary);
   color: #fff;
   box-shadow: 0 0 20px rgba(99,102,241,0.35);
+  opacity: 1;
+  transform: scale(1.05);
 }
-
+.flow-node.active ~ .flow-node {
+  opacity: 0.25;
+}
 /* FLOW LINE */
 .flow-line {
   width: 28px;
@@ -1453,13 +1466,28 @@ z-index: 2;
   position: relative;
   overflow: hidden;
 }
-
+.flow-line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,#22c55e,#3b82f6);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+.flow-node.active + .flow-line::after {
+  transform: scaleX(1);
+}
 /* GLOW FLOW */
 .flow-glow {
   position: absolute;
-  width: 60px;
-  height: 2px;
-  background: linear-gradient(90deg,#22c55e,#3b82f6);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow:
+    0 0 10px #22c55e,
+    0 0 20px rgba(34,197,94,0.6);
   filter: blur(6px);
   opacity: 0;
   pointer-events: none;
