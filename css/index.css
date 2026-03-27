@@ -1110,7 +1110,13 @@ z-index: 2;
   border-radius: 10px;
   opacity: 0.6;
 }
-
+.success-icon {
+  width: 16px;
+  height: 16px;
+  color: #22c55e;
+  margin-right: 6px;
+  vertical-align: middle;
+}
 /* STEP HEADER */
 .step-header {
   display: flex;
@@ -1121,8 +1127,19 @@ z-index: 2;
 
 .step-number {
   position: relative;
-  font-size: 12px;
   color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(99,102,241,0.15);
+  border: 1px solid rgba(99,102,241,0.4);
+  font-size: 12px;
+  font-weight: 600;
+  color: #c7d2fe;
+  box-shadow: 0 0 10px rgba(99,102,241,0.3);
 }
 .step-number::after {
   content: "";
@@ -1153,6 +1170,10 @@ z-index: 2;
 }
 
 /* CTA */
+.cta-content > * {
+  opacity: 0;
+  transform: translateY(10px);
+}
 .how-cta {
   margin-top: 40px;
   opacity: 0;
