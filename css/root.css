@@ -144,11 +144,11 @@ h2.gradient {
 }
 /* LEFT LINE */
 .section-grid::before {
-  left: calc(50% - var(--container)/2);
+  left: calc(50% - var(--container)/2 + 20px);
 }
 /* RIGHT LINE */
 .section-grid::after {
-  right: calc(50% - var(--container)/2);
+  right: calc(50% - var(--container)/2 + 20px);
 }
 .section {
   opacity: 0;
@@ -168,20 +168,12 @@ h2.gradient {
 .section-divider::after {
   content: "";
   position: absolute;
-  left: calc(50% - var(--container)/2);
-  right: calc(50% - var(--container)/2);
-  bottom: -0.5px;
+  left: calc(50% - var(--container)/2 + 20px);
+  right: calc(50% - var(--container)/2 + 20px);
+  bottom: 0;
   height: 1px;
-  z-index: 4;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255,255,255,0.08),
-    rgba(255,255,255,0.18),
-    rgba(255,255,255,0.08),
-    transparent
-  );
-  background-size: 200% 100%;
+  background: rgba(255,255,255,0.12); /* stronger */
+  z-index: 10;
   animation: shimmer 6s linear infinite;
 }
 @keyframes shimmer {
