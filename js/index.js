@@ -1141,18 +1141,68 @@ function animateCounters(){
 }
 
 // ================= CAROUSEL =================
+// ================= CAROUSEL (REAL CASE STUDIES) =================
 function renderSlides(){
 
   slider.innerHTML = "";
 
-  data.forEach((d,i)=>{
+  const stories = [
+    {
+      title: "Podiatry Surgical Group",
+      badge: "Podiatry • 5 Locations",
+      problem: "High denial rates for surgical procedures and orthotics due to inconsistent coding.",
+      solution: "Implemented structured coding validation and pre-submission claim intelligence.",
+      result: "28% increase in surgical collections within 90 days with 92% first-pass acceptance."
+    },
+    {
+      title: "DME Supplier",
+      badge: "Durable Medical Equipment",
+      problem: "Strict payer documentation caused frequent claim rejections and delayed payments.",
+      solution: "Deployed payer-specific workflows and automated eligibility verification.",
+      result: "40% reduction in claim rejections and significantly faster reimbursement cycles."
+    },
+    {
+      title: "Behavioral Health Group",
+      badge: "Mental Health • Multi-Payer",
+      problem: "Authorization gaps and inconsistent follow-ups led to delayed reimbursements.",
+      solution: "Optimized authorization workflows with real-time payer tracking.",
+      result: "97% clean claim rate and 32% faster reimbursement cycles."
+    }
+  ];
+
+  stories.forEach((s,i)=>{
     const slide=document.createElement("div");
     slide.className="pg-slide"+(i===0?" active":"");
 
     slide.innerHTML=`
-      <h3>${d.title}</h3>
-      <p>${d.metric}% ${d.label}</p>
-      <span>${d.sub}</span>
+      <div class="pg-story-card">
+
+        <span class="pg-badge">${s.badge}</span>
+
+        <h3>${s.title}</h3>
+
+        <div class="pg-story-block">
+          <strong>Problem</strong>
+          <p>${s.problem}</p>
+        </div>
+
+        <div class="pg-story-block">
+          <strong>Solution</strong>
+          <p>${s.solution}</p>
+        </div>
+
+        <div class="pg-story-block result">
+          <strong>Outcome</strong>
+          <p>${s.result}</p>
+        </div>
+
+        <div class="pg-story-cta">
+          <a href="why-us.html" class="btn-outline">
+            View Full Case →
+          </a>
+        </div>
+
+      </div>
     `;
 
     slider.appendChild(slide);
