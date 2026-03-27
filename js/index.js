@@ -801,94 +801,166 @@ setInterval(() => {
 // ============================================================================================================================
 // 6. SERVICES
 // ============================================================================================================================
+  // ===============================
+  // ELEMENTS
+  // ===============================
+  const flow = document.getElementById("rcmFlow");
+  if (!flow) return;
 
-(function(){
+  const nodes = flow.querySelectorAll(".flow-node");
+  const lines = flow.querySelectorAll(".flow-line");
+  const context = document.getElementById("rcmContext");
 
-const nodes = document.querySelectorAll(".flow-node");
-const glow = document.getElementById("flowGlow");
-const context = document.getElementById("rcmContext");
+  if (!nodes.length) return;
 
-if (!nodes.length || !glow || !context) return;
+  // ===============================
+  // STATE
+  // ===============================
+  let tl;
+  let hasPlayed = false;
+  let isHovering = false;
 
-function moveGlow(target) {
-
-  const rect = target.getBoundingClientRect();
-  const parent = target.parentElement.getBoundingClientRect();
-
-  const x = rect.left - parent.left + rect.width / 2;
-  const y = rect.top - parent.top + rect.height / 2;
-
-  // smooth movement (GSAP if available)
-  if (typeof gsap !== "undefined") {
-    gsap.to(glow, {
-      x: x,
-      y: y,
-      duration: 0.6,
-      ease: "power2.out"
-    });
-  } else {
-    glow.style.transform = `translate(${x}px, ${y}px)`;
-  }
-  glow.style.transition = "all 0.6s cubic-bezier(0.22,1,0.36,1)";
-  glow.style.opacity = 0.9;
-}
-
-function activateUpTo(index) {
-  nodes.forEach(n => n.classList.remove("active"));
-  for (let i = 0; i <= index; i++) {
-    nodes[i].classList.add("active");
-  }
-}
-
-nodes.forEach((node, index) => {
-
-  node.addEventListener("mouseenter", () => {
-    activateUpTo(index);
-    moveGlow(node);
-    context.innerText = node.dataset.info;
-    // ✅ ADD THIS EXACTLY HERE
-    if (index === nodes.length - 1) {
-      document.querySelector(".rcm-system").classList.add("complete");
-    } else {
-      document.querySelector(".rcm-system").classList.remove("complete");
-    }
+  // ===============================
+  // INIT STATES (important)
+  // ===============================
+  gsap.set(nodes, {
+    opacity: 0,
+    y: 20,
+    scale: 0.95
   });
 
-});
+  gsap.set(lines, {
+    opacity: 0,
+    scaleX: 0,
+    transformOrigin: "left center"
+  });
 
-// AUTO FLOW (IDLE ANIMATION)
-let current = 0;
-let isUserInteracted = false;
+  // ===============================
+  // GSAP TIMELINE
+  // ===============================
+  function createTimeline() {
 
-function runAutoFlow() {
+    tl = gsap.timeline({ paused: true });
 
-  if (isUserInteracted) return;
+    nodes.forEach((node, i) => {
 
-  const index = current % nodes.length;
-  const node = nodes[index];
+      const line = lines[i];
 
-  activateUpTo(index);
-  moveGlow(node);
-  context.innerText = node.dataset.info;
+      // NODE ANIMATION
+      tl.to(node, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.5,
+        ease: "power3.out",
+        onStart: () => {
 
-  current++;
+          if (isHovering) return;
 
-  setTimeout(runAutoFlow, 1800);
-}
+          // progressive activation
+          nodes.forEach((n, j) => {
+            n.classList.toggle("active", j <= i);
+          });
 
-// START AFTER SHORT DELAY
-setTimeout(runAutoFlow, 800);
+          // update context
+          if (context) {
+            context.textContent = node.dataset.info || "";
+          }
+        }
+      }, i * 0.35);
 
-// STOP ON USER INTERACTION
-node.addEventListener("mouseenter", () => {
-  isUserInteracted = true;
+      // LINE ANIMATION
+      if (line) {
+        tl.to(line, {
+          opacity: 1,
+          scaleX: 1,
+          duration: 0.4,
+          ease: "power2.out"
+        }, i * 0.35);
+      }
 
-  activateUpTo(index);
-  moveGlow(node);
-  context.innerText = node.dataset.info;
-});
+    });
 
-})();
+  }
+
+  createTimeline();
+
+  // ===============================
+  // SCROLL TRIGGER (IntersectionObserver)
+  // ===============================
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+
+      if (entry.isIntersecting && !hasPlayed) {
+        tl.play();
+        hasPlayed = true;
+      }
+
+      // Optional reset when leaving viewport (comment out if not needed)
+      if (!entry.isIntersecting && hasPlayed) {
+        tl.pause(0);
+        hasPlayed = false;
+
+        // reset UI
+        nodes.forEach(n => n.classList.remove("active"));
+        if (context) {
+          context.textContent = "System ready. Hover any stage to explore.";
+        }
+
+        gsap.set(nodes, { opacity: 0, y: 20, scale: 0.95 });
+        gsap.set(lines, { opacity: 0, scaleX: 0 });
+      }
+
+    });
+  }, { threshold: 0.4 });
+
+  observer.observe(flow);
+
+  // ===============================
+  // HOVER INTERACTION (OVERRIDE)
+  // ===============================
+  nodes.forEach((node, index) => {
+
+    node.addEventListener("mouseenter", () => {
+
+      isHovering = true;
+
+      // kill timeline influence visually
+      gsap.killTweensOf(nodes);
+
+      // progressive activation
+      nodes.forEach((n, i) => {
+        n.classList.toggle("active", i <= index);
+      });
+
+      // update context
+      if (context) {
+        context.textContent = node.dataset.info || "";
+      }
+
+      // micro interaction
+      gsap.to(node, {
+        scale: 1.08,
+        duration: 0.2,
+        ease: "power2.out"
+      });
+
+    });
+
+    node.addEventListener("mouseleave", () => {
+
+      isHovering = false;
+
+      gsap.to(node, {
+        scale: 1,
+        duration: 0.2,
+        ease: "power2.out"
+      });
+
+    });
+
+  });
+
 // ============================================================================================================================
 // 7. EHR
 // ============================================================================================================================
