@@ -1555,45 +1555,26 @@ z-index: 2;
 /* ============================================================================================================================
   7. OUTCOMES
 ============================================================================================================================== */
-.pg-toggle {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-}
-.toggle-btn {
-  padding: 8px 16px;
-  border-radius: 999px;
-  border: 1px solid var(--border-default);
+.pg-outcomes-pro select {
+  padding: 8px 12px;
+  border-radius: 8px;
   background: transparent;
-  cursor: pointer;
-  transition: var(--transition-base);
-}
-.toggle-btn.active {
-  background: var(--gradient-accent);
   color: white;
+  border: 1px solid var(--border-default);
 }
-.pg-view {
-  display: none;
-}
-.pg-view.active {
-  display: block;
-}
-.pg-outcomes-lite {
-  position: relative;
-}
+
+/* GRID */
 .pg-outcomes-grid {
-  margin-top: 30px;
   display: grid;
   grid-template-columns: repeat(4,1fr);
   gap: 20px;
 }
 
-/* CARD */
 .pg-card {
   padding: 20px;
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-default);
-  text-align: center;
+  background: rgba(255,255,255,0.02);
   transition: var(--transition-base);
 }
 
@@ -1602,76 +1583,41 @@ z-index: 2;
   box-shadow: var(--glow-soft);
 }
 
-.pg-card canvas {
-  height: 60px !important;
-  margin-bottom: 10px;
-}
-.pg-slider {
-  position: relative;
-  overflow: hidden;
-  margin-top: 30px;
+.pg-card h4 {
+  margin-top: 10px;
 }
 
+.pg-card canvas {
+  height: 60px !important;
+}
+
+/* CAROUSEL */
 .pg-slide {
-  display: none;
   text-align: center;
-  opacity: 0;
-  transform: translateX(40px);
+  display: none;
 }
 
 .pg-slide.active {
   display: block;
 }
 
-/* ICON */
-.pg-icon {
-  margin-bottom: 12px;
+/* SIMULATOR */
+.pg-simulator {
+  text-align: center;
 }
 
-.pg-icon i {
-  width: 22px;
-  height: 22px;
+.sim-controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.sim-result {
+  margin-top: 12px;
+  font-size: 18px;
   color: var(--secondary);
 }
-
-/* METRIC */
-.pg-metric {
-  font-size: 36px;
-  font-weight: 800;
-  margin: 10px 0;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* LABEL */
-.pg-label {
-  font-size: 14px;
-  color: var(--text-secondary);
-}
-
-/* SUBTEXT */
-.pg-sub {
-  display: block;
-  margin-top: 6px;
-  font-size: 12px;
-  color: var(--text-muted);
-}
-
-/* subtle glow pulse */
-.pg-outcome-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle, rgba(99,102,241,0.15), transparent 70%);
-  opacity: 0;
-  transition: var(--transition-base);
-}
-
-.pg-outcome-card:hover::after {
-  opacity: 1;
-}
-
 /* ============================================================================================================================
   8. EHR SECTION
 ============================================================================================================================== */
