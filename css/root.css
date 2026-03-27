@@ -117,11 +117,55 @@ h2.gradient {
   margin: auto;
   padding: 0 20px;
 }
+.container-bordered {
+  border-left: 1px solid var(--border-subtle);
+  border-right: 1px solid var(--border-subtle);
+}
 section {
   padding: var(--space-xl) 0;
   position: relative;
+  z-index: 1;
 }
-
+.section-alt {
+  background: rgba(255,255,255,0.02);
+}
+.section-bordered {
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.section-top-border {
+  border-top: 1px solid var(--border-subtle);
+}
+.section-bottom-border {
+  border-bottom: 1px solid var(--border-subtle);
+}
+.section-frame {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+}
+.section-glow {
+  position: relative;
+}
+.section-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    120deg,
+    rgba(99,102,241,0.2),
+    transparent,
+    rgba(59,130,246,0.2)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
 /* ===============================
    5. LINKS (NO UNDERLINE, NO COLOR CHANGE)
 ================================= */
