@@ -981,6 +981,7 @@ const data = [
 const grid = document.getElementById("gridView");
 const slider = document.getElementById("pgSlider");
 const toggleBtns = section.querySelectorAll(".toggle-btn");
+const explanation = document.querySelector(".pg-explanation");
 
 let hasAnimated = false;
 
@@ -990,40 +991,68 @@ function renderGrid(){
   grid.innerHTML = `<div class="pg-outcomes-grid"></div>`;
   const container = grid.querySelector(".pg-outcomes-grid");
 
-  data.forEach(d => {
+  data.forEach((d,i) => {
 
     const card = document.createElement("div");
     card.className = "pg-card";
 
-      card.innerHTML = `
-        <div class="pg-top">
-          <div class="pg-icon"><i data-lucide="${d.icon}"></i></div>
-          <div>
-            <h3 class="pg-metric" data-target="${d.metric}">0%</h3>
-            <p class="pg-title">${d.title}</p>
-          </div>
-        </div>
-        <h4>${d.label}</h4>
-        <span>${d.sub}</span>
-        <canvas class="chart"></canvas>
-      `;
+    card.innerHTML = `
+      <div class="pg-icon"><i data-lucide="${d.icon}"></i></div>
+      <h3 class="pg-metric" data-target="${d.metric}">0%</h3>
+      <h4>${d.label}</h4>
+      <p>${d.title}</p>
+      <span>${d.sub}</span>
+      <canvas class="chart"></canvas>
+    `;
 
     container.appendChild(card);
 
-    drawGraph(card.querySelector("canvas"), d.graph);
+    const canvas = card.querySelector("canvas");
+    drawGraph(canvas, d.graph);
+
+    // ================= GRAPH HOVER ANIMATION =================
+    card.addEventListener("mouseenter", () => {
+
+      // GRAPH INTERACTION
+      if(canvas.chart){
+        canvas.chart.data.datasets[0].data =
+          canvas.chart.data.datasets[0].data.map(v => v * 1.05);
+        canvas.chart.update();
+      }
+
+      // ================= DYNAMIC EXPLANATION =================
+      if(explanation){
+        explanation.classList.add("active");
+
+        const titleEl = explanation.querySelector("h3");
+        const descEl = explanation.querySelector("p");
+
+        if(titleEl) titleEl.textContent = d.title;
+        if(descEl) descEl.textContent =
+          "AI-driven validation and denial intelligence optimized this workflow stage, improving revenue performance significantly.";
+      }
+
+    });
+
+    card.addEventListener("mouseleave", () => {
+      if(canvas.chart){
+        canvas.chart.update();
+      }
+    });
+
   });
 
   lucide.createIcons();
 }
 
-// ================= GRAPH SYSTEM (MEANINGFUL + PREMIUM) =================
+// ================= GRAPH SYSTEM (ENHANCED) =================
 function drawGraph(canvas,type){
 
   if(!hasChart) return;
 
   const ctx = canvas.getContext("2d");
 
-  const gradient = ctx.createLinearGradient(0,0,0,80);
+  const gradient = ctx.createLinearGradient(0,0,0,100);
   gradient.addColorStop(0,"#6366f1");
   gradient.addColorStop(1,"#3b82f6");
 
@@ -1051,7 +1080,7 @@ function drawGraph(canvas,type){
         data:[97,3],
         backgroundColor:["#22c55e","#1e293b"]
       }]},
-      options:{cutout:"75%",plugins:{legend:false},animation:{duration:1200}}
+      options:{cutout:"70%",plugins:{legend:false},animation:{duration:1200}}
     };
   }
 
@@ -1084,7 +1113,8 @@ function drawGraph(canvas,type){
     };
   }
 
-  new Chart(canvas,config);
+  const chart = new Chart(canvas,config);
+  canvas.chart = chart; // IMPORTANT (for hover interaction)
 }
 
 // ================= COUNTER ANIMATION =================
@@ -1165,12 +1195,12 @@ toggleBtns.forEach(btn=>{
   });
 });
 
-// ================= SIMULATOR (REAL LOGIC) =================
+// ================= SIMULATOR (FIXED REAL INPUTS) =================
 document.getElementById("simulateBtn").addEventListener("click",()=>{
 
-  const claims = parseFloat(document.getElementById("claimsInput").value||0);
-  const avg = 120; // avg reimbursement baseline
-  const denial = 0.18; // industry leakage
+  const claims = parseFloat(document.getElementById("claimsInput")?.value || 0);
+  const avg = parseFloat(document.getElementById("avgInput")?.value || 0);
+  const denial = (parseFloat(document.getElementById("denialInput")?.value || 0)) / 100;
 
   const recovery = claims * avg * denial * 0.25;
 
