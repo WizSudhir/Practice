@@ -1555,6 +1555,15 @@ z-index: 2;
 /* ============================================================================================================================
   7. OUTCOMES
 ============================================================================================================================== */
+.pg-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.pg-title {
+  font-size: 13px;
+  color: var(--text-muted);
+}
 .pg-outcomes-pro select {
   padding: 8px 12px;
   border-radius: 8px;
@@ -1594,9 +1603,16 @@ z-index: 2;
 }
 
 .pg-card canvas {
-  height: 60px !important;
+  height: 80px !important;
   transform: perspective(600px) rotateX(20deg);
   opacity: 0.9;
+}
+.pg-card .pg-metric {
+  transition: 0.3s ease;
+}
+.pg-card:hover .pg-metric {
+  transform: scale(1.1);
+  text-shadow: 0 0 10px rgba(99,102,241,0.6);
 }
 .pg-toggle {
   background: rgba(255,255,255,0.04);
@@ -1631,7 +1647,11 @@ z-index: 2;
 .pg-simulator {
   text-align: center;
 }
-
+.pg-simulator .btn-primary {
+  height: 48px;
+  padding: 0 22px;
+  font-size: 14px;
+}
 .sim-controls {
   display: flex;
   justify-content: center;
@@ -1643,6 +1663,12 @@ z-index: 2;
   margin-top: 12px;
   font-size: 18px;
   color: var(--secondary);
+}
+.sim-logic {
+  margin-top: 14px;
+  margin-bottom: 14px;
+  font-size: 13px;
+  color: var(--text-muted);
 }
 .pg-explanation {
   opacity: 0;
