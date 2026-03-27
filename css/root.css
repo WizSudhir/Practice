@@ -115,7 +115,7 @@ h2.gradient {
 .container {
   max-width: var(--container);
   margin: auto;
-  padding: 0 0px;
+  padding: 0 10px;
 }
 .divider {
   height: 1px;
