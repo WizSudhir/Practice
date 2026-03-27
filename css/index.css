@@ -1431,7 +1431,7 @@ z-index: 2;
   font-size: 13px;
   color: var(--text-secondary);
   transition: all 0.3s ease;
-  opacity: 0.5;
+  opacity: 0.4;
   transform: scale(0.95);
   position: relative;
   z-index: 2;
@@ -1456,7 +1456,7 @@ z-index: 2;
   transform: scale(1.05);
 }
 .flow-node.active ~ .flow-node {
-  opacity: 0.25;
+  opacity: 0.2;
 }
 /* FLOW LINE */
 .flow-line {
@@ -1481,13 +1481,14 @@ z-index: 2;
 /* GLOW FLOW */
 .flow-glow {
   position: absolute;
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: #22c55e;
   box-shadow:
-    0 0 10px #22c55e,
+    0 0 8px #22c55e,
     0 0 20px rgba(34,197,94,0.6);
+  transform: translate(-50%, -50%);
   filter: blur(6px);
   opacity: 0;
   pointer-events: none;
