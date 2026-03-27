@@ -1224,7 +1224,18 @@ function startCarousel(){
     active.classList.add("active");
 
     if(hasGSAP){
-      gsap.fromTo(active,{opacity:0,x:40},{opacity:1,x:0,duration:0.6});
+      // kill previous animations (important for smoothness)
+      gsap.killTweensOf(active);
+      gsap.fromTo(
+        active,
+        { opacity: 0, y: 20, scale: 0.98 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "power3.out" }
+      );
+      gsap.fromTo(
+        active.querySelectorAll(".pg-story-block, h3, .pg-badge"),
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, stagger: 0.08, delay: 0.1 }
+      );
     }
 
   },4000);
