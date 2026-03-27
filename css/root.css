@@ -83,7 +83,8 @@ body {
 body::before,
 body::after {
   content: "";
-  position: fixed;
+  position: relative;
+  overflow-x: hidden;
   top: 0;
   bottom: 0;
   width: 1px;
@@ -97,7 +98,9 @@ body::after {
     0 0 0 1px rgba(255,255,255,0.06),
     0 0 12px rgba(99,102,241,0.15);
   pointer-events: none;
-  z-index: 0;
+  mix-blend-mode: screen;
+  z-index: 1000;
+  opacity: 0.9;
 }
 body::before {
   left: calc((100vw - var(--container)) / 2);
