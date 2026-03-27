@@ -810,57 +810,76 @@
 </section>
   
 <!------------------------------------------------------------------ OUTCOMES ------------------------------------------------------------------>
-<section class="section pg-outcomes-lite">
+<section class="section pg-outcomes-pro">
 
   <div class="container">
 
+    <!-- HEADER -->
     <div class="section-header center">
       <h2 class="gradient">Proven Revenue Outcomes</h2>
-      <p class="mt-sm">
-        Real results from specialty practices using the PracticeGrid system.
-      </p>
+      <p class="mt-sm">Real performance data across specialties</p>
     </div>
 
-    <div class="pg-outcomes-grid">
+    <!-- TOGGLE -->
+    <div class="pg-toggle center mt-md">
+      <button class="toggle-btn active" data-view="grid">Snapshot</button>
+      <button class="toggle-btn" data-view="stories">Case Studies</button>
+    </div>
 
-      <!-- CARD 1 -->
-      <div class="pg-outcome-card">
-        <div class="pg-icon">
-          <i data-lucide="trending-up"></i>
+    <!-- ================= GRID VIEW ================= -->
+    <div class="pg-view pg-grid active">
+
+      <div class="pg-outcomes-grid">
+
+        <!-- CARD -->
+        <div class="pg-card">
+          <canvas class="mini-chart"></canvas>
+          <h3 class="pg-metric" data-target="28">0%</h3>
+          <p>Increase in Collections</p>
         </div>
-        <h3 class="pg-metric" data-target="28">0%</h3>
-        <p class="pg-label">Increase in Surgical Collections</p>
-        <span class="pg-sub">Podiatry Group • 90 Days</span>
+
+        <div class="pg-card">
+          <canvas class="mini-chart"></canvas>
+          <h3 class="pg-metric" data-target="92">0%</h3>
+          <p>First Pass Acceptance</p>
+        </div>
+
+        <div class="pg-card highlight">
+          <canvas class="mini-chart"></canvas>
+          <h3 class="pg-metric" data-target="40">0%</h3>
+          <p>Reduction in Rejections</p>
+        </div>
+
+        <div class="pg-card">
+          <canvas class="mini-chart"></canvas>
+          <h3 class="pg-metric" data-target="97">0%</h3>
+          <p>Clean Claim Rate</p>
+        </div>
+
       </div>
 
-      <!-- CARD 2 -->
-      <div class="pg-outcome-card">
-        <div class="pg-icon">
-          <i data-lucide="shield-check"></i>
-        </div>
-        <h3 class="pg-metric" data-target="92">0%</h3>
-        <p class="pg-label">First Pass Acceptance Rate</p>
-        <span class="pg-sub">Multi-Specialty Claims</span>
-      </div>
+    </div>
 
-      <!-- CARD 3 -->
-      <div class="pg-outcome-card highlight">
-        <div class="pg-icon">
-          <i data-lucide="zap"></i>
-        </div>
-        <h3 class="pg-metric" data-target="40">0%</h3>
-        <p class="pg-label">Reduction in Claim Rejections</p>
-        <span class="pg-sub">DME Supplier</span>
-      </div>
+    <!-- ================= CAROUSEL ================= -->
+    <div class="pg-view pg-carousel">
 
-      <!-- CARD 4 -->
-      <div class="pg-outcome-card">
-        <div class="pg-icon">
-          <i data-lucide="badge-check"></i>
+      <div class="pg-slider" id="pgSlider">
+
+        <div class="pg-slide active">
+          <h3>Podiatry Group</h3>
+          <p>28% increase in collections within 90 days</p>
         </div>
-        <h3 class="pg-metric" data-target="97">0%</h3>
-        <p class="pg-label">Clean Claim Rate</p>
-        <span class="pg-sub">Behavioral Health</span>
+
+        <div class="pg-slide">
+          <h3>DME Supplier</h3>
+          <p>40% reduction in claim rejections</p>
+        </div>
+
+        <div class="pg-slide">
+          <h3>Behavioral Health</h3>
+          <p>97% clean claim rate achieved</p>
+        </div>
+
       </div>
 
     </div>
@@ -873,7 +892,6 @@
     </div>
 
   </div>
-
 </section>
   
 <!------------------------------------------------------------------ EHR SECTION ------------------------------------------------------------------>  
