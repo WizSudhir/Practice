@@ -144,11 +144,6 @@ h2.gradient {
   pointer-events: none;
   opacity: 0.8;
   z-index: 0;
-  animation: railPulse 6s ease-in-out infinite;
-}
-@keyframes railPulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.9; }
 }
 /* LEFT LINE */
 .section-grid::before {
