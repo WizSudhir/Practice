@@ -801,52 +801,46 @@ setInterval(() => {
 // ============================================================================================================================
 // 6. SERVICES
 // ============================================================================================================================
-  // ===============================
-  // ELEMENTS
-  // ===============================
-  const flow = document.getElementById("rcmFlow");
-  if (!flow) return;
+// ============================================================================================================================
+// 6. SERVICES (ISOLATED MODULE)
+// ============================================================================================================================
+(function(){
 
-  const nodes = flow.querySelectorAll(".flow-node");
-  const lines = flow.querySelectorAll(".flow-line");
+  const flow = document.getElementById("rcmFlow");
+  if (!flow || typeof gsap === "undefined") return;
+
+  const flowNodes = flow.querySelectorAll(".flow-node");
+  const flowLines = flow.querySelectorAll(".flow-line");
   const context = document.getElementById("rcmContext");
 
-  if (!nodes.length) return;
+  if (!flowNodes.length) return;
 
-  // ===============================
-  // STATE
-  // ===============================
   let tl;
   let hasPlayed = false;
   let isHovering = false;
 
-  // ===============================
-  // INIT STATES (important)
-  // ===============================
-  gsap.set(nodes, {
+  // INIT STATES
+  gsap.set(flowNodes, {
     opacity: 0,
     y: 20,
     scale: 0.95
   });
 
-  gsap.set(lines, {
+  gsap.set(flowLines, {
     opacity: 0,
     scaleX: 0,
     transformOrigin: "left center"
   });
 
-  // ===============================
-  // GSAP TIMELINE
-  // ===============================
+  // TIMELINE
   function createTimeline() {
 
     tl = gsap.timeline({ paused: true });
 
-    nodes.forEach((node, i) => {
+    flowNodes.forEach((node, i) => {
 
-      const line = lines[i];
+      const line = flowLines[i];
 
-      // NODE ANIMATION
       tl.to(node, {
         opacity: 1,
         y: 0,
@@ -857,19 +851,16 @@ setInterval(() => {
 
           if (isHovering) return;
 
-          // progressive activation
-          nodes.forEach((n, j) => {
+          flowNodes.forEach((n, j) => {
             n.classList.toggle("active", j <= i);
           });
 
-          // update context
           if (context) {
             context.textContent = node.dataset.info || "";
           }
         }
       }, i * 0.35);
 
-      // LINE ANIMATION
       if (line) {
         tl.to(line, {
           opacity: 1,
@@ -885,10 +876,8 @@ setInterval(() => {
 
   createTimeline();
 
-  // ===============================
-  // SCROLL TRIGGER (IntersectionObserver)
-  // ===============================
-  const observer = new IntersectionObserver((entries) => {
+  // SCROLL TRIGGER
+  const flowObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
 
       if (entry.isIntersecting && !hasPlayed) {
@@ -896,53 +885,31 @@ setInterval(() => {
         hasPlayed = true;
       }
 
-      // Optional reset when leaving viewport (comment out if not needed)
-      if (!entry.isIntersecting && hasPlayed) {
-        tl.pause(0);
-        hasPlayed = false;
-
-        // reset UI
-        nodes.forEach(n => n.classList.remove("active"));
-        if (context) {
-          context.textContent = "System ready. Hover any stage to explore.";
-        }
-
-        gsap.set(nodes, { opacity: 0, y: 20, scale: 0.95 });
-        gsap.set(lines, { opacity: 0, scaleX: 0 });
-      }
-
     });
   }, { threshold: 0.4 });
 
-  observer.observe(flow);
+  flowObserver.observe(flow);
 
-  // ===============================
-  // HOVER INTERACTION (OVERRIDE)
-  // ===============================
-  nodes.forEach((node, index) => {
+  // HOVER
+  flowNodes.forEach((node, index) => {
 
     node.addEventListener("mouseenter", () => {
 
       isHovering = true;
 
-      // kill timeline influence visually
-      gsap.killTweensOf(nodes);
+      gsap.killTweensOf(flowNodes);
 
-      // progressive activation
-      nodes.forEach((n, i) => {
+      flowNodes.forEach((n, i) => {
         n.classList.toggle("active", i <= index);
       });
 
-      // update context
       if (context) {
         context.textContent = node.dataset.info || "";
       }
 
-      // micro interaction
       gsap.to(node, {
         scale: 1.08,
-        duration: 0.2,
-        ease: "power2.out"
+        duration: 0.2
       });
 
     });
@@ -953,14 +920,14 @@ setInterval(() => {
 
       gsap.to(node, {
         scale: 1,
-        duration: 0.2,
-        ease: "power2.out"
+        duration: 0.2
       });
 
     });
 
   });
 
+})();
 // ============================================================================================================================
 // 7. EHR
 // ============================================================================================================================
