@@ -801,19 +801,81 @@ setInterval(() => {
 // ============================================================================================================================
 // 6. SERVICES
 // ============================================================================================================================
-const gateway = document.querySelector('.services-gateway');
 
-if (gateway) {
-  const gatewayObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        gateway.classList.add('active');
-      }
+(function(){
+
+const nodes = document.querySelectorAll(".flow-node");
+const glow = document.getElementById("flowGlow");
+const context = document.getElementById("rcmContext");
+
+if (!nodes.length || !glow || !context) return;
+
+function moveGlow(target) {
+
+  const rect = target.getBoundingClientRect();
+  const parent = target.parentElement.getBoundingClientRect();
+
+  const x = rect.left - parent.left + rect.width / 2;
+  const y = rect.top - parent.top + rect.height / 2;
+
+  // smooth movement (GSAP if available)
+  if (typeof gsap !== "undefined") {
+    gsap.to(glow, {
+      x: x,
+      y: y,
+      duration: 0.6,
+      ease: "power2.out"
     });
-  }, { threshold: 0.3 });
+  } else {
+    glow.style.transform = `translate(${x}px, ${y}px)`;
+  }
 
-  gatewayObserver.observe(gateway);
+  glow.style.opacity = 1;
 }
+
+function activateUpTo(index) {
+  nodes.forEach(n => n.classList.remove("active"));
+  for (let i = 0; i <= index; i++) {
+    nodes[i].classList.add("active");
+  }
+}
+
+nodes.forEach((node, index) => {
+
+  node.addEventListener("mouseenter", () => {
+    activateUpTo(index);
+    moveGlow(node);
+    context.innerText = node.dataset.info;
+  });
+
+});
+
+// AUTO FLOW (IDLE ANIMATION)
+let current = 0;
+
+const interval = setInterval(() => {
+
+  if (!document.hidden) {
+
+    const node = nodes[current % nodes.length];
+
+    activateUpTo(current % nodes.length);
+    moveGlow(node);
+    context.innerText = node.dataset.info;
+
+    current++;
+  }
+
+}, 2200);
+
+// STOP ON USER INTERACTION
+nodes.forEach(node => {
+  node.addEventListener("mouseenter", () => {
+    clearInterval(interval);
+  });
+});
+
+})();
 // ============================================================================================================================
 // 7. EHR
 // ============================================================================================================================
