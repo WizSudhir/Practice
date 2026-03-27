@@ -1679,6 +1679,52 @@ z-index: 2;
   opacity: 1;
   transform: translateY(0);
 }
+/* STORY CARD */
+.pg-story-card {
+  max-width: 700px;
+  margin: auto;
+  padding: 30px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-default);
+  background: rgba(255,255,255,0.02);
+  text-align: left;
+}
+
+/* BADGE */
+.pg-badge {
+  font-size: 12px;
+  color: var(--text-muted);
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+/* BLOCKS */
+.pg-story-block {
+  margin-top: 14px;
+}
+
+.pg-story-block strong {
+  font-size: 12px;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.pg-story-block p {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* RESULT HIGHLIGHT */
+.pg-story-block.result p {
+  color: #22c55e;
+  font-weight: 500;
+}
+
+/* CTA */
+.pg-story-cta {
+  margin-top: 20px;
+}
 /* ============================================================================================================================
   8. EHR SECTION
 ============================================================================================================================== */
