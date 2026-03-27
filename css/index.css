@@ -1817,7 +1817,7 @@ z-index: 2;
 }
 .insights-editorial {
   padding: 120px 0;
-  background: var(--bg-primary);
+  background: none;
 }
 /* LAYOUT */
 .insights-editorial .container {
