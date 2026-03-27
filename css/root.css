@@ -134,7 +134,7 @@ h2.gradient {
   width: 1px;
   background: var(--border-subtle);
   pointer-events: none;
-  opacity: 0.6;
+  opacity: 0.4;
 }
 /* LEFT LINE */
 .section-grid::before {
@@ -157,10 +157,17 @@ section {
   position: absolute;
   left: calc(50% - var(--container)/2);
   right: calc(50% - var(--container)/2);
-  bottom: 0;
+  bottom: -0.5px;
   height: 1px;
-  background: var(--border-subtle);
-  opacity: 0.6;
+  background: linear-gradient(
+  to right,
+  transparent,
+  rgba(255,255,255,0.08) 20%,
+  rgba(255,255,255,0.08) 80%,
+  transparent
+   );
+  opacity: 1;
+  z-index: 5;
 }
 .section-tight {
   padding: var(--space-lg) 0;
@@ -172,6 +179,8 @@ section {
   background: rgba(255,255,255,0.02);
 }
 .section-frame {
+  position: relative;
+  z-index: 2;
   border: none;
   padding: clamp(32px, 4vw, 64px);
 }
