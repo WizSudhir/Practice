@@ -1555,41 +1555,72 @@ z-index: 2;
 /* ============================================================================================================================
   7. OUTCOMES
 ============================================================================================================================== */
-
+.pg-toggle {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.toggle-btn {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--border-default);
+  background: transparent;
+  cursor: pointer;
+  transition: var(--transition-base);
+}
+.toggle-btn.active {
+  background: var(--gradient-accent);
+  color: white;
+}
+.pg-view {
+  display: none;
+}
+.pg-view.active {
+  display: block;
+}
 .pg-outcomes-lite {
   position: relative;
 }
-
 .pg-outcomes-grid {
-  margin-top: var(--space-lg);
+  margin-top: 30px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(4,1fr);
+  gap: 20px;
 }
 
 /* CARD */
-.pg-outcome-card {
-  padding: 28px 22px;
+.pg-card {
+  padding: 20px;
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-default);
-  background: rgba(255,255,255,0.02);
   text-align: center;
   transition: var(--transition-base);
-  position: relative;
-  overflow: hidden;
 }
 
-/* hover elevation */
-.pg-outcome-card:hover {
+.pg-card:hover {
   transform: translateY(-6px);
-  border-color: var(--border-strong);
   box-shadow: var(--glow-soft);
 }
 
-/* highlight card */
-.pg-outcome-card.highlight {
-  border-color: rgba(99,102,241,0.5);
-  box-shadow: var(--glow-primary);
+.pg-card canvas {
+  height: 60px !important;
+  margin-bottom: 10px;
+}
+.pg-slider {
+  position: relative;
+  overflow: hidden;
+  margin-top: 30px;
+}
+
+.pg-slide {
+  display: none;
+  text-align: center;
+  opacity: 0;
+  transform: translateX(40px);
+}
+
+.pg-slide.active {
+  display: block;
 }
 
 /* ICON */
