@@ -626,49 +626,6 @@ function updateGraphDot() {
     graphDot.style.opacity = 0;
   }
 }
-/* =========================
-   GLOWING DATA POINT PLUGIN
-========================= */
-const glowPlugin = {
-  id: "glowDot",
-  afterDatasetsDraw(chart) {
-    const { ctx } = chart;
-    const meta = chart.getDatasetMeta(0);
-    const point = meta.data[meta.data.length - 1];
-    if (!point) return;
-
-    const x = point.x;
-    const y = point.y;
-
-    ctx.save();
-
-    // glow trail
-    ctx.shadowColor = "rgba(34,197,94,0.6)";
-    ctx.shadowBlur = 20;
-
-    // outer glow
-    const gradient = ctx.createRadialGradient(x, y, 2, x, y, 20);
-    gradient.addColorStop(0, "rgba(34,197,94,0.9)");
-    gradient.addColorStop(1, "rgba(34,197,94,0)");
-
-    ctx.fillStyle = gradient;
-    ctx.beginPath();
-    ctx.arc(x, y, 20, 0, Math.PI * 2);
-    ctx.fill();
-
-    // core dot
-    ctx.fillStyle = "#22c55e";
-    ctx.beginPath();
-    ctx.arc(x, y, 4, 0, Math.PI * 2);
-    ctx.fill();
-
-    ctx.restore();
-  }
-};
-
-if (typeof Chart !== "undefined") {
-  Chart.register(glowPlugin);
-}
 
 /* =========================
    HELPERS
