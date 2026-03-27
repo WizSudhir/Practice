@@ -1739,8 +1739,20 @@ z-index: 2;
 /* SLIDER */
 .ehr-slider {
   position: relative;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
+  cursor: grab;
+  scrollbar-width: none;
   margin-top: 20px;
+}
+.ehr-slider:hover .ehr-track {
+  animation-play-state: paused;
+}
+.ehr-slider::-webkit-scrollbar {
+  display: none;
+}
+.ehr-slider.dragging {
+  cursor: grabbing;
 }
 /* TRACK */
 .ehr-track {
@@ -1756,6 +1768,7 @@ z-index: 2;
   object-fit: contain;
   opacity: 0.7;
   transition: 0.3s ease;
+  pointer-events: none;
 }
 .ehr-track img:hover {
   opacity: 1;
