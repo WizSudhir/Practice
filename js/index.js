@@ -829,7 +829,7 @@ function moveGlow(target) {
   } else {
     glow.style.transform = `translate(${x}px, ${y}px)`;
   }
-
+  glow.style.transition = "all 0.6s cubic-bezier(0.22,1,0.36,1)";
   glow.style.opacity = 1;
 }
 
@@ -846,6 +846,12 @@ nodes.forEach((node, index) => {
     activateUpTo(index);
     moveGlow(node);
     context.innerText = node.dataset.info;
+    // ✅ ADD THIS EXACTLY HERE
+    if (index === nodes.length - 1) {
+      document.querySelector(".rcm-system").classList.add("complete");
+    } else {
+      document.querySelector(".rcm-system").classList.remove("complete");
+    }
   });
 
 });
@@ -857,12 +863,17 @@ const interval = setInterval(() => {
 
   if (!document.hidden) {
 
-    const node = nodes[current % nodes.length];
-
-    activateUpTo(current % nodes.length);
+    const index = current % nodes.length;
+    const node = nodes[index];
+    activateUpTo(index);
     moveGlow(node);
     context.innerText = node.dataset.info;
 
+    if (index === nodes.length - 1) {
+      document.querySelector(".rcm-system").classList.add("complete");
+    } else {
+      document.querySelector(".rcm-system").classList.remove("complete");
+    }
     current++;
   }
 
