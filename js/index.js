@@ -929,19 +929,34 @@ setInterval(() => {
 // ============================================================================================================================
 // 7. OUTCOMES
 // ============================================================================================================================
-
 (function(){
 
-  const section = document.querySelector(".pg-outcomes-lite");
+  const section = document.querySelector(".pg-outcomes-pro");
   if (!section) return;
 
-  const metrics = section.querySelectorAll(".pg-metric");
-  let hasAnimated = false;
+  // ===============================
+  // SAFE DEPENDENCY CHECKS
+  // ===============================
+  const hasGSAP = typeof gsap !== "undefined";
+  const hasChart = typeof Chart !== "undefined";
 
+  const metrics = section.querySelectorAll(".pg-metric");
+  const toggleBtns = section.querySelectorAll(".toggle-btn");
+  const views = section.querySelectorAll(".pg-view");
+  const slides = section.querySelectorAll(".pg-slide");
+  const charts = section.querySelectorAll(".mini-chart");
+
+  let hasAnimated = false;
+  let carouselIndex = 0;
+  let carouselInterval;
+
+  // ===============================
+  // COUNTER ANIMATION
+  // ===============================
   function animateCounters() {
     metrics.forEach(metric => {
 
-      const target = parseInt(metric.dataset.target);
+      const target = parseInt(metric.dataset.target || 0);
       let current = 0;
       const increment = target / 40;
 
@@ -961,16 +976,153 @@ setInterval(() => {
     });
   }
 
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && !hasAnimated) {
-        animateCounters();
-        hasAnimated = true;
-      }
-    });
-  }, { threshold: 0.4 });
+  // ===============================
+  // MINI CHARTS (SAFE INIT)
+  // ===============================
+  function initCharts() {
 
-  observer.observe(section);
+    if (!hasChart) return;
+
+    charts.forEach(canvas => {
+
+      try {
+        new Chart(canvas, {
+          type: "line",
+          data: {
+            labels: ["","","","",""],
+            datasets: [{
+              data: [10, 20, 35, 55, 85],
+              borderWidth: 2,
+              tension: 0.4,
+              pointRadius: 0
+            }]
+          },
+          options: {
+            responsive: true,
+            animation: false,
+            plugins: { legend: { display: false }},
+            scales: {
+              x: { display: false },
+              y: { display: false }
+            }
+          }
+        });
+      } catch (e) {
+        console.warn("Chart init failed", e);
+      }
+
+    });
+
+  }
+
+  // ===============================
+  // TOGGLE (GRID / CAROUSEL)
+  // ===============================
+  function initToggle() {
+
+    if (!toggleBtns.length) return;
+
+    toggleBtns.forEach(btn => {
+
+      btn.addEventListener("click", () => {
+
+        toggleBtns.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        const view = btn.dataset.view;
+
+        views.forEach(v => {
+          v.classList.toggle("active", v.classList.contains("pg-" + view));
+        });
+
+      });
+
+    });
+
+  }
+
+  // ===============================
+  // CAROUSEL
+  // ===============================
+  function showSlide(index) {
+
+    slides.forEach(s => s.classList.remove("active"));
+
+    const slide = slides[index];
+    if (!slide) return;
+
+    slide.classList.add("active");
+
+    if (hasGSAP) {
+      gsap.fromTo(slide,
+        { opacity: 0, x: 40 },
+        { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" }
+      );
+    } else {
+      slide.style.opacity = 1;
+    }
+
+  }
+
+  function startCarousel() {
+
+    if (!slides.length) return;
+
+    carouselInterval = setInterval(() => {
+      carouselIndex = (carouselIndex + 1) % slides.length;
+      showSlide(carouselIndex);
+    }, 4000);
+
+  }
+
+  function stopCarousel() {
+    if (carouselInterval) clearInterval(carouselInterval);
+  }
+
+  // Pause on hover (premium UX)
+  function bindCarouselHover() {
+    const slider = section.querySelector("#pgSlider");
+    if (!slider) return;
+
+    slider.addEventListener("mouseenter", stopCarousel);
+    slider.addEventListener("mouseleave", startCarousel);
+  }
+
+  // ===============================
+  // SCROLL TRIGGER
+  // ===============================
+  function initObserver() {
+
+    const observer = new IntersectionObserver(entries => {
+
+      entries.forEach(entry => {
+
+        if (entry.isIntersecting && !hasAnimated) {
+          animateCounters();
+          initCharts();
+          showSlide(0);
+          startCarousel();
+          hasAnimated = true;
+        }
+
+        // Optional reset (disabled for UX stability)
+        // if (!entry.isIntersecting) {
+        //   stopCarousel();
+        // }
+
+      });
+
+    }, { threshold: 0.4 });
+
+    observer.observe(section);
+  }
+
+  // ===============================
+  // INIT ALL
+  // ===============================
+  initToggle();
+  bindCarouselHover();
+  initObserver();
 
 })();
 // ============================================================================================================================
