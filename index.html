@@ -817,7 +817,17 @@
     <!-- HEADER -->
     <div class="section-header center">
       <h2 class="gradient">Proven Revenue Outcomes</h2>
-      <p class="mt-sm">Real performance data across specialties</p>
+      <p class="mt-sm">Real results across specialties using PracticeGrid</p>
+    </div>
+
+    <!-- SPECIALTY SELECT (AI PERSONALIZATION) -->
+    <div class="pg-filter center mt-md">
+      <select id="specialtyFilter">
+        <option value="all">All Specialties</option>
+        <option value="podiatry">Podiatry</option>
+        <option value="dme">DME</option>
+        <option value="mental">Behavioral Health</option>
+      </select>
     </div>
 
     <!-- TOGGLE -->
@@ -826,69 +836,28 @@
       <button class="toggle-btn" data-view="stories">Case Studies</button>
     </div>
 
-    <!-- ================= GRID VIEW ================= -->
-    <div class="pg-view pg-grid active">
-
-      <div class="pg-outcomes-grid">
-
-        <!-- CARD -->
-        <div class="pg-card">
-          <canvas class="mini-chart"></canvas>
-          <h3 class="pg-metric" data-target="28">0%</h3>
-          <p>Increase in Collections</p>
-        </div>
-
-        <div class="pg-card">
-          <canvas class="mini-chart"></canvas>
-          <h3 class="pg-metric" data-target="92">0%</h3>
-          <p>First Pass Acceptance</p>
-        </div>
-
-        <div class="pg-card highlight">
-          <canvas class="mini-chart"></canvas>
-          <h3 class="pg-metric" data-target="40">0%</h3>
-          <p>Reduction in Rejections</p>
-        </div>
-
-        <div class="pg-card">
-          <canvas class="mini-chart"></canvas>
-          <h3 class="pg-metric" data-target="97">0%</h3>
-          <p>Clean Claim Rate</p>
-        </div>
-
-      </div>
-
-    </div>
+    <!-- ================= GRID ================= -->
+    <div class="pg-view pg-grid active" id="gridView"></div>
 
     <!-- ================= CAROUSEL ================= -->
     <div class="pg-view pg-carousel">
-
-      <div class="pg-slider" id="pgSlider">
-
-        <div class="pg-slide active">
-          <h3>Podiatry Group</h3>
-          <p>28% increase in collections within 90 days</p>
-        </div>
-
-        <div class="pg-slide">
-          <h3>DME Supplier</h3>
-          <p>40% reduction in claim rejections</p>
-        </div>
-
-        <div class="pg-slide">
-          <h3>Behavioral Health</h3>
-          <p>97% clean claim rate achieved</p>
-        </div>
-
-      </div>
-
+      <div class="pg-slider" id="pgSlider"></div>
     </div>
 
-    <!-- CTA -->
-    <div class="center mt-lg">
-      <a href="why-us.html" class="btn-primary">
-        See Full Case Studies →
-      </a>
+    <!-- ================= REVENUE SIMULATOR ================= -->
+    <div class="pg-simulator mt-lg">
+
+      <h3>Estimate Your Revenue Opportunity</h3>
+
+      <div class="sim-controls">
+        <input type="number" id="claimsInput" placeholder="Monthly Claims Volume">
+        <button id="simulateBtn" class="btn-primary">Calculate</button>
+      </div>
+
+      <div class="sim-result" id="simResult">
+        Potential Recovery: <strong>$0</strong>
+      </div>
+
     </div>
 
   </div>
