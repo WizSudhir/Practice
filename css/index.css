@@ -1402,22 +1402,95 @@ z-index: 2;
 /* ============================================================================================================================
   6. SERVICES GATEWAY
 ============================================================================================================================== */
-.gateway-subtext {
-  margin-top: var(--space-sm);
-  color: var(--text-secondary);
-}
-.flow-step {
-  padding: var(--space-sm);
-  border-radius: var(--radius-md);
-  background: var(--bg-glass);
-  border: 1px solid var(--border-primary);
-  transition: var(--transition-medium);
-}
-.flow-step:hover {
-  transform: translateY(-3px);
-  border-color: var(--border-accent);
+
+.rcm-system {
+  margin-top: var(--space-lg);
 }
 
+/* FLOW CONTAINER */
+.rcm-flow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* NODE */
+.flow-node {
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border-default);
+  background: rgba(255,255,255,0.02);
+  font-size: 13px;
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+  text-decoration: none;
+}
+
+.flow-node:hover {
+  color: #fff;
+  border-color: var(--border-strong);
+  box-shadow: 0 0 20px rgba(99,102,241,0.25);
+  transform: translateY(-2px);
+}
+
+.flow-node.active {
+  background: rgba(99,102,241,0.15);
+  border-color: var(--primary);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(99,102,241,0.35);
+}
+
+/* FLOW LINE */
+.flow-line {
+  width: 28px;
+  height: 1px;
+  background: var(--border-default);
+  position: relative;
+  overflow: hidden;
+}
+
+/* GLOW FLOW */
+.flow-glow {
+  position: absolute;
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg,#22c55e,#3b82f6);
+  filter: blur(6px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* CONTEXT PANEL */
+.rcm-context {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-muted);
+  min-height: 20px;
+  transition: all 0.3s ease;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .flow-line {
+    display: none;
+  }
+
+  .rcm-flow {
+    gap: 8px;
+  }
+
+  .flow-node {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+}
 /* ============================================================================================================================
   7. OUTCOMES
 ============================================================================================================================== */
