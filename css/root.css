@@ -149,6 +149,19 @@ section {
   position: relative;
   z-index: 1;
 }
+.section-divider {
+  position: relative;
+}
+.section-divider::after {
+  content: "";
+  position: absolute;
+  left: calc(50% - var(--container)/2);
+  right: calc(50% - var(--container)/2);
+  bottom: 0;
+  height: 1px;
+  background: var(--border-subtle);
+  opacity: 0.6;
+}
 .section-tight {
   padding: var(--space-lg) 0;
 }
