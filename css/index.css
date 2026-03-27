@@ -1438,7 +1438,6 @@ z-index: 2;
   text-decoration: none;
   backdrop-filter: blur(10px);
 }
-}
 
 .flow-node:hover {
   color: #fff;
@@ -1488,22 +1487,6 @@ z-index: 2;
   color: var(--text-muted);
   min-height: 20px;
   transition: all 0.3s ease;
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-  .flow-line {
-    display: none;
-  }
-
-  .rcm-flow {
-    gap: 8px;
-  }
-
-  .flow-node {
-    font-size: 12px;
-    padding: 8px 12px;
-  }
 }
 /* ============================================================================================================================
   7. OUTCOMES
