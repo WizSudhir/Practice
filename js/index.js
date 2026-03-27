@@ -756,6 +756,17 @@ gsap.timeline({
             ease: "power4.out"
           }
         );
+        gsap.fromTo(
+          "#howCta .cta-content > *",
+          { opacity: 0, y: 10 },
+          {
+            opacity: 1,
+             y: 0,
+            duration: 0.6,
+            stagger: 0.1,
+            delay: 0.2
+          }
+        );
         // DOT BURST
         gsap.to(graphDot, {
           scale: 6,
