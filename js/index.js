@@ -620,7 +620,11 @@ function updateGraphDot() {
 
   graphDot.style.left = x + "px";
   graphDot.style.top = y + "px";
-  graphDot.style.opacity = 1;
+  if (state.progress > 0.15) {
+    graphDot.style.opacity = 1;
+  } else {
+    graphDot.style.opacity = 0;
+  }
 }
 /* =========================
    GLOWING DATA POINT PLUGIN
