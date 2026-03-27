@@ -838,17 +838,27 @@
     <div class="pg-view pg-carousel">
       <div class="pg-slider" id="pgSlider"></div>
     </div>
-
+    <div class="pg-explanation">
+      <h3>How PracticeGrid Achieves This</h3>
+      <p>
+        AI-driven validation eliminates front-end errors, while denial intelligence ensures continuous revenue recovery across payers.
+      </p>
+    </div>
     <!-- ================= REVENUE SIMULATOR ================= -->
     <div class="pg-simulator mt-lg">
 
       <h3>Estimate Your Revenue Opportunity</h3>
 
       <div class="sim-controls">
-        <input type="number" id="claimsInput" placeholder="Monthly Claims Volume">
+        <input type="number" placeholder="Monthly Claims">
+        <input type="number" placeholder="Avg Reimbursement ($)">
+        <input type="number" placeholder="Denial Rate (%)">
         <button id="simulateBtn" class="btn-primary">Calculate</button>
       </div>
-
+      <div class="sim-logic">
+        Based on industry benchmarks:
+        18–32% recoverable revenue leakage
+      </div>
       <div class="sim-result" id="simResult">
         Potential Recovery: <strong>$0</strong>
       </div>
