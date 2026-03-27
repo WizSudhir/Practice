@@ -1488,19 +1488,28 @@ if (slider && wrapper && track) {
   autoScroll();
 }
 // ============================================================================================================================
-// 8. EDITORIAL INSIGHTS
+// 8. ENGAGEMENT MODEL
 // ============================================================================================================================
-const insightsSection = document.querySelector('.insights-editorial');
+// Engagement animation (progress reveal)
+const steps = document.querySelectorAll('.eng-step');
 
-if (insightsSection) {
-  const insightsObserver = new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting) {
-      insightsSection.classList.add('active');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = 1;
+      entry.target.style.transform = 'translateY(0)';
     }
-  }, { threshold: 0.3 });
+  });
+}, { threshold: 0.2 });
 
-  insightsObserver.observe(insightsSection);
-}
+steps.forEach(step => {
+  step.style.opacity = 0;
+  step.style.transform = 'translateY(30px)';
+  step.style.transition = 'all 0.6s ease';
+  observer.observe(step);
+});
+
+  
 }); // DOM Close
 
 
