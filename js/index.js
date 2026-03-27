@@ -931,198 +931,175 @@ setInterval(() => {
 // ============================================================================================================================
 (function(){
 
-  const section = document.querySelector(".pg-outcomes-pro");
-  if (!section) return;
+const section = document.querySelector(".pg-outcomes-pro");
+if(!section) return;
 
-  // ===============================
-  // SAFE DEPENDENCY CHECKS
-  // ===============================
-  const hasGSAP = typeof gsap !== "undefined";
-  const hasChart = typeof Chart !== "undefined";
-
-  const metrics = section.querySelectorAll(".pg-metric");
-  const toggleBtns = section.querySelectorAll(".toggle-btn");
-  const views = section.querySelectorAll(".pg-view");
-  const slides = section.querySelectorAll(".pg-slide");
-  const charts = section.querySelectorAll(".mini-chart");
-
-  let hasAnimated = false;
-  let carouselIndex = 0;
-  let carouselInterval;
-
-  // ===============================
-  // COUNTER ANIMATION
-  // ===============================
-  function animateCounters() {
-    metrics.forEach(metric => {
-
-      const target = parseInt(metric.dataset.target || 0);
-      let current = 0;
-      const increment = target / 40;
-
-      function update() {
-        current += increment;
-
-        if (current >= target) {
-          metric.textContent = target + "%";
-          return;
-        }
-
-        metric.textContent = Math.round(current) + "%";
-        requestAnimationFrame(update);
-      }
-
-      update();
-    });
+// ================= DATA (CMS READY)
+// Replace this with API later
+// =================
+const data = [
+  {
+    specialty:"podiatry",
+    title:"Podiatry Surgical Group",
+    metric:28,
+    label:"Increase in Surgical Collections",
+    sub:"5 Locations • 90 Days",
+    icon:"trending-up",
+    graph:"line"
+  },
+  {
+    specialty:"dme",
+    title:"DME Supplier",
+    metric:40,
+    label:"Reduction in Claim Rejections",
+    sub:"Faster reimbursements",
+    icon:"shield-check",
+    graph:"bar"
+  },
+  {
+    specialty:"mental",
+    title:"Behavioral Health",
+    metric:97,
+    label:"Clean Claim Rate",
+    sub:"Multi-payer optimization",
+    icon:"badge-check",
+    graph:"radial"
+  },
+  {
+    specialty:"all",
+    title:"Multi-Specialty Claims",
+    metric:92,
+    label:"First Pass Acceptance",
+    sub:"System-wide improvement",
+    icon:"zap",
+    graph:"line"
   }
+];
 
-  // ===============================
-  // MINI CHARTS (SAFE INIT)
-  // ===============================
-  function initCharts() {
+// ================= BUILD GRID =================
+const grid = document.getElementById("gridView");
 
-    if (!hasChart) return;
+function renderGrid(filter="all"){
 
-    charts.forEach(canvas => {
+  grid.innerHTML = `<div class="pg-outcomes-grid"></div>`;
+  const container = grid.querySelector(".pg-outcomes-grid");
 
-      try {
-        new Chart(canvas, {
-          type: "line",
-          data: {
-            labels: ["","","","",""],
-            datasets: [{
-              data: [10, 20, 35, 55, 85],
-              borderWidth: 2,
-              tension: 0.4,
-              pointRadius: 0
-            }]
-          },
-          options: {
-            responsive: true,
-            animation: false,
-            plugins: { legend: { display: false }},
-            scales: {
-              x: { display: false },
-              y: { display: false }
-            }
-          }
-        });
-      } catch (e) {
-        console.warn("Chart init failed", e);
-      }
+  data
+    .filter(d => filter==="all" || d.specialty===filter)
+    .forEach(d => {
 
+      const card = document.createElement("div");
+      card.className = "pg-card";
+
+      card.innerHTML = `
+        <i data-lucide="${d.icon}"></i>
+        <h3 class="pg-metric">${d.metric}%</h3>
+        <h4>${d.label}</h4>
+        <p>${d.title}</p>
+        <span>${d.sub}</span>
+        <canvas class="chart"></canvas>
+      `;
+
+      container.appendChild(card);
+
+      drawGraph(card.querySelector("canvas"), d.graph);
     });
 
+  lucide.createIcons();
+}
+
+// ================= GRAPH VARIANTS =================
+function drawGraph(canvas,type){
+
+  if(typeof Chart === "undefined") return;
+
+  let config;
+
+  if(type==="bar"){
+    config={
+      type:"bar",
+      data:{labels:["","",""],datasets:[{data:[20,40,80]}]},
+      options:{plugins:{legend:false},scales:{x:{display:false},y:{display:false}}}
+    };
   }
 
-  // ===============================
-  // TOGGLE (GRID / CAROUSEL)
-  // ===============================
-  function initToggle() {
-
-    if (!toggleBtns.length) return;
-
-    toggleBtns.forEach(btn => {
-
-      btn.addEventListener("click", () => {
-
-        toggleBtns.forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-
-        const view = btn.dataset.view;
-
-        views.forEach(v => {
-          v.classList.toggle("active", v.classList.contains("pg-" + view));
-        });
-
-      });
-
-    });
-
+  else if(type==="radial"){
+    config={
+      type:"doughnut",
+      data:{datasets:[{data:[80,20]}]},
+      options:{cutout:"70%",plugins:{legend:false}}
+    };
   }
 
-  // ===============================
-  // CAROUSEL
-  // ===============================
-  function showSlide(index) {
-
-    slides.forEach(s => s.classList.remove("active"));
-
-    const slide = slides[index];
-    if (!slide) return;
-
-    slide.classList.add("active");
-
-    if (hasGSAP) {
-      gsap.fromTo(slide,
-        { opacity: 0, x: 40 },
-        { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" }
-      );
-    } else {
-      slide.style.opacity = 1;
-    }
-
+  else{
+    config={
+      type:"line",
+      data:{labels:["","",""],datasets:[{data:[10,30,70]}]},
+      options:{plugins:{legend:false},scales:{x:{display:false},y:{display:false}}}
+    };
   }
 
-  function startCarousel() {
+  new Chart(canvas,config);
+}
 
-    if (!slides.length) return;
+// ================= CAROUSEL =================
+const slider = document.getElementById("pgSlider");
 
-    carouselInterval = setInterval(() => {
-      carouselIndex = (carouselIndex + 1) % slides.length;
-      showSlide(carouselIndex);
-    }, 4000);
+function renderSlides(){
+  slider.innerHTML="";
 
-  }
+  data.forEach((d,i)=>{
+    const slide=document.createElement("div");
+    slide.className="pg-slide"+(i===0?" active":"");
 
-  function stopCarousel() {
-    if (carouselInterval) clearInterval(carouselInterval);
-  }
+    slide.innerHTML=`
+      <h3>${d.title}</h3>
+      <p>${d.metric}% ${d.label}</p>
+      <span>${d.sub}</span>
+    `;
 
-  // Pause on hover (premium UX)
-  function bindCarouselHover() {
-    const slider = section.querySelector("#pgSlider");
-    if (!slider) return;
+    slider.appendChild(slide);
+  });
+}
 
-    slider.addEventListener("mouseenter", stopCarousel);
-    slider.addEventListener("mouseleave", startCarousel);
-  }
+let index=0;
+function startCarousel(){
+  setInterval(()=>{
+    const slides=slider.querySelectorAll(".pg-slide");
+    slides.forEach(s=>s.classList.remove("active"));
+    index=(index+1)%slides.length;
+    slides[index].classList.add("active");
+  },4000);
+}
 
-  // ===============================
-  // SCROLL TRIGGER
-  // ===============================
-  function initObserver() {
+// ================= FILTER =================
+document.getElementById("specialtyFilter").addEventListener("change",(e)=>{
+  renderGrid(e.target.value);
+});
 
-    const observer = new IntersectionObserver(entries => {
+// ================= SIMULATOR =================
+document.getElementById("simulateBtn").addEventListener("click",()=>{
+  const claims=parseInt(document.getElementById("claimsInput").value||0);
+  const recovery=claims*45; // avg $45 per claim improvement
+  document.getElementById("simResult").innerHTML=
+    `Potential Recovery: <strong>$${recovery.toLocaleString()}</strong>`;
+});
 
-      entries.forEach(entry => {
+// ================= TOGGLE =================
+document.querySelectorAll(".toggle-btn").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll(".toggle-btn").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
 
-        if (entry.isIntersecting && !hasAnimated) {
-          animateCounters();
-          initCharts();
-          showSlide(0);
-          startCarousel();
-          hasAnimated = true;
-        }
+    document.querySelectorAll(".pg-view").forEach(v=>v.classList.remove("active"));
+    document.querySelector(".pg-"+btn.dataset.view).classList.add("active");
+  });
+});
 
-        // Optional reset (disabled for UX stability)
-        // if (!entry.isIntersecting) {
-        //   stopCarousel();
-        // }
-
-      });
-
-    }, { threshold: 0.4 });
-
-    observer.observe(section);
-  }
-
-  // ===============================
-  // INIT ALL
-  // ===============================
-  initToggle();
-  bindCarouselHover();
-  initObserver();
+// ================= INIT =================
+renderGrid();
+renderSlides();
+startCarousel();
 
 })();
 // ============================================================================================================================
