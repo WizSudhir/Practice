@@ -934,9 +934,10 @@ setInterval(() => {
 const section = document.querySelector(".pg-outcomes-pro");
 if(!section) return;
 
-// ================= DATA (CMS READY)
-// Replace this with API later
-// =================
+const hasGSAP = typeof gsap !== "undefined";
+const hasChart = typeof Chart !== "undefined";
+
+// ================= DATA =================
 const data = [
   {
     specialty:"podiatry",
@@ -945,7 +946,7 @@ const data = [
     label:"Increase in Surgical Collections",
     sub:"5 Locations • 90 Days",
     icon:"trending-up",
-    graph:"line"
+    graph:"growth"
   },
   {
     specialty:"dme",
@@ -954,7 +955,7 @@ const data = [
     label:"Reduction in Claim Rejections",
     sub:"Faster reimbursements",
     icon:"shield-check",
-    graph:"bar"
+    graph:"decline"
   },
   {
     specialty:"mental",
@@ -972,81 +973,143 @@ const data = [
     label:"First Pass Acceptance",
     sub:"System-wide improvement",
     icon:"zap",
-    graph:"line"
+    graph:"stability"
   }
 ];
 
-// ================= BUILD GRID =================
+// ================= ELEMENTS =================
 const grid = document.getElementById("gridView");
+const slider = document.getElementById("pgSlider");
+const toggleBtns = section.querySelectorAll(".toggle-btn");
 
-function renderGrid(filter="all"){
+let hasAnimated = false;
+
+// ================= RENDER GRID =================
+function renderGrid(){
 
   grid.innerHTML = `<div class="pg-outcomes-grid"></div>`;
   const container = grid.querySelector(".pg-outcomes-grid");
 
-  data
-    .filter(d => filter==="all" || d.specialty===filter)
-    .forEach(d => {
+  data.forEach(d => {
 
-      const card = document.createElement("div");
-      card.className = "pg-card";
+    const card = document.createElement("div");
+    card.className = "pg-card";
 
-      card.innerHTML = `
-        <i data-lucide="${d.icon}"></i>
-        <h3 class="pg-metric">${d.metric}%</h3>
-        <h4>${d.label}</h4>
-        <p>${d.title}</p>
-        <span>${d.sub}</span>
-        <canvas class="chart"></canvas>
-      `;
+    card.innerHTML = `
+      <div class="pg-icon"><i data-lucide="${d.icon}"></i></div>
+      <h3 class="pg-metric" data-target="${d.metric}">0%</h3>
+      <h4>${d.label}</h4>
+      <p>${d.title}</p>
+      <span>${d.sub}</span>
+      <canvas class="chart"></canvas>
+    `;
 
-      container.appendChild(card);
+    container.appendChild(card);
 
-      drawGraph(card.querySelector("canvas"), d.graph);
-    });
+    drawGraph(card.querySelector("canvas"), d.graph);
+  });
 
   lucide.createIcons();
 }
 
-// ================= GRAPH VARIANTS =================
+// ================= GRAPH SYSTEM (MEANINGFUL + PREMIUM) =================
 function drawGraph(canvas,type){
 
-  if(typeof Chart === "undefined") return;
+  if(!hasChart) return;
+
+  const ctx = canvas.getContext("2d");
+
+  const gradient = ctx.createLinearGradient(0,0,0,80);
+  gradient.addColorStop(0,"#6366f1");
+  gradient.addColorStop(1,"#3b82f6");
 
   let config;
 
-  if(type==="bar"){
+  if(type==="decline"){
     config={
-      type:"bar",
-      data:{labels:["","",""],datasets:[{data:[20,40,80]}]},
-      options:{plugins:{legend:false},scales:{x:{display:false},y:{display:false}}}
+      type:"line",
+      data:{labels:["","","",""],datasets:[{
+        data:[80,60,40,20],
+        borderColor:"#ef4444",
+        borderWidth:2,
+        tension:0.5,
+        fill:false,
+        pointRadius:0
+      }]},
+      options:{animation:{duration:1200},plugins:{legend:false},scales:{x:{display:false},y:{display:false}}}
     };
   }
 
   else if(type==="radial"){
     config={
       type:"doughnut",
-      data:{datasets:[{data:[80,20]}]},
-      options:{cutout:"70%",plugins:{legend:false}}
+      data:{datasets:[{
+        data:[97,3],
+        backgroundColor:["#22c55e","#1e293b"]
+      }]},
+      options:{cutout:"75%",plugins:{legend:false},animation:{duration:1200}}
     };
   }
 
-  else{
+  else if(type==="stability"){
     config={
       type:"line",
-      data:{labels:["","",""],datasets:[{data:[10,30,70]}]},
-      options:{plugins:{legend:false},scales:{x:{display:false},y:{display:false}}}
+      data:{labels:["","","",""],datasets:[{
+        data:[60,65,63,68],
+        borderColor:gradient,
+        borderWidth:2,
+        tension:0.4,
+        pointRadius:0
+      }]},
+      options:{animation:{duration:1200},plugins:{legend:false},scales:{x:{display:false},y:{display:false}}}
+    };
+  }
+
+  else {
+    config={
+      type:"line",
+      data:{labels:["","","",""],datasets:[{
+        data:[20,40,65,90],
+        borderColor:gradient,
+        borderWidth:3,
+        tension:0.5,
+        fill:false,
+        pointRadius:0
+      }]},
+      options:{animation:{duration:1200},plugins:{legend:false},scales:{x:{display:false},y:{display:false}}}
     };
   }
 
   new Chart(canvas,config);
 }
 
-// ================= CAROUSEL =================
-const slider = document.getElementById("pgSlider");
+// ================= COUNTER ANIMATION =================
+function animateCounters(){
+  document.querySelectorAll(".pg-metric").forEach(el => {
+    const target = parseInt(el.dataset.target);
+    if(!hasGSAP){
+      el.textContent = target + "%";
+      return;
+    }
 
+    gsap.fromTo(el,
+      {innerText:0},
+      {
+        innerText:target,
+        duration:1.2,
+        snap:{innerText:1},
+        onUpdate:function(){
+          el.textContent = Math.floor(el.innerText) + "%";
+        }
+      }
+    );
+  });
+}
+
+// ================= CAROUSEL =================
 function renderSlides(){
-  slider.innerHTML="";
+
+  slider.innerHTML = "";
 
   data.forEach((d,i)=>{
     const slide=document.createElement("div");
@@ -1063,38 +1126,66 @@ function renderSlides(){
 }
 
 let index=0;
+let interval;
+
 function startCarousel(){
-  setInterval(()=>{
+
+  interval = setInterval(()=>{
     const slides=slider.querySelectorAll(".pg-slide");
     slides.forEach(s=>s.classList.remove("active"));
+
     index=(index+1)%slides.length;
-    slides[index].classList.add("active");
+    const active = slides[index];
+
+    active.classList.add("active");
+
+    if(hasGSAP){
+      gsap.fromTo(active,{opacity:0,x:40},{opacity:1,x:0,duration:0.6});
+    }
+
   },4000);
 }
 
-// ================= FILTER =================
-document.getElementById("specialtyFilter").addEventListener("change",(e)=>{
-  renderGrid(e.target.value);
-});
-
-// ================= SIMULATOR =================
-document.getElementById("simulateBtn").addEventListener("click",()=>{
-  const claims=parseInt(document.getElementById("claimsInput").value||0);
-  const recovery=claims*45; // avg $45 per claim improvement
-  document.getElementById("simResult").innerHTML=
-    `Potential Recovery: <strong>$${recovery.toLocaleString()}</strong>`;
-});
+// pause on hover
+slider.addEventListener("mouseenter",()=>clearInterval(interval));
+slider.addEventListener("mouseleave",startCarousel);
 
 // ================= TOGGLE =================
-document.querySelectorAll(".toggle-btn").forEach(btn=>{
+toggleBtns.forEach(btn=>{
   btn.addEventListener("click",()=>{
-    document.querySelectorAll(".toggle-btn").forEach(b=>b.classList.remove("active"));
+    toggleBtns.forEach(b=>b.classList.remove("active"));
     btn.classList.add("active");
 
     document.querySelectorAll(".pg-view").forEach(v=>v.classList.remove("active"));
     document.querySelector(".pg-"+btn.dataset.view).classList.add("active");
   });
 });
+
+// ================= SIMULATOR (REAL LOGIC) =================
+document.getElementById("simulateBtn").addEventListener("click",()=>{
+
+  const claims = parseFloat(document.getElementById("claimsInput").value||0);
+  const avg = 120; // avg reimbursement baseline
+  const denial = 0.18; // industry leakage
+
+  const recovery = claims * avg * denial * 0.25;
+
+  document.getElementById("simResult").innerHTML =
+    `Potential Recovery: <strong>$${Math.round(recovery).toLocaleString()}</strong>
+     <div style="font-size:12px;color:#94a3b8;margin-top:6px">
+       Based on industry benchmarks (18–32% leakage)
+     </div>`;
+});
+
+// ================= SCROLL TRIGGER =================
+const observer = new IntersectionObserver(entries=>{
+  if(entries[0].isIntersecting && !hasAnimated){
+    animateCounters();
+    hasAnimated = true;
+  }
+},{threshold:0.4});
+
+observer.observe(section);
 
 // ================= INIT =================
 renderGrid();
