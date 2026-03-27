@@ -830,7 +830,7 @@ function moveGlow(target) {
     glow.style.transform = `translate(${x}px, ${y}px)`;
   }
   glow.style.transition = "all 0.6s cubic-bezier(0.22,1,0.36,1)";
-  glow.style.opacity = 1;
+  glow.style.opacity = 0.9;
 }
 
 function activateUpTo(index) {
@@ -886,7 +886,6 @@ node.addEventListener("mouseenter", () => {
   activateUpTo(index);
   moveGlow(node);
   context.innerText = node.dataset.info;
-});
 });
 
 })();
