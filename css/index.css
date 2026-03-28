@@ -292,10 +292,6 @@ z-index: 2;
 }
 /* CONTENT */
 .hero-content {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: var(--space-xl);
   transform: none;
   text-align: center;
   max-width: calc(var(--container) * 0.65);
@@ -326,6 +322,30 @@ z-index: 2;
   margin-top: 10px;
   font-size: 13px;
   color: rgba(255,255,255,0.6);
+}
+.hero-layout {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none; /* animation still interactive */
+}
+/* TOP TITLE */
+.hero-top {
+  position: absolute;
+  top: calc(var(--nav-height) + var(--space-lg));
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  max-width: calc(var(--container) * 0.7);
+}
+/* BOTTOM CONTENT */
+.hero-bottom {
+  position: absolute;
+  bottom: var(--space-xl);
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  max-width: calc(var(--container) * 0.6);
 }
 /* CONTROL PHASE (PracticeGrid) */
 /* System activation */
