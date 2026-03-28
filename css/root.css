@@ -176,12 +176,12 @@ h2.gradient {
   border: 1px solid rgba(255,255,255,0.12);
   background: rgba(255,255,255,0.02);
   backdrop-filter: blur(12px);
+  transition: 
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s ease;
 }
 .section-frame:hover {
-  border-color: rgba(99,102,241,0.5);
-  box-shadow:
-    0 0 0 1px rgba(99,102,241,0.3),
-    0 10px 40px rgba(59,130,246,0.2);
+  transform: scale(1.015);
 }
 .section-glow {
   position: relative;
