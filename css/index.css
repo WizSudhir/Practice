@@ -104,6 +104,7 @@ z-index: 2;
     0 0 40px rgba(59,130,246,0.5),
     0 0 80px rgba(139,92,246,0.3);
   animation: corePulse 3s infinite ease-in-out;
+  z-index: 4;
 }
 @keyframes corePulse {
   0% { transform: translate(-50%, -50%) scale(0.9); }
@@ -121,6 +122,9 @@ z-index: 2;
 @keyframes coreWave {
   0% {transform: scale(0.5);opacity: 0.8;}
   100% {transform: scale(2.5);opacity: 0;}
+}
+.core.pulse::after {
+  animation: coreWave 1.5s ease-out forwards;
 }
 .core svg {
   width: 40px;
