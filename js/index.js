@@ -285,7 +285,7 @@ document.addEventListener("DOMContentLoaded", () => {
         scale(${scale})
       `;
     });
-    requestAnimationFrame(animate);
+    requestAnimationFrame(loop);
   }
   loop();
   }
@@ -307,6 +307,7 @@ document.addEventListener("DOMContentLoaded", () => {
         controlled = true;
         frozen = true;
         timelineRunning = false;
+        animationRunning = false;
         // clear connections
         clearAllTimeouts();
         resetConnections();
