@@ -460,75 +460,12 @@ z-index: 2;
   stroke-dashoffset: 300;
   transition: stroke-dashoffset 0.6s ease;
 }
-/* REVENUE PHASE */
-.revenue {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.8s ease;
-  z-index: 5;
-}
-.how-it-works .revenue {
-  opacity: 1;
-}
-.revenue.active {
-  opacity: 1;
-  transform: translateY(0);
-}
-.revenue-card {
-  width: 260px;
-  padding: 16px;
-  border-radius: 14px;
-  background: rgba(15,23,42,0.85);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(59,130,246,0.2);
-  box-shadow:
-    0 0 30px rgba(34,197,94,0.2),
-    0 0 60px rgba(59,130,246,0.15);
-}
 /* HEADER */
 .rev-header {
   font-size: 13px;
   font-weight: 600;
   margin-bottom: 10px;
   color: #e2e8f0;
-}
-/* CHART */
-.rev-chart {
-  position: relative;
-  height: calc(var(--space-xl) + var(--space-sm));
-  display: flex;
-  align-items: flex-end;
-  gap: 6px;
-}
-/* BARS */
-.bar {
-  flex: 1;
-  height: 0;
-  background: var(--gradient-accent);
-  border-radius: 4px;
-  transition: height 0.8s ease;
-}
-.bar.highlight {
-  background: linear-gradient(180deg, #4ade80, #2563eb);
-  box-shadow: 0 0 10px rgba(34,197,94,0.6);
-}
-/* LINE */
-.line-graph {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-/* METRICS */
-.rev-metrics {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-  font-size: 11px;
-  color: #94a3b8;
 }
 /* RESPONSIVE HERO SYSTEM */
 /* NAV HEIGHT TOKEN */
