@@ -10,17 +10,14 @@ const nodes = document.querySelectorAll(".node");
 const core = document.querySelector(".core");
 const svg = document.getElementById("connections");
 
-if (!hero || !core) return;
+if (!hero || !core || !svg) return;
 
-// =========================
-// STATE
-// =========================
+// ================= STATE =================
 let running = false;
 let rafId = null;
+let timelineId = 0;
 
-// =========================
-// CONFIG
-// =========================
+// ================= CONFIG =================
 const styles = getComputedStyle(document.documentElement);
 const SIDE_PADDING = parseInt(styles.getPropertyValue('--space-lg'));
 const TOP_PADDING = parseInt(styles.getPropertyValue('--space-xxl'));
@@ -35,9 +32,7 @@ function updateBounds() {
 updateBounds();
 window.addEventListener("resize", updateBounds);
 
-// =========================
-// INIT NODES
-// =========================
+// ================= INIT =================
 function initNodes() {
   const cols = 4;
   const rows = 2;
@@ -52,8 +47,8 @@ function initNodes() {
     const col = i % cols;
     const row = Math.floor(i / cols);
 
-    n.baseX = -width/2 + SIDE_PADDING + zoneW * (col + 0.5);
-    n.baseY = -height/2 + TOP_PADDING + zoneH * (row + 0.5);
+    n.baseX = -width / 2 + SIDE_PADDING + zoneW * (col + 0.5);
+    n.baseY = -height / 2 + TOP_PADDING + zoneH * (row + 0.5);
 
     n.x = n.baseX;
     n.y = n.baseY;
@@ -63,13 +58,12 @@ function initNodes() {
 
     n.floatX = zoneW * 0.35;
     n.floatY = zoneH * 0.35;
+
+    n.z = 0;
   });
 }
-initNodes();
 
-// =========================
-// RAF ENGINE
-// =========================
+// ================= RAF ENGINE =================
 function startRAF() {
   if (rafId) return;
 
@@ -77,12 +71,32 @@ function startRAF() {
     nodes.forEach(n => {
       n.angle += n.speed;
 
-      n.x = n.baseX + Math.cos(n.angle) * n.floatX;
-      n.y = n.baseY + Math.sin(n.angle) * n.floatY;
+      const floatX = Math.cos(n.angle) * n.floatX;
+      const floatY = Math.sin(n.angle) * n.floatY;
+
+      const dx = -n.x * 0.002;
+      const dy = -n.y * 0.002;
+
+      n.x = n.baseX + floatX + dx;
+      n.y = n.baseY + floatY + dy;
+
+      // DEPTH
+      n.z = Math.sin(n.angle) * 30;
+
+      const scale = 1 + n.z / 200;
+      const opacity = 0.6 + (n.z + 30) / 60 * 0.4;
+
+      n.style.opacity = opacity;
 
       n.style.transform = `
-        translate3d(${n.x}px, ${n.y}px, 0)
+        translate3d(${n.x}px, ${n.y}px, ${n.z}px)
         translate(-50%, -50%)
+        scale(${scale})
+      `;
+
+      n.querySelector(".node-inner").style.boxShadow = `
+        0 0 ${10 + n.z}px rgba(59,130,246,0.25),
+        0 0 ${20 + n.z}px rgba(139,92,246,0.15)
       `;
     });
 
@@ -97,9 +111,7 @@ function stopRAF() {
   rafId = null;
 }
 
-// =========================
-// CONNECTIONS
-// =========================
+// ================= CONNECTIONS =================
 function resetConnections() {
   svg.innerHTML = `
     <defs>
@@ -112,36 +124,65 @@ function resetConnections() {
 }
 
 function drawConnection(node) {
-  const path = document.createElementNS("http://www.w3.org/2000/svg","path");
+  const coreRect = core.getBoundingClientRect();
+  const nodeRect = node.querySelector(".node-inner").getBoundingClientRect();
+  const svgRect = svg.getBoundingClientRect();
 
-  path.setAttribute("d", "M 0 0 L 100 100"); // simple clean version
+  const startX = coreRect.left + coreRect.width / 2 - svgRect.left;
+  const startY = coreRect.top + coreRect.height / 2 - svgRect.top;
+
+  const endX = nodeRect.left + nodeRect.width / 2 - svgRect.left;
+  const endY = nodeRect.top + nodeRect.height / 2 - svgRect.top;
+
+  const midX = startX + (endX - startX) * 0.5;
+
+  const d = `
+    M ${startX} ${startY}
+    L ${midX} ${startY}
+    L ${midX} ${endY}
+    L ${endX} ${endY}
+  `;
+
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  path.setAttribute("d", d);
   path.classList.add("connection-path");
 
   svg.appendChild(path);
+
   return path;
 }
 
-// =========================
-// TIMELINE ENGINE (ASYNC)
-// =========================
-async function runTimeline() {
-  while (running) {
+// ================= TIMELINE =================
+async function runTimeline(id) {
+  while (running && id === timelineId) {
 
-    // FLOAT PHASE
-    await delay(1500);
+    // FLOAT
+    await delay(1200);
+
+    if (!running || id !== timelineId) break;
 
     // SHOW CORE
     core.style.display = "flex";
 
-    // CONNECT PHASE
-    for (let n of nodes) {
+    // CONNECT
+    for (let i = 0; i < nodes.length; i++) {
+      if (!running || id !== timelineId) return;
+
+      const n = nodes[i];
+
       const path = drawConnection(n);
+      path.getBoundingClientRect();
+
+      await delay(120 + Math.random() * 120);
+
       path.classList.add("active");
-      await delay(200);
+
+      await delay(80);
+
+      n.classList.add("resolved-active");
     }
 
-    // RESOLVE PHASE
-    nodes.forEach(n => n.classList.add("resolved-active"));
+    // HOLD
     await delay(1500);
 
     // RESET
@@ -150,9 +191,9 @@ async function runTimeline() {
   }
 }
 
+// ================= RESET =================
 function resetSystem() {
   resetConnections();
-
   core.style.display = "none";
 
   nodes.forEach(n => {
@@ -160,37 +201,34 @@ function resetSystem() {
   });
 }
 
-// =========================
-// HELPERS
-// =========================
+// ================= HELPERS =================
 function delay(ms) {
   return new Promise(res => setTimeout(res, ms));
 }
 
-// =========================
-// START / STOP SYSTEM
-// =========================
+// ================= START / STOP =================
 function startSystem() {
   if (running) return;
+
   running = true;
+  timelineId++;
 
   initNodes();
   resetSystem();
 
   startRAF();
-  runTimeline();
+  runTimeline(timelineId);
 }
 
 function stopSystem() {
   running = false;
+  timelineId++;
 
   stopRAF();
   resetSystem();
 }
 
-// =========================
-// VISIBILITY CONTROL
-// =========================
+// ================= OBSERVER =================
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -202,6 +240,21 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.3 });
 
 observer.observe(hero);
+
+// ================= MICRO INTERACTIONS =================
+nodes.forEach(n => {
+  n.addEventListener("mouseenter", () => {
+    n.style.transform += " scale(1.1)";
+    n.querySelector(".node-inner").style.boxShadow = `
+      0 0 40px rgba(34,197,94,0.7),
+      0 0 80px rgba(59,130,246,0.5)
+    `;
+  });
+
+  n.addEventListener("mouseleave", () => {
+    n.style.transform = n.style.transform.replace(" scale(1.1)", "");
+  });
+});
 
   // ============================================================================================================================
   // 2. MOBILE HERO
