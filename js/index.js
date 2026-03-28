@@ -1495,6 +1495,11 @@ if (slider && wrapper && track) {
 // ==========================
 gsap.registerPlugin(ScrollTrigger);
 
+// 🔥 GLOBAL FIX (prevents weird scroll bugs)
+ScrollTrigger.config({
+  ignoreMobileResize: true
+});
+
 const steps = document.querySelectorAll('.eng-step');
 const visual = document.getElementById('engVisual');
 
@@ -1541,6 +1546,8 @@ if (steps.length && visual) {
   // COUNTER ANIMATION
   // ==========================
   function animateCounter(el, start, end, prefix = "", suffix = "") {
+    gsap.killTweensOf(el); // 🔥 prevents stacking
+
     gsap.to({ val: start }, {
       val: end,
       duration: 0.8,
@@ -1560,6 +1567,9 @@ if (steps.length && visual) {
   function updateVisual(index) {
     const data = stepData[index];
 
+    // 🔥 kill ALL previous animations (critical)
+    gsap.killTweensOf([revEl, denialEl, statusEl, bars]);
+
     // SAFE current values
     const currentRevenue =
       Number(revEl.textContent.replace(/\D/g, '')) || 0;
@@ -1571,28 +1581,31 @@ if (steps.length && visual) {
     animateCounter(revEl, currentRevenue, data.revenue, "$");
     animateCounter(denialEl, currentDenials, data.denials, "", "%");
 
-    // Status text (fade)
+    // Status text (clean fade)
     gsap.to(statusEl, {
       opacity: 0,
       duration: 0.2,
       onComplete: () => {
         statusEl.textContent = data.status;
-        gsap.to(statusEl, { opacity: 1, duration: 0.4 });
+        gsap.to(statusEl, { opacity: 1, duration: 0.3 });
       }
     });
 
-    // Bars animation
+    // 🔥 Bars reset + stagger animation (fix sync issue)
     bars.forEach((bar, i) => {
+      gsap.set(bar, { height: 0 });
+
       gsap.to(bar, {
         height: data.bars[i],
-        duration: 0.6,
+        duration: 0.5,
+        delay: i * 0.05,
         ease: "power2.out"
       });
     });
 
     // Pulse effect
     visual.classList.add('active');
-    setTimeout(() => visual.classList.remove('active'), 500);
+    setTimeout(() => visual.classList.remove('active'), 400);
   }
 
   // ==========================
@@ -1600,6 +1613,7 @@ if (steps.length && visual) {
   // ==========================
   function activateStep(index) {
     if (index === currentStep) return;
+
     currentStep = index;
 
     steps.forEach(s => s.classList.remove('active'));
@@ -1609,27 +1623,41 @@ if (steps.length && visual) {
   }
 
   // ==========================
-  // GSAP SCROLL STORY ENGINE
+  // GSAP SCROLL STORY ENGINE (FIXED)
   // ==========================
+  const totalSteps = steps.length;
+
   gsap.timeline({
     scrollTrigger: {
       trigger: ".engagement-gsap",
       start: "top top",
-      end: "+=3000",
+
+      // 🔥 responsive scroll distance
+      end: "+=" + (window.innerHeight * totalSteps),
+
       scrub: true,
       pin: true,
-      anticipatePin: 1
+      anticipatePin: 1,
+
+      // 🔥 SNAP = fixes sync issues completely
+      snap: {
+        snapTo: 1 / (totalSteps - 1),
+        duration: 0.3,
+        ease: "power1.inOut"
+      }
     }
   })
   .to({}, {
     duration: 1,
     onUpdate: function () {
+
       const progress = this.progress();
 
-      let stepIndex = Math.floor(progress * steps.length);
+      // 🔥 ROUND instead of FLOOR (critical fix)
+      let stepIndex = Math.round(progress * (totalSteps - 1));
 
-      if (stepIndex >= steps.length) {
-        stepIndex = steps.length - 1;
+      if (stepIndex >= totalSteps) {
+        stepIndex = totalSteps - 1;
       }
 
       activateStep(stepIndex);
@@ -1641,7 +1669,6 @@ if (steps.length && visual) {
   // ==========================
   activateStep(0);
 }
-  
 }); // DOM Close
 
 
