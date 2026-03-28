@@ -404,56 +404,66 @@
     <div class="belief-layout">
 
       <!-- LEFT: INTERACTIVE CARD -->
-    <div class="belief-visual">
-    <div class="system-card" id="systemCard">
-      <!-- HEADER -->
-      <div class="system-header">
-        Revenue System Status
-      </div>
-    <div class="system-body">
-      <!-- ERRORS -->
-      <div class="system-errors">
-        <div class="system-item error">
-          <span>Eligibility Not Verified</span>
-        </div>
-        <div class="system-item error">
-          <span>Authorization Missing</span>
-        </div>
-        <div class="system-item error">
-          <span>ICD-CPT Mismatch</span>
-        </div>
-        <div class="system-item error">
-          <span>Claim Denials</span>
-        </div>
+<div class="belief-visual">
+
+  <div class="rules-engine" id="rulesEngine">
+
+    <!-- HEADER -->
+    <div class="rules-header">
+      System Rules Engine
+    </div>
+
+    <!-- RULES LIST -->
+    <div class="rules-list">
+
+      <div class="rule active">
+        <span>01</span>
+        <p>Before Visit Validation</p>
       </div>
 
-      <!-- RESOLVED -->
-      <div class="system-resolved">
-        <div class="system-item success">
-          <span>Eligibility Verified</span>
-        </div>
-        <div class="system-item success">
-          <span>Authorization Approved</span>
-        </div>
-        <div class="system-item success">
-          <span>Codes Validated</span>
-        </div>
-        <div class="system-item success">
-          <span>Claims Paid</span>
-        </div>
+      <div class="rule">
+        <span>02</span>
+        <p>Coverage Alignment</p>
       </div>
-    </div>
-      
-      <!-- FOOTER -->
-      <div class="system-footer">
-        Click to fix system →
+
+      <div class="rule">
+        <span>03</span>
+        <p>Coding Intelligence</p>
       </div>
-      <!-- RESULT METRIC -->
-      <div class="system-metric">
-        +32% Revenue Recovery
+
+      <div class="rule">
+        <span>04</span>
+        <p>Claim Optimization</p>
       </div>
+
+      <div class="rule">
+        <span>05</span>
+        <p>Revenue Recovery Loop</p>
+      </div>
+
     </div>
+
+    <!-- VISUAL FLOW -->
+    <div class="rules-visual">
+
+      <div class="flow-line">
+        <div class="flow-progress" id="flowProgress"></div>
+      </div>
+
+      <div class="engine-core">
+        <i data-lucide="cpu"></i>
+        <span>PracticeGrid Engine</span>
+      </div>
+
+      <div class="rules-output" id="rulesOutput">
+        Data Verified
+      </div>
+
     </div>
+
+  </div>
+
+</div>
       
   <!-- RIGHT -->
   <div class="belief-content">
