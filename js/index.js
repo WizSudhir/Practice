@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
 // ============================================================================================================================
 // 1. DESKTOP HERO
 // ============================================================================================================================
-
   gsap.registerPlugin(ScrollTrigger);
 
   const hero = document.querySelector(".system-bg");
@@ -16,16 +15,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const styles = getComputedStyle(document.documentElement);
 
-  let width, height;
   let masterTL = null;
 
   const SIDE_PADDING = parseInt(styles.getPropertyValue('--space-lg'));
   const TOP_PADDING = parseInt(styles.getPropertyValue('--space-xxl'));
   const BOTTOM_PADDING = parseInt(styles.getPropertyValue('--space-lg'));
 
-  // =========================
-  // SETUP
-  // =========================
+  let width, height;
+
   function updateBounds() {
     width = hero.clientWidth;
     height = hero.clientHeight;
@@ -34,6 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
   updateBounds();
   window.addEventListener("resize", updateBounds);
 
+  // =========================
+  // SETUP NODES
+  // =========================
   function setupNodes() {
 
     nodes.forEach((n, i) => {
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
       gsap.set(n, {
         x: baseX,
         y: baseY,
-        z: gsap.utils.random(-20, 20),
+        z: gsap.utils.random(-20, 20)
       });
 
       n._baseX = baseX;
@@ -66,26 +66,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   }
 
-  setupNodes();
-
   // =========================
-  // FLOATING LOOP (CHAOS)
+  // FLOATING (CHAOS LOOP)
   // =========================
   function createFloating() {
 
     nodes.forEach(n => {
 
-      const floatX = gsap.utils.random(20, 60);
-      const floatY = gsap.utils.random(20, 60);
-      const duration = gsap.utils.random(3, 6);
-
       gsap.to(n, {
-        x: `+=${floatX}`,
-        y: `+=${floatY}`,
-        duration,
+        x: `+=${gsap.utils.random(20, 60)}`,
+        y: `+=${gsap.utils.random(20, 60)}`,
+        duration: gsap.utils.random(3, 6),
         ease: "sine.inOut",
         repeat: -1,
-        yoyo: true
+        yoyo: true,
+        overwrite: "auto"
       });
 
     });
@@ -93,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // =========================
-  // CONNECTION
+  // CONNECTION DRAW
   // =========================
   function drawConnection(node) {
 
@@ -132,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // =========================
-  // RESET
+  // RESET SYSTEM
   // =========================
   function resetSystem() {
 
@@ -144,6 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
     gsap.killTweensOf(nodes);
 
     hero.classList.remove("controlled");
+
     core.style.display = "none";
 
     resetConnections();
@@ -156,11 +152,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // =========================
-  // MASTER TIMELINE
+  // MAIN ANIMATION
   // =========================
   function startAnimation() {
 
-    resetSystem();
+    if (masterTL) return;
+
     setupNodes();
     createFloating();
 
@@ -169,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
       repeatDelay: 1
     });
 
-    // CHAOS DELAY
+    // CHAOS
     masterTL.to({}, { duration: 2 });
 
     // CONTROL PHASE
@@ -187,7 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
         duration: 0.8,
         ease: "power3.out",
         onStart: () => {
-          drawConnection(n);
+          requestAnimationFrame(() => drawConnection(n));
           n.classList.add("resolved-active");
         }
       }, i * 0.2);
@@ -197,7 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // HOLD
     masterTL.to({}, { duration: 2 });
 
-    // RESET PHASE
+    // LOOP RESET
     masterTL.add(() => {
       resetSystem();
       setupNodes();
@@ -211,27 +208,15 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================
   ScrollTrigger.create({
     trigger: hero,
-    start: "top 70%",
-    end: "bottom 30%",
+    start: "top top",
+    end: "bottom top",
 
-    onEnter: () => {
-      startAnimation();
-    },
+    onEnter: () => startAnimation(),
+    onEnterBack: () => startAnimation(),
 
-    onEnterBack: () => {
-      startAnimation();
-    },
-
-    onLeave: () => {
-      resetSystem();
-    },
-
-    onLeaveBack: () => {
-      resetSystem();
-    }
+    onLeave: () => resetSystem(),
+    onLeaveBack: () => resetSystem()
   });
-
-
   // ============================================================================================================================
   // 2. MOBILE HERO
   // ============================================================================================================================
