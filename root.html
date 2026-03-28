@@ -4,24 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PracticeGrid Design System</title>
+<title>PracticeGrid Root System</title>
 
-<link rel="stylesheet" href="css/root.css">
+<link rel="stylesheet" href="./css/root.css">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-
 <script defer src="https://unpkg.com/lucide@latest"></script>
 
 <style>
-/* DEMO ONLY */
+/* DEMO HELPERS (SAFE FOR PROD PREVIEW PAGE) */
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap: 20px;
+}
 .demo-box {
   padding: 20px;
-  border: 1px dashed rgba(255,255,255,0.1);
-  border-radius: 12px;
 }
-.grid-demo {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+.scroll-demo {
+  max-height: 120px;
+  overflow-y: auto;
+  padding: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
 }
 </style>
 
@@ -34,86 +37,140 @@ NAVBAR
 ========================================= -->
 <header class="navbar">
   <div class="container navbar-inner">
-    <div class="logo">
-      <strong>PracticeGrid</strong>
-    </div>
+    <div class="logo"><strong>PracticeGrid</strong></div>
+
     <nav class="nav-menu">
       <ul>
-        <li><a href="#">Home</a></li>
         <li><a href="#">System</a></li>
         <li><a href="#">Components</a></li>
-        <li><a href="#" class="btn-primary">Get Started</a></li>
+        <li><a href="#">Utilities</a></li>
+        <li><a class="btn-primary">CTA Button</a></li>
       </ul>
     </nav>
+
+    <button class="nav-toggle">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
 <!-- =========================================
-HERO (TYPOGRAPHY + BUTTONS)
+HERO / TYPOGRAPHY
 ========================================= -->
-<section class="section section-divider">
+<section class="section section-divider visible">
 <div class="container center">
 
-<h1 class="gradient">Enterprise SaaS Design System</h1>
+<h1 class="gradient">Root CSS Design System</h1>
 <p class="mt-md">
-A complete demonstration of the PracticeGrid root.css architecture.
+Complete enterprise SaaS UI system powered by design tokens.
 </p>
 
 <div class="mt-lg">
-  <a class="btn-primary">Primary Button</a>
-  <a class="btn-outline">Outline Button</a>
+  <a class="btn-primary">Primary</a>
+  <a class="btn-outline">Outline</a>
 </div>
 
 </div>
 </section>
 
 <!-- =========================================
-TYPOGRAPHY SYSTEM
+TYPOGRAPHY
 ========================================= -->
-<section class="section section-divider">
+<section class="section section-divider visible">
 <div class="container">
 
-<h2>Typography System</h2>
-
+<h2>Typography</h2>
 <div class="divider"></div>
 
 <h1>Heading 1</h1>
 <h2 class="mt-md">Heading 2</h2>
 <h3 class="mt-md">Heading 3</h3>
+<h4 class="mt-md">Heading 4</h4>
+
 <p class="mt-md">
-This is body text demonstrating readability and spacing in your SaaS design system.
+Body text demonstrates readability, spacing, and color hierarchy.
+</p>
+
+<p class="mt-md gradient-title">
+Gradient text system using brand tokens.
 </p>
 
 </div>
 </section>
 
 <!-- =========================================
-CARDS + GLASS SYSTEM
+LAYOUT + SPACING
 ========================================= -->
-<section class="section section-divider">
+<section class="section section-divider visible">
 <div class="container">
 
-<h2>Glass Card System</h2>
-
+<h2>Layout + Spacing System</h2>
 <div class="divider"></div>
 
-<div class="grid-demo">
+<div class="demo-grid">
 
-<div class="card demo-box">
-<h3>Standard Card</h3>
-<p class="mt-sm">Border + hover glow effect.</p>
+<div class="card demo-box">Card</div>
+<div class="card demo-box mt-sm">mt-sm</div>
+<div class="card demo-box mt-md">mt-md</div>
+<div class="card demo-box mt-lg">mt-lg</div>
+
 </div>
 
-<div class="glass demo-box">
-<h3>Glass Variant</h3>
-<p class="mt-sm">Same system with subtle hover elevation.</p>
 </div>
+</section>
 
-<div class="section-box demo-box">
-<h3>Section Box</h3>
-<p class="mt-sm">Reusable structural container.</p>
+<!-- =========================================
+SECTION VARIANTS
+========================================= -->
+<section class="section section-tight section-divider visible">
+<div class="container">
+<h2>Section Tight</h2>
+<p>Reduced spacing section</p>
 </div>
+</section>
 
+<section class="section section-loose section-divider visible">
+<div class="container">
+<h2>Section Loose</h2>
+<p>Expanded spacing section</p>
+</div>
+</section>
+
+<section class="section section-divider visible">
+<div class="container section-frame section-glow">
+<h2>Section Frame + Glow</h2>
+<p>Premium bordered glowing section</p>
+</div>
+</section>
+
+<!-- =========================================
+BUTTON SYSTEM
+========================================= -->
+<section class="section section-divider visible">
+<div class="container">
+
+<h2>Buttons</h2>
+<div class="divider"></div>
+
+<a class="btn-primary">Primary Button</a>
+<a class="btn-outline mt-md">Outline Button</a>
+
+</div>
+</section>
+
+<!-- =========================================
+CARDS / GLASS SYSTEM
+========================================= -->
+<section class="section section-divider visible">
+<div class="container">
+
+<h2>Glass / Card System</h2>
+<div class="divider"></div>
+
+<div class="demo-grid">
+<div class="card demo-box">Card</div>
+<div class="glass demo-box">Glass</div>
+<div class="section-box demo-box">Section Box</div>
 </div>
 
 </div>
@@ -122,17 +179,30 @@ CARDS + GLASS SYSTEM
 <!-- =========================================
 FORM SYSTEM
 ========================================= -->
-<section class="section section-divider">
+<section class="section section-divider visible">
 <div class="container">
 
 <h2>Input System</h2>
-
 <div class="divider"></div>
 
-<div class="demo-box">
-<input type="text" placeholder="Enter your name">
-<textarea class="mt-md" placeholder="Your message"></textarea>
+<input type="text" placeholder="Input field">
+<textarea class="mt-md" placeholder="Textarea"></textarea>
+
 </div>
+</section>
+
+<!-- =========================================
+ICON SYSTEM
+========================================= -->
+<section class="section section-divider visible">
+<div class="container">
+
+<h2>Icon System</h2>
+<div class="divider"></div>
+
+<i data-lucide="activity" class="icon"></i>
+<i data-lucide="cpu" class="icon"></i>
+<i data-lucide="shield-check" class="icon"></i>
 
 </div>
 </section>
@@ -140,51 +210,37 @@ FORM SYSTEM
 <!-- =========================================
 IMAGE SYSTEM
 ========================================= -->
-<section class="section section-divider">
+<section class="section section-divider visible">
 <div class="container">
 
-<h2>Image Glow System</h2>
-
+<h2>Image System</h2>
 <div class="divider"></div>
 
 <div class="img-glow" style="max-width:400px;">
-<img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71" />
+<img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71">
 </div>
 
 </div>
 </section>
 
 <!-- =========================================
-UTILITY SPACING SYSTEM
+SCROLLBAR DEMO
 ========================================= -->
-<section class="section section-divider">
+<section class="section section-divider visible">
 <div class="container">
 
-<h2>Spacing Utilities</h2>
-
+<h2>Scrollbar System</h2>
 <div class="divider"></div>
 
-<div class="demo-box mt-lg">mt-lg applied</div>
-<div class="demo-box mt-md">mt-md applied</div>
-<div class="demo-box mt-sm">mt-sm applied</div>
-
-</div>
-</section>
-
-<!-- =========================================
-SECTION GLOW + FRAME
-========================================= -->
-<section class="section section-divider">
-<div class="container">
-
-<h2>Section Glow + Frame</h2>
-
-<div class="divider"></div>
-
-<div class="section-frame section-glow">
-<p>
-This demonstrates your premium SaaS glow border system.
-</p>
+<div class="scroll-demo">
+<p>Scroll content</p>
+<p>Scroll content</p>
+<p>Scroll content</p>
+<p>Scroll content</p>
+<p>Scroll content</p>
+<p>Scroll content</p>
+<p>Scroll content</p>
+<p>Scroll content</p>
 </div>
 
 </div>
@@ -209,9 +265,7 @@ FOOTER
     </div>
 
     <div class="footer-contact">
-      <a href="#" class="footer-contact-item">
-        Contact Support
-      </a>
+      <a href="#" class="footer-contact-item">Contact Us</a>
     </div>
 
     <div class="footer-hipaa">
@@ -222,9 +276,21 @@ FOOTER
   </div>
 
   <div class="footer-bottom">
-    © PracticeGrid Design System
+    © PracticeGrid System
   </div>
 </footer>
+
+<!-- =========================================
+SCRIPT FIXES
+========================================= -->
+<script>
+lucide.createIcons();
+
+// ensure sections visible (production safe fallback)
+document.querySelectorAll('.section').forEach(el=>{
+  el.classList.add('visible');
+});
+</script>
 
 </body>
 </html>
