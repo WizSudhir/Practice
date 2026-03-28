@@ -553,6 +553,49 @@ if (systemCard) {
   });
 
 })();
+// ===============================
+  // MICRO INTERACTIONS (APPLE LEVEL)
+// ===============================
+(function(){
+
+  const engine = document.getElementById("rulesEngine");
+  if (!engine) return;
+
+  const glow = document.getElementById("cursorGlow");
+  const tooltip = document.getElementById("ruleTooltip");
+  const core = engine.querySelector(".engine-core");
+  const rules = engine.querySelectorAll(".rule");
+
+  // CURSOR GLOW
+  engine.addEventListener("mousemove", (e) => {
+    const rect = engine.getBoundingClientRect();
+    glow.style.left = (e.clientX - rect.left) + "px";
+    glow.style.top = (e.clientY - rect.top) + "px";
+  });
+
+  // TOOLTIP + PULSE
+  rules.forEach(rule => {
+
+    rule.addEventListener("mouseenter", () => {
+      tooltip.textContent = rule.dataset.detail;
+      tooltip.classList.add("active");
+
+      core.classList.add("pulse");
+      setTimeout(() => core.classList.remove("pulse"), 600);
+    });
+
+    rule.addEventListener("mousemove", (e) => {
+      tooltip.style.left = e.clientX + 14 + "px";
+      tooltip.style.top = e.clientY + 14 + "px";
+    });
+
+    rule.addEventListener("mouseleave", () => {
+      tooltip.classList.remove("active");
+    });
+
+  });
+
+})();
 // ============================================================================================================================
 // 4. PROOF SNAPSHOT
 // ============================================================================================================================
