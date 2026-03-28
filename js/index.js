@@ -39,8 +39,8 @@ document.addEventListener("DOMContentLoaded", () => {
   NODE_H = size.h;
   });
   const SIDE_PADDING = 40;
-  const TOP_PADDING = 60;
-  const BOTTOM_PADDING = 120;
+  const TOP_PADDING = 120;
+  const BOTTOM_PADDING = 80;
   let width, height;
   let controlled = false;
   let frozen = false;
