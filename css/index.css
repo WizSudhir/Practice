@@ -293,20 +293,6 @@ z-index: 2;
   padding: 0 20px;
   z-index: 3;
 }
-.hero-content h1 {
-  line-height: 1.15;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  max-width: 780px;
-  margin: 0 auto;
-  background: linear-gradient(90deg, #fff, #c4b5fd, #93c5fd);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
 .hero-content p {
   max-width: 750px;
   margin: 10px auto 0;
@@ -331,6 +317,9 @@ z-index: 2;
   transform: translateX(-50%);
   text-align: center;
   max-width: calc(var(--container) * 0.7);
+}
+.hero-top h1 {
+  max-width: 900px;
 }
 /* BOTTOM CONTENT */
 .hero-bottom {
