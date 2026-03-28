@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
     n.angle = Math.random() * Math.PI * 2;
     n.speed = 0.002 + Math.random() * 0.002;
     n.floatX = Math.max(10, zoneW / 2 - NODE_W / 2 - 6);
-    n.floatY = Math.max(10, zoneH / 2 - NODE_H / 2 - 6);
+    n.floatY = Math.max(10, zoneH / 2 - NODE_H / 2 - 12);
     n.z = (Math.random() - 0.5) * 40;
     n.x = n.baseX;
     n.y = n.baseY;
@@ -279,6 +279,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const bars = document.querySelectorAll(".mobile-chart .bar");
   const metrics = document.querySelectorAll(".mobile-metrics .metric");
   const connection = document.querySelector(".mobile-connection");
+  const revenue = document.querySelector(".mobile-revenue");
   if (!node || !core || !revenue) return;
   let timeouts = [];
   let observer;
