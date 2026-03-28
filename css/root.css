@@ -84,19 +84,13 @@ body::after {
   bottom: 0;
   height: 100vh;
   width: 1px;
-  background: linear-gradient(
-    to bottom,
-    rgba(255,255,255,0.12),
-    rgba(255,255,255,0.04),
-    rgba(255,255,255,0.12)
-  );
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,0.06),
-    0 0 12px rgba(99,102,241,0.15);
+  background: rgba(255,255,255,0.08);
+  box-shadow: none;
   pointer-events: none;
   mix-blend-mode: screen;
   z-index: 0;
-  opacity: 0.9;
+  opacity: 0.5;
+  transform: translateZ(0);
 }
 body::before {
   left: var(--grid-offset);
@@ -144,7 +138,7 @@ h2.gradient {
 .container {
   max-width: var(--container);
   margin: auto;
-  padding: 0;
+  padding: 0 10px;
 }
 .divider {
   height: 1px;
@@ -272,6 +266,48 @@ a:hover {
 }
 .btn-primary:hover::after {
   opacity: 1;
+}
+.btn-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.arrow {
+  position: relative;
+  width: 18px;
+  height: 10px;
+}
+/* line */
+.arrow .line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 12px;
+  height: 2px;
+  background: #fff;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+}
+/* arrow head */
+.arrow .tip {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-top: 2px solid #fff;
+  border-right: 2px solid #fff;
+  transform: translateY(-50%) rotate(45deg);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+/* HOVER */
+.btn-arrow:hover .line {
+  width: 16px;
+}
+.btn-arrow:hover .tip {
+  opacity: 1;
+  transform: translateY(-50%) rotate(45deg);
 }
 /* OUTLINE */
 .btn-outline {
