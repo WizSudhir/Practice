@@ -180,9 +180,6 @@ h2.gradient {
     transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
     border-color 0.3s ease;
 }
-.section-frame:hover {
-  transform: scale(1.015);
-}
 .section-glow {
   position: relative;
   z-index: 1;
