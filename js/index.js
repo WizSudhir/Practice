@@ -1490,25 +1490,42 @@ if (slider && wrapper && track) {
 // ============================================================================================================================
 // 8. ENGAGEMENT MODEL
 // ============================================================================================================================
-// Engagement animation (progress reveal)
+gsap.registerPlugin(ScrollTrigger);
+
 const steps = document.querySelectorAll('.eng-step');
+const visuals = document.querySelectorAll('.visual-stage');
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.opacity = 1;
-      entry.target.style.transform = 'translateY(0)';
-    }
-  });
-}, { threshold: 0.2 });
-
-steps.forEach(step => {
-  step.style.opacity = 0;
-  step.style.transform = 'translateY(30px)';
-  step.style.transition = 'all 0.6s ease';
-  observer.observe(step);
+gsap.to(".eng-wrapper", {
+  scrollTrigger: {
+    trigger: ".engagement-gsap",
+    start: "top top",
+    end: "+=2000",
+    scrub: true,
+    pin: true
+  }
 });
 
+// Step activation timeline
+steps.forEach((step, i) => {
+
+  ScrollTrigger.create({
+    trigger: step,
+    start: "top center",
+    end: "bottom center",
+
+    onEnter: () => activateStep(i),
+    onEnterBack: () => activateStep(i)
+  });
+
+});
+
+function activateStep(index) {
+  steps.forEach(s => s.classList.remove('active'));
+  visuals.forEach(v => v.classList.remove('active'));
+
+  steps[index].classList.add('active');
+  visuals[index].classList.add('active');
+}
   
 }); // DOM Close
 
