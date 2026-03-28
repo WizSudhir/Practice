@@ -143,7 +143,7 @@ h2.gradient {
 .divider {
   height: 1px;
   background: var(--border-subtle);
-  margin: var(--space-lg) 0;
+  margin: var(--space-sm) 0;
 }
 .section-grid {
   position: relative;
@@ -159,26 +159,6 @@ h2.gradient {
 .section.visible {
   opacity: 1;
   transform: translateY(0);
-}
-.section-divider {
-  position: relative;
-}
-.section-divider::after {
-  content: "";
-  position: absolute;
-  left: var(--grid-offset);
-  right: var(--grid-offset);
-  bottom: 0;
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    rgba(255,255,255,0.2),
-    rgba(99,102,241,0.3),
-    rgba(255,255,255,0.2),
-    transparent
-  );
-  box-shadow: 0 0 12px rgba(99,102,241,0.2);
 }
 .section-tight {
   padding: var(--space-lg) 0;
