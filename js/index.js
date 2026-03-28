@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const svg = document.getElementById("connections");
   const PHASE_DELAY = 3000;
   let isResetting = false;
+  let animationRunning = false;
   const styles = getComputedStyle(document.documentElement);
   const isMobile = window.innerWidth < 768;
   if (isMobile) {
@@ -59,7 +60,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function resetSystem() {
     isResetting = true;
     clearAllTimeouts();
-    timelineRunning = false;
     controlled = false;
     frozen = false;
     hero.classList.remove("controlled");
@@ -239,6 +239,9 @@ document.addEventListener("DOMContentLoaded", () => {
   startTimeline();
   // ANIMATION LOOP //
   function animate() {
+    if (animationRunning) return;
+    animationRunning = true;
+    function loop() {
     nodes.forEach(n => {
       if (!controlled) {
         n.angle += n.speed;
@@ -284,21 +287,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     requestAnimationFrame(animate);
   }
-  animate();
+  loop();
+  }
   // 👁️ VISIBILITY CONTROL (DESKTOP HERO)
   let heroObserver;
   let isHeroVisible = false;
   heroObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-      if (!isHeroVisible) {
-        isHeroVisible = true;
-        if (!timelineRunning) {
+        if (!isHeroVisible) {
+          isHeroVisible = true;
           resetSystem();
           startTimeline();
-        }
-      }
-    } else {
+          animate(); // 🔥 ADD THIS LINE
+          }
+        } else {
         isHeroVisible = false;
         // 🔥 stop animation safely
         controlled = true;
