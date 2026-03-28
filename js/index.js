@@ -1,14 +1,11 @@
-document.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("load", () => {
 
+  if (window.lucide) {
   lucide.createIcons();
+}
 // ============================================================================================================================
 // 1. DESKTOP HERO
 // ============================================================================================================================
-// ============================================================================================================================
-// 1. DESKTOP HERO (FINAL PRODUCTION FIX)
-// ============================================================================================================================
-window.addEventListener("load", () => {
-
   const hero = document.querySelector(".system-bg");
   const nodes = document.querySelectorAll(".node");
   const core = document.querySelector(".core");
@@ -60,7 +57,7 @@ window.addEventListener("load", () => {
     const size = getNodeSize();
     NODE_W = size.w;
     NODE_H = size.h;
-    updateBounds();
+    setTimeout(updateBounds, 50);
   });
 
   const SIDE_PADDING = parseInt(styles.getPropertyValue('--space-lg'));
@@ -363,21 +360,18 @@ window.addEventListener("load", () => {
     loop();
   }
 
-  startTimeline();
   animate();
+setTimeout(startTimeline, 300);
 
   const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) {
-        clearAllTimeouts();
-        resetConnections();
-      }
-    });
-  }, { threshold: 0.3 });
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      startTimeline();
+    }
+  });
+}, { threshold: 0.3 });
 
-  observer.observe(hero);
-
-});
+observer.observe(hero);
 
   // ============================================================================================================================
   // 2. MOBILE HERO
