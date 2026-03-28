@@ -4,48 +4,28 @@ document.addEventListener("DOMContentLoaded", () => {
 // ============================================================================================================================
 // 1. DESKTOP HERO
 // ============================================================================================================================
+
+  gsap.registerPlugin(ScrollTrigger);
+
   const hero = document.querySelector(".system-bg");
   const nodes = document.querySelectorAll(".node");
   const core = document.querySelector(".core");
   const svg = document.getElementById("connections");
 
-  if (!hero || !core) return;
+  if (!hero || !nodes.length || !core) return;
 
   const styles = getComputedStyle(document.documentElement);
 
   let width, height;
-  let rafId = null;
-  let timeouts = [];
+  let masterTL = null;
 
-  let animationRunning = false;
-  let timelineRunning = false;
-  let controlled = false;
-  let frozen = false;
+  const SIDE_PADDING = parseInt(styles.getPropertyValue('--space-lg'));
+  const TOP_PADDING = parseInt(styles.getPropertyValue('--space-xxl'));
+  const BOTTOM_PADDING = parseInt(styles.getPropertyValue('--space-lg'));
 
-  const PHASE_DELAY = 3000;
-
-  function clearAllTimeouts() {
-    timeouts.forEach(t => clearTimeout(t));
-    timeouts = [];
-  }
-
-  function stopAnimation() {
-    if (rafId) cancelAnimationFrame(rafId);
-    rafId = null;
-    animationRunning = false;
-  }
-
-  function resetConnections() {
-    svg.innerHTML = `
-      <defs>
-        <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#22c55e"/>
-          <stop offset="100%" stop-color="#3b82f6"/>
-        </linearGradient>
-      </defs>
-    `;
-  }
-
+  // =========================
+  // SETUP
+  // =========================
   function updateBounds() {
     width = hero.clientWidth;
     height = hero.clientHeight;
@@ -54,31 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
   updateBounds();
   window.addEventListener("resize", updateBounds);
 
-  const SIDE_PADDING = parseInt(styles.getPropertyValue('--space-lg'));
-  const TOP_PADDING = parseInt(styles.getPropertyValue('--space-xxl'));
-  const BOTTOM_PADDING = parseInt(styles.getPropertyValue('--space-lg'));
-
-  function getNodeSize() {
-    const w = window.innerWidth;
-    if (w < 1200) return { w: 110, h: 80 };
-    return {
-      w: parseInt(styles.getPropertyValue('--space-xl')) * 1.75,
-      h: parseInt(styles.getPropertyValue('--space-lg')) * 2.5
-    };
-  }
-
-  let { w: NODE_W, h: NODE_H } = getNodeSize();
-
-  window.addEventListener("resize", () => {
-    const size = getNodeSize();
-    NODE_W = size.w;
-    NODE_H = size.h;
-  });
-
-  // =========================
-  // INITIAL NODE SETUP
-  // =========================
   function setupNodes() {
+
     nodes.forEach((n, i) => {
 
       const cols = 4;
@@ -93,54 +50,50 @@ document.addEventListener("DOMContentLoaded", () => {
       const col = i % cols;
       const row = Math.floor(i / cols);
 
-      n.baseX = -width / 2 + SIDE_PADDING + zoneW * (col + 0.5);
-      n.baseY = -height / 2 + TOP_PADDING + zoneH * (row + 0.5);
+      const baseX = -width / 2 + SIDE_PADDING + zoneW * (col + 0.5);
+      const baseY = -height / 2 + TOP_PADDING + zoneH * (row + 0.5);
 
-      n.angle = Math.random() * Math.PI * 2;
-      n.speed = 0.002 + Math.random() * 0.002;
+      gsap.set(n, {
+        x: baseX,
+        y: baseY,
+        z: gsap.utils.random(-20, 20),
+      });
 
-      n.floatX = Math.max(10, zoneW / 2 - NODE_W / 2 - 6);
-      n.floatY = Math.max(10, zoneH / 2 - NODE_H / 2 - 13);
+      n._baseX = baseX;
+      n._baseY = baseY;
 
-      n.z = (Math.random() - 0.5) * 40;
-
-      n.x = n.baseX;
-      n.y = n.baseY;
     });
+
   }
 
   setupNodes();
 
   // =========================
-  // RESET SYSTEM
+  // FLOATING LOOP (CHAOS)
   // =========================
-  function resetSystem() {
-
-    clearAllTimeouts();
-    stopAnimation();
-
-    controlled = false;
-    frozen = false;
-    timelineRunning = false;
-
-    hero.classList.remove("controlled");
-
-    core.style.display = "none";
-
-    resetConnections();
+  function createFloating() {
 
     nodes.forEach(n => {
-      n.classList.remove("resolved-active");
-      n.style.opacity = "";
-      n.querySelector(".node-inner").style.boxShadow = "";
 
-      n.x = n.baseX;
-      n.y = n.baseY;
+      const floatX = gsap.utils.random(20, 60);
+      const floatY = gsap.utils.random(20, 60);
+      const duration = gsap.utils.random(3, 6);
+
+      gsap.to(n, {
+        x: `+=${floatX}`,
+        y: `+=${floatY}`,
+        duration,
+        ease: "sine.inOut",
+        repeat: -1,
+        yoyo: true
+      });
+
     });
+
   }
 
   // =========================
-  // CONNECTION DRAW
+  // CONNECTION
   // =========================
   function drawConnection(node) {
 
@@ -148,21 +101,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const nodeRect = node.querySelector(".node-inner").getBoundingClientRect();
     const svgRect = svg.getBoundingClientRect();
 
-    const coreCenter = {
-      x: coreRect.left + coreRect.width / 2,
-      y: coreRect.top + coreRect.height / 2
-    };
+    const startX = coreRect.left + coreRect.width / 2 - svgRect.left;
+    const startY = coreRect.top + coreRect.height / 2 - svgRect.top;
 
-    const nodeCenter = {
-      x: nodeRect.left + nodeRect.width / 2,
-      y: nodeRect.top + nodeRect.height / 2
-    };
-
-    const startX = coreCenter.x - svgRect.left;
-    const startY = coreCenter.y - svgRect.top;
-
-    const endX = nodeCenter.x - svgRect.left;
-    const endY = nodeCenter.y - svgRect.top;
+    const endX = nodeRect.left + nodeRect.width / 2 - svgRect.left;
+    const endY = nodeRect.top + nodeRect.height / 2 - svgRect.top;
 
     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
 
@@ -171,104 +114,123 @@ document.addEventListener("DOMContentLoaded", () => {
 
     svg.appendChild(path);
 
-    requestAnimationFrame(() => path.classList.add("active"));
+    gsap.fromTo(path,
+      { strokeDashoffset: 300 },
+      { strokeDashoffset: 0, duration: 0.8, ease: "power2.out" }
+    );
+  }
+
+  function resetConnections() {
+    svg.innerHTML = `
+      <defs>
+        <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#22c55e"/>
+          <stop offset="100%" stop-color="#3b82f6"/>
+        </linearGradient>
+      </defs>
+    `;
   }
 
   // =========================
-  // TIMELINE
+  // RESET
   // =========================
-  function startTimeline() {
+  function resetSystem() {
 
-    if (timelineRunning) return;
-    timelineRunning = true;
+    if (masterTL) {
+      masterTL.kill();
+      masterTL = null;
+    }
 
-    timeouts.push(setTimeout(() => {
+    gsap.killTweensOf(nodes);
 
-      hero.classList.add("controlled");
-      core.style.display = "flex";
+    hero.classList.remove("controlled");
+    core.style.display = "none";
 
-      controlled = true;
+    resetConnections();
 
-      nodes.forEach((n, i) => {
+    nodes.forEach(n => {
+      n.classList.remove("resolved-active");
+      gsap.set(n, { x: n._baseX, y: n._baseY });
+    });
 
-        timeouts.push(setTimeout(() => {
-
-          drawConnection(n);
-
-          n.classList.add("resolved-active");
-
-        }, i * 500));
-
-      });
-
-      // LOOP RESET
-      timeouts.push(setTimeout(() => {
-        resetSystem();
-        startTimeline();
-        startAnimation();
-      }, nodes.length * 800 + 2500));
-
-    }, 2000 + PHASE_DELAY));
   }
 
   // =========================
-  // ANIMATION LOOP
+  // MASTER TIMELINE
   // =========================
   function startAnimation() {
 
-    if (animationRunning) return;
-    animationRunning = true;
+    resetSystem();
+    setupNodes();
+    createFloating();
 
-    function loop() {
+    masterTL = gsap.timeline({
+      repeat: -1,
+      repeatDelay: 1
+    });
 
-      nodes.forEach(n => {
+    // CHAOS DELAY
+    masterTL.to({}, { duration: 2 });
 
-        if (!controlled) {
-          n.angle += n.speed;
-          n.x = n.baseX + Math.cos(n.angle) * n.floatX;
-          n.y = n.baseY + Math.sin(n.angle) * n.floatY;
+    // CONTROL PHASE
+    masterTL.add(() => {
+      hero.classList.add("controlled");
+      core.style.display = "flex";
+    });
+
+    // NODES RESOLVE
+    nodes.forEach((n, i) => {
+
+      masterTL.to(n, {
+        x: n._baseX,
+        y: n._baseY,
+        duration: 0.8,
+        ease: "power3.out",
+        onStart: () => {
+          drawConnection(n);
+          n.classList.add("resolved-active");
         }
-
-        const scale = 1 + n.z / 300;
-
-        n.style.transform = `
-          translate3d(${n.x}px, ${n.y}px, ${n.z}px)
-          translate(-50%, -50%)
-          scale(${scale})
-        `;
-      });
-
-      rafId = requestAnimationFrame(loop);
-    }
-
-    loop();
-  }
-
-  // =========================
-  // INTERSECTION OBSERVER
-  // =========================
-  const observer = new IntersectionObserver(entries => {
-
-    entries.forEach(entry => {
-
-      if (entry.isIntersecting) {
-
-        resetSystem();
-        setupNodes();
-        startTimeline();
-        startAnimation();
-
-      } else {
-
-        resetSystem();
-
-      }
+      }, i * 0.2);
 
     });
 
-  }, { threshold: 0.3 });
+    // HOLD
+    masterTL.to({}, { duration: 2 });
 
-  observer.observe(hero);
+    // RESET PHASE
+    masterTL.add(() => {
+      resetSystem();
+      setupNodes();
+      createFloating();
+    });
+
+  }
+
+  // =========================
+  // SCROLL CONTROL
+  // =========================
+  ScrollTrigger.create({
+    trigger: hero,
+    start: "top 70%",
+    end: "bottom 30%",
+
+    onEnter: () => {
+      startAnimation();
+    },
+
+    onEnterBack: () => {
+      startAnimation();
+    },
+
+    onLeave: () => {
+      resetSystem();
+    },
+
+    onLeaveBack: () => {
+      resetSystem();
+    }
+  });
+
 
   // ============================================================================================================================
   // 2. MOBILE HERO
