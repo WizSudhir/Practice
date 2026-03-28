@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!hero || !core) {
   console.warn("Hero not found — skipping hero only");
   } else {
+  let timelineStarted = false;
   function getNodeSize() {
   const w = window.innerWidth;
   if (w < 768) return { w: 0, h: 0 }; // disabled
@@ -61,6 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // 🔁 FULL RESET FOR LOOP //
   function resetSystem() {
     clearTimeline();
+    timelineStarted = false;
     controlled = false;
     frozen = false;
     isRunning = false;
@@ -103,6 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   // CONNECTION SYSTEM //
   function drawConnection(node) {
+    if (svg.childElementCount > 50) return;
     const coreRect = core.getBoundingClientRect();
     const nodeInner = node.querySelector(".node-inner");
     const nodeRect = nodeInner.getBoundingClientRect();
@@ -159,18 +162,16 @@ document.addEventListener("DOMContentLoaded", () => {
     return path;
   }
     function resetConnections() {
-        while (svg.firstChild) {
-          svg.removeChild(svg.firstChild);
-        }
-        const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
-        defs.innerHTML = `
-            <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#22c55e"/>
-            <stop offset="100%" stop-color="#3b82f6"/>
-            </linearGradient>
-        `;
-        svg.appendChild(defs);
-      }
+      svg.innerHTML = ""; // 🔥 hard clear EVERYTHING
+      const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+      defs.innerHTML = `
+        <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#22c55e"/>
+          <stop offset="100%" stop-color="#3b82f6"/>
+        </linearGradient>
+      `;
+      svg.appendChild(defs);
+    }
   window.addEventListener("resize", resetConnections);
     
   // STABILITY DETECTION //
@@ -179,9 +180,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   // CONTROL TIMELINE (EXTRACTED) //
   function startTimeline() {
+    if (timelineStarted) return;   // 🔥 HARD LOCK
+    timelineStarted = true;
     if (isRunning) return;
     isRunning = true;
-timelineTimeouts.push(setTimeout(() => {
+    timelineTimeouts.push(setTimeout(() => {
 
   waitForStabilization(() => {
     setTimeout(() => {
@@ -230,10 +233,6 @@ timelineTimeouts.push(setTimeout(() => {
       controlled = true;
       hero.classList.add("controlled");
       }, 1000 + PHASE_DELAY));
-    timelineTimeouts.push(setTimeout(() => {
-    resetSystem();
-    startTimeline();
-  }, 9000 + PHASE_DELAY));
   }
   // ANIMATION LOOP //
   function animate() {
@@ -302,7 +301,19 @@ timelineTimeouts.push(setTimeout(() => {
           });
         }, { threshold: 0.2 });
   observer.observe(hero);
-  
+  // 🔥 TAB VISIBILITY FIX (PREVENT TIMER BURST)
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      // user switched tab → stop everything
+      clearTimeline();
+    } else {
+      // user came back → clean restart
+      resetSystem();
+      setTimeout(() => {
+        startTimeline();
+      }, 300);
+    }
+  });
     
   animate();
 
