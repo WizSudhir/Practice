@@ -351,7 +351,7 @@ z-index: 2;
 }
 /* RESOLVED LABELS */
 .resolved {
-  color: var(--primary);
+   color: #22c55e;
   font-size: 9px;
   display: flex;
   align-items: center;
