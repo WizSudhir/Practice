@@ -1669,6 +1669,63 @@ if (steps.length && visual) {
   // ==========================
   activateStep(0);
 }
+// ============================================================================================================================
+// 9. FINAL CTA
+// ============================================================================================================================
+// ==========================
+// CTA LIVE SYSTEM TEXT
+// ==========================
+const ctaTexts = [
+  "Analyzing revenue systems...",
+  "Detecting claim inefficiencies...",
+  "Reducing denial patterns...",
+  "Optimizing collections flow..."
+];
+
+const ctaLiveEl = document.getElementById("ctaLiveText");
+
+if (ctaLiveEl) {
+  let index = 0;
+
+  setInterval(() => {
+    index = (index + 1) % ctaTexts.length;
+
+    // fade out
+    ctaLiveEl.style.opacity = 0;
+
+    setTimeout(() => {
+      ctaLiveEl.textContent = ctaTexts[index];
+      ctaLiveEl.style.opacity = 1;
+    }, 300);
+
+  }, 2500);
+}
+
+// ==========================
+// CTA ENTRANCE ANIMATION
+// ==========================
+const ctaSection = document.querySelector('.final-cta-pro');
+
+if (ctaSection) {
+  const observer = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+
+      gsap.from('.cta-content > *', {
+        opacity: 0,
+        y: 20,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power2.out"
+      });
+
+      observer.disconnect();
+    }
+  }, { threshold: 0.4 });
+
+  observer.observe(ctaSection);
+}
+
+  
 }); // DOM Close
 
 
