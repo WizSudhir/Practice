@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
   NODE_H = size.h;
   });
   const SIDE_PADDING = parseInt(styles.getPropertyValue('--space-lg'));
-  const TOP_PADDING = parseInt(styles.getPropertyValue('--space-xl'));
+  const TOP_PADDING = parseInt(styles.getPropertyValue('--space-xxl'));
   const BOTTOM_PADDING = parseInt(styles.getPropertyValue('--space-lg'));
   let width, height;
   let controlled = false;
@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
     n.angle = Math.random() * Math.PI * 2;
     n.speed = 0.002 + Math.random() * 0.002;
     n.floatX = Math.max(10, zoneW / 2 - NODE_W / 2 - 6);
-    n.floatY = Math.max(10, zoneH / 2 - NODE_H / 2 - 12);
+    n.floatY = Math.max(10, zoneH / 2 - NODE_H / 2 - 13);
     n.z = (Math.random() - 0.5) * 40;
     n.x = n.baseX;
     n.y = n.baseY;
