@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.error("Mobile hero error:", e);
     }
   }
-  if (!hero || !core || !revenue) {
+  if (!hero || !core) {
   console.warn("Hero not found — skipping hero only");
   } else {
   function getNodeSize() {
@@ -42,7 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let controlled = false;
   let frozen = false;
   // 🔥 REVENUE STATE
-  let revenueProgress = 0;
 
   function updateBounds() {
     width = hero.clientWidth;
@@ -57,19 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
     revenueProgress = 0;
     hero.classList.remove("controlled");
     core.style.display = "none";
-    revenue.classList.remove("active");
     resetConnections();
-    // reset bars
-    document.querySelectorAll(".bar").forEach(bar => {
-      bar.style.height = "0px";
-      bar.style.transform = "scaleY(1)";
-    });
-    // reset line
-    const line = document.querySelector(".line-path");
-    if (line) {
-      line.style.strokeDasharray = "0";
-      line.style.strokeDashoffset = "0";
-    }
     // reset nodes
     nodes.forEach(n => {
       n.classList.remove("resolved-active");
@@ -216,9 +203,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 path.getBoundingClientRect();
                 path.classList.add("active");
                 setTimeout(() => {
-                  incrementRevenue();
-                }, 420);
-                setTimeout(() => {
                   n.classList.add("resolved-active");
                   n.querySelector(".node-inner").style.boxShadow = `
                     0 0 25px rgba(34,197,94,0.7),
@@ -292,7 +276,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function runMobileHero() {
   const node = document.getElementById("mobileNode");
   const core = document.getElementById("mobileCore");
-  const revenue = document.querySelector(".mobile-revenue");
   const bars = document.querySelectorAll(".mobile-chart .bar");
   const metrics = document.querySelectorAll(".mobile-metrics .metric");
   const connection = document.querySelector(".mobile-connection");
@@ -357,7 +340,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }, baseTime + 1200));
     // STEP 3 — Revenue
     timeouts.push(setTimeout(() => {
-      revenue.style.opacity = 1;
     }, baseTime + 2000));
     // STEP 4 — Replace + animate
     items.forEach((item, i) => {
