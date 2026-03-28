@@ -8,14 +8,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const nodes = document.querySelectorAll(".node");
   const core = document.querySelector(".core");
   const svg = document.getElementById("connections");
+  if (!svg) {
+    console.warn("SVG connections missing");
+    return;
+  }
   const PHASE_DELAY = 3000;
   let isResetting = false;
   let animationRunning = false;
   const styles = getComputedStyle(document.documentElement);
-  const isMobile = window.innerWidth < 768;
+  const isMobile = window.matchMedia("(max-width: 768px)").matches;
   if (isMobile) {
     try {
       runMobileHero();
+      return;
     } catch (e) {
     console.error("Mobile hero error:", e);
     }
@@ -54,8 +59,9 @@ document.addEventListener("DOMContentLoaded", () => {
     width = hero.clientWidth;
     height = hero.clientHeight;
   }
-  updateBounds();
+  setTimeout(updateBounds, 100);
   window.addEventListener("resize", updateBounds);
+  window.addEventListener("load", updateBounds);
   // 🔁 FULL RESET FOR LOOP //
   function resetSystem() {
     isResetting = true;
@@ -240,7 +246,6 @@ document.addEventListener("DOMContentLoaded", () => {
   animate();
   // ANIMATION LOOP //
   function animate() {
-    if (animationRunning) return;
     animationRunning = true;
     function loop() {
     nodes.forEach(n => {
@@ -308,11 +313,6 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         } else {
         isHeroVisible = false;
-        // 🔥 stop animation safely
-        controlled = false;
-        frozen = false;
-        timelineRunning = false;
-        animationRunning = false;
         // clear connections
         clearAllTimeouts();
         resetConnections();
