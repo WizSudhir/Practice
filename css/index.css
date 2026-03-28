@@ -1849,10 +1849,13 @@ z-index: 2;
 .eng-left {
   display: flex;
   flex-direction: column;
-  gap: 80px;
 }
 
 .eng-step {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   opacity: 0.3;
   transform: translateY(40px);
   transition: all 0.4s ease;
