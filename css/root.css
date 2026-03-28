@@ -152,7 +152,6 @@ h2.gradient {
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.8s ease;
-  padding: var(--space-sm) 0;
   position: relative;
   z-index: 1;
 }
