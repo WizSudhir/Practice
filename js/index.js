@@ -40,6 +40,13 @@ document.addEventListener("DOMContentLoaded", () => {
   let width, height;
   let controlled = false;
   let frozen = false;
+  let isRunning = false;
+  let timelineTimeouts = [];
+
+  function clearTimeline() {
+    timelineTimeouts.forEach(t => clearTimeout(t));
+    timelineTimeouts = [];
+  }
 
   function updateBounds() {
     width = hero.clientWidth;
@@ -49,8 +56,10 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", updateBounds);
   // 🔁 FULL RESET FOR LOOP //
   function resetSystem() {
+    clearTimeline();
     controlled = false;
     frozen = false;
+    isRunning = false;
     hero.classList.remove("controlled");
     core.style.display = "none";
     resetConnections();
@@ -64,8 +73,6 @@ document.addEventListener("DOMContentLoaded", () => {
       n.y = n.baseY;
       n.angle = 0;
     });
-    // restart timeline
-    startTimeline();
   }
   // POSITION SETUP //
   nodes.forEach((n, i) => {
@@ -183,7 +190,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   // CONTROL TIMELINE (EXTRACTED) //
   function startTimeline() {
-    setTimeout(() => {
+    if (isRunning) return;
+    isRunning = true;
+    timelineTimeouts.push(setTimeout(() => {
       hero.classList.add("controlled");
       core.style.display = "flex";
       waitForStabilization(() => {
@@ -192,16 +201,16 @@ document.addEventListener("DOMContentLoaded", () => {
           n.x = n.baseX;
           n.y = n.baseY;
         });
-        setTimeout(() => {
+         timelineTimeouts.push(setTimeout(() => {
           requestAnimationFrame(() => {
             nodes.forEach((n, i) => {
-              setTimeout(() => {
+              timelineTimeouts.push(setTimeout(() => {
                 const path = drawConnection(n);
                 path.getBoundingClientRect();
                 path.classList.add("active");
-                setTimeout(() => {
+                timelineTimeouts.push(setTimeout(() => {
                 }, 420);
-                setTimeout(() => {
+                timelineTimeouts.push(setTimeout(() => {
                   n.classList.add("resolved-active");
                   n.querySelector(".node-inner").style.boxShadow = `
                     0 0 25px rgba(34,197,94,0.7),
@@ -214,12 +223,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 720);
       });
     }, 2000 + PHASE_DELAY);
-    setTimeout(() => {
+    timelineTimeouts.push(setTimeout(() => {
       controlled = true;
     }, 3500 + PHASE_DELAY);
+    timelineTimeouts.push(setTimeout(() => {
+    resetSystem();
+    startTimeline();
+  }, 9000 + PHASE_DELAY));
   }
-  // ▶️ INITIAL START
-  startTimeline();
   // ANIMATION LOOP //
   function animate() {
     nodes.forEach(n => {
@@ -267,6 +278,20 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     requestAnimationFrame(animate);
   }
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        if (!isRunning) {
+          resetSystem();
+          startTimeline();
+        }
+      } else {
+        resetSystem(); // 🔥 FULL STOP + RESET
+      }
+    });
+  }, { threshold: 0.4 });
+  observer.observe(hero);
+    
   animate();
 
   // ============================================================================================================================
