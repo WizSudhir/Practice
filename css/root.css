@@ -165,8 +165,11 @@ h2.gradient {
 .section-frame {
   position: relative;
   z-index: 1;
-  border: none;
   padding: clamp(32px, 4vw, 64px);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.02);
+  backdrop-filter: blur(12px);
 }
 .section-glow {
   position: relative;
@@ -179,11 +182,10 @@ h2.gradient {
   border-radius: inherit;
   padding: 1px;
   background: linear-gradient(
-    120deg,
-    rgba(99,102,241,0.12),
-    rgba(59,130,246,0.12),
-    transparent,
-    rgba(59,130,246,0.2)
+    135deg,
+    rgba(99,102,241,0.6),
+    rgba(59,130,246,0.6),
+    rgba(139,92,246,0.6)
   );
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
@@ -192,6 +194,23 @@ h2.gradient {
   mask-composite: exclude;
   pointer-events: none;
   z-index: -1;
+}
+.section-glow::after {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  border-radius: inherit;
+  /* 🔥 GRADIENT GLOW */
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(99,102,241,0.25),
+    rgba(59,130,246,0.2),
+    transparent 70%
+  );
+  filter: blur(40px);
+  opacity: 0.6;
+  z-index: -2;
+  pointer-events: none;
 }
 /* ===============================
    5. LINKS (NO UNDERLINE, NO COLOR CHANGE)
