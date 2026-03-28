@@ -821,6 +821,22 @@ z-index: 2;
   font-size: var(--text-2xl);
   margin: var(--space-sm) 0;
 }
+.belief-control {
+  margin-top: 28px;
+  padding-left: 16px;
+  border-left: 2px solid var(--primary);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 420px;
+}
+.belief-control strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+.belief-control span {
+  color: var(--text-muted);
+}
 .belief-bridge {
   grid-column: 1 / -1;
   text-align: center;
