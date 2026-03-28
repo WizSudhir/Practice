@@ -737,8 +737,10 @@ z-index: 2;
 /* ============================================================================================================================
   3. ABOUT / BELIEF
 ============================================================================================================================== */
-.about-belief .section-title {
-  margin-bottom: 56px;
+.about-belief {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
 }
 .belief-visual {
   display: flex;
@@ -753,8 +755,8 @@ z-index: 2;
 }
 .belief-layout {
   display: grid;
-  grid-template-columns: minmax(260px, 300px) 1fr;
-  gap: 64px;
+  grid-template-columns: 420px 1fr;
+  gap: 80px;
   align-items: center;
 }
 .belief-row {
@@ -827,13 +829,14 @@ z-index: 2;
 ================================= */
 
 .rules-engine {
-  max-width: 300px;
+  max-width: 420px;
+  min-height: 420px;
   width: 100%;
   padding: 16px;
-  border-radius: 18px;
-   background: rgba(15,23,42,0.55);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.02);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(99,102,241,0.12);
+  border: 1px solid rgba(255,255,255,0.08);
   box-shadow:
     0 10px 30px rgba(0,0,0,0.4),
     inset 0 0 10px rgba(99,102,241,0.03);
@@ -869,7 +872,7 @@ z-index: 2;
 .rules-list {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
 }
 
 /* INDIVIDUAL RULE */
@@ -877,7 +880,7 @@ z-index: 2;
   display: flex;
   gap: 10px;
   align-items: center;
-  padding: 6px 8px;
+  padding: 10px 14px;
   border-radius: 10px;
   font-size: 10px;
   color: #cbd5f5;
