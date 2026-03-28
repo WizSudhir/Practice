@@ -1008,7 +1008,7 @@ z-index: 2;
   filter: blur(40px);
   opacity: 0;
   transform: translate(-50%, -50%);
-  transition: opacity 0.3s ease;
+   transition: opacity 0.3s ease, transform 0.1s ease;
   z-index: 0;
 }
 
