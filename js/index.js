@@ -442,8 +442,8 @@ if (systemCard) {
     systemCard.classList.toggle("active");
   });
 }
-  // ===============================
-// RULES ENGINE ANIMATION
+// ===============================
+// RULES ENGINE (WITH HOVER INSPECT)
 // ===============================
 
 (function(){
@@ -465,18 +465,20 @@ if (systemCard) {
 
   let index = 0;
   let interval;
+  let isHovering = false;
 
   function runSequence(){
+
+    if (isHovering) return;
 
     rules.forEach(r => r.classList.remove("active"));
     rules[index].classList.add("active");
 
-    // progress bar
     const percent = ((index + 1) / rules.length) * 100;
     progress.style.width = percent + "%";
 
-    // output update
     output.textContent = outputs[index];
+    output.classList.remove("inspect");
     output.classList.add("active");
 
     setTimeout(() => {
@@ -493,7 +495,7 @@ if (systemCard) {
     }
   }
 
-  // Intersection Observer (like your hero & metrics)
+  // AUTO LOOP
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -509,6 +511,46 @@ if (systemCard) {
   }, { threshold: 0.4 });
 
   observer.observe(engine);
+
+  // ===============================
+  // 🔥 HOVER INSPECT MODE
+  // ===============================
+
+  rules.forEach((rule, i) => {
+
+    rule.addEventListener("mouseenter", () => {
+
+      isHovering = true;
+
+      engine.classList.add("inspecting");
+
+      rules.forEach(r => r.classList.remove("inspect-active"));
+      rule.classList.add("inspect-active");
+
+      // freeze progress
+      const percent = ((i + 1) / rules.length) * 100;
+      progress.style.width = percent + "%";
+
+      // show detailed explanation
+      const detail = rule.dataset.detail;
+      output.textContent = detail;
+      output.classList.add("inspect");
+      output.classList.add("active");
+
+    });
+
+    rule.addEventListener("mouseleave", () => {
+
+      isHovering = false;
+
+      engine.classList.remove("inspecting");
+      rule.classList.remove("inspect-active");
+
+      output.classList.remove("inspect");
+
+    });
+
+  });
 
 })();
 // ============================================================================================================================
