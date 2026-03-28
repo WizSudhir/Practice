@@ -237,6 +237,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   // ▶️ INITIAL START
   startTimeline();
+  animate();
   // ANIMATION LOOP //
   function animate() {
     if (animationRunning) return;
@@ -297,15 +298,19 @@ document.addEventListener("DOMContentLoaded", () => {
       if (entry.isIntersecting) {
         if (!isHeroVisible) {
           isHeroVisible = true;
-          resetSystem();
-          startTimeline();
-          animate(); // 🔥 ADD THIS LINE
+          if (!timelineRunning) {
+            resetSystem();
+            startTimeline();
+          }
+          if (!animationRunning) {
+            animate();
+          }
           }
         } else {
         isHeroVisible = false;
         // 🔥 stop animation safely
-        controlled = true;
-        frozen = true;
+        controlled = false;
+        frozen = false;
         timelineRunning = false;
         animationRunning = false;
         // clear connections
