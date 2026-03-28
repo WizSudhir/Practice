@@ -36,8 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
   NODE_H = size.h;
   });
   const SIDE_PADDING = parseInt(styles.getPropertyValue('--space-lg'));
-  const TOP_PADDING = parseInt(styles.getPropertyValue('--space-lg'));
-  const BOTTOM_PADDING = parseInt(styles.getPropertyValue('--space-xl'));
+  const TOP_PADDING = parseInt(styles.getPropertyValue('--space-xl'));
+  const BOTTOM_PADDING = parseInt(styles.getPropertyValue('--space-lg'));
   let width, height;
   let controlled = false;
   let frozen = false;
