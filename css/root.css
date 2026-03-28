@@ -270,44 +270,47 @@ a:hover {
 .btn-arrow {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
 }
-.arrow {
+/* arrow container */
+.icon-arrow {
+  width: 12px;
+  height: 12px;
   position: relative;
-  width: 18px;
-  height: 10px;
+  transition: transform 0.3s ease;
 }
-/* line */
-.arrow .line {
+
+/* arrow shaft */
+.icon-arrow::before {
+  content: "";
   position: absolute;
   top: 50%;
   left: 0;
-  width: 12px;
-  height: 2px;
+  width: 6px; /* SHORT → fixes dash problem */
+  height: 1.5px;
   background: #fff;
   transform: translateY(-50%);
-  transition: all 0.3s ease;
+  transition: width 0.3s ease;
 }
 /* arrow head */
-.arrow .tip {
+.icon-arrow::after {
+  content: "";
   position: absolute;
   right: 0;
   top: 50%;
-  width: 6px;
-  height: 6px;
-  border-top: 2px solid #fff;
-  border-right: 2px solid #fff;
+  width: 5px;
+  height: 5px;
+  border-top: 1.5px solid #fff;
+  border-right: 1.5px solid #fff;
   transform: translateY(-50%) rotate(45deg);
-  opacity: 0;
-  transition: all 0.3s ease;
+  opacity: 0.9;
 }
-/* HOVER */
-.btn-arrow:hover .line {
-  width: 16px;
+/* HOVER = Stripe motion */
+.btn-arrow:hover .icon-arrow::before {
+  width: 8px;
 }
-.btn-arrow:hover .tip {
-  opacity: 1;
-  transform: translateY(-50%) rotate(45deg);
+.btn-arrow:hover .icon-arrow {
+  transform: translateX(2px);
 }
 /* OUTLINE */
 .btn-outline {
