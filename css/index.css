@@ -742,6 +742,9 @@ z-index: 2;
   display: flex;
   align-items: center;
 }
+.about-belief .section-title {
+  margin-bottom: 30px;
+}
 .belief-visual {
   display: flex;
   justify-content: center;
@@ -797,6 +800,8 @@ z-index: 2;
 }
 .belief-content {
   display: flex;
+  flex-direction: column;
+  height: 100%;
   align-items: center;
   justify-content: flex-start;
 }
@@ -819,11 +824,13 @@ z-index: 2;
 .belief-bridge {
   grid-column: 1 / -1;
   text-align: center;
-  max-width: 480px;
+  max-width: 420px;
   margin: 20px auto 0;
   font-size: 16px;
-  margin-top: 24px;
-  color: var(--text-secondary);
+  margin-top: auto;
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--border-subtle);
+  color: var(--text-muted);
   line-height: 1.6;
 }
 /* ===============================
@@ -838,10 +845,8 @@ z-index: 2;
   border-radius: 10px;
   background: rgba(255,255,255,0.02);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.08);
-  box-shadow:
-    0 10px 30px rgba(0,0,0,0.4),
-    inset 0 0 10px rgba(99,102,241,0.03);
+  border: 1px solid var(--border-subtle);
+  box-shadow: none;
   position: relative;
   overflow: hidden;
 }
@@ -1017,6 +1022,7 @@ z-index: 2;
   transform: translate(-50%, -50%);
    transition: opacity 0.3s ease, transform 0.1s ease;
   z-index: 0;
+  display: none;
 }
 
 .rules-engine:hover .cursor-glow {
