@@ -750,8 +750,8 @@ z-index: 2;
 }
 .belief-layout {
   display: grid;
-  grid-template-columns: 0.7fr 1.3fr;
-  gap: 30px;
+  grid-template-columns: minmax(260px, 300px) 1fr;
+  gap: 64px;
   align-items: center;
 }
 .belief-row {
@@ -824,16 +824,16 @@ z-index: 2;
 ================================= */
 
 .rules-engine {
-  max-width: 380px;
+  max-width: 300px;
   width: 100%;
-  padding: 22px;
+  padding: 16px;
   border-radius: 18px;
-  background: rgba(15,23,42,0.7);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(99,102,241,0.15);
+   background: rgba(15,23,42,0.55);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(99,102,241,0.12);
   box-shadow:
-    0 0 40px rgba(99,102,241,0.08),
-    inset 0 0 20px rgba(99,102,241,0.05);
+    0 10px 30px rgba(0,0,0,0.4),
+    inset 0 0 10px rgba(99,102,241,0.03);
   position: relative;
   overflow: hidden;
 }
@@ -850,8 +850,8 @@ z-index: 2;
     rgba(59,130,246,0.15),
     rgba(34,197,94,0.2)
   );
-  opacity: 0.2;
-  filter: blur(30px);
+  opacity: 0.08;
+  filter: blur(40px);
   z-index: -1;
 }
 
@@ -866,7 +866,7 @@ z-index: 2;
 .rules-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
 }
 
 /* INDIVIDUAL RULE */
@@ -874,9 +874,9 @@ z-index: 2;
   display: flex;
   gap: 10px;
   align-items: center;
-  padding: 8px 10px;
+  padding: 6px 8px;
   border-radius: 10px;
-  font-size: 13px;
+  font-size: 10px;
   color: #cbd5f5;
   opacity: 0.4;
   transition: all 0.4s ease;
@@ -892,14 +892,13 @@ z-index: 2;
 .rule.active {
   opacity: 1;
   color: #ffffff;
-  background: rgba(99,102,241,0.08);
-  box-shadow:
-    0 0 15px rgba(99,102,241,0.25);
+  background: rgba(99,102,241,0.12);
+  box-shadow: none;
 }
 
 /* VISUAL AREA */
 .rules-visual {
-  margin-top: 18px;
+  margin-top: 12px;
   position: relative;
 }
 
