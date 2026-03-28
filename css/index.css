@@ -326,7 +326,7 @@ z-index: 2;
 /* TOP TITLE */
 .hero-top {
   position: absolute;
-  top: calc(var(--nav-height) + var(--space-md));
+  top: calc(var(--nav-height) + var(--space-sm));
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
@@ -335,7 +335,7 @@ z-index: 2;
 /* BOTTOM CONTENT */
 .hero-bottom {
   position: absolute;
-  bottom: calc(var(--space-xl) * 0.5);
+  bottom: calc(var(--space-sm) * 0.5);
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
