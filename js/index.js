@@ -151,42 +151,24 @@ document.addEventListener("DOMContentLoaded", () => {
     svg.appendChild(path);
     return path;
   }
-  function resetConnections() {
-    svg.innerHTML = `
-      <defs>
-        <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#22c55e"/>
-          <stop offset="100%" stop-color="#3b82f6"/>
-        </linearGradient>
-      </defs>
-    `;
-  }
+    function resetConnections() {
+        while (svg.firstChild) {
+          svg.removeChild(svg.firstChild);
+        }
+        const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+        defs.innerHTML = `
+            <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#22c55e"/>
+            <stop offset="100%" stop-color="#3b82f6"/>
+            </linearGradient>
+        `;
+        svg.appendChild(defs);
+      }
   window.addEventListener("resize", resetConnections);
     
   // STABILITY DETECTION //
   function waitForStabilization(callback) {
-    let stableFrames = 0;
-    let lastPositions = new Map();
-    function check() {
-      let isStable = true;
-      nodes.forEach(n => {
-        const prev = lastPositions.get(n) || { x: n.x, y: n.y };
-        const dx = Math.abs(n.x - prev.x);
-        const dy = Math.abs(n.y - prev.y);
-        if (dx > 0.3 || dy > 0.3) {
-          isStable = false;
-        }
-        lastPositions.set(n, { x: n.x, y: n.y });
-      });
-      if (isStable) stableFrames++;
-      else stableFrames = 0;
-      if (stableFrames > 12) {
-        callback();
-      } else {
-        requestAnimationFrame(check);
-      }
-    }
-    check();
+    setTimeout(callback, 500); // 🔥 SIMPLE + RELIABLE
   }
   // CONTROL TIMELINE (EXTRACTED) //
   function startTimeline() {
@@ -283,14 +265,26 @@ document.addEventListener("DOMContentLoaded", () => {
       if (entry.isIntersecting) {
         if (!isRunning) {
           resetSystem();
-          startTimeline();
+          setTimeout(() => {
+            startTimeline();
+            }, 300);
         }
       } else {
-        resetSystem(); // 🔥 FULL STOP + RESET
-      }
-    });
-  }, { threshold: 0.4 });
+        setTimeout(() => {
+          if (!hero.matches(":hover")) {
+            resetSystem();
+            }
+          }, 300);
+            }
+          });
+        }, { threshold: 0.2 });
   observer.observe(hero);
+    
+  setTimeout(() => {
+  if (!isRunning) {
+    startTimeline();
+  }
+}, 500);
     
   animate();
 
