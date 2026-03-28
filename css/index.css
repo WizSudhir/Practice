@@ -15,8 +15,8 @@ body {
   align-items: center;
   justify-content: center;
   margin-top: var(--nav-height);
-  padding-top: 20px;
- padding-bottom: 60px;
+  padding-top: var(--space-md);
+  padding-bottom: var(--space-md);
   overflow: hidden;
   z-index: 1;
 }
@@ -24,8 +24,8 @@ body {
 .system-bg {
 position: absolute;
 inset: 0;
-padding-top: 60px;     /* instead of hero */
-padding-bottom: 120px;
+padding-top: var(--space-lg);
+padding-bottom: var(--space-xl);
 perspective: 1200px;
 perspective-origin: 50% 50%;
 transform-style: preserve-3d;
@@ -149,8 +149,8 @@ z-index: 2;
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 140px;
-  height: 100px;              /* ✅ FIXED HEIGHT */
+  width: calc(var(--space-xl) * 1.75);
+  height: calc(var(--space-lg) * 2.5);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -171,7 +171,7 @@ z-index: 2;
   gap: 6px;
   background: rgba(255,255,255,0.03);
   padding: 6px 8px;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   position: relative;
   z-index: 1;
   box-shadow:
@@ -292,16 +292,15 @@ z-index: 2;
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 80px;
+  bottom: var(--space-xl);
   transform: none;
   text-align: center;
-  max-width: 800px;
+  max-width: calc(var(--container) * 0.65);
   margin: 0 auto;
   padding: 0 20px;
   z-index: 3;
 }
 .hero-content h1 {
-  font-size: clamp(30px, 3.5vw, 48px);
   line-height: 1.15;
   font-weight: 500;
   letter-spacing: -0.02em;
@@ -352,7 +351,7 @@ z-index: 2;
 }
 /* RESOLVED LABELS */
 .resolved {
-  color: #22c55e;
+  color: var(--primary);
   font-size: 9px;
   display: flex;
   align-items: center;
@@ -476,7 +475,7 @@ z-index: 2;
 /* CHART */
 .rev-chart {
   position: relative;
-  height: 100px;
+  height: calc(var(--space-xl) + var(--space-sm));
   display: flex;
   align-items: flex-end;
   gap: 6px;
@@ -485,7 +484,7 @@ z-index: 2;
 .bar {
   flex: 1;
   height: 0;
-  background: linear-gradient(180deg, #22c55e, #3b82f6);
+  background: var(--gradient-accent);
   border-radius: 4px;
   transition: height 0.8s ease;
 }
@@ -761,7 +760,7 @@ z-index: 2;
 .mobile-chart .bar {
   flex: 1;
   height: 5%;
-  background: linear-gradient(180deg, #22c55e, #3b82f6);
+  background: var(--gradient-accent);
   border-radius: 4px;
   transition: height 0.8s ease;
 }
