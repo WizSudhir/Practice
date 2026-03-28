@@ -1847,23 +1847,27 @@ z-index: 2;
 
 /* LEFT */
 .eng-left {
+  position: relative;
   display: flex;
   flex-direction: column;
 }
 
 .eng-step {
-  min-height: 80vh;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  opacity: 0.3;
-  transform: translateY(40px);
-  transition: all 0.4s ease;
+  opacity: 0;
+  transform: translateY(-50%) translateY(40px);
+  transition: all 0.5s ease;
 }
 
 .eng-step.active {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(-50%) translateY(0);
 }
 
 .eng-impact {
