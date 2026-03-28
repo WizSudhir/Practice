@@ -8,21 +8,18 @@ body {
    1. DESKTOP HERO SECTION
 ============================================================================================================================== */
 .hero-system {
-  position: relative;
-  min-height: calc(100vh - var(--nav-height));
-  height: calc(100vh - var(--nav-height));
-  padding-top: 0;
-  padding-bottom: 0;
+  height: 100vh;
+  padding-top: var(--nav-height);
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  z-index: 1;
 }
 /* BG */
 .system-bg {
 position: absolute;
+display: flex;
+align-items: center;
+justify-content: center;
 inset: 0;
 padding-top: 0;
 padding-bottom: 0;
@@ -329,7 +326,7 @@ z-index: 2;
 /* TOP TITLE */
 .hero-top {
   position: absolute;
-  top: var(--space-lg);
+  top: calc(var(--nav-height) + var(--space-lg));
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
@@ -338,7 +335,7 @@ z-index: 2;
 /* BOTTOM CONTENT */
 .hero-bottom {
   position: absolute;
-  bottom: var(--space-xl);
+  bottom: calc(var(--space-xl) * 0.7);
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
