@@ -51,9 +51,9 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", updateBounds);
   // 🔁 FULL RESET FOR LOOP //
   function resetSystem() {
+    timelineRunning = false;
     controlled = false;
     frozen = false;
-    revenueProgress = 0;
     hero.classList.remove("controlled");
     core.style.display = "none";
     resetConnections();
@@ -148,6 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return path;
   }
   function resetConnections() {
+    svg.innerHTML = "";
     svg.innerHTML = `
       <defs>
         <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -185,7 +186,10 @@ document.addEventListener("DOMContentLoaded", () => {
     check();
   }
   // CONTROL TIMELINE (EXTRACTED) //
+  let timelineRunning = false;
   function startTimeline() {
+    if (timelineRunning) return;
+    timelineRunning = true;
     setTimeout(() => {
       hero.classList.add("controlled");
       core.style.display = "flex";
@@ -269,6 +273,32 @@ document.addEventListener("DOMContentLoaded", () => {
     requestAnimationFrame(animate);
   }
   animate();
+  // 🔁 LOOP RESTART (CORRECT POSITION)
+  setTimeout(() => {
+    resetSystem();
+  }, nodes.length * 900 + 2500);
+  // 👁️ VISIBILITY CONTROL (DESKTOP HERO)
+  let heroObserver;
+  let isHeroVisible = false;
+  heroObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        if (!isHeroVisible) {
+          isHeroVisible = true;
+          // 🔥 restart clean
+          resetSystem();
+        }
+      } else {
+        isHeroVisible = false;
+        // 🔥 stop animation safely
+        controlled = true;
+        frozen = true;
+        // clear connections
+        resetConnections();
+      }
+    });
+  }, { threshold: 0.3 });
+  heroObserver.observe(hero);
 
   // ============================================================================================================================
   // 2. MOBILE HERO
