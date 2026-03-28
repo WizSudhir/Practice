@@ -182,37 +182,49 @@ document.addEventListener("DOMContentLoaded", () => {
   function startTimeline() {
     if (isRunning) return;
     isRunning = true;
+timelineTimeouts.push(setTimeout(() => {
+
+  waitForStabilization(() => {
+    frozen = true;
+
+    nodes.forEach(n => {
+      n.x = n.baseX;
+      n.y = n.baseY;
+    });
+
     timelineTimeouts.push(setTimeout(() => {
-      waitForStabilization(() => {
-        frozen = true;
-        nodes.forEach(n => {
-          n.x = n.baseX;
-          n.y = n.baseY;
-        });
-         timelineTimeouts.push(setTimeout(() => {
-          requestAnimationFrame(() => {
-            nodes.forEach((n, i) => {
-              timelineTimeouts.push(setTimeout(() => {
-                requestAnimationFrame(() => {
-                  const path = drawConnection(n);
-                  path.getBoundingClientRect();
-                  path.classList.add("active");
-                });
-                timelineTimeouts.push(setTimeout(() => {
-                }, 420);
-                timelineTimeouts.push(setTimeout(() => {
-                  n.classList.add("resolved-active");
-                  n.querySelector(".node-inner").style.boxShadow = `
-                    0 0 25px rgba(34,197,94,0.7),
-                    0 0 50px rgba(59,130,246,0.4)
-                  `;
-                }, 840);
-              }, i * 600 + Math.random() * 500);
+
+      requestAnimationFrame(() => {
+
+        nodes.forEach((n, i) => {
+
+          timelineTimeouts.push(setTimeout(() => {
+
+            requestAnimationFrame(() => {
+              const path = drawConnection(n);
+              path.getBoundingClientRect();
+              path.classList.add("active");
             });
-          });
-        }, 720);
+
+            timelineTimeouts.push(setTimeout(() => {
+              n.classList.add("resolved-active");
+              n.querySelector(".node-inner").style.boxShadow = `
+                0 0 25px rgba(34,197,94,0.7),
+                0 0 50px rgba(59,130,246,0.4)
+              `;
+            }, 840));
+
+          }, i * 600 + Math.random() * 500));
+
+        });
+
       });
-    }, 2000 + PHASE_DELAY);
+
+    }, 720));
+
+  });
+
+}, 2000 + PHASE_DELAY));
     timelineTimeouts.push(setTimeout(() => {
       controlled = true;
       hero.classList.add("controlled");
