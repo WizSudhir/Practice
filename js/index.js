@@ -1504,7 +1504,97 @@ gsap.to(".eng-wrapper", {
     pin: true
   }
 });
+// ==========================
+// STEP DATA (DYNAMIC STATES)
+// ==========================
+const stepData = [
+  {
+    revenue: 85000,
+    denials: 32,
+    status: "Scanning system for revenue leakage...",
+    bars: ["30%", "45%", "60%", "75%"]
+  },
+  {
+    revenue: 95000,
+    denials: 24,
+    status: "Integrating workflows & validating data...",
+    bars: ["40%", "55%", "70%", "85%"]
+  },
+  {
+    revenue: 115000,
+    denials: 12,
+    status: "Optimizing claims & reducing denials...",
+    bars: ["50%", "65%", "80%", "92%"]
+  },
+  {
+    revenue: 128450,
+    denials: 5,
+    status: "Revenue system fully optimized...",
+    bars: ["60%", "75%", "90%", "100%"]
+  }
+];
 
+// ==========================
+// DOM
+// ==========================
+const revEl = document.getElementById('revValue');
+const denialEl = document.getElementById('denialValue');
+const statusEl = document.getElementById('engStatus');
+const bars = document.querySelectorAll('.eng-bars .bar');
+const visual = document.getElementById('engVisual');
+
+// ==========================
+// COUNTER ANIMATION
+// ==========================
+function animateCounter(el, start, end, prefix = "", suffix = "") {
+  gsap.to({ val: start }, {
+    val: end,
+    duration: 1,
+    ease: "power2.out",
+    onUpdate: function () {
+      el.textContent = prefix + Math.floor(this.targets()[0].val).toLocaleString() + suffix;
+    }
+  });
+}
+
+// ==========================
+// UPDATE VISUAL PER STEP
+// ==========================
+function updateVisual(stepIndex) {
+  const data = stepData[stepIndex];
+
+  // Animate counters
+  animateCounter(revEl, parseInt(revEl.textContent.replace(/[^0-9]/g,'')) || 0, data.revenue, "$");
+  animateCounter(denialEl, parseInt(denialEl.textContent) || 0, data.denials, "", "%");
+
+  // Status text
+  statusEl.style.opacity = 0;
+  setTimeout(() => {
+    statusEl.textContent = data.status;
+    statusEl.style.opacity = 1;
+  }, 200);
+
+  // Bars animation
+  bars.forEach((bar, i) => {
+    bar.style.height = data.bars[i];
+  });
+
+  // Pulse effect
+  visual.classList.add('active');
+  setTimeout(() => visual.classList.remove('active'), 600);
+}
+
+// ==========================
+// HOOK INTO YOUR EXISTING GSAP
+// ==========================
+function activateStep(index) {
+  document.querySelectorAll('.eng-step').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.visual-stage').forEach(v => v.classList.remove('active'));
+
+  document.querySelectorAll('.eng-step')[index].classList.add('active');
+
+  updateVisual(index);
+}
 // Step activation timeline
 steps.forEach((step, i) => {
 
