@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const nodes = document.querySelectorAll(".node");
   const core = document.querySelector(".core");
   const svg = document.getElementById("connections");
-  const revenue = document.getElementById("revenue");
   const PHASE_DELAY = 3000;
   const styles = getComputedStyle(document.documentElement);
   const isMobile = window.innerWidth < 768;
@@ -172,40 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   }
   window.addEventListener("resize", resetConnections);
-  // REVENUE INCREMENT LOGIC //
-  function incrementRevenue() {
-    const bars = document.querySelectorAll(".revenue .bar");
-    const line = document.querySelector(".line-path");
-    if (revenueProgress >= bars.length) return;
-    const bar = bars[revenueProgress];
-    bar.style.height = bar.dataset.height;
-    bar.style.transform = "scaleY(1.1)";
-    setTimeout(() => {
-      bar.style.transform = "scaleY(1)";
-    }, 200);
-    if (line) {
-      const totalLength = line.getTotalLength();
-      const progressRatio = (revenueProgress + 1) / bars.length;
-      line.style.strokeDasharray = totalLength;
-      line.style.strokeDashoffset = totalLength * (1 - progressRatio);
-    }
-    core.style.boxShadow = `
-      0 0 ${40 + revenueProgress * 12}px rgba(34,197,94,0.7),
-      0 0 ${80 + revenueProgress * 20}px rgba(59,130,246,0.5)
-    `;
-    revenueProgress++;
-    // 🔥 BACKGROUND GLOW SYNC
-    document.documentElement.style.setProperty(
-      "--rev-glow",
-      revenueProgress
-    );
-    // 🔁 TRIGGER LOOP AFTER LAST BAR + 2s
-    if (revenueProgress === bars.length) {
-      setTimeout(() => {
-        resetSystem();
-      }, 5000);
-    }
-  }
+    
   // STABILITY DETECTION //
   function waitForStabilization(callback) {
     let stableFrames = 0;
@@ -236,7 +202,6 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       hero.classList.add("controlled");
       core.style.display = "flex";
-      revenue.classList.add("active");
       waitForStabilization(() => {
         frozen = true;
         nodes.forEach(n => {
