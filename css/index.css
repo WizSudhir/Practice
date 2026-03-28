@@ -16,9 +16,7 @@ body {
 }
 /* BG */
 .system-bg {
-position: relative;
-width: 100%;
-min-height: 600px;
+position: absolute;
 display: flex;
 align-items: center;
 justify-content: center;
