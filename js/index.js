@@ -10,6 +10,8 @@ window.addEventListener("load", () => {
   const nodes = document.querySelectorAll(".node");
   const core = document.querySelector(".core");
   const svg = document.getElementById("connections");
+  console.log("Hero size:", width, height);
+  console.log("Nodes found:", nodes.length);
 
   if (!hero || !core || !svg) {
     console.warn("Hero elements missing");
@@ -360,8 +362,11 @@ window.addEventListener("load", () => {
     loop();
   }
 
+  setTimeout(() => {
+  updateBounds();
   animate();
-setTimeout(startTimeline, 300);
+  setTimeout(startTimeline, 300);
+  }, 100);
 
   const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
