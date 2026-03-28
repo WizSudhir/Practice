@@ -198,8 +198,6 @@ document.addEventListener("DOMContentLoaded", () => {
                   path.getBoundingClientRect();
                   path.classList.add("active");
                 });
-                path.getBoundingClientRect();
-                path.classList.add("active");
                 timelineTimeouts.push(setTimeout(() => {
                 }, 420);
                 timelineTimeouts.push(setTimeout(() => {
@@ -242,11 +240,7 @@ document.addEventListener("DOMContentLoaded", () => {
         n.x = n.baseX;
         n.y = n.baseY;
       }
-        setTimeout(() => {
-          if (!isRunning) {
-            startTimeline();
-          }
-        }, 500);
+      
       const left = -width / 2 + SIDE_PADDING + NODE_W / 2;
       const right = width / 2 - SIDE_PADDING - NODE_W / 2;
       const top = -height / 2 + TOP_PADDING + NODE_H / 2;
