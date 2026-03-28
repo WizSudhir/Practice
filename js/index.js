@@ -1,325 +1,207 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   lucide.createIcons();
-  // ============================================================================================================================
-  // 1. DESKTOP HERO
-  // ============================================================================================================================
-  const hero = document.querySelector(".system-bg");
-  const nodes = document.querySelectorAll(".node");
-  const core = document.querySelector(".core");
-  const svg = document.getElementById("connections");
-  const PHASE_DELAY = 3000;
-  let isResetting = false;
-  let animationRunning = false;
-  const styles = getComputedStyle(document.documentElement);
-  const isMobile = window.innerWidth < 768;
-  if (isMobile) {
-    try {
-      runMobileHero();
-    } catch (e) {
-    console.error("Mobile hero error:", e);
-    }
-  }
-  if (!hero || !core) {
-  console.warn("Hero not found — skipping hero only");
-  } else {
-  let timeouts = [];
-  function clearAllTimeouts() {
-  timeouts.forEach(t => clearTimeout(t));
-  timeouts = [];
-  }
-  function getNodeSize() {
-  const w = window.innerWidth;
-  const NODE_W = parseInt(styles.getPropertyValue('--space-xl')) * 1.75;
-  const NODE_H = parseInt(styles.getPropertyValue('--space-lg')) * 2.5;
-  if (w < 768) return { w: 0, h: 0 }; // disabled
-  if (w < 1200) return { w: 110, h: 80 };
-  return { w: NODE_W, h: NODE_H };
-  }
-  let { w: NODE_W, h: NODE_H } = getNodeSize();
-  window.addEventListener("resize", () => {
-  const size = getNodeSize();
-  NODE_W = size.w;
-  NODE_H = size.h;
-  });
-  const SIDE_PADDING = parseInt(styles.getPropertyValue('--space-lg'));
-  const TOP_PADDING = parseInt(styles.getPropertyValue('--space-xxl'));
-  const BOTTOM_PADDING = parseInt(styles.getPropertyValue('--space-lg'));
-  let width, height;
-  let controlled = false;
-  let frozen = false;
-  // 🔥 REVENUE STATE
+// ============================================================================================================================
+// 1. DESKTOP HERO
+// ============================================================================================================================
 
-  function updateBounds() {
-    width = hero.clientWidth;
-    height = hero.clientHeight;
-  }
-  updateBounds();
-  window.addEventListener("resize", updateBounds);
-  // 🔁 FULL RESET FOR LOOP //
-  function resetSystem() {
-    isResetting = true;
-    clearAllTimeouts();
-    controlled = false;
-    frozen = false;
-    hero.classList.remove("controlled");
-    core.style.display = "none";
-    resetConnections();
-    // reset nodes
-    nodes.forEach(n => {
-      n.classList.remove("resolved-active");
-      n.style.opacity = "";
-      n.querySelector(".node-inner").style.boxShadow = "";
+const hero = document.querySelector(".system-bg");
+const nodes = document.querySelectorAll(".node");
+const core = document.querySelector(".core");
+const svg = document.getElementById("connections");
 
-      n.x = n.baseX;
-      n.y = n.baseY;
-      n.angle = Math.random() * Math.PI * 2;
-    });
-    isResetting = false;
-  }
-  // POSITION SETUP //
+if (!hero || !core) return;
+
+// =========================
+// STATE
+// =========================
+let running = false;
+let rafId = null;
+
+// =========================
+// CONFIG
+// =========================
+const styles = getComputedStyle(document.documentElement);
+const SIDE_PADDING = parseInt(styles.getPropertyValue('--space-lg'));
+const TOP_PADDING = parseInt(styles.getPropertyValue('--space-xxl'));
+const BOTTOM_PADDING = parseInt(styles.getPropertyValue('--space-lg'));
+
+let width, height;
+
+function updateBounds() {
+  width = hero.clientWidth;
+  height = hero.clientHeight;
+}
+updateBounds();
+window.addEventListener("resize", updateBounds);
+
+// =========================
+// INIT NODES
+// =========================
+function initNodes() {
+  const cols = 4;
+  const rows = 2;
+
+  const usableWidth = width - SIDE_PADDING * 2;
+  const usableHeight = height - TOP_PADDING - BOTTOM_PADDING;
+
+  const zoneW = usableWidth / cols;
+  const zoneH = usableHeight / rows;
+
   nodes.forEach((n, i) => {
-    const cols = 4;
-    const rows = 2;
-    const usableWidth = width - SIDE_PADDING * 2;
-    const usableHeight = height - TOP_PADDING - BOTTOM_PADDING;
-    const zoneW = usableWidth / cols;
-    const zoneH = usableHeight / rows;
     const col = i % cols;
     const row = Math.floor(i / cols);
-    n.baseX = -width / 2 + SIDE_PADDING + zoneW * (col + 0.5);
-    n.baseY = -height / 2 + TOP_PADDING + zoneH * (row + 0.5);
-    n.angle = Math.random() * Math.PI * 2;
-    n.speed = 0.002 + Math.random() * 0.002;
-    n.floatX = Math.max(10, zoneW / 2 - NODE_W / 2 - 6);
-    n.floatY = Math.max(10, zoneH / 2 - NODE_H / 2 - 13);
-    n.z = (Math.random() - 0.5) * 40;
+
+    n.baseX = -width/2 + SIDE_PADDING + zoneW * (col + 0.5);
+    n.baseY = -height/2 + TOP_PADDING + zoneH * (row + 0.5);
+
     n.x = n.baseX;
     n.y = n.baseY;
+
+    n.angle = Math.random() * Math.PI * 2;
+    n.speed = 0.002 + Math.random() * 0.002;
+
+    n.floatX = zoneW * 0.35;
+    n.floatY = zoneH * 0.35;
   });
-  // CONNECTION SYSTEM //
-  function drawConnection(node) {
-    if (isResetting || !svg || !core) return;
-    const coreRect = core.getBoundingClientRect();
-    const nodeInner = node.querySelector(".node-inner");
-    const nodeRect = nodeInner.getBoundingClientRect();
-    const svgRect = svg.getBoundingClientRect();
-    const coreCenter = {
-      x: coreRect.left + coreRect.width / 2,
-      y: coreRect.top + coreRect.height / 2
-    };
-    const nodeCenter = {
-      x: nodeRect.left + nodeRect.width / 2,
-      y: nodeRect.top + nodeRect.height / 2
-    };
-    const dx = nodeCenter.x - coreCenter.x;
-    const dy = nodeCenter.y - coreCenter.y;
-    const dist = Math.hypot(dx, dy);
-    const nx = dx / dist;
-    const ny = dy / dist;
-    const coreRadius = coreRect.width / 2;
-    const coreEdge = {
-      x: coreCenter.x + nx * (coreRadius + 1),
-      y: coreCenter.y + ny * (coreRadius + 1)
-    };
-    const halfW = nodeRect.width / 2;
-    const halfH = nodeRect.height / 2;
-    let tx = Infinity;
-    let ty = Infinity;
-    if (nx !== 0) tx = halfW / Math.abs(nx);
-    if (ny !== 0) ty = halfH / Math.abs(ny);
-    const t = Math.min(tx, ty);
-    const nodeEdge = {
-      x: nodeCenter.x - nx * (t + 1),
-      y: nodeCenter.y - ny * (t + 1)
-    };
-    const start = {
-      x: Math.round(coreEdge.x - svgRect.left),
-      y: Math.round(coreEdge.y - svgRect.top)
-    };
-    const end = {
-      x: Math.round(nodeEdge.x - svgRect.left),
-      y: Math.round(nodeEdge.y - svgRect.top)
-    };
-    const midX = Math.round(start.x + (end.x - start.x) * 0.5);
-    const d = `
-      M ${start.x} ${start.y}
-      L ${midX} ${start.y}
-      L ${midX} ${end.y}
-      L ${end.x} ${end.y}
-    `;
-    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    path.setAttribute("d", d);
-    path.setAttribute("vector-effect", "non-scaling-stroke");
-    path.classList.add("connection-path");
-    svg.appendChild(path);
-    return path;
-  }
-  function resetConnections() {
-    svg.innerHTML = "";
-    svg.innerHTML = `
-      <defs>
-        <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#22c55e"/>
-          <stop offset="100%" stop-color="#3b82f6"/>
-        </linearGradient>
-      </defs>
-    `;
-  }
-  window.addEventListener("resize", resetConnections);
-    
-  // STABILITY DETECTION //
-  function waitForStabilization(callback) {
-    let stableFrames = 0;
-    let lastPositions = new Map();
-    function check() {
-      let isStable = true;
-      nodes.forEach(n => {
-        const prev = lastPositions.get(n) || { x: n.x, y: n.y };
-        const dx = Math.abs(n.x - prev.x);
-        const dy = Math.abs(n.y - prev.y);
-        if (dx > 0.3 || dy > 0.3) {
-          isStable = false;
-        }
-        lastPositions.set(n, { x: n.x, y: n.y });
-      });
-      if (isStable) stableFrames++;
-      else stableFrames = 0;
-      if (stableFrames > 12) {
-        callback();
-      } else {
-        requestAnimationFrame(check);
-      }
-    }
-    check();
-  }
-  // CONTROL TIMELINE (EXTRACTED) //
-  let timelineRunning = false;
-  function startTimeline() {
-    if (timelineRunning) return;
-    timelineRunning = true;
-    timeouts.push(setTimeout(() => {
-      hero.classList.add("controlled");
-      core.style.display = "flex";
-      waitForStabilization(() => {
-        frozen = true;
-        nodes.forEach(n => {
-          n.x = n.baseX;
-          n.y = n.baseY;
-        });
-        timeouts.push(setTimeout(() => {
-          requestAnimationFrame(() => {
-            nodes.forEach((n, i) => {
-              timeouts.push(setTimeout(() => {
-                const path = drawConnection(n);
-                if (!path) return;
-                path.getBoundingClientRect();
-                path.classList.add("active");
-                timeouts.push(setTimeout(() => {
-                  n.classList.add("resolved-active");
-                  n.querySelector(".node-inner").style.boxShadow = `
-                    0 0 25px rgba(34,197,94,0.7),
-                    0 0 50px rgba(59,130,246,0.4)
-                  `;
-                }, 840);
-              }, i * 600 + Math.random() * 500);
-            });
-            timeouts.push(setTimeout(() => {
-            resetSystem();
-          }, nodes.length * 900 + 2500);
-          });
-        }, 720);
-      });
-    }, 2000 + PHASE_DELAY);
-    timeouts.push(setTimeout(() => {
-      controlled = true;
-    }, 3500 + PHASE_DELAY);
-  }
-  // ▶️ INITIAL START
-  startTimeline();
-  animate();
-  // ANIMATION LOOP //
-  function animate() {
-    if (animationRunning) return;
-    animationRunning = true;
-    function loop() {
+}
+initNodes();
+
+// =========================
+// RAF ENGINE
+// =========================
+function startRAF() {
+  if (rafId) return;
+
+  function loop() {
     nodes.forEach(n => {
-      if (!controlled) {
-        n.angle += n.speed;
-        n.x = n.baseX + Math.cos(n.angle) * n.floatX;
-        n.y = n.baseY + Math.sin(n.angle) * n.floatY;
-      } else if (!frozen) {
-        const dx = -n.x;
-        const dy = -n.y;
-        n.x += dx * 0.015;
-        n.y += dy * 0.015;
-        n.x += (n.baseX - n.x) * 0.04;
-        n.y += (n.baseY - n.y) * 0.04;
-      } else {
-        n.x = n.baseX;
-        n.y = n.baseY;
-      }
-      const left = -width / 2 + SIDE_PADDING + NODE_W / 2;
-      const right = width / 2 - SIDE_PADDING - NODE_W / 2;
-      const top = -height / 2 + TOP_PADDING + NODE_H / 2;
-      const bottom = height / 2 - BOTTOM_PADDING - NODE_H / 2;
-      n.x = Math.max(left, Math.min(right, n.x));
-      n.y = Math.max(top, Math.min(bottom, n.y));
-      if (!controlled) {
-        n.z += Math.sin(n.angle) * 0.03;
-      }
-      n.z = Math.max(0, Math.min(30, n.z));
-      const scale = 1 + n.z / 300;
-      const glowStrength = n.z / 40;
-      const glow = 10 + glowStrength * 30;
-      const opacity = controlled ? 1 : (0.7 + glowStrength * 0.3);
-      if (!n.matches(':hover')) {
-        n.style.opacity = opacity;
-      }
-      n.querySelector(".node-inner").style.boxShadow = controlled
-        ? `0 0 20px rgba(34,197,94,0.4), 0 0 40px rgba(59,130,246,0.25)`
-        : `0 0 ${glow}px rgba(59,130,246,0.25),
-           0 0 ${glow * 2}px rgba(139,92,246,0.15)`;
+      n.angle += n.speed;
+
+      n.x = n.baseX + Math.cos(n.angle) * n.floatX;
+      n.y = n.baseY + Math.sin(n.angle) * n.floatY;
+
       n.style.transform = `
-        translate3d(${n.x}px, ${n.y}px, ${n.z}px)
+        translate3d(${n.x}px, ${n.y}px, 0)
         translate(-50%, -50%)
-        scale(${scale})
       `;
     });
-    requestAnimationFrame(loop);
+
+    rafId = requestAnimationFrame(loop);
   }
+
   loop();
+}
+
+function stopRAF() {
+  cancelAnimationFrame(rafId);
+  rafId = null;
+}
+
+// =========================
+// CONNECTIONS
+// =========================
+function resetConnections() {
+  svg.innerHTML = `
+    <defs>
+      <linearGradient id="lineGradient">
+        <stop offset="0%" stop-color="#22c55e"/>
+        <stop offset="100%" stop-color="#3b82f6"/>
+      </linearGradient>
+    </defs>
+  `;
+}
+
+function drawConnection(node) {
+  const path = document.createElementNS("http://www.w3.org/2000/svg","path");
+
+  path.setAttribute("d", "M 0 0 L 100 100"); // simple clean version
+  path.classList.add("connection-path");
+
+  svg.appendChild(path);
+  return path;
+}
+
+// =========================
+// TIMELINE ENGINE (ASYNC)
+// =========================
+async function runTimeline() {
+  while (running) {
+
+    // FLOAT PHASE
+    await delay(1500);
+
+    // SHOW CORE
+    core.style.display = "flex";
+
+    // CONNECT PHASE
+    for (let n of nodes) {
+      const path = drawConnection(n);
+      path.classList.add("active");
+      await delay(200);
+    }
+
+    // RESOLVE PHASE
+    nodes.forEach(n => n.classList.add("resolved-active"));
+    await delay(1500);
+
+    // RESET
+    resetSystem();
+    await delay(500);
   }
-  // 👁️ VISIBILITY CONTROL (DESKTOP HERO)
-  let heroObserver;
-  let isHeroVisible = false;
-  heroObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        if (!isHeroVisible) {
-          isHeroVisible = true;
-          if (!timelineRunning) {
-            resetSystem();
-            startTimeline();
-          }
-          if (!animationRunning) {
-            animate();
-          }
-          }
-        } else {
-        isHeroVisible = false;
-        // 🔥 stop animation safely
-        controlled = false;
-        frozen = false;
-        timelineRunning = false;
-        animationRunning = false;
-        // clear connections
-        clearAllTimeouts();
-        resetConnections();
-      }
-    });
-  }, { threshold: 0.3 });
-  heroObserver.observe(hero);
+}
+
+function resetSystem() {
+  resetConnections();
+
+  core.style.display = "none";
+
+  nodes.forEach(n => {
+    n.classList.remove("resolved-active");
+  });
+}
+
+// =========================
+// HELPERS
+// =========================
+function delay(ms) {
+  return new Promise(res => setTimeout(res, ms));
+}
+
+// =========================
+// START / STOP SYSTEM
+// =========================
+function startSystem() {
+  if (running) return;
+  running = true;
+
+  initNodes();
+  resetSystem();
+
+  startRAF();
+  runTimeline();
+}
+
+function stopSystem() {
+  running = false;
+
+  stopRAF();
+  resetSystem();
+}
+
+// =========================
+// VISIBILITY CONTROL
+// =========================
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      startSystem();
+    } else {
+      stopSystem();
+    }
+  });
+}, { threshold: 0.3 });
+
+observer.observe(hero);
 
   // ============================================================================================================================
   // 2. MOBILE HERO
