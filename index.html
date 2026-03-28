@@ -988,24 +988,33 @@
         <!-- RIGHT: VISUAL -->
         <div class="eng-right">
           <div class="eng-visual" id="engVisual">
-
-            <div class="visual-stage active" data-step="1">
-              Detecting Revenue Leakage...
+            
+            <!-- LIVE METRICS -->
+            <div class="eng-metrics">
+              <div class="eng-metric">
+                <span class="label">Revenue</span>
+                <span class="value" id="revValue">$0</span>
+              </div>
+              <div class="eng-metric">
+                <span class="label">Denials</span>
+                <span class="value red" id="denialValue">0%</span>
+              </div>
             </div>
 
-            <div class="visual-stage" data-step="2">
-              Integrating With Your Systems...
+            <!-- BARS -->
+            <div class="eng-bars">
+              <div class="bar" data-height="30%"></div>
+              <div class="bar" data-height="50%"></div>
+              <div class="bar" data-height="70%"></div>
+              <div class="bar highlight" data-height="90%"></div>
             </div>
 
-            <div class="visual-stage" data-step="3">
-              Optimizing Revenue Flow...
+            <!-- STATUS TEXT -->
+            <div class="eng-status" id="engStatus">
+              Initializing system...
             </div>
 
-            <div class="visual-stage" data-step="4">
-              Driving Predictable Growth...
             </div>
-
-          </div>
         </div>
 
       </div>
