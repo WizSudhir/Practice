@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const core = document.querySelector(".core");
   const svg = document.getElementById("connections");
   const PHASE_DELAY = 3000;
+  let isResetting = false;
   const styles = getComputedStyle(document.documentElement);
   const isMobile = window.innerWidth < 768;
   if (isMobile) {
@@ -21,6 +22,11 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!hero || !core) {
   console.warn("Hero not found — skipping hero only");
   } else {
+  let timeouts = [];
+  function clearAllTimeouts() {
+  timeouts.forEach(t => clearTimeout(t));
+  timeouts = [];
+  }
   function getNodeSize() {
   const w = window.innerWidth;
   const NODE_W = parseInt(styles.getPropertyValue('--space-xl')) * 1.75;
@@ -51,6 +57,8 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", updateBounds);
   // 🔁 FULL RESET FOR LOOP //
   function resetSystem() {
+    isResetting = true;
+    clearAllTimeouts();
     timelineRunning = false;
     controlled = false;
     frozen = false;
@@ -65,10 +73,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       n.x = n.baseX;
       n.y = n.baseY;
-      n.angle = 0;
+      n.angle = Math.random() * Math.PI * 2;
     });
-    // restart timeline
-    startTimeline();
+    isResetting = false;
   }
   // POSITION SETUP //
   nodes.forEach((n, i) => {
@@ -92,6 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   // CONNECTION SYSTEM //
   function drawConnection(node) {
+    if (isResetting || !svg || !core) return;
     const coreRect = core.getBoundingClientRect();
     const nodeInner = node.querySelector(".node-inner");
     const nodeRect = nodeInner.getBoundingClientRect();
@@ -190,7 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function startTimeline() {
     if (timelineRunning) return;
     timelineRunning = true;
-    setTimeout(() => {
+    timeouts.push(setTimeout(() => {
       hero.classList.add("controlled");
       core.style.display = "flex";
       waitForStabilization(() => {
@@ -199,14 +207,15 @@ document.addEventListener("DOMContentLoaded", () => {
           n.x = n.baseX;
           n.y = n.baseY;
         });
-        setTimeout(() => {
+        timeouts.push(setTimeout(() => {
           requestAnimationFrame(() => {
             nodes.forEach((n, i) => {
-              setTimeout(() => {
+              timeouts.push(setTimeout(() => {
                 const path = drawConnection(n);
+                if (!path) return;
                 path.getBoundingClientRect();
                 path.classList.add("active");
-                setTimeout(() => {
+                timeouts.push(setTimeout(() => {
                   n.classList.add("resolved-active");
                   n.querySelector(".node-inner").style.boxShadow = `
                     0 0 25px rgba(34,197,94,0.7),
@@ -215,14 +224,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 }, 840);
               }, i * 600 + Math.random() * 500);
             });
-            setTimeout(() => {
+            timeouts.push(setTimeout(() => {
             resetSystem();
           }, nodes.length * 900 + 2500);
           });
         }, 720);
       });
     }, 2000 + PHASE_DELAY);
-    setTimeout(() => {
+    timeouts.push(setTimeout(() => {
       controlled = true;
     }, 3500 + PHASE_DELAY);
   }
@@ -286,6 +295,7 @@ document.addEventListener("DOMContentLoaded", () => {
         isHeroVisible = true;
         if (!timelineRunning) {
           resetSystem();
+          startTimeline();
         }
       }
     } else {
@@ -295,6 +305,7 @@ document.addEventListener("DOMContentLoaded", () => {
         frozen = true;
         timelineRunning = false;
         // clear connections
+        clearAllTimeouts();
         resetConnections();
       }
     });
