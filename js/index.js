@@ -65,7 +65,6 @@ document.addEventListener("DOMContentLoaded", () => {
     frozen = false;
     isRunning = false;
     hero.classList.remove("controlled");
-    core.style.opacity = 0;
     resetConnections();
     // reset nodes
     nodes.forEach(n => {
@@ -185,7 +184,9 @@ document.addEventListener("DOMContentLoaded", () => {
 timelineTimeouts.push(setTimeout(() => {
 
   waitForStabilization(() => {
-    frozen = true;
+    setTimeout(() => {
+      frozen = true;
+    }, 800);
 
     nodes.forEach(n => {
       n.x = n.baseX;
@@ -228,7 +229,7 @@ timelineTimeouts.push(setTimeout(() => {
     timelineTimeouts.push(setTimeout(() => {
       controlled = true;
       hero.classList.add("controlled");
-      }, 3500 + PHASE_DELAY));
+      }, 1000 + PHASE_DELAY));
     timelineTimeouts.push(setTimeout(() => {
     resetSystem();
     startTimeline();
