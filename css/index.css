@@ -273,6 +273,38 @@ z-index: 2;
   animation: moneyFlow 1.2s linear infinite;
   animation-delay: 0.4s;
 }
+/* CONNECTION LINES */
+.connections {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+/* Line style */
+.connection-path {
+  fill: none;
+  stroke: url(#lineGradient);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+  opacity: 0.9;
+  stroke-dashoffset: 300;
+  transition: stroke-dashoffset 1s ease;
+}
+/* when active */
+.connection-path.active {
+  stroke-dashoffset: 0;
+}
+.line-path {
+  fill: none;
+  stroke: #4ade80;
+  stroke-width: 2;
+  opacity: 1;
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  transition: stroke-dashoffset 0.6s ease;
+}
 /* OVERLAY */
 .hero-overlay {
   position: absolute;
