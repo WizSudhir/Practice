@@ -442,6 +442,75 @@ if (systemCard) {
     systemCard.classList.toggle("active");
   });
 }
+  // ===============================
+// RULES ENGINE ANIMATION
+// ===============================
+
+(function(){
+
+  const engine = document.getElementById("rulesEngine");
+  if (!engine) return;
+
+  const rules = engine.querySelectorAll(".rule");
+  const progress = document.getElementById("flowProgress");
+  const output = document.getElementById("rulesOutput");
+
+  const outputs = [
+    "Data Verified",
+    "Coverage Confirmed",
+    "Codes Aligned",
+    "Claim Optimized",
+    "Revenue Secured"
+  ];
+
+  let index = 0;
+  let interval;
+
+  function runSequence(){
+
+    rules.forEach(r => r.classList.remove("active"));
+    rules[index].classList.add("active");
+
+    // progress bar
+    const percent = ((index + 1) / rules.length) * 100;
+    progress.style.width = percent + "%";
+
+    // output update
+    output.textContent = outputs[index];
+    output.classList.add("active");
+
+    setTimeout(() => {
+      output.classList.remove("active");
+    }, 1200);
+
+    index++;
+
+    if (index >= rules.length) {
+      setTimeout(() => {
+        index = 0;
+        progress.style.width = "0%";
+      }, 1200);
+    }
+  }
+
+  // Intersection Observer (like your hero & metrics)
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        if (!interval) {
+          runSequence();
+          interval = setInterval(runSequence, 1800);
+        }
+      } else {
+        clearInterval(interval);
+        interval = null;
+      }
+    });
+  }, { threshold: 0.4 });
+
+  observer.observe(engine);
+
+})();
 // ============================================================================================================================
 // 4. PROOF SNAPSHOT
 // ============================================================================================================================
