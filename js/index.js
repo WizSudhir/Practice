@@ -83,6 +83,13 @@ document.addEventListener("DOMContentLoaded", () => {
       n.angle = 0;
     });
   }
+  function restartTimeline() {
+  if (!isRunning) return; // safety
+  resetSystem();
+  setTimeout(() => {
+    startTimeline();
+  }, 300);
+  }
   // POSITION SETUP //
   nodes.forEach((n, i) => {
     const cols = 4;
@@ -233,6 +240,9 @@ document.addEventListener("DOMContentLoaded", () => {
       controlled = true;
       hero.classList.add("controlled");
       }, 1000 + PHASE_DELAY));
+    timelineTimeouts.push(setTimeout(() => {
+    restartTimeline();
+    }, 9000 + PHASE_DELAY));
   }
   // ANIMATION LOOP //
   function animate() {
