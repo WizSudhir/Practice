@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const svg = document.getElementById("connections");
   const revenue = document.getElementById("revenue");
   const PHASE_DELAY = 3000;
+  const styles = getComputedStyle(document.documentElement);
   const isMobile = window.innerWidth < 768;
   if (isMobile) {
     try {
@@ -23,9 +24,11 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
   function getNodeSize() {
   const w = window.innerWidth;
+  const NODE_W = parseInt(styles.getPropertyValue('--space-xl')) * 1.75;
+  const NODE_H = parseInt(styles.getPropertyValue('--space-lg')) * 2.5;
   if (w < 768) return { w: 0, h: 0 }; // disabled
   if (w < 1200) return { w: 110, h: 80 };
-  return { w: 140, h: 100 };
+  return { w: NODE_W, h: NODE_H };
   }
   let { w: NODE_W, h: NODE_H } = getNodeSize();
   window.addEventListener("resize", () => {
@@ -33,9 +36,9 @@ document.addEventListener("DOMContentLoaded", () => {
   NODE_W = size.w;
   NODE_H = size.h;
   });
-  const SIDE_PADDING = 40;
-  const TOP_PADDING = 60;
-  const BOTTOM_PADDING = 120;
+  const SIDE_PADDING = parseInt(styles.getPropertyValue('--space-lg'));
+  const TOP_PADDING = parseInt(styles.getPropertyValue('--space-lg'));
+  const BOTTOM_PADDING = parseInt(styles.getPropertyValue('--space-xl'));
   let width, height;
   let controlled = false;
   let frozen = false;
