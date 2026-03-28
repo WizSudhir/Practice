@@ -215,6 +215,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 }, 840);
               }, i * 600 + Math.random() * 500);
             });
+            setTimeout(() => {
+            resetSystem();
+          }, nodes.length * 900 + 2500);
           });
         }, 720);
       });
@@ -273,26 +276,24 @@ document.addEventListener("DOMContentLoaded", () => {
     requestAnimationFrame(animate);
   }
   animate();
-  // 🔁 LOOP RESTART (CORRECT POSITION)
-  setTimeout(() => {
-    resetSystem();
-  }, nodes.length * 900 + 2500);
   // 👁️ VISIBILITY CONTROL (DESKTOP HERO)
   let heroObserver;
   let isHeroVisible = false;
   heroObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        if (!isHeroVisible) {
-          isHeroVisible = true;
-          // 🔥 restart clean
+      if (!isHeroVisible) {
+        isHeroVisible = true;
+        if (!timelineRunning) {
           resetSystem();
         }
-      } else {
+      }
+    } else {
         isHeroVisible = false;
         // 🔥 stop animation safely
         controlled = true;
         frozen = true;
+        timelineRunning = false;
         // clear connections
         resetConnections();
       }
