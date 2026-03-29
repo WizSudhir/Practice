@@ -291,11 +291,12 @@ a:hover {
   position: absolute;
   top: 50%;
   left: 0;
-  width: 6px; /* SHORT → fixes dash problem */
+  width: 0;
+  opacity: 0;
   height: 1.5px;
   background: #fff;
   transform: translateY(-50%);
-  transition: width 0.3s ease;
+  transition: width 0.3s ease, opacity 0.2s ease;
 }
 /* arrow head */
 .icon-arrow::after {
@@ -313,9 +314,13 @@ a:hover {
 /* HOVER = Stripe motion */
 .btn-arrow:hover .icon-arrow::before {
   width: 8px;
+  opacity: 1;
 }
 .btn-arrow:hover .icon-arrow {
   transform: translateX(2px);
+}
+.btn-arrow:hover .icon-arrow::after {
+  transform: translateY(-50%) rotate(45deg) translateX(1px);
 }
 /* OUTLINE */
 .btn-outline {
