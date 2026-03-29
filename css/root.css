@@ -151,26 +151,12 @@ h2.gradient {
 .viewport-safe .section-frame {
   width: 100%;
 }
-.container {
-  max-width: var(--container);
-  margin-inline: auto;
-  padding-inline: clamp(12px, 3vw, 24px);
-}
-.divider {
-  height: 1px;
-  background: var(--border-subtle);
-  margin: var(--space-sm) 0;
-}
 .section {
   padding-block: clamp(24px, 3vw, 48px);
   opacity: 0;
   position: relative;
   z-index: 1;
   scroll-margin-top: var(--nav-height);
-}
-.section-inner {
-  padding-block: 10px;
-  width: 100%
 }
 .section.visible {
   opacity: 1;
@@ -196,6 +182,11 @@ h2.gradient {
 .section-grid::after {
   right: var(--grid-offset);
 }
+.container {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: clamp(12px, 3vw, 24px);
+}
 .section-frame {
   position: relative;
   width: 100%
@@ -207,7 +198,7 @@ h2.gradient {
   border-radius: var(--radius-sm);
   border: 1px solid rgba(255,255,255,0.12);
   background: rgba(255,255,255,0.02);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(8px);
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
   border-color 0.3s ease;
   will-change: transform;
@@ -215,6 +206,11 @@ h2.gradient {
 }
 .section-frame > * {
   width: 100%;
+}
+.section-inner {
+  padding-inline: clamp(12px, 3vw, 24px);
+  padding-block: 10px;
+  width: 100%
 }
 .section-glow {
   position: relative;
