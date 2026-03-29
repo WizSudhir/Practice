@@ -171,7 +171,8 @@ h2.gradient {
   scroll-margin-top: var(--nav-height);
 }
 .section-inner {
-  padding-block: 10px; /* small internal breathing */
+  padding-block: 10px;
+  width: 100%
 }
 .section.visible {
   opacity: 1;
@@ -202,6 +203,7 @@ h2.gradient {
 }
 .section-frame {
   position: relative;
+  width: 100%
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
@@ -217,7 +219,7 @@ h2.gradient {
   transform: none !important;
 }
 .section-frame > * {
-  max-width: 100%;
+  width: 100%;
 }
 .section-glow {
   position: relative;
