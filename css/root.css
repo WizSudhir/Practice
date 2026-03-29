@@ -155,22 +155,6 @@ h2.gradient {
 .viewport-safe .section-frame {
   width: 100%;
 }
-.viewport-safe::before,
-.viewport-safe::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: var(--border-subtle);
-  opacity: 0.4;
-}
-.viewport-safe::before {
-  left: var(--grid-offset);
-}
-.viewport-safe::after {
-  right: var(--grid-offset);
-}
 .section {
   padding-block: clamp(12px, 3vw, 24px);
   opacity: 0;
