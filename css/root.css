@@ -275,7 +275,7 @@ a:hover {
 .btn-arrow {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
 }
 /* arrow container */
 .icon-arrow {
@@ -317,7 +317,7 @@ a:hover {
   opacity: 1;
 }
 .btn-arrow:hover .icon-arrow {
-  transform: translateX(2px);
+  transform: translateX(1px);
 }
 .btn-arrow:hover .icon-arrow::after {
   transform: translateY(-50%) rotate(45deg) translateX(1px);
