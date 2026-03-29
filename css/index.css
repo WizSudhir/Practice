@@ -8,6 +8,7 @@
   min-height: 100vh;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
@@ -1079,10 +1080,11 @@ z-index: 2;
   4. METRIC
 ============================================================================================================================== */
 .metrics-row {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   justify-content: space-between;
   align-items: center;
-  gap: 40px;
+  gap: var(--space-md);
   flex-wrap: wrap;
 }
 .metric {
