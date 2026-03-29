@@ -12,6 +12,7 @@
   position: relative;
   overflow: hidden;
   isolation: isolate;
+  margin-bottom: var(--space-xl);
 }
 /* BG */
 .system-bg {
