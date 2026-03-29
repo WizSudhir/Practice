@@ -11,6 +11,7 @@
   --bg-primary: #050a19;          /* Main dark (no gradient) */
   --bg-secondary: #0b1224;
   --bg-elevated: #0f172a;
+  --bg-alt: #060d1f;
   /* BRAND (FROM LOGO) */
   --primary: #6366f1;             /* Indigo */
   --secondary: #3b82f6;           /* Blue */
@@ -68,6 +69,9 @@
 }
 html {
   scroll-behavior: smooth;
+}
+.section:nth-of-type(even) {
+  background: var(--bg-alt);
 }
 body {
   margin: 0;
