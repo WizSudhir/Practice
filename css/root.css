@@ -146,7 +146,7 @@ h2.gradient {
   min-height: calc(100vh - var(--nav-height));
   display: flex;
   align-items: center;
-  margin-top: var(--nav-height);
+  padding-top: var(--nav-height);
 }
 .viewport-safe .section-frame {
   width: 100%;
@@ -162,7 +162,7 @@ h2.gradient {
   margin: var(--space-sm) 0;
 }
 .section {
-  padding-block: clamp(50px, 6vw, 80px);
+  padding-block: clamp(24px, 3vw, 48px);
   opacity: 0;
   transform: none;
   transition: all 0.8s ease;
@@ -171,7 +171,7 @@ h2.gradient {
   scroll-margin-top: var(--nav-height);
 }
 .section-inner {
-  padding-block: var(--space-md); /* small internal breathing */
+  padding-block: 10px; /* small internal breathing */
 }
 .section.visible {
   opacity: 1;
