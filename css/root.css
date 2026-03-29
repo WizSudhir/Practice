@@ -212,7 +212,7 @@ h2.gradient {
   width: 100%;
 }
 .section-inner {
-  padding-inline: var(--space-md);
+  padding-inline: clamp(16px, 2vw, 28px);
   padding-block: var(--space-md);
   width: 100%;
 }
