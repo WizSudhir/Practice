@@ -173,6 +173,7 @@ h2.gradient {
   transform: translateY(0);
 }
 .section-frame {
+  min-height: 260px;
   position: relative;
   display: flex;
   flex-direction: column;
