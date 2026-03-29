@@ -283,6 +283,7 @@ a:hover {
   height: 12px;
   position: relative;
   transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1);
+  will-change: transform;
 }
 
 /* arrow shaft */
@@ -290,7 +291,7 @@ a:hover {
   content: "";
   position: absolute;
   top: 50%;
-  right: 3.5px;
+  right: 2.5px;
   width: 0;
   opacity: 0;
   height: 1.6px;
@@ -298,6 +299,7 @@ a:hover {
   transform: translateY(-50%) translateZ(0);
   transform-origin: right center;
   transition: width 0.25s cubic-bezier(0.2, 0, 0, 1), opacity 0.2s ease;
+  will-change: transform;
 }
 /* arrow head */
 .icon-arrow::after {
@@ -305,16 +307,17 @@ a:hover {
   position: absolute;
   right: 0;
   top: 50%;
-  width: 7px;
-  height: 7px;
+  width: 6.5px;
+  height: 6.5px;
   border-top: 1.6px solid #fff;
   border-right: 1.6px solid #fff;
   transform: translateY(-50%) rotate(45deg);
   opacity: 0.9;
+  will-change: transform;
 }
 /* HOVER = Stripe motion */
 .btn-arrow:hover .icon-arrow::before {
-  width: 5px;
+  width: 6px;
   opacity: 1;
 }
 .btn-arrow:hover .icon-arrow {
