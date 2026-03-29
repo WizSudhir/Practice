@@ -657,9 +657,6 @@ if (proofSection) {
         animateMetrics();
         hasAnimated = true;
       }
-      if (!entry.isIntersecting) {
-        resetMetrics(); // 🔥 THIS WAS MISSING
-      }
     });
   }, { threshold: 0.4 });
   proofObserver.observe(proofSection);
@@ -843,10 +840,10 @@ gsap.timeline({
   scrollTrigger: {
     trigger: section,
     start: `top+=${NAV_HEIGHT} top`,
-    end: "+=2200",
+    end: "+=1400",
     scrub: true,
     pin: true,
-    pinSpacing: true,
+    pinSpacing: false,
     anticipatePin: 1
   }
 })
