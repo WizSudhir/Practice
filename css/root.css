@@ -212,8 +212,8 @@ h2.gradient {
   width: 100%;
 }
 .section-inner {
-  padding-inline: 0;
-  padding-block: 10px;
+  padding-inline: var(--space-md);
+  padding-block: var(--space-md);
   width: 100%;
 }
 .section-glow {
