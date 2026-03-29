@@ -1183,7 +1183,6 @@ z-index: 2;
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 8px;
 }
 
 .step-number {
@@ -1220,12 +1219,10 @@ z-index: 2;
 }
 
 .step-solution {
-  margin-top: 8px;
   color: var(--text-secondary);
 }
 
 .step-impact {
-  margin-top: 6px;
   font-size: 13px;
   color: #22c55e;
 }
@@ -1236,7 +1233,6 @@ z-index: 2;
   transform: translateY(10px);
 }
 .how-cta {
-  margin-top: 40px;
   opacity: 0;
   transform: translateY(40px) scale(0.95);
   transform-origin: top left;
@@ -1251,18 +1247,15 @@ z-index: 2;
 .cta-eyebrow {
   font-size: 11px;
   color: #22c55e;
-  margin-bottom: 6px;
   letter-spacing: 0.08em;
 }
 .cta-heading {
   font-size: 18px;
   font-weight: 600;
-  margin-bottom: 8px;
 }
 .cta-sub {
   font-size: 13px;
   color: var(--text-muted);
-  margin-bottom: 14px;
 }
 .cta-btn {
   background: linear-gradient(135deg,#6366f1,#3b82f6);
