@@ -2,241 +2,238 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Design System Preview</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PracticeGrid Design System</title>
 
-  <!-- ROOT CSS -->
-  <link rel="stylesheet" href="css/root.css" />
+  <link rel="stylesheet" href="root.css" />
 
-  <!-- DEBUG STYLES (ONLY FOR VISUALIZATION) -->
+  <!-- DEBUG VISUAL HELPERS (SAFE FOR PROD PREVIEW PAGE) -->
   <style>
-    .debug {
-      outline: 1px dashed rgba(255,255,255,0.2);
+    .debug-outline {
+      outline: 1px dashed rgba(255,255,255,0.15);
     }
 
-    .debug-bg-1 { background: rgba(99,102,241,0.08); }
-    .debug-bg-2 { background: rgba(59,130,246,0.08); }
-    .debug-bg-3 { background: rgba(139,92,246,0.08); }
+    .debug-section { background: rgba(99,102,241,0.06); }
+    .debug-grid { background: rgba(59,130,246,0.06); }
+    .debug-container { background: rgba(139,92,246,0.06); }
 
     .label {
       font-size: 12px;
       color: var(--text-muted);
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
-    .box {
+    .demo-box {
       padding: 20px;
       border: 1px solid var(--border-default);
+      border-radius: var(--radius-sm);
     }
 
-    .spacer {
-      height: 40px;
-    }
+    .spacer { height: 40px; }
   </style>
-  <script>
-const sections = document.querySelectorAll('.section');
-
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.1 });
-
-sections.forEach(section => observer.observe(section));
-</script>
 </head>
+
 <body>
 
 <!-- ========================================================= -->
-<!-- 1. TYPOGRAPHY -->
+<!-- NAVBAR (REAL IMPLEMENTATION) -->
 <!-- ========================================================= -->
-<section class="section">
+<header class="navbar">
   <div class="container">
-    <div class="section-frame">
-      <h1 class="gradient">H1 Gradient Title</h1>
-      <h2>H2 Heading</h2>
-      <h3>H3 Heading</h3>
-      <p>
-        This is body text. It demonstrates line height, readability and spacing.
-      </p>
+    <div class="navbar-inner">
+      <div class="logo">
+        <img src="https://via.placeholder.com/120x40" />
+      </div>
+      <div class="nav-right">
+        <nav class="nav-menu">
+          <ul>
+            <li><a href="#">Docs</a></li>
+            <li><a href="#">Components</a></li>
+            <li><a href="#">Tokens</a></li>
+            <li><a class="btn-primary">Get Started</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ========================================================= -->
+<!-- HERO -->
+<!-- ========================================================= -->
+<section class="section viewport-safe">
+  <div class="container">
+    <div class="section-frame center">
+      <h1 class="gradient">Design System Preview</h1>
+      <p>Visual testing of spacing, layout, and components</p>
     </div>
   </div>
 </section>
 
 <!-- ========================================================= -->
-<!-- 2. SPACING SYSTEM -->
+<!-- 🔥 CORE: SECTION SYSTEM VISUALIZATION -->
 <!-- ========================================================= -->
-<section class="section">
-  <div class="container">
-    <div class="section-frame">
-      <div class="label">Spacing Stack Test</div>
+<section class="section debug-section">
 
-      <div class="stack-sm debug">
-        <div class="box">Item 1</div>
-        <div class="box">Item 2</div>
-        <div class="box">Item 3</div>
-      </div>
+  <div class="section-grid debug-grid">
 
-      <div class="stack-md debug mt-md">
-        <div class="box">Item 1</div>
-        <div class="box">Item 2</div>
-        <div class="box">Item 3</div>
-      </div>
+    <div class="container debug-container">
 
-      <div class="stack-lg debug mt-md">
-        <div class="box">Item 1</div>
-        <div class="box">Item 2</div>
-        <div class="box">Item 3</div>
+      <div class="section-frame">
+
+        <div class="label">STRUCTURE BREAKDOWN</div>
+
+        <div class="stack-md">
+          <div class="demo-box">Section (outer vertical padding)</div>
+          <div class="demo-box">Section-Grid (positioning layer)</div>
+          <div class="demo-box">Container (max-width + horizontal padding)</div>
+          <div class="demo-box">Section-Frame (inner padding + glass UI)</div>
+        </div>
+
       </div>
     </div>
   </div>
 </section>
 
 <!-- ========================================================= -->
-<!-- 3. GRID SYSTEM -->
+<!-- 🔥 PADDING + MARGIN INTERACTION -->
 <!-- ========================================================= -->
 <section class="section">
   <div class="container">
     <div class="section-frame">
-      <div class="label">Grid 2</div>
+
+      <h2>Spacing System</h2>
+
+      <div class="label">Margin Bottom</div>
+      <div class="demo-box mb-sm">mb-sm</div>
+      <div class="demo-box mb-md">mb-md</div>
+      <div class="demo-box mb-lg">mb-lg</div>
+
+      <div class="spacer"></div>
+
+      <div class="label">Margin Top</div>
+      <div class="demo-box mt-sm">mt-sm</div>
+      <div class="demo-box mt-md">mt-md</div>
+      <div class="demo-box mt-lg">mt-lg</div>
+
+      <div class="spacer"></div>
+
+      <div class="label">Stack (Internal spacing)</div>
+      <div class="stack-sm debug-outline">
+        <div class="demo-box">Item</div>
+        <div class="demo-box">Item</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- GRID SYSTEM -->
+<!-- ========================================================= -->
+<section class="section">
+  <div class="container">
+    <div class="section-frame">
+
+      <h2>Grid System</h2>
+
       <div class="grid-2">
-        <div class="box">Column 1</div>
-        <div class="box">Column 2</div>
+        <div class="demo-box">Column 1</div>
+        <div class="demo-box">Column 2</div>
       </div>
 
-      <div class="label mt-md">Grid 3</div>
+      <div class="spacer"></div>
+
       <div class="grid-3">
-        <div class="box">1</div>
-        <div class="box">2</div>
-        <div class="box">3</div>
+        <div class="demo-box">1</div>
+        <div class="demo-box">2</div>
+        <div class="demo-box">3</div>
       </div>
+
     </div>
   </div>
 </section>
 
 <!-- ========================================================= -->
-<!-- 4. BUTTONS -->
+<!-- COMPONENTS -->
 <!-- ========================================================= -->
 <section class="section">
   <div class="container">
     <div class="section-frame">
-      <button class="btn-primary">Primary</button>
-      <button class="btn-outline">Outline</button>
 
-      <button class="btn-primary btn-arrow">
-        CTA
-        <span class="icon-arrow"></span>
-      </button>
+      <h2>Buttons</h2>
+
+      <div class="stack-sm">
+        <button class="btn-primary">Primary</button>
+        <button class="btn-outline">Outline</button>
+
+        <button class="btn-primary btn-arrow">
+          CTA <span class="icon-arrow"></span>
+        </button>
+      </div>
+
     </div>
   </div>
 </section>
 
 <!-- ========================================================= -->
-<!-- 5. INPUTS -->
+<!-- INPUTS -->
 <!-- ========================================================= -->
 <section class="section">
   <div class="container">
     <div class="section-frame">
-      <input placeholder="Input field" />
-      <textarea placeholder="Textarea"></textarea>
+
+      <h2>Inputs</h2>
+
+      <div class="stack-sm">
+        <input placeholder="Input field"/>
+        <textarea placeholder="Textarea"></textarea>
+      </div>
+
     </div>
   </div>
 </section>
 
 <!-- ========================================================= -->
-<!-- 6. CARD / GLASS -->
+<!-- CARDS -->
 <!-- ========================================================= -->
 <section class="section">
   <div class="container">
     <div class="grid-3">
-      <div class="card box">Card</div>
-      <div class="glass box">Glass</div>
-      <div class="section-box box">Section Box</div>
+
+      <div class="card demo-box">Card</div>
+      <div class="glass demo-box">Glass</div>
+      <div class="section-box demo-box">Section Box</div>
+
     </div>
   </div>
 </section>
 
 <!-- ========================================================= -->
-<!-- 7. IMAGE SYSTEM -->
+<!-- IMAGE -->
 <!-- ========================================================= -->
 <section class="section">
   <div class="container">
     <div class="section-frame">
+
       <div class="img-glow">
-        <img src="https://via.placeholder.com/600x300" />
+        <img src="https://via.placeholder.com/600x300"/>
       </div>
+
     </div>
   </div>
 </section>
 
 <!-- ========================================================= -->
-<!-- 🔥 8. CRITICAL: SECTION SYSTEM VISUALIZATION -->
+<!-- NESTED STRUCTURE TEST -->
 <!-- ========================================================= -->
-
-<section class="section debug-bg-1">
-  <div class="label">SECTION (outer padding)</div>
-
-  <div class="section-grid debug-bg-2">
-    <div class="label">SECTION-GRID (no padding, positioning layer)</div>
-
-    <div class="container debug-bg-3">
-      <div class="label">CONTAINER (max-width + horizontal padding)</div>
-
-      <div class="section-frame">
-        <div class="label">SECTION-FRAME (inner padding + glass)</div>
-
-        <p>
-          This block shows EXACT spacing interaction:
-        </p>
-
-        <ul>
-          <li>Section → vertical padding</li>
-          <li>Container → horizontal padding</li>
-          <li>Section-frame → inner padding</li>
-        </ul>
-
-        <div class="box">Content Box</div>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========================================================= -->
-<!-- 🔥 9. PADDING + MARGIN INTERACTION TEST -->
-<!-- ========================================================= -->
-<section class="section debug-bg-1">
+<section class="section debug-section">
   <div class="container">
     <div class="section-frame">
 
-      <div class="label">Margin vs Padding</div>
+      <h2>Nested Sections</h2>
 
-      <div class="box mb-sm">mb-sm</div>
-      <div class="box mb-md">mb-md</div>
-      <div class="box mb-lg">mb-lg</div>
-
-      <div class="spacer"></div>
-
-      <div class="box mt-sm">mt-sm</div>
-      <div class="box mt-md">mt-md</div>
-      <div class="box mt-lg">mt-lg</div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ========================================================= -->
-<!-- 🔥 10. NESTED SECTION TEST -->
-<!-- ========================================================= -->
-<section class="section debug-bg-2">
-  <div class="container">
-    <div class="section-frame">
-
-      <div class="label">Nested Section Test</div>
-
-      <section class="section debug-bg-3">
+      <section class="section debug-grid">
         <div class="container">
           <div class="section-frame">
             Nested section content
@@ -249,30 +246,32 @@ sections.forEach(section => observer.observe(section));
 </section>
 
 <!-- ========================================================= -->
-<!-- 11. ICON TEST -->
+<!-- FOOTER -->
 <!-- ========================================================= -->
-<section class="section">
+<footer class="footer">
   <div class="container">
-    <div class="section-frame">
-      <svg class="icon" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="10" stroke="currentColor" fill="none"/>
-      </svg>
+    <div class="footer-bottom">
+      © PracticeGrid Design System
     </div>
   </div>
-</section>
+</footer>
 
 <!-- ========================================================= -->
-<!-- 12. DIVIDER -->
+<!-- SCRIPT (CRITICAL FOR VISIBILITY) -->
 <!-- ========================================================= -->
-<section class="section">
-  <div class="container">
-    <div class="section-frame">
-      <div>Above</div>
-      <div class="divider"></div>
-      <div>Below</div>
-    </div>
-  </div>
-</section>
+<script>
+const sections = document.querySelectorAll('.section');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+sections.forEach(section => observer.observe(section));
+</script>
 
 </body>
 </html>
