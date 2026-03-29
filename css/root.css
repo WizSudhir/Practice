@@ -152,11 +152,15 @@ h2.gradient {
   background: var(--border-subtle);
   margin: var(--space-sm) 0;
 }
+.section + .section {
+  margin-top: var(--space-sm);
+}
 .section-grid {
   position: relative;
   z-index: 0;
 }
 .section {
+  padding: var(--space-sm) 0;
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.8s ease;
@@ -170,8 +174,11 @@ h2.gradient {
 }
 .section-frame {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   z-index: 1;
-  padding: clamp(32px, 4vw, 64px);
+  padding: var(--space-sm);
   border-radius: var(--radius-sm);
   border: 1px solid rgba(255,255,255,0.12);
   background: rgba(255,255,255,0.02);
