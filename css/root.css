@@ -290,12 +290,13 @@ a:hover {
   content: "";
   position: absolute;
   top: 50%;
-  left: 0;
+  right: 5px;
   width: 0;
   opacity: 0;
   height: 1.5px;
   background: #fff;
   transform: translateY(-50%);
+  transform-origin: right center;
   transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
 }
 /* arrow head */
@@ -317,7 +318,7 @@ a:hover {
   opacity: 1;
 }
 .btn-arrow:hover .icon-arrow {
-  transform: translateX(1px);
+  transform: translateX(2px);
 }
 .btn-arrow:hover .icon-arrow::after {
   transform: translateY(-50%) rotate(45deg) translateX(1px);
