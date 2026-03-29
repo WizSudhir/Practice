@@ -463,6 +463,7 @@ img {
   backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border-default);
   transition: all var(--transition-base);
+  z-index: 9999;
 }
 .navbar .container {
   max-width: 1200px;
