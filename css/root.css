@@ -70,7 +70,6 @@ html {
   scroll-behavior: smooth;
 }
 body {
-  padding-top: var(--nav-height);
   margin: 0;
   font-family: var(--font-primary);
   background: var(--bg-primary);
