@@ -206,7 +206,7 @@ h2.gradient {
   border-color 0.3s ease;
   will-change: transform;
   transform: none !important;
-  contain: layout;
+  backface-visibility: hidden;
 }
 .section-frame > * {
   width: 100%;
