@@ -843,7 +843,7 @@ gsap.timeline({
     end: "+=1400",
     scrub: true,
     pin: true,
-    pinSpacing: false,
+    pinSpacing: true,
     anticipatePin: 1
   }
 })
