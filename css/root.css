@@ -153,8 +153,8 @@ h2.gradient {
 }
 .container {
   max-width: var(--container);
-  margin-inline: auto;
-  padding-inline: clamp(16px, 3vw, 32px);
+  margin-inline: 5px;
+  padding-inline: clamp(12px, 3vw, 24px);
 }
 .divider {
   height: 1px;
@@ -164,8 +164,6 @@ h2.gradient {
 .section {
   padding-block: clamp(24px, 3vw, 48px);
   opacity: 0;
-  transform: none;
-  transition: all 0.8s ease;
   position: relative;
   z-index: 1;
   scroll-margin-top: var(--nav-height);
@@ -177,9 +175,6 @@ h2.gradient {
 .section.visible {
   opacity: 1;
   transform: translateY(0);
-}
-.section + .section {
-  margin-top: 0;
 }
 .section-grid {
   position: relative;
