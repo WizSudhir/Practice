@@ -148,7 +148,7 @@ h2.gradient {
 ============================================================================================================================ */
 .viewport-safe {
   min-height: calc(100vh - var(--nav-height));
-  display: flex;
+  display: block;
   align-items: center;
   padding-top: var(--nav-height);
 }
