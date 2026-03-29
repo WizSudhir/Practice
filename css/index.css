@@ -1056,7 +1056,6 @@ z-index: 2;
   align-items: center;
   gap: var(--space-lg);
   flex-wrap: wrap;
-  max-width: 900px;
   margin: 0 auto;
 }
 .metric {
@@ -1072,8 +1071,8 @@ z-index: 2;
   transform: translateY(0);
 }
 .metric h3 {
-  font-size: 36px;
-  font-weight: 700;
+  font-size: 30px;
+  font-weight: 600;
   background: var(--gradient-primary);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1082,9 +1081,6 @@ z-index: 2;
   font-size: 14px;
   color: var(--text-secondary);
   margin-top: 6px;
-}
-.metrics-row {
-  gap: clamp(20px, 4vw, 60px);
 }
 /* ============================================================================================================================
   5. HOW IT WORKS
