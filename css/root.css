@@ -162,6 +162,7 @@ h2.gradient {
   transition: all 0.8s ease;
   position: relative;
   z-index: 1;
+  scroll-margin-top: var(--nav-height);
 }
 .section.visible {
   opacity: 1;
