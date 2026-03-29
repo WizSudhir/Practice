@@ -738,6 +738,7 @@ z-index: 2;
 ============================================================================================================================== */
 .about-belief {
   min-height: calc(100vh - var(--nav-height));
+  padding-top: var(--nav-height);
   display: flex;
   align-items: center;
 }
