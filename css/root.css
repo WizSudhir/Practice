@@ -160,7 +160,7 @@ h2.gradient {
   z-index: 0;
 }
 .section {
-  padding: var(--space-xl) 0;
+  padding: var(--space-lg) 0;
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.8s ease;
@@ -176,10 +176,10 @@ h2.gradient {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
+  gap: var(--space-sm);
   justify-content: center;
   z-index: 1;
-  padding: var(--space-lg);
+  padding: var(--space-md);
   border-radius: var(--radius-sm);
   border: 1px solid rgba(255,255,255,0.12);
   background: rgba(255,255,255,0.02);
