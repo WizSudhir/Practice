@@ -723,6 +723,13 @@ const chart = new Chart(ctx, {
     }
   }
 });
+  gsap.to(".metric", {
+  opacity: 1,
+  y: 0,
+  duration: 0.6,
+  stagger: 0.2,
+  ease: "power2.out"
+});
 // =========================
 // GRAPH DOT TRACKING
 // =========================
