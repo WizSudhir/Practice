@@ -5,8 +5,7 @@
    1. DESKTOP HERO SECTION
 ============================================================================================================================== */
 .hero-system {
-  min-height: calc(100vh - var(--nav-height));
-  padding-top: var(--nav-height);
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
