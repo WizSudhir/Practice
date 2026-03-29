@@ -1279,7 +1279,11 @@ z-index: 2;
   border: 1px solid var(--border-default);
   box-shadow: var(--shadow-elevated);
   overflow: hidden;
+  transform: translateZ(0);
+  will-change: transform;
+  opacity: 1 !important;
 }
+
 #graphDot {
   position: absolute;
   width: 10px;
@@ -1340,6 +1344,7 @@ z-index: 2;
 .metric-value {
   font-size: 30px;
   font-weight: 700;
+  color: #4ade80;
   background: linear-gradient(90deg,#4ade80,#22c55e);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1428,12 +1433,6 @@ z-index: 2;
   transition: all 0.4s ease;
 }
 
-/* ===== FLOAT DEPTH ===== */
-
-.hiw-dashboard {
-  transform: translateZ(0);
-  will-change: transform;
-}
 
 /* ============================================================================================================================
   6. SERVICES GATEWAY
