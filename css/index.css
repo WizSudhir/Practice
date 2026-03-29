@@ -1108,6 +1108,7 @@ z-index: 2;
 
 .how-it-works {
   overflow: hidden;
+  padding-top: var(--nav-height);
 }
 
 .narrative {
