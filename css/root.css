@@ -218,8 +218,8 @@ h2.gradient {
     rgba(59,130,246,0.2),
     transparent 70%
   );
-  filter: blur(40px);
-  opacity: 0.6;
+  filter: blur(10px);
+  opacity: 0.5;
   z-index: -2;
   pointer-events: none;
 }
