@@ -6,7 +6,6 @@
 ============================================================================================================================== */
 .hero-system {
   height: 100vh;
-  padding-top: var(--nav-height);
   display: flex;
   align-items: center;
   justify-content: center;
