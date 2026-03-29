@@ -1,296 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design System Preview</title>
 
-<title>PracticeGrid Root System</title>
+  <!-- ROOT CSS -->
+  <link rel="stylesheet" href="css/root.css" />
 
-<link rel="stylesheet" href="./css/root.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-<script defer src="https://unpkg.com/lucide@latest"></script>
+  <!-- DEBUG STYLES (ONLY FOR VISUALIZATION) -->
+  <style>
+    .debug {
+      outline: 1px dashed rgba(255,255,255,0.2);
+    }
 
-<style>
-/* DEMO HELPERS (SAFE FOR PROD PREVIEW PAGE) */
-.demo-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
-  gap: 20px;
-}
-.demo-box {
-  padding: 20px;
-}
-.scroll-demo {
-  max-height: 120px;
-  overflow-y: auto;
-  padding: 10px;
-  border: 1px solid rgba(255,255,255,0.1);
-}
-</style>
+    .debug-bg-1 { background: rgba(99,102,241,0.08); }
+    .debug-bg-2 { background: rgba(59,130,246,0.08); }
+    .debug-bg-3 { background: rgba(139,92,246,0.08); }
 
+    .label {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .box {
+      padding: 20px;
+      border: 1px solid var(--border-default);
+    }
+
+    .spacer {
+      height: 40px;
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- =========================================
-NAVBAR
-========================================= -->
-<header class="navbar">
-  <div class="container navbar-inner">
-    <div class="logo"><strong>PracticeGrid</strong></div>
-
-    <nav class="nav-menu">
-      <ul>
-        <li><a href="#">System</a></li>
-        <li><a href="#">Components</a></li>
-        <li><a href="#">Utilities</a></li>
-        <li><a class="btn-primary">CTA Button</a></li>
-      </ul>
-    </nav>
-
-    <button class="nav-toggle">
-      <span></span><span></span><span></span>
-    </button>
+<!-- ========================================================= -->
+<!-- 1. TYPOGRAPHY -->
+<!-- ========================================================= -->
+<section class="section">
+  <div class="container">
+    <div class="section-frame">
+      <h1 class="gradient">H1 Gradient Title</h1>
+      <h2>H2 Heading</h2>
+      <h3>H3 Heading</h3>
+      <p>
+        This is body text. It demonstrates line height, readability and spacing.
+      </p>
+    </div>
   </div>
-</header>
-
-<!-- =========================================
-HERO / TYPOGRAPHY
-========================================= -->
-<section class="section section-divider visible">
-<div class="container center">
-
-<h1 class="gradient">Root CSS Design System</h1>
-<p class="mt-md">
-Complete enterprise SaaS UI system powered by design tokens.
-</p>
-
-<div class="mt-lg">
-  <a class="btn-primary">Primary</a>
-  <a class="btn-outline">Outline</a>
-</div>
-
-</div>
 </section>
 
-<!-- =========================================
-TYPOGRAPHY
-========================================= -->
-<section class="section section-divider visible">
-<div class="container">
+<!-- ========================================================= -->
+<!-- 2. SPACING SYSTEM -->
+<!-- ========================================================= -->
+<section class="section">
+  <div class="container">
+    <div class="section-frame">
+      <div class="label">Spacing Stack Test</div>
 
-<h2>Typography</h2>
-<div class="divider"></div>
+      <div class="stack-sm debug">
+        <div class="box">Item 1</div>
+        <div class="box">Item 2</div>
+        <div class="box">Item 3</div>
+      </div>
 
-<h1>Heading 1</h1>
-<h2 class="mt-md">Heading 2</h2>
-<h3 class="mt-md">Heading 3</h3>
-<h4 class="mt-md">Heading 4</h4>
+      <div class="stack-md debug mt-md">
+        <div class="box">Item 1</div>
+        <div class="box">Item 2</div>
+        <div class="box">Item 3</div>
+      </div>
 
-<p class="mt-md">
-Body text demonstrates readability, spacing, and color hierarchy.
-</p>
-
-<p class="mt-md gradient-title">
-Gradient text system using brand tokens.
-</p>
-
-</div>
-</section>
-
-<!-- =========================================
-LAYOUT + SPACING
-========================================= -->
-<section class="section section-divider visible">
-<div class="container">
-
-<h2>Layout + Spacing System</h2>
-<div class="divider"></div>
-
-<div class="demo-grid">
-
-<div class="card demo-box">Card</div>
-<div class="card demo-box mt-sm">mt-sm</div>
-<div class="card demo-box mt-md">mt-md</div>
-<div class="card demo-box mt-lg">mt-lg</div>
-
-</div>
-
-</div>
-</section>
-
-<!-- =========================================
-SECTION VARIANTS
-========================================= -->
-<section class="section section-tight section-divider visible">
-<div class="container">
-<h2>Section Tight</h2>
-<p>Reduced spacing section</p>
-</div>
-</section>
-
-<section class="section section-loose section-divider visible">
-<div class="container">
-<h2>Section Loose</h2>
-<p>Expanded spacing section</p>
-</div>
-</section>
-
-<section class="section section-divider visible">
-<div class="container section-frame section-glow">
-<h2>Section Frame + Glow</h2>
-<p>Premium bordered glowing section</p>
-</div>
-</section>
-
-<!-- =========================================
-BUTTON SYSTEM
-========================================= -->
-<section class="section section-divider visible">
-<div class="container">
-
-<h2>Buttons</h2>
-<div class="divider"></div>
-
-<a class="btn-primary">Primary Button</a>
-<a class="btn-outline mt-md">Outline Button</a>
-
-</div>
-</section>
-
-<!-- =========================================
-CARDS / GLASS SYSTEM
-========================================= -->
-<section class="section section-divider visible">
-<div class="container">
-
-<h2>Glass / Card System</h2>
-<div class="divider"></div>
-
-<div class="demo-grid">
-<div class="card demo-box">Card</div>
-<div class="glass demo-box">Glass</div>
-<div class="section-box demo-box">Section Box</div>
-</div>
-
-</div>
-</section>
-
-<!-- =========================================
-FORM SYSTEM
-========================================= -->
-<section class="section section-divider visible">
-<div class="container">
-
-<h2>Input System</h2>
-<div class="divider"></div>
-
-<input type="text" placeholder="Input field">
-<textarea class="mt-md" placeholder="Textarea"></textarea>
-
-</div>
-</section>
-
-<!-- =========================================
-ICON SYSTEM
-========================================= -->
-<section class="section section-divider visible">
-<div class="container">
-
-<h2>Icon System</h2>
-<div class="divider"></div>
-
-<i data-lucide="activity" class="icon"></i>
-<i data-lucide="cpu" class="icon"></i>
-<i data-lucide="shield-check" class="icon"></i>
-
-</div>
-</section>
-
-<!-- =========================================
-IMAGE SYSTEM
-========================================= -->
-<section class="section section-divider visible">
-<div class="container">
-
-<h2>Image System</h2>
-<div class="divider"></div>
-
-<div class="img-glow" style="max-width:400px;">
-<img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71">
-</div>
-
-</div>
-</section>
-
-<!-- =========================================
-SCROLLBAR DEMO
-========================================= -->
-<section class="section section-divider visible">
-<div class="container">
-
-<h2>Scrollbar System</h2>
-<div class="divider"></div>
-
-<div class="scroll-demo">
-<p>Scroll content</p>
-<p>Scroll content</p>
-<p>Scroll content</p>
-<p>Scroll content</p>
-<p>Scroll content</p>
-<p>Scroll content</p>
-<p>Scroll content</p>
-<p>Scroll content</p>
-</div>
-
-</div>
-</section>
-
-<!-- =========================================
-FOOTER
-========================================= -->
-<footer class="footer">
-  <div class="container footer-grid">
-
-    <div class="footer-brand">
-      <h3>PracticeGrid</h3>
-      <p>Revenue Cycle Intelligence Platform</p>
+      <div class="stack-lg debug mt-md">
+        <div class="box">Item 1</div>
+        <div class="box">Item 2</div>
+        <div class="box">Item 3</div>
+      </div>
     </div>
-
-    <div class="footer-links">
-      <h4>Company</h4>
-      <a href="#">Home</a>
-      <a href="#">Services</a>
-      <a href="#">Blog</a>
-    </div>
-
-    <div class="footer-contact">
-      <a href="#" class="footer-contact-item">Contact Us</a>
-    </div>
-
-    <div class="footer-hipaa">
-      <span class="hipaa-title">HIPAA</span>
-      <span class="hipaa-sub">Compliant</span>
-    </div>
-
   </div>
+</section>
 
-  <div class="footer-bottom">
-    © PracticeGrid System
+<!-- ========================================================= -->
+<!-- 3. GRID SYSTEM -->
+<!-- ========================================================= -->
+<section class="section">
+  <div class="container">
+    <div class="section-frame">
+      <div class="label">Grid 2</div>
+      <div class="grid-2">
+        <div class="box">Column 1</div>
+        <div class="box">Column 2</div>
+      </div>
+
+      <div class="label mt-md">Grid 3</div>
+      <div class="grid-3">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+      </div>
+    </div>
   </div>
-</footer>
+</section>
 
-<!-- =========================================
-SCRIPT FIXES
-========================================= -->
-<script>
-lucide.createIcons();
+<!-- ========================================================= -->
+<!-- 4. BUTTONS -->
+<!-- ========================================================= -->
+<section class="section">
+  <div class="container">
+    <div class="section-frame">
+      <button class="btn-primary">Primary</button>
+      <button class="btn-outline">Outline</button>
 
-// ensure sections visible (production safe fallback)
-document.querySelectorAll('.section').forEach(el=>{
-  el.classList.add('visible');
-});
-</script>
+      <button class="btn-primary btn-arrow">
+        CTA
+        <span class="icon-arrow"></span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- 5. INPUTS -->
+<!-- ========================================================= -->
+<section class="section">
+  <div class="container">
+    <div class="section-frame">
+      <input placeholder="Input field" />
+      <textarea placeholder="Textarea"></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- 6. CARD / GLASS -->
+<!-- ========================================================= -->
+<section class="section">
+  <div class="container">
+    <div class="grid-3">
+      <div class="card box">Card</div>
+      <div class="glass box">Glass</div>
+      <div class="section-box box">Section Box</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- 7. IMAGE SYSTEM -->
+<!-- ========================================================= -->
+<section class="section">
+  <div class="container">
+    <div class="section-frame">
+      <div class="img-glow">
+        <img src="https://via.placeholder.com/600x300" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- 🔥 8. CRITICAL: SECTION SYSTEM VISUALIZATION -->
+<!-- ========================================================= -->
+
+<section class="section debug-bg-1">
+  <div class="label">SECTION (outer padding)</div>
+
+  <div class="section-grid debug-bg-2">
+    <div class="label">SECTION-GRID (no padding, positioning layer)</div>
+
+    <div class="container debug-bg-3">
+      <div class="label">CONTAINER (max-width + horizontal padding)</div>
+
+      <div class="section-frame">
+        <div class="label">SECTION-FRAME (inner padding + glass)</div>
+
+        <p>
+          This block shows EXACT spacing interaction:
+        </p>
+
+        <ul>
+          <li>Section → vertical padding</li>
+          <li>Container → horizontal padding</li>
+          <li>Section-frame → inner padding</li>
+        </ul>
+
+        <div class="box">Content Box</div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- 🔥 9. PADDING + MARGIN INTERACTION TEST -->
+<!-- ========================================================= -->
+<section class="section debug-bg-1">
+  <div class="container">
+    <div class="section-frame">
+
+      <div class="label">Margin vs Padding</div>
+
+      <div class="box mb-sm">mb-sm</div>
+      <div class="box mb-md">mb-md</div>
+      <div class="box mb-lg">mb-lg</div>
+
+      <div class="spacer"></div>
+
+      <div class="box mt-sm">mt-sm</div>
+      <div class="box mt-md">mt-md</div>
+      <div class="box mt-lg">mt-lg</div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- 🔥 10. NESTED SECTION TEST -->
+<!-- ========================================================= -->
+<section class="section debug-bg-2">
+  <div class="container">
+    <div class="section-frame">
+
+      <div class="label">Nested Section Test</div>
+
+      <section class="section debug-bg-3">
+        <div class="container">
+          <div class="section-frame">
+            Nested section content
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- 11. ICON TEST -->
+<!-- ========================================================= -->
+<section class="section">
+  <div class="container">
+    <div class="section-frame">
+      <svg class="icon" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" fill="none"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- 12. DIVIDER -->
+<!-- ========================================================= -->
+<section class="section">
+  <div class="container">
+    <div class="section-frame">
+      <div>Above</div>
+      <div class="divider"></div>
+      <div>Below</div>
+    </div>
+  </div>
+</section>
 
 </body>
 </html>
