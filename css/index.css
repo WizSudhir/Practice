@@ -1297,9 +1297,7 @@ z-index: 2;
 /* DASHBOARD CORE */
 .hiw-dashboard {
   position: relative;
-  background: rgba(255,255,255,0.02);
-  backdrop-filter: blur(24px);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-sm);
   padding: 28px;
   border: 1px solid var(--border-default);
   box-shadow: var(--shadow-elevated);
