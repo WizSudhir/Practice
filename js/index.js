@@ -845,6 +845,7 @@ gsap.timeline({
     start: `top+=${NAV_HEIGHT} top`,
     end: "+=2200",
     scrub: true,
+    pin: true,
     pinSpacing: true,
     anticipatePin: 1
   }
