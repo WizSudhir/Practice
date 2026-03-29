@@ -1797,13 +1797,14 @@ if (steps.length && visual) {
   gsap.timeline({
     scrollTrigger: {
       trigger: ".engagement-gsap",
-      start: "top top",
+      start: `top+=${NAV_HEIGHT} top`,
 
       // 🔥 responsive scroll distance
       end: "+=" + (window.innerHeight * totalSteps),
 
       scrub: true,
       pin: true,
+      pinSpacing: true,
       anticipatePin: 1,
 
       // 🔥 SNAP = fixes sync issues completely
