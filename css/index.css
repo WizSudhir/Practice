@@ -737,8 +737,8 @@ z-index: 2;
   3. ABOUT / BELIEF
 ============================================================================================================================== */
 .about-belief {
-  min-height: 100vh;
-  display: block;
+  min-height: calc(100vh - var(--nav-height));
+  display: flex;
   align-items: center;
 }
 .about-belief .section-title {
