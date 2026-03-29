@@ -242,7 +242,7 @@ h2.gradient {
 .section-glow::after {
   content: "";
   position: absolute;
-  inset: -12px;
+  inset: -6px;
   border-radius: inherit;
   /* 🔥 GRADIENT GLOW */
   background: radial-gradient(
