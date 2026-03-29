@@ -447,7 +447,6 @@ document.addEventListener("DOMContentLoaded", () => {
 // 3. ABOUT
 // ============================================================================================================================
 const aboutSection = document.querySelector('.about-system');
-
 if (aboutSection) {
   const aboutObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -464,19 +463,13 @@ if (systemCard) {
     systemCard.classList.toggle("active");
   });
 }
-// ===============================
 // RULES ENGINE (WITH HOVER INSPECT)
-// ===============================
-
 (function(){
-
   const engine = document.getElementById("rulesEngine");
   if (!engine) return;
-
   const rules = engine.querySelectorAll(".rule");
   const progress = document.getElementById("flowProgress");
   const output = document.getElementById("rulesOutput");
-
   const outputs = [
     "Data Verified",
     "Coverage Confirmed",
@@ -484,31 +477,23 @@ if (systemCard) {
     "Claim Optimized",
     "Revenue Secured"
   ];
-
   let index = 0;
   let interval;
   let isHovering = false;
 
   function runSequence(){
-
     if (isHovering) return;
-
     rules.forEach(r => r.classList.remove("active"));
     rules[index].classList.add("active");
-
     const percent = ((index + 1) / rules.length) * 100;
     progress.style.width = percent + "%";
-
     output.textContent = outputs[index];
     output.classList.remove("inspect");
     output.classList.add("active");
-
     setTimeout(() => {
       output.classList.remove("active");
     }, 1200);
-
     index++;
-
     if (index >= rules.length) {
       setTimeout(() => {
         index = 0;
@@ -516,7 +501,6 @@ if (systemCard) {
       }, 1200);
     }
   }
-
   // AUTO LOOP
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -531,106 +515,76 @@ if (systemCard) {
       }
     });
   }, { threshold: 0.4 });
-
   observer.observe(engine);
 
-  // ===============================
-  // 🔥 HOVER INSPECT MODE
-  // ===============================
-
+  // HOVER INSPECT MODE
   rules.forEach((rule, i) => {
-
     rule.addEventListener("mouseenter", () => {
-
       isHovering = true;
-
       engine.classList.add("inspecting");
-
       rules.forEach(r => r.classList.remove("inspect-active"));
       rule.classList.add("inspect-active");
-
       // freeze progress
       const percent = ((i + 1) / rules.length) * 100;
       progress.style.width = percent + "%";
-
       // show detailed explanation
       const detail = rule.dataset.detail;
       output.textContent = detail;
       output.classList.add("inspect");
       output.classList.add("active");
-
     });
-
     rule.addEventListener("mouseleave", () => {
-
       isHovering = false;
-
       engine.classList.remove("inspecting");
       rule.classList.remove("inspect-active");
-
       output.classList.remove("inspect");
-
     });
-
   });
-
 })();
-// ===============================
-  // MICRO INTERACTIONS (APPLE LEVEL)
-// ===============================
+// MICRO INTERACTIONS (APPLE LEVEL)
 (function(){
-
   const engine = document.getElementById("rulesEngine");
   if (!engine) return;
-
   const glow = document.getElementById("cursorGlow");
   const tooltip = document.getElementById("ruleTooltip");
   const core = engine.querySelector(".engine-core");
   const rules = engine.querySelectorAll(".rule");
-
   // CURSOR GLOW
   engine.addEventListener("mousemove", (e) => {
     const rect = engine.getBoundingClientRect();
     glow.style.left = (e.clientX - rect.left) + "px";
     glow.style.top = (e.clientY - rect.top) + "px";
   });
-
   // TOOLTIP + PULSE
   rules.forEach(rule => {
-
     rule.addEventListener("mouseenter", () => {
       tooltip.textContent = rule.dataset.detail;
       tooltip.classList.add("active");
-
       core.classList.add("pulse");
       setTimeout(() => core.classList.remove("pulse"), 600);
     });
-
     rule.addEventListener("mousemove", (e) => {
       tooltip.style.left = e.clientX + 14 + "px";
       tooltip.style.top = e.clientY + 14 + "px";
     });
-
     rule.addEventListener("mouseleave", () => {
       tooltip.classList.remove("active");
     });
-
   });
-
 })();
+  
 // ============================================================================================================================
 // 4. PROOF SNAPSHOT
 // ============================================================================================================================
 const proofSection = document.querySelector(".proof-snapshot");
 if (proofSection) {
   const metrics = proofSection.querySelectorAll(".metric h3");
-  let hasAnimated = false;
+  let isAnimating = false;
   function animateMetrics() {
     metrics.forEach((metric, i) => {
       const target = parseInt(metric.dataset.target);
       let current = 0;
       const increment = target / 40;
-      // show element
       setTimeout(() => {
         metric.parentElement.classList.add("visible");
       }, i * 150);
@@ -649,17 +603,22 @@ if (proofSection) {
       update();
     });
   }
+
   function resetMetrics() {
     metrics.forEach(metric => {
       metric.textContent = "0%";
+      metric.parentElement.classList.remove("visible");
     });
-    hasAnimated = false;
   }
+
   const proofObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (entry.isIntersecting && !hasAnimated) {
+      if (entry.isIntersecting && !isAnimating) {
+        isAnimating = true;
         animateMetrics();
-        hasAnimated = true;
+      } else if (!entry.isIntersecting) {
+        isAnimating = false;
+        resetMetrics();
       }
     });
   }, { threshold: 0.4 });
