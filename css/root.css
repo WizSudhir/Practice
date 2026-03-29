@@ -296,6 +296,7 @@ a:hover {
   opacity: 0;
   height: 1.6px;
   background: #fff;
+  box-shadow: 1px 0 0 #fff;
   transform: translateY(-50%) translateZ(0);
   transform-origin: right center;
   transition: width 0.25s cubic-bezier(0.2, 0, 0, 1), opacity 0.2s ease;
