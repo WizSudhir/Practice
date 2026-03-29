@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // ============================================================================================================================
 // 1. DESKTOP HERO
 // ============================================================================================================================
+  const NAV_HEIGHT = 80;
   const hero = document.querySelector(".system-bg");
   const nodes = document.querySelectorAll(".node");
   const core = document.querySelector(".core");
@@ -841,7 +842,7 @@ function updateStepUI(index) {
 gsap.timeline({
   scrollTrigger: {
     trigger: section,
-    start: "top top",
+    start: `top+=${NAV_HEIGHT} top`,
     end: "+=2200",
     scrub: true,
     pin: true,
