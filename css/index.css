@@ -776,7 +776,6 @@ z-index: 2;
   margin: 0;
   line-height: 1.7;
 }
-
 /* BELIEF CARDS (UPGRADE) */
 .belief-card {
   display: flex;
@@ -844,10 +843,7 @@ z-index: 2;
   color: var(--text-muted);
   line-height: 1.6;
 }
-/* ===============================
-   RULES ENGINE (BELIEF SECTION)
-================================= */
-
+/* RULES ENGINE */
 .rules-engine {
   min-height: auto;
   width: 100%;
@@ -860,7 +856,6 @@ z-index: 2;
   position: relative;
   overflow: hidden;
 }
-
 /* subtle glow */
 .rules-engine::before {
   content: "";
@@ -878,21 +873,18 @@ z-index: 2;
   z-index: -1;
   display: none;
 }
-
 /* HEADER */
 .rules-header {
   font-size: 13px;
   color: #93c5fd;
   margin-bottom: 16px;
 }
-
 /* RULE LIST */
 .rules-list {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-
 /* INDIVIDUAL RULE */
 .rule {
   display: flex;
@@ -905,13 +897,11 @@ z-index: 2;
   opacity: 0.4;
   transition: all 0.4s ease;
 }
-
 .rule span {
   font-size: 11px;
   color: #6366f1;
   font-weight: 600;
 }
-
 /* ACTIVE RULE */
 .rule.active {
   opacity: 1;
@@ -919,13 +909,11 @@ z-index: 2;
   background: rgba(99,102,241,0.12);
   box-shadow: none;
 }
-
 /* VISUAL AREA */
 .rules-visual {
   margin-top: 12px;
   position: relative;
 }
-
 /* FLOW LINE */
 .flow-line {
   width: 100%;
@@ -935,14 +923,12 @@ z-index: 2;
   overflow: hidden;
   margin-bottom: 16px;
 }
-
 .flow-progress {
   height: 100%;
   width: 0%;
   background: linear-gradient(90deg,#6366f1,#22c55e);
   transition: width 0.6s ease;
 }
-
 /* ENGINE CORE */
 .engine-core {
   margin: 14px 0;
@@ -953,7 +939,6 @@ z-index: 2;
   align-items: center;
   gap: 6px;
 }
-
 .engine-core svg {
   width: 22px;
   height: 22px;
@@ -987,26 +972,20 @@ z-index: 2;
   transform: translateY(6px);
   transition: all 0.4s ease;
 }
-
 .rules-output.active {
   opacity: 1;
   transform: translateY(0);
 }
-/* ===============================
-   RULE INSPECT MODE
-================================= */
-
+/* RULE INSPECT MODE */
 .rules-engine.inspecting .rule {
   opacity: 0.2;
 }
-
 .rules-engine.inspecting .rule.inspect-active {
   opacity: 1;
   background: rgba(34,197,94,0.1);
   box-shadow:
     0 0 20px rgba(34,197,94,0.3);
 }
-
 /* OUTPUT becomes explanation */
 .rules-output.inspect {
   color: #93c5fd;
@@ -1015,16 +994,12 @@ z-index: 2;
   max-width: 260px;
   margin: 12px auto 0;
 }
-
 /* subtle core boost */
 .rules-engine.inspecting .engine-core {
   transform: scale(1.05);
   filter: drop-shadow(0 0 12px rgba(34,197,94,0.4));
 }
-/* ===============================
-   CURSOR GLOW (APPLE STYLE)
-================================= */
-
+/* CURSOR GLOW */
 .cursor-glow {
   position: absolute;
   width: 220px;
@@ -1044,15 +1019,10 @@ z-index: 2;
   z-index: 0;
   display: none;
 }
-
 .rules-engine:hover .cursor-glow {
   opacity: 1;
 }
-
-/* ===============================
-   TOOLTIP MICRO CARD
-================================= */
-
+/* TOOLTIP MICRO CARD */
 .rule-tooltip {
   position: fixed;
   max-width: 240px;
@@ -1073,7 +1043,6 @@ z-index: 2;
   transition: all 0.25s ease;
   z-index: 999;
 }
-
 .rule-tooltip.active {
   opacity: 1;
   transform: translateY(0) scale(1);
@@ -1091,7 +1060,7 @@ z-index: 2;
   margin: 0 auto;
 }
 .metric {
-  flex: 0 0 auto;
+  flex: 1;
   min-width: 180px;
   text-align: center;
   opacity: 0;
