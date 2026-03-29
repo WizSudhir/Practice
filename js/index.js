@@ -442,7 +442,6 @@ document.addEventListener("DOMContentLoaded", () => {
 }
 }
 
-
 // ============================================================================================================================
 // 3. ABOUT
 // ============================================================================================================================
@@ -583,24 +582,22 @@ if (proofSection) {
   function animateMetrics() {
     metrics.forEach((metric, i) => {
       const target = parseInt(metric.dataset.target);
-      let current = 0;
-      const increment = target / 40;
+      const duration = 1600; // 🔥 increase for slower (1200–2000 ideal)
+      const start = performance.now();
       setTimeout(() => {
         metric.parentElement.classList.add("visible");
       }, i * 150);
-      function update() {
-        current += increment;
-        if (
-          (target > 0 && current >= target) ||
-          (target < 0 && current <= target)
-        ) {
-          metric.textContent = target + "%";
-          return;
+      function update(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        // easeOut (smooth finish)
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const value = target * eased;
+        metric.textContent = Math.round(value) + "%";
+        if (progress < 1) {
+          requestAnimationFrame(update);
         }
-        metric.textContent = Math.round(current) + "%";
-        requestAnimationFrame(update);
       }
-      update();
+      requestAnimationFrame(update);
     });
   }
 
