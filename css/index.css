@@ -1217,6 +1217,10 @@ z-index: 2;
   transform: translateY(10px);
 }
 .how-cta {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
   opacity: 0;
   transform: translateY(40px) scale(0.95);
   transform-origin: top left;
