@@ -839,8 +839,8 @@ function updateStepUI(index) {
 gsap.timeline({
   scrollTrigger: {
     trigger: section,
-    start: "top top"
-    end: "+=1400",
+    start: "top top",
+    end: "+=2200",
     scrub: true,
     pin: true,
     pinSpacing: true,
