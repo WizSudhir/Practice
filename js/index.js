@@ -623,13 +623,17 @@ if (systemCard) {
 // ============================================================================================================================
 const proofSection = document.querySelector(".proof-snapshot");
 if (proofSection) {
-  const metrics = proofSection.querySelectorAll("h3");
+  const metrics = proofSection.querySelectorAll(".metric h3");
   let hasAnimated = false;
   function animateMetrics() {
-    metrics.forEach(metric => {
+    metrics.forEach((metric, i) => {
       const target = parseInt(metric.dataset.target);
       let current = 0;
       const increment = target / 40;
+      // show element
+      setTimeout(() => {
+        metric.parentElement.classList.add("visible");
+      }, i * 150);
       function update() {
         current += increment;
         if (
