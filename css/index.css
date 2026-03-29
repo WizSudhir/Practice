@@ -14,7 +14,6 @@
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  margin-bottom: 10px;
 }
 /* BG */
 .system-bg {
