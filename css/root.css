@@ -144,8 +144,8 @@ h2.gradient {
 ============================================================================================================================ */
 .container {
   max-width: var(--container);
-  margin: auto;
-  padding: 0 20px;
+  margin-inline: auto;
+  padding-inline: 24px;
 }
 .divider {
   height: 1px;
@@ -174,12 +174,12 @@ h2.gradient {
 }
 .section-frame {
   position: relative;
+  padding: var(--space-sm); 
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
   justify-content: center;
   z-index: 1;
-  padding: var(--space-sm);
   border-radius: var(--radius-sm);
   border: 1px solid rgba(255,255,255,0.12);
   background: rgba(255,255,255,0.02);
@@ -363,7 +363,16 @@ a:hover {
   box-shadow: var(--glow-soft);
   transform: translateY(-4px);
 }
-
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
 /* ============================================================================================================================
    8. INPUT SYSTEM
 ============================================================================================================================ */
@@ -438,6 +447,9 @@ img {
 .mb-sm { margin-bottom: var(--space-sm); }
 .mb-md { margin-bottom: var(--space-md); }
 .mb-lg { margin-bottom: var(--space-lg); }
+.stack-sm > * + * { margin-top: var(--space-sm); }
+.stack-md > * + * { margin-top: var(--space-md); }
+.stack-lg > * + * { margin-top: var(--space-lg); }
 
 /* ============================================================================================================================
    12. SCROLLBAR (PREMIUM)
