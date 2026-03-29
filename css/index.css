@@ -1087,9 +1087,11 @@ z-index: 2;
   align-items: center;
   gap: var(--space-lg);
   flex-wrap: wrap;
+  max-width: 900px;
+  margin: 0 auto;
 }
 .metric {
-  flex: 1;
+  flex: 0 0 auto;
   min-width: 180px;
   text-align: center;
   opacity: 0;
@@ -1111,6 +1113,9 @@ z-index: 2;
   font-size: 14px;
   color: var(--text-secondary);
   margin-top: 6px;
+}
+.metrics-row {
+  gap: clamp(20px, 4vw, 60px);
 }
 /* ============================================================================================================================
   5. HOW IT WORKS
