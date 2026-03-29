@@ -840,7 +840,7 @@ gsap.timeline({
   scrollTrigger: {
     trigger: section,
     start: "top top"
-    end: "+=2200",
+    end: "+=1400",
     scrub: true,
     pin: true,
     pinSpacing: true,
