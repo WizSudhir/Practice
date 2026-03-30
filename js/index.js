@@ -1525,7 +1525,7 @@ if (ctaSection) {
     if (entries[0].isIntersecting) {
       ctaSection.classList.add('visible');
       // your animation
-      gsap.from('.cta-content > *', {
+      gsap.from(ctaSection.querySelectorAll('.cta-content > *'), {
         opacity: 0,
         y: 20,
         duration: 0.8,
