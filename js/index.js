@@ -799,7 +799,11 @@ function updateStepUI(index) {
   });
   transformEl.innerText = step.transform;
 }
-
+if (index === 4) {
+  cta.style.display = "block";
+} else {
+  cta.style.display = "none";
+}
 /* =========================
    SCROLL-DRIVEN SYSTEM
 ========================= */
@@ -807,7 +811,7 @@ gsap.timeline({
   scrollTrigger: {
     trigger: section,
     start: "top top",
-    end: "+=2200",
+    end: "+=2600",
     scrub: true,
     pin: true,
     pinSpacing: true,
