@@ -58,7 +58,43 @@
   --nav-height: 80px;
   --grid-offset: calc((100vw - var(--container)) / 2);
 }
-
+/* =========================================================
+   LIGHT THEME (NON-DESTRUCTIVE OVERRIDE)
+========================================================= */
+[data-theme="light"] {
+  /* BACKGROUNDS */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-elevated: #ffffff;
+  --bg-alt: #f1f5f9;
+  /* TEXT */
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  /* BORDERS */
+  --border-subtle: rgba(0,0,0,0.06);
+  --border-default: rgba(0,0,0,0.08);
+  --border-strong: rgba(99,102,241,0.25);
+  /* SHADOW (clean, no glow) */
+  --shadow-soft: 0 10px 25px rgba(0,0,0,0.08);
+  --shadow-elevated: 0 20px 50px rgba(0,0,0,0.12);
+}
+[data-theme="light"] body::before,
+[data-theme="light"] body::after {
+  display: none;
+}
+[data-theme="light"] .section-frame {
+  background: rgba(0,0,0,0.02);
+}
+[data-theme="light"] .navbar {
+  background: rgba(255,255,255,0.7);
+}
+[data-theme="light"] .navbar.scrolled {
+  background: rgba(255,255,255,0.9);
+}
+[data-theme="light"] .nav-overlay {
+  background: rgba(255,255,255,0.6);
+}
 /* ============================================================================================================================
    2. GLOBAL RESET
 ============================================================================================================================ */
