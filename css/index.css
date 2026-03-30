@@ -2013,6 +2013,7 @@ z-index: 2;
   position: absolute;
   inset: 0;
   z-index: 0;
+  display: none;
 }
 /* GRID */
 .cta-grid {
