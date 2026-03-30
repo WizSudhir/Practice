@@ -1519,24 +1519,22 @@ if (ctaLiveEl) {
   }, 2500);
 }
 // CTA ENTRANCE ANIMATION
-const ctaSection = document.querySelector('.final-cta-pro');
-if (ctaSection) {
-  const observer = new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting) {
-      ctaSection.classList.add('visible');
-      // your animation
-      gsap.from(ctaSection.querySelectorAll('.cta-content > *'), {
-        opacity: 0,
-        y: 20,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "power2.out"
-      });
-      observer.disconnect();
-    }
-  }, { threshold: 0.4 });
-  observer.observe(ctaSection);
-}
+const observer = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting) {
+    ctaSection.classList.add('visible');
+    gsap.from(ctaSection.querySelectorAll('.cta-content > *'), {
+      opacity: 0,
+      y: 20,
+      duration: 0.8,
+      stagger: 0.1,
+      ease: "power2.out"
+    });
+    observer.disconnect();
+  }
+}, {
+  threshold: 0.1,
+  rootMargin: "0px 0px -80px 0px"
+});
 
   
 }); // DOM Close
