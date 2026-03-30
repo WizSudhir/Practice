@@ -1036,29 +1036,30 @@ function renderGrid(){
     const canvas = card.querySelector("canvas");
     drawGraph(canvas, d.graph);
     // ================= GRAPH HOVER ANIMATION =================
-    card.addEventListener("mouseenter", () => {
-      // GRAPH INTERACTION
+        card.addEventListener("mouseenter", () => {
       if(canvas.chart){
         const target = d.metric;
-          let baseData;
-            if(d.graph === "growth"){
-            baseData = [10, 20, 40, target];
-          }
-          else if(d.graph === "decline"){
-            baseData = [target*2, target*1.5, target*1.2, target];
-          }
-          else if(d.graph === "stability"){
-            baseData = [target-5, target-2, target-3, target];
-          }
-          else {
-            baseData = [target, 100-target];
-          }
-          canvas.chart.data.datasets[0].data = original.map(() => 0);
+        let baseData;
+        if(d.graph === "growth"){
+          baseData = [10, 20, 40, target];
+        }
+        else if(d.graph === "decline"){
+          baseData = [target*2, target*1.5, target*1.2, target];
+        }
+        else if(d.graph === "stability"){
+          baseData = [target-5, target-2, target-3, target];
+        }
+        else {
+          baseData = [target, 100-target];
+        }
+        // reset to zero
+        canvas.chart.data.datasets[0].data = baseData.map(()=>0);
+        canvas.chart.update();
+        // animate to real values
+        setTimeout(()=>{
+          canvas.chart.data.datasets[0].data = baseData;
           canvas.chart.update();
-          setTimeout(()=>{
-            canvas.chart.data.datasets[0].data = original;
-            canvas.chart.update();
-          }, 150);
+        }, 150);
       }
       // ================= DYNAMIC EXPLANATION =================
       if(explanation){
