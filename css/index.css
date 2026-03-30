@@ -1732,30 +1732,25 @@ z-index: 2;
   display: inline-block;
   margin-bottom: 10px;
 }
-
 /* BLOCKS */
 .pg-story-block {
   margin-top: 14px;
 }
-
 .pg-story-block strong {
   font-size: 12px;
   color: var(--text-muted);
   display: block;
   margin-bottom: 4px;
 }
-
 .pg-story-block p {
   font-size: 14px;
   color: var(--text-secondary);
 }
-
 /* RESULT HIGHLIGHT */
 .pg-story-block.result p {
   color: #22c55e;
   font-weight: 500;
 }
-
 /* CTA */
 .pg-story-cta {
   margin-top: 20px;
@@ -1869,24 +1864,18 @@ z-index: 2;
 /* ============================================================================================================================
   9. ENGAGEMENT MODEL
 ============================================================================================================================== */
-/* =========================
-   GSAP ENGAGEMENT SECTION
-========================= */
-
 .eng-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 80px;
   margin-top: 60px;
 }
-
 /* LEFT */
 .eng-left {
   position: relative;
   display: flex;
   flex-direction: column;
 }
-
 .eng-step {
   position: absolute;
   top: 50%;
@@ -1899,18 +1888,15 @@ z-index: 2;
   transform: translateY(-50%) translateY(40px);
   transition: all 0.5s ease;
 }
-
 .eng-step.active {
   opacity: 1;
   transform: translateY(-50%) translateY(0);
 }
-
 .eng-impact {
   margin-top: 8px;
   color: #4ade80;
   font-size: 13px;
 }
-
 /* RIGHT */
 .eng-right {
   position: sticky;
@@ -1919,7 +1905,6 @@ z-index: 2;
   display: flex;
   align-items: center;
 }
-
 .eng-visual {
   width: 100%;
   height: 220px;
@@ -2004,42 +1989,24 @@ z-index: 2;
   opacity: 1;
   transform: translateY(0);
 }
-
 /* CTA */
 .eng-final-cta {
   margin-top: 80px;
 }
 
-/* MOBILE */
-@media (max-width: 900px) {
-  .eng-wrapper {
-    grid-template-columns: 1fr;
-  }
-
-  .eng-right {
-    position: relative;
-    top: auto;
-  }
-}
 /* ============================================================================================================================
   11. FINAL CTA
 ============================================================================================================================== */
-/* =========================
-   FINAL CTA PRO
-========================= */
-
 .final-cta-pro {
   position: relative;
   overflow: hidden;
 }
-
 /* BACKGROUND SYSTEM */
 .cta-bg {
   position: absolute;
   inset: 0;
   z-index: 0;
 }
-
 /* GRID */
 .cta-grid {
   position: absolute;
@@ -2051,12 +2018,10 @@ z-index: 2;
   animation: ctaGridMove 20s linear infinite;
   opacity: 0.3;
 }
-
 @keyframes ctaGridMove {
   from { transform: translateY(0); }
   to { transform: translateY(60px); }
 }
-
 /* PULSE GLOW */
 .cta-pulse {
   position: absolute;
@@ -2066,12 +2031,10 @@ z-index: 2;
   opacity: 0.3;
   animation: ctaPulse 4s ease-in-out infinite;
 }
-
 @keyframes ctaPulse {
   0%,100% { opacity: 0.2; }
   50% { opacity: 0.4; }
 }
-
 /* CONTENT */
 .cta-content {
   position: relative;
@@ -2082,13 +2045,11 @@ z-index: 2;
   flex-direction: column;
   gap: 12px;
 }
-
 /* SUBTEXT */
 .cta-sub {
   margin-top: 12px;
   color: var(--text-secondary);
 }
-
 /* LIVE STATUS */
 .cta-live {
   margin-top: 20px;
@@ -2099,7 +2060,6 @@ z-index: 2;
   justify-content: center;
   gap: 6px;
 }
-
 .cta-live .dot {
   width: 6px;
   height: 6px;
@@ -2107,7 +2067,6 @@ z-index: 2;
   border-radius: 50%;
   animation: blink 1.2s infinite;
 }
-
 /* TRUST */
 .cta-trust {
   margin-top: 20px;
@@ -2118,7 +2077,6 @@ z-index: 2;
   font-size: 13px;
   color: #94a3b8;
 }
-
 /* BUTTON */
 .cta-btn {
   margin-top: 26px;
@@ -2127,12 +2085,10 @@ z-index: 2;
   height: 44px;
   box-shadow: 0 0 20px rgba(99,102,241,0.4);
 }
-
 .cta-btn:hover {
   transform: translateY(-2px) scale(1.02);
   box-shadow: 0 0 35px rgba(99,102,241,0.6);
 }
-
 /* URGENCY */
 .cta-urgency {
   margin-top: 12px;
