@@ -1229,8 +1229,9 @@ function renderSlides(){
           <p>${s.result}</p>
         </div>
         <div class="pg-story-cta">
-          <a href="why-us.html" class="btn-outline">
-            View Full Case →
+          <a href="why-us.html" class="btn-primary btn-arrow">
+            View Full Case
+            <span class="icon-arrow"></span>
           </a>
         </div>
       </div>
@@ -1261,7 +1262,7 @@ function startCarousel(){
         { opacity: 1, y: 0, stagger: 0.08, delay: 0.1 }
       );
     }
-  },4000);
+  },8000);
 }
 // pause on hover
 slider.addEventListener("mouseenter",()=>clearInterval(interval));
