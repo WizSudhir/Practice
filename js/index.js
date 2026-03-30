@@ -882,9 +882,6 @@ setInterval(() => {
     scaleX: 0,
     transformOrigin: "left center"
   });
-  tl.eventCallback("onComplete", () => {
-    gsap.set(flowNodes, { opacity: 1 });
-  });
   // TIMELINE
   function createTimeline() {
     tl = gsap.timeline({ paused: true });
@@ -915,13 +912,18 @@ setInterval(() => {
         }, i * 0.35);
       }
     });
+      tl.eventCallback("onComplete", () => {
+      gsap.set(flowNodes, { opacity: 1 });
+    });
   }
   createTimeline();
   // SCROLL TRIGGER
   const flowObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        tl.restart();
+      tl.restart();
+      } else {
+      hasPlayed = false;
       }
     });
   }, { threshold: 0.2 });
@@ -930,7 +932,7 @@ setInterval(() => {
   flowNodes.forEach((node, index) => {
     node.addEventListener("mouseenter", () => {
       isHovering = true;
-      tl.pause();
+      tl.pause(0);
       flowNodes.forEach((n, i) => {
         n.classList.toggle("active", i <= index);
       });
