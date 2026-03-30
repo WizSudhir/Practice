@@ -1186,7 +1186,28 @@ function renderSlides(){
       problem: "Authorization gaps and inconsistent follow-ups led to delayed reimbursements.",
       solution: "Optimized authorization workflows with real-time payer tracking.",
       result: "97% clean claim rate and 32% faster reimbursement cycles."
-    }
+    },
+    {
+    title: "Internal Medicine Practice",
+    badge: "Internal Medicine • Multi-location",
+    problem: "Chronic undercoding and missed preventive billing opportunities.",
+    solution: "AI-driven coding validation and preventive care optimization workflows.",
+    result: "22% increase in average reimbursement per visit within 60 days."
+  },
+  {
+    title: "Pediatrics Group",
+    badge: "Pediatrics • High Volume",
+    problem: "High claim denials due to eligibility and authorization gaps.",
+    solution: "Real-time eligibility checks and pediatric-specific payer rules.",
+    result: "35% reduction in denials and faster payment cycles."
+  },
+  {
+    title: "Cardiology Center",
+    badge: "Cardiology • Specialty Care",
+    problem: "Complex procedure billing errors causing delayed reimbursements.",
+    solution: "Procedure-level validation and denial prediction engine.",
+    result: "30% faster reimbursements and improved first-pass acceptance."
+  }
   ];
   stories.forEach((s,i)=>{
     const slide=document.createElement("div");
