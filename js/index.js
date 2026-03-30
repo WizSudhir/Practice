@@ -799,6 +799,11 @@ function updateStepUI(index) {
     }
   });
   transformEl.innerText = step.transform;
+    if (index === 4) {
+      cta.style.display = "block";
+    } else {
+      cta.style.display = "none";
+    }
 }
 /* =========================
    SCROLL-DRIVEN SYSTEM
