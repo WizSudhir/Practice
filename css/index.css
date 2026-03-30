@@ -1370,7 +1370,6 @@ z-index: 2;
 /* ============================================================================================================================
   6. SERVICES GATEWAY
 ============================================================================================================================== */
-
 .rcm-system {
   margin-top: var(--space-lg);
 }
@@ -1390,7 +1389,6 @@ z-index: 2;
   overflow-x: auto;
   gap: 10px;
 }
-
 /* NODE */
 .flow-node i {
   width: 10px;
@@ -1405,26 +1403,24 @@ z-index: 2;
 }
 .flow-node {
   position: relative;
-  padding: 8px 14px;
-  font-size: 13px;
+  padding: 6px 12px;
+  font-size: 12px;
   border-radius: 999px;
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.08);
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
   transition: all 0.35s ease;
   overflow: hidden;
   z-index: 2;
 }
-
 .flow-node:hover {
   color: #fff;
   border-color: var(--border-strong);
   box-shadow: 0 0 20px rgba(99,102,241,0.25);
   transform: translateY(-2px) scale(1.05);
 }
-
 .flow-node.active {
   background: rgba(99,102,241,0.15);
   border-color: rgba(99,102,241,0.5);
@@ -1439,12 +1435,7 @@ z-index: 2;
   position: absolute;
   inset: -2px;
   border-radius: inherit;
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(99,102,241,0.25),
-    transparent
-  );
+  background: linear-gradient(120deg,transparent,rgba(99,102,241,0.25),transparent);
   animation: pulseWave 2.5s linear infinite;
 }
 @keyframes pulseWave {
@@ -1469,29 +1460,16 @@ z-index: 2;
   animation: ripple 0.6s ease-out;
 }
 @keyframes ripple {
-  0% {
-    width: 0;
-    height: 0;
-    opacity: 0.6;
-  }
-  100% {
-    width: 200px;
-    height: 200px;
-    opacity: 0;
-  }
+  0% {width: 0;height: 0;opacity: 0.6;}
+  100% {width: 200px;height: 200px;opacity: 0;}
 }
 /* FLOW LINE */
 .flow-line {
   flex: none;
-  width: 40px;
+  width: 30px;
   height: 2px;
   position: relative;
-  background: linear-gradient(
-    90deg,
-    rgba(99,102,241,0.2),
-    rgba(59,130,246,0.4),
-    rgba(99,102,241,0.2)
-  );
+  background: linear-gradient(90deg,rgba(99,102,241,0.2),rgba(59,130,246,0.4),rgba(99,102,241,0.2));
   overflow: hidden;
 }
 .flow-line::after {
