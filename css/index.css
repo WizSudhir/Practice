@@ -2074,6 +2074,10 @@ z-index: 2;
   border-radius: 50%;
   animation: blink 1.2s infinite;
 }
+@keyframes blink {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
 /* TRUST */
 .cta-trust {
   margin-top: 20px;
