@@ -1451,23 +1451,19 @@ if (slider && wrapper && track) {
 // ============================================================================================================================
 // 8. ENGAGEMENT MODEL
 // ============================================================================================================================
-
 (function () {
   const section = document.querySelector(".engagement-model");
   if (!section || !window.gsap) return;
-
   const steps = section.querySelectorAll(".eng-step");
   const cards = section.querySelectorAll(".eng-proof-card");
   const tension = section.querySelector(".eng-tension");
   const bridge = section.querySelector(".eng-bridge");
-
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: section,
       start: "top 70%",
     }
   });
-
   // STEP TIMELINE (staggered)
   tl.to(steps, {
     opacity: 1,
@@ -1476,7 +1472,6 @@ if (slider && wrapper && track) {
     stagger: 0.2,
     ease: "power3.out"
   });
-
   // PROOF CARDS
   tl.to(cards, {
     opacity: 1,
@@ -1485,7 +1480,6 @@ if (slider && wrapper && track) {
     stagger: 0.2,
     ease: "power3.out"
   }, "-=0.3");
-
   // TENSION LINE
   tl.to(tension, {
     opacity: 1,
@@ -1493,7 +1487,6 @@ if (slider && wrapper && track) {
     duration: 0.6,
     ease: "power2.out"
   }, "-=0.2");
-
   // BRIDGE
   tl.to(bridge, {
     opacity: 1,
@@ -1501,49 +1494,37 @@ if (slider && wrapper && track) {
     duration: 0.6,
     ease: "power2.out"
   }, "-=0.3");
-
 })();
 // ============================================================================================================================
 // 9. FINAL CTA
 // ============================================================================================================================
-// ==========================
 // CTA LIVE SYSTEM TEXT
-// ==========================
 const ctaTexts = [
   "Analyzing revenue systems...",
   "Detecting claim inefficiencies...",
   "Reducing denial patterns...",
   "Optimizing collections flow..."
 ];
-
 const ctaLiveEl = document.getElementById("ctaLiveText");
-
 if (ctaLiveEl) {
   let index = 0;
-
   setInterval(() => {
     index = (index + 1) % ctaTexts.length;
-
     // fade out
     ctaLiveEl.style.opacity = 0;
-
     setTimeout(() => {
       ctaLiveEl.textContent = ctaTexts[index];
       ctaLiveEl.style.opacity = 1;
     }, 300);
-
   }, 2500);
 }
-
-// ==========================
 // CTA ENTRANCE ANIMATION
-// ==========================
 const ctaSection = document.querySelector('.final-cta-pro');
-
 if (ctaSection) {
   const observer = new IntersectionObserver(entries => {
     if (entries[0].isIntersecting) {
-
+      ctaSection.classList.add('visible');
+      // your animation
       gsap.from('.cta-content > *', {
         opacity: 0,
         y: 20,
@@ -1551,11 +1532,9 @@ if (ctaSection) {
         stagger: 0.1,
         ease: "power2.out"
       });
-
       observer.disconnect();
     }
   }, { threshold: 0.4 });
-
   observer.observe(ctaSection);
 }
 
