@@ -1499,30 +1499,30 @@ if (slider && wrapper && track) {
 // 9. FINAL CTA
 // ============================================================================================================================
 // CTA LIVE SYSTEM TEXT
-const ctaTexts = [
+const finalctaTexts = [
   "Analyzing revenue systems...",
   "Detecting claim inefficiencies...",
   "Reducing denial patterns...",
   "Optimizing collections flow..."
 ];
-const ctaLiveEl = document.getElementById("ctaLiveText");
-if (ctaLiveEl) {
+const finalctaLiveEl = document.getElementById("finalctaLiveText");
+if (finalctaLiveEl) {
   let index = 0;
   setInterval(() => {
-    index = (index + 1) % ctaTexts.length;
+    index = (index + 1) % finalctaTexts.length;
     // fade out
-    ctaLiveEl.style.opacity = 0;
+    finalctaLiveEl.style.opacity = 0;
     setTimeout(() => {
-      ctaLiveEl.textContent = ctaTexts[index];
-      ctaLiveEl.style.opacity = 1;
+      finalctaLiveEl.textContent = finalctaTexts[index];
+      finalctaLiveEl.style.opacity = 1;
     }, 300);
   }, 2500);
 }
 // CTA ENTRANCE ANIMATION
 const observer = new IntersectionObserver(entries => {
   if (entries[0].isIntersecting) {
-    ctaSection.classList.add('visible');
-    gsap.from(ctaSection.querySelectorAll('.cta-content > *'), {
+    finalctaSection.classList.add('visible');
+    gsap.from(finalctaSection.querySelectorAll('.final-cta-content > *'), {
       opacity: 0,
       y: 20,
       duration: 0.8,
