@@ -1535,9 +1535,10 @@ z-index: 2;
 }
 
 /* GRID */
-pg-card-top {
+.pg-card-top {
   display: flex;
   align-items: flex-start;
+  justify-content: space-between;
   gap: 12px;
 }
 .pg-icon-box {
@@ -1554,6 +1555,9 @@ pg-card-top {
   width: 18px;
   height: 18px;
   color: var(--primary);
+}
+.pg-metric-wrap {
+  text-align: right;
 }
 .pg-metric-wrap h3 {
   margin: 0;
