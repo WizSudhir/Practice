@@ -1387,13 +1387,13 @@ z-index: 2;
   justify-content: center;
   flex-wrap: nowrap;
   overflow-x: auto;
-  gap: 10px;
+  gap: 8px;
 }
 /* NODE */
 .flow-node i {
-  width: 10px;
-  height: 10px;
-  stroke-width: 1.8;
+  width: 8px;
+  height: 8px;
+  stroke-width: 1.5;
   color: #93c5fd;
   transition: all 0.3s ease;
 }
@@ -1466,7 +1466,7 @@ z-index: 2;
 /* FLOW LINE */
 .flow-line {
   flex: none;
-  width: 30px;
+  width: 25px;
   height: 2px;
   position: relative;
   background: linear-gradient(90deg,rgba(99,102,241,0.2),rgba(59,130,246,0.4),rgba(99,102,241,0.2));
