@@ -954,13 +954,10 @@ setInterval(() => {
 // 7. OUTCOMES
 // ============================================================================================================================
 (function(){
-
 const section = document.querySelector(".pg-outcomes-pro");
 if(!section) return;
-
 const hasGSAP = typeof gsap !== "undefined";
 const hasChart = typeof Chart !== "undefined";
-
 // ================= DATA =================
 const data = [
   {
@@ -1000,26 +997,19 @@ const data = [
     graph:"stability"
   }
 ];
-
 // ================= ELEMENTS =================
 const grid = document.getElementById("gridView");
 const slider = document.getElementById("pgSlider");
 const toggleBtns = section.querySelectorAll(".toggle-btn");
-const explanation = document.querySelector(".pg-explanation");
-
+const explanation = section.querySelector(".pg-explanation");
 let hasAnimated = false;
-
 // ================= RENDER GRID =================
 function renderGrid(){
-
   grid.innerHTML = `<div class="pg-outcomes-grid"></div>`;
   const container = grid.querySelector(".pg-outcomes-grid");
-
   data.forEach((d,i) => {
-
     const card = document.createElement("div");
     card.className = "pg-card";
-
     card.innerHTML = `
       <div class="pg-icon"><i data-lucide="${d.icon}"></i></div>
       <h3 class="pg-metric" data-target="${d.metric}">0%</h3>
@@ -1028,60 +1018,43 @@ function renderGrid(){
       <span>${d.sub}</span>
       <canvas class="chart"></canvas>
     `;
-
     container.appendChild(card);
-
     const canvas = card.querySelector("canvas");
     drawGraph(canvas, d.graph);
-
     // ================= GRAPH HOVER ANIMATION =================
     card.addEventListener("mouseenter", () => {
-
       // GRAPH INTERACTION
       if(canvas.chart){
         canvas.chart.data.datasets[0].data =
           canvas.chart.data.datasets[0].data.map(v => v * 1.05);
         canvas.chart.update();
       }
-
       // ================= DYNAMIC EXPLANATION =================
       if(explanation){
         explanation.classList.add("active");
-
         const titleEl = explanation.querySelector("h3");
         const descEl = explanation.querySelector("p");
-
         if(titleEl) titleEl.textContent = d.title;
         if(descEl) descEl.textContent =
           "AI-driven validation and denial intelligence optimized this workflow stage, improving revenue performance significantly.";
       }
-
     });
-
     card.addEventListener("mouseleave", () => {
       if(canvas.chart){
         canvas.chart.update();
       }
     });
-
   });
-
   lucide.createIcons();
 }
-
 // ================= GRAPH SYSTEM (ENHANCED) =================
 function drawGraph(canvas,type){
-
   if(!hasChart) return;
-
   const ctx = canvas.getContext("2d");
-
   const gradient = ctx.createLinearGradient(0,0,0,100);
   gradient.addColorStop(0,"#6366f1");
   gradient.addColorStop(1,"#3b82f6");
-
   let config;
-
   if(type==="decline"){
     config={
       type:"line",
@@ -1096,7 +1069,6 @@ function drawGraph(canvas,type){
       options:{animation:{duration:1200},plugins:{legend:false},scales:{x:{display:false},y:{display:false}}}
     };
   }
-
   else if(type==="radial"){
     config={
       type:"doughnut",
@@ -1107,7 +1079,6 @@ function drawGraph(canvas,type){
       options:{cutout:"70%",plugins:{legend:false},animation:{duration:1200}}
     };
   }
-
   else if(type==="stability"){
     config={
       type:"line",
@@ -1121,7 +1092,6 @@ function drawGraph(canvas,type){
       options:{animation:{duration:1200},plugins:{legend:false},scales:{x:{display:false},y:{display:false}}}
     };
   }
-
   else {
     config={
       type:"line",
@@ -1136,11 +1106,9 @@ function drawGraph(canvas,type){
       options:{animation:{duration:1200},plugins:{legend:false},scales:{x:{display:false},y:{display:false}}}
     };
   }
-
   const chart = new Chart(canvas,config);
   canvas.chart = chart; // IMPORTANT (for hover interaction)
 }
-
 // ================= COUNTER ANIMATION =================
 function animateCounters(){
   document.querySelectorAll(".pg-metric").forEach(el => {
@@ -1149,7 +1117,6 @@ function animateCounters(){
       el.textContent = target + "%";
       return;
     }
-
     gsap.fromTo(el,
       {innerText:0},
       {
@@ -1163,13 +1130,9 @@ function animateCounters(){
     );
   });
 }
-
 // ================= CAROUSEL =================
-// ================= CAROUSEL (REAL CASE STUDIES) =================
 function renderSlides(){
-
   slider.innerHTML = "";
-
   const stories = [
     {
       title: "Podiatry Surgical Group",
@@ -1193,60 +1156,44 @@ function renderSlides(){
       result: "97% clean claim rate and 32% faster reimbursement cycles."
     }
   ];
-
   stories.forEach((s,i)=>{
     const slide=document.createElement("div");
     slide.className="pg-slide"+(i===0?" active":"");
-
     slide.innerHTML=`
       <div class="pg-story-card">
-
         <span class="pg-badge">${s.badge}</span>
-
         <h3>${s.title}</h3>
-
         <div class="pg-story-block">
           <strong>Problem</strong>
           <p>${s.problem}</p>
         </div>
-
         <div class="pg-story-block">
           <strong>Solution</strong>
           <p>${s.solution}</p>
         </div>
-
         <div class="pg-story-block result">
           <strong>Outcome</strong>
           <p>${s.result}</p>
         </div>
-
         <div class="pg-story-cta">
           <a href="why-us.html" class="btn-outline">
             View Full Case →
           </a>
         </div>
-
       </div>
     `;
-
     slider.appendChild(slide);
   });
 }
-
 let index=0;
 let interval;
-
 function startCarousel(){
-
   interval = setInterval(()=>{
     const slides=slider.querySelectorAll(".pg-slide");
     slides.forEach(s=>s.classList.remove("active"));
-
     index=(index+1)%slides.length;
     const active = slides[index];
-
     active.classList.add("active");
-
     if(hasGSAP){
       // kill previous animations (important for smoothness)
       gsap.killTweensOf(active);
@@ -1261,41 +1208,44 @@ function startCarousel(){
         { opacity: 1, y: 0, stagger: 0.08, delay: 0.1 }
       );
     }
-
   },4000);
 }
-
 // pause on hover
 slider.addEventListener("mouseenter",()=>clearInterval(interval));
 slider.addEventListener("mouseleave",startCarousel);
-
 // ================= TOGGLE =================
+let slidesRendered = false;
 toggleBtns.forEach(btn=>{
   btn.addEventListener("click",()=>{
     toggleBtns.forEach(b=>b.classList.remove("active"));
     btn.classList.add("active");
-
     document.querySelectorAll(".pg-view").forEach(v=>v.classList.remove("active"));
-    document.querySelector(".pg-"+btn.dataset.view).classList.add("active");
+    const activeView = document.querySelector(".pg-"+btn.dataset.view);
+    activeView.classList.add("active");
+    // ✅ ONLY LOAD CASE STUDIES WHEN NEEDED
+    if(btn.dataset.view === "stories"){
+      if(!slidesRendered){
+        renderSlides();
+        slidesRendered = true;
+      }
+      startCarousel();
+    } else {
+      clearInterval(interval);
+    }
   });
 });
-
 // ================= SIMULATOR (FIXED REAL INPUTS) =================
 document.getElementById("simulateBtn").addEventListener("click",()=>{
-
   const claims = parseFloat(document.getElementById("claimsInput")?.value || 0);
   const avg = parseFloat(document.getElementById("avgInput")?.value || 0);
   const denial = (parseFloat(document.getElementById("denialInput")?.value || 0)) / 100;
-
   const recovery = claims * avg * denial * 0.25;
-
   document.getElementById("simResult").innerHTML =
     `Potential Recovery: <strong>$${Math.round(recovery).toLocaleString()}</strong>
      <div style="font-size:12px;color:#94a3b8;margin-top:6px">
        Based on industry benchmarks (18–32% leakage)
      </div>`;
 });
-
 // ================= SCROLL TRIGGER =================
 const observer = new IntersectionObserver(entries=>{
   if(entries[0].isIntersecting && !hasAnimated){
@@ -1303,15 +1253,11 @@ const observer = new IntersectionObserver(entries=>{
     hasAnimated = true;
   }
 },{threshold:0.4});
-
 observer.observe(section);
-
 // ================= INIT =================
 renderGrid();
-renderSlides();
-startCarousel();
-
 })();
+  
 // ============================================================================================================================
 // 7. EHR
 // ============================================================================================================================
