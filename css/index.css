@@ -1099,15 +1099,6 @@ z-index: 2;
   gap: 80px;
   align-items: start;
 }
-.narrative::before {
-  content: "";
-  position: absolute;
-  left: -20px;
-  top: 0;
-  height: 100%;
-  width: 2px;
-  background: rgba(255,255,255,0.05);
-}
 /* ===== LEFT SIDE ===== */
 .narrative-left {
   position: relative;
