@@ -1406,7 +1406,7 @@ z-index: 2;
   align-items: center;
   justify-content: center;
   flex-wrap: nowrap;
-  overflow-x: auto;
+  overflow: hidden;
   gap: 8px;
 }
 /* NODE */
@@ -1423,8 +1423,8 @@ z-index: 2;
 }
 .flow-node {
   position: relative;
-  padding: 6px 12px;
-  font-size: 12px;
+  padding: 5px 10px;
+  font-size: 11px;
   border-radius: 999px;
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.08);
@@ -1486,7 +1486,7 @@ z-index: 2;
 /* FLOW LINE */
 .flow-line {
   flex: none;
-  width: 25px;
+  width: 18px;
   height: 6px;
   border-radius: 999px;
   position: relative;
