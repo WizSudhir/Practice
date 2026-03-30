@@ -1320,26 +1320,18 @@ const wrapper = document.querySelector('.ehr-track-wrapper');
 const track = document.querySelector('.ehr-track');
 
 if (slider && wrapper && track) {
-
   slider.classList.add('js-active');
-
   let isDown = false;
   let startX;
   let scrollLeft;
-
   let velocity = 0;
   let lastX = 0;
   let raf;
-
   let autoSpeed = 0.35;
   let isHovering = false;
-
-  // =======================
   // INFINITE LOOP FIX
-  // =======================
   function loopFix() {
     const maxScroll = wrapper.scrollWidth / 2;
-
     if (wrapper.scrollLeft >= maxScroll) {
       wrapper.scrollLeft -= maxScroll;
     }
@@ -1347,170 +1339,115 @@ if (slider && wrapper && track) {
       wrapper.scrollLeft += maxScroll;
     }
   }
-
-  // =======================
   // AUTO SCROLL ENGINE
-  // =======================
   function autoScroll() {
     if (!isDown) {
       wrapper.scrollLeft += autoSpeed + velocity;
       velocity *= 0.95;
-
       if (Math.abs(velocity) < 0.01) velocity = 0;
-
       loopFix();
     }
-
     raf = requestAnimationFrame(autoScroll);
   }
-
-  // =======================
   // DRAG START
-  // =======================
   slider.addEventListener('mousedown', (e) => {
     isDown = true;
     slider.classList.add('dragging');
-
     cancelAnimationFrame(raf);
-
     startX = e.pageX;
     scrollLeft = wrapper.scrollLeft;
     lastX = e.pageX;
     velocity = 0;
   });
-
-  // =======================
   // DRAG MOVE
-  // =======================
   slider.addEventListener('mousemove', (e) => {
     if (!isDown) return;
-
     const dx = e.pageX - startX;
     wrapper.scrollLeft = scrollLeft - dx;
-
     velocity = (lastX - e.pageX) * 0.25;
     lastX = e.pageX;
   });
-
-  // =======================
   // DRAG END
-  // =======================
   function stopDrag() {
     if (!isDown) return;
-
     isDown = false;
     slider.classList.remove('dragging');
-
     snapToNearest();
     resumeAuto();
   }
-
   slider.addEventListener('mouseup', stopDrag);
   slider.addEventListener('mouseleave', stopDrag);
-
-  // =======================
   // MAGNETIC SNAP
-  // =======================
   function snapToNearest() {
     const logos = track.querySelectorAll('img');
     const current = wrapper.scrollLeft;
-
     let closest = 0;
     let minDist = Infinity;
-
     logos.forEach((logo) => {
       const offset = logo.offsetLeft;
       const dist = Math.abs(offset - current);
-
       if (dist < minDist) {
         minDist = dist;
         closest = offset;
       }
     });
-
     smoothScrollTo(closest, 400);
   }
-
-  // =======================
   // SMOOTH SCROLL
-  // =======================
   function smoothScrollTo(target, duration) {
     const start = wrapper.scrollLeft;
     const change = target - start;
     const startTime = performance.now();
-
     function animate(currentTime) {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
-
       const ease = 1 - Math.pow(1 - progress, 3);
-
       wrapper.scrollLeft = start + change * ease;
-
       if (progress < 1) {
         requestAnimationFrame(animate);
       }
     }
-
     requestAnimationFrame(animate);
   }
-
-  // =======================
   // RESUME AUTO (VELOCITY BASED)
-  // =======================
   function resumeAuto() {
     velocity += velocity * 1.2;
     raf = requestAnimationFrame(autoScroll);
   }
-
-  // =======================
   // HOVER CONTROL
-  // =======================
   slider.addEventListener('mouseenter', () => {
     isHovering = true;
     autoSpeed = 0.1;
   });
-
   slider.addEventListener('mouseleave', () => {
     isHovering = false;
     autoSpeed = 0.35;
   });
-
-  // =======================
   // TOUCH SUPPORT (MOBILE)
-  // =======================
   slider.addEventListener('touchstart', (e) => {
     isDown = true;
     cancelAnimationFrame(raf);
-
     startX = e.touches[0].pageX;
     scrollLeft = wrapper.scrollLeft;
     lastX = startX;
   });
-
   slider.addEventListener('touchmove', (e) => {
     if (!isDown) return;
-
     const x = e.touches[0].pageX;
     const dx = x - startX;
-
     wrapper.scrollLeft = scrollLeft - dx;
-
     velocity = (lastX - x) * 0.25;
     lastX = x;
   });
-
   slider.addEventListener('touchend', () => {
     isDown = false;
     snapToNearest();
     resumeAuto();
   });
-
-  // =======================
   // START ENGINE
-  // =======================
   autoScroll();
 }
+  
 // ============================================================================================================================
 // 8. ENGAGEMENT MODEL
 // ============================================================================================================================
