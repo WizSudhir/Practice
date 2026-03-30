@@ -1128,6 +1128,9 @@ z-index: 2;
   position: relative;
   text-shadow: 0 0 20px rgba(99,102,241,0.15);
 }
+.narrative-step:not(.active) {
+  display: none;
+}
 .success-icon {
   width: 16px;
   height: 16px;
