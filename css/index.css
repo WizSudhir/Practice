@@ -2007,13 +2007,13 @@ z-index: 2;
 .final-cta-pro {
   position: relative;
   overflow: visible;
+  isolation: isolate;
 }
 /* BACKGROUND SYSTEM */
 .cta-bg {
-  position: absolute;
+  position: relative;
   inset: 0;
-  z-index: 0;
-  display: none;
+  z-index: -1;
 }
 /* GRID */
 .cta-grid {
@@ -2046,7 +2046,7 @@ z-index: 2;
 /* CONTENT */
 .cta-content {
   position: relative;
-  z-index: 1;
+  z-index: 5;
   max-width: 720px;
   margin: 0 auto;
   display: flex;
