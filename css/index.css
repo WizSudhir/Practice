@@ -1134,22 +1134,6 @@ z-index: 2;
   position: relative;
   text-shadow: 0 0 20px rgba(99,102,241,0.15);
 }
-
-/* subtle glow on active */
-.narrative-step.active::before {
-  content: "";
-  position: absolute;
-  left: -20px;
-  top: 10px;
-  width: 4px;
-  height: 80%;
-  background: linear-gradient(to bottom, #6366f1, #3b82f6);
-  border-radius: 10px;
-  opacity: 0.6;
-}
-.narrative-step:not(.active) {
-  display: none;
-}
 .success-icon {
   width: 16px;
   height: 16px;
