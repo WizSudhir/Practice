@@ -466,9 +466,11 @@ if (systemCard) {
 (function(){
   const engine = document.getElementById("rulesEngine");
   if (!engine) return;
+
   const rules = engine.querySelectorAll(".rule");
   const progress = document.getElementById("flowProgress");
   const output = document.getElementById("rulesOutput");
+
   const outputs = [
     "Data Verified",
     "Coverage Confirmed",
@@ -476,35 +478,30 @@ if (systemCard) {
     "Claim Optimized",
     "Revenue Secured"
   ];
+
   let index = 0;
-  let interval;
+  let interval = null;
   let isHovering = false;
 
   function runSequence(){
-    if (!isHovering) {
-    flowNodes.forEach((n, j) => {
-      n.classList.toggle("active", j <= i);
-    });
-    }
+    if (isHovering) return;
+
     rules.forEach(r => r.classList.remove("active"));
     rules[index].classList.add("active");
-    const percent = ((index + 1) / rules.length) * 100;
-    progress.style.width = percent + "%";
+
+    progress.style.width = ((index + 1) / rules.length) * 100 + "%";
     output.textContent = outputs[index];
+
     output.classList.remove("inspect");
     output.classList.add("active");
+
     setTimeout(() => {
       output.classList.remove("active");
     }, 1200);
-    index++;
-    if (index >= rules.length) {
-      setTimeout(() => {
-        index = 0;
-        progress.style.width = "0%";
-      }, 1200);
-    }
+
+    index = (index + 1) % rules.length;
   }
-  // AUTO LOOP
+
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -518,29 +515,36 @@ if (systemCard) {
       }
     });
   }, { threshold: 0.4 });
+
   observer.observe(engine);
 
-  // HOVER INSPECT MODE
   rules.forEach((rule, i) => {
     rule.addEventListener("mouseenter", () => {
       isHovering = true;
+
+      clearInterval(interval);
+      interval = null;
+
       engine.classList.add("inspecting");
       rules.forEach(r => r.classList.remove("inspect-active"));
       rule.classList.add("inspect-active");
-      // freeze progress
-      const percent = ((i + 1) / rules.length) * 100;
-      progress.style.width = percent + "%";
-      // show detailed explanation
-      const detail = rule.dataset.detail;
-      output.textContent = detail;
-      output.classList.add("inspect");
-      output.classList.add("active");
+
+      progress.style.width = ((i + 1) / rules.length) * 100 + "%";
+
+      output.textContent = rule.dataset.detail;
+      output.classList.add("inspect", "active");
     });
+
     rule.addEventListener("mouseleave", () => {
       isHovering = false;
+
       engine.classList.remove("inspecting");
       rule.classList.remove("inspect-active");
       output.classList.remove("inspect");
+
+      if (!interval) {
+        interval = setInterval(runSequence, 1800);
+      }
     });
   });
 })();
