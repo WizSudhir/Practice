@@ -1204,16 +1204,19 @@ z-index: 2;
   font-size: 11px;
   color: #22c55e;
   letter-spacing: 0.08em;
+  padding-top: 4px;
 }
 .how-cta-heading {
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 4px;
+  padding-top: 4px;
 }
 .how-cta-sub {
   font-size: 13px;
   color: var(--text-muted);
   margin-bottom: 6px;
+  padding-top: 4px;
 }
 .how-cta-btn {
   background: linear-gradient(135deg,#6366f1,#3b82f6);
