@@ -2005,11 +2005,8 @@ z-index: 2;
   11. FINAL CTA
 ============================================================================================================================== */
 .final-cta-pro {
-  border: 2px solid red;
-}
-.final-cta-pro {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 /* BACKGROUND SYSTEM */
 .cta-bg {
