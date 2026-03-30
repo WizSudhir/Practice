@@ -628,33 +628,21 @@ if (proofSection) {
 (function(){
 const hiwSection = document.querySelector(".how-it-works");
 if (!hiwSection || typeof gsap === "undefined" || typeof Chart === "undefined") return;
-
 gsap.registerPlugin(ScrollTrigger);
 
-/* =========================
-   ELEMENTS
-========================= */
+/* ELEMENTS */
 const section = document.querySelector(".how-it-works");
-
 const revEl = document.getElementById("revCounter");
 const denEl = document.getElementById("denialCounter");
 const aiEl = document.getElementById("aiText");
 const transformEl = document.getElementById("transformBox");
-
 const stepsEls = document.querySelectorAll(".narrative-step");
-
-/* =========================
-   INITIAL VALUES
-========================= */
+/* INITIAL VALUES */
 const START_REVENUE = 128450;
 const END_REVENUE = 260000;
-
 const START_DENIAL = 32;
 const END_DENIAL = 5;
-
-/* =========================
-   STEP DATA
-========================= */
+/* STEP DATA */
 const steps = [
   {
     ai: "42% intake errors eliminated before claim creation",
@@ -677,10 +665,7 @@ const steps = [
     transform: "System Optimized → Predictable Revenue"
   }
 ];
-
-/* =========================
-   CHART INIT (STRIPE STYLE)
-========================= */
+/* CHART INIT */
 const ctx = document.getElementById("revChart");
 const chart = new Chart(ctx, {
   type: "line",
@@ -742,24 +727,18 @@ const chart = new Chart(ctx, {
   yoyo: true,
   ease: "sine.inOut"
 });
-// =========================
 // GRAPH DOT TRACKING
-// =========================
 const graphDot = document.getElementById("graphDot");
 
 function updateGraphDot() {
   if (!chart || !graphDot) return;
-
   const meta = chart.getDatasetMeta(0);
   const point = meta.data[meta.data.length - 1];
   if (!point) return;
-
   const canvasRect = chart.canvas.getBoundingClientRect();
   const parentRect = chart.canvas.parentElement.getBoundingClientRect();
-
   const x = canvasRect.left - parentRect.left + point.x;
   const y = canvasRect.top - parentRect.top + point.y;
-
   graphDot.style.left = x + "px";
   graphDot.style.top = y + "px";
   if (state.progress > 0.15) {
@@ -768,17 +747,12 @@ function updateGraphDot() {
     graphDot.style.opacity = 0;
   }
 }
-
-/* =========================
-   HELPERS
-========================= */
+/* HELPERS */
 function lerp(a, b, t) {
   return a + (b - a) * t;
 }
-
 let state = { progress: 0 };
 let currentStep = -1;
-
 function getStepIndex(p) {
   if (p < 0.2) return 0;
   if (p < 0.4) return 1;
@@ -786,10 +760,7 @@ function getStepIndex(p) {
   if (p < 0.8) return 3;
   return 4;
 }
-
-/* =========================
-   STEP UI UPDATE
-========================= */
+/* STEP UI UPDATE*/
 const cta = document.getElementById("howCta");
 cta.style.display = "none";
 function updateStepUI(index) {
@@ -817,9 +788,7 @@ function updateStepUI(index) {
       cta.style.display = "none";
     }
 }
-/* =========================
-   SCROLL-DRIVEN SYSTEM
-========================= */
+/* SCROLL-DRIVEN SYSTEM */
 gsap.timeline({
   scrollTrigger: {
     trigger: section,
@@ -835,21 +804,16 @@ gsap.timeline({
   progress: 1,
   ease: "none",
   onUpdate: () => {
-
     const p = state.progress;
-    
     // smooth curve
     const smoothP = p * p * (3 - 2 * p);
     const easeOutExpo = (t) => 1 - Math.pow(2, -10 * t);
     const curve = Math.pow(smoothP, 1.8);
-
     /* ===== COUNTERS ===== */
     const revenue = lerp(START_REVENUE, END_REVENUE, smoothP);
     const denials = lerp(START_DENIAL, END_DENIAL, smoothP);
-
     revEl.innerText = "$" + Math.floor(revenue).toLocaleString();
     denEl.innerText = denials.toFixed(1) + "%";
-
     /* ===== GRAPH ===== */
     chart.data.datasets[0].data = [
       lerp(50, 70, curve),
@@ -868,19 +832,14 @@ gsap.timeline({
       lerp(30, 10, smoothP),
       lerp(25, 6, smoothP)
     ];
-
     chart.update("none");
     updateGraphDot();
-
     /* ===== STEP SYNC ===== */
     const stepIndex = getStepIndex(p);
     updateStepUI(stepIndex);
   }
 });
-
-/* =========================
-   FLOATING DASHBOARD
-========================= */
+/* FLOATING DASHBOARD */
 gsap.to(".hiw-dashboard", {
   y: -8,
   duration: 3,
@@ -888,13 +847,9 @@ gsap.to(".hiw-dashboard", {
   repeat: -1,
   yoyo: true
 });
-
-/* =========================
-   MICRO LIVE DRIFT
-========================= */
+/* MICRO LIVE DRIFT */
 setInterval(() => {
   if (state.progress < 0.95) return;
-
   const currentRev = parseFloat(revEl.innerText.replace(/[^0-9]/g, ""));
   const newRev = currentRev + Math.floor(Math.random() * 50);
 
@@ -902,46 +857,39 @@ setInterval(() => {
 
 }, 3000);
 })();
+  
 // ============================================================================================================================
 // 6. SERVICES
 // ============================================================================================================================
 (function(){
-
   const flow = document.getElementById("rcmFlow");
   if (!flow || typeof gsap === "undefined") return;
-
   const flowNodes = flow.querySelectorAll(".flow-node");
   const flowLines = flow.querySelectorAll(".flow-line");
   const context = document.getElementById("rcmContext");
-
   if (!flowNodes.length) return;
-
   let tl;
   let hasPlayed = false;
   let isHovering = false;
-
   // INIT STATES
   gsap.set(flowNodes, {
     opacity: 0,
     y: 20,
     scale: 0.95
   });
-
   gsap.set(flowLines, {
     opacity: 0,
     scaleX: 0,
     transformOrigin: "left center"
   });
-
+  tl.eventCallback("onComplete", () => {
+    gsap.set(flowNodes, { opacity: 1 });
+  });
   // TIMELINE
   function createTimeline() {
-
     tl = gsap.timeline({ paused: true });
-
     flowNodes.forEach((node, i) => {
-
       const line = flowLines[i];
-
       tl.to(node, {
         opacity: 1,
         y: 0,
@@ -949,19 +897,15 @@ setInterval(() => {
         duration: 0.5,
         ease: "power3.out",
         onStart: () => {
-
           if (isHovering) return;
-
           flowNodes.forEach((n, j) => {
             n.classList.toggle("active", j <= i);
           });
-
           if (context) {
             context.textContent = node.dataset.info || "";
           }
         }
       }, i * 0.35);
-
       if (line) {
         tl.to(line, {
           opacity: 1,
@@ -970,64 +914,43 @@ setInterval(() => {
           ease: "power2.out"
         }, i * 0.35);
       }
-
     });
-
   }
-
   createTimeline();
-
   // SCROLL TRIGGER
   const flowObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-
-      if (entry.isIntersecting && !hasPlayed) {
-        tl.play();
-        hasPlayed = true;
+      if (entry.isIntersecting) {
+        tl.restart();
       }
-
     });
-  }, { threshold: 0.4 });
-
+  }, { threshold: 0.2 });
   flowObserver.observe(flow);
-
   // HOVER
   flowNodes.forEach((node, index) => {
-
     node.addEventListener("mouseenter", () => {
-
       isHovering = true;
-
-      gsap.killTweensOf(flowNodes);
-
+      tl.pause();
       flowNodes.forEach((n, i) => {
         n.classList.toggle("active", i <= index);
       });
-
       if (context) {
         context.textContent = node.dataset.info || "";
       }
-
       gsap.to(node, {
         scale: 1.08,
         duration: 0.2
       });
-
     });
-
     node.addEventListener("mouseleave", () => {
-
       isHovering = false;
-
+      tl.resume();
       gsap.to(node, {
         scale: 1,
         duration: 0.2
       });
-
     });
-
   });
-
 })();
 
 // ============================================================================================================================
