@@ -481,7 +481,11 @@ if (systemCard) {
   let isHovering = false;
 
   function runSequence(){
-    if (isHovering) return;
+    if (!isHovering) {
+    flowNodes.forEach((n, j) => {
+      n.classList.toggle("active", j <= i);
+    });
+    }
     rules.forEach(r => r.classList.remove("active"));
     rules[index].classList.add("active");
     const percent = ((index + 1) / rules.length) * 100;
@@ -623,7 +627,7 @@ if (proofSection) {
 }
   
 // ============================================================================================================================
-// HOW IT WORKS
+// 5. HOW IT WORKS
 // ============================================================================================================================
 (function(){
 const hiwSection = document.querySelector(".how-it-works");
@@ -871,18 +875,13 @@ setInterval(() => {
   let tl;
   let hasPlayed = false;
   let isHovering = false;
-  // INIT STATES
-  gsap.set(flowNodes, {
-    opacity: 0,
-    y: 20,
-    scale: 0.95
-  });
+  // INIT
+  gsap.set(flowNodes, { opacity: 0, y: 20, scale: 0.95 });
   gsap.set(flowLines, {
     opacity: 0,
     scaleX: 0,
     transformOrigin: "left center"
   });
-  // TIMELINE
   function createTimeline() {
     tl = gsap.timeline({ paused: true });
     flowNodes.forEach((node, i) => {
@@ -894,10 +893,11 @@ setInterval(() => {
         duration: 0.5,
         ease: "power3.out",
         onStart: () => {
-          if (isHovering) return;
-          flowNodes.forEach((n, j) => {
-            n.classList.toggle("active", j <= i);
-          });
+          if (!isHovering) {
+            flowNodes.forEach((n, j) => {
+              n.classList.toggle("active", j <= i);
+            });
+          }
           if (context) {
             context.textContent = node.dataset.info || "";
           }
@@ -912,18 +912,19 @@ setInterval(() => {
         }, i * 0.35);
       }
     });
-      tl.eventCallback("onComplete", () => {
+    tl.eventCallback("onComplete", () => {
       gsap.set(flowNodes, { opacity: 1 });
     });
   }
   createTimeline();
-  // SCROLL TRIGGER
+  // SCROLL
   const flowObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-      tl.restart();
-      } else {
-      hasPlayed = false;
+      if (entry.isIntersecting && !hasPlayed) {
+        tl.restart();
+        hasPlayed = true;
+      } else if (!entry.isIntersecting) {
+        hasPlayed = false;
       }
     });
   }, { threshold: 0.2 });
@@ -932,25 +933,19 @@ setInterval(() => {
   flowNodes.forEach((node, index) => {
     node.addEventListener("mouseenter", () => {
       isHovering = true;
-      tl.pause(0);
+      tl.pause();
       flowNodes.forEach((n, i) => {
         n.classList.toggle("active", i <= index);
       });
       if (context) {
         context.textContent = node.dataset.info || "";
       }
-      gsap.to(node, {
-        scale: 1.08,
-        duration: 0.2
-      });
+      gsap.to(node, { scale: 1.08, duration: 0.2 });
     });
     node.addEventListener("mouseleave", () => {
       isHovering = false;
       tl.resume();
-      gsap.to(node, {
-        scale: 1,
-        duration: 0.2
-      });
+      gsap.to(node, { scale: 1, duration: 0.2 });
     });
   });
 })();
