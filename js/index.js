@@ -770,7 +770,7 @@ function getStepIndex(p) {
 }
 /* STEP UI UPDATE*/
 const cta = document.getElementById("howCta");
-cta.style.display = "none";
+cta.classList.remove("visible");
 function updateStepUI(index) {
   if (currentStep === index) return;
   currentStep = index;
@@ -791,9 +791,9 @@ function updateStepUI(index) {
   });
   transformEl.innerText = step.transform;
     if (index === 4) {
-      cta.style.display = "block";
+      cta.classList.add("visible");
     } else {
-      cta.style.display = "none";
+      cta.classList.remove("visible");
     }
 }
 /* SCROLL-DRIVEN SYSTEM */
