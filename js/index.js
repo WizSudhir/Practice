@@ -735,17 +735,13 @@ const chart = new Chart(ctx, {
   stagger: 0.2,
   ease: "power2.out"
 });
-  /* ✅ MICRO GRAPH BREATHING */
-  gsap.to(chart.data.datasets[0].data, {
-    duration: 2,
-    repeat: -1,
-    yoyo: true,
-    ease: "sine.inOut",
-    onUpdate: () => chart.update("none"),
-    modifiers: {
-      value: (v) => parseFloat(v) + (Math.random() * 1.5 - 0.75)
-    }
-  });
+  gsap.to(".graph-container canvas", {
+  filter: "drop-shadow(0 0 18px rgba(34,197,94,0.35))",
+  duration: 2,
+  repeat: -1,
+  yoyo: true,
+  ease: "sine.inOut"
+});
 // =========================
 // GRAPH DOT TRACKING
 // =========================
@@ -820,13 +816,6 @@ function updateStepUI(index) {
     } else {
       cta.style.display = "none";
     }
-  /* ✅ STEP-BASED GRAPH SHAPES */
-  if (index === 0) chart.data.datasets[0].data = [50,52,53,54,55];
-  if (index === 1) chart.data.datasets[0].data = [50,60,65,68,75];
-  if (index === 2) chart.data.datasets[0].data = [50,70,90,110,130];
-  if (index === 3) chart.data.datasets[0].data = [50,85,120,160,200];
-  if (index === 4) chart.data.datasets[0].data = [50,100,150,210,260];
-  chart.update("none");
 }
 /* =========================
    SCROLL-DRIVEN SYSTEM
@@ -852,7 +841,7 @@ gsap.timeline({
     // smooth curve
     const smoothP = p * p * (3 - 2 * p);
     const easeOutExpo = (t) => 1 - Math.pow(2, -10 * t);
-    const curve = easeOutExpo(smoothP);
+    const curve = Math.pow(smoothP, 1.8);
 
     /* ===== COUNTERS ===== */
     const revenue = lerp(START_REVENUE, END_REVENUE, smoothP);
@@ -863,13 +852,15 @@ gsap.timeline({
 
     /* ===== GRAPH ===== */
     chart.data.datasets[0].data = [
-      lerp(50, 90, curve),
-      lerp(55, 130, curve),
-      lerp(60, 170, curve),
-      lerp(70, 210, curve),
+      lerp(50, 70, curve),
+      lerp(55, 95, curve),
+      lerp(60, 140, curve),
+      lerp(70, 200, curve),
       lerp(80, 260, curve)
     ];
-
+    const boost = Math.pow(smoothP, 4) * 40;
+    chart.data.datasets[0].data[4] += boost;
+    
     chart.data.datasets[1].data = [
       lerp(40, 25, smoothP),
       lerp(38, 20, smoothP),
