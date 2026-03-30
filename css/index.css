@@ -2007,6 +2007,7 @@ z-index: 2;
 .final-cta-pro {
   position: relative;
   overflow: hidden;
+  opacity: 1 !important;
 }
 /* BACKGROUND SYSTEM */
 .cta-bg {
