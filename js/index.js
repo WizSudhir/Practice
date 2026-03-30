@@ -820,55 +820,7 @@ gsap.timeline({
   onUpdate: () => {
 
     const p = state.progress;
-    // 🔥 CTA EMERGE FROM GRAPH DOT
-    if (cta && graphDot) {
-      if (p > 0.92 && !cta.classList.contains("active")) {
-        cta.classList.add("active");
-        const dotRect = graphDot.getBoundingClientRect();
-        const ctaRect = cta.getBoundingClientRect();
-        const dx = dotRect.left - ctaRect.left;
-        const dy = dotRect.top - ctaRect.top;
-        gsap.fromTo(cta,
-          {
-            opacity: 0,
-            scale: 0.2,
-            x: dx,
-            y: dy
-          },
-          {
-            opacity: 1,
-            scale: 1,
-            x: 0,
-            y: 0,
-            duration: 0.9,
-            ease: "power4.out"
-          }
-        );
-        gsap.fromTo(
-          "#howCta .cta-content > *",
-          { opacity: 0, y: 10 },
-          {
-            opacity: 1,
-             y: 0,
-            duration: 0.6,
-            stagger: 0.1,
-            delay: 0.2
-          }
-        );
-        // DOT BURST
-        gsap.to(graphDot, {
-          scale: 6,
-          opacity: 0,
-          duration: 0.6,
-          ease: "power2.out"
-        });
-      }
-      if (p <= 0.92 && cta.classList.contains("active")) {
-        cta.classList.remove("active");
-        graphDot.style.opacity = 1;
-        graphDot.style.transform = "translate(-50%, -50%) scale(1)";
-      }
-    }
+    
     // smooth curve
     const smoothP = p * p * (3 - 2 * p);
 
