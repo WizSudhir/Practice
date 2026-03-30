@@ -456,12 +456,6 @@ if (aboutSection) {
   }, { threshold: 0.4 });
   aboutObserver.observe(aboutSection);
 }
-const systemCard = document.getElementById("systemCard");
-if (systemCard) {
-  systemCard.addEventListener("click", () => {
-    systemCard.classList.toggle("active");
-  });
-}
 // RULES ENGINE (WITH HOVER INSPECT)
 (function(){
   const engine = document.getElementById("rulesEngine");
