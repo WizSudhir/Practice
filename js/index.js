@@ -1030,7 +1030,7 @@ function initRevenueChart(){
 }
 // ================= ELEMENTS =================
 const grid = document.getElementById("gridView");
-const slider = document.getElementById("pgSlider");
+const outcomesSlider = document.getElementById("pgSlider");
 const toggleBtns = section.querySelectorAll(".toggle-btn");
 const explanation = section.querySelector(".pg-explanation");
 let hasAnimated = false;
@@ -1195,7 +1195,7 @@ function animateCounters(){
 }
 // ================= CAROUSEL =================
 function renderSlides(){
-  slider.innerHTML = "";
+  outcomesSlider.innerHTML = "";
   const stories = [
     {
       title: "Podiatry Surgical Group",
@@ -1245,14 +1245,14 @@ function renderSlides(){
         </div>
       </div>
     `;
-    slider.appendChild(slide);
+    outcomesSlider.appendChild(slide);
   });
 }
 let index=0;
 let interval;
 function startCarousel(){
   interval = setInterval(()=>{
-    const slides=slider.querySelectorAll(".pg-slide");
+    const slides=outcomesSlider.querySelectorAll(".pg-slide");
     slides.forEach(s=>s.classList.remove("active"));
     index=(index+1)%slides.length;
     const active = slides[index];
@@ -1274,8 +1274,8 @@ function startCarousel(){
   },4000);
 }
 // pause on hover
-slider.addEventListener("mouseenter",()=>clearInterval(interval));
-slider.addEventListener("mouseleave",startCarousel);
+outcomesSlider.addEventListener("mouseenter",()=>clearInterval(interval));
+outcomesSlider.addEventListener("mouseleave",startCarousel);
 // ================= TOGGLE =================
 let slidesRendered = false;
 toggleBtns.forEach(btn=>{
