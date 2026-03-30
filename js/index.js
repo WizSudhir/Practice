@@ -688,18 +688,23 @@ const chart = new Chart(ctx, {
     labels: ["","","","",""],
     datasets: [
       {
-        label: "Revenue",
+       label: "Revenue",
         data: [50, 55, 60, 70, 80],
         borderColor: "#22c55e",
         borderWidth: 3,
         tension: 0.45,
-        pointRadius: 0,
+        /* ✅ END POINT GLOW DOT */
+        pointRadius: (ctx) => ctx.dataIndex === 4 ? 5 : 0,
+        pointBackgroundColor: "#22c55e",
+        pointHoverRadius: 6,
         fill: true,
+        /* ✅ STRONGER GRADIENT */
         backgroundColor: (ctx) => {
-          const gradient = ctx.chart.ctx.createLinearGradient(0, 0, 0, 200);
-          gradient.addColorStop(0, "rgba(34,197,94,0.25)");
-          gradient.addColorStop(1, "rgba(34,197,94,0)");
-          return gradient;
+        const gradient = ctx.chart.ctx.createLinearGradient(0, 0, 0, 200);
+        gradient.addColorStop(0, "rgba(34,197,94,0.45)");
+        gradient.addColorStop(0.6, "rgba(34,197,94,0.15)");
+        gradient.addColorStop(1, "rgba(34,197,94,0)");
+        return gradient;
         }
       },
       {
@@ -730,6 +735,17 @@ const chart = new Chart(ctx, {
   stagger: 0.2,
   ease: "power2.out"
 });
+  /* ✅ MICRO GRAPH BREATHING */
+  gsap.to(chart.data.datasets[0].data, {
+    duration: 2,
+    repeat: -1,
+    yoyo: true,
+    ease: "sine.inOut",
+    onUpdate: () => chart.update("none"),
+    modifiers: {
+      value: (v) => parseFloat(v) + (Math.random() * 1.5 - 0.75)
+    }
+  });
 // =========================
 // GRAPH DOT TRACKING
 // =========================
@@ -804,6 +820,13 @@ function updateStepUI(index) {
     } else {
       cta.style.display = "none";
     }
+  /* ✅ STEP-BASED GRAPH SHAPES */
+  if (index === 0) chart.data.datasets[0].data = [50,52,53,54,55];
+  if (index === 1) chart.data.datasets[0].data = [50,60,65,68,75];
+  if (index === 2) chart.data.datasets[0].data = [50,70,90,110,130];
+  if (index === 3) chart.data.datasets[0].data = [50,85,120,160,200];
+  if (index === 4) chart.data.datasets[0].data = [50,100,150,210,260];
+  chart.update("none");
 }
 /* =========================
    SCROLL-DRIVEN SYSTEM
@@ -828,6 +851,8 @@ gsap.timeline({
     
     // smooth curve
     const smoothP = p * p * (3 - 2 * p);
+    const easeOutExpo = (t) => 1 - Math.pow(2, -10 * t);
+    const curve = easeOutExpo(smoothP);
 
     /* ===== COUNTERS ===== */
     const revenue = lerp(START_REVENUE, END_REVENUE, smoothP);
@@ -838,11 +863,11 @@ gsap.timeline({
 
     /* ===== GRAPH ===== */
     chart.data.datasets[0].data = [
-      lerp(50, 90, smoothP),
-      lerp(55, 120, smoothP),
-      lerp(60, 150, smoothP),
-      lerp(70, 190, smoothP),
-      lerp(80, 240, smoothP)
+      lerp(50, 90, curve),
+      lerp(55, 130, curve),
+      lerp(60, 170, curve),
+      lerp(70, 210, curve),
+      lerp(80, 260, curve)
     ];
 
     chart.data.datasets[1].data = [
