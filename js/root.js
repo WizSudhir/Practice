@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ===============================
   // LIGHT/DARK THEME
   // ===============================  
-  const toggleTheme = () => {
+  window.toggleTheme = () => {
   const current = document.documentElement.getAttribute("data-theme");
   if (current === "light") {
     document.documentElement.removeAttribute("data-theme");
