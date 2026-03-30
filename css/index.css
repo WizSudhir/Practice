@@ -913,13 +913,14 @@ z-index: 2;
 .rules-visual {
   margin-top: 12px;
   position: relative;
+  padding: 0 4px;
 }
 /* FLOW LINE */
 .flow-line {
   width: 100%;
-  height: 2px;
+  height: 6px;
   background: rgba(255,255,255,0.05);
-  border-radius: 10px;
+  border-radius: 999px;
   overflow: hidden;
   margin-bottom: 16px;
 }
