@@ -1451,186 +1451,58 @@ if (slider && wrapper && track) {
 // ============================================================================================================================
 // 8. ENGAGEMENT MODEL
 // ============================================================================================================================
-// ==========================
-// GSAP ENGAGEMENT SYSTEM (FINAL)
-// ==========================
-gsap.registerPlugin(ScrollTrigger);
 
-// 🔥 GLOBAL FIX (prevents weird scroll bugs)
-ScrollTrigger.config({
-  ignoreMobileResize: true
-});
+(function () {
+  const section = document.querySelector(".engagement-model");
+  if (!section || !window.gsap) return;
 
-const steps = document.querySelectorAll('.eng-step');
-const visual = document.getElementById('engVisual');
+  const steps = section.querySelectorAll(".eng-step");
+  const cards = section.querySelectorAll(".eng-proof-card");
+  const tension = section.querySelector(".eng-tension");
+  const bridge = section.querySelector(".eng-bridge");
 
-const revEl = document.getElementById('revValue');
-const denialEl = document.getElementById('denialValue');
-const statusEl = document.getElementById('engStatus');
-const bars = document.querySelectorAll('.eng-bars .bar');
-
-if (steps.length && visual) {
-
-  // ==========================
-  // STEP DATA (SYSTEM STATES)
-  // ==========================
-  const stepData = [
-    {
-      revenue: 85000,
-      denials: 32,
-      status: "Scanning system for revenue leakage...",
-      bars: ["30%", "45%", "60%", "75%"]
-    },
-    {
-      revenue: 95000,
-      denials: 24,
-      status: "Integrating workflows & validating data...",
-      bars: ["40%", "55%", "70%", "85%"]
-    },
-    {
-      revenue: 115000,
-      denials: 12,
-      status: "Optimizing claims & reducing denials...",
-      bars: ["50%", "65%", "80%", "92%"]
-    },
-    {
-      revenue: 128450,
-      denials: 5,
-      status: "Revenue system fully optimized...",
-      bars: ["60%", "75%", "90%", "100%"]
-    }
-  ];
-
-  let currentStep = -1;
-
-  // ==========================
-  // COUNTER ANIMATION
-  // ==========================
-  function animateCounter(el, start, end, prefix = "", suffix = "") {
-    gsap.killTweensOf(el); // 🔥 prevents stacking
-
-    gsap.to({ val: start }, {
-      val: end,
-      duration: 0.8,
-      ease: "power2.out",
-      onUpdate: function () {
-        el.textContent =
-          prefix +
-          Math.floor(this.targets()[0].val).toLocaleString() +
-          suffix;
-      }
-    });
-  }
-
-  // ==========================
-  // UPDATE VISUAL (RIGHT SIDE)
-  // ==========================
-  function updateVisual(index) {
-    const data = stepData[index];
-
-    // 🔥 kill ALL previous animations (critical)
-    gsap.killTweensOf([revEl, denialEl, statusEl, bars]);
-
-    // SAFE current values
-    const currentRevenue =
-      Number(revEl.textContent.replace(/\D/g, '')) || 0;
-
-    const currentDenials =
-      Number(denialEl.textContent.replace(/\D/g, '')) || 0;
-
-    // Animate counters
-    animateCounter(revEl, currentRevenue, data.revenue, "$");
-    animateCounter(denialEl, currentDenials, data.denials, "", "%");
-
-    // Status text (clean fade)
-    gsap.to(statusEl, {
-      opacity: 0,
-      duration: 0.2,
-      onComplete: () => {
-        statusEl.textContent = data.status;
-        gsap.to(statusEl, { opacity: 1, duration: 0.3 });
-      }
-    });
-
-    // 🔥 Bars reset + stagger animation (fix sync issue)
-    bars.forEach((bar, i) => {
-      gsap.set(bar, { height: 0 });
-
-      gsap.to(bar, {
-        height: data.bars[i],
-        duration: 0.5,
-        delay: i * 0.05,
-        ease: "power2.out"
-      });
-    });
-
-    // Pulse effect
-    visual.classList.add('active');
-    setTimeout(() => visual.classList.remove('active'), 400);
-  }
-
-  // ==========================
-  // STEP ACTIVATION
-  // ==========================
-  function activateStep(index) {
-    if (index === currentStep) return;
-
-    currentStep = index;
-
-    steps.forEach(s => s.classList.remove('active'));
-    steps[index].classList.add('active');
-
-    updateVisual(index);
-  }
-
-  // ==========================
-  // GSAP SCROLL STORY ENGINE (FIXED)
-  // ==========================
-  const totalSteps = steps.length;
-
-  gsap.timeline({
+  const tl = gsap.timeline({
     scrollTrigger: {
-      trigger: ".engagement-gsap",
-      start: `top+=${NAV_HEIGHT} top`,
-
-      // 🔥 responsive scroll distance
-      end: "+=" + (window.innerHeight * totalSteps),
-
-      scrub: true,
-      pin: true,
-      pinSpacing: true,
-      anticipatePin: 1,
-
-      // 🔥 SNAP = fixes sync issues completely
-      snap: {
-        snapTo: 1 / (totalSteps - 1),
-        duration: 0.3,
-        ease: "power1.inOut"
-      }
-    }
-  })
-  .to({}, {
-    duration: 1,
-    onUpdate: function () {
-
-      const progress = this.progress();
-
-      // 🔥 ROUND instead of FLOOR (critical fix)
-      let stepIndex = Math.round(progress * (totalSteps - 1));
-
-      if (stepIndex >= totalSteps) {
-        stepIndex = totalSteps - 1;
-      }
-
-      activateStep(stepIndex);
+      trigger: section,
+      start: "top 70%",
     }
   });
 
-  // ==========================
-  // INITIAL STATE FIX
-  // ==========================
-  activateStep(0);
-}
+  // STEP TIMELINE (staggered)
+  tl.to(steps, {
+    opacity: 1,
+    y: 0,
+    duration: 0.6,
+    stagger: 0.2,
+    ease: "power3.out"
+  });
+
+  // PROOF CARDS
+  tl.to(cards, {
+    opacity: 1,
+    y: 0,
+    duration: 0.6,
+    stagger: 0.2,
+    ease: "power3.out"
+  }, "-=0.3");
+
+  // TENSION LINE
+  tl.to(tension, {
+    opacity: 1,
+    y: 0,
+    duration: 0.6,
+    ease: "power2.out"
+  }, "-=0.2");
+
+  // BRIDGE
+  tl.to(bridge, {
+    opacity: 1,
+    y: 0,
+    duration: 0.6,
+    ease: "power2.out"
+  }, "-=0.3");
+
+})();
 // ============================================================================================================================
 // 9. FINAL CTA
 // ============================================================================================================================
