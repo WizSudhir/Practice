@@ -926,6 +926,7 @@ z-index: 2;
 .flow-progress {
   height: 100%;
   width: 0%;
+  border-radius: 999px;
   background: linear-gradient(90deg,#6366f1,#22c55e);
   transition: width 0.6s ease;
 }
@@ -1471,7 +1472,8 @@ z-index: 2;
 .flow-line {
   flex: none;
   width: 25px;
-  height: 2px;
+  height: 6px;
+  border-radius: 999px;
   position: relative;
   background: linear-gradient(90deg,rgba(99,102,241,0.2),rgba(59,130,246,0.4),rgba(99,102,241,0.2));
   overflow: hidden;
