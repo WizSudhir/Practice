@@ -997,6 +997,37 @@ const data = [
     graph:"stability"
   }
 ];
+// Revenue Chart below Sim Result
+let revenueChart;
+function initRevenueChart(){
+  const ctx = document.getElementById("revenueChart");
+  if(!ctx || !hasChart) return;
+  revenueChart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: ["Month 1","Month 2","Month 3","Month 4"],
+      datasets: [
+        {
+          label: "Current Revenue",
+          data: [0,0,0,0],
+          borderColor: "#ef4444",
+          tension: 0.4
+        },
+        {
+          label: "Optimized Revenue",
+          data: [0,0,0,0],
+          borderColor: "#22c55e",
+          tension: 0.4
+        }
+      ]
+    },
+    options: {
+      plugins: { legend: false },
+      scales: { x:{display:false}, y:{display:false} },
+      animation: { duration: 800 }
+    }
+  });
+}
 // ================= ELEMENTS =================
 const grid = document.getElementById("gridView");
 const slider = document.getElementById("pgSlider");
@@ -1272,12 +1303,30 @@ document.getElementById("simulateBtn").addEventListener("click",()=>{
   const avg = parseFloat(document.getElementById("avgInput")?.value || 0);
   const denial = (parseFloat(document.getElementById("denialInput")?.value || 0)) / 100;
   const recovery = claims * avg * denial * 0.25;
-  document.getElementById("simResult").innerHTML =
-    `Potential Recovery: <strong>$${Math.round(recovery).toLocaleString()}</strong>
-     <div style="font-size:12px;color:#94a3b8;margin-top:6px">
-       Based on industry benchmarks (18–32% leakage)
-     </div>`;
-});
+const resultEl = document.getElementById("simResult");
+resultEl.innerHTML =
+  `Potential Recovery: <strong>$${Math.round(recovery).toLocaleString()}</strong>
+   <div style="font-size:12px;color:#94a3b8;margin-top:6px">
+     Based on industry benchmarks (18–32% leakage)
+   </div>`;
+// 🔥 GRAPH UPDATE
+if(revenueChart){
+  const current = claims * avg * (1 - denial);
+  const improved = current + recovery;
+  revenueChart.data.datasets[0].data = [
+    current*0.9,
+    current*0.95,
+    current,
+    current*1.02
+  ];
+  revenueChart.data.datasets[1].data = [
+    improved*0.9,
+    improved*1.0,
+    improved*1.1,
+    improved*1.2
+  ];
+  revenueChart.update();
+}
 // ================= SCROLL TRIGGER =================
 const observer = new IntersectionObserver(entries=>{
   if(entries[0].isIntersecting && !hasAnimated){
@@ -1288,6 +1337,7 @@ const observer = new IntersectionObserver(entries=>{
 observer.observe(section);
 // ================= INIT =================
 renderGrid();
+initRevenueChart();
 })();
   
 // ============================================================================================================================
