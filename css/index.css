@@ -1156,6 +1156,9 @@ z-index: 2;
   border-radius: 10px;
   opacity: 0.6;
 }
+.narrative-step:not(.active) {
+  display: none;
+}
 .success-icon {
   width: 16px;
   height: 16px;
