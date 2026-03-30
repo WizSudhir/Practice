@@ -779,6 +779,7 @@ function getStepIndex(p) {
    STEP UI UPDATE
 ========================= */
 const cta = document.getElementById("howCta");
+cta.style.display = "none";
 function updateStepUI(index) {
   if (currentStep === index) return;
   currentStep = index;
