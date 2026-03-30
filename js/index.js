@@ -1031,9 +1031,13 @@ function renderGrid(){
     card.addEventListener("mouseenter", () => {
       // GRAPH INTERACTION
       if(canvas.chart){
-        canvas.chart.data.datasets[0].data =
-          canvas.chart.data.datasets[0].data.map(v => v * 1.05);
-        canvas.chart.update();
+        const original = [...canvas.chart.data.datasets[0].data];
+          canvas.chart.data.datasets[0].data = original.map(() => 0);
+          canvas.chart.update();
+          setTimeout(()=>{
+            canvas.chart.data.datasets[0].data = original;
+            canvas.chart.update();
+          }, 150);
       }
       // ================= DYNAMIC EXPLANATION =================
       if(explanation){
