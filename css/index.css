@@ -1386,7 +1386,8 @@ z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
   gap: 10px;
 }
 
@@ -1400,18 +1401,18 @@ z-index: 2;
 }
 .flow-node.active i {
   color: #ffffff;
-  filter:
-    drop-shadow(0 0 6px rgba(99,102,241,0.8));
+  filter: drop-shadow(0 0 3px rgba(99,102,241,0.4));
 }
 .flow-node {
   position: relative;
-  padding: 10px 18px;
+  padding: 8px 14px;
+  font-size: 13px;
   border-radius: 999px;
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.08);
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   transition: all 0.35s ease;
   overflow: hidden;
   z-index: 2;
@@ -1428,8 +1429,8 @@ z-index: 2;
   background: rgba(99,102,241,0.15);
   border-color: rgba(99,102,241,0.5);
   box-shadow:
-    0 0 20px rgba(99,102,241,0.6),
-    0 0 40px rgba(59,130,246,0.25);
+    0 0 10px rgba(99,102,241,0.25),
+    0 0 20px rgba(59,130,246,0.12);
   opacity: 1;
   transform: scale(1.05);
 }
@@ -1441,7 +1442,7 @@ z-index: 2;
   background: linear-gradient(
     120deg,
     transparent,
-    rgba(99,102,241,0.6),
+    rgba(99,102,241,0.25),
     transparent
   );
   animation: pulseWave 2.5s linear infinite;
@@ -1481,7 +1482,8 @@ z-index: 2;
 }
 /* FLOW LINE */
 .flow-line {
-  flex: 1;
+  flex: none;
+  width: 40px;
   height: 2px;
   position: relative;
   background: linear-gradient(
