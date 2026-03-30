@@ -1102,6 +1102,7 @@ z-index: 2;
   position: relative;
   display: flex;
   flex-direction: column;
+  padding-bottom: 240px;
 }
 .narrative-content {
   display: flex;
