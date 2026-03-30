@@ -1039,7 +1039,20 @@ function renderGrid(){
     card.addEventListener("mouseenter", () => {
       // GRAPH INTERACTION
       if(canvas.chart){
-        const original = [...canvas.chart.data.datasets[0].data];
+        const target = d.metric;
+          let baseData;
+            if(d.graph === "growth"){
+            baseData = [10, 20, 40, target];
+          }
+          else if(d.graph === "decline"){
+            baseData = [target*2, target*1.5, target*1.2, target];
+          }
+          else if(d.graph === "stability"){
+            baseData = [target-5, target-2, target-3, target];
+          }
+          else {
+            baseData = [target, 100-target];
+          }
           canvas.chart.data.datasets[0].data = original.map(() => 0);
           canvas.chart.update();
           setTimeout(()=>{
