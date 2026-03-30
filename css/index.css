@@ -1195,6 +1195,15 @@ z-index: 2;
   transform: none;
   pointer-events: auto;
   z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.how-cta > * {
+  flex: 1;
+  min-width: 220px;
 }
 .cta-eyebrow {
   font-size: 11px;
