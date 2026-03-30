@@ -1577,23 +1577,28 @@ z-index: 2;
   text-shadow: 0 0 10px rgba(99,102,241,0.6);
 }
 .pg-toggle {
-  background: rgba(255,255,255,0.04);
-  padding: 4px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-default);
+  padding: 6px;
   border-radius: 999px;
   display: inline-flex;
+  backdrop-filter: blur(10px);
 }
-
 .toggle-btn {
-  padding: 8px 18px;
+  padding: 8px 20px;
   border-radius: 999px;
   font-size: 13px;
   color: var(--text-muted);
+  position: relative;
+  transition: var(--transition-base);
 }
-
 .toggle-btn.active {
+  color: #fff;
   background: var(--gradient-accent);
-  color: white;
   box-shadow: var(--glow-primary);
+}
+.toggle-btn:not(.active):hover {
+  color: var(--text-primary);
 }
 /* CAROUSEL */
 .pg-slide {
