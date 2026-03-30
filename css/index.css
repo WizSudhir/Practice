@@ -1774,8 +1774,7 @@ z-index: 2;
 /* SLIDER */
 .ehr-slider {
   position: relative;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: hidden;
   cursor: grab;
   user-select: none;
   scrollbar-width: none;
@@ -1817,7 +1816,7 @@ z-index: 2;
   object-fit: contain;
   opacity: 0.7;
   transition: 0.3s ease;
-  pointer-events: none;
+  pointer-events: auto;
 }
 .ehr-track img:hover {
   opacity: 1;
