@@ -1120,7 +1120,7 @@ z-index: 2;
   gap: 40px;
   position: relative;
   height: auto;
-  overflow: hidden;
+  overflow: visible;
 }
 
 /* STEP BASE */
