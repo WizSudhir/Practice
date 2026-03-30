@@ -1022,8 +1022,16 @@ function renderGrid(){
       </div>
       <p>${d.title}</p>
       <span>${d.sub}</span>
+      <p class="pg-graph-label">${getGraphLabel(d.graph)}</p>
       <canvas class="chart"></canvas>
     `;
+    function getGraphLabel(type){
+      if(type === "growth") return "Collections Growth Trend";
+      if(type === "decline") return "Rejection Rate Reduction";
+      if(type === "radial") return "Clean Claims Ratio";
+      if(type === "stability") return "Acceptance Stability";
+      return "";
+    }
     container.appendChild(card);
     const canvas = card.querySelector("canvas");
     drawGraph(canvas, d.graph);
