@@ -2010,9 +2010,6 @@ z-index: 2;
 .final-cta-pro {
   position: relative;
   overflow: hidden;
-  min-height: 400px;
-  display: flex;
-  align-items: center;
 }
 /* BACKGROUND SYSTEM */
 .cta-bg {
