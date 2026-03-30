@@ -28,8 +28,8 @@
   --gradient-primary: linear-gradient(90deg, #ffffff, #c4b5fd, #93c5fd);
   --gradient-accent: linear-gradient(90deg, #6366f1, #3b82f6);
   /* GLOW */
-  --glow-primary: 0 0 25px rgba(99,102,241,0.35);
-  --glow-soft: 0 0 40px rgba(59,130,246,0.25);
+  --glow-primary: none;
+  --glow-soft: none;
   /* RADIUS */
   --radius-sm: 8px;
   --radius-md: 12px;
@@ -244,15 +244,6 @@ h2.gradient {
   position: absolute;
   inset: -6px;
   border-radius: inherit;
-  /* 🔥 GRADIENT GLOW */
-  background: radial-gradient(
-    circle at 50% 50%,
-    rgba(99,102,241,0.25),
-    rgba(59,130,246,0.2),
-    transparent 70%
-  );
-  filter: blur(10px);
-  opacity: 0.5;
   z-index: -2;
   pointer-events: none;
 }
@@ -301,7 +292,7 @@ a:hover {
 }
 .btn-primary:hover {
   transform: translateY(-1px);
-  box-shadow: var(--glow-primary);
+  filter: brightness(1.1);
 }
 .btn-primary:hover::after {
   opacity: 1;
@@ -386,7 +377,6 @@ a:hover {
 .card:hover,
 .glass:hover {
   border-color: var(--border-strong);
-  box-shadow: var(--glow-soft);
   transform: translateY(-4px);
 }
 .grid-2 {
@@ -432,7 +422,6 @@ textarea:focus {
 
 .icon:hover {
   color: #fff;
-  filter: drop-shadow(0 0 6px rgba(99,102,241,0.6));
 }
 
 /* ============================================================================================================================
@@ -451,7 +440,6 @@ img {
 }
 .img-glow:hover {
   transform: translateY(-6px) scale(1.02);
-  box-shadow: var(--glow-soft);
 }
 .img-glow img {
   transition: var(--transition-base);
@@ -518,7 +506,7 @@ img {
 .navbar.scrolled {
   background: rgba(11,17,32,0.85);
   backdrop-filter: blur(24px);
-  box-shadow: var(--shadow-soft);
+  border-bottom: 1px solid var(--border-default);
 }
 .navbar-inner {
   height: 72px;
