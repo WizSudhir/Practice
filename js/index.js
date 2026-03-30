@@ -1327,6 +1327,7 @@ if(revenueChart){
   ];
   revenueChart.update();
 }
+});
 // ================= SCROLL TRIGGER =================
 const observer = new IntersectionObserver(entries=>{
   if(entries[0].isIntersecting && !hasAnimated){
