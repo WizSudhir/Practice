@@ -445,7 +445,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // ============================================================================================================================
 // 3. ABOUT
 // ============================================================================================================================
-const aboutSection = document.querySelector('.about-system');
+const aboutSection = document.querySelector('about-belief');
 if (aboutSection) {
   const aboutObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
