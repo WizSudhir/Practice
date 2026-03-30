@@ -322,19 +322,6 @@ z-index: 2;
    z-index: 1;
 }
 /* CONTENT */
-.hero-content {
-  transform: none;
-  text-align: center;
-  max-width: calc(var(--container) * 0.65);
-  margin: 0 auto;
-  padding: 0 20px;
-  z-index: 3;
-}
-.hero-content p {
-  max-width: 750px;
-  margin: 10px auto 0;
-  color: rgba(255,255,255,0.65);
-}
 .hero-trust {
   margin-top: 10px;
   font-size: 13px;
@@ -457,13 +444,6 @@ z-index: 2;
   z-index: 2;
   pointer-events: none;
 }
-/* HEADER */
-.rev-header {
-  font-size: 13px;
-  font-weight: 600;
-  margin-bottom: 10px;
-  color: #e2e8f0;
-}
 /* RESPONSIVE HERO SYSTEM */
 /* NAV HEIGHT TOKEN */
 :root {
@@ -548,8 +528,7 @@ z-index: 2;
 @media (max-width: 768px) {
      /* 🔥 KILL COMPLEX SYSTEM */
   .system-bg,
-  .connections,
-  .revenue {
+  .connections {
     display: none !important;
   }
   /* CLEAN MOBILE HERO */
@@ -776,22 +755,6 @@ z-index: 2;
   margin: 0;
   line-height: 1.7;
 }
-/* BELIEF CARDS (UPGRADE) */
-.belief-card {
-  display: flex;
-  gap: 12px;
-  padding: 6px 0;
-  border: none;
-  background: transparent;
-  font-size: 15px;
-  color: var(--text-secondary);
-  transition: all 0.3s ease;
-}
-.belief-card:hover {
-  transform: translateX(8px);
-  border-color: var(--border-strong);
-  box-shadow: var(--glow-soft);
-}
 .belief-stack span {
   color: #6366f1;
   min-width: 28px;
@@ -803,22 +766,6 @@ z-index: 2;
   align-items: center;
   justify-content: center;
   gap: 32px;
-}
-.proof-card {
-  text-align: center;
-  padding: var(--space-md);
-  background: var(--bg-elevated);
-  border: 1px solid var(--border-primary);
-  border-radius: var(--radius-md);
-  transition: var(--transition-medium);
-}
-.proof-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-glow);
-}
-.proof-card h3 {
-  font-size: var(--text-2xl);
-  margin: var(--space-sm) 0;
 }
 .belief-control {
   padding-left: 16px;
