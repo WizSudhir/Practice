@@ -1204,10 +1204,12 @@ z-index: 2;
 .cta-heading {
   font-size: 18px;
   font-weight: 600;
+  margin-bottom: 4px;
 }
 .cta-sub {
   font-size: 13px;
   color: var(--text-muted);
+  margin-bottom: 6px;
 }
 .cta-btn {
   background: linear-gradient(135deg,#6366f1,#3b82f6);
