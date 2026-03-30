@@ -1110,6 +1110,7 @@ z-index: 2;
 }
 /* ===== LEFT SIDE ===== */
 .narrative-left {
+  position: relative;
   display: flex;
   flex-direction: column;
 }
@@ -1221,7 +1222,8 @@ z-index: 2;
   margin-top: 40px;
   opacity: 1;
   transform: none;
-  pointer-events: none;
+  pointer-events: auto;
+  z-index: 5;
 }
 .cta-eyebrow {
   font-size: 11px;
