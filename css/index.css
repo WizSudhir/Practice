@@ -1774,7 +1774,8 @@ z-index: 2;
 /* SLIDER */
 .ehr-slider {
   position: relative;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   cursor: grab;
   user-select: none;
   scrollbar-width: none;
