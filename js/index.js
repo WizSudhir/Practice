@@ -468,7 +468,7 @@ if (systemCard) {
   if (!engine) return;
 
   const rules = engine.querySelectorAll(".rule");
-  const progress = document.getElementById("flowProgress");
+  const progress = document.getElementById("aboutflowProgress");
   const output = document.getElementById("rulesOutput");
 
   const outputs = [
