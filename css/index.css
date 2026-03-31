@@ -1027,7 +1027,7 @@ z-index: 2;
 ============================================================================================================================== */
 .how-it-works {
   overflow: hidden;
-  padding-bottom: 200px;
+  padding-block: clamp(12px, 3vw, 24px);
 }
 .narrative {
   display: grid;
