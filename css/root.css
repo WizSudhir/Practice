@@ -420,7 +420,19 @@ a:hover {
   box-shadow: var(--glow-soft);
   transform: translateY(-1px);
 }
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .btn-primary,
+  .btn-outline {
+    height: 44px;
+    font-size: 14px;
+    padding: 0 18px;
+  }
 
+  .btn-arrow {
+    gap: 6px;
+  }
+}
 /* ============================================================================================================================
    7. GLASS BORDER SYSTEM (NO BG)
 ============================================================================================================================ */
@@ -440,13 +452,38 @@ a:hover {
 }
 .grid-2 {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--space-lg);
 }
 .grid-3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-lg);
+}
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 768px) {
+  .grid-2,
+  .grid-3 {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+}
+@media (hover: hover) {
+  .card:hover,
+  .glass:hover {
+    transform: translateY(-4px);
+  }
+}
+@media (hover: none) {
+  .card:hover,
+  .glass:hover {
+    transform: none;
+  }
 }
 /* ============================================================================================================================
    8. INPUT SYSTEM
@@ -467,7 +504,14 @@ textarea:focus {
   border-color: var(--primary);
   box-shadow: 0 0 0 2px rgba(99,102,241,0.2);
 }
-
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  input,
+  textarea {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
 /* ============================================================================================================================
    9. ICON SYSTEM
 ============================================================================================================================ */
@@ -492,6 +536,7 @@ img {
   display: block;
 }
 .img-glow {
+  width: 100%;
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-default);
   transition: var(--transition-base);
@@ -506,7 +551,12 @@ img {
 .img-glow:hover img {
   transform: scale(1.05);
 }
-
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .img-glow:hover {
+    transform: none;
+  }
+}
 /* ============================================================================================================================
    11. UTILITIES
 ============================================================================================================================ */
@@ -523,7 +573,15 @@ img {
 .stack-sm > * + * { margin-top: var(--space-sm); }
 .stack-md > * + * { margin-top: var(--space-md); }
 .stack-lg > * + * { margin-top: var(--space-lg); }
-
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .stack-md > * + * {
+    margin-top: var(--space-sm);
+  }
+  .stack-lg > * + * {
+    margin-top: var(--space-md);
+  }
+}
 /* ============================================================================================================================
    12. SCROLLBAR (PREMIUM)
 ============================================================================================================================ */
@@ -912,5 +970,27 @@ body.menu-open {
   }
   .footer-links a {
     width: 100%;
+  }
+}
+/* ============================================================================================================================
+ 15. COMMON RESPONSIVE (PERFORMANCE BASED)
+============================================================================================================================ */
+/* Reduce heavy effects on low-end devices */
+@media (max-width: 768px) {
+  .section-glow::after {
+    display: none;
+  }
+  .img-glow:hover img {
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+  .section {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
