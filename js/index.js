@@ -798,7 +798,7 @@ gsap.timeline({
     end: "+=2600",
     scrub: true,
     pin: true,
-    pinSpacing: true,
+    pinSpacing: false,
     anticipatePin: 1
   }
 })
