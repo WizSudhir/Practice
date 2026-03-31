@@ -609,6 +609,9 @@ img {
 .mobile-nav-cta {
    display: none;
 }
+.nav-menu {
+  z-index: 9999;
+}
 .navbar {
   position: fixed;
   top: 0;
@@ -618,7 +621,7 @@ img {
   backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border-default);
   transition: all var(--transition-base);
-  z-index: 9999;
+  z-index: 100;
 }
 .navbar .container {
   max-width: 1200px;
