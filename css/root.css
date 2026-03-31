@@ -191,7 +191,7 @@ h2.gradient {
 ============================================================================================================================ */
 .viewport-safe {
   min-height: 100vh;
-  display: block;
+  display: flex;
   align-items: center;
 }
 .viewport-safe .section-frame {
