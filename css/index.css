@@ -1040,7 +1040,7 @@ z-index: 2;
   position: relative;
   display: flex;
   flex-direction: column;
-  padding-bottom: 0px;
+  padding-bottom: 240px;
 }
 .narrative-content {
   display: flex;
