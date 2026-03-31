@@ -58,6 +58,28 @@
   --nav-height: 80px;
   --grid-offset: calc((100vw - var(--container)) / 2);
 }
+/* RESPONSIVE TOKENS (ADAPTIVE SYSTEM) */
+/* Breakpoints */
+:root {
+  --bp-sm: 480px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
+}
+/* Fluid spacing overrides */
+@media (max-width: 768px) {
+  :root {
+    --space-lg: 28px;
+    --space-xl: 48px;
+    --space-xxl: 64px;
+  }
+}
+@media (max-width: 480px) {
+  :root {
+    --space-md: 16px;
+    --space-lg: 24px;
+  }
+}
 /* ============================================================================================================================
    2. GLOBAL RESET
 ============================================================================================================================ */
@@ -108,6 +130,16 @@ body::before {
 body::after {
   right: var(--grid-offset);
 }
+/* RESPOSIVE */
+@media (max-width: 1024px) {
+  :root {
+    --grid-offset: 0px;
+  }
+  body::before,
+  body::after {
+    display: none; /* Remove side glow lines on mobile */
+  }
+}
 /* ============================================================================================================================
    3. TYPOGRAPHY (STRIPE STYLE)
 ============================================================================================================================ */
@@ -141,7 +173,19 @@ h2.gradient {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  h1 {
+    font-size: clamp(28px, 6vw, 36px);
+  }
+  h2 {
+    font-size: clamp(22px, 5vw, 28px);
+  }
+  p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+}
 /* ============================================================================================================================
    4. LAYOUT SYSTEM
 ============================================================================================================================ */
@@ -160,6 +204,10 @@ h2.gradient {
   position: relative;
   z-index: 3;
   scroll-margin-top: var(--nav-height);
+  transform: translateY(40px);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .section.visible {
   opacity: 1;
@@ -186,9 +234,11 @@ h2.gradient {
   right: var(--grid-offset);
 }
 .container {
+  width: 100%;
   max-width: var(--container);
   margin-inline: auto;
-  padding-inline: 24px;
+  padding-left: clamp(16px, 4vw, 32px);
+  padding-right: clamp(16px, 4vw, 32px);
 }
 .section-frame {
   position: relative;
@@ -245,6 +295,13 @@ h2.gradient {
   border-radius: inherit;
   z-index: -2;
   pointer-events: none;
+}
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .section {
+    transform: translateY(20px);
+    transition-duration: 0.6s;
+  }
 }
 /* ============================================================================================================================
    5. LINKS (NO UNDERLINE, NO COLOR CHANGE)
