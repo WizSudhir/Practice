@@ -1027,7 +1027,7 @@ z-index: 2;
 ============================================================================================================================== */
 .how-it-works {
   overflow: hidden;
-  margin-bottom: 20px;
+  padding-bottom: 200px;
 }
 .narrative {
   display: grid;
@@ -1040,7 +1040,7 @@ z-index: 2;
   position: relative;
   display: flex;
   flex-direction: column;
-  padding-bottom: 240px;
+  padding-bottom: 0px;
 }
 .narrative-content {
   display: flex;
