@@ -654,7 +654,6 @@ img {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: flex;
   align-items: center;
   gap: 32px;
 }
@@ -745,7 +744,7 @@ body.menu-open {
     inset: 0;
     width: 100%;
     height: 100vh;
-    background: #0b1120;
+    background: linear-gradient(180deg,#0b1120,#050816);
     color: #fff;
     display: flex;
     flex-direction: column;
@@ -776,6 +775,7 @@ body.menu-open {
   }
   /* LINKS */
   .mobile-nav-links {
+    flex: 1;
     list-style: none;
     padding: 0 20px;
     margin: 0;
