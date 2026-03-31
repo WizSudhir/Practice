@@ -193,7 +193,6 @@ h2.gradient {
   min-height: calc(100vh - var(--nav-height));
   display: block;
   align-items: center;
-  padding-top: var(--nav-height);
 }
 .viewport-safe .section-frame {
   width: 100%;
