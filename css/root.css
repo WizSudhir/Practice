@@ -729,6 +729,9 @@ body.menu-open {
 }
 @media (max-width: 992px) {
   /* NAVBAR (FLOATING STRIPE STYLE) */
+   .nav-menu ul {
+    display: block !important;
+  }
   .navbar {
     background: rgba(11,17,32,0.6);
     backdrop-filter: blur(20px);
