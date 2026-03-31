@@ -190,7 +190,7 @@ h2.gradient {
    4. LAYOUT SYSTEM
 ============================================================================================================================ */
 .viewport-safe {
-  min-height: calc(100vh - var(--nav-height));
+  min-height: 100vh;
   display: block;
   align-items: center;
 }
