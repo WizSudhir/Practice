@@ -1194,8 +1194,8 @@ z-index: 2;
 }
 /* ===== RIGHT SIDE (VISUAL) ===== */
 .hiw-visual {
-  position: sticky;
-  top: 120px;
+  position: relative;
+  top: auto;
 }
 /* DASHBOARD CORE */
 .hiw-dashboard {
