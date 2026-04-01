@@ -386,7 +386,6 @@ flex-wrap:wrap;
 .rcm-services{
 min-height:200vh;
 position:relative;
-background: var(--bg-primary);
 }
 .services-content{
 position:relative;
