@@ -265,7 +265,7 @@ transform:translateX(-50%);
 background: var(--primary);
 color:var(--text-primary);
 padding:8px 22px;
-border-radius:40px;
+border-radius:6px;
 }
 
 /* GRID LAYOUT */
@@ -292,7 +292,7 @@ grid-template-areas:
 height:100%;
 position:relative;
 border:1.5px solid var(--border-strong);
-border-radius:18px;
+border-radius:6px;
 padding: var(--space-md) var(--space-sm);
 background: transparent;
 display:flex;
@@ -322,8 +322,8 @@ box-shadow: var(--shadow-soft);
 /* CENTERED TITLE */
 .rcm-card-title{
 position:absolute;
-font-size: 15px;
-line-height: 1.7;
+font-size: 12px;
+line-height: 1;
 top:-16px;
 left:50%;
 transform:translateX(-50%);
@@ -340,13 +340,13 @@ flex-direction:column;
 align-items:center;
 gap: var(--space-xs);
 margin: var(--space-xs) 0;
-font-size: 15px;
-line-height: 1.7;
+font-size: 12px;
+line-height: 1;
 }
 /* LARGE ICON */
 .rcm-item svg{
-width:36px;
-height:36px;
+width:28px;
+height:28px;
 stroke:var(--primary);
 stroke-width:1;
 animation:rcmPulse 6s infinite;
