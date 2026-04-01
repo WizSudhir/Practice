@@ -827,11 +827,12 @@ body.menu-open {
   .mobile-nav-cta {
     padding: 20px;
   }
-  .mobile-nav-cta .btn-primary {
+  .nav-cta .btn-primary {
     width: 100%;
-    height: 48px;
-    font-size: 16px;
-    border-radius: 12px;
+    height: 32px;
+    padding: 0 10px;
+    font-size: 12px;
+    border-radius: 8px;
   }
 }
 /* ============================================================================================================================
