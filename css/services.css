@@ -294,8 +294,7 @@ position:relative;
 border:1.5px solid var(--border-strong);
 border-radius:18px;
 padding: var(--space-md) var(--space-sm);
-background: var(--primary);
-color:var(--text-primary);
+background: transparent;
 display:flex;
 flex-direction:column;
 justify-content:center;
@@ -326,10 +325,10 @@ position:absolute;
 top:-16px;
 left:50%;
 transform:translateX(-50%);
-background:var(--rcm-blue);
-color:white;
+background: var(--primary);
+color:var(--text-primary);
 padding:5px 14px;
-border-radius:20px;
+border-radius:8px;
 border:none;
 }
 /* ITEMS */
@@ -344,7 +343,7 @@ margin: var(--space-xs) 0;
 .rcm-item svg{
 width:36px;
 height:36px;
-stroke:var(--rcm-blue);
+stroke:var(--primary);
 stroke-width:2;
 animation:rcmPulse 6s infinite;
 }
