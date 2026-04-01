@@ -111,7 +111,7 @@ background:#22c55e;
 color:#fff;
 }
 .node:hover{
-box-shadow:0 0 15px rgba(99,102,241,0.5);
+box-shadow: none;
 transform:translateY(-2px);
 }
 /* HERO STAGE BACKGROUNDS */
@@ -175,7 +175,7 @@ color:var(--text-primary);
 }
 .calc-grid input:focus{
 border-color:#6366f1;
-box-shadow:0 0 0 2px rgba(99,102,241,.25);
+box-shadow: 0 0 0 2px rgba(99,102,241,0.2);
 }
 .calc-result{
 margin-top:18px;
@@ -203,7 +203,6 @@ color:#cbd5f5;
 padding:12px;
 border-radius:8px;
 border:1px solid rgba(255,255,255,0.15);
-background:rgba(255,255,255,0.05);
 color:white;
 }
 .calc-result a{
@@ -341,7 +340,7 @@ transform:translateY(0) scale(1);
 .rcm-card:hover{
 transform:translateY(-6px);
 border-color:var(--rcm-blue);
-box-shadow:0 15px 40px rgba(0,0,0,.45);
+box-shadow: var(--shadow-soft);
 }
 /* CENTERED TITLE */
 .rcm-card-title{
@@ -399,10 +398,7 @@ flex-wrap:wrap;
 min-height:200vh;
 position:relative;
 padding:80px 0;
-background:
-radial-gradient(circle at 10% 20%, rgba(99,102,241,.15), transparent 40%),
-radial-gradient(circle at 90% 80%, rgba(59,130,246,.15), transparent 40%),
-#050a19;
+background: var(--bg-primary);
 }
 .services-content{
 position:relative;
@@ -415,7 +411,7 @@ left:0;
 top:0;
 bottom:0;
 width:3px;
-background:linear-gradient(to bottom,#6366f1,#3b82f6);
+background: var(--gradient-accent);
 opacity:.5;
 border-radius:10px;
 }
@@ -474,7 +470,6 @@ font-weight:600;
 }
 .services-nav a.active::before{
 opacity:1;
-box-shadow:0 0 10px #6366f1;
 }
 .services-nav svg{
 width:16px;
@@ -497,7 +492,6 @@ width:14px;
 height:14px;
 border-radius:50%;
 background:#6366f1;
-box-shadow:0 0 12px #6366f1;
 }
 .rcm-phase::after{
 left:117px;
@@ -539,8 +533,6 @@ cursor:pointer;
 content:"";
 position:absolute;
 inset:0;
-background:radial-gradient(circle at top left,
-rgba(99,102,241,.25),
 transparent 60%);
 opacity:.25;
 transition:.3s;
@@ -600,7 +592,6 @@ font-weight:800;
 color:#6366f1;
 margin-right:12px;
 opacity:1;
-text-shadow:0 0 8px rgba(99,102,241,.6);
 }
 .phase-progress{
 position:absolute;
