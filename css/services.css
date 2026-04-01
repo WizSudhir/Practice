@@ -98,26 +98,10 @@ transform:translateY(0);
 .stage-pipeline .pipeline{
 max-width:900px;
 }
-.pg-title{
-font-size:56px;
-line-height:1.1;
-margin-bottom:25px;
-background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-text-shadow:0 10px 30px rgba(0,0,0,0.6);
-}
 .gradient-title{
 background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
-}
-.pg-sub{
-max-width:700px;
-margin:auto;
-font-size:18px;
-margin-bottom:40px;
-color:#ffffff;
 }
 .pg-buttons{
 display:flex;
@@ -219,33 +203,6 @@ pointer-events:none;
 @keyframes calcGlow{
 0%{transform:translate(0,0)}
 100%{transform:translate(120px,80px)}
-}
-.calc-layout{
-position:relative;
-min-height:auto;
-display:grid;
-grid-template-columns:1fr 1fr;
-align-items:center;
-gap:60px;
-max-width:1200px;
-margin:40px auto;
-background:rgba(20,25,55,.45);
-border:1px solid rgba(255,255,255,.05);
-backdrop-filter:blur(10px);
-border-radius:24px;
-padding:50px;
-box-shadow:
-0 30px 80px rgba(0,0,0,.6),
-0 0 40px rgba(99,102,241,.15);
-}
-.calc-layout::after{
-content:"";
-position:absolute;
-top:40px;
-bottom:40px;
-left:50%;
-width:1px;
-background:linear-gradient(transparent,rgba(255,255,255,.1),transparent);
 }
 .rcm-calculator{
 background:transparent;
@@ -737,21 +694,6 @@ height:0%;
 background:linear-gradient(#6366f1,#3b82f6);
 transition:height .2s;
 }
-.rcm-system-intro{
-text-align:center;
-max-width:700px;
-margin:auto;
-margin-bottom:60px;
-color:var(--text-secondary);
-}
-.phase-label{
-display:inline-block;
-font-size:12px;
-letter-spacing:.08em;
-text-transform:uppercase;
-color:#93c5fd;
-margin-bottom:10px;
-}
 .pipeline-title{
 margin-bottom:20px;
 }
@@ -769,26 +711,6 @@ PracticeGrid Services Page
 ========================================================= */
 /* LARGE LAPTOP */
 @media (max-width:1200px){
-.pg-title{
-font-size:48px;
-}
-.dashboard{
-grid-template-columns:repeat(2,1fr);
-}
-.calc-layout{
-grid-template-columns:1fr;
-gap:40px;
-}
-.calc-layout::after{
-display:none;
-}
-.transform-grid{
-grid-template-columns:1fr;
-gap:30px;
-}
-.transform-arrow{
-transform:rotate(90deg);
-}
 .services-layout{
 grid-template-columns:240px 1fr;
 gap:50px;
@@ -805,28 +727,11 @@ grid-template-areas:
 }
 /* TABLET */
 @media (max-width:992px){
-.pg-title{
-font-size:40px;
-}
-.pg-sub{
-font-size:16px;
-}
 .pg-stage{
 padding:120px 30px 40px;
 }
-.dashboard{
-grid-template-columns:1fr 1fr;
-gap:20px;
-}
-.metric{
-min-height:140px;
-padding:22px;
-}
 .revenue-live h3{
 font-size:40px;
-}
-.calc-layout{
-padding:35px;
 }
 .services-layout{
 grid-template-columns:1fr;
@@ -874,13 +779,6 @@ position:absolute;
 height:100vh;
 padding:120px 20px 60px;
 }
-.pg-title{
-font-size:32px;
-line-height:1.2;
-}
-.pg-sub{
-font-size:15px;
-}
 .pg-buttons{
 flex-direction:column;
 align-items:center;
@@ -892,25 +790,11 @@ gap:10px;
 font-size:12px;
 padding:10px 16px;
 }
-.dashboard{
-grid-template-columns:1fr;
-gap:18px;
-}
-.metric span{
-font-size:28px;
-}
-.metric{
-min-height:auto;
-}
 .revenue-live h3{
 font-size:34px;
 }
 .calc-section{
 padding:50px 20px 30px;
-}
-.calc-layout{
-padding:25px;
-margin:20px auto;
 }
 .calc-grid input{
 padding:14px;
@@ -923,21 +807,6 @@ padding:30px;
 }
 .impact-number{
 font-size:36px;
-}
-.rcm-transformation{
-padding-top:40px;
-}
-.rcm-transformation .container{
-padding-top:0;
-}
-.transform-sub{
-font-size:15px;
-}
-.transform-section{
-padding:40px 20px;
-}
-.transform-card{
-padding:30px;
 }
 .rcm-infrastructure{
 padding:30px 20px;
@@ -978,9 +847,7 @@ grid-template-columns:1fr;
 .service-card{
 padding:24px;
 }
-.calc-layout,
 .service-card,
-.transform-card,
 .services-nav{
 backdrop-filter:none;
 }
@@ -997,17 +864,8 @@ transition:none !important;
 }
 /* SMALL MOBILE */
 @media (max-width:480px){
-.pg-title{
-font-size:28px;
-}
-.pg-sub{
-font-size:14px;
-}
 .pg-stage{
 padding:110px 16px 40px;
-}
-.metric span{
-font-size:24px;
 }
 .revenue-live h3{
 font-size:30px;
