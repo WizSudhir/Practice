@@ -245,6 +245,7 @@ overflow:visible;
 .ecosystem{
 position:relative;
 overflow:hidden;
+isolation: isolate;
 }
 .ecosystem::before{
 content:"";
