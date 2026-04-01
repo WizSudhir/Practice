@@ -230,9 +230,9 @@ opacity:.7;
 100%{stroke-dashoffset:40}
 }
 
-/* ======================================
+/* ==================================================================================================================
 2. ECOSYSTEM NETWORK — STRIPE STYLE
-====================================== */
+================================================================================================================== */
 .ecosystem-network{
 position:relative;
 max-width:900px;
@@ -259,7 +259,7 @@ background-image:
 radial-gradient(rgba(99,102,241,0.55) 1px, transparent 1px);
 background-size:26px 26px;
 opacity:.6;
-z-index:0;
+z-index:10;
 animation:gridMove 80s linear infinite;
 }
 .ecosystem::after{
@@ -268,7 +268,7 @@ position:absolute;
 inset:0;
 background:radial-gradient(circle at center,transparent 40%,#050a19 95%);
 pointer-events:none;
-z-index:1;
+z-index:11;
 }
 @keyframes gridMove{
 0%{transform:translate(0,0);}
