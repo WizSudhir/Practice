@@ -422,25 +422,18 @@ margin-top:60px;
 /* CARD */
 .org-card{
 display:block;
-background:rgba(20,25,55,.55);
+background:transparent;
 border:1px solid rgba(255,255,255,.12);
-border-radius:20px;
+border-radius:8px;
 overflow:hidden;
-backdrop-filter:blur(16px);
 transition:.35s ease;
 text-decoration:none;
 color:white;
-box-shadow:
-0 25px 60px rgba(0,0,0,.5),
-0 0 30px rgba(99,102,241,.08);
 position:relative;
 }
 .org-card:hover{
 transform:translateY(-10px);
 border:1px solid rgba(99,102,241,.55);
-box-shadow:
-0 35px 90px rgba(0,0,0,.8),
-0 0 60px rgba(99,102,241,.35);
 }
 .org-card::before{
 content:"";
@@ -448,7 +441,6 @@ position:absolute;
 inset:0;
 border-radius:20px;
 padding:1px;
-background:linear-gradient(120deg,transparent,rgba(99,102,241,.4),transparent);
 -webkit-mask:
 linear-gradient(#000 0 0) content-box,
 linear-gradient(#000 0 0);
@@ -527,30 +519,17 @@ top:-60px;
 left:50%;
 transform:translateX(-50%);
 width:300px;
-height:1px;background:linear-gradient(90deg,transparent,#6366f1,transparent);
+height:1px;
+background:transparent;
 opacity:.6;
 }
 .serve-specialties{
 padding:140px 0;
-background:
-radial-gradient(circle at 30% 20%, rgba(99,102,241,.18), transparent 40%),
-radial-gradient(circle at 70% 80%, rgba(59,130,246,.15), transparent 40%),
-#050a19;
+background: transparent;
 position:relative;
 overflow:hidden;
 }
-/* SECTION HEADER */
-.serve-specialties h2{
-font-size:38px;
-font-weight:800;
-margin-bottom:18px;
-letter-spacing:-0.5px;
-}
-.serve-specialties p{
-color:#6b7280;
-font-size:17px;
-line-height:1.7;
-}
+
 /* GRID */
 .specialty-grid{
 display:grid;
@@ -560,27 +539,20 @@ gap:28px;
 /* CARD BASE */
 .specialty-card{
 position:relative;
-background:rgba(20,25,55,.55);
+background:transparent;
 border:1px solid rgba(255,255,255,.12);
-border-radius:20px;
+border-radius:8px;
 overflow:hidden;
-backdrop-filter:blur(16px);
 transition:.35s ease;
 text-decoration:none;
 color:white;
 display:flex;
 flex-direction:column;
-box-shadow:
-0 25px 60px rgba(0,0,0,.5),
-0 0 30px rgba(99,102,241,.08);
 }
 /* HOVER EFFECT */
 .specialty-card:hover{
 transform:translateY(-10px);
 border:1px solid rgba(99,102,241,.55);
-box-shadow:
-0 35px 90px rgba(0,0,0,.8),
-0 0 60px rgba(99,102,241,.35);
 }
 /* IMAGE */
 .specialty-image{
@@ -609,9 +581,6 @@ border-radius:14px;
 display:flex;
 align-items:center;
 justify-content:center;
-box-shadow:
-0 10px 25px rgba(0,0,0,.6),
-0 0 20px rgba(99,102,241,.4);
 border:1px solid rgba(255,255,255,.15);
 }
 .specialty-icon svg{
