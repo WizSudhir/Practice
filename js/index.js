@@ -10,12 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const hero = document.querySelector(".system-bg");
   const nodes = document.querySelectorAll(".node");
   const core = document.querySelector(".core");
-  const svg = document.getElementById("connections");
-  if (!svg) {
-    console.warn("SVG connections not found");
-    return;
-  }
-  const PHASE_DELAY = 3000;
   const isMobile = window.innerWidth < 768;
   if (isMobile) {
     try {
@@ -24,6 +18,12 @@ document.addEventListener("DOMContentLoaded", () => {
     console.error("Mobile hero error:", e);
     }
   }
+  const svg = document.getElementById("connections");
+  if (!svg) {
+    console.warn("SVG connections not found");
+    return;
+  }
+  const PHASE_DELAY = 3000;
   if (!hero || !core) {
   console.warn("Hero not found — skipping hero only");
   } else {
