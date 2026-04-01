@@ -70,17 +70,6 @@ transform:translateY(0);
 .stage-pipeline .pipeline{
 max-width:900px;
 }
-.gradient-title{
-background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
-.pg-buttons{
-display:flex;
-gap:20px;
-justify-content:center;
-flex-wrap:wrap;
-}
 /* PIPELINE VISUAL */
 .pipeline{
 display:flex;
