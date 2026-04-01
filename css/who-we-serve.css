@@ -247,7 +247,11 @@ position:relative;
 overflow:hidden;
 isolation: isolate;
 }
-.ecosystem::before{
+.section-frame.ecosystem-frame {
+  position: relative;
+  overflow: hidden;
+}
+.ecosystem-frame::before{
 content:"";
 position:absolute;
 inset:0;
@@ -259,7 +263,7 @@ z-index:0;
 animation:gridMove 80s linear infinite;
 pointer-events: none;
 }
-.ecosystem::after{
+.ecosystem-frame::after{
 content:"";
 position:absolute;
 inset:0;
