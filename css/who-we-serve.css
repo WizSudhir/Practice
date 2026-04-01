@@ -246,11 +246,6 @@ overflow:visible;
 position:relative;
 overflow:hidden;
 }
-.ecosystem .container{
-position:relative;
-z-index:2;
-background:transparent;
-}
 .ecosystem::before{
 content:"";
 position:absolute;
@@ -278,7 +273,7 @@ z-index:11;
 .eco-grid{
 position:absolute;
 inset:0;
-z-index:3;
+z-index:12;
 }
 /* CORE */
 .eco-core{
