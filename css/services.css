@@ -384,7 +384,7 @@ flex-wrap:wrap;
 4. RCM SERVICES LAYOUT + STICKY NAV
 ========================================================= */
 .rcm-services{
-min-height:200vh;
+min-height: auto;
 position:relative;
 }
 .services-content{
