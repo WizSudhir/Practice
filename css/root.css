@@ -23,7 +23,7 @@
   --text-muted: #94a3b8;
   /* BORDERS */
   --border-subtle: rgba(255,255,255,0.08);
-  --border-default: rgba(255,255,255,0.08);
+  --border-default: rgba(255,255,255,0.14);
   --border-strong: rgba(99,102,241,0.35);
   /* GRADIENTS (ONLY FOR TEXT / CTA) */
   --gradient-primary: linear-gradient(90deg, #ffffff, #c4b5fd, #93c5fd);
@@ -231,8 +231,8 @@ p {
   justify-content: center;
   z-index: 1;
   border-radius: var(--radius-sm);
-  background: rgba(255,255,255,.12);
   background: transparent;
+  border: 1px solid var(--border-default);
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
   border-color 0.3s ease;
   will-change: transform;
