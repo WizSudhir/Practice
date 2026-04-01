@@ -241,6 +241,11 @@ margin:auto;
 z-index:2;
 overflow:visible;
 }
+.section-inner,
+.ecosystem-network {
+  position: relative;
+  z-index: 2;
+}
 /* STRIPE STYLE DOT GRID */
 .ecosystem{
 position:relative;
@@ -259,7 +264,7 @@ background-image:
 radial-gradient(rgba(99,102,241,0.9) 1.2px, transparent 1.2px);
 background-size: 24px 24px;
 opacity: 1;
-z-index:0;
+z-index:1;
 animation:gridMove 80s linear infinite;
 pointer-events: none;
 }
@@ -269,7 +274,7 @@ position:absolute;
 inset:0;
 background: radial-gradient(circle at center, transparent 60%, rgba(5,10,25,0.6) 100%);
 pointer-events:none;
-z-index:1;
+z-index:0;
 }
 @keyframes gridMove{
 0%{transform:translate(0,0);}
