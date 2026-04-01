@@ -257,16 +257,16 @@ z-index:2;
 overflow:visible;
 }
 /* STRIPE STYLE DOT GRID */
-.ecosystem-section{
+.ecosystem{
 position:relative;
 overflow:hidden;
 }
-.ecosystem-section .container{
+.ecosystem .container{
 position:relative;
 z-index:2;
 background:transparent;
 }
-.ecosystem-section::before{
+.ecosystem::before{
 content:"";
 position:absolute;
 inset:0;
@@ -277,7 +277,7 @@ opacity:.6;
 z-index:0;
 animation:gridMove 80s linear infinite;
 }
-.ecosystem-section::after{
+.ecosystem::after{
 content:"";
 position:absolute;
 inset:0;
@@ -424,22 +424,10 @@ filter:
 drop-shadow(0 0 12px #6366f1)
 drop-shadow(0 0 30px #6366f1);
 }
-/* ======================================
+/* ==================================================================================================================
 3. ORG CARDS
-====================================== */
+================================================================================================================== */
 /* SECTION HEADERS */
-.section-title{
-text-align:center;
-max-width:1000px;
-margin:0 auto 80px;
-}
-.section-title p{
-font-size:18px;
-line-height:1.7;
-color:#cbd5f5;
--webkit-text-fill-color:unset;
-background:none;
-}
 .org-grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
