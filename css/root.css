@@ -92,9 +92,6 @@
 html {
   scroll-behavior: smooth;
 }
-.section:nth-of-type(even) {
-  background: var(--bg-alt);
-}
 body {
   margin: 0;
   font-family: var(--font-primary);
@@ -241,7 +238,7 @@ h2.gradient {
   justify-content: center;
   z-index: 1;
   border-radius: var(--radius-sm);
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.06);
   background: transparent;
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
   border-color 0.3s ease;
@@ -252,6 +249,9 @@ h2.gradient {
 }
 .section-frame > * {
   width: 100%;
+}
+.section-frame:hover {
+  border-color: rgba(99,102,241,0.4);
 }
 .section-inner {
   padding-inline: clamp(16px, 2vw, 28px);
@@ -584,7 +584,7 @@ img {
   top: 0;
   width: 100%;
   z-index: 1000; /* replaced var */
-  background: rgba(11,17,32,0.6);
+  background: #000;
   border-bottom: 1px solid var(--border-default);
   transition: all var(--transition-base);
   z-index: 100;
@@ -595,7 +595,7 @@ img {
 }
 /* SCROLL STATE (Stripe style solid glass) */
 .navbar.scrolled {
-  background: rgba(11,17,32,0.85);
+  background: #000;
   border-bottom: 1px solid var(--border-default);
 }
 .navbar-inner {
