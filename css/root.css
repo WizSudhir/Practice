@@ -887,6 +887,9 @@ body.menu-open {
 
 /* SOCIAL ICONS (CLEAN + PREMIUM) */
 .footer-social {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   margin-top: var(--space-sm);
 }
 .footer-social img {
@@ -927,7 +930,7 @@ body.menu-open {
 }
 .footer-links a:hover,
 .footer-contact a:hover {
-  color: var(--text-heading);
+  color: var(--text-primary);
 }
 /* subtle SaaS underline */
 .footer-links a::after {
@@ -969,10 +972,16 @@ body.menu-open {
   box-shadow: var(--shadow-soft);
   transform: translateY(-2px);
 }
+.footer-contact-item span {
+  line-height: 1;
+}
 /* ICON SYSTEM FIX */
 .footer-contact-icon {
   width: 26px;
   height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .footer-contact-item svg {
   width: 18px;
