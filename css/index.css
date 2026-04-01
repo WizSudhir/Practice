@@ -68,15 +68,22 @@ z-index:1;
 0%{transform:translate(0,0) scale(1);}
 100%{transform:translate(-120px,-60px) scale(1.2);}
 }
-.hero-overlay{
-position:absolute;
-inset:0;
-background-image:
-linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
-background-size:60px 60px;
-pointer-events:none;
-z-index:2;
+.hero-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 2;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(0,0,0,0.7), transparent 60%);
+  z-index: 3;
 }
 .system-bg {
   will-change: transform, opacity;
