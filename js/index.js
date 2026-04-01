@@ -436,7 +436,7 @@ document.addEventListener("DOMContentLoaded", () => {
         reset();          // 🔥 FULL RESET ON EXIT
       }
     });
-  }, { threshold: 0.4 });
+  }, { threshold: 0.1 });
   const target = document.querySelector(".mobile-system");
   if (target) observer.observe(target);
 }
