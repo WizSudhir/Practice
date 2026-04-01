@@ -27,9 +27,6 @@ align-items:center;
 min-height:420px;
 }
 .hero-content h1{
-font-size:56px;
-line-height:1.1;
-background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 margin-bottom:25px;
