@@ -157,13 +157,6 @@ p {
   font-size: 15px;
   line-height: 1.7;
 }
-.gradient-title,
-h1.gradient,
-h2.gradient {
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
 /* RESPONSIVE */
 @media (max-width: 768px) {
   h1 {
