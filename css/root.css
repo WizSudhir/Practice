@@ -8,10 +8,10 @@
 :root {
 
   /* COLORS — BASE */
-  --bg-primary: #050a19;          /* Main dark (no gradient) */
-  --bg-secondary: #0b1224;
-  --bg-elevated: #0f172a;
-  --bg-alt: #060d1f;
+  --bg-primary: #000000;
+  --bg-secondary: #000000;
+  --bg-alt: #000000;
+  --bg-elevated: #000000;
   --success: #22c55e;
   /* BRAND (FROM LOGO) */
   --primary: #6366f1;             /* Indigo */
