@@ -706,6 +706,16 @@ z-index: 2;
 .metric.negative {
   color: #f87171;
 }
+.mobile-connection .line {
+  width: 0;
+  display: block;
+  height: 2px;
+  background: #22c55e;
+  transition: width 0.6s ease;
+}
+.mobile-connection.active .line {
+  width: 100%;
+}
 }
 
 /* ============================================================================================================================
