@@ -251,17 +251,18 @@ content:"";
 position:absolute;
 inset:0;
 background-image:
-radial-gradient(rgba(99,102,241,0.55) 1px, transparent 1px);
-background-size:26px 26px;
-opacity:.6;
-z-index:2;
+radial-gradient(rgba(99,102,241,0.9) 1.2px, transparent 1.2px);
+background-size: 24px 24px;
+opacity: 1;
+z-index:0;
 animation:gridMove 80s linear infinite;
+pointer-events: none;
 }
 .ecosystem::after{
 content:"";
 position:absolute;
 inset:0;
-background:radial-gradient(circle at center,transparent 40%,#050a19 95%);
+background: radial-gradient(circle at center, transparent 60%, rgba(5,10,25,0.6) 100%);
 pointer-events:none;
 z-index:1;
 }
