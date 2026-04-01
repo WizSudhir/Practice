@@ -737,16 +737,19 @@ body.menu-open {
     width: 100%;
   }
   .navbar {
-    border-radius: 2px;
-    margin: 10px;
+    border-radius: 0px;
+    margin: 0px;
     border: 1px solid var(--border-default);
   }
   /* FULLSCREEN MENU */
   .nav-menu {
     position: fixed;
     inset: 0;
-    width: 100%;
-    height: 100vh;
+    left: 0;
+    right: 0;
+    width: 100vw; /* ✅ FORCE FULL WIDTH */
+    max-width: 100vw;
+    height: 100dvh;
     background: linear-gradient(180deg,#0b1120,#050816);
     color: #fff;
     display: flex;
