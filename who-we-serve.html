@@ -28,38 +28,63 @@
 
 <body>
 
-<!-- NAVBAR -->
+<!-------------------------------------------------- NAVBAR -------------------------------------------------->
 <header class="navbar">
   <div class="container navbar-inner">
 
+    <!-- LOGO -->
     <div class="logo">
-      <a href="index.html">
+      <a href="index.html" aria-label="PracticeGrid Home">
         <img src="images/logo.png" alt="PracticeGrid Solutions Logo">
       </a>
     </div>
 
-      <nav class="nav-menu">
-        <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="who-we-serve.html">Who We Serve</a></li>
-        <li><a href="why-us.html">Why Us</a></li>
-        <li><a href="blog/">Blog</a></li>
-        <li><a href="contact.html" class="btn-primary">Connect With Us</a></li>
+    <!-- RIGHT SIDE -->
+    <div class="nav-right">
+
+      <!-- NAV MENU -->
+      <nav class="nav-menu" id="primary-navigation" aria-hidden="true">
+        <!-- TOP HEADER (LIKE STRIPE) -->
+        <div class="mobile-nav-header">
+          <div class="logo">
+            <a href="index.html" aria-label="PracticeGrid Home">
+            <img src="images/logo.png" alt="PracticeGrid Solutions Logo">
+            </a>
+          </div>
+          <button class="nav-close" aria-label="Close menu">
+            ✕
+          </button>
+        </div>
+        
+        <ul class="mobile-nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="who-we-serve.html">Who We Serve</a></li>
+          <li><a href="why-us.html">Why Us</a></li>
+          <li><a href="blog/">Blog</a></li>
         </ul>
       </nav>
 
-    <!-- MOBILE TOGGLE -->
-          <button class="nav-toggle" aria-label="Toggle Menu">
-          <span></span>
-          <span></span>
-          <span></span>
-          </button>
+      <div class="nav-cta">
+        <a href="contact.html" class="btn-primary btn-arrow">
+          Contact Us
+          <span class="icon-arrow"></span>
+        </a>
+      </div>
 
+      <!-- MOBILE TOGGLE -->
+      <button class="nav-toggle"aria-label="Toggle navigation menu"aria-controls="primary-navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+
+    </div>
   </div>
 </header>
 
-<!-- HERO SECTION -->
+<!-------------------------------------------------- HERO SECTION -------------------------------------------------->
 
 <section class="serve-hero">
 <div id="hero-universe"></div>
@@ -88,16 +113,15 @@ specialty clinics, and physician groups.
 
 </div>
 
-<a href="/contact.html" class="btn-primary">
+<a href="/contact.html" class="btn-primary btn-arrow">
 Schedule Consultation
+<span class="icon-arrow"></span>
 </a>
 
 </div>
 
 <div class="hero-visual">
-
 <div class="orbit-system">
-
 <div class="orbit-core">
 
 <svg class="engine-icon" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -140,20 +164,21 @@ RCM Support
 </div>
 
 </div>
-
+</div>
+</div>
 </section>
 
-<!-- HEALTHCARE REVENUE ECOSYSTEM -->
-
-<section class="ecosystem-section">
-
+<!-------------------------------------------------- HEALTHCARE REVENUE ECOSYSTEM -------------------------------------------------->
+<section class="section section-grid ecosystem-section">
 <div class="container">
+<div class="section-frame section-glow">
+<div class="section-inner">
 
-<h2 class="section-title">
+<h2 class="section-title gradient center">
 How PracticeGrid Connects Your Revenue Cycle
 </h2>
 
-<p class="ecosystem-subtext">
+<p class="section-subtitle center">
 Healthcare revenue flows through a complex network of clinical systems,
 financial infrastructure, and insurance payers. PracticeGrid connects
 these systems to streamline billing operations, reduce denials, and
@@ -218,14 +243,17 @@ accelerate payments for modern healthcare practices.
 
 </section>
   
-<!-- WHO WE SERVE — ORGANIZATIONS -->
+<!-------------------------------------------------- WHO WE SERVE — ORGANIZATIONS -------------------------------------------------->
 
-<section class="serve-organizations">
-
+<section class="section section-grid serve-organizations">
 <div class="container">
-<div class="section-title">
+<div class="section-frame section-glow">
+<div class="section-inner">
+
+  
+<div class="section-title gradient center">
 <h2>Healthcare Organizations We Support</h2>
-<p> PracticeGrid works with healthcare organizations across the United States —
+<p center> PracticeGrid works with healthcare organizations across the United States —
 from independent physician practices to multi-location medical groups and specialty surgical facilities. </p>
 </div>
 
@@ -332,23 +360,25 @@ procedure and facility billing.
 </p>
 </div>
 </div>
-
+  
 </div>
+  
+</div>
+</div>  
 </div>
 </section>
 
   
-<!-- SPECIALTIES SECTION -->
+<!-------------------------------------------------- SPECIALTIES SECTION -------------------------------------------------->
   
-<section class="serve-specialties">
-
+<section class="section section-grid serve-specialties">
 <div class="container">
+<div class="section-frame section-glow">
+<div class="section-inner">
 
 <!-- SECTION HEADER -->
 
-<div class="section-title">
-
-<h2>Medical Specialties We Support</h2>
+<h2 class="section-title gradient center"> Medical Specialties We Support</h2>
 
 <p>
 Every medical specialty has unique billing rules, payer requirements,
@@ -553,7 +583,8 @@ pain management, and many others.
 </div>
 
 </div>
-
+</div>
+</div>
 </section>
   
 
