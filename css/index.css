@@ -557,7 +557,7 @@ z-index: 2;
     gap: 36px;
     padding-top: 12px;
     padding-bottom: 14px;
-    z-index: 2;
+    z-index: 5;
   }
   .mobile-node {
     width: 90%;
@@ -622,20 +622,21 @@ z-index: 2;
   opacity: 1;
    }
   .mobile-core {
-    position: relative;
-    width: 90%;
-    max-width: 260px;
-    margin: 10px auto;
-   transform: none;
-    text-align: center;
+  position: relative;
+  width: 90%;
+  max-width: 260px;
+  margin: 10px auto;
+  transform: none;
+  text-align: center;
   display: flex;
   flex-direction: column;     /* 🔥 KEY FIX */
   align-items: center;
   justify-content: center;
   gap: 6px;
-    opacity: 0;
-    transition: 0.5s ease;
-    color: #4ade80;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: 0.5s ease;
+  color: #4ade80;
   }
  .mobile-core svg {
   width: 18px;
@@ -647,9 +648,10 @@ z-index: 2;
     drop-shadow(0 0 12px rgba(139,92,246,0.4));
 }
   .mobile-core.active {
-    text-shadow: 0 0 10px #22c55e;
-    opacity: 1;
-    animation: pulseCore 2s infinite ease-in-out;
+  text-shadow: 0 0 10px #22c55e;
+  opacity: 1;
+  transform: scale(1);
+  animation: pulseCore 2s infinite ease-in-out;
   }
  @keyframes pulseCore {
   0%,100% { transform: scale(1); }
