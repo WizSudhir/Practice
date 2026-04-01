@@ -217,7 +217,7 @@ h2.gradient {
   top: 0;
   bottom: 0;
   width: 1px;
-  background: var(--border-subtle);
+  background: rgba(255,255,255,.12);
   opacity: 0.4;
 }
 .section-grid::before {
@@ -242,7 +242,7 @@ h2.gradient {
   z-index: 1;
   border-radius: var(--radius-sm);
   border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,.12);
+  background: transparent;
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
   border-color 0.3s ease;
   will-change: transform;
