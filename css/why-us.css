@@ -471,15 +471,6 @@ pointer-events:none;
 /* =========================================================
 2. PRACTICEGRID PLATFORM ARCHITECTURE
 ========================================================= */
-.section-title p{
-background:none;
--webkit-text-fill-color:initial;
-color:#cbd5f5;
-font-size:18px;
-line-height:1.7;
-margin-top:18px;
-max-width:720px;
-}
 .pg-architecture{
 padding:100px 0 60px;
 position:relative;
@@ -501,12 +492,6 @@ background-size:18px 18px;
 opacity:.6;
 pointer-events:none;
 z-index:1;
-}
-.pg-architecture .section-title{
-margin-bottom:30px;
-}
-.pg-architecture .section-title p{
-  margin:12px auto 0;
 }
 .architecture-grid{
 display:grid;
@@ -794,59 +779,7 @@ animation:dataFlow 4s linear infinite;
 
 .pg-revenue-flow{
 padding:70px 0 50px;
-background:
-radial-gradient(circle at 20% 30%, rgba(99,102,241,.15), transparent 40%),
-radial-gradient(circle at 80% 70%, rgba(59,130,246,.15), transparent 40%),
-#050a19;
 position:relative;
-}
-.pg-revenue-flow::after{
-content:"";
-position:absolute;
-inset:0;
-background-image:
-linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
-background-size:60px 60px;
-opacity:.3;
-pointer-events:none;
-}
-.pg-revenue-flow .section-header{
-max-width:1100px;
-text-align:center;
-max-width:760px;
-margin:0 auto 40px;
-padding:0 20px;
-}
-.pg-revenue-flow h2{
-overflow:visible;
-font-size:clamp(28px,3vw,44px);
-white-space:normal;
-line-height:1.2;
-font-weight:800;
-margin-bottom:20px;
-background:var(--pg-gradient-title);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
-.pg-revenue-flow p{
-color:#cbd5f5;
-font-size:18px;
-line-height:1.7;
-}
-/* FLOW LAYOUT */
-.revenue-flow::before{
-content:"";
-position:absolute;
-top:82px;
-left:8%;
-width:84%;
-height:4px;
-background:linear-gradient(90deg,rgba(99,102,241,.7),rgba(59,130,246,.7));
-border-radius:4px;
-box-shadow:
-0 0 20px rgba(99,102,241,.4);
-z-index:0;
 }
 .revenue-flow{
 display:grid;
@@ -1001,7 +934,6 @@ transform:translate(-50%,-50%);
 width:180px;
 height:180px;
 background:radial-gradient(circle, rgba(99,102,241,0.4), transparent 70%);
-filter:blur(40px);
 pointer-events:none;
 }
 .transform-card{
@@ -1009,7 +941,6 @@ padding:45px;
 border-radius:var(--radius-lg);
 background:rgba(20,25,55,0.65);
 border:1px solid rgba(255,255,255,0.06);
-backdrop-filter:blur(10px);
 transition:.35s;
 position:relative;
 overflow:hidden;
@@ -1128,46 +1059,10 @@ font-size:16px;
 /* =========================================================
 5. RCM MATURITY SCORE GAUGE
 ========================================================= */
-.section-sub{
-text-align:center;
-max-width:720px;
-margin:12px auto 0;
-}
 .rcm-score-section{
 position:relative;
-background:
-radial-gradient(circle at 20% 30%, rgba(99,102,241,0.18), transparent 40%),
-radial-gradient(circle at 80% 70%, rgba(59,130,246,0.18), transparent 40%),
-#050a19;
 overflow:hidden;
 padding:90px 0 60px;
-}
-.rcm-score-section::before{
-content:"";
-position:absolute;
-width:700px;
-height:700px;
-background:radial-gradient(circle,#6366f1 0%,transparent 70%);
-top:-200px;
-right:-200px;
-opacity:.35;
-filter:blur(120px);
-animation:rcmGlow 16s infinite alternate ease-in-out;
-pointer-events:none;
-}
-@keyframes rcmGlow{
-0%{transform:translate(0,0)}
-100%{transform:translate(-120px,80px)}
-}
-.rcm-score-section::after{
-content:"";
-position:absolute;
-inset:0;
-background-image:
-linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-background-size:60px 60px;
-pointer-events:none;
 }
 .rcm-score-layout{
 display:grid;
@@ -1492,10 +1387,6 @@ border:1px solid rgba(59,130,246,.25);
 
 .pg-framework{
 padding:70px 0 50px;
-background:
-radial-gradient(circle at 20% 30%, rgba(99,102,241,.12), transparent 40%),
-radial-gradient(circle at 80% 70%, rgba(59,130,246,.12), transparent 40%),
-#050a19;
 position:relative;
 overflow:hidden;
 }
@@ -1641,299 +1532,4 @@ color:#9ca3af;
 .framework-right{
   display:flex;
   align-items:center;
-}
-
-/* =========================================================
-🔥 RESPONSIVE SYSTEM — MOBILE FIRST
-========================================================= */
-
-/* ≤ 1200px (Laptops / Small Desktop) */
-@media (max-width:1200px){
-  .hero-grid{
-    grid-template-columns:1fr 1fr;
-    gap:50px;
-  }
-  .hero-left{
-    text-align:center;
-    padding-right:0;
-    align-items:center;
-  }
-  .hero-right{
-    margin:auto;
-    max-width:100%;
-    padding:20px;
-  }
-  .architecture-grid{
-    grid-template-columns:1fr;
-    gap:60px;
-  }
-  .arch-inputs{
-    flex-direction:row;
-    flex-wrap:wrap;
-    justify-content:center;
-  }
-  .input-node{
-    width:auto;
-    padding:10px 16px;
-  }
-  .transform-grid{
-    grid-template-columns:1fr;
-    gap:30px;
-  }
-  .transform-arrow{
-    display:none;
-  }
-  .rcm-score-layout{
-    grid-template-columns:1fr;
-    gap:40px;
-  }
-  .framework-wrapper{
-    grid-template-columns:1fr;
-  }
-  .pg-story{
-    grid-template-columns:1fr;
-    gap:30px;
-  }
-}
-/* ≤ 1024px (Tablet) */
-@media (max-width:1024px){
-  section + section{
-    margin-top:-20px;
-  }
-  .hero-grid{
-    grid-template-columns:1fr 1fr;
-  }
-  .hero-enterprise{
-    padding:100px 20px 60px;
-  }
-  .workflow{
-    padding:30px;
-    height:auto;
-    flex-wrap:wrap;
-  }
-  .stage{
-    flex:1 1 45%;
-    margin-bottom:30px;
-  }
-  .stage:not(:last-child)::after{
-    display:none;
-  }
-  .dashboard-metrics{
-    flex-direction:column;
-  }
-  .revenue-flow{
-    grid-template-columns:repeat(2,1fr);
-  }
-  .flow-step{
-    min-height:auto;
-  }
-  .architecture-grid{
-    gap:50px;
-  }
-  .engine-circle{
-    width:180px;
-    height:180px;
-  }
-  .emr-ring{
-    width:340px;
-    height:340px;
-  }
-  .dashboard-card{
-    width:100%;
-  }
-}
-/* ≤ 768px (Mobile Landscape) */
-@media (max-width:768px){
-body{
-  overflow-x:hidden;
-}
-  .hero-aurora,
-  .hero-aurora-2{
-    width:400px;
-    height:400px;
-    filter:blur(80px);
-  }
-  .hero-left h1{
-    font-size:32px;
-  }
-  .hero-sub{
-    font-size:15px;
-  }
-  .hero-cta{
-    flex-direction:column;
-    width:100%;
-  }
-  .hero-cta a{
-    width:100%;
-  }
-  .workflow-dashboard{
-    transform:none;
-  }
-.hero-right{
-    display:none;
-  }
-  .workflow{
-    height:auto;
-    padding:20px;
-    flex-direction:column;
-    gap:30px;
-  }
-  .workflow::before{
-    display:none; /* remove pipeline line */
-  }
-  .stage{
-    width:100%;
-  }
-  .emr-ring{
-    width:260px;
-    height:260px;
-  }
-  .emr{
-    width:40px;
-    height:40px;
-  }
-  .revenue-token{
-    display:none;
-  }
-  .revenue-flow{
-    grid-template-columns:1fr;
-  }
-  .flow-step{
-    padding:30px 20px;
-  }
-  .flow-icon{
-    width:64px;
-    height:64px;
-  }
-  .flow-step h3{
-    font-size:18px;
-  }
-  .transform-card{
-    padding:30px;
-  }
-  .rcm-questions{
-    padding:25px;
-  }
-  .gauge{
-    width:200px;
-  }
-  .score-number{
-    font-size:30px;
-  }
-  .framework-step{
-    grid-template-columns:60px 1fr;
-  }
-  .framework-circle{
-    width:52px;
-    height:52px;
-    font-size:16px;
-  }
-  .pg-architecture{
-    display:none;
-  }
-}
-/* ≤ 600px (Mobile Portrait) */
-@media (max-width:600px){
-  .hero-enterprise{
-    padding:80px 16px 40px;
-  }
-  .hero-proof{
-    font-size:13px;
-  }
-  .hero-left{
-    min-height:auto;
-  }
-  .workflow{
-    padding:20px;
-  }
-  .stage-node{
-    width:60px;
-    height:60px;
-    font-size:10px;
-  }
-  .metric-value{
-    font-size:18px;
-  }
-  .pg-architecture{
-    padding:70px 0 40px;
-  }
-  .engine-circle{
-    width:150px;
-    height:150px;
-  }
-  .emr-ring{
-    width:260px;
-    height:260px;
-  }
-  .emr{
-    width:48px;
-    height:48px;
-  }
-  .dashboard-card{
-    padding:20px;
-  }
-  .pg-revenue-flow{
-    padding:50px 0 30px;
-  }
-  .flow-step{
-    padding:25px 16px;
-  }
-  .flow-stat{
-    min-width:auto;
-    width:100%;
-  }
-  .transform-section{
-    padding:60px 0;
-  }
-  .transform-card{
-    padding:25px;
-  }
-  .rcm-score-section{
-    padding:60px 0 40px;
-  }
-  .rcm-questions{
-    padding:20px;
-  }
-  .pg-outcomes{
-    padding:70px 0 40px;
-  }
-  .pg-metric-card{
-    width:100%;
-  }
-  .framework-timeline{
-    gap:40px;
-  }
-}
-
-
-/* ≤ 420px (Small Devices) */
-@media (max-width:420px){
-  .hero-left h1{
-    font-size:26px;
-  }
-  .hero-sub{
-    font-size:14px;
-  }
-  .hero-cta a{
-    height:48px;
-    font-size:14px;
-  }
-  .flow-step h3{
-    font-size:16px;
-  }
-  .flow-step p{
-    font-size:14px;
-  }
-  .pg-metric-card h3{
-    font-size:32px;
-  }
-  .roi-main{
-    font-size:28px;
-  }
-  .framework-content h3{
-    font-size:16px;
-  }
-  .framework-content p{
-    font-size:13px;
-  }
 }
