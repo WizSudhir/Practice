@@ -262,14 +262,12 @@ isolation: isolate;
 position: relative;
 overflow: hidden;
 isolation: isolate;
+padding: 0;
 }
 .ecosystem-frame::before{
 content:"";
 position:absolute;
-top: var(--space-md);
-left: var(--space-md);
-right: var(--space-md);
-bottom: var(--space-md);
+inset: 0;
 background-image:
 radial-gradient(rgba(99,102,241,0.55) 1.2px, transparent 1.2px);
 background-size: 24px 24px;
