@@ -242,6 +242,7 @@ opacity:.7;
 .ecosystem-network{
 position:relative;
 max-width:900px;
+min-height:520px;
 margin:auto;
 z-index:2;
 overflow:visible;
