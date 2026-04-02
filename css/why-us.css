@@ -1,9 +1,3 @@
-:root{
---pg-gradient-title:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
-}
-section + section{
-margin-top:-40px;
-}
 /* =========================================================
 1. HERO
 ========================================================= */
