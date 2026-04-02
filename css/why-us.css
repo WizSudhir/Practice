@@ -468,8 +468,13 @@ pointer-events:none;
 padding:100px 0 60px;
 position:relative;
 overflow:hidden;
+background: var(--bg-primary);
 isolation: isolate;
 z-index:0;
+}
+.pg-architecture .section-frame{
+  background: rgba(0,0,0,0.6); /* ✅ REQUIRED for dots visibility */
+  backdrop-filter: blur(4px);  /* optional premium */
 }
 .pg-architecture-frame::before{
   content:"";
