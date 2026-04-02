@@ -271,9 +271,10 @@ left: var(--space-md);
 right: var(--space-md);
 bottom: var(--space-md);
 background-image:
-radial-gradient(rgba(99,102,241,0.25) 1px, transparent 1px);
+radial-gradient(rgba(99,102,241,0.55) 1.2px, transparent 1.2px);
 background-size: 24px 24px;
-opacity: 0.6;
+opacity: 0.85;
+filter: drop-shadow(0 0 4px rgba(99,102,241,0.15));
 z-index:0;
 animation:gridMove 80s linear infinite;
 pointer-events: none;
@@ -282,7 +283,7 @@ pointer-events: none;
 content:"";
 position:absolute;
 inset:0;
-background:radial-gradient(circle at center,rgba(5,10,25,0) 40%,rgba(5,10,25,0.4) 75%,rgba(5,10,25,0.55) 100%);
+background:radial-gradient(circle at center,rgba(5,10,25,0) 50%,rgba(5,10,25,0.18) 75%,rgba(5,10,25,0.35) 100%);
 pointer-events:none;
 z-index:1;
 }
