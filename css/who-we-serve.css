@@ -498,7 +498,7 @@ padding:46px 28px 30px;
 font-size:inherit;
 margin-bottom:10px;
 font-weight:inherit;
-color:white;
+color:var(--secondary);
 }
 .org-content p{
 font-size:15px;
@@ -594,7 +594,7 @@ padding:34px 26px 28px;
 font-size:inherit;
 font-weight:inherit;
 margin-bottom:10px;
-color:white;
+color:var(--secondary);
 }
 .specialty-content p{
 font-size:15px;
