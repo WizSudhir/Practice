@@ -486,7 +486,7 @@ z-index:0;
   background-image:
     radial-gradient(rgba(255,255,255,.18) 1px, transparent 1px);
   background-size:18px 18px;
-  opacity:.6;
+  opacity:.8;
   pointer-events:none;
   z-index:0;
   border-radius: inherit; /* ✅ keeps dots inside frame */
