@@ -64,6 +64,14 @@
   --container: 1200px;
   --nav-height: 80px;
   --grid-offset: calc((100vw - var(--container)) / 2);
+  /* Z INDEX */
+  --z-lower: -1;
+  --z-base: 0;
+  --z-up: 1;
+  --z-navbar: 100;
+  --z-overlay: 900;
+  --z-drawer: 1000;
+  --z-max: 9999;
 }
 /* RESPONSIVE TOKENS (ADAPTIVE SYSTEM) */
 /* Breakpoints */
