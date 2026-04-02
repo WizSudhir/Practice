@@ -560,9 +560,7 @@ filter:blur(20px);
 width:220px;
 height:220px;
 border-radius:50%;
-background:
-linear-gradient(180deg,rgba(20,25,55,.9),rgba(10,15,35,.95));
-border:3px solid rgba(255,255,255,.45);
+background:transparent;
 box-shadow:
 0 0 0 8px rgba(255,255,255,.05),
 0 0 30px rgba(59,130,246,.25),
@@ -696,7 +694,7 @@ padding:30px;
 border-radius:18px;
 border:1px solid rgba(255,255,255,.08);
 width:260px;
-background:var(--secondary);
+background:transparent;
 box-shadow:
 0 25px 80px rgba(0,0,0,.55),
 0 0 40px rgba(99,102,241,.2);
@@ -716,7 +714,7 @@ margin-top:18px;
 text-align:center;
 padding:14px;
 border-radius:12px;
-background:rgba(15,23,42,.6);
+background:transparent;
 border:1px solid rgba(255,255,255,.06);
 transition:.3s;
 }
