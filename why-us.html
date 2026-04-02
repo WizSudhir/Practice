@@ -26,37 +26,60 @@
 <!-- =========================================
 NAVBAR
 ========================================= -->
-
 <header class="navbar">
   <div class="container navbar-inner">
 
+    <!-- LOGO -->
     <div class="logo">
-      <a href="index.html">
+      <a href="index.html" aria-label="PracticeGrid Home">
         <img src="images/logo.png" alt="PracticeGrid Solutions Logo">
       </a>
     </div>
 
-      <nav class="nav-menu">
-        <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="who-we-serve.html">Who We Serve</a></li>
-        <li><a href="why-us.html">Why Us</a></li>
-        <li><a href="blog/">Blog</a></li>
-        <li><a href="contact.html" class="btn-primary">Connect With Us</a></li>
+    <!-- RIGHT SIDE -->
+    <div class="nav-right">
+
+      <!-- NAV MENU -->
+      <nav class="nav-menu" id="primary-navigation" aria-hidden="true">
+        <!-- TOP HEADER (LIKE STRIPE) -->
+        <div class="mobile-nav-header">
+          <div class="logo">
+            <a href="index.html" aria-label="PracticeGrid Home">
+            <img src="images/logo.png" alt="PracticeGrid Solutions Logo">
+            </a>
+          </div>
+          <button class="nav-close" aria-label="Close menu">
+            ✕
+          </button>
+        </div>
+        
+        <ul class="mobile-nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="who-we-serve.html">Who We Serve</a></li>
+          <li><a href="why-us.html">Why Us</a></li>
+          <li><a href="blog/">Blog</a></li>
         </ul>
       </nav>
 
-    <!-- MOBILE TOGGLE -->
-          <button class="nav-toggle" aria-label="Toggle Menu">
-          <span></span>
-          <span></span>
-          <span></span>
-          </button>
+      <div class="nav-cta">
+        <a href="contact.html" class="btn-primary btn-arrow">
+          Contact Us
+          <span class="icon-arrow"></span>
+        </a>
+      </div>
 
+      <!-- MOBILE TOGGLE -->
+      <button class="nav-toggle"aria-label="Toggle navigation menu"aria-controls="primary-navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+
+    </div>
   </div>
 </header>
-
 
 <!-- =========================================
 1 HERO
@@ -84,12 +107,14 @@ and recovers lost revenue to improve financial performance.
 
 <div class="hero-cta">
 
-<a href="contact.html" class="btn-primary">
+<a href="contact.html" class="btn-primary btn-arrow">
 Calculate Revenue Opportunity
+<span class="icon-arrow"></span>
 </a>
 
-<a href="contact.html" class="btn-primary">
+<a href="contact.html" class="btn-primary btn-arrow">
 Free Revenue Audit
+<span class="icon-arrow"></span>
 </a>
   
 </div>
@@ -211,11 +236,12 @@ PracticeGrid Revenue Recovery Engine Activated
 <!-- =========================================
 PRACTICEGRID PLATFORM ARCHITECTURE
 ========================================= -->
-<section class="pg-architecture">
-
+<section class="section section-grid pg-architecture">
 <div class="container">
+<div class="section-frame">
+<div class="section-inner">
 
-<div class="section-title">
+<div class="section-title center">
 <h2>Inside the PracticeGrid Revenue Intelligence Platform</h2>
 <p>
 PracticeGrid connects your practice systems, analyzes revenue workflows,
@@ -298,21 +324,22 @@ Scanning healthcare revenue data...
 <svg class="network-lines"></svg>
 
 </div>
+  
 </div>
-
+</div>
+</div>
 </section>
 <!-- =========================================
 PRACTICEGRID REVENUE FLOW
 ========================================= -->
 
-<section class="pg-revenue-flow">
-
+<section class="section section-grid pg-revenue-flow">
 <div class="container">
+<div class="section-frame">
+<div class="section-inner">
 
-<div class="section-header">
-
+<div class="section-title center">
 <h2>How PracticeGrid Recovers Healthcare Revenue</h2>
-
 <p>
 PracticeGrid eliminates the four most common causes of revenue leakage in healthcare billing
 through a structured revenue cycle optimization system.
@@ -391,17 +418,24 @@ through a structured revenue cycle optimization system.
 </div>
   
 </div>
-
+</div>
+</div>
 </section>
+  
 <!-- =========================================
 4. THE “BEFORRE V/S AFTER RCM TRANSFORMATION
 ========================================= -->  
-<section class="section rcm-transformation">
+<section class="section section-grid rcm-transformation">
 <div class="container">
-<h2 class="section-title">Revenue Cycle Transformation</h2>
-<p class="transform-tagline">
+<div class="section-frame">
+<div class="section-inner">
+
+  
+<h2 class="section-title center">Revenue Cycle Transformation</h2>
+<p class="section-subtitle center">
 From fragmented billing to optimized revenue cycle performance.
 </p>
+  
 <div class="transform-grid">
   
 <!-- Before -->
@@ -431,19 +465,25 @@ From fragmented billing to optimized revenue cycle performance.
 </ul>
 </div>
 </div>
+
+</div>
+</div>
 </div>
 </section>
 
 <!-- =========================================
 9 RCM MATURITY SCORE
 ========================================= -->
-<section class="section rcm-score-section">
-
+<section class="section section-grid rcm-score-section">
 <div class="container">
-<h2 class="section-title">Revenue Cycle Maturity Assessment</h2>
-<p class="section-sub">
+<div class="section-frame">
+<div class="section-inner">
+  
+<h2 class="section-title center">Revenue Cycle Maturity Assessment</h2>
+<p class="section-sub center">
 Answer a few quick questions to evaluate the health of your revenue cycle.
 </p>
+  
 <div class="rcm-score-layout">
 
 <!-- Questions -->
@@ -523,17 +563,21 @@ Get Free Revenue Audit
 </div>
 
 </div>
+
+</div>
+</div>
 </div>
 </section>
 
 <!-- =========================================
 PRACTICEGRID OUTCOMES
 ========================================= -->
-<section class="pg-outcomes">
-
+<section class="section section-grid pg-outcomes">
 <div class="container">
+<div class="section-frame">
+<div class="section-inner">
 
-<div class="section-header center">
+<div class="section-title center">
 <h2>Revenue Outcomes Powered by the PracticeGrid System</h2>
 <p>
 Real-world results from specialty practices using PracticeGrid’s revenue intelligence system.
@@ -697,16 +741,19 @@ PracticeGrid optimized authorization workflows, implemented real-time payer trac
 </div>
 
 </div>
+</div>
+</div>
 </section>
 <!-- =========================================
 4 RCM FRAMEWORK
 ========================================= -->
 
-<section class="pg-framework">
-
+<section class="section section-grid pg-framework">
 <div class="container">
+<div class="section-frame">
+<div class="section-inner">
 
-<h2 class="section-title">Our Revenue Cycle Framework</h2>
+<h2 class="section-title center">Our Revenue Cycle Framework</h2>
 
 <div class="framework-wrapper">
 
@@ -779,7 +826,8 @@ PracticeGrid optimized authorization workflows, implemented real-time payer trac
 </div>
 
 </div>
-
+</div>
+</div>
 </section>
  
 <!-- =========================================
