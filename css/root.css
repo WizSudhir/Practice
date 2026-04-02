@@ -10,8 +10,7 @@
   /* COLORS — BASE */
   --bg-primary: #000000;
   --bg-secondary: #000000;
-  --bg-alt: #000000;
-  --bg-elevated: #000000;
+   --danger: #ef4444;
   --success: #22c55e;
   /* BRAND (FROM LOGO) */
   --primary: #6366f1;             /* Indigo */
@@ -32,19 +31,25 @@
   --glow-primary: none;
   --glow-soft: none;
   /* RADIUS */
+  --radius-xs: 6px;
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 18px;
   --radius-xl: 24px;
   /* SPACING SYSTEM */
-  --space-xs: 6px;
-  --space-sm: 12px;
-  --space-md: 20px;
-  --space-lg: 40px;
-  --space-xl: 80px;
-  --space-xxl: 100px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+  --space-full: 999px;
   /* TYPOGRAPHY */
   --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-xs: 10px;
+  --font-sm: 12px;
+  --font-md: 14px;
+  --font-lg: 18px;
+  --font-xl: 24px;
   /* SHADOW */
   --shadow-soft:
     0 10px 30px rgba(0,0,0,0.4);
@@ -53,7 +58,8 @@
     0 0 40px rgba(99,102,241,0.12);
   /* TRANSITIONS */
   --transition-fast: 0.2s ease;
-  --transition-base: 0.35s ease;
+  --transition-base: 0.4s ease;
+  --transition-slow: 0.6s ease;
   /* LAYOUT */
   --container: 1200px;
   --nav-height: 80px;
@@ -66,20 +72,6 @@
   --bp-md: 768px;
   --bp-lg: 1024px;
   --bp-xl: 1280px;
-}
-/* Fluid spacing overrides */
-@media (max-width: 768px) {
-  :root {
-    --space-lg: 28px;
-    --space-xl: 48px;
-    --space-xxl: 64px;
-  }
-}
-@media (max-width: 480px) {
-  :root {
-    --space-md: 16px;
-    --space-lg: 24px;
-  }
 }
 /* ============================================================================================================================
    2. GLOBAL RESET
@@ -121,16 +113,6 @@ body::before {
 body::after {
   right: var(--grid-offset);
 }
-/* RESPOSIVE */
-@media (max-width: 1024px) {
-  :root {
-    --grid-offset: 0px;
-  }
-  body::before,
-  body::after {
-    display: none; /* Remove side glow lines on mobile */
-  }
-}
 /* ============================================================================================================================
    3. TYPOGRAPHY (STRIPE STYLE)
 ============================================================================================================================ */
@@ -156,19 +138,6 @@ h3 {
 p {
   font-size: 15px;
   line-height: 1.7;
-}
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  h1 {
-    font-size: clamp(28px, 6vw, 36px);
-  }
-  h2 {
-    font-size: clamp(22px, 5vw, 28px);
-  }
-  p {
-    font-size: 14px;
-    line-height: 1.6;
-  }
 }
 /* ============================================================================================================================
    4. LAYOUT SYSTEM
@@ -247,16 +216,6 @@ p {
   padding-inline: clamp(16px, 2vw, 28px);
   padding-block: var(--space-md);
   width: 100%;
-}
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .section {
-    transform: translateY(20px);
-    transition-duration: 0.6s;
-  }
-   .section-frame {
-    border-radius: var(--radius-md);
-  }
 }
 /* ============================================================================================================================
    5. LINKS (NO UNDERLINE, NO COLOR CHANGE)
@@ -372,19 +331,6 @@ a:hover {
   box-shadow: var(--glow-soft);
   transform: translateY(-1px);
 }
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .btn-primary,
-  .btn-outline {
-    height: 44px;
-    font-size: 14px;
-    padding: 0 18px;
-  }
-
-  .btn-arrow {
-    gap: 6px;
-  }
-}
 /* ============================================================================================================================
    7. GLASS BORDER SYSTEM (NO BG)
 ============================================================================================================================ */
@@ -412,31 +358,6 @@ a:hover {
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-lg);
 }
-/* RESPONSIVE */
-@media (max-width: 1024px) {
-  .grid-3 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (max-width: 768px) {
-  .grid-2,
-  .grid-3 {
-    grid-template-columns: 1fr;
-    gap: var(--space-md);
-  }
-}
-@media (hover: hover) {
-  .card:hover,
-  .glass:hover {
-    transform: translateY(-4px);
-  }
-}
-@media (hover: none) {
-  .card:hover,
-  .glass:hover {
-    transform: none;
-  }
-}
 /* ============================================================================================================================
    8. INPUT SYSTEM
 ============================================================================================================================ */
@@ -456,14 +377,6 @@ textarea:focus {
   border-color: var(--primary);
   box-shadow: 0 0 0 2px rgba(99,102,241,0.2);
 }
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  input,
-  textarea {
-    padding: 12px;
-    font-size: 14px;
-  }
-}
 /* ============================================================================================================================
    9. ICON SYSTEM
 ============================================================================================================================ */
@@ -474,7 +387,6 @@ textarea:focus {
   color: var(--text-secondary);
   transition: var(--transition-fast);
 }
-
 .icon:hover {
   color: #fff;
 }
@@ -503,12 +415,7 @@ img {
 .img-glow:hover img {
   transform: scale(1.05);
 }
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .img-glow:hover {
-    transform: none;
-  }
-}
+
 /* ============================================================================================================================
    11. UTILITIES
 ============================================================================================================================ */
@@ -525,15 +432,7 @@ img {
 .stack-sm > * + * { margin-top: var(--space-sm); }
 .stack-md > * + * { margin-top: var(--space-md); }
 .stack-lg > * + * { margin-top: var(--space-lg); }
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .stack-md > * + * {
-    margin-top: var(--space-sm);
-  }
-  .stack-lg > * + * {
-    margin-top: var(--space-md);
-  }
-}
+
 /* ============================================================================================================================
    12. SCROLLBAR (PREMIUM)
 ============================================================================================================================ */
