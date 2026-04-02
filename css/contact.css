@@ -4,8 +4,7 @@
 .contact-hero{
   position:relative;
   overflow:hidden;
-  padding:140px 20px 100px;
-  background:#050a19;
+  background:var(--bg-primary);
    min-height: 600px;
 }
 /* Canvas */
@@ -98,12 +97,7 @@
 .contact-section {
   position: relative;
   min-height: 100vh;
-  padding: 140px 0 80px;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 20% 30%, rgba(99,102,241,0.15), transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(59,130,246,0.12), transparent 40%),
-    linear-gradient(180deg, #050a19 0%, #070d22 100%);
 }
 .contact-section::before {
   content: "";
@@ -113,20 +107,12 @@
   top: 20%;
   left: 50%;
   transform: translateX(-50%);
-  background: radial-gradient(
-    circle,
-    rgba(99,102,241,0.25),
-    rgba(59,130,246,0.15),
-    transparent 70%
-  );
-  filter: blur(100px);
-  opacity: 0.6;
+  background: transparent;
   pointer-events: none;
 }
 .contact-container {
   display: flex;
   align-items: center;
-  gap: 40px;
 }
 /* LEFT SIDE */
 .contact-left {
@@ -146,10 +132,10 @@
   align-items: center;
   margin-top: 25px;
   padding: 20px 25px;
-  background: rgba(255,255,255,0.08);
+  background: transparent;
   border-radius: var(--radius-lg);
   width: fit-content;
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1px solid var(--border-default);
 }
 .contact-social-label {
   font-size: 16px;
@@ -179,10 +165,8 @@
   margin-top: 30px;
   padding: 22px 24px;
   border-radius: var(--radius-lg);
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
-  backdrop-filter: blur(20px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  background: transparent;
+  border: 1px solid var(--border-default);
 }
 .contact-expectation h3 {
   margin-bottom: 12px;
@@ -199,11 +183,10 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
-  background: rgba(15, 23, 42, 0.6);
+  background: transparent;
   padding: 45px;
-  border-radius: var(--radius-lg);
-  backdrop-filter: blur(30px);
-  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-default);
   box-shadow: var(--shadow-hover);
 }
 .contact-form h3 {
@@ -212,8 +195,8 @@
 .contact-form input,
 .contact-form textarea {
   padding: 16px 20px;
-  border-radius: var(--radius-pill);
-  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-default);
   background: var(--bg-secondary);
   color: #fff;
   outline: none;
@@ -230,16 +213,6 @@
 }
 .contact-consent input {
   margin-right: 8px;
-}
-/* BUTTON */
-.contact-submit {
-  align-self: stretch;
-  text-align: center;
-  cursor: pointer;
-  background: var(--gradient-primary);
-  color: #fff;
-  border: none;
-  font-size: 16px;
 }
 /* NOTE */
 .contact-note {
