@@ -194,25 +194,20 @@ const rect = node.getBoundingClientRect();
 const nodeCenterX = rect.left + rect.width/2 - containerRect.left;
 const nodeCenterY = rect.top + rect.height/2 - containerRect.top;
 /* determine connection side */
-let nodeX = nodeCenterX;
-let nodeY = nodeCenterY;
+let nodeX, nodeY;
+// LEFT side nodes → connect from RIGHT middle
 if(nodeCenterX < coreX){
-nodeX = rect.right - containerRect.left;   // right edge
+  nodeX = rect.right - containerRect.left;
+  nodeY = rect.top + rect.height / 2 - containerRect.top;
 }
-if(nodeCenterX > coreX){
-nodeX = rect.left - containerRect.left;    // left edge
-}
-if(nodeCenterY < coreY){
-nodeY = rect.bottom - containerRect.top;   // bottom edge
-}
-if(nodeCenterY > coreY){
-nodeY = rect.top - containerRect.top;      // top edge
+// RIGHT side nodes → connect from LEFT middle
+else{
+  nodeX = rect.left - containerRect.left;
+  nodeY = rect.top + rect.height / 2 - containerRect.top;
 }
 const line = document.createElementNS(
 "http://www.w3.org/2000/svg","path"
 );
-/* direction detection */
-const direction = nodeX < coreX ? -1 : 1;
 /* ORTHOGONAL ROUTING */
 const offset = window.innerWidth < 768 ? 25 : 60;
 /* determine direction */
