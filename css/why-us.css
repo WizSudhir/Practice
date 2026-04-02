@@ -52,8 +52,8 @@ overflow:hidden;
 /* GRID LAYOUT */
 .hero-grid{
 display:grid;
-grid-template-columns: 0.9fr 1.1fr;
-gap: 40px;
+grid-template-columns: 1.2fr 0.8fr;
+gap: 80px;
 align-items:center;
 }
 /* LEFT SIDE */
@@ -62,6 +62,7 @@ font-size:clamp(38px,3.8vw,46px);
 font-weight:800;
 line-height:1.1;
 letter-spacing:-0.02em;
+max-width: 18ch;
 background:var(--pg-gradient-title);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
@@ -134,12 +135,13 @@ justify-content:center;
 min-height:auto;
 padding-right:20px;
 flex:1;
-max-width: 100%;
+max-width: 520px;
 }
 .hero-right{
-padding:40px;
+padding:20px;
 max-width: 100%;
 margin-left: 0;
+justify-self: start;
 position:relative;
 animation:float 6s ease-in-out infinite;
 will-change:transform;
@@ -172,7 +174,7 @@ rgba(5,10,25,.95)
 );
 border:1px solid rgba(255,255,255,.08);
 border-radius:22px;
-transform: rotateX(6deg) rotateY(-6deg); /* reduce tilt */
+transform: scale(0.92) rotateX(6deg) rotateY(-6deg);
 box-shadow:
 0 20px 60px rgba(0,0,0,.5),
 0 0 40px rgba(59,130,246,.1);
@@ -257,7 +259,7 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 height:260px;
-padding:50px 60px;
+padding:40px 40px;
 gap:40px;
 background:rgba(15,23,42,.6);
 border:1px solid rgba(255,255,255,.08);
