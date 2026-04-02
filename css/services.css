@@ -477,9 +477,6 @@ margin-bottom: var(--space-lg);
 }
 .phase-header h2{
 margin-bottom: var(--space-sm);
-background:linear-gradient(90deg,#fff,#c4b5fd,#93c5fd);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
 }
 .phase-header p{
 max-width:650px;
@@ -559,7 +556,6 @@ opacity:1;
 transform:translateY(0);
 }
 .phase-number{
-color:var(--primary);
 margin-right:12px;
 opacity:1;
 }
