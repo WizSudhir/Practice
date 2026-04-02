@@ -274,7 +274,6 @@ background-size: 24px 24px;
 opacity: 0.85;
 filter: drop-shadow(0 0 4px rgba(99,102,241,0.15));
 z-index:0;
-animation:gridMove 80s linear infinite;
 pointer-events: none;
 }
 .ecosystem-frame::after{
@@ -284,10 +283,6 @@ inset:0;
 background:radial-gradient(circle at center,rgba(5,10,25,0) 50%,rgba(5,10,25,0.18) 75%,rgba(5,10,25,0.35) 100%);
 pointer-events:none;
 z-index:1;
-}
-@keyframes gridMove{
-0%{transform:translate(0,0);}
-100%{transform:translate(96px,96px);}
 }
 /* CORE */
 .eco-core{
