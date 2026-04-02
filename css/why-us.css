@@ -52,7 +52,7 @@ overflow:hidden;
 /* GRID LAYOUT */
 .hero-grid{
 display:grid;
-grid-template-columns:1fr;
+grid-template-columns: 0.9fr 1.1fr;
 gap: 40px;
 align-items:center;
 }
@@ -134,12 +134,12 @@ justify-content:center;
 min-height:auto;
 padding-right:20px;
 flex:1;
-max-width: none;
+max-width: 100%;
 }
 .hero-right{
 padding:40px;
-max-width: 620px;
-margin-left: auto;
+max-width: 100%;
+margin-left: 0;
 position:relative;
 animation:float 6s ease-in-out infinite;
 will-change:transform;
