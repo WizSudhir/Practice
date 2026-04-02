@@ -473,17 +473,17 @@ isolation: isolate;
 z-index:0;
 }
 .pg-architecture .section-frame{
-  background: rgba(0,0,0,0.6); /* ✅ REQUIRED for dots visibility */
-  backdrop-filter: blur(4px);  /* optional premium */
+  background: rgba(0,0,0,0.75); /* ✅ REQUIRED for dots visibility */
+  backdrop-filter: blur(2px);  /* optional premium */
 }
 .pg-architecture-frame::before{
   content:"";
-  position:absolute;
+  position:relative;
   inset:0;
   background-image:
-    radial-gradient(rgba(255,255,255,.10) 1px, transparent 1px);
+    radial-gradient(rgba(255,255,255,.18) 1px, transparent 1px);
   background-size:18px 18px;
-  opacity:.4;
+  opacity:.6;
   pointer-events:none;
   z-index:0;
   border-radius: inherit; /* ✅ keeps dots inside frame */
