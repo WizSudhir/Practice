@@ -106,12 +106,12 @@ body::after {
   top: 0;
   bottom: 0;
   height: 100vh;
-  width: 1.5px;
-  background: rgba(255,255,255,.12);
+  width: 1px;
+  background: var(--border-default);
   box-shadow: none;
   pointer-events: none;
   mix-blend-mode: screen;
-  z-index: 999;
+  z-index: var(--z-overlay);
   opacity: 0.7;
   transform: translateZ(0);
 }
@@ -144,7 +144,7 @@ h3 {
   font-weight: 600;
 }
 p {
-  font-size: 15px;
+  font-size: var(--font-md);
   line-height: 1.7;
 }
 /* ============================================================================================================================
@@ -241,16 +241,16 @@ a:hover {
 ============================================================================================================================ */
 .btn-primary,
 .btn-outline {
-  height: 40px;            
-  padding: 0 14px;     
-  font-size: 12px;   
-  border-radius: 6px; 
+  height: calc(var(--space-xl) + var(--space-sm));   
+  padding: 0 var(--space-md);
+  font-size: var(--font-sm);
+  border-radius: var(--radius-xs);
   font-weight: 600;
 }
 /* PRIMARY */
 .btn-primary {
   background: var(--gradient-accent);
-  color: #fff;
+  color: var(--text-primary);
   border: none;
   display: inline-flex;
   align-items: center;
@@ -282,8 +282,8 @@ a:hover {
 }
 /* arrow container */
 .icon-arrow {
-  width: 12px;
-  height: 12px;
+  width: var(--space-md);
+  height: var(--space-md);
   position: relative;
   transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1);
   will-change: transform;
@@ -298,8 +298,8 @@ a:hover {
   width: 0;
   opacity: 0;
   height: 1.6px;
-  background: #fff;
-  box-shadow: 1px 0 0 #fff;
+  background: var(--text-primary);
+  box-shadow: 1px 0 0 var(--text-primary);
   transform: translateY(-50%) translateZ(0);
   transform-origin: right center;
   transition: width 0.25s cubic-bezier(0.2, 0, 0, 1), opacity 0.2s ease;
@@ -313,8 +313,8 @@ a:hover {
   top: 50%;
   width: 6.5px;
   height: 6.5px;
-  border-top: 1.6px solid #fff;
-  border-right: 1.6px solid #fff;
+  border-top: 1.6px var(--text-primary);
+  border-right: 1.6px var(--text-primary);
   transform: translateY(-50%) rotate(45deg);
   opacity: 0.9;
   will-change: transform;
@@ -372,7 +372,7 @@ a:hover {
 input,
 textarea {
   width: 100%;
-  padding: 14px;
+  padding: var(--space-md);
   border-radius: var(--radius-sm);
   border: 1px solid var(--border-subtle);
   background: transparent;
@@ -383,15 +383,15 @@ textarea {
 input:focus,
 textarea:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 2px rgba(99,102,241,0.2);
+  box-shadow: 0 0 0 2px var(--primary);
 }
 /* ============================================================================================================================
    9. ICON SYSTEM
 ============================================================================================================================ */
 .icon {
-  width: 22px;
-  height: 22px;
-  stroke-width: 1.6;
+  width: var(--space-lg);
+  width: var(--space-lg);
+  stroke-width: 1.5;
   color: var(--text-secondary);
   transition: var(--transition-fast);
 }
@@ -446,18 +446,18 @@ img {
 ============================================================================================================================ */
 
 ::-webkit-scrollbar {
-  width: 8px;
+  width: var(--space-sm);
 }
 ::-webkit-scrollbar-track {
-  background: #020617;
+  background: var(--bg-secondary);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 10px;
+  background: var(--text-muted);
+  border-radius: var(--radiums-sm);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: var(--text-secondary);
 }
 
 /* ============================================================================================================================
