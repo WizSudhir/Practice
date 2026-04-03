@@ -45,7 +45,7 @@ pointer-events:none;
 z-index:0;
 }
 .hero-enterprise{
-padding: var(--space-xxl) var(--space-md) var(--space-lg);
+min-height: calc(100vh - var(--nav-height));
 position:relative;
 overflow:hidden;
 }
