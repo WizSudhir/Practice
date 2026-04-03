@@ -562,6 +562,9 @@ body.menu-open {
   .navbar .container {
     padding: 0 16px;
    }
+   .logo {
+    justify-self: start;
+  }
    .logo img {
     height: 28px;
   }
@@ -569,18 +572,23 @@ body.menu-open {
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
-    padding: 6px;
+    padding: var(--space-sm);
     margin-right: -6px;
     cursor: pointer;
+    justify-self: end;
     z-index: var(--z-drawer);
   }
   .nav-toggle span {
-    width: var(--space-lg);
-    height: 2px;
+    width: var(--space-xl);
+    height: 3px;
     background: var(--text-primary);
+    border-radius: 2px;
     transition: var(--transition-base);
   }
    .navbar-inner {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
     height: 56px;      /* 🔥 from 72 → 56 */
     padding: var(--space-sm) 0;
   }
@@ -682,6 +690,7 @@ body.menu-open {
   }
   .mobile-nav-cta {
     padding: var(--space-xl);
+    justify-self: center;
   }
   .nav-cta .btn-primary {
     width: 100%;
