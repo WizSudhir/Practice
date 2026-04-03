@@ -46,6 +46,7 @@ z-index:0;
 }
 .hero-enterprise{
 min-height: calc(100vh - var(--nav-height));
+padding-top: var(--nav-height);
 position:relative;
 overflow:hidden;
 }
