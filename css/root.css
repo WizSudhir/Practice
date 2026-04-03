@@ -313,8 +313,8 @@ a:hover {
   top: 50%;
   width: 6.5px;
   height: 6.5px;
-  border-top: 1.6px #fff;
-  border-right: 1.6px #fff;
+  border-top: 1.6px solid #fff;
+  border-right: 1.6px solid #fff;
   transform: translateY(-50%) rotate(45deg);
   opacity: 0.9;
   will-change: transform;
