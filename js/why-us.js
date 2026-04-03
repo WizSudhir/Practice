@@ -203,25 +203,6 @@ ticking = true
 }
 })
 }
-// ===============================
-// SaaS Hero Parallax System
-// ===============================
-
-const dashboard =
-document.querySelector(".workflow-dashboard")
-if(hero && dashboard){
-hero.addEventListener("mousemove",(e)=>{
-const x = (window.innerWidth/2 - e.clientX)/40
-const y = (window.innerHeight/2 - e.clientY)/40
-dashboard.style.transform =
-`rotateX(${8+y}deg) rotateY(${-10+x}deg)`
-})
-hero.addEventListener("mouseleave",()=>{
-dashboard.style.transform =
-"rotateX(8deg) rotateY(-10deg)"
-})
-}
-  
 // ======================================
 // PLATFORM DATA FLOW ANIMATION
 // ======================================
