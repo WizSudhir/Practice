@@ -350,7 +350,6 @@ z-index:1;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
-  max-width: calc(var(--container) * 0.7);
 }
 .hero-top h1 {
   top: calc(var(--nav-height) + 60px);
