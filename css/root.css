@@ -558,7 +558,7 @@ body.menu-open {
   overflow: hidden;
 }
 /* MOBILE NAV (STRIPE DRAWER) */
-@media (max-width: var(--bp-lg)) {
+@media (max-width: 768px) {
   .navbar .container {
     padding: 0 16px;
    }
