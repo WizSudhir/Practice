@@ -5,7 +5,8 @@
   position:relative;
   overflow:hidden;
   background:var(--bg-primary);
-   min-height: 600px;
+  min-height: 600px;
+  padding-top: var(--nav-height);
 }
 /* Canvas */
 #cta-rays{
