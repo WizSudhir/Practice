@@ -353,6 +353,10 @@ z-index:1;
   max-width: calc(var(--container) * 0.7);
 }
 .hero-top h1 {
+  top: calc(var(--nav-height) + 60px);
+  font-size: clamp(42px, 5.5vw, 72px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
   max-width: 900px;
 }
 /* BOTTOM CONTENT */
