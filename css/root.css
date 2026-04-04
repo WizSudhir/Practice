@@ -692,12 +692,17 @@ body.menu-open {
     padding: var(--space-xl);
     justify-self: center;
   }
+  .nav-cta {
+  display: flex;
+  justify-content: center;
+  }
   .nav-cta .btn-primary {
     width: 100%;
     height: 32px;
     padding: 0 var(--space-md);
     font-size: 12px;
     border-radius: 8px;
+    width: auto;
   }
 }
 /* ============================================================================================================================
