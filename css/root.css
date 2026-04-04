@@ -501,11 +501,6 @@ img {
   justify-content: space-between;
   padding: var(--space-lg) 0;
 }
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: var(--space-xl);
-}
 /* LOGO */
 .logo img {
   height: calc(var(--space-xl) * 2);
@@ -580,7 +575,7 @@ body.menu-open {
    
   }
   .nav-toggle span {
-    width: var(--space-xl);
+    width: var(--space-lg);
     height: 2.5px;
     background: var(--text-primary);
     border-radius: 2px;
@@ -612,16 +607,6 @@ body.menu-open {
     border-radius: 0px;
     margin: 0px;
     border: 1px solid var(--border-default);
-  }
-  .nav-right {
-    gap: var(--space-md);
-  }
-  .nav-right .btn-primary {
-    height: 34px;         /* 🔥 smaller */
-    padding: 0 var(--space-md);
-    font-size: 12px;      /* compact */
-    border-radius: 8px; 
-    letter-spacing: -0.01em;
   }
   /* FULLSCREEN MENU */
   .nav-menu {
