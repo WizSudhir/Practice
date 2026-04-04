@@ -573,14 +573,15 @@ body.menu-open {
     flex-direction: column;
     gap: var(--space-sm);
     padding: var(--space-sm);
-    margin-right: -6px;
+    margin-right: 0px;
     cursor: pointer;
     justify-self: end;
     z-index: var(--z-drawer);
+   
   }
   .nav-toggle span {
     width: var(--space-xl);
-    height: 3px;
+    height: 2.5px;
     background: var(--text-primary);
     border-radius: 2px;
     transition: var(--transition-base);
