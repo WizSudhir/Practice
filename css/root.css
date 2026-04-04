@@ -576,7 +576,7 @@ body.menu-open {
   }
   .nav-toggle span {
     width: var(--space-lg);
-    height: 2px;
+    height: 1px;
     background: var(--text-primary);
     border-radius: 2px;
     transition: var(--transition-base);
