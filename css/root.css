@@ -731,6 +731,7 @@ body.menu-open {
 .footer-brand img {
   height: calc(var(--space-xl) * 2);
   width: auto;
+  align-items: flex-start;
   object-fit: contain;
   margin-bottom: var(--space-sm);
   margin: 0 auto;
