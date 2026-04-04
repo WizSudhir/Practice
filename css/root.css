@@ -27,6 +27,9 @@
   /* GRADIENTS (ONLY FOR TEXT / CTA) */
   --gradient-primary: linear-gradient(90deg, #ffffff, #c4b5fd, #93c5fd);
   --gradient-accent: linear-gradient(90deg, #6366f1, #3b82f6);
+  --gradient-success: linear-gradient(90deg,#4ade80,#22c55e);
+  --gradient-danger: linear-gradient(90deg,#f87171,#ef4444);
+  --gradient-brand: linear-gradient(135deg,#6366f1,#3b82f6);
   /* GLOW */
   --glow-primary: none;
   --glow-soft: none;
@@ -37,11 +40,13 @@
   --radius-lg: 18px;
   --radius-xl: 24px;
   /* SPACING SYSTEM */
+  --space-xxs: 2px;
   --space-xs: 4px;
   --space-sm: 8px;
   --space-md: 12px;
   --space-lg: 16px;
   --space-xl: 24px;
+  --space-2xl: 32px;
   --space-full: 999px;
   /* TYPOGRAPHY */
   --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
