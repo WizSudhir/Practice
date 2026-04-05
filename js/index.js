@@ -280,7 +280,7 @@ function startTimeline() {
     });
     requestAnimationFrame(animate);
   }
-  const observer = new IntersectionObserver(entries => {
+  const heroObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         if (!isRunning) {
@@ -298,7 +298,7 @@ function startTimeline() {
             }
           });
         }, { threshold: 0.2 });
-  observer.observe(hero);
+  heroObserver.observe(hero);
   // 🔥 TAB VISIBILITY FIX (PREVENT TIMER BURST)
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) {
@@ -325,7 +325,7 @@ function startTimeline() {
   const connection = document.querySelector(".mobile-connection");
   if (!node || !core || !revenue) return;
   let timeouts = [];
-  let observer;
+  let mobileObserver;
   let isRunning = false;   // 🔥 NEW
   function clearAllTimers() {
     timeouts.forEach(t => clearTimeout(t));
@@ -439,7 +439,7 @@ function runSequence() {
   });
 }
   // ✅ OBSERVER WITH STATE CONTROL
-  observer = new IntersectionObserver(entries => {
+  mobileObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         if (!isRunning) {
@@ -452,7 +452,7 @@ function runSequence() {
     });
   }, { threshold: 0 });
   const target = document.querySelector(".mobile-system");
-  if (target) observer.observe(target);
+  if (target) mobileObserver.observe(target);
   // 🔥 FORCE RUN (backup for mobile bugs)
   setTimeout(() => {
   if (!isRunning) {
@@ -516,7 +516,7 @@ if (aboutSection) {
     index = (index + 1) % rules.length;
   }
 
-  const observer = new IntersectionObserver(entries => {
+  const rulesObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         if (!interval) {
@@ -530,7 +530,7 @@ if (aboutSection) {
     });
   }, { threshold: 0.4 });
 
-  observer.observe(engine);
+  rulesObserver.observe(engine);
 
   rules.forEach((rule, i) => {
     rule.addEventListener("mouseenter", () => {
@@ -1319,13 +1319,13 @@ document.getElementById("simulateBtn").addEventListener("click",()=>{
      </div>`;
 });
 // ================= SCROLL TRIGGER =================
-const observer = new IntersectionObserver(entries=>{
+const outcomesObserver = new IntersectionObserver(entries=>{
   if(entries[0].isIntersecting && !hasAnimated){
     animateCounters();
     hasAnimated = true;
   }
 },{threshold:0.4});
-observer.observe(section);
+outcomesObserver.observe(section);
 // ================= INIT =================
 renderGrid();
 })();
@@ -1537,7 +1537,7 @@ if (finalctaLiveEl) {
   }, 2500);
 }
 // CTA ENTRANCE ANIMATION
-const observer = new IntersectionObserver(entries => {
+const ctaObserver = new IntersectionObserver(entries => {
   if (entries[0].isIntersecting) {
     finalctaSection.classList.add('visible');
     gsap.from(finalctaSection.querySelectorAll('.final-cta-content > *'), {
@@ -1547,7 +1547,7 @@ const observer = new IntersectionObserver(entries => {
       stagger: 0.1,
       ease: "power2.out"
     });
-    observer.disconnect();
+    ctaObserver.disconnect();
   }
 }, {
   threshold: 0.1,
