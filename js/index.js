@@ -20,9 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   const svg = document.getElementById("connections");
   if (!svg) {
-    console.warn("SVG connections not found");
-    return;
-  }
+  console.warn("SVG missing — skipping desktop only");
+  } else {
   const PHASE_DELAY = 3000;
   if (!hero || !core) {
   console.warn("Hero not found — skipping hero only");
@@ -325,9 +324,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 300);
     }
   });
-    
   animate();
-
+  } // closing SVG missing — skipping desktop only
   // ============================================================================================================================
   // 2. MOBILE HERO
   // ============================================================================================================================
@@ -349,7 +347,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function reset() {
   clearAllTimers();
   isRunning = false;
-  node.style.opacity = 0;
+  node.style.opacity = "";
   core.classList.remove("active");
   revenue.style.opacity = 0;
   // 🔥 FIX: reset connection
@@ -436,14 +434,22 @@ document.addEventListener("DOMContentLoaded", () => {
         reset();          // 🔥 FULL RESET ON EXIT
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0 });
   const target = document.querySelector(".mobile-system");
+  if (target) observer.observe(target);
+  // 🔥 FORCE RUN (backup for mobile bugs)
+  setTimeout(() => {
+  if (!isRunning) {
+    reset();
+    runSequence();
+  }
+  }, 800);
 }
 
 // ============================================================================================================================
 // 3. ABOUT
 // ============================================================================================================================
-const aboutSection = document.querySelector('about-belief');
+const aboutSection = document.querySelector('.about-belief');
 if (aboutSection) {
   const aboutObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
