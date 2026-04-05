@@ -33,6 +33,7 @@
   /* GLOW */
   --glow-primary: none;
   --glow-soft: none;
+  --glow-radial: radial-gradient(circle, rgba(255,255,255,0.25), transparent 60%);
   /* RADIUS */
   --radius-xs: 6px;
   --radius-sm: 8px;
@@ -189,7 +190,7 @@ p {
   top: 0;
   bottom: 0;
   width: 1px;
-  background: rgba(255,255,255,.12);
+  background: var(--border-default);
   opacity: 0.4;
 }
 .section-grid::before {
@@ -215,8 +216,7 @@ p {
   border-radius: var(--radius-sm);
   background: transparent;
   border: 1px solid var(--border-default);
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-  border-color 0.3s ease;
+  transition: transform var(--transition-base), border-color var(--transition-fast);
   will-change: transform;
   transform: none !important;
   backface-visibility: hidden;
@@ -270,7 +270,7 @@ a:hover {
   position: absolute;
   inset: 0;
   opacity: 0;
-  background: radial-gradient(circle, rgba(255,255,255,0.25), transparent 60%);
+  background: var(--glow-radial);
   transition: var(--transition-base);
 }
 .btn-primary:hover {
