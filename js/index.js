@@ -81,11 +81,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
   function restartTimeline() {
-  if (!isRunning) return; // safety
-  resetSystem();
-  setTimeout(() => {
-    startTimeline();
-  }, 300);
+    isRunning = false; // 🔥 allow restart
+    resetSystem();
+    setTimeout(() => {
+      isRunning = true;
+      startTimeline();
+    }, 800);
   }
   // POSITION SETUP //
   nodes.forEach((n, i) => {
@@ -193,9 +194,26 @@ function startTimeline() {
     defaults: { ease: "power2.out" }
   });
 
-  // STEP 1 — stabilize
-  tl.to({}, { duration: 0.8, onStart: () => { frozen = true; } });
-
+  // STEP 1.1 — CHAOS PHASE (FLOATING ACTIVE)
+  tl.to({}, {
+    duration: 2.5 // 🔥 let chaos breathe
+  });
+  // STEP 1.2 — CORE APPEARS + SYSTEM CONTROL
+  tl.to(hero, {
+    duration: 0.6,
+    onStart: () => {
+      controlled = true;
+      hero.classList.add("controlled");
+    }
+  });
+  // STEP 1.3 — STABILIZATION (smooth pull-in)
+  tl.to({}, {
+    duration: 1.5,
+    onStart: () => {
+      frozen = true;
+    }
+  });
+  tl.add(() => {}, "+=0.5");
   // STEP 2 — draw connections + resolve nodes
   nodes.forEach((n, i) => {
     tl.add(() => {
@@ -204,7 +222,7 @@ function startTimeline() {
         path.getBoundingClientRect();
         path.classList.add("active");
       }
-    }, i * 0.25);
+    }, i * 0.6);
 
     tl.to(n, {
       duration: 0.4,
@@ -215,7 +233,7 @@ function startTimeline() {
           0 0 50px rgba(59,130,246,0.4)
         `;
       }
-    }, i * 0.25 + 0.1);
+    }, i * 0.6 + 0.2);
   });
 
   // STEP 3 — activate system
@@ -284,10 +302,11 @@ function startTimeline() {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         if (!isRunning) {
+          isRunning = true; // 🔥 ADD THIS
           resetSystem();
           setTimeout(() => {
             startTimeline();
-            }, 300);
+          }, PHASE_DELAY); // 🔥 USE REAL DELAY
         }
       } else {
         setTimeout(() => {
