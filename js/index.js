@@ -183,64 +183,55 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(callback, 500); // 🔥 SIMPLE + RELIABLE
   }
   // CONTROL TIMELINE (EXTRACTED) //
-  function startTimeline() {
-    if (timelineStarted) return;   // 🔥 HARD LOCK
-    timelineStarted = true;
-    if (isRunning) return;
-    isRunning = true;
-    timelineTimeouts.push(setTimeout(() => {
+function startTimeline() {
+  if (timelineStarted) return;
+  timelineStarted = true;
 
-  waitForStabilization(() => {
-    setTimeout(() => {
-      frozen = true;
-    }, 800);
+  if (typeof gsap === "undefined") return;
 
-    nodes.forEach(n => {
-      n.x = n.baseX;
-      n.y = n.baseY;
-    });
-
-    timelineTimeouts.push(setTimeout(() => {
-
-      requestAnimationFrame(() => {
-
-        nodes.forEach((n, i) => {
-
-          timelineTimeouts.push(setTimeout(() => {
-
-            requestAnimationFrame(() => {
-              const path = drawConnection(n);
-              path.getBoundingClientRect();
-              path.classList.add("active");
-            });
-
-            timelineTimeouts.push(setTimeout(() => {
-              n.classList.add("resolved-active");
-              n.querySelector(".node-inner").style.boxShadow = `
-                0 0 25px rgba(34,197,94,0.7),
-                0 0 50px rgba(59,130,246,0.4)
-              `;
-            }, 840));
-
-          }, i * 600 + Math.random() * 500));
-
-        });
-
-      });
-
-    }, 720));
-
+  const tl = gsap.timeline({
+    defaults: { ease: "power2.out" }
   });
 
-}, 2000 + PHASE_DELAY));
-    timelineTimeouts.push(setTimeout(() => {
+  // STEP 1 — stabilize
+  tl.to({}, { duration: 0.8, onStart: () => { frozen = true; } });
+
+  // STEP 2 — draw connections + resolve nodes
+  nodes.forEach((n, i) => {
+    tl.add(() => {
+      const path = drawConnection(n);
+      if (path) {
+        path.getBoundingClientRect();
+        path.classList.add("active");
+      }
+    }, i * 0.25);
+
+    tl.to(n, {
+      duration: 0.4,
+      onStart: () => {
+        n.classList.add("resolved-active");
+        n.querySelector(".node-inner").style.boxShadow = `
+          0 0 25px rgba(34,197,94,0.7),
+          0 0 50px rgba(59,130,246,0.4)
+        `;
+      }
+    }, i * 0.25 + 0.1);
+  });
+
+  // STEP 3 — activate system
+  tl.to(hero, {
+    duration: 0.6,
+    onStart: () => {
       controlled = true;
       hero.classList.add("controlled");
-      }, 1000 + PHASE_DELAY));
-    timelineTimeouts.push(setTimeout(() => {
-    restartTimeline();
-    }, 9000 + PHASE_DELAY));
-  }
+    }
+  }, "+=0.5");
+
+  // LOOP
+  tl.call(() => {
+    setTimeout(() => restartTimeline(), 2000);
+  });
+}
   // ANIMATION LOOP //
   function animate() {
     nodes.forEach(n => {
@@ -343,84 +334,113 @@ document.addEventListener("DOMContentLoaded", () => {
     timeouts.forEach(t => clearTimeout(t));
     timeouts = [];
   }
-  function reset() {
+function reset() {
   clearAllTimers();
   isRunning = false;
-  node.style.opacity = "";
-  core.classList.remove("active");
-  revenue.style.opacity = 0;
-  // 🔥 FIX: reset connection
+
+  if (typeof gsap !== "undefined") {
+    gsap.set(node, { opacity: 0 });
+    gsap.set(core, { opacity: 0, scale: 0.9 });
+    gsap.set(revenue, { opacity: 0 });
+
+    bars.forEach(bar => gsap.set(bar, { height: "5%" }));
+    metrics.forEach(m => gsap.set(m, { opacity: 0, y: 10 }));
+  }
+
   if (connection) {
     connection.classList.remove("active");
-    void connection.offsetHeight; // force reflow
+    void connection.offsetHeight;
   }
+
   const items = document.querySelectorAll(".mobile-node .item");
   items.forEach(item => {
     const error = item.querySelector(".error");
     const resolved = item.querySelector(".resolved");
+
     error.style.opacity = 0;
     error.classList.remove("active");
     resolved.style.opacity = 0;
   });
-  bars.forEach(bar => bar.style.height = "5%");
-  metrics.forEach(m => {
-    m.style.opacity = 0;
-    m.style.transform = "translateY(10px)";
+}
+function runSequence() {
+  if (isRunning || typeof gsap === "undefined") return;
+  isRunning = true;
+
+  const items = document.querySelectorAll(".mobile-node .item");
+
+  const tl = gsap.timeline({
+    defaults: { ease: "power2.out" },
+    onComplete: () => {
+      setTimeout(() => {
+        reset();
+        runSequence();
+      }, 2000);
+    }
   });
-  }
-  function runSequence() {
-    if (isRunning) return;   // 🔥 PREVENT DUPLICATE RUNS
-    isRunning = true;
-    clearAllTimers();
-    const items = document.querySelectorAll(".mobile-node .item");
-    // STEP 0 — Show chaos card
-    timeouts.push(setTimeout(() => {
-      node.style.opacity = 1;
-    }, 500));
-    // STEP 1 — Errors appear
-    items.forEach((item, i) => {
-      const error = item.querySelector(".error");
-      timeouts.push(setTimeout(() => {
-        error.style.opacity = 1;
-        error.classList.add("active");
-      }, 1200 + i * 1000));
+
+  // STEP 0 — show node
+  tl.to(node, { opacity: 1, duration: 0.5 });
+
+  // STEP 1 — errors appear
+  items.forEach((item, i) => {
+    const error = item.querySelector(".error");
+
+    tl.to(error, {
+      opacity: 1,
+      duration: 0.4,
+      onStart: () => error.classList.add("active")
+    }, i * 0.4 + 0.6);
+  });
+
+  // STEP 2 — connection
+  tl.to(connection, {
+    opacity: 1,
+    height: "20px",
+    duration: 0.6
+  }, "+=0.2");
+
+  // STEP 3 — core
+  tl.to(core, {
+    opacity: 1,
+    scale: 1,
+    duration: 0.6
+  }, "+=0.3");
+
+  // STEP 4 — revenue
+  tl.to(revenue, {
+    opacity: 1,
+    duration: 0.6
+  }, "+=0.3");
+
+  // STEP 5 — resolve + bars
+  items.forEach((item, i) => {
+    const error = item.querySelector(".error");
+    const resolved = item.querySelector(".resolved");
+
+    tl.to(error, { opacity: 0, duration: 0.3 }, "+=0.1");
+
+    tl.to(resolved, {
+      opacity: 1,
+      y: 0,
+      duration: 0.4
     });
-    const baseTime = 1200 + items.length * 1000;
-    // STEP 1.5 — Draw connection
-    timeouts.push(setTimeout(() => {
-      if (connection) connection.classList.add("active");
-    }, baseTime + 200));
-    // STEP 2 — Core
-    timeouts.push(setTimeout(() => {
-      core.classList.add("active");
-    }, baseTime + 1200));
-    // STEP 3 — Revenue
-    timeouts.push(setTimeout(() => {
-      revenue.style.opacity = 1;
-    }, baseTime + 2000));
-    // STEP 4 — Replace + animate
-    items.forEach((item, i) => {
-      const error = item.querySelector(".error");
-      const resolved = item.querySelector(".resolved");
-      timeouts.push(setTimeout(() => {
-        error.style.opacity = 0;
-        error.classList.remove("active");
-        resolved.style.opacity = 1;
-        if (bars[i]) {
-          bars[i].style.height = bars[i].dataset.height;
-        }
-        if (metrics[i]) {
-          metrics[i].style.opacity = 1;
-          metrics[i].style.transform = "translateY(0)";
-        }
-      }, baseTime + 2600 + i * 1200));
-    });
-    // 🔥 FIXED LOOP (RESET + RESTART CLEANLY)
-    timeouts.push(setTimeout(() => {
-      reset();
-      runSequence();
-    }, baseTime + 2600 + items.length * 1200 + 4000));
-  }
+
+    if (bars[i]) {
+      tl.to(bars[i], {
+        height: bars[i].dataset.height,
+        duration: 0.5
+      }, "<");
+    }
+
+    if (metrics[i]) {
+      tl.to(metrics[i], {
+        opacity: 1,
+        y: 0,
+        duration: 0.4
+      }, "<");
+    }
+  });
+}
   // ✅ OBSERVER WITH STATE CONTROL
   observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
