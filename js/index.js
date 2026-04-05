@@ -19,10 +19,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   const svg = document.getElementById("connections");
-  if (svg && hero && core) {
-  const PHASE_DELAY = 3000;
-  console.warn("Hero not found — skipping hero only");
+  if (!svg || !hero || !core) {
+    console.warn("Desktop hero skipped");
   } else {
+  const PHASE_DELAY = 3000;
   let timelineStarted = false;
   function getNodeSize() {
   const w = window.innerWidth;
@@ -313,9 +313,6 @@ function startTimeline() {
     }
   });
   animate();
-  } else {
-  console.warn("Desktop hero skipped");
-  } // closing SVG missing — skipping desktop only
   // ============================================================================================================================
   // 2. MOBILE HERO
   // ============================================================================================================================
