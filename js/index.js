@@ -19,11 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   const svg = document.getElementById("connections");
-  if (!svg) {
-  console.warn("SVG missing — skipping desktop only");
-  } else {
+  if (svg && hero && core) {
   const PHASE_DELAY = 3000;
-  if (!hero || !core) {
   console.warn("Hero not found — skipping hero only");
   } else {
   let timelineStarted = false;
@@ -325,6 +322,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
   animate();
+  } else {
+  console.warn("Desktop hero skipped");
   } // closing SVG missing — skipping desktop only
   // ============================================================================================================================
   // 2. MOBILE HERO
