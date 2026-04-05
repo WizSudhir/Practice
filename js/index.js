@@ -438,7 +438,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }, { threshold: 0.1 });
   const target = document.querySelector(".mobile-system");
-  if (target) observer.observe(target);
+if (target) {
+  observer.observe(target);
+  // 🔥 FORCE RUN (fix mobile bug)
+  setTimeout(() => {
+    runSequence();
+  }, 800);
 }
 }
 
