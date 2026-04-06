@@ -1977,21 +1977,24 @@ z-index:1;
   11. FINAL CTA
 ============================================================================================================================== */
 .final-cta {
-  opacity: 1 !important;
-  transform: none !important;
   position: relative;
-  overflow: visible;
+  overflow: hidden;
   isolation: isolate;
   min-height: 420px;
+  opacity: 1 !important;
+  transform: none !important;
 }
-/* BACKGROUND SYSTEM */
+/* anchor system */
+.final-cta-wrap {
+  position: relative;
+}
+/* BACKGROUND */
 .final-cta-bg {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
 }
-/* GRID */
 .final-cta-grid {
   position: absolute;
   inset: 0;
@@ -2000,24 +2003,35 @@ z-index:1;
     linear-gradient(90deg, rgba(99,102,241,0.08) 1px, transparent 1px);
   background-size: 60px 60px;
   animation: ctaGridMove 20s linear infinite;
-  opacity: 0.3;
+  opacity: 0.35;
 }
 @keyframes ctaGridMove {
   from { transform: translateY(0); }
   to { transform: translateY(60px); }
 }
-/* PULSE GLOW */
 .final-cta-pulse {
   position: absolute;
   inset: 0;
   background:
     radial-gradient(circle at 50% 50%, rgba(99,102,241,0.25), transparent 60%);
-  opacity: 0.3;
   animation: ctaPulse 4s ease-in-out infinite;
 }
 @keyframes ctaPulse {
   0%,100% { opacity: 0.2; }
-  50% { opacity: 0.4; }
+  50% { opacity: 0.45; }
+}
+/* CANVAS */
+.cta-visual {
+  position: absolute;
+  inset: 0;
+  z-index: 2; /* above frame */
+  pointer-events: none;
+}
+#ctaCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
 }
 /* CONTENT */
 .final-cta-content {
@@ -2029,21 +2043,17 @@ z-index:1;
   flex-direction: column;
   gap: 18px;
 }
-.final-cta-content h2 {
-  font-size: 32px;
+.final-cta-btn {
+  margin-top: 32px;
+  z-index: 10;
+  box-shadow: 0 0 30px rgba(99,102,241,0.6);
 }
-/* SUBTEXT */
-.final-cta-sub {
-  margin-top: 12px;
-  color: var(--text-secondary);
-}
-/* LIVE STATUS */
+/* rest unchanged */
+.final-cta-sub { color: var(--text-secondary); }
+.final-cta-urgency { color: #94a3b8; opacity: 0.8; }
 .final-cta-live {
   margin-top: 20px;
-  font-size: var(--font-md);
-  color: var(--text-muted);
   display: flex;
-  align-items: center;
   justify-content: center;
   gap: 6px;
 }
@@ -2058,50 +2068,12 @@ z-index:1;
   0%,100% { opacity: 1; }
   50% { opacity: 0.3; }
 }
-/* TRUST */
 .final-cta-trust {
-  margin-top: 20px;
   display: flex;
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
-  font-size: var(--font-md);
   color: #94a3b8;
-}
-/* BUTTON */
-.final-cta-btn {
-  position: relative;
-  margin-top: 32px;
-  font-size: var(--font-md);
-  padding: 0 22px;
-  height: 44px;
-  background: var(--gradient-accent);
-  box-shadow: 0 0 25px rgba(99,102,241,0.6);
-  z-index: 10;
-}
-.final-cta-btn:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 0 35px rgba(99,102,241,0.6);
-}
-/* URGENCY */
-.final-cta-urgency {
-  margin-top: 12px;
-  font-size: var(--font-sm);
-  color: #94a3b8;
-  opacity: 0.8;
-}
-.cta-visual {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-}
-#ctaCanvas {
-  display: block;
-  width: 100%;
-  height: 100%;
-  opacity: 0.6;
-  filter: blur(0.3px);
 }
 /* ============================================================================================================================
    12. SCROLLBAR
