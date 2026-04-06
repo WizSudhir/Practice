@@ -2076,9 +2076,11 @@ z-index:1;
 /* LIVE STATUS */
 .final-cta-live {
   margin-top: 20px;
-  display: flex;
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 8px;
+  line-height: 1;
 }
 
 .final-cta-live .dot {
@@ -2086,6 +2088,9 @@ z-index:1;
   height: 6px;
   background: #4ade80;
   border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+  transform: translateY(0);
   animation: blink 1.2s infinite;
 }
 
