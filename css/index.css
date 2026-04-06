@@ -343,7 +343,10 @@ z-index:1;
   z-index: 6;
   pointer-events: none; /* animation still interactive */
 }
-/* BOTTOM CONTENT */
+.hero-top {
+  position: relative;
+  z-index: 20;
+}
 .hero-bottom {
   position: absolute;
   bottom: calc(var(--space-sm) * 0.5);
