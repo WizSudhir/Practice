@@ -89,6 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
     resetSystem();
     setTimeout(() => {
       isRunning = true;
+      animate();
       startTimeline();
     }, 800);
   }
@@ -301,7 +302,6 @@ function startTimeline() {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         if (!isRunning) {
-          isRunning = true;
           resetSystem();
           isRunning = true;
           animate(); // 🔥 restart loop
@@ -326,6 +326,8 @@ function startTimeline() {
     } else {
       // user came back → clean restart
       resetSystem();
+      isRunning = true;
+      animate(); // 🔥 ADD THIS
       setTimeout(() => {
         startTimeline();
       }, 300);
