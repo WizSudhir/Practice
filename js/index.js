@@ -1366,102 +1366,163 @@ renderGrid();
 // 7. EHR
 // ============================================================================================================================
 (function(){
-
 const slider = document.querySelector('.ehr-slider');
 const wrapper = document.querySelector('.ehr-track-wrapper');
 const track = document.querySelector('.ehr-track');
 
-if (!slider || !wrapper || !track) return;
-
-slider.classList.add('js-active');
-
-let isDown = false;
-let startX;
-let scrollLeft;
-let velocity = 0;
-let lastX = 0;
-let raf;
-let autoSpeed = 0.35;
-
-// LOOP FIX
-function loopFix() {
-  const maxScroll = slider.scrollWidth / 2;
-  if (slider.scrollLeft >= maxScroll) {
-    slider.scrollLeft -= maxScroll;
+if (slider && wrapper && track) {
+  slider.classList.add('js-active');
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+  let velocity = 0;
+  let lastX = 0;
+  let raf;
+  let autoSpeed = 0.35;
+  function updateSpeed() {
+    autoSpeed = window.innerWidth <= 768 ? 0.35 : 0.35;
   }
-  if (slider.scrollLeft <= 0) {
-    slider.scrollLeft += maxScroll;
+  updateSpeed();
+  window.addEventListener('resize', updateSpeed);
+  let isHovering = false;
+  // INFINITE LOOP FIX
+  function loopFix() {
+    const maxScroll = slider.scrollWidth / 2;
+    if (slider.scrollLeft >= maxScroll) {
+      slider.scrollLeft -= maxScroll;
+    }
+    if (slider.scrollLeft <= 0) {
+      slider.scrollLeft += maxScroll;
+    }
   }
-}
-
-// AUTO SCROLL
-function autoScroll() {
-  if (!isDown) {
-    slider.scrollLeft += autoSpeed + velocity;
-    velocity *= 0.95;
-    if (Math.abs(velocity) < 0.01) velocity = 0;
-    loopFix();
+  // AUTO SCROLL ENGINE
+  function autoScroll() {
+    if (!isDown) {
+      slider.scrollLeft += autoSpeed + velocity;
+      velocity *= 0.95;
+      if (Math.abs(velocity) < 0.01) velocity = 0;
+      loopFix();
+    }
+    raf = requestAnimationFrame(autoScroll);
   }
-  raf = requestAnimationFrame(autoScroll);
-}
-
-// DRAG START
-slider.addEventListener('mousedown', (e) => {
-  isDown = true;
-  cancelAnimationFrame(raf);
-  startX = e.pageX;
-  scrollLeft = slider.scrollLeft;
-  lastX = e.pageX;
-});
-
-// DRAG MOVE
-slider.addEventListener('mousemove', (e) => {
-  if (!isDown) return;
-  const dx = e.pageX - startX;
-  slider.scrollLeft = scrollLeft - dx;
-  velocity = (lastX - e.pageX) * 0.25;
-  lastX = e.pageX;
-});
-
-// DRAG END
-function stopDrag() {
-  if (!isDown) return;
-  isDown = false;
-  raf = requestAnimationFrame(autoScroll);
-}
-
-slider.addEventListener('mouseup', stopDrag);
-slider.addEventListener('mouseleave', stopDrag);
-
-// TOUCH
-slider.addEventListener('touchstart', (e) => {
-  isDown = true;
-  cancelAnimationFrame(raf);
-  startX = e.touches[0].pageX;
-  scrollLeft = slider.scrollLeft;
-  lastX = startX;
-});
-
-slider.addEventListener('touchmove', (e) => {
-  if (!isDown) return;
-  e.preventDefault();
-  const x = e.touches[0].pageX;
-  const dx = x - startX;
-  slider.scrollLeft = scrollLeft - dx;
-  velocity = (lastX - x) * 0.25;
-  lastX = x;
-}, { passive: false });
-
-slider.addEventListener('touchend', () => {
-  isDown = false;
-  raf = requestAnimationFrame(autoScroll);
-});
-
-// START ENGINE
-raf = requestAnimationFrame(autoScroll);
-
-})();
+  // DRAG START
+  slider.addEventListener('mousedown', (e) => {
+    isDown = true;
+    slider.classList.add('dragging');
+    cancelAnimationFrame(raf);
+    startX = e.pageX;
+    scrollLeft = slider.scrollLeft;
+    lastX = e.pageX;
+    velocity = 0;
+  });
+  // DRAG MOVE
+  slider.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    const dx = e.pageX - startX;
+    slider.scrollLeft = scrollLeft - dx;
+    velocity = (lastX - e.pageX) * 0.25;
+    lastX = e.pageX;
+  });
+  // DRAG END
+  function stopDrag() {
+    if (!isDown) return;
+    isDown = false;
+    slider.classList.remove('dragging');
+    snapToNearest();
+    resumeAuto();
+  }
+  slider.addEventListener('mouseup', stopDrag);
+  slider.addEventListener('mouseleave', stopDrag);
+  // MAGNETIC SNAP
+  function snapToNearest() {
+    const logos = track.querySelectorAll('img');
+    const current = slider.scrollLeft;
+    let closest = 0;
+    let minDist = Infinity;
+    logos.forEach((logo) => {
+      const offset = logo.offsetLeft;
+      const dist = Math.abs(offset - current);
+      if (dist < minDist) {
+        minDist = dist;
+        closest = offset;
+      }
+    });
+    smoothScrollTo(closest, 400);
+  }
+  // SMOOTH SCROLL
+  function smoothScrollTo(target, duration) {
+    const start = slider.scrollLeft;
+    const change = target - start;
+    const startTime = performance.now();
+    function animate(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      slider.scrollLeft = start + change * ease;
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    }
+    requestAnimationFrame(animate);
+  }
+  // RESUME AUTO (VELOCITY BASED)
+  function resumeAuto() {
+    velocity += velocity * 1.2;
+    raf = requestAnimationFrame(autoScroll);
+  }
+  // HOVER CONTROL
+  slider.addEventListener('mouseenter', () => {
+    isHovering = true;
+    autoSpeed = 0.1;
+  });
+  slider.addEventListener('mouseleave', () => {
+    isHovering = false;
+    autoSpeed = 0.35;
+  });
+  // TOUCH SUPPORT (MOBILE)
+  slider.addEventListener('touchstart', (e) => {
+    isDown = true;
+    cancelAnimationFrame(raf);
+    startX = e.touches[0].pageX;
+    scrollLeft = slider.scrollLeft;
+    lastX = startX;
+  });
+  slider.addEventListener('touchmove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();   // 🔥 IMPORTANT
+    const x = e.touches[0].pageX;
+    const dx = x - startX;
+    slider.scrollLeft = scrollLeft - dx;
+    velocity = (lastX - x) * 0.25;
+    lastX = x;
+    }, { passive: false });
+  slider.addEventListener('touchend', () => {
+    isDown = false;
+    snapToNearest();
+    cancelAnimationFrame(raf);
+    // 🔥 ensure restart ALWAYS
+    setTimeout(() => {
+      raf = requestAnimationFrame(autoScroll);
+    }, 50);
+  });
+  slider.addEventListener('touchcancel', () => {
+    isDown = false;
+    raf = requestAnimationFrame(autoScroll);
+  });
   
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(autoScroll);
+      }
+    });
+  }, { threshold: 0.2 });
+  observer.observe(slider); 
+  // START ENGINE
+  raf = requestAnimationFrame(autoScroll);
+  }
+})();
 // ============================================================================================================================
 // 8. ENGAGEMENT MODEL
 // ============================================================================================================================
