@@ -1929,7 +1929,7 @@ z-index:1;
   user-select: none;
   scrollbar-width: none;
   margin-top: 20px;
-  touch-action: pan-y;
+  touch-action: none;
 }
 .ehr-slider.js-active .ehr-track {
   animation: none;
@@ -1954,6 +1954,7 @@ z-index:1;
   gap: 50px;
   width: max-content;
   will-change: transform;
+  transform: translateZ(0);
 }
 /* LOGOS */
 .ehr-track img {
