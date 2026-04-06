@@ -80,7 +80,8 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
       n.x = n.baseX;
       n.y = n.baseY;
-      n.angle = 0;
+      n.angle = Math.random() * Math.PI * 2;
+      n.speed = 0.002 + Math.random() * 0.003; // 🔥 re-randomize speed
     });
   }
   function restartTimeline() {
