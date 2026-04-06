@@ -840,9 +840,14 @@ gsap.timeline({
   scrollTrigger: {
     trigger: section,
     start: "top top",
-    end: isMobile ? "+=1400" : "+=2600",
+    end: isMobile ? "+=2400" : "+=2600",
     scrub: true,
     pin: true,
+    snap: isMobile ? {
+      snapTo: 1 / 4,
+      duration: 0.3,
+      ease: "power1.inOut"
+    } : false
   }
 })
 .to(state, {
@@ -880,7 +885,10 @@ gsap.timeline({
     chart.update("none");
     updateGraphDot();
     /* ===== STEP SYNC ===== */
-    const stepIndex = getStepIndex(p);
+    const stepIndex = Math.min(
+      steps.length - 1,
+      Math.floor(p * steps.length)
+    );
     updateStepUI(stepIndex);
   }
 });
