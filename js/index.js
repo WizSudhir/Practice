@@ -835,15 +835,14 @@ function updateStepUI(index) {
     }
 }
 /* SCROLL-DRIVEN SYSTEM */
+const isMobile = window.innerWidth <= 768;
 gsap.timeline({
   scrollTrigger: {
     trigger: section,
     start: "top top",
-    end: "+=2600",
-    scrub: true,
-    pin: true,
-    pinSpacing: true,
-    anticipatePin: 1
+    end: isMobile ? "+=800" : "+=2600",
+    scrub: !isMobile,
+    pin: !isMobile,   // 🔥 disable pin on mobile
   }
 })
 .to(state, {
