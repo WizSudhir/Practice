@@ -159,7 +159,6 @@ document.addEventListener("DOMContentLoaded", () => {
       x: Math.round(nodeEdge.x - svgRect.left),
       y: Math.round(nodeEdge.y - svgRect.top)
     };
-    let d;
     const midX = Math.round(start.x + (end.x - start.x) * 0.5);
     const d = `
       M ${start.x} ${start.y}
