@@ -1,13 +1,12 @@
 /* =========================================================
-   PRACTICEGRID SOLUTIONS — CSS SYSTEM
+   PRACTICEGRID SOLUTIONS — INDEX.CSS
 ========================================================= */
 /* ============================================================================================================================
    1. DESKTOP HERO SECTION
 ============================================================================================================================== */
 .hero-system {
-  min-height: 100vh;
-  height: 100vh;
-  padding-bottom: 80px
+  min-height: 100svh;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,6 +30,7 @@ perspective-origin: 50% 50%;
 transform-style: preserve-3d;
 transform: translateY(60px);
 background: #050a19;
+will-change: transform, opacity;
 z-index: 0;
 }
 .hero-aurora{
@@ -87,9 +87,6 @@ z-index:1;
   background:
     linear-gradient(to top, rgba(0,0,0,0.7), transparent 60%);
   z-index: 3;
-}
-.system-bg {
-  will-change: transform, opacity;
 }
 /* Dim all nodes when hovering */
 .system-bg:hover .node {
@@ -168,9 +165,8 @@ z-index:1;
   position: absolute;
   top: 50%;
   left: 50%;
-  min-width: 120px;
   width: auto;
-  max-width: 160px;
+  width: clamp(100px, 12vw, 160px);
   min-height: 70px;
   height: auto;
   display: flex;
@@ -250,7 +246,7 @@ z-index:1;
   display: flex;
   align-items: center;
   gap: 4px;
-  font-size: 9px;
+  font-size: clamp(10px, 1vw, 12px);
   opacity: 0.9;
   color: #f87171;
   line-height: 1;
@@ -387,7 +383,7 @@ z-index:1;
 /* RESOLVED LABELS */
 .resolved {
   color: var(--success);
-  font-size: 9px;
+  font-size: clamp(10px, 1vw, 12px);
   display: flex;
   align-items: center;
   gap: 4px;
@@ -462,22 +458,13 @@ z-index:1;
     height: 80px;
   }
   .node-title {
-    font-size: 10px;
+    font-size: clamp(12px, 1vw, 14px);
   }
   .error-label {
     font-size: 8px;
   }
   .revenue-card {
     width: 220px;
-  }
-}
-/* SMALL MOBILE (480px) */
-@media (max-width: 480px) {
-  .hero-content h1 {
-    font-size: 24px;
-  }
-  .hero-content p {
-    font-size: var(--font-md);
   }
 }
 
@@ -533,24 +520,6 @@ z-index:1;
     justify-content: flex-start;
     position: relative;
     background: #020617;
-  }
-  .hero-content {
-    position: relative;
-    bottom: auto;
-    left: 0;
-    right: 0;
-    text-align: center;
-    margin: 0 auto;
-    margin-top: 20px;
-    padding: 0 20px;
-    z-index: 3;
-  }
-  .hero-content h1 {
-    font-size: 25px;
-    line-height: 1.1;
-  }
-  .hero-content p {
-    font-size: var(--font-sm);
   }
   .mobile-system {
     position: relative;
