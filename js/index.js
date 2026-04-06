@@ -1379,14 +1379,14 @@ if (slider && wrapper && track) {
   let raf;
   let autoSpeed = 0.35;
   function updateSpeed() {
-    autoSpeed = window.innerWidth <= 768 ? 0.15 : 0.35;
+    autoSpeed = window.innerWidth <= 768 ? 0.25 : 0.35;
   }
   updateSpeed();
   window.addEventListener('resize', updateSpeed);
   let isHovering = false;
   // INFINITE LOOP FIX
   function loopFix() {
-    const maxScroll = wrapper.scrollWidth / 2;
+    const maxScroll = slider.scrollWidth / 2;
     if (slider.scrollLeft >= maxScroll) {
       slider.scrollLeft -= maxScroll;
     }
@@ -1498,10 +1498,22 @@ if (slider && wrapper && track) {
   slider.addEventListener('touchend', () => {
     isDown = false;
     snapToNearest();
-    resumeAuto();
+    // 🔥 FORCE restart
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(autoScroll);
   });
   // START ENGINE
   autoScroll();
+  slider.addEventListener('touchcancel', () => {
+    isDown = false;
+    raf = requestAnimationFrame(autoScroll);
+  });
+  setInterval(() => {
+    if (!isDown) {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(autoScroll);
+    }
+  }, 2000);
 }
   
 // ============================================================================================================================
