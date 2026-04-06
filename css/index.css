@@ -2174,7 +2174,91 @@ z-index:1;
   opacity: 0;
   transform: translateY(20px);
 }
-
+@media (max-width: 768px) {
+  /* HEADER */
+  .eng-header {
+    margin-bottom: var(--space-md);
+  }
+  .eng-sub {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  /* TIMELINE */
+  .eng-timeline {
+    gap: 20px;
+  }
+  /* FIX vertical line alignment */
+  .eng-timeline::before {
+    left: 14px;   /* 🔥 tighter alignment */
+  }
+  /* STEP LAYOUT */
+  .eng-step {
+    gap: 14px;
+    align-items: flex-start;
+  }
+  /* NUMBER */
+  .eng-step-number {
+    min-width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+  /* CONTENT */
+  .eng-step-content {
+    padding: 14px;
+  }
+  .eng-step-content h3 {
+    font-size: 14px;
+    line-height: 1.3;
+  }
+  .eng-step-content p {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .eng-tag {
+    font-size: 10px;
+  }
+  /* 🔥 MOST IMPORTANT FIX */
+  /* PROOF CARDS STACK */
+  .eng-proof {
+    grid-template-columns: 1fr;   /* ✅ stack */
+    gap: 12px;
+  }
+  .eng-proof-card {
+    padding: 14px;
+  }
+  .eng-proof-card h4 {
+    font-size: 14px;
+  }
+  .eng-proof-card p {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  /* TENSION + BRIDGE */
+  .eng-tension {
+    font-size: 14px;
+    margin-top: var(--space-md);
+  }
+  .eng-bridge {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+}
+@media (max-width: 480px) {
+  .eng-step {
+    gap: 10px;
+  }
+  .eng-step-number {
+    min-width: 28px;
+    height: 28px;
+    font-size: 11px;
+  }
+  .eng-step-content {
+    padding: 12px;
+  }
+  .eng-proof-card {
+    padding: 12px;
+  }
+}
 /* ============================================================================================================================
   11. FINAL CTA
 ============================================================================================================================== */
