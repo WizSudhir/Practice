@@ -120,7 +120,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const nodeInner = node.querySelector(".node-inner");
     const nodeRect = nodeInner.getBoundingClientRect();
     const svgRect = svg.getBoundingClientRect();
-    const isTopNode = nodeCenter.y < coreCenter.y;
     const coreCenter = {
       x: coreRect.left + coreRect.width / 2,
       y: coreRect.top + coreRect.height / 2
@@ -129,6 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
       x: nodeRect.left + nodeRect.width / 2,
       y: nodeRect.top + nodeRect.height / 2
     };
+    const isTopNode = nodeCenter.y < coreCenter.y;
     const dx = nodeCenter.x - coreCenter.x;
     const dy = nodeCenter.y - coreCenter.y;
     const dist = Math.hypot(dx, dy);
@@ -159,6 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
       x: Math.round(nodeEdge.x - svgRect.left),
       y: Math.round(nodeEdge.y - svgRect.top)
     };
+    let d;
     if (isTopNode) {
     // 🔥 go vertical first, then horizontal
     const midY = Math.round(start.y + (end.y - start.y) * 0.5);
