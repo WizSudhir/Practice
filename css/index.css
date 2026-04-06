@@ -1929,6 +1929,7 @@ z-index:1;
   user-select: none;
   scrollbar-width: none;
   margin-top: 20px;
+  touch-action: pan-y;
 }
 .ehr-slider.js-active .ehr-track {
   animation: none;
