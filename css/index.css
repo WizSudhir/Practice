@@ -347,6 +347,9 @@ z-index:1;
   position: relative;
   z-index: 20;
   padding-top: var(--nav-height);
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
 }
 .hero-bottom {
   position: absolute;
