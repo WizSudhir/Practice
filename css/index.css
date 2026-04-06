@@ -1830,6 +1830,9 @@ z-index:1;
   background: rgba(255,255,255,0.02);
   text-align: left;
 }
+.pg-grid {
+  margin-top: 28px;
+}
 .pg-stories {
   margin-top: 28px;
 }
@@ -1870,6 +1873,12 @@ z-index:1;
   }
   .pg-card {
     padding: 16px;
+  }
+  .pg-grid {
+    margin-top: 10px;
+  }
+  .pg-stories {
+    margin-top: 10px;
   }
   .sim-controls {
     grid-template-columns: 1fr;   /* 🔥 stack */
