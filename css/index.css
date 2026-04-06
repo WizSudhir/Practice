@@ -1376,12 +1376,14 @@ z-index:1;
     gap: 32px;
   }
   .hiw-visual {
+    margin-top: 20px;
     width: 100%;
   }
   .hiw-dashboard {
     padding: 18px;              /* tighter for mobile */
   }
   .narrative-step {
+    min-height: 220px;
     display: none;
   }
   .narrative-step.active {
