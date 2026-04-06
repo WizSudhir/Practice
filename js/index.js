@@ -1538,135 +1538,125 @@ if (slider && wrapper && track) {
 // ============================================================================================================================
 // 9. FINAL CTA
 // ============================================================================================================================
+
 (function () {
-  const finalctaSection = document.querySelector(".final-cta");
-  if (!finalctaSection) return;
- // LIVE TEXT SYSTEM (UNCHANGED, OPTIMIZED)
-  const finalctaTexts = [
+
+  const section = document.querySelector(".final-cta");
+  const canvas = document.getElementById("ctaCanvas");
+  if (!section || !canvas) return;
+
+  const ctx = canvas.getContext("2d");
+
+  let width, height, waves = [];
+  let progress = 0;
+
+  // FIX CANVAS RESOLUTION
+  function resize() {
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width;
+    canvas.height = rect.height;
+    width = rect.width;
+    height = rect.height;
+  }
+
+  window.addEventListener("resize", resize);
+  resize();
+
+  // INIT WAVES
+  function init() {
+    waves = [];
+    for (let i = 0; i < 18; i++) {
+      waves.push({
+        y: (height / 18) * i,
+        amp: 20 + Math.random() * 20,
+        freq: 0.002 + Math.random() * 0.002,
+        phase: Math.random() * Math.PI * 2,
+        speed: 0.01 + Math.random() * 0.02
+      });
+    }
+  }
+  init();
+
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+
+    const cx = width / 2;
+    const cy = height / 2;
+
+    waves.forEach(w => {
+      ctx.beginPath();
+
+      for (let x = 0; x < width; x += 6) {
+
+        let y =
+          w.y +
+          Math.sin(x * w.freq + w.phase) *
+          w.amp * (1 - progress);
+
+        const dx = cx - x;
+        const dy = cy - y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        const pull = (1 / (dist + 1)) * 200 * progress;
+
+        y += dy * pull * 0.02;
+
+        if (x === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+
+      ctx.strokeStyle = `rgba(59,130,246,${0.15 + progress * 0.35})`;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      w.phase += w.speed;
+    });
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+
+  // SCROLL TRIGGER
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        gsap.to({ p: progress }, {
+          p: 1,
+          duration: 2,
+          ease: "power2.out",
+          onUpdate: function () {
+            progress = this.targets()[0].p;
+          }
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+
+  observer.observe(section);
+
+  // TEXT ROTATION
+  const texts = [
     "Analyzing revenue systems...",
     "Detecting claim inefficiencies...",
     "Reducing denial patterns...",
     "Optimizing collections flow..."
   ];
-  const finalctaLiveEl = document.getElementById("finalctaLiveText");
-  if (finalctaLiveEl) {
-    let index = 0;
+
+  const el = document.getElementById("finalctaLiveText");
+
+  if (el) {
+    let i = 0;
     setInterval(() => {
-      index = (index + 1) % finalctaTexts.length;
-      finalctaLiveEl.style.opacity = 0;
+      i = (i + 1) % texts.length;
+      el.style.opacity = 0;
       setTimeout(() => {
-        finalctaLiveEl.textContent = finalctaTexts[index];
-        finalctaLiveEl.style.opacity = 1;
+        el.textContent = texts[i];
+        el.style.opacity = 1;
       }, 300);
     }, 2500);
   }
-  // CANVAS: SIGNAL COLLAPSE → GRAVITY WELL
-  const canvas = document.getElementById("ctaCanvas");
-  let ctx, width, height, waves = [];
-  let progress = 0; // 0 = chaos, 1 = gravity
-  if (canvas) {
-    ctx = canvas.getContext("2d");
-    const WAVE_COUNT = 18;
-    function resize() {
-      const rect = canvas.getBoundingClientRect();
-      canvas.width = rect.width;
-      canvas.height = rect.height;
-    }
-    window.addEventListener("resize", resize);
-    resize();
-    function getCenter() {
-      return {
-        x: width / 2,
-        y: height / 2
-      };
-    }
-    function initWaves() {
-      waves = [];
-      for (let i = 0; i < WAVE_COUNT; i++) {
-        waves.push({
-          y: (height / WAVE_COUNT) * i,
-          amplitude: 20 + Math.random() * 20,
-          frequency: 0.002 + Math.random() * 0.002,
-          phase: Math.random() * Math.PI * 2,
-          speed: 0.01 + Math.random() * 0.02
-        });
-      }
-    }
-    initWaves();
-    function animateCanvas() {
-      if (!ctx) return;
-      ctx.clearRect(0, 0, width, height);
-      const center = getCenter();
-      waves.forEach(w => {
-        ctx.beginPath();
-        for (let x = 0; x < width; x += 6) {
-          // CHAOS → COLLAPSE
-          let y =
-            w.y +
-            Math.sin(x * w.frequency + w.phase) *
-            w.amplitude * (1 - progress);
-          // GRAVITY WELL
-          const dx = center.x - x;
-          const dy = center.y - y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          const pull = (1 / (dist + 1)) * 200 * progress;
-          y += dy * pull * 0.02;
-          if (x === 0) ctx.moveTo(x, y);
-          else ctx.lineTo(x, y);
-        }
-        ctx.strokeStyle = `rgba(59,130,246,${0.15 + progress * 0.35})`;
-        ctx.lineWidth = 1;
-        ctx.stroke();
-        w.phase += w.speed;
-      });
-      requestAnimationFrame(animateCanvas);
-    }
-    animateCanvas();
-  }
-  // SINGLE OBSERVER (MASTER CONTROL)
-  const ctaObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        // ---- ACTIVATE SECTION
-        finalctaSection.classList.add("visible");
-        // ---- TEXT + CONTENT ANIMATION (UNCHANGED)
-        gsap.from(finalctaSection.querySelectorAll('.final-cta-content > *'), {
-          opacity: 0,
-          y: 20,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: "power2.out"
-        });
-        // ---- CANVAS: CHAOS → GRAVITY
-        if (canvas) {
-          gsap.to({ p: progress }, {
-            p: 1,
-            duration: 2,
-            ease: "power2.out",
-            onUpdate: function () {
-              progress = this.targets()[0].p;
-            }
-          });
-        }
-      } else {
-        // ---- RESET CANVAS (smooth reverse)
-        if (canvas) {
-          gsap.to({ p: progress }, {
-            p: 0,
-            duration: 1,
-            ease: "power2.out",
-            onUpdate: function () {
-              progress = this.targets()[0].p;
-            }
-          });
-        }
-      }
-    });
-  }, {
-    threshold: 0.2,
-    rootMargin: "0px 0px -80px 0px"
-  });
-  ctaObserver.observe(finalctaSection);
+
 })();
   
 }); // DOM Close
