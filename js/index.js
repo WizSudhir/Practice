@@ -1377,7 +1377,7 @@ if (slider && wrapper && track) {
   let velocity = 0;
   let lastX = 0;
   let raf;
-  let autoSpeed = 0.35;
+  let autoSpeed = window.innerWidth <= 768 ? 0.2 : 0.35;
   let isHovering = false;
   // INFINITE LOOP FIX
   function loopFix() {
@@ -1483,6 +1483,7 @@ if (slider && wrapper && track) {
   });
   slider.addEventListener('touchmove', (e) => {
     if (!isDown) return;
+    e.preventDefault();   // 🔥 IMPORTANT
     const x = e.touches[0].pageX;
     const dx = x - startX;
     wrapper.scrollLeft = scrollLeft - dx;
