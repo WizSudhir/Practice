@@ -120,6 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const nodeInner = node.querySelector(".node-inner");
     const nodeRect = nodeInner.getBoundingClientRect();
     const svgRect = svg.getBoundingClientRect();
+    const isTopNode = nodeCenter.y < coreCenter.y;
     const coreCenter = {
       x: coreRect.left + coreRect.width / 2,
       y: coreRect.top + coreRect.height / 2
@@ -158,13 +159,25 @@ document.addEventListener("DOMContentLoaded", () => {
       x: Math.round(nodeEdge.x - svgRect.left),
       y: Math.round(nodeEdge.y - svgRect.top)
     };
+    if (isTopNode) {
+    // 🔥 go vertical first, then horizontal
+    const midY = Math.round(start.y + (end.y - start.y) * 0.5);
+    d = `
+      M ${start.x} ${start.y}
+      L ${start.x} ${midY}
+      L ${end.x} ${midY}
+      L ${end.x} ${end.y}
+    `;
+  } else {
+    // default (side + bottom nodes)
     const midX = Math.round(start.x + (end.x - start.x) * 0.5);
-    const d = `
+    d = `
       M ${start.x} ${start.y}
       L ${midX} ${start.y}
       L ${midX} ${end.y}
       L ${end.x} ${end.y}
     `;
+    }
     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
     path.setAttribute("d", d);
     path.setAttribute("vector-effect", "non-scaling-stroke");
