@@ -1365,6 +1365,7 @@ renderGrid();
 // ============================================================================================================================
 // 7. EHR
 // ============================================================================================================================
+(function(){
 const slider = document.querySelector('.ehr-slider');
 const wrapper = document.querySelector('.ehr-track-wrapper');
 const track = document.querySelector('.ehr-track');
@@ -1404,6 +1405,7 @@ if (slider && wrapper && track) {
     }
     raf = requestAnimationFrame(autoScroll);
   }
+  })();
   // DRAG START
   slider.addEventListener('mousedown', (e) => {
     isDown = true;
@@ -1510,6 +1512,17 @@ if (slider && wrapper && track) {
     isDown = false;
     raf = requestAnimationFrame(autoScroll);
   });
+  
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(autoScroll);
+    }
+  });
+}, { threshold: 0.2 });
+observer.observe(slider);
+  
 }
   
 // ============================================================================================================================
