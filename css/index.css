@@ -1643,7 +1643,6 @@ z-index:1;
   color: white;
   border: 1px solid var(--border-default);
 }
-
 /* GRID */
 .pg-card-top {
   display: flex;
@@ -1753,7 +1752,6 @@ z-index:1;
   padding: 6px;
   border-radius: 999px;
   display: inline-flex;
-  backdrop-filter: blur(10px);
 }
 .toggle-btn {
   padding: 8px 20px;
