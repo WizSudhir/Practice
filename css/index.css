@@ -346,6 +346,7 @@ z-index:1;
 .hero-top {
   position: relative;
   z-index: 20;
+  padding-top: var(--nav-height);
 }
 .hero-bottom {
   position: absolute;
