@@ -160,25 +160,13 @@ document.addEventListener("DOMContentLoaded", () => {
       y: Math.round(nodeEdge.y - svgRect.top)
     };
     let d;
-    if (isTopNode) {
-    // 🔥 go vertical first, then horizontal
-    const midY = Math.round(start.y + (end.y - start.y) * 0.5);
-    d = `
-      M ${start.x} ${start.y}
-      L ${start.x} ${midY}
-      L ${end.x} ${midY}
-      L ${end.x} ${end.y}
-    `;
-  } else {
-    // default (side + bottom nodes)
     const midX = Math.round(start.x + (end.x - start.x) * 0.5);
-    d = `
+    const d = `
       M ${start.x} ${start.y}
       L ${midX} ${start.y}
       L ${midX} ${end.y}
       L ${end.x} ${end.y}
     `;
-    }
     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
     path.setAttribute("d", d);
     path.setAttribute("vector-effect", "non-scaling-stroke");
