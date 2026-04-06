@@ -117,7 +117,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function drawConnection(node) {
     if (svg.childElementCount > 50) return;
     const coreRect = core.getBoundingClientRect();
-    const nodeRect = node.getBoundingClientRect();
+    const nodeInner = node.querySelector(".node-inner");
+    const nodeRect = nodeInner.getBoundingClientRect();
     const svgRect = svg.getBoundingClientRect();
     const coreCenter = {
       x: coreRect.left + coreRect.width / 2,
@@ -139,14 +140,15 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     const halfW = nodeRect.width / 2;
     const halfH = nodeRect.height / 2;
-    let tx = Infinity;
-    let ty = Infinity;
-    if (nx !== 0) tx = halfW / Math.abs(nx);
-    if (ny !== 0) ty = halfH / Math.abs(ny);
-    const t = Math.min(tx, ty);
+    // 🔥 exact rectangle intersection (no inward shift)
+    let tX = halfW / Math.abs(nx);
+    let tY = halfH / Math.abs(ny);
+    // choose nearest boundary
+    let t = Math.min(tX, tY);
+    // 🔥 PERFECT EDGE POINT
     const nodeEdge = {
-      x: nodeCenter.x - nx * (t + 1),
-      y: nodeCenter.y - ny * (t + 1)
+      x: nodeCenter.x - nx * t,
+      y: nodeCenter.y - ny * t
     };
     const start = {
       x: Math.round(coreEdge.x - svgRect.left),
