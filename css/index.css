@@ -972,6 +972,48 @@ z-index:1;
   opacity: 1;
   transform: translateY(0) scale(1);
 }
+@media (max-width: 768px) {
+  .about-belief {
+    min-height: auto;
+    padding-block: 40px;
+  }
+  .belief-layout {
+    grid-template-columns: 1fr;   /* stack */
+    gap: 24px;
+  }
+  .belief-content {
+    align-items: flex-start;      /* better readability */
+    text-align: left;
+    justify-content: flex-start;
+    gap: 20px;
+  }
+  .belief-bridge {
+    font-size: 14px;
+    padding-top: 16px;
+  }
+  .rules-engine {
+    padding: 14px;
+  }
+  .rule {
+    font-size: 12px;   /* FIX readability */
+  }
+  .rules-output {
+    font-size: 13px;
+  }
+  .rule-tooltip {
+    max-width: 90vw;   /* prevent overflow */
+    left: 5vw !important;
+    right: 5vw;
+  }
+}
+@media (max-width: 480px) {
+  .belief-row {
+    gap: 10px;
+  }
+  .belief-row span {
+    min-width: 20px;
+  }
+}
 /* ============================================================================================================================
   4. METRIC
 ============================================================================================================================== */
@@ -1006,6 +1048,24 @@ z-index:1;
   font-size: var(--font-md);
   color: var(--text-secondary);
   margin-top: 6px;
+}
+@media (max-width: 768px) {
+  .metrics-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;   /* clean 2x2 */
+    gap: 16px;
+  }
+  .metric {
+    min-width: unset;
+  }
+  .metric h3 {
+    font-size: 24px;
+  }
+}
+@media (max-width: 480px) {
+  .metrics-row {
+    grid-template-columns: 1fr;  /* stack */
+  }
 }
 /* ============================================================================================================================
   5. HOW IT WORKS
