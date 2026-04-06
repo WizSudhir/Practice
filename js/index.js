@@ -1539,7 +1539,7 @@ if (slider && wrapper && track) {
 // 9. FINAL CTA
 // ============================================================================================================================
 (function () {
-  const finalctaSection = document.querySelector(".final-cta-pro");
+  const finalctaSection = document.querySelector(".final-cta");
   if (!finalctaSection) return;
  // LIVE TEXT SYSTEM (UNCHANGED, OPTIMIZED)
   const finalctaTexts = [
@@ -1568,8 +1568,9 @@ if (slider && wrapper && track) {
     ctx = canvas.getContext("2d");
     const WAVE_COUNT = 18;
     function resize() {
-      width = canvas.width = canvas.offsetWidth;
-      height = canvas.height = canvas.offsetHeight;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
     }
     window.addEventListener("resize", resize);
     resize();
@@ -1613,7 +1614,7 @@ if (slider && wrapper && track) {
           if (x === 0) ctx.moveTo(x, y);
           else ctx.lineTo(x, y);
         }
-        ctx.strokeStyle = `rgba(59,130,246,${0.08 + progress * 0.25})`;
+        ctx.strokeStyle = `rgba(59,130,246,${0.15 + progress * 0.35})`;
         ctx.lineWidth = 1;
         ctx.stroke();
         w.phase += w.speed;
