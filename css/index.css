@@ -1381,16 +1381,23 @@ z-index:1;
   .hiw-dashboard {
     padding: 18px;              /* tighter for mobile */
   }
+  .narrative-step {
+    display: none;
+  }
+  .narrative-step.active {
+    display: block;
+  }
   .narrative-step,
   .narrative-step:not(.active) {
-    position: relative;
-    display: block;
-    opacity: 1;
     transform: none;
     pointer-events: auto;
   }
   .narrative-left {
-    padding-bottom: 0;   /* remove 240px gap */
+    position: sticky;
+    top: 80px; /* navbar height */
+    z-index: 10;
+    background: var(--bg-primary);
+    padding-bottom: 20px;
   }
   .narrative-content {
     gap: 24px;
