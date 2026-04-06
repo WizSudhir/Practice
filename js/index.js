@@ -1377,6 +1377,7 @@ if (slider && wrapper && track) {
   let velocity = 0;
   let lastX = 0;
   let raf;
+  let autoSpeed = 0.35;
   function updateSpeed() {
     autoSpeed = window.innerWidth <= 768 ? 0.15 : 0.35;
   }
@@ -1494,7 +1495,6 @@ if (slider && wrapper && track) {
     velocity = (lastX - x) * 0.25;
     lastX = x;
     }, { passive: false });
-  });
   slider.addEventListener('touchend', () => {
     isDown = false;
     snapToNearest();
