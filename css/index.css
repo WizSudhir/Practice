@@ -1369,7 +1369,49 @@ z-index:1;
   line-height: 1.5;
   transition: all 0.4s ease;
 }
-
+@media (max-width: 768px) {
+  .narrative {
+    display: flex;              /* 🔥 override grid */
+    flex-direction: column;
+    gap: 32px;
+  }
+  .hiw-visual {
+    width: 100%;
+  }
+  .hiw-dashboard {
+    padding: 18px;              /* tighter for mobile */
+  }
+  .narrative-step,
+  .narrative-step:not(.active) {
+    position: relative;
+    display: block;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+  .narrative-left {
+    padding-bottom: 0;   /* remove 240px gap */
+  }
+  .narrative-content {
+    gap: 24px;
+  }
+  .how-cta {
+    position: relative;   /* 🔥 remove absolute */
+    bottom: auto;
+    margin-top: 24px;
+    max-width: 100%;
+  }
+  .metrics-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .metric-value {
+    font-size: 22px;
+  }
+  .graph-container {
+    height: 160px;
+  }
+}
 /* ============================================================================================================================
   6. SERVICES GATEWAY
 ============================================================================================================================== */
