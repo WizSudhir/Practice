@@ -1581,6 +1581,38 @@ z-index:1;
   min-height: 20px;
   transition: var(--transition-base);
 }
+@media (max-width: 768px) {
+  .rcm-flow {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .flow-line {
+    width: 2px;         /* vertical line */
+    height: 20px;
+  }
+  .flow-node {
+    width: 100%;
+    max-width: 260px;
+    justify-content: center;
+    font-size: 13px;
+    padding: 10px 14px;
+  }
+  .flow-node i {
+    width: 16px;   /* 🔥 FIX */
+    height: 16px;
+  }
+  .rcm-system {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .rcm-context {
+    margin-top: 16px;
+    text-align: center;
+  }
+
+}
 /* ============================================================================================================================
   7. OUTCOMES
 ============================================================================================================================== */
