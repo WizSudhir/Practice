@@ -1611,8 +1611,8 @@ if (slider && wrapper && track) {
         else ctx.lineTo(x, y);
       }
 
-      ctx.strokeStyle = `rgba(99,102,241,${0.08 + progress * 0.18})`;
-      ctx.lineWidth = 1;
+      ctx.strokeStyle = `rgba(99,102,241,${0.12 + progress * 0.28})`;
+      ctx.lineWidth = 1.2;
       ctx.stroke();
     });
 
