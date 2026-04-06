@@ -1377,22 +1377,25 @@ if (slider && wrapper && track) {
   let velocity = 0;
   let lastX = 0;
   let raf;
-  let autoSpeed = window.innerWidth <= 768 ? 0.2 : 0.35;
+  let autoSpeed = 0.35;
+  if (window.innerWidth <= 768) {
+    autoSpeed = 0.15;
+  };
   let isHovering = false;
   // INFINITE LOOP FIX
   function loopFix() {
     const maxScroll = wrapper.scrollWidth / 2;
-    if (wrapper.scrollLeft >= maxScroll) {
-      wrapper.scrollLeft -= maxScroll;
+    if (slider.scrollLeft >= maxScroll) {
+      slider.scrollLeft -= maxScroll;
     }
-    if (wrapper.scrollLeft <= 0) {
-      wrapper.scrollLeft += maxScroll;
+    if (slider.scrollLeft <= 0) {
+      slider.scrollLeft += maxScroll;
     }
   }
   // AUTO SCROLL ENGINE
   function autoScroll() {
     if (!isDown) {
-      wrapper.scrollLeft += autoSpeed + velocity;
+      slider.scrollLeft += autoSpeed + velocity;
       velocity *= 0.95;
       if (Math.abs(velocity) < 0.01) velocity = 0;
       loopFix();
@@ -1405,7 +1408,7 @@ if (slider && wrapper && track) {
     slider.classList.add('dragging');
     cancelAnimationFrame(raf);
     startX = e.pageX;
-    scrollLeft = wrapper.scrollLeft;
+    scrollLeft = slider.scrollLeft;
     lastX = e.pageX;
     velocity = 0;
   });
@@ -1413,7 +1416,7 @@ if (slider && wrapper && track) {
   slider.addEventListener('mousemove', (e) => {
     if (!isDown) return;
     const dx = e.pageX - startX;
-    wrapper.scrollLeft = scrollLeft - dx;
+    slider.scrollLeft = scrollLeft - dx;
     velocity = (lastX - e.pageX) * 0.25;
     lastX = e.pageX;
   });
@@ -1430,7 +1433,7 @@ if (slider && wrapper && track) {
   // MAGNETIC SNAP
   function snapToNearest() {
     const logos = track.querySelectorAll('img');
-    const current = wrapper.scrollLeft;
+    const current = slider.scrollLeft;
     let closest = 0;
     let minDist = Infinity;
     logos.forEach((logo) => {
@@ -1445,14 +1448,14 @@ if (slider && wrapper && track) {
   }
   // SMOOTH SCROLL
   function smoothScrollTo(target, duration) {
-    const start = wrapper.scrollLeft;
+    const start = slider.scrollLeft;
     const change = target - start;
     const startTime = performance.now();
     function animate(currentTime) {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
       const ease = 1 - Math.pow(1 - progress, 3);
-      wrapper.scrollLeft = start + change * ease;
+      slider.scrollLeft = start + change * ease;
       if (progress < 1) {
         requestAnimationFrame(animate);
       }
@@ -1478,7 +1481,7 @@ if (slider && wrapper && track) {
     isDown = true;
     cancelAnimationFrame(raf);
     startX = e.touches[0].pageX;
-    scrollLeft = wrapper.scrollLeft;
+    scrollLeft = slider.scrollLeft;
     lastX = startX;
   });
   slider.addEventListener('touchmove', (e) => {
@@ -1486,7 +1489,7 @@ if (slider && wrapper && track) {
     e.preventDefault();   // 🔥 IMPORTANT
     const x = e.touches[0].pageX;
     const dx = x - startX;
-    wrapper.scrollLeft = scrollLeft - dx;
+    slider.scrollLeft = scrollLeft - dx;
     velocity = (lastX - x) * 0.25;
     lastX = x;
   });
@@ -1497,7 +1500,7 @@ if (slider && wrapper && track) {
   });
   // START ENGINE
   autoScroll();
-}
+}, { passive: false });
   
 // ============================================================================================================================
 // 8. ENGAGEMENT MODEL
