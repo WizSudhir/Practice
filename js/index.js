@@ -1379,7 +1379,7 @@ if (slider && wrapper && track) {
   let raf;
   let autoSpeed = 0.35;
   function updateSpeed() {
-    autoSpeed = window.innerWidth <= 768 ? 0.25 : 0.35;
+    autoSpeed = window.innerWidth <= 768 ? 0.35 : 0.35;
   }
   updateSpeed();
   window.addEventListener('resize', updateSpeed);
@@ -1498,22 +1498,18 @@ if (slider && wrapper && track) {
   slider.addEventListener('touchend', () => {
     isDown = false;
     snapToNearest();
-    // 🔥 FORCE restart
     cancelAnimationFrame(raf);
-    raf = requestAnimationFrame(autoScroll);
+    // 🔥 ensure restart ALWAYS
+    setTimeout(() => {
+      raf = requestAnimationFrame(autoScroll);
+    }, 50);
   });
   // START ENGINE
-  autoScroll();
+  raf = requestAnimationFrame(autoScroll);
   slider.addEventListener('touchcancel', () => {
     isDown = false;
     raf = requestAnimationFrame(autoScroll);
   });
-  setInterval(() => {
-    if (!isDown) {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(autoScroll);
-    }
-  }, 2000);
 }
   
 // ============================================================================================================================
