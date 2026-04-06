@@ -189,11 +189,15 @@ document.addEventListener("DOMContentLoaded", () => {
   // CONTROL TIMELINE (EXTRACTED) //
 function startTimeline() {
   if (typeof gsap === "undefined") return;
-
+  controlled = false;
+  frozen = false;
   tl = gsap.timeline({
     defaults: { ease: "power2.out" }
   });
-
+  tl.call(() => {
+  controlled = false;
+  frozen = false;
+  });
   // STEP 1.1 — CHAOS PHASE (FLOATING ACTIVE)
   tl.to({}, {
     duration: 2.5 // 🔥 let chaos breathe
@@ -258,10 +262,11 @@ function startTimeline() {
         n.x += (n.baseX - n.x) * 0.04;
         n.y += (n.baseY - n.y) * 0.04;
       } else {
-        n.x = n.baseX;
-        n.y = n.baseY;
-      }
-      
+        // 🔥 keep subtle motion instead of full lock
+        n.angle += n.speed * 0.3;
+        n.x = n.baseX + Math.cos(n.angle) * 5;
+        n.y = n.baseY + Math.sin(n.angle) * 5;
+      }      
       const left = -width / 2 + SIDE_PADDING + NODE_W / 2;
       const right = width / 2 - SIDE_PADDING - NODE_W / 2;
       const top = -height / 2 + TOP_PADDING + NODE_H / 2;
