@@ -222,7 +222,7 @@ function startTimeline() {
         path.getBoundingClientRect();
         path.classList.add("active");
       }
-    }, i * 0.6);
+    }, `+=${i === 0 ? 0 : 0.6}`);
 
     tl.to(n, {
       duration: 0.4,
@@ -233,17 +233,8 @@ function startTimeline() {
           0 0 50px rgba(59,130,246,0.4)
         `;
       }
-    }, i * 0.6 + 0.2);
+    }, `+=0.2`);
   });
-
-  // STEP 3 — activate system
-  tl.to(hero, {
-    duration: 0.6,
-    onStart: () => {
-      controlled = true;
-      hero.classList.add("controlled");
-    }
-  }, "+=0.5");
 
   // LOOP
   tl.call(() => {
