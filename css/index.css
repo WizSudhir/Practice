@@ -1977,6 +1977,8 @@ z-index:1;
   11. FINAL CTA
 ============================================================================================================================== */
 .final-cta {
+  opacity: 1 !important;
+  transform: none !important;
   position: relative;
   overflow: visible;
   isolation: isolate;
@@ -2068,11 +2070,14 @@ z-index:1;
 }
 /* BUTTON */
 .final-cta-btn {
+  position: relative;
   margin-top: 32px;
   font-size: var(--font-md);
   padding: 0 22px;
   height: 44px;
-  box-shadow: 0 0 20px rgba(99,102,241,0.4);
+  background: var(--gradient-accent);
+  box-shadow: 0 0 25px rgba(99,102,241,0.6);
+  z-index: 10;
 }
 .final-cta-btn:hover {
   transform: translateY(-2px) scale(1.02);
@@ -2088,7 +2093,7 @@ z-index:1;
 .cta-visual {
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 2;
   pointer-events: none;
 }
 #ctaCanvas {
