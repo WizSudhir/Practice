@@ -1539,7 +1539,7 @@ if (slider && wrapper && track) {
 // 9. FINAL CTA
 // ============================================================================================================================
 (function () {
-  const finalctaSection = document.querySelector(".final-cta");
+  const finalctaSection = document.querySelector(".final-cta-pro");
   if (!finalctaSection) return;
  // LIVE TEXT SYSTEM (UNCHANGED, OPTIMIZED)
   const finalctaTexts = [
