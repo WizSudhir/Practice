@@ -1558,14 +1558,13 @@ if (slider && wrapper && track) {
     width = rect.width;
     height = rect.height;
   }
-
   window.addEventListener("resize", resize);
   resize();
 
   // INIT WAVES
   function init() {
     waves = [];
-    for (let i = 0; i < 18; i++) {
+    for (let i = 0; i < 10; i++) {
       waves.push({
         y: (height / 18) * i,
         amp: 20 + Math.random() * 20,
@@ -1576,7 +1575,16 @@ if (slider && wrapper && track) {
     }
   }
   init();
-
+  // center focus glow (very subtle)
+  const gradient = ctx.createRadialGradient(
+  width/2, height/2, 0,
+  width/2, height/2, width * 0.5
+  );
+  gradient.addColorStop(0, "rgba(99,102,241,0.08)");
+  gradient.addColorStop(1, "transparent");
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, width, height);
+  
   function animate() {
     ctx.clearRect(0, 0, width, height);
 
@@ -1586,26 +1594,24 @@ if (slider && wrapper && track) {
     waves.forEach(w => {
       ctx.beginPath();
 
-      for (let x = 0; x < width; x += 6) {
+      for (let x = 0; x < width; x += 12) {
 
         let y =
           w.y +
-          Math.sin(x * w.freq + w.phase) *
-          w.amp * (1 - progress);
+          Math.sin(x * w.freq + w.phase) * w.amp * (0.3 - progress * 0.3);
 
         const dx = cx - x;
         const dy = cy - y;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
-        const pull = (1 / (dist + 1)) * 200 * progress;
-
-        y += dy * pull * 0.02;
+        const pull = Math.min(1, 120 / (dist + 40)) * progress;
+        y += dy * pull * 0.08;
 
         if (x === 0) ctx.moveTo(x, y);
         else ctx.lineTo(x, y);
       }
 
-      ctx.strokeStyle = `rgba(59,130,246,${0.15 + progress * 0.35})`;
+      ctx.strokeStyle = `rgba(99,102,241,${0.08 + progress * 0.18})`;
       ctx.lineWidth = 1;
       ctx.stroke();
 
