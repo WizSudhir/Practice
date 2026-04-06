@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.warn("Desktop hero skipped");
   } else {
   const PHASE_DELAY = 3000;
-  let timelineStarted = false;
+  let tl = null;
   function getNodeSize() {
   const w = window.innerWidth;
   if (w < 768) return { w: 0, h: 0 }; // disabled
@@ -48,6 +48,10 @@ document.addEventListener("DOMContentLoaded", () => {
   function clearTimeline() {
     timelineTimeouts.forEach(t => clearTimeout(t));
     timelineTimeouts = [];
+    if (tl) {
+      tl.kill();
+      tl = null;
+    }
   }
 
   function updateBounds() {
@@ -58,13 +62,12 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", updateBounds);
   // 🔁 FULL RESET FOR LOOP //
   function resetSystem() {
+    resetConnections();
     clearTimeline();
-    timelineStarted = false;
     controlled = false;
     frozen = false;
     isRunning = false;
     hero.classList.remove("controlled");
-    resetConnections();
     // reset nodes
     nodes.forEach(n => {
       n.classList.remove("resolved-active");
@@ -185,12 +188,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   // CONTROL TIMELINE (EXTRACTED) //
 function startTimeline() {
-  if (timelineStarted) return;
-  timelineStarted = true;
-
   if (typeof gsap === "undefined") return;
 
-  const tl = gsap.timeline({
+  tl = gsap.timeline({
     defaults: { ease: "power2.out" }
   });
 
@@ -238,11 +238,13 @@ function startTimeline() {
 
   // LOOP
   tl.call(() => {
-    setTimeout(() => restartTimeline(), 2000);
+    const t = setTimeout(() => restartTimeline(), 2000);
+    timelineTimeouts.push(t); // 🔥 track it
   });
 }
   // ANIMATION LOOP //
   function animate() {
+    if (!isRunning) return; // 🔥 STOP LOOP
     nodes.forEach(n => {
       if (!controlled) {
         n.angle += n.speed;
@@ -293,21 +295,22 @@ function startTimeline() {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         if (!isRunning) {
-          isRunning = true; // 🔥 ADD THIS
+          isRunning = true;
           resetSystem();
+          isRunning = true;
+          animate(); // 🔥 restart loop
           setTimeout(() => {
             startTimeline();
-          }, PHASE_DELAY); // 🔥 USE REAL DELAY
+          }, PHASE_DELAY);
         }
       } else {
-        setTimeout(() => {
-          if (!hero.matches(":hover")) {
-            resetSystem();
-            }
-          }, 300);
-            }
-          });
-        }, { threshold: 0.2 });
+        // 🔥 HARD RESET ALWAYS
+        isRunning = false;
+        clearTimeline();
+        resetSystem();
+      }
+    });
+  }, { threshold: 0.1 });
   heroObserver.observe(hero);
   // 🔥 TAB VISIBILITY FIX (PREVENT TIMER BURST)
   document.addEventListener("visibilitychange", () => {
