@@ -117,8 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function drawConnection(node) {
     if (svg.childElementCount > 50) return;
     const coreRect = core.getBoundingClientRect();
-    const nodeInner = node.querySelector(".node-inner");
-    const nodeRect = nodeInner.getBoundingClientRect();
+    const nodeRect = node.getBoundingClientRect();
     const svgRect = svg.getBoundingClientRect();
     const coreCenter = {
       x: coreRect.left + coreRect.width / 2,
