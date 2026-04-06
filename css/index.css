@@ -1414,7 +1414,7 @@ z-index:1;
   .step-impact {
     font-size: 13px;
   }
-  .how-cta {
+  .how-cta, .ai-box {
     display: none !important;
   }
   .metrics-row {
