@@ -1865,6 +1865,43 @@ z-index:1;
 .pg-story-cta {
   margin-top: 20px;
 }
+@media (max-width: 768px) {
+  .pg-outcomes-grid {
+    grid-template-columns: 1fr;   /* 🔥 stack */
+    gap: 16px;
+  }
+  .pg-card {
+    padding: 16px;
+  }
+  .sim-controls {
+    grid-template-columns: 1fr;   /* 🔥 stack */
+    gap: 10px;
+  }
+  .sim-controls input,
+  .sim-controls button {
+    width: 100%;
+  }
+  .sim-controls button {
+    margin-top: 6px;
+  }
+  .pg-trust-line {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .toggle-btn {
+    font-size: 13px;
+    padding: 6px 14px;
+  }
+  .pg-graph-label {
+    font-size: 12px;
+  }
+  .sim-result {
+    font-size: 16px;
+  }
+  .sim-logic {
+    font-size: 13px;
+  }
+}
 /* ============================================================================================================================
   8. EHR SECTION
 ============================================================================================================================== */
