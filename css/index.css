@@ -1933,9 +1933,6 @@ z-index:1;
 .ehr-slider.js-active .ehr-track {
   animation: none;
 }
-.ehr-slider:hover .ehr-track {
-  animation-play-state: paused;
-}
 .ehr-slider::-webkit-scrollbar {
   display: none;
 }
