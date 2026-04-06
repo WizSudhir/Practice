@@ -1538,116 +1538,9 @@ if (slider && wrapper && track) {
 // ============================================================================================================================
 // 9. FINAL CTA
 // ============================================================================================================================
-// ================= FINAL CTA FLOW SYSTEM =================
+// ================= FINAL CTA (LIGHT SYSTEM) =================
 
 (function () {
-
-  const section = document.querySelector(".final-cta");
-  const canvas = document.getElementById("ctaCanvas");
-  if (!section || !canvas) return;
-
-  const ctx = canvas.getContext("2d");
-
-  let width, height;
-  let lines = [];
-  let progress = 0;
-
-  // CANVAS FIX
-  function resize() {
-    const rect = canvas.getBoundingClientRect();
-    canvas.width = rect.width;
-    canvas.height = rect.height;
-    width = rect.width;
-    height = rect.height;
-  }
-
-  window.addEventListener("resize", resize);
-  resize();
-
-  // INIT STRUCTURED FLOW
-  function init() {
-    lines = [];
-
-    const count = 10; // low density
-
-    for (let i = 0; i < count; i++) {
-      lines.push({
-        baseY: (height / count) * i,
-        offset: Math.random() * 40 - 20,
-        speed: 0.2 + Math.random() * 0.3
-      });
-    }
-  }
-
-  init();
-
-  function draw() {
-    ctx.clearRect(0, 0, width, height);
-
-    const cx = width / 2;
-    const cy = height / 2;
-
-    lines.forEach((l, i) => {
-      ctx.beginPath();
-
-      for (let x = 0; x < width; x += 12) {
-
-        // base structured line
-        let y = l.baseY + l.offset * 0.2;
-
-        // subtle curve
-        y += Math.sin(x * 0.002 + i) * 8 * (1 - progress);
-
-        // convergence toward CTA center
-        const dx = cx - x;
-        const dy = cy - y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-
-        const pull = Math.min(1, 120 / (dist + 40)) * progress;
-
-        y += dy * pull * 0.08;
-
-        if (x === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
-      }
-
-      ctx.strokeStyle = `rgba(99,102,241,${0.12 + progress * 0.28})`;
-      ctx.lineWidth = 1.2;
-      ctx.stroke();
-    });
-
-    // subtle center focus
-    const gradient = ctx.createRadialGradient(
-      width / 2, height / 2, 0,
-      width / 2, height / 2, width * 0.5
-    );
-
-    gradient.addColorStop(0, "rgba(99,102,241,0.06)");
-    gradient.addColorStop(1, "transparent");
-
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, width, height);
-
-    requestAnimationFrame(draw);
-  }
-
-  draw();
-
-  // SCROLL ACTIVATION
-  const observer = new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting) {
-      gsap.to({ p: progress }, {
-        p: 1,
-        duration: 1.8,
-        ease: "power2.out",
-        onUpdate: function () {
-          progress = this.targets()[0].p;
-        }
-      });
-    }
-  }, { threshold: 0.3 });
-
-  observer.observe(section);
 
   // TEXT ROTATION
   const texts = [
@@ -1661,13 +1554,17 @@ if (slider && wrapper && track) {
 
   if (el) {
     let i = 0;
+
     setInterval(() => {
       i = (i + 1) % texts.length;
+
       el.style.opacity = 0;
+
       setTimeout(() => {
         el.textContent = texts[i];
         el.style.opacity = 1;
       }, 300);
+
     }, 2500);
   }
 
