@@ -1538,6 +1538,7 @@ if (slider && wrapper && track) {
 // ============================================================================================================================
 // 9. FINAL CTA
 // ============================================================================================================================
+// ================= FINAL CTA FLOW SYSTEM =================
 
 (function () {
 
@@ -1547,10 +1548,11 @@ if (slider && wrapper && track) {
 
   const ctx = canvas.getContext("2d");
 
-  let width, height, waves = [];
+  let width, height;
+  let lines = [];
   let progress = 0;
 
-  // FIX CANVAS RESOLUTION
+  // CANVAS FIX
   function resize() {
     const rect = canvas.getBoundingClientRect();
     canvas.width = rect.width;
@@ -1558,53 +1560,51 @@ if (slider && wrapper && track) {
     width = rect.width;
     height = rect.height;
   }
+
   window.addEventListener("resize", resize);
   resize();
 
-  // INIT WAVES
+  // INIT STRUCTURED FLOW
   function init() {
-    waves = [];
-    for (let i = 0; i < 10; i++) {
-      waves.push({
-        y: (height / 18) * i,
-        amp: 20 + Math.random() * 20,
-        freq: 0.002 + Math.random() * 0.002,
-        phase: Math.random() * Math.PI * 2,
-        speed: 0.01 + Math.random() * 0.02
+    lines = [];
+
+    const count = 10; // low density
+
+    for (let i = 0; i < count; i++) {
+      lines.push({
+        baseY: (height / count) * i,
+        offset: Math.random() * 40 - 20,
+        speed: 0.2 + Math.random() * 0.3
       });
     }
   }
+
   init();
-  // center focus glow (very subtle)
-  const gradient = ctx.createRadialGradient(
-  width/2, height/2, 0,
-  width/2, height/2, width * 0.5
-  );
-  gradient.addColorStop(0, "rgba(99,102,241,0.08)");
-  gradient.addColorStop(1, "transparent");
-  ctx.fillStyle = gradient;
-  ctx.fillRect(0, 0, width, height);
-  
-  function animate() {
+
+  function draw() {
     ctx.clearRect(0, 0, width, height);
 
     const cx = width / 2;
     const cy = height / 2;
 
-    waves.forEach(w => {
+    lines.forEach((l, i) => {
       ctx.beginPath();
 
       for (let x = 0; x < width; x += 12) {
 
-        let y =
-          w.y +
-          Math.sin(x * w.freq + w.phase) * w.amp * (0.3 - progress * 0.3);
+        // base structured line
+        let y = l.baseY + l.offset * 0.2;
 
+        // subtle curve
+        y += Math.sin(x * 0.002 + i) * 8 * (1 - progress);
+
+        // convergence toward CTA center
         const dx = cx - x;
         const dy = cy - y;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
         const pull = Math.min(1, 120 / (dist + 40)) * progress;
+
         y += dy * pull * 0.08;
 
         if (x === 0) ctx.moveTo(x, y);
@@ -1614,29 +1614,37 @@ if (slider && wrapper && track) {
       ctx.strokeStyle = `rgba(99,102,241,${0.08 + progress * 0.18})`;
       ctx.lineWidth = 1;
       ctx.stroke();
-
-      w.phase += w.speed;
     });
 
-    requestAnimationFrame(animate);
+    // subtle center focus
+    const gradient = ctx.createRadialGradient(
+      width / 2, height / 2, 0,
+      width / 2, height / 2, width * 0.5
+    );
+
+    gradient.addColorStop(0, "rgba(99,102,241,0.06)");
+    gradient.addColorStop(1, "transparent");
+
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, width, height);
+
+    requestAnimationFrame(draw);
   }
 
-  animate();
+  draw();
 
-  // SCROLL TRIGGER
+  // SCROLL ACTIVATION
   const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        gsap.to({ p: progress }, {
-          p: 1,
-          duration: 2,
-          ease: "power2.out",
-          onUpdate: function () {
-            progress = this.targets()[0].p;
-          }
-        });
-      }
-    });
+    if (entries[0].isIntersecting) {
+      gsap.to({ p: progress }, {
+        p: 1,
+        duration: 1.8,
+        ease: "power2.out",
+        onUpdate: function () {
+          progress = this.targets()[0].p;
+        }
+      });
+    }
   }, { threshold: 0.3 });
 
   observer.observe(section);
