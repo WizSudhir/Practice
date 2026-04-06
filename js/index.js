@@ -750,6 +750,7 @@ const chart = new Chart(ctx, {
   },
   options: {
     responsive: true,
+    maintainAspectRatio: false,
     animation: false,
     plugins: { legend: { display: false }},
     interaction: { intersect: false },
@@ -840,7 +841,7 @@ gsap.timeline({
   scrollTrigger: {
     trigger: section,
     start: "top top",
-    end: isMobile ? "+=2400" : "+=2600",
+    end: isMobile ? "+=2400" : "+=3600",
     scrub: true,
     pin: true,
     snap: isMobile ? {
