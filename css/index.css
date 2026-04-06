@@ -1373,15 +1373,15 @@ z-index:1;
   .narrative {
     display: flex;              /* 🔥 override grid */
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
   }
   .hiw-visual {
     margin-top: 0;
     width: 100%;
   }
   .hiw-dashboard {
-    margin-top: -10px;
-    padding: 14px;              /* tighter for mobile */
+    margin-top: -12px;
+    padding: 12px;              /* tighter for mobile */
   }
   .narrative-step {
     min-height: auto;
@@ -1400,19 +1400,19 @@ z-index:1;
     top: 80px; /* navbar height */
     z-index: 10;
     background: var(--bg-primary);
-    padding-bottom: 20px;
+    padding-bottom: 16px;
   }
   .narrative-content {
-    gap: 16px;
+    gap: 14px;
   }
   .step-problem {
-    font-size: 13px;
+    font-size: 12px;
   }
   .step-solution {
-    font-size: 13px;
+    font-size: 12px;
   }
   .step-impact {
-    font-size: 13px;
+    font-size: 12px;
   }
   .how-cta, .ai-box {
     display: none !important;
@@ -1422,10 +1422,10 @@ z-index:1;
     gap: 10px;
   }
   .metric-value {
-    font-size: 20px;
+    font-size: 18px;
   }
   .graph-container {
-    height: 140px;
+    height: 120px;
   }
 }
 /* ============================================================================================================================
