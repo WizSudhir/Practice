@@ -7,6 +7,7 @@
 .hero-system {
   min-height: 100vh;
   height: 100vh;
+  padding-bottom: 80px
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -347,7 +348,7 @@ z-index:1;
 .hero-top {
   position: relative;
   z-index: 20;
-  padding-top: var(--nav-height) + var(--space-sm);
+  padding-top: calc(var(--nav-height) + var(--space-sm));
   text-align: center;
 }
 .hero-bottom {
