@@ -840,9 +840,9 @@ gsap.timeline({
   scrollTrigger: {
     trigger: section,
     start: "top top",
-    end: isMobile ? "+=800" : "+=2600",
-    scrub: !isMobile,
-    pin: !isMobile,   // 🔥 disable pin on mobile
+    end: isMobile ? "+=1400" : "+=2600",
+    scrub: true,
+    pin: true,
   }
 })
 .to(state, {
