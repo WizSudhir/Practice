@@ -515,6 +515,9 @@ z-index:1;
     display: none !important;
   }
   /* CLEAN MOBILE HERO */
+  .hero-system.section {
+    padding-top: 0 !important;   /* 🔥 remove gap */
+   }
   .hero-system {
     align-items: flex-start;
     justify-content: flex-start;
@@ -533,6 +536,20 @@ z-index:1;
     padding-top: 12px;
     padding-bottom: 14px;
     z-index: 5;
+  }
+  .hero-top {
+    margin-top: 6px;   /* small breathing space */
+   }
+  .hero-bottom p {
+    font-size: 13px;
+    line-height: 1.5;
+    margin-top: 8px;
+  }
+  .hero-trust {
+    font-size: 12px;
+    max-width: 280px;   /* 🔥 forces 2 lines */
+    margin-inline: auto;
+    line-height: 1.5;
   }
   .mobile-node {
     width: 90%;
@@ -662,8 +679,11 @@ z-index:1;
 }
 .mobile-metrics {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
   margin-top: 10px;
+  max-width: 280px;
   font-size: var(--font-sm);
   opacity: 0.8;
 }
