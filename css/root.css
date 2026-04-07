@@ -1024,6 +1024,7 @@ body.menu-open {
     --container: 100%;
     --space-xl: 20px;
     --space-2xl: 28px;
+    --nav-height: 56px;
   }
   /* REMOVE SIDE GRID LINES */
   body::before,
