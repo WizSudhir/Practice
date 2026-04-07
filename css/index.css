@@ -679,11 +679,11 @@ z-index:1;
 }
 .mobile-metrics {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   gap: 4px;
   margin-top: 10px;
-  max-width: 280px;
+  max-width: 260px;
   font-size: var(--font-sm);
   opacity: 0.8;
 }
