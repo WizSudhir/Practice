@@ -375,12 +375,12 @@ function reset() {
 
   const items = document.querySelectorAll(".mobile-node .item");
   items.forEach(item => {
-    const error = item.querySelector(".error");
-    const resolved = item.querySelector(".resolved");
+    const mobileerror = item.querySelector(".mobile-error");
+    const mobileresolved = item.querySelector(".mobile-resolved");
 
-    error.style.opacity = 0;
-    error.classList.remove("active");
-    resolved.style.opacity = 0;
+    mobileerror.style.opacity = 0;
+    mobileerror.classList.remove("active");
+    mobileresolved.style.opacity = 0;
   });
 }
 function runSequence() {
@@ -404,9 +404,9 @@ function runSequence() {
 
   // STEP 1 — errors appear
   items.forEach((item, i) => {
-    const error = item.querySelector(".error");
+    const mobileerror = item.querySelector(".mobile-error");
 
-    tl.to(error, {
+    tl.to(mobileerror, {
       opacity: 1,
       duration: 0.4,
       onStart: () => error.classList.add("active")
@@ -435,16 +435,16 @@ function runSequence() {
 
   // STEP 5 — resolve + bars
 items.forEach((item, i) => {
-  const error = item.querySelector(".error");
-  const resolved = item.querySelector(".resolved");
+  const mobileerror = item.querySelector(".mobile-error");
+  const mobileresolved = item.querySelector(".mobile-resolved");
   // ERROR DISAPPEARS
-  tl.to(error, {
+  tl.to(mobileerror, {
     opacity: 0,
     duration: 0.3
   });
 
   // RESOLVED APPEARS
-  tl.to(resolved, {
+  tl.to(mobileresolved, {
     opacity: 1,
     y: 0,
     duration: 0.4
