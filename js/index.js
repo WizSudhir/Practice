@@ -474,6 +474,7 @@ items.forEach((item, i) => {
     }, "<");
   }
 });
+}
   // ✅ OBSERVER WITH STATE CONTROL
   mobileObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
