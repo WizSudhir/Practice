@@ -522,7 +522,7 @@ z-index:1;
     align-items: flex-start;
     justify-content: flex-start;
     position: relative;
-    background: #020617;
+    background: transparent;
   }
   .mobile-system {
     position: relative;
@@ -532,7 +532,6 @@ z-index:1;
     justify-content: flex-start;
     min-height: auto;
     width: 100%;
-    gap: 20px;
     padding-top: 4px;
     padding-bottom: 14px;
     z-index: 5;
@@ -555,8 +554,8 @@ z-index:1;
     width: 90%;
     max-width: 320px;
     margin: 0 auto;
-    padding: 18px;
-    border-radius: 12px;
+    padding: 6px;
+    border-radius: 2px;
     background: transparent;
     text-align: left;
   }
