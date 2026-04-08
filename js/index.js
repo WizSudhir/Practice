@@ -434,34 +434,46 @@ function runSequence() {
   }, "+=0.3");
 
   // STEP 5 — resolve + bars
-  items.forEach((item, i) => {
-    const error = item.querySelector(".error");
-    const resolved = item.querySelector(".resolved");
+items.forEach((item, i) => {
+  const error = item.querySelector(".error");
+  const resolved = item.querySelector(".resolved");
 
-    tl.to(error, { opacity: 0, duration: 0.3 }, "+=0.1");
+  // ERROR APPEARS
+  tl.to(error, {
+    opacity: 1,
+    duration: 0.4,
+    onStart: () => error.classList.add("active")
+  }, "+=0.2");
 
-    tl.to(resolved, {
+  // ERROR DISAPPEARS
+  tl.to(error, {
+    opacity: 0,
+    duration: 0.3
+  });
+
+  // RESOLVED APPEARS
+  tl.to(resolved, {
+    opacity: 1,
+    y: 0,
+    duration: 0.4
+  });
+
+  // BAR + METRIC SYNC
+  if (bars[i]) {
+    tl.to(bars[i], {
+      height: bars[i].dataset.height,
+      duration: 0.5
+    }, "<");
+  }
+
+  if (metrics[i]) {
+    tl.to(metrics[i], {
       opacity: 1,
       y: 0,
       duration: 0.4
-    });
-
-    if (bars[i]) {
-      tl.to(bars[i], {
-        height: bars[i].dataset.height,
-        duration: 0.5
-      }, "<");
-    }
-
-    if (metrics[i]) {
-      tl.to(metrics[i], {
-        opacity: 1,
-        y: 0,
-        duration: 0.4
-      }, "<");
-    }
-  });
-}
+    }, "<");
+  }
+});
   // ✅ OBSERVER WITH STATE CONTROL
   mobileObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
