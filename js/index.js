@@ -437,14 +437,6 @@ function runSequence() {
 items.forEach((item, i) => {
   const error = item.querySelector(".error");
   const resolved = item.querySelector(".resolved");
-
-  // ERROR APPEARS
-  tl.to(error, {
-    opacity: 1,
-    duration: 0.4,
-    onStart: () => error.classList.add("active")
-  }, "+=0.2");
-
   // ERROR DISAPPEARS
   tl.to(error, {
     opacity: 0,
