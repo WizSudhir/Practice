@@ -431,7 +431,6 @@ function runSequence() {
   tl.to(revenue, {
     opacity: 1,
     duration: 0.6
-    onStart: () => revenue.classList.add("active")
   }, "+=0.3");
 
   // STEP 5 — resolve + bars
