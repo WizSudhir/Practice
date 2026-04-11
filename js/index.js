@@ -345,7 +345,7 @@ function startTimeline() {
   const core = document.getElementById("mobileCore");
   const revenue = document.querySelector(".mobile-revenue");
   const bars = document.querySelectorAll(".mobile-chart .bar");
-  const metrics = document.querySelectorAll(".mobile-metrics .metric");
+  const metrics = document.querySelectorAll(".mobile-metrics .mobile-metric");
   const connection = document.querySelector(".mobile-connection");
   if (!node || !core || !revenue) return;
   let timeouts = [];
@@ -431,6 +431,7 @@ function runSequence() {
   tl.to(revenue, {
     opacity: 1,
     duration: 0.6
+    onStart: () => revenue.classList.add("active")
   }, "+=0.3");
 
   // STEP 5 — resolve + bars
