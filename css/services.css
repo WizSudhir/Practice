@@ -622,16 +622,15 @@ gap: var(--space-lg);
 ================================ */
 @media (max-width:992px){
 
-/* HERO HEIGHT FIX */
 .pg-hero{
 height:auto;
 }
 .pg-sticky{
 position:relative;
 height:auto;
+display:block;
 }
-
-/* STAGES STACK */
+/* CRITICAL FIX */
 .pg-stage{
 position:relative;
 opacity:1 !important;
@@ -639,23 +638,28 @@ transform:none !important;
 pointer-events:auto;
 height:auto;
 margin-bottom: var(--space-xl);
+z-index:1;
 }
-
+/* STACK CLEANLY */
+.pg-stage:not(:first-child){
+margin-top:40px;
+}
+/* DISABLE SCROLL SNAP */
+.pg-hero{
+scroll-snap-type:none;
+}
 /* PIPELINE */
 .pipeline{
 gap: var(--space-sm);
 }
-
 /* INFRA */
 .rcm-infrastructure{
 padding:30px 20px;
 }
-
 /* SERVICES LAYOUT STACK */
 .services-layout{
 grid-template-columns:1fr;
 }
-
 /* NAV → HORIZONTAL SCROLL */
 .services-nav{
 position:relative;
@@ -665,17 +669,22 @@ overflow-x:auto;
 white-space:nowrap;
 gap: var(--space-md);
 padding: var(--space-md);
+scrollbar-width:none;
 }
 
 .services-nav h4{
 display:none;
 }
-
+.services-nav::-webkit-scrollbar{
+display:none;
+}
 .services-nav a{
 flex-shrink:0;
 padding:8px 12px;
 border:1px solid var(--border-default);
 border-radius:20px;
+flex:0 0 auto;
+white-space:nowrap;
 }
 
 /* TIMELINE FIX */
@@ -688,7 +697,10 @@ display:none;
 .rcm-phase::before{
 display:none;
 }
-
+.rcm-card{
+opacity:1 !important;
+transform:none !important;
+}
 }
 
 
@@ -696,7 +708,13 @@ display:none;
 <= 768px (Mobile landscape)
 ================================ */
 @media (max-width:768px){
-
+.stage-intro,
+.stage-pipeline,
+.stage-cta{
+background-size:cover !important;
+background-position:center top;
+animation:none; /* 🔥 IMPORTANT */
+}
 /* HERO TEXT */
 .pg-stage h1{
 font-size:clamp(28px,5vw,36px);
