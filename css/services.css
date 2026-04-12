@@ -577,3 +577,264 @@ margin-bottom: var(--space-xs);
 .pipeline-title p{
 color:var(--text-secondary);
 }
+/* =========================================================
+RESPONSIVE BREAKPOINTS
+Desktop First → Downscale
+========================================================= */
+
+/* ===============================
+<= 1200px (Large tablets / small laptops)
+================================ */
+@media (max-width:1200px){
+
+/* HERO */
+.pg-stage{
+padding: var(--space-lg) var(--space-md);
+}
+
+/* CALCULATOR */
+.calc-section .section-inner{
+grid-template-columns:1fr;
+gap: var(--space-xl);
+text-align:center;
+}
+
+/* INFRA GRID */
+.rcm-layout{
+grid-template-columns:repeat(2,1fr);
+grid-template-areas:
+"claim recovery"
+"patient intelligence"
+"documentation credentialing";
+}
+
+/* SERVICES */
+.services-layout{
+grid-template-columns:260px 1fr;
+gap: var(--space-lg);
+}
+
+}
+
+
+/* ===============================
+<= 992px (Tablets)
+================================ */
+@media (max-width:992px){
+
+/* HERO HEIGHT FIX */
+.pg-hero{
+height:auto;
+}
+.pg-sticky{
+position:relative;
+height:auto;
+}
+
+/* STAGES STACK */
+.pg-stage{
+position:relative;
+opacity:1 !important;
+transform:none !important;
+pointer-events:auto;
+height:auto;
+margin-bottom: var(--space-xl);
+}
+
+/* PIPELINE */
+.pipeline{
+gap: var(--space-sm);
+}
+
+/* INFRA */
+.rcm-infrastructure{
+padding:30px 20px;
+}
+
+/* SERVICES LAYOUT STACK */
+.services-layout{
+grid-template-columns:1fr;
+}
+
+/* NAV → HORIZONTAL SCROLL */
+.services-nav{
+position:relative;
+top:auto;
+flex-direction:row;
+overflow-x:auto;
+white-space:nowrap;
+gap: var(--space-md);
+padding: var(--space-md);
+}
+
+.services-nav h4{
+display:none;
+}
+
+.services-nav a{
+flex-shrink:0;
+padding:8px 12px;
+border:1px solid var(--border-default);
+border-radius:20px;
+}
+
+/* TIMELINE FIX */
+.services-content{
+padding-left:0;
+}
+.services-content::before{
+display:none;
+}
+.rcm-phase::before{
+display:none;
+}
+
+}
+
+
+/* ===============================
+<= 768px (Mobile landscape)
+================================ */
+@media (max-width:768px){
+
+/* HERO TEXT */
+.pg-stage h1{
+font-size:clamp(28px,5vw,36px);
+}
+.pg-stage p{
+font-size:14px;
+}
+
+/* PIPELINE NODES */
+.node{
+font-size:12px;
+padding:8px 12px;
+}
+
+/* CALCULATOR */
+.rcm-calculator{
+padding: var(--space-md);
+}
+.calc-grid input{
+padding:12px;
+}
+
+/* IMPACT BOX */
+.impact-box{
+padding: var(--space-md);
+}
+
+/* INFRA GRID → SINGLE COLUMN */
+.rcm-layout{
+grid-template-columns:1fr;
+grid-template-areas:
+"claim"
+"recovery"
+"patient"
+"intelligence"
+"documentation"
+"credentialing";
+}
+
+/* CARDS */
+.rcm-card{
+padding: var(--space-md);
+}
+
+/* SERVICES */
+.rcm-phase{
+padding: var(--space-md);
+}
+
+.phase-grid{
+grid-template-columns:1fr;
+}
+
+/* SERVICE CARD */
+.service-card{
+padding: var(--space-md);
+}
+
+}
+
+
+/* ===============================
+<= 576px (Small phones)
+================================ */
+@media (max-width:576px){
+
+/* GLOBAL SPACING */
+.pg-stage{
+padding: var(--space-md) var(--space-sm);
+}
+
+/* TEXT SCALE */
+h1{
+font-size:24px;
+}
+h2{
+font-size:20px;
+}
+h3{
+font-size:18px;
+}
+
+/* BUTTON / CTA */
+.calc-result a,
+.impact-cta{
+width:100%;
+text-align:center;
+}
+
+/* NAV PILLS */
+.services-nav{
+gap:8px;
+padding:10px;
+}
+
+.services-nav a{
+font-size:12px;
+padding:6px 10px;
+}
+
+/* SERVICE ICON */
+.service-icon{
+width:40px;
+height:40px;
+}
+
+.service-icon svg{
+width:18px;
+height:18px;
+}
+
+/* REDUCE ANIMATIONS (performance) */
+.node{
+animation:none;
+}
+.rcm-item svg{
+animation:none;
+}
+
+}
+
+
+/* ===============================
+<= 400px (Extra small devices)
+================================ */
+@media (max-width:400px){
+
+/* EXTRA COMPACT */
+.pg-stage{
+padding:12px;
+}
+
+.service-card{
+padding:12px;
+}
+
+.calc-grid{
+gap:8px;
+}
+
+}
