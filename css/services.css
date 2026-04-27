@@ -267,14 +267,13 @@ color: var(--text-primary);
 padding:8px 22px;
 border-radius:6px;
 }
-
 /* GRID LAYOUT */
 .rcm-layout{
 padding: var(--space-xs) var(--space-xs) 0;
 display:grid;
 grid-template-columns:repeat(4,1fr);
 grid-template-rows:auto auto auto;
-gap: var(--space-sm);
+gap: var(--space-lg);
 grid-template-areas:
 "claim claim recovery recovery"
 "patient intelligence recovery recovery"
@@ -293,7 +292,7 @@ height:100%;
 position:relative;
 border:1px solid var(--border-default);
 border-radius:6px;
-padding: var(--space-md) var(--space-sm);
+padding: var(--space-lg);
 background: rgba(255,255,255,0.02);
 backdrop-filter: blur(6px);
 display:flex;
@@ -581,24 +580,20 @@ color:var(--text-secondary);
 RESPONSIVE BREAKPOINTS
 Desktop First → Downscale
 ========================================================= */
-
 /* ===============================
 <= 1200px (Large tablets / small laptops)
 ================================ */
 @media (max-width:1200px){
-
 /* HERO */
 .pg-stage{
 padding: var(--space-lg) var(--space-md);
 }
-
 /* CALCULATOR */
 .calc-section .section-inner{
 grid-template-columns:1fr;
 gap: var(--space-xl);
 text-align:center;
 }
-
 /* INFRA GRID */
 .rcm-layout{
 grid-template-columns:repeat(2,1fr);
@@ -607,21 +602,16 @@ grid-template-areas:
 "patient intelligence"
 "documentation credentialing";
 }
-
 /* SERVICES */
 .services-layout{
 grid-template-columns:260px 1fr;
 gap: var(--space-lg);
 }
-
 }
-
-
 /* ===============================
 <= 992px (Tablets)
 ================================ */
 @media (max-width:992px){
-
 .pg-hero{
 height:auto;
 }
@@ -663,10 +653,12 @@ grid-template-columns:1fr;
 /* NAV → HORIZONTAL SCROLL */
 .services-nav{
 position:relative;
+max-width:100%;
 top:auto;
 flex-direction:row;
 overflow-x:auto;
-white-space:nowrap;
+white-space: normal;
+flex-wrap: wrap;
 gap: var(--space-md);
 padding: var(--space-md);
 scrollbar-width:none;
@@ -702,8 +694,6 @@ opacity:1 !important;
 transform:none !important;
 }
 }
-
-
 /* ===============================
 <= 768px (Mobile landscape)
 ================================ */
@@ -758,7 +748,10 @@ grid-template-areas:
 .rcm-card{
 padding: var(--space-md);
 }
-
+.reveal{
+opacity:1 !important;
+transform:none !important;
+}
 /* SERVICES */
 .rcm-phase{
 padding: var(--space-md);
@@ -772,7 +765,6 @@ grid-template-columns:1fr;
 .service-card{
 padding: var(--space-md);
 }
-
 }
 
 
