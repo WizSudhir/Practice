@@ -304,7 +304,6 @@ position:relative;
 border:1px solid var(--border-default);
 border-radius:6px;
 padding: var(--space-lg);
-padding-top:30px;
 background: rgba(255,255,255,0.02);
 backdrop-filter: blur(6px);
 display:flex;
