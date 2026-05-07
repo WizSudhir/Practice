@@ -8,7 +8,7 @@ Dark SaaS System
 ====================================== */
 .serve-hero{
 position: relative;
-min-height: calc(100vh - var(--nav-height));
+min-height: auto;
 padding-top: 120px;
 padding-bottom: 80px;
 background:
@@ -18,7 +18,7 @@ background:
 overflow:visible;
 }
 .hero-grid{
-min-height: 100%;
+min-height: auto;
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:80px;
@@ -29,7 +29,7 @@ position: relative;
 display:flex;
 justify-content:center;
 align-items:center;
-min-height:420px;
+min-height:320px;
 z-index: 2;
 }
 .hero-content h1{
@@ -679,6 +679,12 @@ RESPONSIVE SYSTEM
 .orbit1{width:200px;height:200px;}
 .orbit2{width:260px;height:260px;}
 .orbit3{width:340px;height:340px;}
+.hero-visual{
+    order:2;
+  }
+.hero-content{
+    order:1;
+  }
 .specialty-grid{
     grid-template-columns:repeat(2,1fr);
 }
@@ -791,7 +797,7 @@ RESPONSIVE SYSTEM
     font-size:14px;
 }
 .orbit-system{
-    display:none; /* IMPORTANT: prevents overflow */
+ transform: scale(0.75);
 }
 .hero-visual{
     min-height:auto;
