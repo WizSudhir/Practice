@@ -75,18 +75,32 @@ JSON-LD STRUCTURED DATA
 
 <body>
 
-<!-- NAVBAR -->
+<!-------------------------------- NAVBAR -------------------------------->
 <header class="navbar">
   <div class="container navbar-inner">
 
+    <!-- LOGO -->
     <div class="logo">
-      <a href="index.html">
-        <img src="images/logo.png" alt="PracticeGrid Solutions Medical Billing & Revenue Cycle Management Company">
+      <a href="index.html" aria-label="PracticeGrid Home">
+        <img src="images/logo.png" alt="PracticeGrid Solutions Logo">
       </a>
     </div>
 
-      <nav class="nav-menu">
-        <ul>
+      <!-- NAV MENU -->
+      <nav class="nav-menu" id="primary-navigation" aria-hidden="true">
+        <!-- TOP HEADER (LIKE STRIPE) -->
+        <div class="mobile-nav-header">
+          <div class="logo">
+            <a href="index.html" aria-label="PracticeGrid Home">
+            <img src="images/logo.png" alt="PracticeGrid Solutions Logo">
+            </a>
+          </div>
+          <button class="nav-close" aria-label="Close menu">
+            ✕
+          </button>
+        </div>
+        
+        <ul class="mobile-nav-links">
         <li><a href="../index.html">Home</a></li>
         <li><a href="../services.html">Services</a></li>
         <li><a href="../who-we-serve.html">Who We Serve</a></li>
@@ -95,13 +109,21 @@ JSON-LD STRUCTURED DATA
         <li><a href="../contact.html" class="btn-primary">Connect With Us</a></li>
         </ul>
       </nav>
+    
+      <div class="nav-cta">
+        <a href="contact.html" class="btn-primary btn-arrow">
+          Contact Us
+          <span class="icon-arrow"></span>
+        </a>
+      </div>
 
-    <!-- MOBILE TOGGLE -->
-          <button class="nav-toggle" aria-label="Toggle Menu">
-          <span></span>
-          <span></span>
-          <span></span>
-          </button>
+      <!-- MOBILE TOGGLE -->
+      <button class="nav-toggle"aria-label="Toggle navigation menu"aria-controls="primary-navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
 
   </div>
 </header>
