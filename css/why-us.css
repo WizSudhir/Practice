@@ -1355,9 +1355,9 @@ gap: var(--space-lg);
 .framework-timeline::before{
 content:"";
 position:absolute;
-left:32px;
-top:32px;
-bottom:32px;
+left:40px;
+top:64px;
+bottom:64px;
 width:2px;
 background:linear-gradient(
 180deg,
