@@ -60,33 +60,37 @@ createParticle();
 }
 // 3. DATA FLOW LINES //
 
+const orbitSystem = document.querySelector(".orbit-system");
 const svg = document.querySelector(".data-lines");
-const size = orbitSystem.offsetWidth;
-const center = {x:size/2,y:size/2};
-const r = size/2;
-const nodes = [
-{x:center.x,y:0},
-{x:size,y:center.y},
-{x:center.x,y:size},
-{x:0,y:center.y},
-{x:center.x+r*0.55,y:r*0.35},
-{x:center.x-r*0.55,y:center.y+r*0.55}
-];
-nodes.forEach(n=>{
-const line=document.createElementNS(
-"http://www.w3.org/2000/svg",
-"line"
-);
-line.setAttribute("x1",n.x);
-line.setAttribute("y1",n.y);
-line.setAttribute("x2",center.x);
-line.setAttribute("y2",center.y);
-svg.appendChild(line);
-});
+if (orbitSystem && svg) {
+    const size = orbitSystem.offsetWidth;
+    const center = {
+        x: size / 2,
+        y: size / 2
+    };
+    const r = size / 2;
+    const nodes = [
+        {x:center.x,y:0},
+        {x:size,y:center.y},
+        {x:center.x,y:size},
+        {x:0,y:center.y},
+        {x:center.x+r*0.55,y:r*0.35},
+        {x:center.x-r*0.55,y:center.y+r*0.55}
+    ];
+    nodes.forEach(n=>{
+        const line=document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "line"
+        );
+        line.setAttribute("x1",n.x);
+        line.setAttribute("y1",n.y);
+        line.setAttribute("x2",center.x);
+        line.setAttribute("y2",center.y);
+        svg.appendChild(line);
+    });
+}
 
 // 4. 3D PARALLAX HERO EFFECT //
-
-const orbitSystem = document.querySelector(".orbit-system");
 if(orbitSystem){
 document.addEventListener("mousemove",(e)=>{
 const x = (window.innerWidth/2 - e.clientX)/40;
