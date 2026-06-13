@@ -196,6 +196,7 @@ const containerRect = ecoContainer.getBoundingClientRect();
 const coreX = coreRect.left + coreRect.width/2 - containerRect.left;
 const coreY = coreRect.top + coreRect.height/2 - containerRect.top;
 const coreHalf = ecoCore.offsetWidth / 2;
+const coreHalfH = ecoCore.offsetHeight / 2;
 ecoNodes.forEach(node=>{
 if(window.innerWidth < 768){
     const rect = node.getBoundingClientRect();
@@ -230,9 +231,9 @@ else if(node.classList.contains("node-market")){
     const startY =
         rect.bottom - containerRect.top;
     const endX =
-        coreX - 35;
+        coreX - coreHalf;
     const endY =
-        coreY - coreHalf;
+        coreY - 30;
     pathData = `
         M ${startX} ${startY}
         L ${startX} ${endY}
@@ -246,9 +247,9 @@ else if(node.classList.contains("node-events")){
     const startY =
         rect.bottom - containerRect.top;
     const endX =
-        coreX + 35;
+        coreX + coreHalf;
     const endY =
-        coreY - coreHalf;
+        coreY - 30;
     pathData = `
         M ${startX} ${startY}
         L ${startX} ${endY}
@@ -262,9 +263,9 @@ else if(node.classList.contains("node-orchestration")){
     const startY =
         rect.top - containerRect.top;
     const endX =
-        coreX - 35;
+        coreX - coreHalf;
     const endY =
-        coreY + coreHalf;
+        coreY + 30;
     pathData = `
         M ${startX} ${startY}
         L ${startX} ${endY}
@@ -278,9 +279,9 @@ else if(node.classList.contains("node-pipeline")){
     const startY =
         rect.top - containerRect.top;
     const endX =
-        coreX + 35;
+        coreX + coreHalf;
     const endY =
-        coreY + coreHalf;
+        coreY + 30;
     pathData = `
         M ${startX} ${startY}
         L ${startX} ${endY}
