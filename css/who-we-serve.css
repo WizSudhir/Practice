@@ -527,12 +527,12 @@ background: transparent;
 position:relative;
 overflow:hidden;
 }
-
 /* GRID */
 .specialty-grid{
 display:grid;
 grid-template-columns:repeat(3,1fr);
 gap:28px;
+align-items:start;
 }
 /* CARD BASE */
 .specialty-card{
@@ -631,6 +631,7 @@ position:absolute;
 inset:0;
 border-radius:18px;
 padding:1px;
+height:fit-content;
 background:linear-gradient(
 120deg,
 rgba(59,130,246,0.2),
@@ -644,6 +645,7 @@ linear-gradient(#fff 0 0);
 mask-composite:exclude;
 opacity:0;
 transition:opacity .3s ease;
+align-self:start;
 }
 .specialty-card:hover::after{
 opacity:1;
