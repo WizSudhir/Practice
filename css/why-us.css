@@ -1812,7 +1812,12 @@ grid-template-columns:1fr;
 gap:24px;
 }
 .transform-arrow{
-transform:rotate(90deg);
+animation:arrowPulseMobile 2.5s infinite ease-in-out;
+}
+@keyframes arrowPulseMobile{
+0%{transform:rotate(90deg) translateY(0);}
+50%{transform:rotate(90deg) translateY(8px);}
+100%{transform:rotate(90deg) translateY(0);}
 }
 .transform-arrow svg{
 width:40px;
