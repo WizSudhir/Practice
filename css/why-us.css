@@ -1364,7 +1364,7 @@ grid-column:3;
 content:"";
 position:absolute;
 left:32px;
-top:56px; /* starts EXACTLY from bottom of circle */
+top:62px; /* starts EXACTLY from bottom of circle */
 width:2px;
 min-height:90px;
 background:linear-gradient(
