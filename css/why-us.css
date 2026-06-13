@@ -1469,6 +1469,107 @@ color:#9ca3af;
 8. RESPONSIVE
 ======================================================================================================================================= */
 
+@media (max-width:1024px){
+    .hero-enterprise{
+        min-height:auto;
+        padding-top:calc(var(--nav-height) + 40px);
+        padding-bottom:80px;
+    }
+    .hero-grid{
+        grid-template-columns:1fr;
+        gap:60px;
+        text-align:center;
+    }
+    .hero-left{
+        max-width:100%;
+        padding-right:0;
+        align-items:center;
+    }
+    .hero-left h1{
+        max-width:22ch;
+        margin-inline:auto;
+    }
+    .hero-sub{
+        max-width:700px;
+        margin-left:auto;
+        margin-right:auto;
+    }
+    .hero-proof{
+        margin-left:auto;
+        margin-right:auto;
+    }
+    .hero-proof::before{
+        margin-left:auto;
+        margin-right:auto;
+    }
+    .hero-cta{
+        justify-content:center;
+    }
+    .hero-right{
+        justify-self:center;
+        margin-left:0;
+        max-width:none;
+        width:auto;
+        transform:scale(.85);
+        transform-origin:center center;
+    }
+}
+@media (max-width:768px){
+    .hero-grid{
+        gap:40px;
+    }
+    .hero-left h1{
+        font-size:clamp(2.2rem,8vw,3.5rem);
+        line-height:1.1;
+    }
+    .hero-sub{
+        font-size:16px;
+    }
+    .hero-cta{
+        flex-direction:column;
+        width:100%;
+    }
+    .hero-cta a{
+        width:100%;
+        max-width:340px;
+    }
+    /* ONLY SCALE WHOLE DASHBOARD */
+    .hero-right{
+        transform:scale(.70);
+        transform-origin:center center;
+        margin-top:-60px;
+        margin-bottom:-60px;
+    }
+}
+@media (max-width:576px){
+    .hero-enterprise{
+        padding-bottom:40px;
+    }
+    .hero-left h1{
+        font-size:2rem;
+    }
+    .hero-sub{
+        font-size:15px;
+    }
+    .hero-right{
+        transform:scale(.58);
+        transform-origin:center center;
+        margin-top:-110px;
+        margin-bottom:-110px;
+    }
+}
+@media (max-width:420px){
+
+    .hero-left h1{
+        font-size:1.8rem;
+    }
+    .hero-right{
+        transform:scale(.48);
+        transform-origin:center center;
+        margin-top:-150px;
+        margin-bottom:-150px;
+    }
+}
 @media (max-width:1200px){
 .architecture-grid{
 grid-template-columns:280px 1fr 260px;
