@@ -196,6 +196,67 @@ const containerRect = ecoContainer.getBoundingClientRect();
 const coreX = coreRect.left + coreRect.width/2 - containerRect.left;
 const coreY = coreRect.top + coreRect.height/2 - containerRect.top;
 ecoNodes.forEach(node=>{
+if(window.innerWidth < 768){
+    const rect = node.getBoundingClientRect();
+    const nodeCenterX =
+        rect.left + rect.width/2 - containerRect.left;
+    const nodeCenterY =
+        rect.top + rect.height/2 - containerRect.top;
+    const line =
+        document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "path"
+        );
+    let pathData = "";
+    // TOP NODE
+    if(node.classList.contains("node-sdk")){
+        pathData = `
+            M ${nodeCenterX} ${rect.bottom-containerRect.top}
+            L ${nodeCenterX} ${coreY - 85}
+        `;
+    }
+    // BOTTOM NODE
+    else if(node.classList.contains("node-management")){
+        pathData = `
+            M ${nodeCenterX} ${rect.top-containerRect.top}
+            L ${nodeCenterX} ${coreY + 85}
+        `;
+    }
+    // LEFT TOP
+    else if(node.classList.contains("node-market")){
+        pathData = `
+            M ${rect.right-containerRect.left} ${nodeCenterY}
+            L ${coreX - 90} ${nodeCenterY}
+        `;
+    }
+    // RIGHT TOP
+    else if(node.classList.contains("node-events")){
+        pathData = `
+            M ${rect.left-containerRect.left} ${nodeCenterY}
+            L ${coreX + 90} ${nodeCenterY}
+        `;
+    }
+    // LEFT BOTTOM
+    else if(node.classList.contains("node-orchestration")){
+        pathData = `
+            M ${rect.right-containerRect.left} ${nodeCenterY}
+            L ${coreX - 90} ${nodeCenterY}
+        `;
+    }
+    // RIGHT BOTTOM
+    else if(node.classList.contains("node-pipeline")){
+        pathData = `
+            M ${rect.left-containerRect.left} ${nodeCenterY}
+            L ${coreX + 90} ${nodeCenterY}
+        `;
+    }
+    line.setAttribute("d", pathData);
+    line.setAttribute("stroke","#6366f1");
+    line.setAttribute("stroke-width","1.4");
+    line.setAttribute("stroke-dasharray","3 8");
+    ecoSvg.appendChild(line);
+    return;
+}
 const rect = node.getBoundingClientRect();
 const nodeCenterX = rect.left + rect.width/2 - containerRect.left;
 const nodeCenterY = rect.top + rect.height/2 - containerRect.top;
