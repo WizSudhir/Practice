@@ -1,6 +1,6 @@
-/* =========================================================
+/* =======================================================================================================================================
 1. HERO
-========================================================= */
+======================================================================================================================================= */
 .hero-aurora{
 max-width:100%;
 position:absolute;
@@ -462,9 +462,9 @@ filter:blur(120px);
 pointer-events:none;
 }
 
-/* ==================================================================================================================
+/* =======================================================================================================================================
 2. PRACTICEGRID PLATFORM ARCHITECTURE
-================================================================================================================== */
+======================================================================================================================================= */
 .pg-architecture{
 position:relative;
 overflow:hidden;
@@ -773,9 +773,9 @@ animation:dataFlow 4s linear infinite;
 100%{stroke-dashoffset:-60}
 }
 
-/* ==================================================================================================================
+/* =======================================================================================================================================
 3. PRACTICEGRID REVENUE FLOW
-================================================================================================================== */
+======================================================================================================================================= */
 .revenue-flow{
 display:grid;
 grid-template-columns:repeat(4,1fr);
@@ -875,9 +875,9 @@ font-weight:700;
 color:#e0e7ff;
 }
 
-/* =========================================================
+/* =======================================================================================================================================
 4. THE “BEFORRE V/S AFTER RCM TRANSFORMATION
-========================================================= */
+======================================================================================================================================= */
 
 .transform-grid{
 display:grid;
@@ -1005,9 +1005,9 @@ margin-bottom:30px;
 font-size:16px;
 }
 
-/* =========================================================
+/* =======================================================================================================================================
 5. RCM MATURITY SCORE GAUGE
-========================================================= */
+======================================================================================================================================= */
 .rcm-score-layout{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -1064,9 +1064,9 @@ display:block;
 margin:30px auto 0;
 }
 
-/* =========================================================
+/* =======================================================================================================================================
 6. PRACTICEGRID OUTCOMES
-========================================================= */
+======================================================================================================================================= */
 .pg-outcomes .container{
 position:relative;
 z-index:2;
@@ -1323,9 +1323,9 @@ background:linear-gradient(180deg,#0b1220,#020617);
 border:1px solid rgba(59,130,246,.25);
 }
 
-/* =========================================================
+/* =======================================================================================================================================
 7. RCM FRAMEWORK TIMELINE
-========================================================= */
+======================================================================================================================================= */
 
 .pg-framework{
 position:relative;
@@ -1454,4 +1454,261 @@ color:#9ca3af;
 .framework-right{
   display:flex;
   align-items:center;
+}
+
+/* =======================================================================================================================================
+8. RESPONSIVE
+======================================================================================================================================= */
+
+@media (max-width:1200px){
+.architecture-grid{
+grid-template-columns:280px 1fr 260px;
+gap:24px;
+}
+.framework-wrapper{
+grid-template-columns:1fr 360px;
+}
+.pg-story{
+gap:32px;
+}
+}
+@media (max-width:1024px){
+/* Architecture */
+.architecture-grid{
+grid-template-columns:1fr;
+gap:48px;
+text-align:center;
+}
+.arch-inputs{
+flex-direction:row;
+flex-wrap:wrap;
+justify-content:center;
+}
+.input-node{
+width:160px;
+}
+.arch-dashboard{
+justify-content:center;
+}
+.network-lines{
+display:none;
+}
+/* Revenue Flow */
+.revenue-flow{
+grid-template-columns:repeat(2,1fr);
+}
+/* Framework */
+.framework-wrapper{
+grid-template-columns:1fr;
+}
+.framework-right{
+justify-content:center;
+}
+.framework-card{
+max-width:600px;
+width:100%;
+}
+/* Outcomes */
+.pg-story,
+.pg-story:nth-child(even){
+grid-template-columns:1fr;
+}
+.pg-story-left,
+.pg-story:nth-child(even) .pg-story-left{
+order:1;
+max-width:none;
+}
+.pg-story-right,
+.pg-story:nth-child(even) .pg-story-right{
+order:2;
+}
+}
+@media (max-width:768px){
+.section-title h2{
+font-size:32px;
+}
+/* Architecture */
+.engine-circle{
+width:190px;
+height:190px;
+}
+.emr-ring{
+width:340px;
+height:340px;
+}
+.emr{
+width:52px;
+height:52px;
+}
+.emr:nth-child(1){transform:translate(-50%,-50%) rotate(0deg) translateX(115px);}
+.emr:nth-child(2){transform:translate(-50%,-50%) rotate(45deg) translateX(115px) rotate(-45deg);}
+.emr:nth-child(3){transform:translate(-50%,-50%) rotate(90deg) translateX(115px) rotate(-90deg);}
+.emr:nth-child(4){transform:translate(-50%,-50%) rotate(135deg) translateX(115px) rotate(-135deg);}
+.emr:nth-child(5){transform:translate(-50%,-50%) rotate(180deg) translateX(115px) rotate(-180deg);}
+.emr:nth-child(6){transform:translate(-50%,-50%) rotate(225deg) translateX(115px) rotate(-225deg);}
+.emr:nth-child(7){transform:translate(-50%,-50%) rotate(270deg) translateX(115px) rotate(-270deg);}
+.emr:nth-child(8){transform:translate(-50%,-50%) rotate(315deg) translateX(115px) rotate(-315deg);}
+/* Revenue Flow */
+.revenue-flow{
+grid-template-columns:1fr;
+}
+.flow-step{
+min-height:auto;
+}
+/* Transformation */
+.transform-grid{
+grid-template-columns:1fr;
+gap:24px;
+}
+.transform-arrow{
+transform:rotate(90deg);
+}
+.transform-arrow svg{
+width:40px;
+height:40px;
+}
+/* Score */
+.rcm-score-layout{
+grid-template-columns:1fr;
+gap:40px;
+}
+.gauge{
+width:220px;
+}
+/* Framework */
+.framework-step{
+grid-template-columns:60px 1fr;
+column-gap:18px;
+}
+.framework-circle{
+width:52px;
+height:52px;
+font-size:16px;
+}
+.framework-step:not(:last-child)::before{
+left:25px;
+top:52px;
+}
+.framework-content h3{
+font-size:17px;
+}
+/* Outcomes */
+.pg-metric-card{
+width:100%;
+max-width:320px;
+margin:auto;
+}
+}
+@media (max-width:576px){
+/* Architecture */
+.architecture-grid{
+gap:36px;
+}
+.arch-inputs{
+gap:12px;
+}
+.input-node{
+width:140px;
+font-size:11px;
+}
+.engine-circle{
+width:160px;
+height:160px;
+}
+.engine-inner h3{
+font-size:16px;
+}
+.engine-status{
+font-size:11px;
+}
+.emr-ring{
+width:280px;
+height:280px;
+}
+.emr{
+width:42px;
+height:42px;
+}
+.emr:nth-child(1){transform:translate(-50%,-50%) rotate(0deg) translateX(95px);}
+.emr:nth-child(2){transform:translate(-50%,-50%) rotate(45deg) translateX(95px) rotate(-45deg);}
+.emr:nth-child(3){transform:translate(-50%,-50%) rotate(90deg) translateX(95px) rotate(-90deg);}
+.emr:nth-child(4){transform:translate(-50%,-50%) rotate(135deg) translateX(95px) rotate(-135deg);}
+.emr:nth-child(5){transform:translate(-50%,-50%) rotate(180deg) translateX(95px) rotate(-180deg);}
+.emr:nth-child(6){transform:translate(-50%,-50%) rotate(225deg) translateX(95px) rotate(-225deg);}
+.emr:nth-child(7){transform:translate(-50%,-50%) rotate(270deg) translateX(95px) rotate(-270deg);}
+.emr:nth-child(8){transform:translate(-50%,-50%) rotate(315deg) translateX(95px) rotate(-315deg);}
+.dashboard-card{
+width:100%;
+}
+/* Transformation */
+.transform-card{
+padding:24px 20px;
+}
+.transform-card h3{
+font-size:18px;
+}
+.transform-card li{
+font-size:14px;
+}
+/* Score */
+.question h4{
+font-size:15px;
+}
+.score-number{
+font-size:30px;
+}
+/* Outcomes */
+.pg-story-left p{
+font-size:15px;
+}
+.pg-story-left li{
+font-size:14px;
+}
+.roi-main{
+font-size:34px;
+}
+/* Framework */
+.framework-content h3{
+font-size:16px;
+}
+.framework-content p{
+font-size:14px;
+}
+.framework-card{
+padding:24px;
+}
+}
+@media (max-width:420px){
+.input-node{
+width:100%;
+}
+.emr-ring{
+display:none;
+}
+.engine-circle{
+width:150px;
+height:150px;
+}
+.flow-step{
+padding:24px 18px;
+}
+.transform-card{
+padding:20px 16px;
+}
+.pg-metric-card{
+max-width:none;
+width:100%;
+}
+.framework-step{
+grid-template-columns:50px 1fr;
+}
+.framework-circle{
+width:44px;
+height:44px;
+font-size:14px;
+}
+.framework-step:not(:last-child)::before{
+left:21px;
+top:44px;
+}
 }
