@@ -1510,13 +1510,13 @@ color:#9ca3af;
         margin-left:0;
         max-width:none;
         width:auto;
-        transform:scale(.85);
         transform-origin:center center;
     }
 }
 @media (max-width:768px){
     .hero-grid{
-        gap:40px;
+        grid-template-columns:1fr;
+        gap:32px;
     }
     .hero-left h1{
         font-size:clamp(2.2rem,8vw,3.5rem);
@@ -1535,10 +1535,19 @@ color:#9ca3af;
     }
     /* ONLY SCALE WHOLE DASHBOARD */
     .hero-right{
-        transform:scale(.70);
-        transform-origin:center center;
-        margin-top:-60px;
-        margin-bottom:-60px;
+        width:100%;
+        max-width:100%;
+        padding:0;
+        margin:0 auto;
+        justify-self:center;
+    }
+    .dashboard-perspective{
+        width:100%;
+    }
+    .workflow-dashboard{
+        transform:none;
+        width:100%;
+        max-width:100%;
     }
 }
 @media (max-width:576px){
@@ -1552,10 +1561,14 @@ color:#9ca3af;
         font-size:15px;
     }
     .hero-right{
-        transform:scale(.58);
         transform-origin:center center;
         margin-top:-110px;
         margin-bottom:-110px;
+    }
+    .workflow-dashboard{
+        transform:none;
+        width:100%;
+        max-width:100%;
     }
 }
 @media (max-width:420px){
@@ -1564,12 +1577,18 @@ color:#9ca3af;
         font-size:1.8rem;
     }
     .hero-right{
-        transform:scale(.48);
         transform-origin:center center;
         margin-top:-150px;
         margin-bottom:-150px;
     }
+    .workflow-dashboard{
+        transform:none;
+        width:100%;
+        max-width:100%;
+    }
 }
+
+
 @media (max-width:1200px){
 .architecture-grid{
 grid-template-columns:280px 1fr 260px;
