@@ -731,15 +731,23 @@ RESPONSIVE SYSTEM
     grid-template-columns:1fr;
 }
 .specialty-large{
+    grid-column:span 1;
+    display:flex;
     flex-direction:column;
     min-height:auto;
 }
 .specialty-large .specialty-image{
     width:100%;
-    height:180px;
+    height:170px;
+    min-height:170px;
 }
 .specialty-large .specialty-content{
-    padding:24px;
+    width:100%;
+    padding:52px 26px 28px;
+}
+.specialty-large .specialty-icon{
+    top:140px;
+    left:24px;
 }
 }
 /* MOBILE (≤768px) */
@@ -932,6 +940,17 @@ height:220px;
 }
 .specialty-content{
     padding-top:58px;
+}
+.specialty-large .specialty-image{
+    height:150px;
+    min-height:150px;
+}
+.specialty-large .specialty-icon{
+    top:125px;
+    left:18px;
+}
+.specialty-large .specialty-content{
+    padding:58px 26px 28px;
 }
 .org-image{
     height:150px;
