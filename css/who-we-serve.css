@@ -705,8 +705,8 @@ RESPONSIVE SYSTEM
     height:300px;
 }
 .orbit-core{
-    width:140px;
-    height:140px;
+    width:120px;
+    height:120px;
 }
 .org-grid{
     grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -744,6 +744,10 @@ RESPONSIVE SYSTEM
 .orbit-system{
     width:260px;
     height:260px;
+}
+.orbit-core{
+    width:100px;
+    height:100px;
 }
 .orbit1{width:160px;height:160px;}
 .orbit2{width:210px;height:210px;}
@@ -802,7 +806,20 @@ RESPONSIVE SYSTEM
     font-size:14px;
 }
 .orbit-system{
- transform: scale(0.75);
+width:220px;
+height:220px;
+}
+.orbit1{
+width:130px;
+height:130px;
+}
+.orbit2{
+width:175px;
+height:175px;
+}
+.orbit3{
+width:220px;
+height:220px;
 }
 .hero-visual{
     min-height:auto;
