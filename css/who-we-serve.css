@@ -767,11 +767,13 @@ RESPONSIVE SYSTEM
 }
 /* ===== ECOSYSTEM FIX ===== */
 .ecosystem-network{
-    min-height:700px;
+    position:relative;
+    height:540px;
+    min-height:540px;
 }
 .eco-core{
-    width:110px;
-    height:110px;
+    width:140px;
+    height:140px;
     position:absolute;
     left:50%;
     top:50%;
