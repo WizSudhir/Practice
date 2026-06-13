@@ -1514,40 +1514,52 @@ color:#9ca3af;
     }
 }
 @media (max-width:768px){
+    .hero-enterprise{
+        overflow:visible;
+        padding-bottom:80px;
+    }
     .hero-grid{
-        grid-template-columns:1fr;
-        gap:32px;
-    }
-    .hero-left h1{
-        font-size:clamp(2.2rem,8vw,3.5rem);
-        line-height:1.1;
-    }
-    .hero-sub{
-        font-size:16px;
-    }
-    .hero-cta{
+        display:flex;
         flex-direction:column;
-        width:100%;
+        gap:40px;
     }
-    .hero-cta a{
-        width:100%;
-        max-width:340px;
-    }
-    /* ONLY SCALE WHOLE DASHBOARD */
-    .hero-right{
+    .hero-left{
         width:100%;
         max-width:100%;
+        align-items:center;
+        text-align:center;
+    }
+    .hero-right{
+        width:100%;
+        max-width:600px;
+        margin:0;
         padding:0;
-        margin:0 auto;
-        justify-self:center;
+        display:flex;
+        justify-content:center;
+        align-items:center;
     }
     .dashboard-perspective{
         width:100%;
+        display:flex;
+        justify-content:center;
     }
     .workflow-dashboard{
-        transform:none;
         width:100%;
-        max-width:100%;
+        max-width:520px;
+        transform:none;
+    }
+    .workflow{
+        padding:16px;
+        gap:8px;
+        height:220px;
+    }
+    .stage-node{
+        width:56px;
+        height:56px;
+        font-size:10px;
+    }
+    .dashboard-metrics{
+        flex-direction:column;
     }
 }
 @media (max-width:576px){
@@ -1562,8 +1574,6 @@ color:#9ca3af;
     }
     .hero-right{
         transform-origin:center center;
-        margin-top:-110px;
-        margin-bottom:-110px;
     }
     .workflow-dashboard{
         transform:none;
@@ -1578,8 +1588,6 @@ color:#9ca3af;
     }
     .hero-right{
         transform-origin:center center;
-        margin-top:-150px;
-        margin-bottom:-150px;
     }
     .workflow-dashboard{
         transform:none;
