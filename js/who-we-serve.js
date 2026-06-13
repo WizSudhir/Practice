@@ -215,7 +215,7 @@ const line = document.createElementNS(
 "http://www.w3.org/2000/svg","path"
 );
 /* ORTHOGONAL ROUTING */
-const offset = window.innerWidth < 768 ? 25 : 60;
+const offset = window.innerWidth < 768 ? 8 : 60;
 /* determine direction */
 const horizontalDir = nodeX < coreX ? 1 : -1;
 /* first horizontal segment */
