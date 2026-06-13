@@ -61,14 +61,16 @@ createParticle();
 // 3. DATA FLOW LINES //
 
 const svg = document.querySelector(".data-lines");
-const center = {x:210,y:210};
+const size = orbitSystem.offsetWidth;
+const center = {x:size/2,y:size/2};
+const r = size/2;
 const nodes = [
-{x:210,y:0},
-{x:420,y:210},
-{x:210,y:420},
-{x:0,y:210},
-{x:320,y:70},
-{x:90,y:330}
+{x:center.x,y:0},
+{x:size,y:center.y},
+{x:center.x,y:size},
+{x:0,y:center.y},
+{x:center.x+r*0.55,y:r*0.35},
+{x:center.x-r*0.55,y:center.y+r*0.55}
 ];
 nodes.forEach(n=>{
 const line=document.createElementNS(
