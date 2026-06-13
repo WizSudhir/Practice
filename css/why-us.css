@@ -1573,8 +1573,28 @@ order:2;
 }
 
 @media (max-width:768px){
+.hero-aurora,
+.hero-aurora-2{
+    width:500px;
+    height:500px;
+    filter:blur(80px);
+}
+.hero-enterprise::before{
+    width:450px;
+    height:450px;
+    right:-120px;
+}
+.hero-enterprise::after{
+    width:350px;
+    height:350px;
+}
+.hero-right::before{
+    width:300px;
+    height:300px;
+    right:-50px;
+}
 .hero-enterprise{
-overflow:visible;
+overflow:hidden;
 padding-bottom:80px;
 }
 .hero-grid{
