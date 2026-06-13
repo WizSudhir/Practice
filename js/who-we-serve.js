@@ -224,33 +224,69 @@ if(window.innerWidth < 768){
         `;
     }
     // LEFT TOP
-    else if(node.classList.contains("node-market")){
-        pathData = `
-            M ${rect.right-containerRect.left} ${nodeCenterY}
-            L ${coreX - coreHalf} ${nodeCenterY}
-        `;
-    }
+else if(node.classList.contains("node-market")){
+    const startX =
+        rect.right - containerRect.left;
+    const startY =
+        nodeCenterY;
+    const endX =
+        coreX - coreHalf;
+    const endY =
+        coreY - 30;
+    pathData = `
+        M ${startX} ${startY}
+        L ${endX} ${startY}
+        L ${endX} ${endY}
+    `;
+}
     // RIGHT TOP
-    else if(node.classList.contains("node-events")){
-        pathData = `
-            M ${rect.left-containerRect.left} ${nodeCenterY}
-            L ${coreX + coreHalf} ${nodeCenterY}
-        `;
-    }
+else if(node.classList.contains("node-events")){
+    const startX =
+        rect.left - containerRect.left;
+    const startY =
+        nodeCenterY;
+    const endX =
+        coreX + coreHalf;
+    const endY =
+        coreY - 30;
+    pathData = `
+        M ${startX} ${startY}
+        L ${endX} ${startY}
+        L ${endX} ${endY}
+    `;
+}
     // LEFT BOTTOM
-    else if(node.classList.contains("node-orchestration")){
-        pathData = `
-            M ${rect.right-containerRect.left} ${nodeCenterY}
-            L ${coreX - coreHalf} ${nodeCenterY}
-        `;
-    }
+else if(node.classList.contains("node-orchestration")){
+    const startX =
+        rect.right - containerRect.left;
+    const startY =
+        nodeCenterY;
+    const endX =
+        coreX - coreHalf;
+    const endY =
+        coreY + 30;
+    pathData = `
+        M ${startX} ${startY}
+        L ${endX} ${startY}
+        L ${endX} ${endY}
+    `;
+}
     // RIGHT BOTTOM
-    else if(node.classList.contains("node-pipeline")){
-        pathData = `
-            M ${rect.left-containerRect.left} ${nodeCenterY}
-            L ${coreX + coreHalf} ${nodeCenterY}
-        `;
-    }
+else if(node.classList.contains("node-pipeline")){
+    const startX =
+        rect.left - containerRect.left;
+    const startY =
+        nodeCenterY;
+    const endX =
+        coreX + coreHalf;
+    const endY =
+        coreY + 30;
+    pathData = `
+        M ${startX} ${startY}
+        L ${endX} ${startY}
+        L ${endX} ${endY}
+    `;
+}
     line.setAttribute("d", pathData);
     line.setAttribute("stroke","#6366f1");
     line.setAttribute("stroke-width","1.4");
