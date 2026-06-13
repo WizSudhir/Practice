@@ -727,6 +727,11 @@ RESPONSIVE SYSTEM
 }
 /* MOBILE (≤768px) */
 @media (max-width:768px){
+  .hero-content .btn-primary{
+      width:auto;
+      display:inline-flex;
+      align-self:center;
+  }
 .hero-grid{
     gap:40px;
 }
