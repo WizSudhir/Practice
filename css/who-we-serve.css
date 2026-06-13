@@ -768,56 +768,66 @@ RESPONSIVE SYSTEM
 /* ===== ECOSYSTEM FIX ===== */
 .ecosystem-network{
     position:relative;
-    height:540px;
-    min-height:540px;
-}
-.eco-core{
-    width:140px;
-    height:140px;
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-}
-.eco-node{
-    width:140px;
-    height:52px;
-    font-size:12px;
-    padding:10px 12px;
-}
-.node-sdk{
-    top:60px;
-    left:50%;
-    transform:translateX(-50%);
-}
-.node-events{
-    top:180px;
-    right:0;
-}
-.node-market{
-    top:180px;
-    left:0;
-}
-.node-pipeline{
-    bottom:180px;
-    right:0;
-}
-.node-orchestration{
-    bottom:180px;
-    left:0;
-}
-.node-management{
-    bottom:60px;
-    left:50%;
-    transform:translateX(-50%);
-}
-.eco-lines{
-    display:block;
+    width:100%;
+    height:620px;
+    min-height:620px;
+    margin-top:40px;
 }
 .eco-grid{
     position:relative;
     width:100%;
     height:100%;
+}
+/* CORE */
+.eco-core{
+    width:130px;
+    height:130px;
+    position:absolute;
+    left:50%;
+    top:300px;
+    transform:translate(-50%,-50%);
+}
+/* NODES */
+.eco-node{
+    width:130px;
+    height:56px;
+    font-size:12px;
+    padding:10px;
+}
+/* TOP */
+.node-sdk{
+    top:40px;
+    left:50%;
+    transform:translateX(-50%);
+}
+/* MID LEFT */
+.node-market{
+    top:180px;
+    left:20px;
+}
+/* MID RIGHT */
+.node-events{
+    top:180px;
+    right:20px;
+}
+/* LOWER LEFT */
+.node-orchestration{
+    top:400px;
+    left:20px;
+}
+/* LOWER RIGHT */
+.node-pipeline{
+    top:400px;
+    right:20px;
+}
+/* BOTTOM */
+.node-management{
+    top:540px;
+    left:50%;
+    transform:translateX(-50%);
+}
+.eco-lines{
+    display:block;
 }
 /* ===== CARDS ===== */
 .org-content{
