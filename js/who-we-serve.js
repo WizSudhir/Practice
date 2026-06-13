@@ -226,70 +226,70 @@ if(window.innerWidth < 768){
     // LEFT TOP
 else if(node.classList.contains("node-market")){
     const startX =
-        rect.right - containerRect.left;
+        rect.left + rect.width/2 - containerRect.left;
     const startY =
-        nodeCenterY;
+        rect.bottom - containerRect.top;
     const endX =
-        coreX - coreHalf;
+        coreX - 35;
     const endY =
-        coreY - 30;
+        coreY - coreHalf;
     pathData = `
         M ${startX} ${startY}
-        L ${endX} ${startY}
+        L ${startX} ${endY}
         L ${endX} ${endY}
     `;
 }
     // RIGHT TOP
 else if(node.classList.contains("node-events")){
     const startX =
-        rect.left - containerRect.left;
+        rect.left + rect.width/2 - containerRect.left;
     const startY =
-        nodeCenterY;
+        rect.bottom - containerRect.top;
     const endX =
-        coreX + coreHalf;
+        coreX + 35;
     const endY =
-        coreY - 30;
+        coreY - coreHalf;
     pathData = `
         M ${startX} ${startY}
-        L ${endX} ${startY}
+        L ${startX} ${endY}
         L ${endX} ${endY}
     `;
 }
     // LEFT BOTTOM
 else if(node.classList.contains("node-orchestration")){
     const startX =
-        rect.right - containerRect.left;
+        rect.left + rect.width/2 - containerRect.left;
     const startY =
-        nodeCenterY;
+        rect.top - containerRect.top;
     const endX =
-        coreX - coreHalf;
+        coreX - 35;
     const endY =
-        coreY + 30;
+        coreY + coreHalf;
     pathData = `
         M ${startX} ${startY}
-        L ${endX} ${startY}
+        L ${startX} ${endY}
         L ${endX} ${endY}
     `;
 }
     // RIGHT BOTTOM
 else if(node.classList.contains("node-pipeline")){
     const startX =
-        rect.left - containerRect.left;
+        rect.left + rect.width/2 - containerRect.left;
     const startY =
-        nodeCenterY;
+        rect.top - containerRect.top;
     const endX =
-        coreX + coreHalf;
+        coreX + 35;
     const endY =
-        coreY + 30;
+        coreY + coreHalf;
     pathData = `
         M ${startX} ${startY}
-        L ${endX} ${startY}
+        L ${startX} ${endY}
         L ${endX} ${endY}
     `;
 }
     line.setAttribute("d", pathData);
     line.setAttribute("stroke","#6366f1");
-    line.setAttribute("stroke-width","1.4");
+    line.setAttribute("stroke-width","1.8");
     line.setAttribute("stroke-dasharray","3 8");
     ecoSvg.appendChild(line);
     return;
