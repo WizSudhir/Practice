@@ -802,22 +802,22 @@ RESPONSIVE SYSTEM
 }
 /* MID LEFT */
 .node-market{
-    top:180px;
+    top:160px;
     left:20px;
 }
 /* MID RIGHT */
 .node-events{
-    top:180px;
+    top:160px;
     right:20px;
 }
 /* LOWER LEFT */
 .node-orchestration{
-    top:400px;
+    top:430px;
     left:20px;
 }
 /* LOWER RIGHT */
 .node-pipeline{
-    top:400px;
+    top:430px;
     right:20px;
 }
 /* BOTTOM */
