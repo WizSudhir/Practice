@@ -1921,11 +1921,17 @@ font-size:11px;
 width:160px;
 height:160px;
 }
-.engine-inner h3{
-font-size:16px;
+.engine-inner{
+    transform:scale(0.82);
+    transform-origin:center;
+    padding:6px;
 }
 .engine-status{
 font-size:11px;
+max-width:90px;
+}
+.engine-inner h3{
+font-size:16px;
 }
 .emr-ring{
 width:280px;
