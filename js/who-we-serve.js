@@ -240,6 +240,7 @@ ecoSvg.appendChild(line);
 });
 }
 window.addEventListener("load",drawLines);
+setTimeout(drawLines, 300);
 window.addEventListener("resize",drawLines);
 /* LINE FEED ANIMATION */
 function triggerDataFlow(nodeIndex){
