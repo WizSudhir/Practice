@@ -1645,6 +1645,8 @@ font-size:32px;
 }
 /* Architecture */
 .architecture-grid{
+transform-origin:top center;
+scale:0.85;
 display:flex;
 flex-direction:column;
 align-items:center;
@@ -1655,14 +1657,14 @@ position:relative;
 position:relative;
 width:100%;
 max-width:360px;
-height:220px;
+height:170px;
 display:block;
 margin-bottom:40px;
 }
 .arch-engine{
 order:2;
 position:relative;
-margin-top:-60px;
+margin-top:-20px;
 }
 .arch-dashboard{
 order:3;
@@ -1683,22 +1685,22 @@ margin-top:40px;
 }
 /* left upper */
 .input-node:nth-child(2){
-    top:70px;
+    top:55px;
     left:0;
 }
 /* left lower */
 .input-node:nth-child(3){
-    top:130px;
+    top:105px;
     left:0;
 }
 /* right upper */
 .input-node:nth-child(4){
-    top:70px;
+    top:55px;
     right:0;
 }
 /* right lower */
 .input-node:nth-child(5){
-    top:130px;
+    top:105px;
     right:0;
 }
 .arch-engine::after{
@@ -1743,6 +1745,16 @@ margin-top:40px;
         transparent 8px 16px
     );
     animation:dataFlowVertical 2s linear infinite;
+}
+.dashboard-card{
+    max-width:260px;
+    padding:16px;
+}
+.dashboard-metric{
+    padding:10px;
+}
+.dashboard-metric span{
+    font-size:24px;
 }
 .network-lines{
 display:none;
@@ -1984,6 +1996,9 @@ transform-origin:center center;
 transform:none;
 width:100%;
 max-width:100%;
+}
+.architecture-grid{
+    scale:0.75;
 }
 .input-node{
 width:120px;
