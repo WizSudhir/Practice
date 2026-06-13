@@ -1402,7 +1402,7 @@ color:#4ade80;
     transform:translateX(-50%);
     top:100%;
     width:2px;
-    height:88px; /* adjust */
+    height:72px; /* adjust */
     background:linear-gradient(
         180deg,
         rgba(99,102,241,.8),
