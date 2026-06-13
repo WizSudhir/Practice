@@ -302,4 +302,8 @@
   .contact-section {
     padding: 100px 15px 60px;
   }
+  .g-recaptcha {
+    transform: scale(0.85);
+    transform-origin: left top;
+  }
 }
