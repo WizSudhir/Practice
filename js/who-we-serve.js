@@ -195,6 +195,7 @@ const coreRect = ecoCore.getBoundingClientRect();
 const containerRect = ecoContainer.getBoundingClientRect();
 const coreX = coreRect.left + coreRect.width/2 - containerRect.left;
 const coreY = coreRect.top + coreRect.height/2 - containerRect.top;
+const coreHalf = ecoCore.offsetWidth / 2;
 ecoNodes.forEach(node=>{
 if(window.innerWidth < 768){
     const rect = node.getBoundingClientRect();
@@ -212,42 +213,42 @@ if(window.innerWidth < 768){
     if(node.classList.contains("node-sdk")){
         pathData = `
             M ${nodeCenterX} ${rect.bottom-containerRect.top}
-            L ${nodeCenterX} ${coreY - 85}
+            L ${nodeCenterX} ${coreY - coreHalf}
         `;
     }
     // BOTTOM NODE
     else if(node.classList.contains("node-management")){
         pathData = `
             M ${nodeCenterX} ${rect.top-containerRect.top}
-            L ${nodeCenterX} ${coreY + 85}
+            L ${nodeCenterX} ${coreY + coreHalf}
         `;
     }
     // LEFT TOP
     else if(node.classList.contains("node-market")){
         pathData = `
             M ${rect.right-containerRect.left} ${nodeCenterY}
-            L ${coreX - 90} ${nodeCenterY}
+            L ${coreX - coreHalf} ${nodeCenterY}
         `;
     }
     // RIGHT TOP
     else if(node.classList.contains("node-events")){
         pathData = `
             M ${rect.left-containerRect.left} ${nodeCenterY}
-            L ${coreX + 90} ${nodeCenterY}
+            L ${coreX + coreHalf} ${nodeCenterY}
         `;
     }
     // LEFT BOTTOM
     else if(node.classList.contains("node-orchestration")){
         pathData = `
             M ${rect.right-containerRect.left} ${nodeCenterY}
-            L ${coreX - 90} ${nodeCenterY}
+            L ${coreX - coreHalf} ${nodeCenterY}
         `;
     }
     // RIGHT BOTTOM
     else if(node.classList.contains("node-pipeline")){
         pathData = `
             M ${rect.left-containerRect.left} ${nodeCenterY}
-            L ${coreX + 90} ${nodeCenterY}
+            L ${coreX + coreHalf} ${nodeCenterY}
         `;
     }
     line.setAttribute("d", pathData);
