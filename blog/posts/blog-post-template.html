@@ -55,33 +55,54 @@
 
 <body>
 <body data-post-id="billing-mistakes">
-<!-- NAVBAR -->
+<!-------------------------------- NAVBAR -------------------------------->
 <header class="navbar">
   <div class="container navbar-inner">
 
+    <!-- LOGO -->
     <div class="logo">
-      <a href="index.html">
-        <img src="../../images/logo.png" alt="PracticeGrid Solutions Medical Billing & Revenue Cycle Management Company">
+      <a href="index.html" aria-label="PracticeGrid Home">
+        <img src="../../images/logo.png" alt="PracticeGrid Solutions Logo">
       </a>
     </div>
 
-      <nav class="nav-menu">
-        <ul>
+      <!-- NAV MENU -->
+      <nav class="nav-menu" id="primary-navigation" aria-hidden="true">
+        <!-- TOP HEADER (LIKE STRIPE) -->
+        <div class="mobile-nav-header">
+          <div class="logo">
+            <a href="../../index.html" aria-label="PracticeGrid Home">
+            <img src="../../images/logo.png" alt="PracticeGrid Solutions Logo">
+            </a>
+          </div>
+          <button class="nav-close" aria-label="Close menu">
+            ✕
+          </button>
+        </div>
+        
+        <ul class="mobile-nav-links">
         <li><a href="../../index.html">Home</a></li>
         <li><a href="../../services.html">Services</a></li>
         <li><a href="../../who-we-serve.html">Who We Serve</a></li>
         <li><a href="../../why-us.html">Why Us</a></li>
         <li><a href="../../blog/index.html">Blog</a></li>
-        <li><a href="../../contact.html" class="btn-primary">Connect With Us</a></li>
         </ul>
       </nav>
+    
+      <div class="nav-cta">
+        <a href="../../contact.html" class="btn-primary btn-arrow">
+          Contact Us
+          <span class="icon-arrow"></span>
+        </a>
+      </div>
 
-    <!-- MOBILE TOGGLE -->
-          <button class="nav-toggle" aria-label="Toggle Menu">
-          <span></span>
-          <span></span>
-          <span></span>
-          </button>
+      <!-- MOBILE TOGGLE -->
+      <button class="nav-toggle"aria-label="Toggle navigation menu"aria-controls="primary-navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
 
   </div>
 </header>
@@ -202,12 +223,14 @@ RELATED POSTS
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ===============================
+FOOTER
+================================= -->
 <footer class="footer">
   <div class="container footer-grid">
 
     <div class="footer-brand">
-      <img src="../images/logo.png" alt="PracticeGrid Solutions Medical Billing & Revenue Cycle Management Company">
+      <img src="../../images/logo.png" alt="PracticeGrid Solutions Medical Billing & Revenue Cycle Management Company">
       <p>Elite Revenue Cycle Management for Modern Healthcare Practices.</p>
       <div class="footer-social">
         <a href="https://wa.me/17276741458" target="_blank">
@@ -270,7 +293,7 @@ RELATED POSTS
 </div>
 
     <div class="footer-hipaa">
-      <img src="../images/hipaa-official.png" alt="HIPAA Compliant">
+      <img src="../../images/hipaa-official.png" alt="HIPAA Compliant">
       <div class="hipaa-label">
       <span class="hipaa-title">HIPAA</span>
       <span class="hipaa-sub">Compliant</span>
