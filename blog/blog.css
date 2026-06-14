@@ -401,22 +401,17 @@
   justify-content: center;
 }
 .filter-btn {
-  padding: 10px 20px;
+  padding: 0 var(--space-md);
   border-radius: 999px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: var(--gradient-accent);
+  border: none;
   cursor: pointer;
-  transition: all .25s ease;
-  color: #cbd5f5;
+  transition: var(--transition-base);
+  color: var(--text-primary);
 }
 .filter-btn:hover {
-  transform: translateY(-2px);
-  background: rgba(255,255,255,0.1);
-}
-.filter-btn.active {
-  background: var(--gradient-primary);
-  color: #fff;
-  box-shadow: 0 10px 25px rgba(99,102,241,0.4);
+  transform: translateY(-1px);
+  filter: brightness(1.1);
 }
 
 /* =========================================================
