@@ -100,7 +100,7 @@ BREADCRUMB (TOP RIGHT)
 <div class="breadcrumb">
   <a href="../../index.html">Home</a> /
   <a href="../index.html">Blog</a> /
-  <span>{{BREADCRUMB_TITLE}}</span>
+  <span>{{POST_TITLE}}</span>
 </div>
 
 <!-- ===============================
@@ -170,23 +170,10 @@ RELATED POSTS
   <div class="container">
     <h2>Related Articles</h2>
 
-    <div class="blog-grid">
-
-      <a href="#" class="blog-card">
-        <img src="../images/blog1.jpg" alt="" class="blog-main-image" loading="lazy">
-        <div class="blog-content">
-          <h3>Denial Management Best Practices</h3>
-        </div>
-      </a>
-
-      <a href="#" class="blog-card">
-        <img src="../images/blog1.jpg" alt="" class="blog-main-image" loading="lazy">
-        <div class="blog-content">
-          <h3>How to Improve RCM Efficiency</h3>
-        </div>
-      </a>
-
-    </div>
+<div class="blog-grid">
+{{RELATED_POSTS}}
+</div>
+    
   </div>
 </section>
 
