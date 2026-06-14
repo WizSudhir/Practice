@@ -12,7 +12,8 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{POST_TITLE}}">
 <meta name="twitter:description" content="{{SOCIAL_DESCRIPTION}}">
-<meta name="twitter:image" content="{{FEATURED_IMAGE_URL}}">
+<meta name="twitter:image" content="{{FEATURED_IMAGE}}">
+<meta name="keywords" content="{{KEYWORDS}}">
 
 <link rel="canonical" href="{{CANONICAL_URL}}">
 
@@ -20,7 +21,7 @@
 <!-- Open Graph -->
 <meta property="og:title" content="{{POST_TITLE}}">
 <meta property="og:description" content="{{SOCIAL_DESCRIPTION}}">
-<meta property="og:image" content="{{FEATURED_IMAGE_URL}}">
+<meta property="og:image" content="{{FEATURED_IMAGE}}">
 <meta property="og:url" content="{{CANONICAL_URL}}">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="PracticeGrid Solutions">
@@ -130,9 +131,11 @@ BLOG CONTENT
 <section class="blog-post-content">
   <div class="container">
 
-    <img src="{{FEATURED_IMAGE_PATH}}" alt="{{FEATURED_IMAGE_ALT}}" class="blog-main-image">
+    <img src="{{FEATURED_IMAGE}}" alt="{{FEATURED_IMAGE_ALT}}" class="blog-main-image">
 
+   <article class="blog-article">
     {{ARTICLE_CONTENT}}
+   </article>
 
   </div>
 </section>
